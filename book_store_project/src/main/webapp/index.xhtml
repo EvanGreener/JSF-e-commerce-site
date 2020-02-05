@@ -9,7 +9,8 @@
         <link rel="stylesheet" href="https://unpkg.com/swiper/css/swiper.min.css"/>
         <h:outputStylesheet library="webjars" name="Semantic-UI/2.4.1/semantic.min.css" />
         <h:outputStylesheet library="css" name="homepage.css" />
-
+        <!-- Swiper JS -->
+        <script src="https://unpkg.com/swiper/js/swiper.min.js"></script>
     </h:head>
     <h:body>
         <b:navBar brand="Brand" brandHref="#" fluid="true" class="headMenu">
@@ -184,24 +185,15 @@
             </div>
         </div>
 
-
-
-
-
-
-
-
-
-
-
-
-
-        <!-- Swiper JS -->
-        <script src="https://unpkg.com/swiper/js/swiper.min.js"></script>
-
         <!-- Initialize Swiper -->
         <script>
             var swiper = new Swiper('.swiper-container', {
+                loop: true,
+                centeredSlides: true,
+                autoplay: {
+                    delay: 3000,
+                    disableOnInteraction: false,
+                },
                 pagination: {
                     el: '.swiper-pagination',
                 },
