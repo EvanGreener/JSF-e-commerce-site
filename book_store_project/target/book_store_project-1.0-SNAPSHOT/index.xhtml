@@ -1,80 +1,37 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://java.sun.com/jsf/html">
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:b="http://bootsfaces.net/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
     <h:head>
-        <title>Semantics Basic Page</title>
+        <title>TheBookStore</title>
         <link rel="stylesheet" href="https://unpkg.com/swiper/css/swiper.min.css"/>
         <h:outputStylesheet library="webjars" name="Semantic-UI/2.4.1/semantic.min.css" />
-        <style>
-            html, body {
-                position: relative;
-                height: 100%;
-            }
-            body {
-                background: #eee;
-                font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
-                font-size: 14px;
-                color:#000;
-                margin: 0;
-                padding: 0;
-            }
-            .swiper-container {
-                width: 100%;
-                height: 100%;
-            }
-            .swiper-slide {
-                text-align: center;
-                font-size: 18px;
-                background: #fff;
-
-                /* Center slide text vertically */
-                display: -webkit-box;
-                display: -ms-flexbox;
-                display: -webkit-flex;
-                display: flex;
-                -webkit-box-pack: center;
-                -ms-flex-pack: center;
-                -webkit-justify-content: center;
-                justify-content: center;
-                -webkit-box-align: center;
-                -ms-flex-align: center;
-                -webkit-align-items: center;
-                align-items: center;
-            }
-        </style>
+        <h:outputStylesheet library="css" name="homepage.css" />
 
     </h:head>
     <h:body>
-        <!--        <div class="ui card">
-                    <div class="content">
-                        <a class="header">Kristy</a>
-                        <div class="meta">
-                            <span class="date">Joined in 2013</span>
-                        </div>
-                        <div class="description">
-                            Kristy is an art director living in New York.
-                        </div>
-                    </div>
-                    <div class="extra content">
-                        <a>
-                            <i class="user icon"></i>
-                            22 Friends
-                        </a>
-                    </div>
-                </div>-->
+        <b:navBar brand="Brand" brandHref="#" fluid="true" class="headMenu">
+            <f:facet name="kebab">
+                <span class="fa fa-chevron-right"></span>
+            </f:facet>
+            <b:navbarLinks>
+                <b:navLink value="Link" href="#"></b:navLink>
+                <b:navLink value="Link" href="#"></b:navLink>
+            </b:navbarLinks>
+        </b:navBar>
         <div class="swiper-container">
             <div class="swiper-wrapper">
-                <div class="swiper-slide">Slide 1</div>
-                <div class="swiper-slide">Slide 2</div>
-                <div class="swiper-slide">Slide 3</div>
-                <div class="swiper-slide">Slide 4</div>
-                <div class="swiper-slide">Slide 5</div>
-                <div class="swiper-slide">Slide 6</div>
-                <div class="swiper-slide">Slide 7</div>
-                <div class="swiper-slide">Slide 8</div>
-                <div class="swiper-slide">Slide 9</div>
-                <div class="swiper-slide">Slide 10</div>
+                <div class="swiper-slide item1">Slide 1</div>
+                <div class="swiper-slide item2">Slide 2</div>
+                <div class="swiper-slide item3">Slide 3</div>
+                <div class="swiper-slide item1">Slide 4</div>
+                <div class="swiper-slide item2">Slide 5</div>
+                <div class="swiper-slide item3">Slide 6</div>
+                <div class="swiper-slide item1">Slide 7</div>
+                <div class="swiper-slide item2">Slide 8</div>
+                <div class="swiper-slide item3">Slide 9</div>
             </div>
             <!-- Add Pagination -->
             <div class="swiper-pagination"></div>
@@ -82,8 +39,77 @@
             <div class="swiper-button-next"></div>
             <div class="swiper-button-prev"></div>
         </div>
-        
-        <p style="font-size: 48px">Hello</p>
+        <div class="thingy">
+            <p style="font-size: 48px">Hello</p>
+            <div class="ui four doubling stackable cards">
+                <div class="ui fluid card">
+                    <div class="image">
+                        <h:graphicImage library="images" name="colorScheme.PNG"  /></div>
+                    <div class="content">
+                        <div class="header">Elliot Baker</div>
+                        <div class="meta">Friend</div>
+                        <div class="description">
+                            Elliot is a sound engineer living in Nashville who enjoys playing guitar and hanging with his
+                            cat.
+                        </div>
+                    </div>
+                    <div class="extra content">
+                        <a>
+                            <i aria-hidden="true" class="user icon"></i>
+                            16 Friends
+                        </a>
+                    </div>
+                </div>
+                <div class="ui fluid card">
+                    <div class="image">
+                        <h:graphicImage library="images" name="colorScheme.PNG"  /></div>
+                    <div class="content">
+                        <div class="header">Elliot Baker</div>
+                        <div class="meta">Friend</div>
+                        <div class="description">
+                            Elliot is a sound engineer living in Nashville who enjoys playing guitar and hanging with his
+                            cat.
+                        </div>
+                    </div>
+                    <div class="extra content">
+                        <a>
+                            <i aria-hidden="true" class="user icon"></i>
+                            16 Friends
+                        </a>
+                    </div>
+                </div>
+                <div class="ui fluid card">
+                    <div class="image">
+                        <h:graphicImage library="images" name="colorScheme.PNG"  /></div>
+                    <div class="content">
+                        <div class="header">Elliot Baker</div>
+                        <div class="meta">Friend</div>
+                        <div class="description">
+                            Elliot is a sound engineer living in Nashville who enjoys playing guitar and hanging with his
+                            cat.
+                        </div>
+                    </div>
+                    <div class="extra content">
+                        <a>
+                            <i aria-hidden="true" class="user icon"></i>
+                            16 Friends
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+
+
+
+
+
+
+
+
+
 
         <!-- Swiper JS -->
         <script src="https://unpkg.com/swiper/js/swiper.min.js"></script>
