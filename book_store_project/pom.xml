@@ -19,7 +19,11 @@
             <artifactId>Semantic-UI</artifactId>
             <version>2.4.1</version>
         </dependency>
-
+        <dependency>
+            <groupId>org.webjars.npm</groupId>
+            <artifactId>swiper</artifactId>
+            <version>4.5.1</version>
+        </dependency>
     </dependencies>
     
     <parent>

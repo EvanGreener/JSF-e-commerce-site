@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:b="http://bootsfaces.net/ui"
+      >
+    <h:head>
+        <title> Gallery Page </title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+        <h:outputStylesheet library="webjars" name="Semantic-UI/2.4.1/semantic.min.css" />
+        <h:outputStylesheet library="webjars" name="swiper/4.5.1/dist/swiper.min.css" />
+        <h:outputStylesheet library="css" name="gallery.css" />
+
+        <!-- Swiper JS -->
+
+        <script src="https://unpkg.com/swiper/js/swiper.min.js"></script>
+    </h:head>
+    <h:body>
+        <b:navBar brand="Brand" brandHref="#" fluid="true" class="headMenu">
+            <f:facet name="kebab">
+                <span class="fa fa-chevron-right"></span>
+            </f:facet>
+            <b:navbarLinks>
+                <b:navLink value="Link" href="#"></b:navLink>
+                <b:navLink value="Link" href="#"></b:navLink>
+            </b:navbarLinks>
+        </b:navBar>
+        <div class="gallery">
+            <div class="ui grid">
+                <div class="four wide column">
+                    <p>Filter By Genre</p>
+                    <div class="ui list">
+                        <div class="item"> Sci-Fi </div>
+                        <div class="item"> Mystery </div>
+                        <div class="item"> Fantasy </div>
+                        <div class="item"> Horror</div>
+                        <div class="item"> Fiction</div>
+                    </div>
+
+                    <div class="ui divider"></div>
+
+                    <p>Filter By Genre</p>
+                    <div class="ui list">
+                        <div class="item"> Sci-Fi</div>
+                        <div class="item"> Horror</div>
+                        <div class="item"> Fiction</div>
+                        <div class="item"> Fantasy</div>
+                        <div class="item"> Mystery</div>
+                    </div>
+                </div>
+                <div class="twelve wide column">
+
+                </div>
+            </div>
+        </div>
+    </h:body>
+</html>
