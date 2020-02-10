@@ -537,8 +537,7 @@ VALUES(2, "9780439244190");
 #Holes
 INSERT INTO Book_Authors
 VALUES(3, "9780061120084");
-#To
-Kill a Mockingbird
+#To Kill a Mockingbird
 INSERT INTO Book_Authors
 VALUES(50, "9781328869333");
 #1984
@@ -619,8 +618,7 @@ VALUES(53, "9780380729401");
 #Something Wicked This Way Comes
 INSERT INTO Book_Authors
 VALUES(19, "9780345476876");
-#Interview
-with the Vampire
+#Interview with the Vampire
 INSERT INTO Book_Authors
 VALUES(20, "9780735212510");
 #The Hunger
@@ -629,9 +627,7 @@ VALUES(28, "9780450031069");
 #Salem''s Lot
 INSERT INTO Book_Authors
 VALUES(21, "9780307346605");
-#World War
-Z:
-An Oral History of the Zombie War
+#World War Z: An Oral History of the Zombie War
 INSERT INTO Book_Authors
 VALUES(22, "9780727860996");
 #Hell House
@@ -655,8 +651,7 @@ VALUES(28, "9781982110567");
 #The Institute
 INSERT INTO Book_Authors
 VALUES(29, "9780307949486");
-#The Girl
-with the Dragon Tattoo
+#The Girl with the Dragon Tattoo
 INSERT INTO Book_Authors
 VALUES(30, "9780312330873");
 #And Then There Were None
@@ -716,8 +711,7 @@ VALUES(49, "9780812550702");
 #Ender''s Game
 INSERT INTO Book_Authors
 VALUES(50, "9780141036144");
-#1984
-(Sci-Fi)
+#1984 (Sci-Fi)
 INSERT INTO Book_Authors
 VALUES(51, "9780307887436");
 #Ready Player One
@@ -726,8 +720,7 @@ VALUES(52, "9780593099322");
 #Dune
 INSERT INTO Book_Authors
 VALUES(53, "9781451673319");
-#Farenheit 451
-(Sci-Fi)
+#Farenheit 451 (Sci-Fi)
 INSERT INTO Book_Authors
 VALUES(54, "9780804139021");
 #The Martian
@@ -757,19 +750,16 @@ VALUES(60, "9780441788385");
 #Stranger in a Strange Land
 INSERT INTO Book_Authors
 VALUES(61, "9780771008795");
-#Handmaid''s Tale
-(Sci-Fi)
+#Handmaid''s Tale (Sci-Fi)
 INSERT INTO Book_Authors
 VALUES(62, "9781509808335");
-#The Restaurant at the
-End of the Universe
+#The Restaurant at the End of the Universe
 INSERT INTO Book_Authors
 VALUES(63, "9780345538987");
 #Jurassic Park
 INSERT INTO Book_Authors
 VALUES(64, "9780451457998");
-#2001:
-A Space Odyssey
+#2001: A Space Odyssey
 INSERT INTO Book_Authors
 VALUES(65, "9780989671767");
 #Unsouled
