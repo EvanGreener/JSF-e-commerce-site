@@ -1,7 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<persistence version="2.2" xmlns="http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_2.xsd">
-    <!-- Define Persistence Unit -->
-    <persistence-unit name="my_persistence_unit">
-        
-    </persistence-unit>
+<persistence version="2.2" xmlns="http://java.sun.com/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_2.xsd">
+  <!-- Define Persistence Unit -->
+  <persistence-unit name="my_persistence_unit">
+    <class>com.gb1w20.book_store_project.News</class>
+    <class>com.gb1w20.book_store_project.Authors</class>
+    <class>com.gb1w20.book_store_project.OrderItem</class>
+    <class>com.gb1w20.book_store_project.Ads</class>
+    <class>com.gb1w20.book_store_project.Surveys</class>
+    <class>com.gb1w20.book_store_project.Clients</class>
+    <class>com.gb1w20.book_store_project.Tax</class>
+    <class>com.gb1w20.book_store_project.Orders</class>
+    <class>com.gb1w20.book_store_project.Book</class>
+    <class>com.gb1w20.book_store_project.CustomerReviews</class>
+    <class>com.gb1w20.book_store_project.Publisher</class>
+    <class>com.gb1w20.book_store_project.SurveyData</class>
+  </persistence-unit>
 </persistence>
