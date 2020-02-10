@@ -1,0 +1,81 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : Feb. 4, 2020, 9:28:27 p.m.
+    Author     : Saad
+*/
+*{
+    font-family: 'Roboto', sans-serif !important;
+}
+html, body {
+    position: relative;
+    height: 100%;
+}
+body {
+    background: #eee;
+    font-size: 14px;
+    color:#000;
+    margin: 0;
+    padding: 0;
+}
+
+.item1{
+    background-color:  #CB4025 !important;
+}
+.item2{
+    background-color:  #CB2578 !important;
+}
+.item3{
+    background-color:  #3625CB !important;
+}
+
+.swiper-container {
+    width: 100%;
+    height: 80%;
+}
+.swiper-slide {
+    text-align: center;
+    font-size: 18px;
+    background: #fff;
+
+    /* Center slide text vertically */
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    -webkit-justify-content: center;
+    justify-content: center;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    -webkit-align-items: center;
+    align-items: center;
+}
+.headMenu{
+    margin-bottom: 0px !important;
+}
+.thingy{
+    padding:5%;
+    background-color: #EBD9CF;
+}
+.thingy2{
+    padding:5%;
+    background-color: #EFF1F3;
+}
+.thingy3{
+    padding:5%;
+    background-color: #DBD3DB;
+}
+.thingy4{
+    padding:5%;
+    background-color: #223843;
+}
+
+.mainBtn{
+    width: 15% !important;
+    background-color: white !important;
+}
