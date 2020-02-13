@@ -1,3 +1,6 @@
+CREATE DATABASE IF NOT EXISTS bookstore;
+USE bookstore;
+
 DROP TABLE IF EXISTS `Tax`;
 DROP TABLE IF EXISTS `Clients`;
 DROP TABLE IF EXISTS `Book_Authors`;
