@@ -5,7 +5,7 @@ and open the template in the editor.
 */
 /* 
     Created on : Feb. 4, 2020, 9:28:27 p.m.
-    Author     : Saad
+    Author     : Saad,Shruti
 */
 *{
     font-family: 'Roboto', sans-serif !important;
@@ -78,4 +78,31 @@ body {
 .mainBtn{
     width: 15% !important;
     background-color: white !important;
+}
+.darker:hover {
+    -webkit-filter:brightness(50%);
+    -moz-filter:brightness(50%);
+    filter: url(#brightness); 
+    filter:brightness(50%);
+}
+
+.cardHoverBtn{
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  display:block;
+  background-color: white;
+  color: black;
+  opacity:0.5;
+  font-size: 16px;
+  padding: 12px 24px;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
+  text-align: center;
+}
+.cardHoverBtn:hover {
+  background-color: grey;
 }
