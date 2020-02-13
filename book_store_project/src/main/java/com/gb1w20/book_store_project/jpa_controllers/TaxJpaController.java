@@ -20,7 +20,7 @@ import javax.transaction.UserTransaction;
  *
  * @author Saad
  */
-@Named
+@Named("tax")
 @RequestScoped
 public class TaxJpaController implements Serializable {
     

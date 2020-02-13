@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.gb1w20.book_store_project.jpa_controllers;
 
 import com.gb1w20.book_store_project.entities.Ads;
@@ -25,7 +20,7 @@ import javax.transaction.UserTransaction;
  *
  * @author Saad
  */
-@Named
+@Named("ads")
 @RequestScoped
 public class AdsJpaController implements Serializable {
     
@@ -124,7 +119,7 @@ public class AdsJpaController implements Serializable {
             Root<Ads> rt = cq.from(Ads.class);
             cq.select(em.getCriteriaBuilder().count(rt));
             Query q = em.createQuery(cq);
-            System.out.println("fish count: " + ((Long) q.getSingleResult()).intValue());
+            System.out.println("ad count: " + ((Long) q.getSingleResult()).intValue());
             return ((Long) q.getSingleResult()).intValue();
     }
     
