@@ -1,97 +1,93 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.gb1w20.book_store_project.jpa_controllers;
 
 import com.gb1w20.book_store_project.entities.Book;
 import com.gb1w20.book_store_project.jpa_controllers.exceptions.NonexistentEntityException;
-import com.gb1w20.book_store_project.jpa_controllers.exceptions.PreexistingEntityException;
 import java.io.Serializable;
 import java.util.List;
+import javax.annotation.Resource;
+import javax.enterprise.context.RequestScoped;
+import javax.inject.Named;
 import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
 import javax.persistence.Query;
 import javax.persistence.EntityNotFoundException;
+import javax.persistence.PersistenceContext;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
+import javax.transaction.SystemException;
+import javax.transaction.UserTransaction;
 
 /**
  *
  * @author Saad
  */
+@Named
+@RequestScoped
 public class BookJpaController implements Serializable {
+    
+    @Resource
+    private UserTransaction utx;
 
-    public BookJpaController(EntityManagerFactory emf) {
-        this.emf = emf;
-    }
-    private EntityManagerFactory emf = null;
+    @PersistenceContext
+    private EntityManager em;
 
-    public EntityManager getEntityManager() {
-        return emf.createEntityManager();
-    }
+    public BookJpaController() {}
 
-    public void create(Book book) throws PreexistingEntityException, Exception {
-        EntityManager em = null;
+    public void create(Book books) throws Exception {
+    try {
+        utx.begin();
+        em.persist(books);
+        utx.commit();
+    } catch (Exception ex) {
         try {
-            em = getEntityManager();
-            em.getTransaction().begin();
-            em.persist(book);
-            em.getTransaction().commit();
-        } catch (Exception ex) {
-            if (findBook(book.getIsbn()) != null) {
-                throw new PreexistingEntityException("Book " + book + " already exists.", ex);
-            }
-            throw ex;
-        } finally {
-            if (em != null) {
-                em.close();
-            }
+            utx.rollback();
+        } catch (Exception re) {
+            throw new Exception("An error occurred attempting to roll back the transaction.", re);
         }
+        throw ex;
     }
+}
 
-    public void edit(Book book) throws NonexistentEntityException, Exception {
-        EntityManager em = null;
+    public void edit(Book books) throws NonexistentEntityException, Exception {
         try {
-            em = getEntityManager();
-            em.getTransaction().begin();
-            book = em.merge(book);
-            em.getTransaction().commit();
+            utx.begin();
+            books = em.merge(books);
+            utx.commit();
         } catch (Exception ex) {
+            try {
+                utx.rollback();
+            } catch (IllegalStateException | SecurityException | SystemException re) {
+                throw new Exception("An error occurred attempting to roll back the transaction.", re);
+            }
             String msg = ex.getLocalizedMessage();
             if (msg == null || msg.length() == 0) {
-                String id = book.getIsbn();
+                Integer id = Integer.parseInt(books.getIsbn());
                 if (findBook(id) == null) {
                     throw new NonexistentEntityException("The book with id " + id + " no longer exists.");
                 }
             }
             throw ex;
-        } finally {
-            if (em != null) {
-                em.close();
-            }
         }
     }
 
-    public void destroy(String id) throws NonexistentEntityException {
-        EntityManager em = null;
+    public void destroy(Integer id) throws NonexistentEntityException, Exception {
         try {
-            em = getEntityManager();
-            em.getTransaction().begin();
-            Book book;
+            utx.begin();
+            Book books;
             try {
-                book = em.getReference(Book.class, id);
-                book.getIsbn();
+                books = em.getReference(Book.class, id);
+                books.getIsbn();
             } catch (EntityNotFoundException enfe) {
                 throw new NonexistentEntityException("The book with id " + id + " no longer exists.", enfe);
             }
-            em.remove(book);
-            em.getTransaction().commit();
-        } finally {
-            if (em != null) {
-                em.close();
+            em.remove(books);
+            utx.commit();
+        } catch (Exception ex) {
+            try {
+                utx.rollback();
+            } catch (IllegalStateException | SecurityException | SystemException re) {
+                throw new Exception("An error occurred attempting to roll back the transaction.", re);
             }
+            throw ex;
         }
     }
 
@@ -104,41 +100,27 @@ public class BookJpaController implements Serializable {
     }
 
     private List<Book> findBookEntities(boolean all, int maxResults, int firstResult) {
-        EntityManager em = getEntityManager();
-        try {
-            CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
-            cq.select(cq.from(Book.class));
-            Query q = em.createQuery(cq);
-            if (!all) {
-                q.setMaxResults(maxResults);
-                q.setFirstResult(firstResult);
-            }
-            return q.getResultList();
-        } finally {
-            em.close();
+        CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
+        cq.select(cq.from(Book.class));
+        Query q = em.createQuery(cq);
+        if (!all) {
+            q.setMaxResults(maxResults);
+            q.setFirstResult(firstResult);
         }
+        return q.getResultList();
     }
 
-    public Book findBook(String id) {
-        EntityManager em = getEntityManager();
-        try {
+    public Book findBook(Integer id) {
             return em.find(Book.class, id);
-        } finally {
-            em.close();
-        }
     }
 
     public int getBookCount() {
-        EntityManager em = getEntityManager();
-        try {
             CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
             Root<Book> rt = cq.from(Book.class);
             cq.select(em.getCriteriaBuilder().count(rt));
             Query q = em.createQuery(cq);
+            System.out.println("book count: " + ((Long) q.getSingleResult()).intValue());
             return ((Long) q.getSingleResult()).intValue();
-        } finally {
-            em.close();
-        }
     }
     
 }

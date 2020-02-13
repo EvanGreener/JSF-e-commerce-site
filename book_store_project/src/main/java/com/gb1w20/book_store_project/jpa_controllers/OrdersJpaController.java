@@ -1,91 +1,93 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.gb1w20.book_store_project.jpa_controllers;
 
 import com.gb1w20.book_store_project.entities.Orders;
 import com.gb1w20.book_store_project.jpa_controllers.exceptions.NonexistentEntityException;
 import java.io.Serializable;
 import java.util.List;
+import javax.annotation.Resource;
+import javax.enterprise.context.RequestScoped;
+import javax.inject.Named;
 import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
 import javax.persistence.Query;
 import javax.persistence.EntityNotFoundException;
+import javax.persistence.PersistenceContext;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
+import javax.transaction.SystemException;
+import javax.transaction.UserTransaction;
 
 /**
  *
  * @author Saad
  */
+@Named
+@RequestScoped
 public class OrdersJpaController implements Serializable {
+    
+    @Resource
+    private UserTransaction utx;
 
-    public OrdersJpaController(EntityManagerFactory emf) {
-        this.emf = emf;
-    }
-    private EntityManagerFactory emf = null;
+    @PersistenceContext
+    private EntityManager em;
 
-    public EntityManager getEntityManager() {
-        return emf.createEntityManager();
-    }
+    public OrdersJpaController() {}
 
-    public void create(Orders orders) {
-        EntityManager em = null;
+    public void create(Orders order) throws Exception {
+    try {
+        utx.begin();
+        em.persist(order);
+        utx.commit();
+    } catch (Exception ex) {
         try {
-            em = getEntityManager();
-            em.getTransaction().begin();
-            em.persist(orders);
-            em.getTransaction().commit();
-        } finally {
-            if (em != null) {
-                em.close();
-            }
+            utx.rollback();
+        } catch (Exception re) {
+            throw new Exception("An error occurred attempting to roll back the transaction.", re);
         }
+        throw ex;
     }
+}
 
-    public void edit(Orders orders) throws NonexistentEntityException, Exception {
-        EntityManager em = null;
+    public void edit(Orders order) throws NonexistentEntityException, Exception {
         try {
-            em = getEntityManager();
-            em.getTransaction().begin();
-            orders = em.merge(orders);
-            em.getTransaction().commit();
+            utx.begin();
+            order = em.merge(order);
+            utx.commit();
         } catch (Exception ex) {
+            try {
+                utx.rollback();
+            } catch (IllegalStateException | SecurityException | SystemException re) {
+                throw new Exception("An error occurred attempting to roll back the transaction.", re);
+            }
             String msg = ex.getLocalizedMessage();
             if (msg == null || msg.length() == 0) {
-                Integer id = orders.getOrderID();
+                Integer id = order.getOrderID();
                 if (findOrders(id) == null) {
-                    throw new NonexistentEntityException("The orders with id " + id + " no longer exists.");
+                    throw new NonexistentEntityException("The order with id " + id + " no longer exists.");
                 }
             }
             throw ex;
-        } finally {
-            if (em != null) {
-                em.close();
-            }
         }
     }
 
-    public void destroy(Integer id) throws NonexistentEntityException {
-        EntityManager em = null;
+    public void destroy(Integer id) throws NonexistentEntityException, Exception {
         try {
-            em = getEntityManager();
-            em.getTransaction().begin();
-            Orders orders;
+            utx.begin();
+            Orders order;
             try {
-                orders = em.getReference(Orders.class, id);
-                orders.getOrderID();
+                order = em.getReference(Orders.class, id);
+                order.getOrderID();
             } catch (EntityNotFoundException enfe) {
-                throw new NonexistentEntityException("The orders with id " + id + " no longer exists.", enfe);
+                throw new NonexistentEntityException("The order with id " + id + " no longer exists.", enfe);
             }
-            em.remove(orders);
-            em.getTransaction().commit();
-        } finally {
-            if (em != null) {
-                em.close();
+            em.remove(order);
+            utx.commit();
+        } catch (Exception ex) {
+            try {
+                utx.rollback();
+            } catch (IllegalStateException | SecurityException | SystemException re) {
+                throw new Exception("An error occurred attempting to roll back the transaction.", re);
             }
+            throw ex;
         }
     }
 
@@ -98,41 +100,27 @@ public class OrdersJpaController implements Serializable {
     }
 
     private List<Orders> findOrdersEntities(boolean all, int maxResults, int firstResult) {
-        EntityManager em = getEntityManager();
-        try {
-            CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
-            cq.select(cq.from(Orders.class));
-            Query q = em.createQuery(cq);
-            if (!all) {
-                q.setMaxResults(maxResults);
-                q.setFirstResult(firstResult);
-            }
-            return q.getResultList();
-        } finally {
-            em.close();
+        CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
+        cq.select(cq.from(Orders.class));
+        Query q = em.createQuery(cq);
+        if (!all) {
+            q.setMaxResults(maxResults);
+            q.setFirstResult(firstResult);
         }
+        return q.getResultList();
     }
 
     public Orders findOrders(Integer id) {
-        EntityManager em = getEntityManager();
-        try {
             return em.find(Orders.class, id);
-        } finally {
-            em.close();
-        }
     }
 
     public int getOrdersCount() {
-        EntityManager em = getEntityManager();
-        try {
             CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
             Root<Orders> rt = cq.from(Orders.class);
             cq.select(em.getCriteriaBuilder().count(rt));
             Query q = em.createQuery(cq);
+            System.out.println("order count: " + ((Long) q.getSingleResult()).intValue());
             return ((Long) q.getSingleResult()).intValue();
-        } finally {
-            em.close();
-        }
     }
     
 }

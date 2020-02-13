@@ -9,83 +9,90 @@ import com.gb1w20.book_store_project.entities.Ads;
 import com.gb1w20.book_store_project.jpa_controllers.exceptions.NonexistentEntityException;
 import java.io.Serializable;
 import java.util.List;
+import javax.annotation.Resource;
+import javax.enterprise.context.RequestScoped;
+import javax.inject.Named;
 import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
 import javax.persistence.Query;
 import javax.persistence.EntityNotFoundException;
+import javax.persistence.PersistenceContext;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
+import javax.transaction.SystemException;
+import javax.transaction.UserTransaction;
 
 /**
  *
  * @author Saad
  */
+@Named
+@RequestScoped
 public class AdsJpaController implements Serializable {
+    
+    @Resource
+    private UserTransaction utx;
 
-    public AdsJpaController(EntityManagerFactory emf) {
-        this.emf = emf;
-    }
-    private EntityManagerFactory emf = null;
+    @PersistenceContext
+    private EntityManager em;
 
-    public EntityManager getEntityManager() {
-        return emf.createEntityManager();
-    }
+    public AdsJpaController() {}
 
-    public void create(Ads ads) {
-        EntityManager em = null;
+    public void create(Ads ads) throws Exception {
+    try {
+        utx.begin();
+        em.persist(ads);
+        utx.commit();
+    } catch (Exception ex) {
         try {
-            em = getEntityManager();
-            em.getTransaction().begin();
-            em.persist(ads);
-            em.getTransaction().commit();
-        } finally {
-            if (em != null) {
-                em.close();
-            }
+            utx.rollback();
+        } catch (Exception re) {
+            throw new Exception("An error occurred attempting to roll back the transaction.", re);
         }
+        throw ex;
     }
+}
 
     public void edit(Ads ads) throws NonexistentEntityException, Exception {
-        EntityManager em = null;
         try {
-            em = getEntityManager();
-            em.getTransaction().begin();
+            utx.begin();
             ads = em.merge(ads);
-            em.getTransaction().commit();
+            utx.commit();
         } catch (Exception ex) {
+            try {
+                utx.rollback();
+            } catch (IllegalStateException | SecurityException | SystemException re) {
+                throw new Exception("An error occurred attempting to roll back the transaction.", re);
+            }
             String msg = ex.getLocalizedMessage();
             if (msg == null || msg.length() == 0) {
                 Integer id = ads.getAdID();
                 if (findAds(id) == null) {
-                    throw new NonexistentEntityException("The ads with id " + id + " no longer exists.");
+                    throw new NonexistentEntityException("The ad with id " + id + " no longer exists.");
                 }
             }
             throw ex;
-        } finally {
-            if (em != null) {
-                em.close();
-            }
         }
     }
 
-    public void destroy(Integer id) throws NonexistentEntityException {
-        EntityManager em = null;
+    public void destroy(Integer id) throws NonexistentEntityException, Exception {
         try {
-            em = getEntityManager();
-            em.getTransaction().begin();
+            utx.begin();
             Ads ads;
             try {
                 ads = em.getReference(Ads.class, id);
                 ads.getAdID();
             } catch (EntityNotFoundException enfe) {
-                throw new NonexistentEntityException("The ads with id " + id + " no longer exists.", enfe);
+                throw new NonexistentEntityException("The ad with id " + id + " no longer exists.", enfe);
             }
             em.remove(ads);
-            em.getTransaction().commit();
-        } finally {
-            if (em != null) {
-                em.close();
+            utx.commit();
+        } catch (Exception ex) {
+            try {
+                utx.rollback();
+            } catch (IllegalStateException | SecurityException | SystemException re) {
+                throw new Exception("An error occurred attempting to roll back the transaction.", re);
             }
+            throw ex;
         }
     }
 
@@ -98,41 +105,27 @@ public class AdsJpaController implements Serializable {
     }
 
     private List<Ads> findAdsEntities(boolean all, int maxResults, int firstResult) {
-        EntityManager em = getEntityManager();
-        try {
-            CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
-            cq.select(cq.from(Ads.class));
-            Query q = em.createQuery(cq);
-            if (!all) {
-                q.setMaxResults(maxResults);
-                q.setFirstResult(firstResult);
-            }
-            return q.getResultList();
-        } finally {
-            em.close();
+        CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
+        cq.select(cq.from(Ads.class));
+        Query q = em.createQuery(cq);
+        if (!all) {
+            q.setMaxResults(maxResults);
+            q.setFirstResult(firstResult);
         }
+        return q.getResultList();
     }
 
     public Ads findAds(Integer id) {
-        EntityManager em = getEntityManager();
-        try {
             return em.find(Ads.class, id);
-        } finally {
-            em.close();
-        }
     }
 
     public int getAdsCount() {
-        EntityManager em = getEntityManager();
-        try {
             CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
             Root<Ads> rt = cq.from(Ads.class);
             cq.select(em.getCriteriaBuilder().count(rt));
             Query q = em.createQuery(cq);
+            System.out.println("fish count: " + ((Long) q.getSingleResult()).intValue());
             return ((Long) q.getSingleResult()).intValue();
-        } finally {
-            em.close();
-        }
     }
     
 }
