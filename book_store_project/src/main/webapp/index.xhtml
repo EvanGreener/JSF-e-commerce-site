@@ -14,6 +14,7 @@
         <h:outputStylesheet library="webjars" name="Semantic-UI/2.4.1/semantic.min.css" />
         <h:outputStylesheet library="css" name="homepage.css" />
         <h:outputScript library="js" name="homepage.js" />
+
         <!-- Swiper JS -->
         <script src="https://unpkg.com/swiper/js/swiper.min.js"></script>
     </h:head>
@@ -25,13 +26,21 @@
             <f:facet name="kebab">
                 <span class="fa fa-chevron-right"></span>
             </f:facet>
+    
             <b:navbarLinks>
                 <b:navLink class="nav" value="Shop" href="#"></b:navLink>
                 <b:navLink value="Sales" href="#"></b:navLink>
                 <b:navLink value="Genres" href="#"></b:navLink>
-               <b:navLink class="nav" value="Cart" href="#"></b:navLink>
-                    <b:dropButton value="En"><b:navLink value="Fr" href="#"></b:navLink></b:dropButton>
-                
+            </b:navbarLinks>
+            <!--Adds spacing in nav bar-->
+            <b:navbarLinks pull="right"><b:navLink value="    " href="#"></b:navLink></b:navbarLinks>
+            <b:navbarLinks pull="right" styleClass="hidden-xs">
+                <b:navLink class="nav" value="Cart" href="#"></b:navLink>
+                <b:dropMenu value="En">
+                    <b:navLink value="En" href="#"></b:navLink>
+                    <b:navLink value="Fr" href="#"></b:navLink>
+                </b:dropMenu>
+
                 <b:navLink value="Login" href="#">
 
                 </b:navLink>
@@ -40,18 +49,20 @@
         <div class="swiper-container">
             <div class="swiper-wrapper">
                 <div class="swiper-slide item1">  
-                    
+
                     <div class="sliderTextContent">
                         <h1>Blah Blah</h1>
                         <span>By someone</span>
                         <p> fjre;jfl  weoirewouroewro r  iorewiour erwiurwoiuere ewrui ewroi urewuioerwiuo ie ier orew urewuoewrioewrio or</p>
+                                  <h:commandButton value="Shop Now" type="button" />
                     </div>
-                  
-                         
-                   <div  class="sliderImageContent">
+
+
+                    <div  class="sliderImageContent">
                         <h:graphicImage width="20%" height="40%" library="images" name="colorScheme.PNG"  />
-                        </div>
-                   </div>
+                    </div>
+                </div>
+          
                 <div class="swiper-slide item2">Slide 2</div>
                 <div class="swiper-slide item3">Slide 3</div>
                 <div class="swiper-slide item1">Slide 4</div>
@@ -72,7 +83,8 @@
             <div class="ui four doubling stackable cards">
                 <div class="ui fluid card darker">
                     <div class="image">
-                        <h:graphicImage library="images" name="colorScheme.PNG"  />
+                        <h:graphicImage library="images" name="9780060584757.jpg"  />
+                
                     </div>
                     <div class="content">
                         <div class="header">Elliot Baker</div>
@@ -91,7 +103,7 @@
                 </div>
                 <div class="ui fluid card darker">
                     <div class="image">
-                        <h:graphicImage library="images" name="colorScheme.PNG"  /></div>
+                       <h:graphicImage library="images" name="9780061007224.jpg"  /></div>
                     <div class="content">
                         <div class="header">Elliot Baker</div>
                         <div class="meta">Friend</div>
