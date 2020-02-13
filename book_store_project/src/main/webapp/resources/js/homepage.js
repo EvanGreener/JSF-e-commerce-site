@@ -7,7 +7,7 @@ for(index=0;index<bookCards.length;index++){
 function displayCardHoverButton()
 {
    var btn = document.createElement("BUTTON");
-   
+   btn.addEventListener('click',addToCart);
    //TODO: put into message bundle for localization
     btn.innerHTML = "Add To Cart";
     btn.classList.add("cardHoverBtn");
@@ -17,4 +17,7 @@ function removeCardHoverButton()
 {
    var btn = document.getElementsByClassName("cardHoverBtn");
   btn[0].remove();
+}
+function addToCart()
+{alert("added to cart");
 }

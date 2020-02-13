@@ -18,36 +18,40 @@
         <script src="https://unpkg.com/swiper/js/swiper.min.js"></script>
     </h:head>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     <h:body>
-        
 
-        <b:navBar brand="Brand" brandHref="#" fluid="true" class="headMenu">
+
+        <b:navBar brand="The Bookstore" brandHref="#" fluid="true" class="headMenu">
             <f:facet name="kebab">
                 <span class="fa fa-chevron-right"></span>
             </f:facet>
             <b:navbarLinks>
-                <b:navLink value="Link" href="#"></b:navLink>
-                <b:navLink value="Link" href="#"></b:navLink>
+                <b:navLink class="nav" value="Shop" href="#"></b:navLink>
+                <b:navLink value="Sales" href="#"></b:navLink>
+                <b:navLink value="Genres" href="#"></b:navLink>
+               <b:navLink class="nav" value="Cart" href="#"></b:navLink>
+                    <b:dropButton value="En"><b:navLink value="Fr" href="#"></b:navLink></b:dropButton>
+                
+                <b:navLink value="Login" href="#">
+
+                </b:navLink>
             </b:navbarLinks>
         </b:navBar>
         <div class="swiper-container">
             <div class="swiper-wrapper">
-                <div class="swiper-slide item1">Slide 1</div>
+                <div class="swiper-slide item1">  
+                    
+                    <div class="sliderTextContent">
+                        <h1>Blah Blah</h1>
+                        <span>By someone</span>
+                        <p> fjre;jfl  weoirewouroewro r  iorewiour erwiurwoiuere ewrui ewroi urewuioerwiuo ie ier orew urewuoewrioewrio or</p>
+                    </div>
+                  
+                         
+                   <div  class="sliderImageContent">
+                        <h:graphicImage width="20%" height="40%" library="images" name="colorScheme.PNG"  />
+                        </div>
+                   </div>
                 <div class="swiper-slide item2">Slide 2</div>
                 <div class="swiper-slide item3">Slide 3</div>
                 <div class="swiper-slide item1">Slide 4</div>
@@ -64,7 +68,7 @@
             <div class="swiper-button-prev"></div>
         </div>
         <div class="thingy">
-            <p style="font-size: 48px">Best Seller Products</p>
+            <h2>Best Seller Products</h2><br></br>
             <div class="ui four doubling stackable cards">
                 <div class="ui fluid card darker">
                     <div class="image">
@@ -207,9 +211,7 @@
                     </div>
                 </div>
             </div>
-            <button class="massive fluid ui button mainBtn" style="height:300px">
-                Massive
-            </button>
+            <h:commandButton class="button" value="Shop Now" type="button" />
         </div>
         <div class="thingy2">
             <div class="ui four doubling stackable cards">
