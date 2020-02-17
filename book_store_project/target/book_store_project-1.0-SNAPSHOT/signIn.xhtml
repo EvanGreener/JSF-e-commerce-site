@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:b="http://bootsfaces.net/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Sign In</title>
+        <link href="https://fonts.googleapis.com/css?family=Montserrat|Roboto&amp;display=swap" rel="stylesheet"/>
+        <h:outputStylesheet library="webjars" name="Semantic-UI/2.4.1/semantic.min.css" />
+        <h:outputStylesheet library="css" name="homepage.css" />
+    </h:head>
+    <h:body>
+        <b:navBar brand="Brand" brandHref="#" fluid="true" class="headMenu">
+            <f:facet name="kebab">
+                <span class="fa fa-chevron-right"></span>
+            </f:facet>
+            <b:navbarLinks>
+                <b:navLink value="Log In" href="signIn.xhtml"></b:navLink>
+                <b:navLink value="Link" href="#"></b:navLink>
+            </b:navbarLinks>
+        </b:navBar>
+        <div class="ui fluid card">
+            <div class="thingy2">
+                <h1 class="ui header">Login</h1>
+                <br/>
+                <label>Email</label>
+                <div class="fluid ui input">
+                    <input type="text" placeholder="Enter email" />
+                </div>
+                <br/>
+                <br/>
+                <label>Password</label>
+                <div class="fluid ui input">
+                    <input type="password" placeholder="Enter password" />
+                </div>
+                <br/>
+                <div class="ui checkbox">
+                    <input type="checkbox" name="remember" />
+                    <label>Remember Me</label>
+                </div>
+                <button class="fluid ui button">Log In</button>
+            </div>
+        </div>
+    </h:body>
+</html>
