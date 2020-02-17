@@ -1,0 +1,581 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:b="http://bootsfaces.net/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>TheBookStore</title>
+        <link rel="stylesheet" href="https://unpkg.com/swiper/css/swiper.min.css"/>
+
+        <link href="https://fonts.googleapis.com/css?family=Montserrat|Roboto&amp;display=swap" rel="stylesheet"/>
+
+        <h:outputStylesheet library="webjars" name="Semantic-UI/2.4.1/semantic.min.css" />
+        <h:outputStylesheet library="css" name="homepage.css" />
+        
+        <!-- Swiper JS -->
+        
+        <script src="https://unpkg.com/swiper/js/swiper.min.js"></script>
+    </h:head>
+    <h:body>
+        <b:navBar brand="Brand" brandHref="#" fluid="true" class="headMenu">
+            <f:facet name="kebab">
+                <span class="fa fa-chevron-right"></span>
+            </f:facet>
+            <b:navbarLinks>
+                <b:navLink value="Shop" href="gallery.xhtml"></b:navLink>
+                <b:navLink value="Link" href="#"></b:navLink>
+            </b:navbarLinks>
+        </b:navBar>
+        <div class="swiper-container">
+            <div class="swiper-wrapper">
+                <div class="swiper-slide item1">Slide 1</div>
+                <div class="swiper-slide item2">Slide 2</div>
+                <div class="swiper-slide item3">Slide 3</div>
+                <div class="swiper-slide item1">Slide 4</div>
+                <div class="swiper-slide item2">Slide 5</div>
+                <div class="swiper-slide item3">Slide 6</div>
+                <div class="swiper-slide item1">Slide 7</div>
+                <div class="swiper-slide item2">Slide 8</div>
+                <div class="swiper-slide item3">Slide 9</div>
+            </div>
+            <!-- Add Pagination -->
+            <div class="swiper-pagination"></div>
+            <!-- Add Arrows -->
+            <div class="swiper-button-next"></div>
+            <div class="swiper-button-prev"></div>
+        </div>
+        <div class="thingy">
+            <p style="font-size: 48px">Hello</p>
+            <h:dataTable value="#{bookJpaController.findBookEntities()}" var="books">
+                <h:column>
+                    <f:facet name="header">HI</f:facet>
+                        #{books.title}
+                </h:column>
+            </h:dataTable>
+            <div class="ui four doubling stackable cards">
+                <div class="ui fluid card">
+                    <div class="image">
+                        <h:graphicImage library="images" name="colorScheme.PNG"  /></div>
+                    <div class="content">
+                        <div class="header">Elliot Baker</div>
+                        <div class="meta">Friend</div>
+                        <div class="description">
+                            Elliot is a sound engineer living in Nashville who enjoys playing guitar and hanging with his
+                            cat.
+                        </div>
+                    </div>
+                    <div class="extra content">
+                        <a>
+                            <i aria-hidden="true" class="user icon"></i>
+                            16 Friends
+                        </a>
+                    </div>
+                </div>
+                <div class="ui fluid card">
+                    <div class="image">
+                        <h:graphicImage library="images" name="colorScheme.PNG"  /></div>
+                    <div class="content">
+                        <div class="header">Elliot Baker</div>
+                        <div class="meta">Friend</div>
+                        <div class="description">
+                            Elliot is a sound engineer living in Nashville who enjoys playing guitar and hanging with his
+                            cat.
+                        </div>
+                    </div>
+                    <div class="extra content">
+                        <a>
+                            <i aria-hidden="true" class="user icon"></i>
+                            16 Friends
+                        </a>
+                    </div>
+                </div>
+                <div class="ui fluid card">
+                    <div class="image">
+                        <h:graphicImage library="images" name="colorScheme.PNG"  /></div>
+                    <div class="content">
+                        <div class="header">Elliot Baker</div>
+                        <div class="meta">Friend</div>
+                        <div class="description">
+                            Elliot is a sound engineer living in Nashville who enjoys playing guitar and hanging with his
+                            cat.
+                        </div>
+                    </div>
+                    <div class="extra content">
+                        <a>
+                            <i aria-hidden="true" class="user icon"></i>
+                            16 Friends
+                        </a>
+                    </div>
+                </div>                <div class="ui fluid card">
+                    <div class="image">
+                        <h:graphicImage library="images" name="colorScheme.PNG"  /></div>
+                    <div class="content">
+                        <div class="header">Elliot Baker</div>
+                        <div class="meta">Friend</div>
+                        <div class="description">
+                            Elliot is a sound engineer living in Nashville who enjoys playing guitar and hanging with his
+                            cat.
+                        </div>
+                    </div>
+                    <div class="extra content">
+                        <a>
+                            <i aria-hidden="true" class="user icon"></i>
+                            16 Friends
+                        </a>
+                    </div>
+                </div>                <div class="ui fluid card">
+                    <div class="image">
+                        <h:graphicImage library="images" name="colorScheme.PNG"  /></div>
+                    <div class="content">
+                        <div class="header">Elliot Baker</div>
+                        <div class="meta">Friend</div>
+                        <div class="description">
+                            Elliot is a sound engineer living in Nashville who enjoys playing guitar and hanging with his
+                            cat.
+                        </div>
+                    </div>
+                    <div class="extra content">
+                        <a>
+                            <i aria-hidden="true" class="user icon"></i>
+                            16 Friends
+                        </a>
+                    </div>
+                </div>                <div class="ui fluid card">
+                    <div class="image">
+                        <h:graphicImage library="images" name="colorScheme.PNG"  /></div>
+                    <div class="content">
+                        <div class="header">Elliot Baker</div>
+                        <div class="meta">Friend</div>
+                        <div class="description">
+                            Elliot is a sound engineer living in Nashville who enjoys playing guitar and hanging with his
+                            cat.
+                        </div>
+                    </div>
+                    <div class="extra content">
+                        <a>
+                            <i aria-hidden="true" class="user icon"></i>
+                            16 Friends
+                        </a>
+                    </div>
+                </div>                <div class="ui fluid card">
+                    <div class="image">
+                        <h:graphicImage library="images" name="colorScheme.PNG"  /></div>
+                    <div class="content">
+                        <div class="header">Elliot Baker</div>
+                        <div class="meta">Friend</div>
+                        <div class="description">
+                            Elliot is a sound engineer living in Nashville who enjoys playing guitar and hanging with his
+                            cat.
+                        </div>
+                    </div>
+                    <div class="extra content">
+                        <a>
+                            <i aria-hidden="true" class="user icon"></i>
+                            16 Friends
+                        </a>
+                    </div>
+                </div>                <div class="ui fluid card">
+                    <div class="image">
+                        <h:graphicImage library="images" name="colorScheme.PNG"  /></div>
+                    <div class="content">
+                        <div class="header">Elliot Baker</div>
+                        <div class="meta">Friend</div>
+                        <div class="description">
+                            Elliot is a sound engineer living in Nashville who enjoys playing guitar and hanging with his
+                            cat.
+                        </div>
+                    </div>
+                    <div class="extra content">
+                        <a>
+                            <i aria-hidden="true" class="user icon"></i>
+                            16 Friends
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <button class="massive fluid ui button mainBtn" style="height:300px">
+                Massive
+            </button>
+        </div>
+        <div class="thingy2">
+            <div class="ui four doubling stackable cards">
+                <div class="ui fluid card">
+                    <div class="image">
+                        <h:graphicImage library="images" name="colorScheme.PNG"  /></div>
+                    <div class="content">
+                        <div class="header">Elliot Baker</div>
+                        <div class="meta">Friend</div>
+                        <div class="description">
+                            Elliot is a sound engineer living in Nashville who enjoys playing guitar and hanging with his
+                            cat.
+                        </div>
+                    </div>
+                    <div class="extra content">
+                        <a>
+                            <i aria-hidden="true" class="user icon"></i>
+                            16 Friends
+                        </a>
+                    </div>
+                </div>
+                <div class="ui fluid card">
+                    <div class="image">
+                        <h:graphicImage library="images" name="colorScheme.PNG"  /></div>
+                    <div class="content">
+                        <div class="header">Elliot Baker</div>
+                        <div class="meta">Friend</div>
+                        <div class="description">
+                            Elliot is a sound engineer living in Nashville who enjoys playing guitar and hanging with his
+                            cat.
+                        </div>
+                    </div>
+                    <div class="extra content">
+                        <a>
+                            <i aria-hidden="true" class="user icon"></i>
+                            16 Friends
+                        </a>
+                    </div>
+                </div>
+                <div class="ui fluid card">
+                    <div class="image">
+                        <h:graphicImage library="images" name="colorScheme.PNG"  /></div>
+                    <div class="content">
+                        <div class="header">Elliot Baker</div>
+                        <div class="meta">Friend</div>
+                        <div class="description">
+                            Elliot is a sound engineer living in Nashville who enjoys playing guitar and hanging with his
+                            cat.
+                        </div>
+                    </div>
+                    <div class="extra content">
+                        <a>
+                            <i aria-hidden="true" class="user icon"></i>
+                            16 Friends
+                        </a>
+                    </div>
+                </div>                <div class="ui fluid card">
+                    <div class="image">
+                        <h:graphicImage library="images" name="colorScheme.PNG"  /></div>
+                    <div class="content">
+                        <div class="header">Elliot Baker</div>
+                        <div class="meta">Friend</div>
+                        <div class="description">
+                            Elliot is a sound engineer living in Nashville who enjoys playing guitar and hanging with his
+                            cat.
+                        </div>
+                    </div>
+                    <div class="extra content">
+                        <a>
+                            <i aria-hidden="true" class="user icon"></i>
+                            16 Friends
+                        </a>
+                    </div>
+                </div>                <div class="ui fluid card">
+                    <div class="image">
+                        <h:graphicImage library="images" name="colorScheme.PNG"  /></div>
+                    <div class="content">
+                        <div class="header">Elliot Baker</div>
+                        <div class="meta">Friend</div>
+                        <div class="description">
+                            Elliot is a sound engineer living in Nashville who enjoys playing guitar and hanging with his
+                            cat.
+                        </div>
+                    </div>
+                    <div class="extra content">
+                        <a>
+                            <i aria-hidden="true" class="user icon"></i>
+                            16 Friends
+                        </a>
+                    </div>
+                </div>                <div class="ui fluid card">
+                    <div class="image">
+                        <h:graphicImage library="images" name="colorScheme.PNG"  /></div>
+                    <div class="content">
+                        <div class="header">Elliot Baker</div>
+                        <div class="meta">Friend</div>
+                        <div class="description">
+                            Elliot is a sound engineer living in Nashville who enjoys playing guitar and hanging with his
+                            cat.
+                        </div>
+                    </div>
+                    <div class="extra content">
+                        <a>
+                            <i aria-hidden="true" class="user icon"></i>
+                            16 Friends
+                        </a>
+                    </div>
+                </div>                <div class="ui fluid card">
+                    <div class="image">
+                        <h:graphicImage library="images" name="colorScheme.PNG"  /></div>
+                    <div class="content">
+                        <div class="header">Elliot Baker</div>
+                        <div class="meta">Friend</div>
+                        <div class="description">
+                            Elliot is a sound engineer living in Nashville who enjoys playing guitar and hanging with his
+                            cat.
+                        </div>
+                    </div>
+                    <div class="extra content">
+                        <a>
+                            <i aria-hidden="true" class="user icon"></i>
+                            16 Friends
+                        </a>
+                    </div>
+                </div>                <div class="ui fluid card">
+                    <div class="image">
+                        <h:graphicImage library="images" name="colorScheme.PNG"  /></div>
+                    <div class="content">
+                        <div class="header">Elliot Baker</div>
+                        <div class="meta">Friend</div>
+                        <div class="description">
+                            Elliot is a sound engineer living in Nashville who enjoys playing guitar and hanging with his
+                            cat.
+                        </div>
+                    </div>
+                    <div class="extra content">
+                        <a>
+                            <i aria-hidden="true" class="user icon"></i>
+                            16 Friends
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="thingy3">
+            <div class="ui four doubling stackable cards">
+                <div class="ui fluid card">
+                    <div class="image">
+                        <h:graphicImage library="images" name="colorScheme.PNG"  /></div>
+                    <div class="content">
+                        <div class="header">Elliot Baker</div>
+                        <div class="meta">Friend</div>
+                        <div class="description">
+                            Elliot is a sound engineer living in Nashville who enjoys playing guitar and hanging with his
+                            cat.
+                        </div>
+                    </div>
+                    <div class="extra content">
+                        <a>
+                            <i aria-hidden="true" class="user icon"></i>
+                            16 Friends
+                        </a>
+                    </div>
+                </div>
+                <div class="ui fluid card">
+                    <div class="image">
+                        <h:graphicImage library="images" name="colorScheme.PNG"  /></div>
+                    <div class="content">
+                        <div class="header">Elliot Baker</div>
+                        <div class="meta">Friend</div>
+                        <div class="description">
+                            Elliot is a sound engineer living in Nashville who enjoys playing guitar and hanging with his
+                            cat.
+                        </div>
+                    </div>
+                    <div class="extra content">
+                        <a>
+                            <i aria-hidden="true" class="user icon"></i>
+                            16 Friends
+                        </a>
+                    </div>
+                </div>
+                <div class="ui fluid card">
+                    <div class="image">
+                        <h:graphicImage library="images" name="colorScheme.PNG"  /></div>
+                    <div class="content">
+                        <div class="header">Elliot Baker</div>
+                        <div class="meta">Friend</div>
+                        <div class="description">
+                            Elliot is a sound engineer living in Nashville who enjoys playing guitar and hanging with his
+                            cat.
+                        </div>
+                    </div>
+                    <div class="extra content">
+                        <a>
+                            <i aria-hidden="true" class="user icon"></i>
+                            16 Friends
+                        </a>
+                    </div>
+                </div>                <div class="ui fluid card">
+                    <div class="image">
+                        <h:graphicImage library="images" name="colorScheme.PNG"  /></div>
+                    <div class="content">
+                        <div class="header">Elliot Baker</div>
+                        <div class="meta">Friend</div>
+                        <div class="description">
+                            Elliot is a sound engineer living in Nashville who enjoys playing guitar and hanging with his
+                            cat.
+                        </div>
+                    </div>
+                    <div class="extra content">
+                        <a>
+                            <i aria-hidden="true" class="user icon"></i>
+                            16 Friends
+                        </a>
+                    </div>
+                </div>                <div class="ui fluid card">
+                    <div class="image">
+                        <h:graphicImage library="images" name="colorScheme.PNG"  /></div>
+                    <div class="content">
+                        <div class="header">Elliot Baker</div>
+                        <div class="meta">Friend</div>
+                        <div class="description">
+                            Elliot is a sound engineer living in Nashville who enjoys playing guitar and hanging with his
+                            cat.
+                        </div>
+                    </div>
+                    <div class="extra content">
+                        <a>
+                            <i aria-hidden="true" class="user icon"></i>
+                            16 Friends
+                        </a>
+                    </div>
+                </div>                <div class="ui fluid card">
+                    <div class="image">
+                        <h:graphicImage library="images" name="colorScheme.PNG"  /></div>
+                    <div class="content">
+                        <div class="header">Elliot Baker</div>
+                        <div class="meta">Friend</div>
+                        <div class="description">
+                            Elliot is a sound engineer living in Nashville who enjoys playing guitar and hanging with his
+                            cat.
+                        </div>
+                    </div>
+                    <div class="extra content">
+                        <a>
+                            <i aria-hidden="true" class="user icon"></i>
+                            16 Friends
+                        </a>
+                    </div>
+                </div>                <div class="ui fluid card">
+                    <div class="image">
+                        <h:graphicImage library="images" name="colorScheme.PNG"  /></div>
+                    <div class="content">
+                        <div class="header">Elliot Baker</div>
+                        <div class="meta">Friend</div>
+                        <div class="description">
+                            Elliot is a sound engineer living in Nashville who enjoys playing guitar and hanging with his
+                            cat.
+                        </div>
+                    </div>
+                    <div class="extra content">
+                        <a>
+                            <i aria-hidden="true" class="user icon"></i>
+                            16 Friends
+                        </a>
+                    </div>
+                </div>                <div class="ui fluid card">
+                    <div class="image">
+                        <h:graphicImage library="images" name="colorScheme.PNG"  /></div>
+                    <div class="content">
+                        <div class="header">Elliot Baker</div>
+                        <div class="meta">Friend</div>
+                        <div class="description">
+                            Elliot is a sound engineer living in Nashville who enjoys playing guitar and hanging with his
+                            cat.
+                        </div>
+                    </div>
+                    <div class="extra content">
+                        <a>
+                            <i aria-hidden="true" class="user icon"></i>
+                            16 Friends
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="thingy4">
+            <div class="ui four doubling stackable cards">
+                <div class="ui fluid card">
+                    <div class="image">
+                        <h:graphicImage library="images" name="colorScheme.PNG"  /></div>
+                    <div class="content">
+                        <div class="header">Elliot Baker</div>
+                        <div class="meta">Friend</div>
+                        <div class="description">
+                            Elliot is a sound engineer living in Nashville who enjoys playing guitar and hanging with his
+                            cat.
+                        </div>
+                    </div>
+                    <div class="extra content">
+                        <a>
+                            <i aria-hidden="true" class="user icon"></i>
+                            16 Friends
+                        </a>
+                    </div>
+                </div>
+                <div class="ui fluid card">
+                    <div class="image">
+                        <h:graphicImage library="images" name="colorScheme.PNG"  /></div>
+                    <div class="content">
+                        <div class="header">Elliot Baker</div>
+                        <div class="meta">Friend</div>
+                        <div class="description">
+                            Elliot is a sound engineer living in Nashville who enjoys playing guitar and hanging with his
+                            cat.
+                        </div>
+                    </div>
+                    <div class="extra content">
+                        <a>
+                            <i aria-hidden="true" class="user icon"></i>
+                            16 Friends
+                        </a>
+                    </div>
+                </div>
+                <div class="ui fluid card">
+                    <div class="image">
+                        <h:graphicImage library="images" name="colorScheme.PNG"  /></div>
+                    <div class="content">
+                        <div class="header">Elliot Baker</div>
+                        <div class="meta">Friend</div>
+                        <div class="description">
+                            Elliot is a sound engineer living in Nashville who enjoys playing guitar and hanging with his
+                            cat.
+                        </div>
+                    </div>
+                    <div class="extra content">
+                        <a>
+                            <i aria-hidden="true" class="user icon"></i>
+                            16 Friends
+                        </a>
+                    </div>
+                </div>                <div class="ui fluid card">
+                    <div class="image">
+                        <h:graphicImage library="images" name="colorScheme.PNG"  /></div>
+                    <div class="content">
+                        <div class="header">Elliot Baker</div>
+                        <div class="meta">Friend</div>
+                        <div class="description">
+                            Elliot is a sound engineer living in Nashville who enjoys playing guitar and hanging with his
+                            cat.
+                        </div>
+                    </div>
+                    <div class="extra content">
+                        <a>
+                            <i aria-hidden="true" class="user icon"></i>
+                            16 Friends
+                        </a>
+                    </div>
+                </div>               
+            </div>
+        </div>
+        <!-- Initialize Swiper -->
+        <script>
+            var swiper = new Swiper('.swiper-container', {
+                loop: true,
+                centeredSlides: true,
+                autoplay: {
+                    delay: 5000,
+                    disableOnInteraction: false,
+                },
+                pagination: {
+                    el: '.swiper-pagination',
+                },
+                navigation: {
+                    nextEl: '.swiper-button-next',
+                    prevEl: '.swiper-button-prev',
+                },
+            });
+        </script>
+    </h:body>
+</html>
