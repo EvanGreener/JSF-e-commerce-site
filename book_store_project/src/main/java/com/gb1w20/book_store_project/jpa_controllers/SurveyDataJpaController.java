@@ -20,7 +20,7 @@ import javax.transaction.UserTransaction;
  *
  * @author Saad
  */
-@Named("surveyData")
+@Named
 @RequestScoped
 public class SurveyDataJpaController implements Serializable {
     
