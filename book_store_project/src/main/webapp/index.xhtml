@@ -47,6 +47,12 @@
         </div>
         <div class="thingy">
             <p style="font-size: 48px">Hello</p>
+            <h:dataTable value="#{bookJpaController.findBookEntities()}" var="books">
+                <h:column>
+                    <f:facet name="header">HI</f:facet>
+                        #{books.title}
+                </h:column>
+            </h:dataTable>
             <div class="ui four doubling stackable cards">
                 <div class="ui fluid card">
                     <div class="image">
