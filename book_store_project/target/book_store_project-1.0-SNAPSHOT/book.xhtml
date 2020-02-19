@@ -1,0 +1,251 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:b="http://bootsfaces.net/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>The BookStore</title>
+        <link rel="stylesheet" href="https://unpkg.com/swiper/css/swiper.min.css"/>
+
+
+        <link href="https://fonts.googleapis.com/css?family=Montserrat|Roboto&amp;display=swap" rel="stylesheet"/>
+
+        <h:outputStylesheet library="webjars" name="Semantic-UI/2.4.1/semantic.min.css" />
+        <h:outputStylesheet library="css" name="homepage.css" />
+        <h:outputStylesheet library="book_css" name="bookpage.css" />
+        <h:outputScript library="js" name="homepage.js" />
+
+        <!-- Swiper JS -->
+        <script src="https://unpkg.com/swiper/js/swiper.min.js"></script>
+    </h:head>
+
+    <h:body>
+
+
+        <b:navBar brand="The Bookstore" brandHref="#" fluid="true" class="headMenu">
+
+
+            <b:navbarLinks>
+                <b:navLink class="nav" value="Shop" href="#"></b:navLink>
+                <b:navLink value="Sales" href="#"></b:navLink>
+                <b:navLink value="Genres" href="#"></b:navLink>
+            </b:navbarLinks>
+            <!--Adds spacing in nav bar-->
+            <b:navbarLinks pull="right"><b:navLink value="    " href="#"></b:navLink></b:navbarLinks>
+            <b:navbarLinks pull="right" styleClass="hidden-xs">
+                <b:navLink class="nav" value="Cart" href="#"></b:navLink>
+                <b:dropMenu value="En">
+                    <b:navLink id="en" value="English - En" href="#"></b:navLink>
+                    <b:navLink id="fr" value="Francais - Fr" href="#"></b:navLink>
+                </b:dropMenu>
+
+                <b:navLink value="Login" href="#">
+
+                </b:navLink>
+            </b:navbarLinks>
+        </b:navBar>
+
+
+
+        <!--Book description section-->
+        <div class="lightGreyDiv">
+            <div class="sliderTextContent">
+                <h1>Blah Blah</h1>
+                <span>By someone</span>
+                <p> fjre;jfl  weoirewouroewro r  iorewiour erwiurwoiuere ewrui ewroi urewuioerwiuo ie ier orew urewuoewrioewrio or</p>
+
+
+            </div>
+
+
+            <div  class="sliderImageContent">
+                <h:graphicImage width="20%" height="40%" library="images" name="colorScheme.PNG"  />
+            </div>
+        </div>
+
+
+        <!--Reviews section-->
+
+        <div class="thingy3">
+            <div class="ui stackable cards">
+                <div class="ui fluid card">
+
+                    <div class="content">
+
+
+
+
+                        <div class="ui  two doubling stackable cards">
+
+                            <div class="ui fluid card">
+
+                                <div class="content">
+                                    <h1>Elliot Baker</h1>
+                                    <div class="meta">- Friend</div>
+                                    <h:commandButton class="orangeBtn" value="PDF" type="button" />
+                                    <h:commandButton  class="orangeBtn" value="EPUB" type="button" />
+                                    <div class="description">
+                                        Elliot is a sound engineer living in Nashville who enjoys playing guitar and hanging with his
+                                        cat.
+                                    </div>
+
+                                </div>
+                            </div>
+
+                            <div class="ui fluid card">
+
+                                <div class="content">
+                                    <div class="image">
+                                        <h:graphicImage library="images" name="colorScheme.PNG"  />
+                                    </div>
+                                </div>
+
+                            </div>
+
+                        </div> 
+                    </div>
+                </div>
+
+
+            </div>
+
+
+
+        </div>
+
+
+
+
+
+        <!--Suggestions section-->
+        <div class="thingy">
+
+            <h4>You may also like</h4><br></br>
+
+            <div class="ui four doubling stackable cards">
+                <div class="ui fluid card darker">
+                    <div class="image">
+                        <h:graphicImage library="images" name="colorScheme.PNG"  />
+
+                    </div>
+                    <div class="content">
+                        <div class="header">Elliot Baker</div>
+                        <div class="meta">By Friend</div>
+                    </div>
+                    <div class="ui bottom attached button">
+                        + Add to Cart
+                    </div>
+                </div>
+                <div class="ui fluid card darker">
+                    <div class="image">
+                        <h:graphicImage library="images" name="colorScheme.PNG"  /></div>
+                    <div class="content">
+                        <div class="header">Elliot Baker</div>
+                        <div class="meta">Friend</div>
+
+                    </div>
+                </div>
+                <div class="ui fluid card darker">
+                    <div class="image">
+                        <h:graphicImage library="images" name="colorScheme.PNG"  /></div>
+                    <div class="content">
+                        <div class="header">Elliot Baker</div>
+                        <div class="meta">Friend</div>
+
+                    </div>
+
+                </div>                <div class="ui fluid card darker">
+                    <div class="image">
+                        <h:graphicImage library="images" name="colorScheme.PNG"  /></div>
+                    <div class="content">
+                        <div class="header">Elliot Baker</div>
+                        <div class="meta">Friend</div>
+
+                    </div>
+
+                </div>         
+            </div>
+
+            <br></br>
+            <h4>Similar Genre</h4><br></br>
+
+            <div class="ui four doubling stackable cards">
+                <div class="ui fluid card darker">
+                    <div class="image">
+                        <h:graphicImage library="images" name="colorScheme.PNG"  />
+
+                    </div>
+                    <div class="content">
+                        <div class="header">Elliot Baker</div>
+                        <div class="meta">By Friend</div>
+                    </div>
+                    <div class="ui bottom attached button">
+                        + Add to Cart
+                    </div>
+                </div>
+                <div class="ui fluid card darker">
+                    <div class="image">
+                        <h:graphicImage library="images" name="colorScheme.PNG"  /></div>
+                    <div class="content">
+                        <div class="header">Elliot Baker</div>
+                        <div class="meta">Friend</div>
+
+                    </div>
+                </div>
+                <div class="ui fluid card darker">
+                    <div class="image">
+                        <h:graphicImage library="images" name="colorScheme.PNG"  /></div>
+                    <div class="content">
+                        <div class="header">Elliot Baker</div>
+                        <div class="meta">Friend</div>
+
+                    </div>
+
+                </div>                <div class="ui fluid card darker">
+                    <div class="image">
+                        <h:graphicImage library="images" name="colorScheme.PNG"  /></div>
+                    <div class="content">
+                        <div class="header">Elliot Baker</div>
+                        <div class="meta">Friend</div>
+
+                    </div>
+
+                </div>         
+            </div> 
+        </div>
+
+
+
+
+
+
+
+        <div class="thingy4">
+
+
+        </div>
+
+
+
+
+        <!-- Initialize Swiper -->
+        <script>
+            var swiper = new Swiper('.swiper-container', {
+                loop: true,
+                centeredSlides: true,
+                autoplay: {
+                    delay: 5000,
+                    disableOnInteraction: false,
+                },
+                pagination: {
+                    el: '.swiper-pagination',
+                },
+                navigation: {
+                    nextEl: '.swiper-button-next',
+                    prevEl: '.swiper-button-prev',
+                },
+            });
+        </script>
+    </h:body>
+</html>

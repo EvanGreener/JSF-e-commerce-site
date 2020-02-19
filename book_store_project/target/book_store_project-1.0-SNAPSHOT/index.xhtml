@@ -55,6 +55,7 @@
                         <span>By someone</span>
                         <p> fjre;jfl  weoirewouroewro r  iorewiour erwiurwoiuere ewrui ewroi urewuioerwiuo ie ier orew urewuoewrioewrio or</p>
                                   <h:commandButton value="Shop Now" type="button" />
+                                  
                     </div>
 
 
@@ -83,10 +84,10 @@
             <h2>Best Seller Products</h2><br></br>
 
             <p style="font-size: 48px">Hello</p>
-            <h:dataTable value="#{bookJpaController.findBookEntities()}" var="books">
+            <h:dataTable>
                 <h:column>
                     <f:facet name="header">HI</f:facet>
-                        #{books.title}
+                    <p>hello</p>
                 </h:column>
             </h:dataTable>
 
@@ -104,12 +105,10 @@
                             cat.
                         </div>
                     </div>
-                    <div class="extra content">
-                        <a>
-                            <i aria-hidden="true" class="user icon"></i>
-                            16 Friends
-                        </a>
-                    </div>
+            <div class="ui bottom attached button">
+      <i class="add icon"></i>
+       + Add to Cart
+    </div>
                 </div>
                 <div class="ui fluid card darker">
                     <div class="image">
@@ -233,7 +232,7 @@
                     </div>
                 </div>
             </div>
-            <h:commandButton class="button" value="Shop Now" type="button" />
+            <h:commandButton class="shopBtn" value="Shop Now" type="button" />
         </div>
         <div class="thingy2">
             <div class="ui four doubling stackable cards">
