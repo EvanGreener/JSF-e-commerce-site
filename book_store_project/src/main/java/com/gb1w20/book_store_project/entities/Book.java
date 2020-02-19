@@ -215,7 +215,7 @@ public class Book implements Serializable {
 
     @Override
     public String toString() {
-        return "com.gb1w20.book_store_project.entities.Book[ isbn=" + isbn + " ]";
+        return "Book[ title=" + title + ", isbn=" + isbn + " ]";
     }
     
 }
