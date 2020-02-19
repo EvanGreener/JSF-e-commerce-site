@@ -17,31 +17,38 @@
                 <span class="fa fa-chevron-right"></span>
             </f:facet>
             <b:navbarLinks>
+                <b:navLink value="Sign Up" href="signUp.xhtml"></b:navLink>
                 <b:navLink value="Log In" href="signIn.xhtml"></b:navLink>
-                <b:navLink value="Link" href="#"></b:navLink>
+                <b:navLink value="Home Page" href="index.xhtml"></b:navLink>
             </b:navbarLinks>
         </b:navBar>
-        <div class="ui fluid card">
-            <div class="thingy2">
-                <h1 class="ui header">Login</h1>
-                <br/>
-                <label>Email</label>
-                <div class="fluid ui input">
-                    <input type="text" placeholder="Enter email" />
+        <form class="ui form">
+            <div class="ui fluid card">
+                <div class="thingy2">
+                    <div class="thingy5">
+                        <h1 class="ui header">Login</h1>
+                        <div class="thingy6">
+                            <div class="field">
+                                <label>Email</label>
+                                <input type="email" placeholder="Enter email" />
+                            </div>
+                            <br/>
+                            <div class="field">
+                                <label>Password</label>
+                                <input type="password" placeholder="Enter password" />
+                            </div>
+                            <div class="ui checkbox">
+                                <input type="checkbox" name="remember" />
+                                <label>Remember Me</label>
+                            </div>
+                            <button type="submit" class="huge black fluid ui button">Log In</button>
+                        </div>
+                    </div>
                 </div>
-                <br/>
-                <br/>
-                <label>Password</label>
-                <div class="fluid ui input">
-                    <input type="password" placeholder="Enter password" />
-                </div>
-                <br/>
-                <div class="ui checkbox">
-                    <input type="checkbox" name="remember" />
-                    <label>Remember Me</label>
-                </div>
-                <button class="fluid ui button">Log In</button>
             </div>
+        </form>
+        <div class="thingy4">
+            <h2 class="white">This is where the footer goes</h2>
         </div>
     </h:body>
 </html>

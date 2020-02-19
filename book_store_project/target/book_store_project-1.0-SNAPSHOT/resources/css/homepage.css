@@ -75,6 +75,30 @@ body {
     background-color: #223843;
 }
 
+.thingy5{
+    background-color: white;
+    padding: 3%;
+    width: 80%;
+    margin: 0 auto;
+    border: 0.5px solid grey;
+}
+
+.thingy6{
+    padding:0%;
+    width:70%;
+    margin: 0 auto;
+}
+
+.ui.form
+{
+    font-size:1em;
+}
+
+.white
+{
+    color: white;
+}
+
 .mainBtn{
     width: 15% !important;
     background-color: white !important;
