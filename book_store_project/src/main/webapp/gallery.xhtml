@@ -10,6 +10,8 @@
           xmlns:b="http://bootsfaces.net/ui"
           xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
           xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+          
+        
         <h:head>
             <title> Gallery Page </title>
             <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
@@ -24,77 +26,47 @@
         </h:head>
         <h:body>
             <h:form>
-
-
                 <div class="gallery">
                     <div class="ui grid">
                         <div class="four wide column">
                             <p>Filter By Genre</p>
-                            <h:selectManyCheckbox layout="pageDirection" id="genresCheckbox" > 
-                                <f:selectItem itemValue = "scifi" itemLabel = "Sci-Fi" /> 
+                            <h:selectManyCheckbox layout="pageDirection" value="#{data.genreFilters}">
+                                <f:selectItem itemValue = "sci-fi" itemLabel = "Sci-Fi" /> 
                                 <f:selectItem itemValue = "mystery" itemLabel = "Mystery" /> 
                                 <f:selectItem itemValue = "fantansy" itemLabel = "Fantasy" /> 
                                 <f:selectItem itemValue = "horror" itemLabel = "Horror" />
                                 <f:selectItem itemValue = "fiction" itemLabel = "Fiction" />
                             </h:selectManyCheckbox>
+                            
+                            <div class="ui divider" />
+                            
+                            <p>Search by</p>
+                            <h:selectOneRadio layout="pageDirection" value="#{data.searchBy}" >
+                                <f:selectItem itemValue = "title" itemLabel = "Title" />
+                                <f:selectItem itemValue = "author" itemLabel = "Author" />
+                                <f:selectItem itemValue = "genre" itemLabel = "Genre" />
+                                <f:selectItem itemValue = "isbn" itemLabel = "ISBN#" />
+                            </h:selectOneRadio>
                         </div>
                         <div class="twelve wide column">
                             <div style="margin-bottom: 2px;" class="upper">
                                 <h3 style="display: inline;">Showing 12 of 200</h3>
 
                                 <div class="ui search">
-                                    <h:inputText a:placeholder="Search books..." style="float: right; margin-top: -30px;" class="prompt" id="query">
+                                    <h:inputText  id="query" value="#{search.query}" a:placeholder="Search books..." style="float: right; margin-top: -30px;" class="prompt" >
                                         <f:ajax event="keyup" execute="query" render="out" />
                                     </h:inputText>
 
                                 </div> 
                             </div>
 
-                            <div style="margin-right: 40px;" class="middle">
+                            <div id="out" style="margin-right: 40px;" class="middle">
                                 <div class="ui grid">
-                                    
-                                    <div class="four column row">
-                                        <div class="column">
-                                            <h:graphicImage library="images" name="colorScheme.PNG"/>
+                                    <ui:repeat value="#{search.results}" var="book">
+                                        <div class="four wide column">
+                                            <h:graphicImage height="250" width="156.25" library="images" name="#{book.isbn}.jpg"/>
                                         </div>
-                                        <div class="column">
-                                            <h:graphicImage library="images" name="colorScheme.PNG"/>
-                                        </div>
-                                        <div class="column">
-                                            <h:graphicImage library="images" name="colorScheme.PNG"/>
-                                        </div>
-                                        <div class="column">
-                                            <h:graphicImage library="images" name="colorScheme.PNG"/>
-                                        </div>
-                                    </div>
-                                    <div class="four column row">
-                                        <div class="column">
-                                            <h:graphicImage library="images" name="colorScheme.PNG"/>
-                                        </div>
-                                        <div class="column">
-                                            <h:graphicImage library="images" name="colorScheme.PNG"/>
-                                        </div>
-                                        <div class="column">
-                                            <h:graphicImage library="images" name="colorScheme.PNG"/>
-                                        </div>
-                                        <div class="column">
-                                            <h:graphicImage library="images" name="colorScheme.PNG"/>
-                                        </div>
-                                    </div>
-                                    <div class="four column row">
-                                        <div class="column">
-                                            <h:graphicImage library="images" name="colorScheme.PNG"/>
-                                        </div>
-                                        <div class="column">
-                                            <h:graphicImage library="images" name="colorScheme.PNG"/>
-                                        </div>
-                                        <div class="column">
-                                            <h:graphicImage library="images" name="colorScheme.PNG"/>
-                                        </div>
-                                        <div class="column">
-                                            <h:graphicImage library="images" name="colorScheme.PNG"/>
-                                        </div>
-                                    </div>
+                                    </ui:repeat>
                                 </div>
                             </div>
 

@@ -16,6 +16,7 @@ com/gb1w20/book_store_project/entities/Clients_.class
 com/gb1w20/book_store_project/jpa_controllers/CustomerReviewsJpaController.class
 com/gb1w20/book_store_project/jpa_controllers/AdsJpaController.class
 com/gb1w20/book_store_project/jpa_controllers/ClientsJpaController.class
+com/gb1w20/book_store_project/beans/DataBean.class
 com/gb1w20/book_store_project/jpa_controllers/OrdersJpaController.class
 com/gb1w20/book_store_project/entities/Orders.class
 com/gb1w20/book_store_project/entities/SurveyData.class
@@ -33,6 +34,7 @@ com/gb1w20/book_store_project/jpa_controllers/BookJpaController.class
 com/gb1w20/book_store_project/jpa_controllers/SurveyDataJpaController.class
 com/gb1w20/book_store_project/jpa_controllers/NewsJpaController.class
 com/gb1w20/book_store_project/entities/CustomerReviews_.class
+com/gb1w20/book_store_project/beans/SearchBean.class
 com/gb1w20/book_store_project/entities/Surveys.class
 com/gb1w20/book_store_project/entities/OrderItem.class
 com/gb1w20/book_store_project/entities/Authors.class

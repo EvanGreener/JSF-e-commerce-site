@@ -29,6 +29,7 @@ public class SearchBean implements Serializable {
 
     public List<Book> getResults() {
         
+        System.out.println(query);
         if (!query.isBlank()) {
             List<Book> l = bookCtrlr.search(query);
 
@@ -36,6 +37,6 @@ public class SearchBean implements Serializable {
 
             return l;
         }
-        return null;
+        return bookCtrlr.findBookEntities(12, 0);
     }
 }

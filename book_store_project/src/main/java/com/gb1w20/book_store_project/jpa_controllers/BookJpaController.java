@@ -129,14 +129,14 @@ public class BookJpaController implements Serializable {
 
     public List<Book> search(String q) {
 
-        String expression = "%" + q + "%"; 
-        
+        String expression = "%" + q + "%";
+
         CriteriaBuilder cb = em.getCriteriaBuilder();
         CriteriaQuery<Book> cq = cb.createQuery(Book.class);
         Root<Book> book = cq.from(Book.class);
-        
+
         cq.where(cb.like(book.get("title"), expression));
-        
+
         TypedQuery<Book> query = em.createQuery(cq);
         return query.getResultList();
 
