@@ -9,9 +9,11 @@
           xmlns:f="http://xmlns.jcp.org/jsf/core"
           xmlns:b="http://bootsfaces.net/ui"
           xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
-          xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
-          
-        
+          xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+          xmlns:p="http://primefaces.org/ui">
+
+
+
         <h:head>
             <title> Gallery Page </title>
             <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
@@ -19,8 +21,6 @@
             <h:outputStylesheet library="webjars" name="Semantic-UI/2.4.1/semantic.min.css" />
             <h:outputStylesheet library="webjars" name="swiper/4.5.1/dist/css/swiper.min.css" />
             <h:outputStylesheet library="galleryCss" name="gallery.css" />
-
-            <!-- Swiper JS -->
 
             <script src="https://unpkg.com/swiper/js/swiper.min.js"></script>
         </h:head>
@@ -30,18 +30,18 @@
                     <div class="ui grid">
                         <div class="four wide column">
                             <p>Filter By Genre</p>
-                            <h:selectManyCheckbox layout="pageDirection" value="#{data.genreFilters}">
+                            <h:selectManyCheckbox layout="pageDirection" value="#{search.genreFilters}">
                                 <f:selectItem itemValue = "sci-fi" itemLabel = "Sci-Fi" /> 
                                 <f:selectItem itemValue = "mystery" itemLabel = "Mystery" /> 
                                 <f:selectItem itemValue = "fantansy" itemLabel = "Fantasy" /> 
                                 <f:selectItem itemValue = "horror" itemLabel = "Horror" />
                                 <f:selectItem itemValue = "fiction" itemLabel = "Fiction" />
                             </h:selectManyCheckbox>
-                            
+
                             <div class="ui divider" />
-                            
+
                             <p>Search by</p>
-                            <h:selectOneRadio layout="pageDirection" value="#{data.searchBy}" >
+                            <h:selectOneRadio layout="pageDirection" value="#{search.searchBy}" >
                                 <f:selectItem itemValue = "title" itemLabel = "Title" />
                                 <f:selectItem itemValue = "author" itemLabel = "Author" />
                                 <f:selectItem itemValue = "genre" itemLabel = "Genre" />
@@ -50,28 +50,31 @@
                         </div>
                         <div class="twelve wide column">
                             <div style="margin-bottom: 2px;" class="upper">
-                                <h3 style="display: inline;">Showing 12 of 200</h3>
+                                <h3 style="display: inline;">TheBooksStore<sup>TM</sup></h3>
 
                                 <div class="ui search">
                                     <h:inputText  id="query" value="#{search.query}" a:placeholder="Search books..." style="float: right; margin-top: -30px;" class="prompt" >
-                                        <f:ajax event="keyup" execute="query" render="out" />
+                                        <p:ajax event="keyup" update="out" />
                                     </h:inputText>
-
                                 </div> 
+                                
                             </div>
 
-                            <div id="out" style="margin-right: 40px;" class="middle">
-                                <div class="ui grid">
-                                    <ui:repeat value="#{search.results}" var="book">
-                                        <div class="four wide column">
-                                            <h:graphicImage height="250" width="156.25" library="images" name="#{book.isbn}.jpg"/>
-                                        </div>
-                                    </ui:repeat>
-                                </div>
+                            <div  style="margin-right: 40px;" class="middle">
+                                <h:panelGroup id="out">
+                                    <div class="ui grid">
+                                        <ui:repeat value="#{search.results}" var="book">
+                                            <div class="four wide column">
+                                                <h:graphicImage  height="250" width="156.25" library="images" name="#{book.isbn}.jpg"/>
+                                            </div>
+                                        </ui:repeat>
+                                    </div>
+                                </h:panelGroup>
+
                             </div>
 
                             <div class="bot">
-                                <!-- TODO: pagination bootfaces -->
+                                <!-- TODO: pagination -->
                             </div>
                         </div>
                     </div>
