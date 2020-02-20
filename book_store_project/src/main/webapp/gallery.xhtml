@@ -52,12 +52,19 @@
                             <div style="margin-bottom: 2px;" class="upper">
                                 <h3 style="display: inline;">TheBooksStore<sup>TM</sup></h3>
 
-                                <div class="ui search">
-                                    <h:inputText  id="query" value="#{search.query}" a:placeholder="Search books..." style="float: right; margin-top: -30px;" class="prompt" >
+
+                                <p:ajaxStatus style="display: inline;">
+                                    <f:facet  name="start">
+                                        <p:graphicImage style="display: inline;" class="loading" library="images" name="double-ring.svg" />
+                                    </f:facet>
+                                </p:ajaxStatus>
+                                
+                                <div style="display: inline;" class="ui search">
+                                    <h:inputText  id="query" value="#{search.query}" a:placeholder="Search books..." style="float: right; margin-top: -7px;" class="prompt" >
                                         <p:ajax event="keyup" update="out" />
                                     </h:inputText>
                                 </div> 
-                                
+
                             </div>
 
                             <div  style="margin-right: 40px;" class="middle">
@@ -83,6 +90,7 @@
                         <h3 style="text-align: center;">You may also like</h3>
                         <div class="swiper-container">
                             <div class="swiper-wrapper">
+                                
                                 <!--1-->
                                 <div class="swiper-slide">
                                     <h:graphicImage height="51.8" width="116.89" style="margin-bottom: 40px;" library="images" name="colorScheme.PNG"/>
