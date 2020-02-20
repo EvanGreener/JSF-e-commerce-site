@@ -14,6 +14,20 @@
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
+  <component name="DatabaseView">
+    <option name="SHOW_INTERMEDIATE" value="true" />
+    <option name="GROUP_DATA_SOURCES" value="true" />
+    <option name="GROUP_SCHEMA" value="true" />
+    <option name="GROUP_CONTENTS" value="false" />
+    <option name="SORT_POSITIONED" value="false" />
+    <option name="SHOW_EMPTY_GROUPS" value="false" />
+    <option name="AUTO_SCROLL_FROM_SOURCE" value="false" />
+    <option name="HIDDEN_KINDS">
+      <set />
+    </option>
+    <expand />
+    <select />
+  </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
@@ -24,6 +38,8 @@
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
+    <property name="DBE.Init.BalloonShown" value="true" />
+    <property name="DatabaseDriversLRU" value="mysql" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
@@ -38,7 +54,22 @@
       <list>
         <serviceView>
           <treeState>
-            <expand />
+            <expand>
+              <path>
+                <item name="services root" type="e789fda9:ObjectUtils$Sentinel" />
+                <item name="root:@localhost" type="7427dc5b:ServiceModel$ServiceGroupNode" />
+              </path>
+              <path>
+                <item name="services root" type="e789fda9:ObjectUtils$Sentinel" />
+                <item name="root:@localhost" type="7427dc5b:ServiceModel$ServiceGroupNode" />
+                <item name="com.intellij.database.console.session.MessageBusSession@74143e1" type="9fbbdea:ServiceModel$ServiceNode" />
+              </path>
+              <path>
+                <item name="services root" type="e789fda9:ObjectUtils$Sentinel" />
+                <item name="root:@localhost" type="7427dc5b:ServiceModel$ServiceGroupNode" />
+                <item name="com.intellij.database.console.session.MessageBusSession@3a0e7501" type="9fbbdea:ServiceModel$ServiceNode" />
+              </path>
+            </expand>
             <select />
           </treeState>
         </serviceView>
@@ -67,30 +98,34 @@
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
     <state x="872" y="359" key="#Project_Structure/0.0.2560.1400@0.0.2560.1400" timestamp="1581095985361" />
-    <state x="734" y="355" width="1092" height="854" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1581095909717">
+    <state x="734" y="355" width="1092" height="854" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1582227224274">
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
-    <state x="734" y="355" width="1092" height="854" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.2560.1400@0.0.2560.1400" timestamp="1581095909717" />
-    <state width="2517" height="380" key="GridCell.Tab.0.bottom" timestamp="1581096027728">
+    <state x="734" y="355" width="1092" height="854" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.2560.1400@0.0.2560.1400" timestamp="1582227224274" />
+    <state width="1741" height="401" key="GridCell.Tab.0.bottom" timestamp="1582227245229">
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
-    <state width="2517" height="380" key="GridCell.Tab.0.bottom/0.0.2560.1400@0.0.2560.1400" timestamp="1581096027728" />
-    <state width="2517" height="380" key="GridCell.Tab.0.center" timestamp="1581096027728">
+    <state width="1741" height="401" key="GridCell.Tab.0.bottom/0.0.2560.1400@0.0.2560.1400" timestamp="1582227245229" />
+    <state width="1741" height="401" key="GridCell.Tab.0.center" timestamp="1582227245229">
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
-    <state width="2517" height="380" key="GridCell.Tab.0.center/0.0.2560.1400@0.0.2560.1400" timestamp="1581096027728" />
-    <state width="2517" height="380" key="GridCell.Tab.0.left" timestamp="1581096027728">
+    <state width="1741" height="401" key="GridCell.Tab.0.center/0.0.2560.1400@0.0.2560.1400" timestamp="1582227245229" />
+    <state width="1741" height="401" key="GridCell.Tab.0.left" timestamp="1582227245228">
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
-    <state width="2517" height="380" key="GridCell.Tab.0.left/0.0.2560.1400@0.0.2560.1400" timestamp="1581096027728" />
-    <state width="2517" height="380" key="GridCell.Tab.0.right" timestamp="1581096027728">
+    <state width="1741" height="401" key="GridCell.Tab.0.left/0.0.2560.1400@0.0.2560.1400" timestamp="1582227245228" />
+    <state width="1741" height="401" key="GridCell.Tab.0.right" timestamp="1582227245229">
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
-    <state width="2517" height="380" key="GridCell.Tab.0.right/0.0.2560.1400@0.0.2560.1400" timestamp="1581096027728" />
+    <state width="1741" height="401" key="GridCell.Tab.0.right/0.0.2560.1400@0.0.2560.1400" timestamp="1582227245229" />
     <state x="781" y="343" key="SettingsEditor" timestamp="1581095962751">
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
     <state x="781" y="343" key="SettingsEditor/0.0.2560.1400@0.0.2560.1400" timestamp="1581095962751" />
+    <state x="976" y="524" key="com.intellij.ide.util.TipDialog" timestamp="1582227197293">
+      <screen x="0" y="0" width="2560" height="1400" />
+    </state>
+    <state x="976" y="524" key="com.intellij.ide.util.TipDialog/0.0.2560.1400@0.0.2560.1400" timestamp="1582227197293" />
     <state x="943" y="315" width="672" height="678" key="search.everywhere.popup" timestamp="1581095965526">
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
