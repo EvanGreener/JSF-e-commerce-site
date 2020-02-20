@@ -70,14 +70,12 @@ body {
 .thingy{
     padding:5%;
     background-color: #D8B4A0;
-}
-.thingy2{
-    padding:5%;
-    background-color: #EFF1F3;
+
 }
 .thingy3{
     padding:5%;
     background-color: #DBD3DB;
+
 }
 .thingy4{
     padding:5%;
@@ -121,7 +119,9 @@ h2{
   border-radius: 5px;
   text-align: center;
 }
-
+.homepageImg{
+    text-align: center;
+}
 .cardHoverBtn:hover {
   background-color: grey;
 }
