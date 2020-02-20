@@ -4,7 +4,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:b="http://bootsfaces.net/ui"
-      xmlns:f="http://xmlns.jcp.org/jsf/core">
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:a="http://xmlns.jcp.org/jsf/passthrough">
     <h:head>
         <title>Register</title>
         <link href="https://fonts.googleapis.com/css?family=Montserrat|Roboto&amp;display=swap" rel="stylesheet"/>
@@ -21,7 +22,7 @@
                 <b:navLink value="Home Page" href="index.xhtml"></b:navLink>
             </b:navbarLinks>
         </b:navBar>
-        <form class="ui form">
+        <h:form class="ui form" id="register">
             <div class="ui fluid card">
                 <div class="thingy2">
                     <div class="thingy5">
@@ -29,67 +30,104 @@
                         <div class="thingy6">
                             <div class="two fields">
                                 <div class="field">
-                                    <label>First Name</label>
-                                    <input type="text" name="firstName" placeholder="Enter first name" />
+                                    <h:outputLabel for="firstName" value="First Name"/>
+                                    <h:inputText id="firstName" label="First Name" value="#{clientBacking.client.firstName}" required="true" requiredMessage="Please enter first name" a:placeholder="Enter first name" />
+                                    <br/>
+                                    <h:message class="error" for="firstName"/>
                                 </div>
                                 <div class="field">
-                                    <label>Last Name</label>
-                                    <input type="text" name="lastName" placeholder="Enter last name" />
+                                    <h:outputLabel for="lastName" value="Last Name"/>
+                                    <h:inputText id="lastName" label="Last Name" value="#{clientBacking.client.lastName}" required="true" requiredMessage="Please enter last name" a:placeholder="Enter last name" />
+                                    <br/>
+                                    <h:message class="error" for="lastName"/>
                                 </div>
                             </div>
                             <div class="field">
-                                <label>Address 1</label>
-                                <input type="text" name="address1" placeholder="Enter address 1" />
+                                <h:outputLabel for="address1" value="Address 1"/>
+                                <h:inputText id="address1" label="Address 1" value="#{clientBacking.client.address1}" required="true" requiredMessage="Please enter address 1" a:placeholder="Enter address 1" />
+                                <br/>
+                                <h:message class="error" for="address1"/>
                             </div>
                             <div class="field">
-                                <label>Address 2</label>
-                                <input type="text" name="address2" placeholder="Enter address 2" />
+                                <h:outputLabel for="address2" value="Address 2"/>
+                                <h:inputText id="address2" label="Address 2" value="#{clientBacking.client.address2}" required="true" requiredMessage="Please enter address 2" a:placeholder="Enter address 2" />
+                                <br/>
+                                <h:message class="error" for="address2"/>
                             </div>
                             <div class="fields">
                                 <div class="twelve wide field">
-                                    <label>Country</label>
-                                    <input type="text" name="country" placeholder="Enter country" />
+                                    <h:outputLabel for="country" value="Country"/>
+                                    <h:inputText id="country" label="Country" value="#{clientBacking.client.country}" required="true" requiredMessage="Please enter country" a:placeholder="Enter country" />
+                                    <br/>
+                                    <h:message class="error" for="country"/>
                                 </div>
                                 <div class="four wide field">
-                                    <label>Province/State</label>
-                                    <input type="text" name="provOrState" placeholder="Enter province or state" />
+                                    <h:outputLabel for="provOrState" value="Province/State"/>
+                                    <h:inputText id="provOrState" label="Province/State" value="#{clientBacking.client.provinceAbbreviation}" required="true" requiredMessage="Please enter province or state" a:placeholder="Enter province or state" />
+                                    <br/>
+                                    <h:message class="error" for="provOrState"/>
                                 </div>
                             </div>
-                            
+                            <div class="fields">
+                            <div class="twelve wide field">
+                                <h:outputLabel for="city" value="City"/>
+                                <h:inputText id="city" label="City" value="#{clientBacking.client.city}" required="true" requiredMessage="Please enter city" a:placeholder="Enter city" />
+                                <br/>
+                                <h:message class="error" for="companyName"/>
+                            </div>
+                            <div class="four wide field">
+                                <h:outputLabel for="postalCode" value="Postal Code"/>
+                                <h:inputText id="postalCode" label="Postal Code" value="#{clientBacking.client.postalCode}" required="true" requiredMessage="Please enter postal code" a:placeholder="Enter postal code" />
+                                <br/>
+                                <h:message class="error" for="companyName"/>
+                            </div>
+                            </div>
                             <div class="two fields">
                                 <div class="field">
-                                    <label>Home Phone</label>
-                                    <input type="tel" name="homePhone" placeholder="Enter home phone" />
+                                    <h:outputLabel for="homePhone" value="Home Phone"/>
+                                    <h:inputText id="homePhone" label="Home Phone" value="#{clientBacking.client.homeTelephone}" required="true" requiredMessage="Please enter home phone" a:placeholder="Enter home phone" />
+                                    <br/>
+                                    <h:message class="error" for="homePhone"/>
                                 </div>
                                 <div class="field">
-                                    <label>Cell Phone</label>
-                                    <input type="tel" name="cellPhone" placeholder="Enter cell phone" />
+                                    <h:outputLabel for="cellPhone" value="Cell Phone"/>
+                                    <h:inputText id="cellPhone" label="Cell Phone" value="#{clientBacking.client.cellTelephone}" required="true" requiredMessage="Please enter cell phone" a:placeholder="Enter cell phone" />
+                                    <br/>
+                                    <h:message class="error" for="cellPhone"/>
                                 </div>
                             </div>
                             <div class="field">
-                                <label>Company Name</label>
-                                <input type="text" name="companyName" placeholder="Enter company name" />
+                                <h:outputLabel for="companyName" value="Company Name"/>
+                                <h:inputText id="companyName" label="Company Name" value="#{clientBacking.client.companyName}" required="true" requiredMessage="Please enter company name" a:placeholder="Enter company name" />
+                                <br/>
+                                <h:message class="error" for="companyName"/>
                             </div>
                             <div class="field">
-                                <label>Email</label>
-                                <input type="email" name="email" placeholder="Enter email" />
+                                <h:outputLabel for="email" value="Email"/>
+                                <h:inputText id="email" label="Email" value="#{clientBacking.client.email}" required="true" requiredMessage="Please enter email" a:placeholder="Enter email" />
+                                <br/>
+                                <h:message class="error" for="email"/>
                             </div>
                             <div class="field">
-                                <label>Password</label>
-                                <input type="password" name="password" placeholder="Enter password" />
+                                <h:outputLabel for="password" value="Password"/>
+                                <h:inputSecret id="password" value="password" label="password" required="false" requiredMessage="Please enter password" a:placeholder="Enter password" />
+                                <br/>
+                                <h:message class="error" for="password"/>
                             </div>
                             <div class="field">
-                                <label>Re-enter Password</label>
-                                <input type="password" name="passwordRe" placeholder="Re-enter password" />
+                                <h:outputLabel for="passwordRe" value="Re-enter Password"/>
+                                <h:inputSecret id="passwordRe" value="password" label="passwordRe" required="false" requiredMessage="Please re-enter password" a:placeholder="Re-enter password" />
+                                <br/>
+                                <h:message class="error" for="passwordRe"/>
                             </div>
-                            <button type="submit" class="huge black fluid ui button">Register</button>
+                            <h:commandButton class="huge black fluid ui button" id="registerBtn" value="Register" action="#{clientBacking.createClient()}" />
                             <br/>
                             <a href="signIn.xhtml" class="signUpLink">Login</a>
                         </div>
                     </div>
                 </div>
             </div>
-        </form>
+        </h:form>
         <div class="thingy4">
             <h2 class="white">This is where the footer goes</h2>
         </div>

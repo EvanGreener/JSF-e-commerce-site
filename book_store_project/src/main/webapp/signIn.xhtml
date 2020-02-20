@@ -4,7 +4,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:b="http://bootsfaces.net/ui"
-      xmlns:f="http://xmlns.jcp.org/jsf/core">
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:a="http://xmlns.jcp.org/jsf/passthrough">
     <h:head>
         <title>Login</title>
         <link href="https://fonts.googleapis.com/css?family=Montserrat|Roboto&amp;display=swap" rel="stylesheet"/>
@@ -28,13 +29,13 @@
                         <h1 class="ui header">Login</h1>
                         <div class="thingy6">
                             <div class="field">
-                                <label>Email</label>
-                                <input type="email" name="email" placeholder="Enter email" />
+                                <h:outputLabel for="email" value="Email"/>
+                                <h:inputText id="email" label="Email" value="" required="true" requiredMessage="Enter email" a:placeholder="Enter email" />
                             </div>
                             <br/>
                             <div class="field">
-                                <label>Password</label>
-                                <input type="password" name="password" placeholder="Enter password" />
+                                <h:outputLabel for="password" value="Password"/>
+                                <h:inputSecret id="password" label="Password" value="" required="true" requiredMessage="Enter password" a:placeholder="Enter password"/>
                             </div>
                             <div class="ui checkbox">
                                 <input type="checkbox" name="remember" />
