@@ -9,9 +9,6 @@ insert into Client_Inventory
 values (3, "9780061120084", "2019-07-31 04:43:51", "2020-01-17 13:26:36", true);
 insert into Client_Inventory
     (Client_ID, ISBN, Date_Purchased, Last_Modified, Is_Removed)
-values (4, "9781328869333", "2019-10-23 03:22:00", "2019-12-12 12:14:26", true);
-insert into Client_Inventory
-    (Client_ID, ISBN, Date_Purchased, Last_Modified, Is_Removed)
 values (5, "9780684830421", "2019-02-20 18:01:43", "2020-01-19 22:00:21", true);
 insert into Client_Inventory
     (Client_ID, ISBN, Date_Purchased, Last_Modified, Is_Removed)
@@ -30,9 +27,6 @@ insert into Client_Inventory
 values (3, "9780307277671", "2019-06-09 06:25:36", "2020-01-18 15:59:11", true);
 insert into Client_Inventory
     (Client_ID, ISBN, Date_Purchased, Last_Modified, Is_Removed)
-values (5, "9780385490818", "2019-05-09 18:07:26", "2019-12-05 19:15:42", false);
-insert into Client_Inventory
-    (Client_ID, ISBN, Date_Purchased, Last_Modified, Is_Removed)
 values (9, "9781594480003", "2019-03-26 11:41:09", "2020-01-16 19:26:31", true);
 insert into Client_Inventory
     (Client_ID, ISBN, Date_Purchased, Last_Modified, Is_Removed)
@@ -46,9 +40,6 @@ values (9, "9780062315007", "2019-03-05 02:58:01", "2019-11-22 17:17:23", false)
 insert into Client_Inventory
     (Client_ID, ISBN, Date_Purchased, Last_Modified, Is_Removed)
 values (6, "9780770430078", "2019-07-12 17:36:50", "2020-01-11 21:44:51", true);
-insert into Client_Inventory
-    (Client_ID, ISBN, Date_Purchased, Last_Modified, Is_Removed)
-values (9, "9781451690316", "2019-06-14 03:37:48", "2019-11-18 21:41:18", false);
 insert into Client_Inventory
     (Client_ID, ISBN, Date_Purchased, Last_Modified, Is_Removed)
 values (20, "9780375831003", "2019-09-09 01:05:41", "2020-01-17 04:50:54", true);
@@ -248,12 +239,6 @@ insert into customer_reviews
  Date_Entered, Date_Removed)
 values ("5", "9780375831003", 5, "Assault by unspecified means", "Assault by unspecified means", 81, 64, false, false,
         "2019-03-23 14:31:32", "2019-02-27 03:43:16", "2020-03-21 22:10:25");
-insert into customer_reviews
-(Client_ID, ISBN, Rating, Review_Body, Review_Title, Upvotes, Downvotes, Is_Removed, Pending, Last_Modified,
- Date_Entered, Date_Removed)
-values ("8", "9780385490818", 2, "Insect bite (nonvenomous) of right front wall of thorax, sequela",
-        "Insect bite (nonvenomous) of r frnt wl of thorax, sequela", 33, 73, false, true, "2019-07-11 00:22:48",
-        "2019-07-09 22:58:49", "2020-03-13 10:25:52");
 insert into customer_reviews
 (Client_ID, ISBN, Rating, Review_Body, Review_Title, Upvotes, Downvotes, Is_Removed, Pending, Last_Modified,
  Date_Entered, Date_Removed)
@@ -521,9 +506,6 @@ insert into Order_Item
 values (3, "9780061120084", 12, "2019-10-06 07:52:40", true);
 insert into Order_Item
     (Order_ID, ISBN, Price_Sold, Last_updated, Is_Removed)
-values (4, "9781328869333", 19, "2019-08-08 18:34:42", true);
-insert into Order_Item
-    (Order_ID, ISBN, Price_Sold, Last_updated, Is_Removed)
 values (5, "9780684830421", 13, "2019-02-10 23:28:39", false);
 insert into Order_Item
     (Order_ID, ISBN, Price_Sold, Last_updated, Is_Removed)
@@ -542,9 +524,6 @@ insert into Order_Item
 values (10, "9780307277671", 20, "2019-12-04 05:44:00", false);
 insert into Order_Item
     (Order_ID, ISBN, Price_Sold, Last_updated, Is_Removed)
-values (11, "9780385490818", 12, "2019-11-08 11:25:03", false);
-insert into Order_Item
-    (Order_ID, ISBN, Price_Sold, Last_updated, Is_Removed)
 values (12, "9781594480003", 20, "2019-07-28 02:53:12", true);
 insert into Order_Item
     (Order_ID, ISBN, Price_Sold, Last_updated, Is_Removed)
@@ -558,9 +537,6 @@ values (15, "9780062315007", 16, "2019-07-20 23:24:57", true);
 insert into Order_Item
     (Order_ID, ISBN, Price_Sold, Last_updated, Is_Removed)
 values (16, "9780770430078", 19, "2019-02-26 07:58:08", true);
-insert into Order_Item
-    (Order_ID, ISBN, Price_Sold, Last_updated, Is_Removed)
-values (17, "9781451690316", 16, "2019-11-11 03:29:55", false);
 insert into Order_Item
     (Order_ID, ISBN, Price_Sold, Last_updated, Is_Removed)
 values (18, "9780375831003", 13, "2019-09-27 19:19:39", true);
@@ -581,9 +557,6 @@ INSERT INTO Book_Authors
 VALUES (3, "9780061120084");
 #To Kill a Mockingbird
 INSERT INTO Book_Authors
-VALUES (50, "9781328869333");
-#1984
-INSERT INTO Book_Authors
 VALUES (4, "9780684830421");
 #The Great Gatsby
 INSERT INTO Book_Authors
@@ -602,9 +575,6 @@ INSERT INTO Book_Authors
 VALUES (31, "9780307277671");
 #Da Vinci Code
 INSERT INTO Book_Authors
-VALUES (61, "9780385490818");
-#Handmaid''s Tale
-INSERT INTO Book_Authors
 VALUES (8, "9781594480003");
 #Kite Runner
 INSERT INTO Book_Authors
@@ -619,9 +589,6 @@ VALUES (11, "9780062315007");
 INSERT INTO Book_Authors
 VALUES (12, "9780770430078");
 #Life of Pi
-INSERT INTO Book_Authors
-VALUES (53, "9781451690316");
-#Farenheit 451
 INSERT INTO Book_Authors
 VALUES (13, "9780375831003");
 #The Book Thief
@@ -917,13 +884,6 @@ VALUES ("9780061120084", "To Kill a Mockingbird", "Fiction", 324,
 INSERT INTO Book
 (ISBN, Title, Genre, Num_Of_Pages, Description, Date_Of_Publication, Publisher_ID, Date_Entered, Last_Modified,
  Is_Removed, List_Price, Sale_Price, Wholesale_Price)
-VALUES ("9781328869333", "1984", "Fiction", 237,
-        "Among the seminal texts of the 20th century, Nineteen Eighty-Four is a rare work that grows more haunting as its futuristic purgatory becomes more real. Published in 1949, the book offers political satirist George Orwell\'s nightmarish vision of a totalitarian, bureaucratic world and one poor stiff\'s attempt to find individuality. The brilliance of the novel is Orwell\'s prescience of modern life 2014the ubiquity of television, the distortion of the language 2014and his ability to construct such a thorough version of hell. Required reading for students since it was published, it ranks among the most terrifying novels ever written.",
-        STR_TO_DATE("9/3/2013", "%m/%d/%Y"), 1, STR_TO_DATE("9/3/2017", "%m/%d/%Y"),
-        STR_TO_DATE("10/3/2017", "%m/%d/%Y"), FALSE, 18, 14, 7);
-INSERT INTO Book
-(ISBN, Title, Genre, Num_Of_Pages, Description, Date_Of_Publication, Publisher_ID, Date_Entered, Last_Modified,
- Is_Removed, List_Price, Sale_Price, Wholesale_Price)
 VALUES ("9780684830421", "The Great Gatsby", "Fiction", 200,
         "Alternate Cover Edition ISBN: 0743273567 (ISBN13: 9780743273565)The Great Gatsby, F. Scott Fitzgerald\'s third book, stands as the supreme achievement of his career. This exemplary novel of the Jazz Age has been acclaimed by generations of readers. The story is of the fabulously wealthy Jay Gatsby and his new love for the beautiful Daisy Buchanan, of lavish parties on Long Island at a time when The New York Times noted \"gin was the national drink and sex the national obsession,\" it is an exquisitely crafted tale of America in the 1920s.The Great Gatsby is one of the great classics of twentieth-century literature.(back cover)",
         STR_TO_DATE("9/4/2020", "%m/%d/%Y"), 1, STR_TO_DATE("9/4/2018", "%m/%d/%Y"),
@@ -966,13 +926,6 @@ VALUES ("9780307277671", "The Da Vinci Code", "Fiction", 489,
 INSERT INTO Book
 (ISBN, Title, Genre, Num_Of_Pages, Description, Date_Of_Publication, Publisher_ID, Date_Entered, Last_Modified,
  Is_Removed, List_Price, Sale_Price, Wholesale_Price)
-VALUES ("9780385490818", "The Handmaid\'s Tale", "Fiction", 312,
-        "Offred is a Handmaid in the Republic of Gilead. She may leave the home of the Commander and his wife once a day to walk to food markets whose signs are now pictures instead of words because women are no longer allowed to read. She must lie on her back once a month and pray that the Commander makes her pregnant, because in an age of declining births, Offred and the other Handmaids are valued only if their ovaries are viable. Offred can remember the years before, when she lived and made love with her husband, Luke; when she played with and protected her daughter; when she had a job, money of her own, and access to knowledge. But all of that is gone now . . . Funny, unexpected, horrifying, and altogether convincing, The Handmaid's Tale is at once scathing satire, dire warning, and tour de force.",
-        STR_TO_DATE("4/1/1998", "%m/%d/%Y"), 5, STR_TO_DATE("4/1/2018", "%m/%d/%Y"),
-        STR_TO_DATE("5/1/2018", "%m/%d/%Y"), TRUE, 16, 12, 7);
-INSERT INTO Book
-(ISBN, Title, Genre, Num_Of_Pages, Description, Date_Of_Publication, Publisher_ID, Date_Entered, Last_Modified,
- Is_Removed, List_Price, Sale_Price, Wholesale_Price)
 VALUES ("9781594480003", "The Kite Runner", "Fiction", 371,
         "The unforgettable, heartbreaking story of the unlikely friendship between a wealthy boy and the son of his father 2019s servant, The Kite Runner is a beautifully crafted novel set in a country that is in the process of being destroyed. It is about the power of reading, the price of betrayal, and the possibility of redemption; and an exploration of the power of fathers over sons 2014their love, their sacrifices, their lies.A sweeping story of family, love, and friendship told against the devastating backdrop of the history of Afghanistan over the last thirty years, The Kite Runner is an unusual and powerful novel that has become a beloved, one-of-a-kind classic.--khaledhosseini.com",
         STR_TO_DATE("5/4/2020", "%m/%d/%Y"), 1, STR_TO_DATE("5/4/2019", "%m/%d/%Y"),
@@ -1005,13 +958,6 @@ VALUES ("9780770430078", "Life of Pi", "Fiction", 460,
         "Life of Pi is a fantasy adventure novel by Yann Martel published in 2001. The protagonist, Piscine Molitor \"Pi\" Patel, a Tamil boy from Pondicherry, explores issues of spirituality and practicality from an early age. He survives 227 days after a shipwreck while stranded on a boat in the Pacific Ocean with a Bengal tiger named Richard Parker.",
         STR_TO_DATE("8/29/2006", "%m/%d/%Y"), 1, STR_TO_DATE("8/29/2017", "%m/%d/%Y"),
         STR_TO_DATE("8/29/2017", "%m/%d/%Y"), FALSE, 15, 15, 5);
-INSERT INTO Book
-(ISBN, Title, Genre, Num_Of_Pages, Description, Date_Of_Publication, Publisher_ID, Date_Entered, Last_Modified,
- Is_Removed, List_Price, Sale_Price, Wholesale_Price)
-VALUES ("9781451690316", "Fahrenheit 451", "Fiction", 194,
-        "Guy Montag is a fireman. In his world, where television rules and literature is on the brink of extinction, firemen start fires rather than put them out. His job is to destroy the most illegal of commodities, the printed book, along with the houses in which they are hidden.Montag never questions the destruction and ruin his actions produce, returning each day to his bland life and wife, Mildred, who spends all day with her television ''family''. But then he meets an eccentric young neighbor, Clarisse, who introduces him to a past where people did not live in fear and to a present where one sees the world through the ideas in books instead of the mindless chatter of television.When Mildred attempts suicide and Clarisse suddenly disappears, Montag begins to question everything he has ever known.",
-        STR_TO_DATE("11/29/2011", "%m/%d/%Y"), 8, STR_TO_DATE("11/29/2018", "%m/%d/%Y"),
-        STR_TO_DATE("11/29/2018", "%m/%d/%Y"), FALSE, 17, 10, 6);
 INSERT INTO Book
 (ISBN, Title, Genre, Num_Of_Pages, Description, Date_Of_Publication, Publisher_ID, Date_Entered, Last_Modified,
  Is_Removed, List_Price, Sale_Price, Wholesale_Price)
@@ -2075,8 +2021,6 @@ VALUES ("9780439244190", "E-Pub", "sample.epub", "2019-12-26 12:38:58", SYSDATE(
 INSERT INTO Book_Format
 VALUES ("9780061120084", "E-Pub", "sample.epub", "2019-12-26 12:38:58", SYSDATE(), FALSE);
 INSERT INTO Book_Format
-VALUES ("9781328869333", "E-Pub", "sample.epub", "2019-12-26 12:38:58", SYSDATE(), FALSE);
-INSERT INTO Book_Format
 VALUES ("9780684830421", "E-Pub", "sample.epub", "2019-12-26 12:38:58", SYSDATE(), FALSE);
 INSERT INTO Book_Format
 VALUES ("9780606323451", "E-Pub", "sample.epub", "2019-12-26 12:38:58", SYSDATE(), FALSE);
@@ -2089,8 +2033,6 @@ VALUES ("9780439023481", "E-Pub", "sample.epub", "2019-12-26 12:38:58", SYSDATE(
 INSERT INTO Book_Format
 VALUES ("9780307277671", "E-Pub", "sample.epub", "2019-12-26 12:38:58", SYSDATE(), FALSE);
 INSERT INTO Book_Format
-VALUES ("9780385490818", "E-Pub", "sample.epub", "2019-12-26 12:38:58", SYSDATE(), FALSE);
-INSERT INTO Book_Format
 VALUES ("9781594480003", "E-Pub", "sample.epub", "2019-12-26 12:38:58", SYSDATE(), FALSE);
 INSERT INTO Book_Format
 VALUES ("9780140283334", "E-Pub", "sample.epub", "2019-12-26 12:38:58", SYSDATE(), FALSE);
@@ -2100,8 +2042,6 @@ INSERT INTO Book_Format
 VALUES ("9780062315007", "E-Pub", "sample.epub", "2019-12-26 12:38:58", SYSDATE(), FALSE);
 INSERT INTO Book_Format
 VALUES ("9780770430078", "E-Pub", "sample.epub", "2019-12-26 12:38:58", SYSDATE(), FALSE);
-INSERT INTO Book_Format
-VALUES ("9781451690316", "E-Pub", "sample.epub", "2019-12-26 12:38:58", SYSDATE(), FALSE);
 INSERT INTO Book_Format
 VALUES ("9780375831003", "E-Pub", "sample.epub", "2019-12-26 12:38:58", SYSDATE(), FALSE);
 INSERT INTO Book_Format
@@ -2290,8 +2230,6 @@ VALUES ('9780439244190', '2018-09-02', '2018-10-02', TRUE, '9780439244190.pdf');
 INSERT INTO Book_Format(ISBN, date_created, last_modified, Is_Removed, File_Location)
 VALUES ('9780061120084', '2019-05-23', '2019-05-23', FALSE, '9780061120084.pdf');
 INSERT INTO Book_Format(ISBN, date_created, last_modified, Is_Removed, File_Location)
-VALUES ('9781328869333', '2017-09-03', '2017-10-03', FALSE, '9781328869333.pdf');
-INSERT INTO Book_Format(ISBN, date_created, last_modified, Is_Removed, File_Location)
 VALUES ('9780684830421', '2018-09-04', '2018-10-04', FALSE, '9780684830421.pdf');
 INSERT INTO Book_Format(ISBN, date_created, last_modified, Is_Removed, File_Location)
 VALUES ('9780606323451', '2019-06-26', '2019-07-26', FALSE, '9780606323451.pdf');
@@ -2304,8 +2242,6 @@ VALUES ('9780439023481', '2019-09-14', '2019-09-14', FALSE, '9780439023481.pdf')
 INSERT INTO Book_Format(ISBN, date_created, last_modified, Is_Removed, File_Location)
 VALUES ('9780307277671', '2017-03-28', '2017-03-28', FALSE, '9780307277671.pdf');
 INSERT INTO Book_Format(ISBN, date_created, last_modified, Is_Removed, File_Location)
-VALUES ('9780385490818', '2018-04-01', '2018-05-01', TRUE, '9780385490818.pdf');
-INSERT INTO Book_Format(ISBN, date_created, last_modified, Is_Removed, File_Location)
 VALUES ('9781594480003', '2019-05-04', '2019-05-04', FALSE, '9781594480003.pdf');
 INSERT INTO Book_Format(ISBN, date_created, last_modified, Is_Removed, File_Location)
 VALUES ('9780140283334', '2017-10-01', '2017-11-01', FALSE, '9780140283334.pdf');
@@ -2315,8 +2251,6 @@ INSERT INTO Book_Format(ISBN, date_created, last_modified, Is_Removed, File_Loca
 VALUES ('9780062315007', '2019-04-15', '2019-04-15', FALSE, '9780062315007.pdf');
 INSERT INTO Book_Format(ISBN, date_created, last_modified, Is_Removed, File_Location)
 VALUES ('9780770430078', '2017-08-29', '2017-08-29', FALSE, '9780770430078.pdf');
-INSERT INTO Book_Format(ISBN, date_created, last_modified, Is_Removed, File_Location)
-VALUES ('9781451690316', '2018-11-29', '2018-11-29', FALSE, '9781451690316.pdf');
 INSERT INTO Book_Format(ISBN, date_created, last_modified, Is_Removed, File_Location)
 VALUES ('9780375831003', '2019-03-14', '2019-04-14', FALSE, '9780375831003.pdf');
 INSERT INTO Book_Format(ISBN, date_created, last_modified, Is_Removed, File_Location)
@@ -2504,4 +2438,4 @@ VALUES ('9781101988527', '2017-04-04', '2019-04-04', FALSE, '9781101988527.pdf')
 INSERT INTO Book_Format(ISBN, date_created, last_modified, Is_Removed, File_Location)
 VALUES ('9780356507217', '2018-06-05', '2019-06-05', FALSE, '9780356507217.pdf');
 INSERT INTO Book_Format(ISBN, date_created, last_modified, Is_Removed, File_Location)
-VALUES ('9780440000587', '2019-09-24', '2019-09-24', FALSE, '9780440000587.pdf');
+VALUES ('9780440000587', '2019-09-24', '2019-09-24', FALSE, '9780440000587.pdf');♦
