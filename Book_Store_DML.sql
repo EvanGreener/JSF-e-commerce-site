@@ -2438,4 +2438,4 @@ VALUES ('9781101988527', '2017-04-04', '2019-04-04', FALSE, '9781101988527.pdf')
 INSERT INTO Book_Format(ISBN, date_created, last_modified, Is_Removed, File_Location)
 VALUES ('9780356507217', '2018-06-05', '2019-06-05', FALSE, '9780356507217.pdf');
 INSERT INTO Book_Format(ISBN, date_created, last_modified, Is_Removed, File_Location)
-VALUES ('9780440000587', '2019-09-24', '2019-09-24', FALSE, '9780440000587.pdf');♦
+VALUES ('9780440000587', '2019-09-24', '2019-09-24', FALSE, '9780440000587.pdf');

@@ -29,13 +29,3 @@ img {
 .recommendations {
     background-color: palevioletred;
 }
-
-.loading{
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    margin-top: -100px;
-    margin-left: -100px;
-    z-index: 999;
-}
-

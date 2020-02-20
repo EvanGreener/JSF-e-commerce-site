@@ -52,15 +52,14 @@
                             <div style="margin-bottom: 2px;" class="upper">
                                 <h3 style="display: inline;">TheBooksStore<sup>TM</sup></h3>
 
+                                <p:ajaxStatus onstart="PF('statusDialog').show()" onsuccess="PF('statusDialog').hide()" />
 
-                                <p:ajaxStatus style="display: inline;">
-                                    <f:facet  name="start">
-                                        <p:graphicImage style="display: inline;" class="loading" library="images" name="double-ring.svg" />
-                                    </f:facet>
-                                </p:ajaxStatus>
+                                <p:dialog widgetVar="statusDialog" modal="true" draggable="false" closable="false" resizable="false" showHeader="false">
+                                    <p:graphicImage style="display: inline;" class="loading" library="images" name="double-ring.svg" />
+                                </p:dialog>
                                 
                                 <div style="display: inline;" class="ui search">
-                                    <h:inputText  id="query" value="#{search.query}" a:placeholder="Search books..." style="float: right; margin-top: -7px;" class="prompt" >
+                                    <h:inputText  id="query" value="#{search.query}" a:placeholder="Search books..." style="float: right; margin-top: -30px;" class="prompt" >
                                         <p:ajax event="keyup" update="out" />
                                     </h:inputText>
                                 </div> 
@@ -90,7 +89,7 @@
                         <h3 style="text-align: center;">You may also like</h3>
                         <div class="swiper-container">
                             <div class="swiper-wrapper">
-                                
+
                                 <!--1-->
                                 <div class="swiper-slide">
                                     <h:graphicImage height="51.8" width="116.89" style="margin-bottom: 40px;" library="images" name="colorScheme.PNG"/>

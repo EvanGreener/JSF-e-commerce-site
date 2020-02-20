@@ -111,7 +111,6 @@ public class BookJpaController implements Serializable {
             q.setMaxResults(maxResults);
             q.setFirstResult(firstResult);
         }
-        System.out.println(q.getResultList());
         return q.getResultList();
     }
 
