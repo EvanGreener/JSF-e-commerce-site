@@ -6,7 +6,7 @@
       xmlns:b="http://bootsfaces.net/ui"
       xmlns:f="http://xmlns.jcp.org/jsf/core">
     <h:head>
-        <title>Sign In</title>
+        <title>Register</title>
         <link href="https://fonts.googleapis.com/css?family=Montserrat|Roboto&amp;display=swap" rel="stylesheet"/>
         <h:outputStylesheet library="webjars" name="Semantic-UI/2.4.1/semantic.min.css" />
         <h:outputStylesheet library="css" name="homepage.css" />
@@ -17,8 +17,7 @@
                 <span class="fa fa-chevron-right"></span>
             </f:facet>
             <b:navbarLinks>
-                <b:navLink value="Sign Up" href="signUp.xhtml"></b:navLink>
-                <b:navLink value="Log In" href="signIn.xhtml"></b:navLink>
+                <b:navLink value="Login" href="signIn.xhtml"></b:navLink>
                 <b:navLink value="Home Page" href="index.xhtml"></b:navLink>
             </b:navbarLinks>
         </b:navBar>
@@ -26,64 +25,66 @@
             <div class="ui fluid card">
                 <div class="thingy2">
                     <div class="thingy5">
-                        <h1 class="ui header">Login</h1>
+                        <h1 class="ui header">Register</h1>
                         <div class="thingy6">
                             <div class="two fields">
                                 <div class="field">
                                     <label>First Name</label>
-                                    <input type="text" placeholder="Enter first name" />
+                                    <input type="text" name="firstName" placeholder="Enter first name" />
                                 </div>
                                 <div class="field">
                                     <label>Last Name</label>
-                                    <input type="text" placeholder="Enter last name" />
+                                    <input type="text" name="lastName" placeholder="Enter last name" />
                                 </div>
                             </div>
                             <div class="field">
                                 <label>Address 1</label>
-                                <input type="text" placeholder="Enter address 1" />
+                                <input type="text" name="address1" placeholder="Enter address 1" />
                             </div>
                             <div class="field">
                                 <label>Address 2</label>
-                                <input type="text" placeholder="Enter address 2" />
+                                <input type="text" name="address2" placeholder="Enter address 2" />
                             </div>
                             <div class="fields">
                                 <div class="twelve wide field">
                                     <label>Country</label>
-                                    <input type="text" placeholder="Enter country" />
+                                    <input type="text" name="country" placeholder="Enter country" />
                                 </div>
                                 <div class="four wide field">
                                     <label>Province/State</label>
-                                    <input type="text" placeholder="Enter province or state" />
+                                    <input type="text" name="provOrState" placeholder="Enter province or state" />
                                 </div>
                             </div>
                             
                             <div class="two fields">
                                 <div class="field">
                                     <label>Home Phone</label>
-                                    <input type="tel" placeholder="Enter home phone" />
+                                    <input type="tel" name="homePhone" placeholder="Enter home phone" />
                                 </div>
                                 <div class="field">
                                     <label>Cell Phone</label>
-                                    <input type="tel" placeholder="Enter cell phone" />
+                                    <input type="tel" name="cellPhone" placeholder="Enter cell phone" />
                                 </div>
                             </div>
                             <div class="field">
                                 <label>Company Name</label>
-                                <input type="text" placeholder="Enter company name" />
+                                <input type="text" name="companyName" placeholder="Enter company name" />
                             </div>
                             <div class="field">
                                 <label>Email</label>
-                                <input type="email" placeholder="Enter email" />
+                                <input type="email" name="email" placeholder="Enter email" />
                             </div>
                             <div class="field">
                                 <label>Password</label>
-                                <input type="password" placeholder="Enter password" />
+                                <input type="password" name="password" placeholder="Enter password" />
                             </div>
                             <div class="field">
                                 <label>Re-enter Password</label>
-                                <input type="password" placeholder="Re-enter password" />
+                                <input type="password" name="passwordRe" placeholder="Re-enter password" />
                             </div>
-                            <button type="submit" class="huge black fluid ui button">Sign Up</button>
+                            <button type="submit" class="huge black fluid ui button">Register</button>
+                            <br/>
+                            <a href="signIn.xhtml" class="signUpLink">Login</a>
                         </div>
                     </div>
                 </div>

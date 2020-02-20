@@ -89,6 +89,12 @@ body {
     margin: 0 auto;
 }
 
+.signUpLink
+{
+    text-align: center;
+    font-size:14px;
+}
+
 .ui.form
 {
     font-size:1em;

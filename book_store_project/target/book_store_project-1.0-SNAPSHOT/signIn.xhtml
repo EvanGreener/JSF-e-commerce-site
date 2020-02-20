@@ -6,7 +6,7 @@
       xmlns:b="http://bootsfaces.net/ui"
       xmlns:f="http://xmlns.jcp.org/jsf/core">
     <h:head>
-        <title>Sign In</title>
+        <title>Login</title>
         <link href="https://fonts.googleapis.com/css?family=Montserrat|Roboto&amp;display=swap" rel="stylesheet"/>
         <h:outputStylesheet library="webjars" name="Semantic-UI/2.4.1/semantic.min.css" />
         <h:outputStylesheet library="css" name="homepage.css" />
@@ -17,8 +17,7 @@
                 <span class="fa fa-chevron-right"></span>
             </f:facet>
             <b:navbarLinks>
-                <b:navLink value="Sign Up" href="signUp.xhtml"></b:navLink>
-                <b:navLink value="Log In" href="signIn.xhtml"></b:navLink>
+                <b:navLink value="Login" href="signIn.xhtml"></b:navLink>
                 <b:navLink value="Home Page" href="index.xhtml"></b:navLink>
             </b:navbarLinks>
         </b:navBar>
@@ -30,18 +29,20 @@
                         <div class="thingy6">
                             <div class="field">
                                 <label>Email</label>
-                                <input type="email" placeholder="Enter email" />
+                                <input type="email" name="email" placeholder="Enter email" />
                             </div>
                             <br/>
                             <div class="field">
                                 <label>Password</label>
-                                <input type="password" placeholder="Enter password" />
+                                <input type="password" name="password" placeholder="Enter password" />
                             </div>
                             <div class="ui checkbox">
                                 <input type="checkbox" name="remember" />
                                 <label>Remember Me</label>
                             </div>
-                            <button type="submit" class="huge black fluid ui button">Log In</button>
+                            <button type="submit" class="huge black fluid ui button">Login</button>
+                            <br/>
+                            <a href="signUp.xhtml" class="signUpLink">Register</a>
                         </div>
                     </div>
                 </div>
