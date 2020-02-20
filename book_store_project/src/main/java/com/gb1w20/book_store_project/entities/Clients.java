@@ -102,6 +102,37 @@ public class Clients implements Serializable {
 
     public Clients() {
     }
+    
+    public Clients(String firstName,
+            String lastName,
+            String companyName,
+            String address1,
+            String address2,
+            String city,
+            int provinceAbbr,
+            String country,
+            String postalCode,
+            String homePhone,
+            String cellPhone,
+            String email)
+    {
+        this.isManager = false;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.companyName = companyName;
+        this.address1 = address1;
+        this.address2 = address2;
+        this.city = city;
+        this.provinceAbbreviation = provinceAbbr;
+        this.country = country;
+        this.postalCode = postalCode;
+        this.homeTelephone = homePhone;
+        this.cellTelephone = cellPhone;
+        this.email = email;
+        this.dateEntered = new Date();
+        this.lastModified = new Date();
+        this.isRemoved = false;
+    }
 
     public Clients(Integer clientID) {
         this.clientID = clientID;
