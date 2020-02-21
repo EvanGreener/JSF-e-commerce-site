@@ -24,8 +24,10 @@
             <h:outputStylesheet library="galleryCss" name="gallery.css" />
 
             <script src="https://unpkg.com/swiper/js/swiper.min.js"></script>
+            
         </h:head>
         <h:body>
+
             <h:form>
                 <div class="gallery">
                     <div class="ui grid">
@@ -63,7 +65,7 @@
                                 <!--Search bar-->
                                 <div style="display: inline;" class="ui search">
                                     <h:inputText  id="query" value="#{search.query}" a:placeholder="Search books..." style="float: right; margin-top: -30px;" class="prompt" >
-                                        <p:ajax event="keyup" update="gallery pagination" />
+                                        <p:ajax event="keyup" listener="#{search.onKeyUp}" update="gallery pagination" />
                                     </h:inputText>
                                 </div> 
 
