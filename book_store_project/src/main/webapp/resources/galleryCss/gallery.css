@@ -1,9 +1,10 @@
+.navbar{
+    margin-bottom: 0 !important;
+}
+
 .gallery {
-    margin-top: 40px;
-    margin-bottom: 20px;
-    margin-left: 20px;
-    margin-right: 20px;
-/*    background-color: #eaf8ec;*/
+    padding: 40px 120px 20px 20px;
+    background-color: #EFF1F3;
 }
 
 .upper {
@@ -12,7 +13,6 @@
 }
 
 .middle {
-    margin: auto;
     margin-bottom: 30px;
 }
 
@@ -26,7 +26,7 @@ img {
 }
 
 .recommendations {
-    background-color: palevioletred;
+    background-color: #D8B4A0;
 }
 
 .swiper-slide{

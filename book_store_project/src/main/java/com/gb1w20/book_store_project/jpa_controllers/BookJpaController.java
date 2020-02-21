@@ -138,6 +138,7 @@ public class BookJpaController implements Serializable {
         cq.where(cb.like(book.get("title"), expression));
 
         TypedQuery<Book> query = em.createQuery(cq);
+//                .setFirstResult((page - 1) * 8);
         return query.getResultList();
 
     }

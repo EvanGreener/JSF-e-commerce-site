@@ -24,14 +24,22 @@
             <h:outputStylesheet library="galleryCss" name="gallery.css" />
 
             <script src="https://unpkg.com/swiper/js/swiper.min.js"></script>
-            
+
         </h:head>
         <h:body>
-
+            <b:navBar brand="TheBooksStore(TM)" brandHref="/book_store_project" fluid="true" class="headMenu">
+                <f:facet name="kebab">
+                    <span class="fa fa-chevron-right"></span>
+                </f:facet>
+                <b:navbarLinks>
+                    <b:navLink value="Shop" href="gallery.xhtml"></b:navLink>
+                    <b:navLink value="Link" href="#"></b:navLink>
+                </b:navbarLinks>
+            </b:navBar>
             <h:form>
                 <div class="gallery">
                     <div class="ui grid">
-                        <div class="four wide column">
+                        <div class="three wide column">
                             <!--Search by & genre filters-->
                             <p>Filter By Genre</p>
                             <h:selectManyCheckbox layout="pageDirection" value="#{search.genreFilters}">
@@ -52,9 +60,13 @@
                                 <f:selectItem itemValue = "isbn" itemLabel = "ISBN#" />
                             </h:selectOneRadio>
                         </div>
+                        <div class="one wide column"></div>
                         <div class="twelve wide column">
                             <div style="margin-bottom: 2px;" class="upper">
-                                <h3 style="display: inline;">TheBooksStore<sup>TM</sup></h3>
+
+                                <h:panelGroup id="resLabel">
+                                    <h3  style="display: inline;">Found #{search.results.size()} result(s) matching your search query</h3>
+                                </h:panelGroup>
 
                                 <!--Loading modal-->
                                 <p:ajaxStatus onstart="PF('statusDialog').show()" onsuccess="PF('statusDialog').hide()" />
@@ -65,13 +77,13 @@
                                 <!--Search bar-->
                                 <div style="display: inline;" class="ui search">
                                     <h:inputText  id="query" value="#{search.query}" a:placeholder="Search books..." style="float: right; margin-top: -30px;" class="prompt" >
-                                        <p:ajax event="keyup" listener="#{search.onKeyUp}" update="gallery pagination" />
+                                        <p:ajax event="keyup" listener="#{search.onKeyUp}" update="gallery pagination resLabel" />
                                     </h:inputText>
                                 </div> 
 
                             </div>
 
-                            <div  style="margin-right: 40px;" class="middle">
+                            <div class="middle">
 
                                 <!--Actual gallery-->
                                 <h:panelGroup id="gallery">
@@ -79,7 +91,7 @@
                                         <ui:param name="limit" value="8"/>
                                         <!-- -1 because collections are 0-indexed-->
                                         <ui:repeat offset="#{(search.page - 1) * 8}" value="#{search.results}" var="book" varStatus="status">
-                                            <ui:fragment rendered="#{status.index lt limit}">
+                                            <ui:fragment rendered="#{status.index lt limit * search.page}">
                                                 <div style="text-align: center;" class="four wide column">
                                                     <h:graphicImage  height="250" width="156.25" library="images" name="#{book.isbn}.jpg"/>
                                                 </div>
@@ -89,33 +101,48 @@
                                 </h:panelGroup>
 
                             </div>
-                            
+
                             <div class="bot">
                                 <!-- Pagination -->
                                 <h:panelGroup id="pagination">
                                     <!--Previous-->
                                     <c:choose>
                                         <c:when test="#{search.page == 1}">
-                                            <button disabled="true"  class="ui button"> &#xAB; </button>
+                                            <button disabled="true"  class="ui button"> Prev. </button>
                                         </c:when>
                                         <c:otherwise>
-                                            <button class="ui button"> &#xAB; </button>
+                                            <h:commandButton value="Prev." class="ui button"> 
+                                                <p:ajax update="gallery pagination resLabel" listener="#{search.onPrevious}" />
+                                            </h:commandButton>
                                         </c:otherwise>
                                     </c:choose>
 
 
                                     <!--Page numbers-->
                                     <c:forEach begin="1" end="#{search.numPages}" varStatus="status">
-                                        <button class="ui button"> #{status.index}  </button>
+                                        <c:choose>
+                                            <c:when test="#{status.index == search.page}">
+                                                <h:commandButton value="#{status.index} " class="ui active button"> 
+                                                    <p:ajax event="click" update="gallery pagination resLabel" listener="#{search.onPageSelect(status.index)}" />
+                                                </h:commandButton>
+                                            </c:when>
+                                            <c:otherwise>
+                                                <h:commandButton value="#{status.index} " class="ui button"> 
+                                                    <p:ajax event="click" update="gallery pagination resLabel" listener="#{search.onPageSelect(status.index)}" />
+                                                </h:commandButton>
+                                            </c:otherwise>
+                                        </c:choose>
                                     </c:forEach>
 
                                     <!--Next-->
                                     <c:choose>
                                         <c:when test="#{search.page == search.numPages}">
-                                            <button disabled="true"  class="ui button"> &#xBB; </button>
+                                            <button disabled="true"  class="ui button"> Next </button>
                                         </c:when>
                                         <c:otherwise>
-                                            <button  class="ui button"> &#xBB; </button>
+                                            <h:commandButton value="Next" class="ui button"> 
+                                                <p:ajax update="gallery pagination resLabel" listener="#{search.onNext}" />
+                                            </h:commandButton>
                                         </c:otherwise>
                                     </c:choose>
 
