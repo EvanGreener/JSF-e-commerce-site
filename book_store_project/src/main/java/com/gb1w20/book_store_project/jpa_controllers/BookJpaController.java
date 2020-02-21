@@ -127,7 +127,7 @@ public class BookJpaController implements Serializable {
         return ((Long) q.getSingleResult()).intValue();
     }
 
-    public List<Book> search(String q) {
+    public List<Book> search(String q, int page) {
 
         String expression = "%" + q + "%";
 

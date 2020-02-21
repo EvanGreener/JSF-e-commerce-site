@@ -17,10 +17,10 @@ public class SearchBean implements Serializable {
     private BookJpaController bookCtrlr;
 
     private String query = "";
-
     private String[] genreFilters = {"All"};
     private String searchBy = "";
-//    private int page = 0;
+    private int page = 1;
+    private int numPages = 1;
 
     public String[] getGenreFilters() {
         return genreFilters;
@@ -46,14 +46,28 @@ public class SearchBean implements Serializable {
         query = newValue;
     }
 
+    public int getPage() {
+        return page;
+    }
+
+    public void setPage(int newValue) {
+        page = newValue;
+    }
+
+    public int getNumPages() {
+        return numPages;
+    }
+
+    public void setNumPages(int newValue) {
+        numPages = newValue;
+    }
+
     public List<Book> getResults() {
+        List<Book> res = !query.isBlank() ? bookCtrlr.search(query, page) : bookCtrlr.findBookEntities();
+        numPages = (int) Math.ceil(res.size() / 8.0);
+        System.out.println("Num pages - " + numPages);
+        System.out.println("Page # - " + page + "\n");
 
-        if (!query.isBlank()) {
-            List<Book> l = bookCtrlr.search(query);
-            return l;
-
-        }
-        return bookCtrlr.findBookEntities();
-
+        return res;
     }
 }
