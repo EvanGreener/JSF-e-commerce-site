@@ -89,7 +89,7 @@
                                 </h:panelGroup>
 
                             </div>
-
+                            
                             <div class="bot">
                                 <!-- Pagination -->
                                 <h:panelGroup id="pagination">
@@ -105,8 +105,8 @@
 
 
                                     <!--Page numbers-->
-                                    <c:forEach begin="0" end="#{search.numPages}" varStatus="status">
-                                        <button class="ui button"> #{status.index + 1}  </button>
+                                    <c:forEach begin="1" end="#{search.numPages}" varStatus="status">
+                                        <button class="ui button"> #{status.index}  </button>
                                     </c:forEach>
 
                                     <!--Next-->
