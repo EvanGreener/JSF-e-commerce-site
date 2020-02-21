@@ -96,10 +96,10 @@
                                     <!--Previous-->
                                     <c:choose>
                                         <c:when test="#{search.page == 1}">
-                                            <button  class="ui diabled button"> &#xAB; </button>
+                                            <button disabled="true"  class="ui button"> &#xAB; </button>
                                         </c:when>
                                         <c:otherwise>
-                                            <button  class="ui button"> &#xAB; </button>
+                                            <button class="ui button"> &#xAB; </button>
                                         </c:otherwise>
                                     </c:choose>
 
@@ -112,7 +112,7 @@
                                     <!--Next-->
                                     <c:choose>
                                         <c:when test="#{search.page == search.numPages}">
-                                            <button  class="ui diabled button"> &#xBB; </button>
+                                            <button disabled="true"  class="ui button"> &#xBB; </button>
                                         </c:when>
                                         <c:otherwise>
                                             <button  class="ui button"> &#xBB; </button>
