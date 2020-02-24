@@ -169,6 +169,7 @@ CREATE TABLE `Book_Authors` (
 
 CREATE TABLE `Clients` (
   `Client_ID` INT AUTO_INCREMENT,
+  `Hashed_Password` VARCHAR(255),
   `Is_Manager` BOOL,
   `First_Name` VARCHAR(50),
   `Last_Name` VARCHAR(50),
