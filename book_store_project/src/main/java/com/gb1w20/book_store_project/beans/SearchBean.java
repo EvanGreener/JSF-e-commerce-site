@@ -8,7 +8,6 @@ import javax.annotation.PostConstruct;
 
 import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
-import javax.faces.event.AjaxBehaviorEvent;
 import javax.inject.Inject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -32,14 +31,6 @@ public class SearchBean implements Serializable {
     public void init() {
         System.out.println("Init called!");
         updateSearchBean();
-    }
-
-    private void updateSearchBean() {
-        results = !query.isBlank() ? bookCtrlr.search(query, page) : bookCtrlr.findBookEntities();
-        numPages = (int) Math.ceil(results.size() / 8.0);
-
-        System.out.println(results);
-
     }
 
     public String[] getGenreFilters() {
@@ -86,9 +77,23 @@ public class SearchBean implements Serializable {
         return results;
     }
 
-    public void onKeyUp() {
-        System.out.println(query);
+    private void updateSearchBean() {
+        List<Book> res = !query.isBlank() ? bookCtrlr.search(query, page) : bookCtrlr.findBookEntities();
+//        List<Book> filteredRes = new List<>();
+//        for(Book b : res){
+//            
+//        }
+        
+        results = !query.isBlank() ? bookCtrlr.search(query, page) : bookCtrlr.findBookEntities();
 
+        numPages = (int) Math.ceil(results.size() / 8.0);
+
+        System.out.println(results);
+
+    }
+
+    public void onKeyUp() {
+        page = 1;
         updateSearchBean();
     }
 
