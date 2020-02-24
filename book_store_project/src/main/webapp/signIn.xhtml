@@ -30,18 +30,22 @@
                         <div class="thingy6">
                             <div class="field">
                                 <h:outputLabel for="email" value="Email"/>
-                                <h:inputText id="email" label="Email" value="" required="true" requiredMessage="Enter email" a:placeholder="Enter email" />
+                                <h:inputText id="email" label="Email" value="#{clientBacking.loginEmail}" required="true" requiredMessage="Please enter email" a:placeholder="Enter email" />
+                                <br/>
+                                <h:message class="error" for="email"/>
                             </div>
                             <br/>
                             <div class="field">
                                 <h:outputLabel for="password" value="Password"/>
-                                <h:inputSecret id="password" label="Password" value="" required="true" requiredMessage="Enter password" a:placeholder="Enter password"/>
+                                <h:inputSecret id="password" label="Password" value="#{clientBacking.loginPassword}" required="true" requiredMessage="Please enter password" a:placeholder="Enter password"/>
+                                <br/>
+                                <h:message class="error" for="password"/>
                             </div>
                             <div class="ui checkbox">
                                 <input type="checkbox" name="remember" />
                                 <label>Remember Me</label>
                             </div>
-                            <button type="submit" class="huge black fluid ui button">Login</button>
+                            <h:commandButton class="huge black fluid ui button" id="loginBtn" value="Login" action="#{clientBacking.login()}" />
                             <br/>
                             <a href="signUp.xhtml" class="signUpLink">Register</a>
                         </div>

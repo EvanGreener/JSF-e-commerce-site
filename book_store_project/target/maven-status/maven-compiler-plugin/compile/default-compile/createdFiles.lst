@@ -16,7 +16,6 @@ com\gb1w20\book_store_project\backing\OrderBackingBean.class
 com\gb1w20\book_store_project\entities\Book_.class
 com\gb1w20\book_store_project\entities\CustomerReviews_.class
 com\gb1w20\book_store_project\entities\Publisher_.class
-com\gb1w20\book_store_project\beans\RegisterBean.class
 com\gb1w20\book_store_project\jpa_controllers\TaxJpaController.class
 com\gb1w20\book_store_project\entities\Publisher.class
 com\gb1w20\book_store_project\jpa_controllers\AdsJpaController.class

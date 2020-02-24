@@ -34,6 +34,9 @@ public class ClientBackingBean implements Serializable {
     private String password;
     private String passwordConfirm;
     private List<SelectItem> provinces = new ArrayList<SelectItem>();
+    
+    private String loginEmail;
+    private String loginPassword;
 
     /**
      * Clients created if it does not exist.
@@ -88,6 +91,22 @@ public class ClientBackingBean implements Serializable {
     {
         this.provinces = provinces;
     }
+    
+    public String getLoginEmail() {
+        return loginEmail;
+    }
+
+    public void setLoginEmail(String loginEmail) {
+        this.loginEmail = loginEmail;
+    }
+    
+    public String getLoginPassword() {
+        return loginPassword;
+    }
+
+    public void setLoginPassword(String loginPassword) {
+        this.loginPassword = loginPassword;
+    }
 
     /**
      * Save the current client to the db
@@ -132,8 +151,36 @@ public class ClientBackingBean implements Serializable {
         }
     }
     
-    public void login()
+    public String login() throws Exception
     {
+        Object[] info = clientsJpaController.getInfoByEmail(loginEmail);
+        String email = (String)info[0];
+        String dbPasswordHash = (String)info[1];
         
+        MessageDigest md = MessageDigest.getInstance("SHA-256");
+        SecureRandom random = new SecureRandom();
+        byte[] hashEmail = md.digest(email.getBytes(StandardCharsets.UTF_8));
+        byte[] salt = new byte[20];
+        for (int i = 0;i < 20;i++)
+        {
+            salt[i] = hashEmail[i];
+        }
+        random.nextBytes(salt);
+        md.update(salt);
+        byte[] hashedPassword = md.digest(loginPassword.getBytes(StandardCharsets.UTF_8));
+        StringBuilder sb = new StringBuilder();
+        for (byte b : hashedPassword) {
+            sb.append(String.format("%02x", b));
+        }
+        String loginPasswordHash = sb.toString();
+
+        if (dbPasswordHash.equals(loginPasswordHash))
+        {
+            return "index.xhtml";
+        }
+        else
+        {
+            return null;
+        }
     }
 }
