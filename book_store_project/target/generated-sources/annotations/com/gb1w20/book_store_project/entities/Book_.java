@@ -6,7 +6,7 @@ import javax.annotation.processing.Generated;
 import javax.persistence.metamodel.SingularAttribute;
 import javax.persistence.metamodel.StaticMetamodel;
 
-@Generated(value="org.eclipse.persistence.internal.jpa.modelgen.CanonicalModelProcessor", date="2020-02-24T13:41:40", comments="EclipseLink-2.7.6.v20200131-rNA")
+@Generated(value="org.eclipse.persistence.internal.jpa.modelgen.CanonicalModelProcessor", date="2020-02-24T13:47:03", comments="EclipseLink-2.7.6.v20200131-rNA")
 @StaticMetamodel(Book.class)
 public class Book_ { 
 
