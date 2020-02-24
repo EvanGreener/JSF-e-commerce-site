@@ -45,6 +45,6 @@ public class ClientBackingBean implements Serializable {
         client.setIsRemoved(false);
         client.setIsManager(false);
         clientsJpaController.create(client);
-        return null;
+        return "index.xhtml";
     }
 }
