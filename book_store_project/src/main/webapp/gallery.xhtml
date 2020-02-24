@@ -28,7 +28,7 @@
         </h:head>
         <h:body>
             <b:navBar brand="TheBooksStore" brandHref="/book_store_project" fluid="true" class="headMenu">
-                
+
                 <f:facet name="kebab">
                     <span class="fa fa-chevron-right"></span>
                 </f:facet>
@@ -44,7 +44,8 @@
                             <!--Search by & genre filters-->
                             <p>Filter By Genre</p>
                             <h:selectManyCheckbox layout="pageDirection" value="#{search.genreFilters}">
-                                <f:selectItem itemValue = "sci-fi" itemLabel = "Sci-Fi" /> 
+                                <p:ajax update="gallery pagination resLabel" listener="#{search.onChecked}" />
+                                <f:selectItem itemValue = "sci-fi" itemLabel = "Sci-Fi"/>
                                 <f:selectItem itemValue = "mystery" itemLabel = "Mystery" /> 
                                 <f:selectItem itemValue = "fantansy" itemLabel = "Fantasy" /> 
                                 <f:selectItem itemValue = "horror" itemLabel = "Horror" />
@@ -55,7 +56,7 @@
 
                             <p>Search by</p>
                             <h:selectOneRadio layout="pageDirection" value="#{search.searchBy}" >
-                                <f:selectItem itemValue = "title" itemLabel = "Title" />
+                                <f:selectItem itemValue = "title" itemLabel = "Title"/>
                                 <f:selectItem itemValue = "author" itemLabel = "Author" />
                                 <f:selectItem itemValue = "genre" itemLabel = "Genre" />
                                 <f:selectItem itemValue = "isbn" itemLabel = "ISBN#" />

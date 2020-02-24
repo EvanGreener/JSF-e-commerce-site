@@ -3,7 +3,9 @@ package com.gb1w20.book_store_project.beans;
 import com.gb1w20.book_store_project.entities.Book;
 import com.gb1w20.book_store_project.jpa_controllers.BookJpaController;
 import java.io.Serializable;
+import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 import javax.annotation.PostConstruct;
 
 import javax.inject.Named;
@@ -16,7 +18,8 @@ import org.slf4j.LoggerFactory;
 @SessionScoped
 public class SearchBean implements Serializable {
 
-//    private final static Logger LOG = LoggerFactory.getLogger(SearchBean.class);
+    private final static Logger LOG = LoggerFactory.getLogger(SearchBean.class);
+    
     @Inject
     private BookJpaController bookCtrlr;
 
@@ -29,7 +32,7 @@ public class SearchBean implements Serializable {
 
     @PostConstruct
     public void init() {
-        System.out.println("Init called!");
+        LOG.debug("Init called!");
         updateSearchBean();
     }
 
@@ -78,13 +81,12 @@ public class SearchBean implements Serializable {
     }
 
     private void updateSearchBean() {
+        LOG.debug(genreFilters.toString());
         List<Book> res = !query.isBlank() ? bookCtrlr.search(query, page) : bookCtrlr.findBookEntities();
-//        List<Book> filteredRes = new List<>();
-//        for(Book b : res){
-//            
-//        }
         
-        results = !query.isBlank() ? bookCtrlr.search(query, page) : bookCtrlr.findBookEntities();
+        results = genreFilters == null ? res : res.stream()
+                .filter(book -> Arrays.asList(genreFilters).contains(book.getGenre()))
+                .collect(Collectors.toList());
 
         numPages = (int) Math.ceil(results.size() / 8.0);
 
@@ -113,6 +115,10 @@ public class SearchBean implements Serializable {
         page++;
         System.out.println(query);
 
+        updateSearchBean();
+    }
+    
+    public void onChecked(){
         updateSearchBean();
     }
 
