@@ -5,7 +5,7 @@ import javax.annotation.processing.Generated;
 import javax.persistence.metamodel.SingularAttribute;
 import javax.persistence.metamodel.StaticMetamodel;
 
-@Generated(value="org.eclipse.persistence.internal.jpa.modelgen.CanonicalModelProcessor", date="2020-02-20T17:11:55", comments="EclipseLink-2.7.6.v20200131-rNA")
+@Generated(value="org.eclipse.persistence.internal.jpa.modelgen.CanonicalModelProcessor", date="2020-02-24T13:28:05", comments="EclipseLink-2.7.6.v20200131-rNA")
 @StaticMetamodel(Clients.class)
 public class Clients_ { 
 
@@ -14,7 +14,7 @@ public class Clients_ {
     public static volatile SingularAttribute<Clients, Integer> clientID;
     public static volatile SingularAttribute<Clients, String> address2;
     public static volatile SingularAttribute<Clients, String> city;
-    public static volatile SingularAttribute<Clients, Integer> provinceAbbreviation;
+    public static volatile SingularAttribute<Clients, String> provinceAbbreviation;
     public static volatile SingularAttribute<Clients, String> address1;
     public static volatile SingularAttribute<Clients, String> companyName;
     public static volatile SingularAttribute<Clients, String> postalCode;

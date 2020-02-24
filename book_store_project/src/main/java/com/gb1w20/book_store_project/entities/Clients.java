@@ -73,8 +73,9 @@ public class Clients implements Serializable {
     @Size(max = 100)
     @Column(name = "City")
     private String city;
+    @Size(max = 2)
     @Column(name = "Province_Abbreviation")
-    private Integer provinceAbbreviation;
+    private String provinceAbbreviation;
     @Size(max = 30)
     @Column(name = "Country")
     private String country;
@@ -109,7 +110,7 @@ public class Clients implements Serializable {
             String address1,
             String address2,
             String city,
-            int provinceAbbr,
+            String provinceAbbr,
             String country,
             String postalCode,
             String homePhone,
@@ -202,11 +203,11 @@ public class Clients implements Serializable {
         this.city = city;
     }
 
-    public Integer getProvinceAbbreviation() {
+    public String getProvinceAbbreviation() {
         return provinceAbbreviation;
     }
 
-    public void setProvinceAbbreviation(Integer provinceAbbreviation) {
+    public void setProvinceAbbreviation(String provinceAbbreviation) {
         this.provinceAbbreviation = provinceAbbreviation;
     }
 
