@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 C:\Users\06spa\Desktop\Bookstore\gb1w20\book_store_project\src\main\java\com\gb1w20\book_store_project\entities\Book.java
 C:\Users\06spa\Desktop\Bookstore\gb1w20\book_store_project\src\main\java\com\gb1w20\book_store_project\jpa_controllers\BookJpaController.java
 C:\Users\06spa\Desktop\Bookstore\gb1w20\book_store_project\src\main\java\com\gb1w20\book_store_project\jpa_controllers\exceptions\PreexistingEntityException.java
@@ -28,34 +27,3 @@ C:\Users\06spa\Desktop\Bookstore\gb1w20\book_store_project\src\main\java\com\gb1
 C:\Users\06spa\Desktop\Bookstore\gb1w20\book_store_project\src\main\java\com\gb1w20\book_store_project\jpa_controllers\OrdersJpaController.java
 C:\Users\06spa\Desktop\Bookstore\gb1w20\book_store_project\src\main\java\com\gb1w20\book_store_project\jpa_controllers\AuthorsJpaController.java
 C:\Users\06spa\Desktop\Bookstore\gb1w20\book_store_project\src\main\java\com\gb1w20\book_store_project\entities\Orders.java
-=======
-C:\Users\Saad\Documents\programming\school\gb1w20\book_store_project\src\main\java\com\gb1w20\book_store_project\entities\Publisher.java
-C:\Users\Saad\Documents\programming\school\gb1w20\book_store_project\src\main\java\com\gb1w20\book_store_project\jpa_controllers\ClientsJpaController.java
-C:\Users\Saad\Documents\programming\school\gb1w20\book_store_project\src\main\java\com\gb1w20\book_store_project\entities\SurveyData.java
-C:\Users\Saad\Documents\programming\school\gb1w20\book_store_project\src\main\java\com\gb1w20\book_store_project\jpa_controllers\AuthorsJpaController.java
-C:\Users\Saad\Documents\programming\school\gb1w20\book_store_project\src\main\java\com\gb1w20\book_store_project\entities\Book.java
-C:\Users\Saad\Documents\programming\school\gb1w20\book_store_project\src\main\java\com\gb1w20\book_store_project\entities\Tax.java
-C:\Users\Saad\Documents\programming\school\gb1w20\book_store_project\src\main\java\com\gb1w20\book_store_project\entities\Clients.java
-C:\Users\Saad\Documents\programming\school\gb1w20\book_store_project\src\main\java\com\gb1w20\book_store_project\resources\JavaEE8Resource.java
-C:\Users\Saad\Documents\programming\school\gb1w20\book_store_project\src\main\java\com\gb1w20\book_store_project\entities\OrderItem.java
-C:\Users\Saad\Documents\programming\school\gb1w20\book_store_project\src\main\java\com\gb1w20\book_store_project\jpa_controllers\exceptions\PreexistingEntityException.java
-C:\Users\Saad\Documents\programming\school\gb1w20\book_store_project\src\main\java\com\gb1w20\book_store_project\jpa_controllers\OrderItemJpaController.java
-C:\Users\Saad\Documents\programming\school\gb1w20\book_store_project\src\main\java\com\gb1w20\book_store_project\jpa_controllers\SurveysJpaController.java
-C:\Users\Saad\Documents\programming\school\gb1w20\book_store_project\src\main\java\com\gb1w20\book_store_project\jpa_controllers\BookJpaController.java
-C:\Users\Saad\Documents\programming\school\gb1w20\book_store_project\src\main\java\com\gb1w20\book_store_project\jpa_controllers\AdsJpaController.java
-C:\Users\Saad\Documents\programming\school\gb1w20\book_store_project\src\main\java\com\gb1w20\book_store_project\jpa_controllers\TaxJpaController.java
-C:\Users\Saad\Documents\programming\school\gb1w20\book_store_project\src\main\java\com\gb1w20\book_store_project\entities\Authors.java
-C:\Users\Saad\Documents\programming\school\gb1w20\book_store_project\src\main\java\com\gb1w20\book_store_project\jpa_controllers\PublisherJpaController.java
-C:\Users\Saad\Documents\programming\school\gb1w20\book_store_project\src\main\java\com\gb1w20\book_store_project\jpa_controllers\OrdersJpaController.java
-C:\Users\Saad\Documents\programming\school\gb1w20\book_store_project\src\main\java\com\gb1w20\book_store_project\entities\Orders.java
-C:\Users\Saad\Documents\programming\school\gb1w20\book_store_project\src\main\java\com\gb1w20\book_store_project\jpa_controllers\CustomerReviewsJpaController.java
-C:\Users\Saad\Documents\programming\school\gb1w20\book_store_project\src\main\java\com\gb1w20\book_store_project\jpa_controllers\NewsJpaController.java
-C:\Users\Saad\Documents\programming\school\gb1w20\book_store_project\src\main\java\com\gb1w20\book_store_project\JAXRSConfiguration.java
-C:\Users\Saad\Documents\programming\school\gb1w20\book_store_project\src\main\java\com\gb1w20\book_store_project\jpa_controllers\exceptions\IllegalOrphanException.java
-C:\Users\Saad\Documents\programming\school\gb1w20\book_store_project\src\main\java\com\gb1w20\book_store_project\entities\News.java
-C:\Users\Saad\Documents\programming\school\gb1w20\book_store_project\src\main\java\com\gb1w20\book_store_project\entities\CustomerReviews.java
-C:\Users\Saad\Documents\programming\school\gb1w20\book_store_project\src\main\java\com\gb1w20\book_store_project\entities\Surveys.java
-C:\Users\Saad\Documents\programming\school\gb1w20\book_store_project\src\main\java\com\gb1w20\book_store_project\jpa_controllers\exceptions\NonexistentEntityException.java
-C:\Users\Saad\Documents\programming\school\gb1w20\book_store_project\src\main\java\com\gb1w20\book_store_project\jpa_controllers\SurveyDataJpaController.java
-C:\Users\Saad\Documents\programming\school\gb1w20\book_store_project\src\main\java\com\gb1w20\book_store_project\entities\Ads.java
->>>>>>> e8e21c72d652d03944e748114f59b624db79c100
