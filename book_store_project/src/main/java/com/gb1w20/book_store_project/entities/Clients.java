@@ -53,6 +53,9 @@ public class Clients implements Serializable {
     @Basic(optional = false)
     @Column(name = "Client_ID")
     private Integer clientID;
+    @Size(max = 255)
+    @Column(name = "Hashed_Password")
+    private String hashedPassword;
     @Column(name = "Is_Manager")
     private Boolean isManager;
     @Size(max = 50)
@@ -104,37 +107,6 @@ public class Clients implements Serializable {
     public Clients() {
     }
     
-    public Clients(String firstName,
-            String lastName,
-            String companyName,
-            String address1,
-            String address2,
-            String city,
-            String provinceAbbr,
-            String country,
-            String postalCode,
-            String homePhone,
-            String cellPhone,
-            String email)
-    {
-        this.isManager = false;
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.companyName = companyName;
-        this.address1 = address1;
-        this.address2 = address2;
-        this.city = city;
-        this.provinceAbbreviation = provinceAbbr;
-        this.country = country;
-        this.postalCode = postalCode;
-        this.homeTelephone = homePhone;
-        this.cellTelephone = cellPhone;
-        this.email = email;
-        this.dateEntered = new Date();
-        this.lastModified = new Date();
-        this.isRemoved = false;
-    }
-
     public Clients(Integer clientID) {
         this.clientID = clientID;
     }
@@ -145,6 +117,14 @@ public class Clients implements Serializable {
 
     public void setClientID(Integer clientID) {
         this.clientID = clientID;
+    }
+    
+    public String getHashedPassword() {
+        return hashedPassword;
+    }
+
+    public void setHashedPassword(String hashedPassword) {
+        this.hashedPassword = hashedPassword;
     }
 
     public Boolean getIsManager() {

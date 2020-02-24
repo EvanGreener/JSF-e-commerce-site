@@ -57,13 +57,16 @@
                             <div class="fields">
                                 <div class="twelve wide field">
                                     <h:outputLabel for="country" value="Country"/>
-                                    <h:inputText id="country" label="Country" value="#{clientBacking.client.country}" required="true" requiredMessage="Please enter country" a:placeholder="Enter country" />
-                                    <br/>
+                                    <h:selectOneMenu id="country" label="Country" required="true" value="#{clientBacking.client.country}" requiredMessage="Please enter country" a:placeholder="Enter country">
+                                        <f:selectItem itemValue="Canada" itemLabel="Canada" />
+                                    </h:selectOneMenu>
                                     <h:message class="error" for="country"/>
                                 </div>
                                 <div class="four wide field">
                                     <h:outputLabel for="provOrState" value="Province/State"/>
-                                    <h:inputText id="provOrState" label="Province/State" value="#{clientBacking.client.provinceAbbreviation}" required="true" requiredMessage="Please enter province or state" a:placeholder="Enter province or state" />
+                                    <h:selectOneMenu id="provOrState" label="Province/State" value="#{clientBacking.client.provinceAbbreviation}" required="true" requiredMessage="Please enter province or state" a:placeholder="Enter province or state">
+                                        <f:selectItems value="#{clientBacking.provinces}" />
+                                    </h:selectOneMenu>
                                     <br/>
                                     <h:message class="error" for="provOrState"/>
                                 </div>
@@ -110,13 +113,13 @@
                             </div>
                             <div class="field">
                                 <h:outputLabel for="password" value="Password"/>
-                                <h:inputSecret id="password" value="password" label="password" required="false" requiredMessage="Please enter password" a:placeholder="Enter password" />
+                                <h:inputSecret id="password" value="#{clientBacking.password}" label="password" required="false" requiredMessage="Please enter password" a:placeholder="Enter password" />
                                 <br/>
                                 <h:message class="error" for="password"/>
                             </div>
                             <div class="field">
                                 <h:outputLabel for="passwordRe" value="Re-enter Password"/>
-                                <h:inputSecret id="passwordRe" value="password" label="passwordRe" required="false" requiredMessage="Please re-enter password" a:placeholder="Re-enter password" />
+                                <h:inputSecret id="passwordRe" value="#{clientBacking.passwordConfirm}" label="passwordRe" required="false" requiredMessage="Please re-enter password" a:placeholder="Re-enter password" validator="#{clientBacking.validatePassword}"/>
                                 <br/>
                                 <h:message class="error" for="passwordRe"/>
                             </div>
