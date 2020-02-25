@@ -8,6 +8,7 @@ package com.gb1w20.book_store_project.entities;
 import java.io.Serializable;
 import java.util.Collection;
 import java.util.Date;
+import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -58,7 +59,7 @@ public class Authors implements Serializable {
     private Date lastModified;
     
     @ManyToMany(mappedBy="authorsCollection", cascade=CascadeType.ALL, fetch = FetchType.EAGER)
-    private Collection<Book> booksCollection;
+    private List<Book> booksCollection;
 
     public Authors() {
     }
@@ -107,7 +108,7 @@ public class Authors implements Serializable {
         this.lastModified = lastModified;
     }
     
-    public Collection<Book> getBooksCollection(){
+    public List<Book> getBooksCollection(){
         return booksCollection;
     }
 

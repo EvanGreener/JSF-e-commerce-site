@@ -1,6 +1,9 @@
 .navbar{
     margin-bottom: 0 !important;
 }
+.navbar-default{
+    border-color: #D77A61 !important;
+}
 
 .gallery {
     padding: 40px 40px 20px 20px;
@@ -31,4 +34,13 @@ img {
 
 .swiper-slide{
     text-align: center;
+    background-color: #D8B4A0 !important;
+}
+
+.ui.card:first-child{
+    margin-top: 1em;
+}
+
+.ui.card:last-child {
+    margin-bottom: 1em;
 }

@@ -1,7 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE html [
-    <!ENTITY laquo "&#xAB;">
-    <!ENTITY raquo "&#xBB;"> 
     ]>
 
     <html xmlns="http://www.w3.org/1999/xhtml"
@@ -31,14 +29,29 @@
 
         </h:head>
         <h:body>
-            <b:navBar brand="TheBooksStore" brandHref="/book_store_project" fluid="true" class="headMenu">
-
+            <b:navBar style="background-color:#D77A61;" brand="The Bookstore" brandHref="/book_store_project" fluid="true" class="headMenu">
                 <f:facet name="kebab">
                     <span class="fa fa-chevron-right"></span>
                 </f:facet>
+
                 <b:navbarLinks>
-                    <b:navLink value="Shop" href="gallery.xhtml"></b:navLink>
-                    <b:navLink value="Link" href="#"></b:navLink>
+
+                    <b:navLink style="color: white" class="nav" value="Shop" href="./gallery.xhtml"></b:navLink>
+                    <b:navLink  style="color: white" value="Sales" href="#"></b:navLink>
+                    <b:navLink style="color: white" value="Genres" href="#"></b:navLink>
+                </b:navbarLinks>
+                <!--Adds spacing in nav bar-->
+                <b:navbarLinks pull="right"><b:navLink value="    " href="#"></b:navLink></b:navbarLinks>
+                <b:navbarLinks pull="right" styleClass="hidden-xs">
+                    <b:navLink style="color: white" class="nav" value="Cart" href="#"></b:navLink>
+                    <b:dropMenu value="En" style="color: white">
+                        <b:navLink id="en" value="English - En" href="#"></b:navLink>
+                        <b:navLink id="fr" value="Francais - Fr" href="#"></b:navLink>
+                    </b:dropMenu>
+
+                    <b:navLink style="color: white" value="Login" href="#">
+
+                    </b:navLink>
                 </b:navbarLinks>
             </b:navBar>
             <h:form>
@@ -93,19 +106,24 @@
 
                                 <!--Actual gallery-->
                                 <h:panelGroup id="gallery">
-                                    <div class="ui grid">
+                                    <div class="ui four doubling stackable cards">
+
                                         <ui:param name="limit" value="8"/>
                                         <!-- -1 because collections are 0-indexed-->
                                         <ui:repeat offset="#{(search.page - 1) * 8}" value="#{search.results}" var="book" varStatus="status">
                                             <ui:fragment rendered="#{status.index lt limit * search.page}">
-                                                <div class="ui four wide column fluid card darker">
+                                                <div class="ui fluid card darker">
                                                     <div class="homepageImg">
-                                                        <h:graphicImage class="img" style="height: 100%; width: 100%;" library="images" name="#{book.isbn}.jpg"/>
+                                                        <h:graphicImage class="img" height="250" width="156.25" library="images" name="#{book.isbn}.jpg"/>
                                                         <div class="cardHoverBtn"> View Cover</div>
                                                     </div>
                                                     <div class="content">
                                                         <div class="header">#{book.title}</div>
-                                                        <div class="meta">By Friend</div>
+                                                        <div class="meta">By
+                                                            <ui:repeat value="#{book.authorsCollection}" var="author">
+                                                                #{author.name}
+                                                            </ui:repeat>
+                                                        </div>
 
                                                         <div class="description">
                                                             $#{book.listPrice}
@@ -119,6 +137,7 @@
                                             </ui:fragment>
                                         </ui:repeat>
                                     </div>
+
                                 </h:panelGroup>
 
                             </div>
@@ -210,6 +229,81 @@
                         </div>
                         <!-- Add Pagination -->
                         <div class="swiper-pagination"></div>
+                    </div>
+                </div>
+                <div class="thingy4">
+                    <div class="ui four doubling stackable cards">
+                        <div class="ui fluid card">
+                            <div class="image">
+                                <h:graphicImage library="images" name="colorScheme.PNG"  /></div>
+                            <div class="content">
+                                <div class="header">Elliot Baker</div>
+                                <div class="meta">Friend</div>
+                                <div class="description">
+                                    Elliot is a sound engineer living in Nashville who enjoys playing guitar and hanging with his
+                                    cat.
+                                </div>
+                            </div>
+                            <div class="extra content">
+                                <a>
+                                    <i aria-hidden="true" class="user icon"></i>
+                                    16 Friends
+                                </a>
+                            </div>
+                        </div>
+                        <div class="ui fluid card">
+                            <div class="image">
+                                <h:graphicImage library="images" name="colorScheme.PNG"  /></div>
+                            <div class="content">
+                                <div class="header">Elliot Baker</div>
+                                <div class="meta">Friend</div>
+                                <div class="description">
+                                    Elliot is a sound engineer living in Nashville who enjoys playing guitar and hanging with his
+                                    cat.
+                                </div>
+                            </div>
+                            <div class="extra content">
+                                <a>
+                                    <i aria-hidden="true" class="user icon"></i>
+                                    16 Friends
+                                </a>
+                            </div>
+                        </div>
+                        <div class="ui fluid card">
+                            <div class="image">
+                                <h:graphicImage library="images" name="colorScheme.PNG"  /></div>
+                            <div class="content">
+                                <div class="header">Elliot Baker</div>
+                                <div class="meta">Friend</div>
+                                <div class="description">
+                                    Elliot is a sound engineer living in Nashville who enjoys playing guitar and hanging with his
+                                    cat.
+                                </div>
+                            </div>
+                            <div class="extra content">
+                                <a>
+                                    <i aria-hidden="true" class="user icon"></i>
+                                    16 Friends
+                                </a>
+                            </div>
+                        </div>                <div class="ui fluid card">
+                            <div class="image">
+                                <h:graphicImage library="images" name="colorScheme.PNG"  /></div>
+                            <div class="content">
+                                <div class="header">Elliot Baker</div>
+                                <div class="meta">Friend</div>
+                                <div class="description">
+                                    Elliot is a sound engineer living in Nashville who enjoys playing guitar and hanging with his
+                                    cat.
+                                </div>
+                            </div>
+                            <div class="extra content">
+                                <a>
+                                    <i aria-hidden="true" class="user icon"></i>
+                                    16 Friends
+                                </a>
+                            </div>
+                        </div>               
                     </div>
                 </div>
             </h:form>

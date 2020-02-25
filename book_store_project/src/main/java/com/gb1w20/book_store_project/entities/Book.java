@@ -9,6 +9,7 @@ import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Collection;
 import java.util.Date;
+import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -94,7 +95,7 @@ public class Book implements Serializable {
             joinColumns = {@JoinColumn(name = "ISBN")},
             inverseJoinColumns = {@JoinColumn(name = "Author_ID")}
     )
-    private Collection<Authors> authorsCollection;
+    private List<Authors> authorsCollection;
     
 
     public Book() {
@@ -208,7 +209,7 @@ public class Book implements Serializable {
         this.isRemoved = isRemoved;
     }
     
-    public Collection<Authors> getAuthorsCollection(){
+    public List<Authors> getAuthorsCollection(){
         return authorsCollection;
     }
     

@@ -142,7 +142,6 @@ public class BookJpaController implements Serializable {
         CriteriaQuery<Book> cq = cb.createQuery(Book.class);
         Root<Book> book = cq.from(Book.class);
         Join author = book.join("authorsCollection");
-
         
         switch (searchBy) {
             case "title":
