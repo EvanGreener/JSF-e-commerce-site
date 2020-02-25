@@ -22,6 +22,10 @@
             <h:outputStylesheet library="webjars" name="Semantic-UI/2.4.1/semantic.min.css" />
             <h:outputStylesheet library="webjars" name="swiper/4.5.1/dist/css/swiper.min.css" />
             <h:outputStylesheet library="galleryCss" name="gallery.css" />
+            <h:outputStylesheet library="css" name="homepage.css" />
+
+            <h:outputScript library="js" name="homepage.js" />
+
 
             <script src="https://unpkg.com/swiper/js/swiper.min.js"></script>
 
@@ -94,8 +98,23 @@
                                         <!-- -1 because collections are 0-indexed-->
                                         <ui:repeat offset="#{(search.page - 1) * 8}" value="#{search.results}" var="book" varStatus="status">
                                             <ui:fragment rendered="#{status.index lt limit * search.page}">
-                                                <div style="text-align: center;" class="four wide column">
-                                                    <h:graphicImage  height="250" width="156.25" library="images" name="#{book.isbn}.jpg"/>
+                                                <div class="ui four wide column fluid card darker">
+                                                    <div class="homepageImg">
+                                                        <h:graphicImage class="img" style="height: 100%; width: 100%;" library="images" name="#{book.isbn}.jpg"/>
+                                                        <div class="cardHoverBtn"> View Cover</div>
+                                                    </div>
+                                                    <div class="content">
+                                                        <div class="header">#{book.title}</div>
+                                                        <div class="meta">By Friend</div>
+
+                                                        <div class="description">
+                                                            $#{book.listPrice}
+                                                        </div>
+                                                    </div>
+
+                                                    <div onclick="addToCart()" class="ui bottom attached button  ">
+                                                        + Add to Cart
+                                                    </div>
                                                 </div>
                                             </ui:fragment>
                                         </ui:repeat>
