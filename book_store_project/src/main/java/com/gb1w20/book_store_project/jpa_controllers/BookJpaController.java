@@ -1,9 +1,11 @@
 package com.gb1w20.book_store_project.jpa_controllers;
 
+import com.gb1w20.book_store_project.beans.SearchBean;
+import com.gb1w20.book_store_project.entities.Authors_;
 import com.gb1w20.book_store_project.entities.Book;
+import com.gb1w20.book_store_project.entities.Book_;
 import com.gb1w20.book_store_project.jpa_controllers.exceptions.NonexistentEntityException;
 import java.io.Serializable;
-import java.util.Collection;
 import java.util.List;
 import javax.annotation.Resource;
 import javax.enterprise.context.RequestScoped;
@@ -15,9 +17,12 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Join;
 import javax.persistence.criteria.Root;
 import javax.transaction.SystemException;
 import javax.transaction.UserTransaction;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  *
@@ -26,6 +31,8 @@ import javax.transaction.UserTransaction;
 @Named
 @RequestScoped
 public class BookJpaController implements Serializable {
+
+    private final static Logger LOG = LoggerFactory.getLogger(BookJpaController.class);
 
     @Resource
     private UserTransaction utx;
@@ -127,24 +134,35 @@ public class BookJpaController implements Serializable {
         return ((Long) q.getSingleResult()).intValue();
     }
 
-    public List<Book> search(String q, int page) {
+    public List<Book> search(String searchBy, String q, int page) {
 
         String expression = "%" + q + "%";
 
         CriteriaBuilder cb = em.getCriteriaBuilder();
         CriteriaQuery<Book> cq = cb.createQuery(Book.class);
         Root<Book> book = cq.from(Book.class);
+        Join author = book.join("authorsCollection");
 
-        cq.where(cb.like(book.get("title"), expression));
+        
+        switch (searchBy) {
+            case "title":
+                cq.where(cb.like(book.get(Book_.title), expression));
+                break;
+            case "author":
+                cq.where(cb.like(author.get(Authors_.name), expression));
+                break;
+            default:
+                cq.where(cb.like(book.get(Book_.isbn), expression));
+                break;
+        }
 
         TypedQuery<Book> query = em.createQuery(cq);
         return query.getResultList();
 
     }
-    
-    public List<Book> getRecommended(){
-        
-        
+
+    public List<Book> getRecommended() {
+
         return null;
     }
 

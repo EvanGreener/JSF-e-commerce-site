@@ -45,20 +45,20 @@
                             <p>Filter By Genre</p>
                             <h:selectManyCheckbox layout="pageDirection" value="#{search.genreFilters}">
                                 <p:ajax update="gallery pagination resLabel" listener="#{search.onChecked}" />
-                                <f:selectItem itemValue = "sci-fi" itemLabel = "Sci-Fi"/>
-                                <f:selectItem itemValue = "mystery" itemLabel = "Mystery" /> 
-                                <f:selectItem itemValue = "fantansy" itemLabel = "Fantasy" /> 
-                                <f:selectItem itemValue = "horror" itemLabel = "Horror" />
-                                <f:selectItem itemValue = "fiction" itemLabel = "Fiction" />
+                                <f:selectItem itemValue = "Science Fiction" itemLabel = "Sci-Fi"/>
+                                <f:selectItem itemValue = "Mystery" itemLabel = "Mystery" /> 
+                                <f:selectItem itemValue = "Fantasy" itemLabel = "Fantasy" /> 
+                                <f:selectItem itemValue = "Horror" itemLabel = "Horror" />
+                                <f:selectItem itemValue = "Fiction" itemLabel = "Fiction" />
                             </h:selectManyCheckbox>
 
                             <div class="ui divider" />
 
                             <p>Search by</p>
                             <h:selectOneRadio layout="pageDirection" value="#{search.searchBy}" >
+                                <p:ajax update="gallery pagination resLabel" />
                                 <f:selectItem itemValue = "title" itemLabel = "Title"/>
                                 <f:selectItem itemValue = "author" itemLabel = "Author" />
-                                <f:selectItem itemValue = "genre" itemLabel = "Genre" />
                                 <f:selectItem itemValue = "isbn" itemLabel = "ISBN#" />
                             </h:selectOneRadio>
                         </div>

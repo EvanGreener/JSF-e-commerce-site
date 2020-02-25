@@ -19,7 +19,7 @@ import org.slf4j.LoggerFactory;
 public class SearchBean implements Serializable {
 
     private final static Logger LOG = LoggerFactory.getLogger(SearchBean.class);
-    
+
     @Inject
     private BookJpaController bookCtrlr;
 
@@ -81,16 +81,17 @@ public class SearchBean implements Serializable {
     }
 
     private void updateSearchBean() {
-        LOG.debug(genreFilters.toString());
-        List<Book> res = !query.isBlank() ? bookCtrlr.search(query, page) : bookCtrlr.findBookEntities();
+
+        List<Book> res = searchBy != null &&  !query.isBlank() ? bookCtrlr.search(searchBy, query, page) : bookCtrlr.findBookEntities();
+
+        LOG.debug(query);
+        LOG.debug(searchBy);
         
-        results = genreFilters == null ? res : res.stream()
+        results = genreFilters == null || genreFilters.length == 0 ? res : res.stream()
                 .filter(book -> Arrays.asList(genreFilters).contains(book.getGenre()))
                 .collect(Collectors.toList());
 
         numPages = (int) Math.ceil(results.size() / 8.0);
-
-        System.out.println(results);
 
     }
 
@@ -117,8 +118,8 @@ public class SearchBean implements Serializable {
 
         updateSearchBean();
     }
-    
-    public void onChecked(){
+
+    public void onChecked() {
         updateSearchBean();
     }
 
