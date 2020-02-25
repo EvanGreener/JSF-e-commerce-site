@@ -113,13 +113,13 @@
                             </div>
                             <div class="field">
                                 <h:outputLabel for="password" value="Password"/>
-                                <h:inputSecret id="password" value="#{clientBacking.password}" label="password" required="false" requiredMessage="Please enter password" a:placeholder="Enter password" />
+                                <h:inputSecret id="password" value="#{clientBacking.registerPassword}" label="password" required="false" requiredMessage="Please enter password" a:placeholder="Enter password" />
                                 <br/>
                                 <h:message class="error" for="password"/>
                             </div>
                             <div class="field">
                                 <h:outputLabel for="passwordRe" value="Re-enter Password"/>
-                                <h:inputSecret id="passwordRe" value="#{clientBacking.passwordConfirm}" label="passwordRe" required="false" requiredMessage="Please re-enter password" a:placeholder="Re-enter password" validator="#{clientBacking.validatePassword}"/>
+                                <h:inputSecret id="passwordRe" value="#{clientBacking.registerPasswordConfirm}" label="passwordRe" required="false" requiredMessage="Please re-enter password" a:placeholder="Re-enter password" validator="#{clientBacking.validatePassword}"/>
                                 <br/>
                                 <h:message class="error" for="passwordRe"/>
                             </div>

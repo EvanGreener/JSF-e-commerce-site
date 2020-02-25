@@ -31,16 +31,17 @@ public class ClientBackingBean implements Serializable {
     private ClientsJpaController clientsJpaController;
 
     private Clients client;
-    private String password;
-    private String passwordConfirm;
+    private String registerPassword;
+    private String registerPasswordConfirm;
     private List<SelectItem> provinces = new ArrayList<SelectItem>();
     
     private String loginEmail;
     private String loginPassword;
+    private String message = "You are not logged in";
 
     /**
      * Clients created if it does not exist.
-     *
+     * registerPassword
      * @return
      */
     public Clients getClient() {
@@ -50,20 +51,30 @@ public class ClientBackingBean implements Serializable {
         return client;
     }
     
-    public String getPassword() {
-        return password;
+    public String getRegisterPassword() {
+        return registerPassword;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
+    public void setRegisterPassword(String registerPassword) {
+        this.registerPassword = registerPassword;
     }
     
-    public String getPasswordConfirm() {
-        return passwordConfirm;
+    public String getRegisterPasswordConfirm() {
+        return registerPasswordConfirm;
     }
 
-    public void setPasswordConfirm(String passwordConfirm) {
-        this.passwordConfirm = passwordConfirm;
+    public void setRegisterPasswordConfirm(String registerPasswordConfirm) {
+        this.registerPasswordConfirm = registerPasswordConfirm;
+    }
+    
+    public String getMessage()
+    {
+        return this.message;
+    }
+    
+    public void setMessage(String message)
+    {
+        this.message = message;
     }
     
     public List<SelectItem> getProvinces()
@@ -116,16 +127,14 @@ public class ClientBackingBean implements Serializable {
      */
     public String createClient() throws Exception {
         MessageDigest md = MessageDigest.getInstance("SHA-256");
-        SecureRandom random = new SecureRandom();
         byte[] hashEmail = md.digest(client.getEmail().getBytes(StandardCharsets.UTF_8));
         byte[] salt = new byte[20];
         for (int i = 0;i < 20;i++)
         {
             salt[i] = hashEmail[i];
         }
-        random.nextBytes(salt);
         md.update(salt);
-        byte[] hashedPassword = md.digest(password.getBytes(StandardCharsets.UTF_8));
+        byte[] hashedPassword = md.digest(registerPassword.getBytes(StandardCharsets.UTF_8));
         StringBuilder sb = new StringBuilder();
         for (byte b : hashedPassword) {
             sb.append(String.format("%02x", b));
@@ -158,14 +167,12 @@ public class ClientBackingBean implements Serializable {
         String dbPasswordHash = (String)info[1];
         
         MessageDigest md = MessageDigest.getInstance("SHA-256");
-        SecureRandom random = new SecureRandom();
         byte[] hashEmail = md.digest(email.getBytes(StandardCharsets.UTF_8));
         byte[] salt = new byte[20];
         for (int i = 0;i < 20;i++)
         {
             salt[i] = hashEmail[i];
         }
-        random.nextBytes(salt);
         md.update(salt);
         byte[] hashedPassword = md.digest(loginPassword.getBytes(StandardCharsets.UTF_8));
         StringBuilder sb = new StringBuilder();
@@ -176,11 +183,12 @@ public class ClientBackingBean implements Serializable {
 
         if (dbPasswordHash.equals(loginPasswordHash))
         {
+            this.message = "You are logged in, " + email;
             return "index.xhtml";
         }
         else
         {
-            return null;
+            return "signIn.xhtml";
         }
     }
 }
