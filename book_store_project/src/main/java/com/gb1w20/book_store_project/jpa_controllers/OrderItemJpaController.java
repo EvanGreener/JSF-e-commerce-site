@@ -11,6 +11,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.Query;
 import javax.persistence.EntityNotFoundException;
 import javax.persistence.PersistenceContext;
+import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 import javax.transaction.SystemException;
@@ -122,5 +123,19 @@ public class OrderItemJpaController implements Serializable {
             System.out.println("orderItem count: " + ((Long) q.getSingleResult()).intValue());
             return ((Long) q.getSingleResult()).intValue();
     }
+    
+    /*public List<Object[]> getOrderItemBestSeller() {
+        CriteriaQuery<Object[]> cq = em.getCriteriaBuilder().createQuery(Object[].class);
+            Root<OrderItem> rt = cq.from(OrderItem.class);
+            cq.groupBy(rt.get("isbn"));
+            cq.orderBy(em.getCriteriaBuilder().desc(em.getCriteriaBuilder().count(rt.get("isbn"))));
+            cq.select(rt.get("isbn"));
+            Query q = em.createQuery(cq);
+            TypedQuery<Object[]> typedQuery = em.createQuery(cq);
+  List<Object[]> resultList = typedQuery.getResultList();
+            
+            System.out.println("orderItem count: " + ((Long) q.getSingleResult()).intValue());
+            return ((Long) q.getSingleResult()).intValue();
+    }*/
     
 }

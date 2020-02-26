@@ -25,6 +25,10 @@ body {
     margin: 0 auto 0 10px;
 
 }
+.brand-img-style {
+ height: 100%;
+  width: auto;
+}
 .item1{
     background-color:  #CB4025 !important;
 }
@@ -59,7 +63,7 @@ body {
 }
 .headMenu{
     margin-bottom: 0px !important;
-    background-color: #D77A61;
+    background-color: #D77A61 !important;
 }
 
 .lightGreyDiv{
