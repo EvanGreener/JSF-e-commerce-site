@@ -1,11 +1,11 @@
 package com.gb1w20.book_store_project.entities;
 
 import java.util.Date;
-import javax.annotation.processing.Generated;
+import javax.annotation.Generated;
 import javax.persistence.metamodel.SingularAttribute;
 import javax.persistence.metamodel.StaticMetamodel;
 
-@Generated(value="org.eclipse.persistence.internal.jpa.modelgen.CanonicalModelProcessor", date="2020-02-24T17:26:17", comments="EclipseLink-2.7.5.v20191016-rNA")
+@Generated(value="EclipseLink-2.7.6.v20200131-rNA", date="2020-02-25T16:49:37")
 @StaticMetamodel(Authors.class)
 public class Authors_ { 
 
