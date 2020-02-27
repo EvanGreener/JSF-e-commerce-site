@@ -33,6 +33,7 @@ public class BookBean implements Serializable {
     private List<Book> bestSeller;
     private List<Object> popularGenres;
      private List<Book> recentlyAdded;
+     private Book book;
 
     @PostConstruct
     public void init() {
@@ -57,13 +58,12 @@ public class BookBean implements Serializable {
         return recentlyAdded;
     }
     
-    public void execute(String value) {
-
-    try{
-         FacesContext.getCurrentInstance().getExternalContext().dispatch("/book.xhtml?faces-redirect=true");
-    }
-    catch(Exception e){
-         
-    }  
+    public String viewBook(Book value) {
+this.book = value;
+        return "book";
+ 
 }
+    public Book getBook(){
+        return this.book;
+    }
 }

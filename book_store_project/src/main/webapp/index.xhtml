@@ -17,7 +17,7 @@
         <h:outputScript library="js" name="homepage.js" />
 
         <!-- Swiper JS -->
-        
+
         <script src="https://unpkg.com/swiper/js/swiper.min.js"></script>
     </h:head>
 
@@ -48,26 +48,31 @@
         </b:navBar>
         <div class="swiper-container">
             <div class="swiper-wrapper">
-                    <ui:repeat value="#{bb.recentlyAdded}" var="book">
-                <div class="swiper-slide item1">  
+               
+                <ui:repeat value="#{bb.recentlyAdded}" var="book">
+                    <div class="swiper-slide item1">  
 
-                    <div class="sliderTextContent">
-                        <h1>#{book.title}</h1>
-                        <span>    <ui:repeat value="#{book.authorsCollection}" var="author">
-                                                                #{author.name}
-                                        </ui:repeat></span>
-                        <p> #{book.description}</p>
-                        <h:commandButton value="Shop Now" type="button" />
+                        <div class="sliderTextContent">
+                       
+                            <h1>#{book.title}</h1>
+                            <span>    <ui:repeat value="#{book.authorsCollection}" var="author">
+                                    #{author.name}
+                                </ui:repeat></span>
+                            <p> #{book.description}</p>
+                             <h:form>
+                            <h:commandButton type="submit"
+                 value="Shop Now"
+                 action="#{bb.viewBook(book)}" />
+</h:form>
+                        </div>
 
+
+                        <div  class="sliderImageContent">
+                            <h:graphicImage width="300px" height="400px" library="images" name="#{book.isbn}.jpg"  />
+                        </div>
                     </div>
+                </ui:repeat>
 
-
-                    <div  class="sliderImageContent">
-                        <h:graphicImage width="300px" height="400px" library="images" name="#{book.isbn}.jpg"  />
-                    </div>
-                </div>
-                         </ui:repeat>
-        
             </div>
             <!-- Add Pagination -->
             <div class="swiper-pagination"></div>
@@ -78,108 +83,124 @@
         <div class="thingy">
 
             <p class="small">Best Seller Products</p><br/>
-            
+
             <h:panelGroup>
                 <div class="ui four doubling stackable cards">
+
+
                     <ui:repeat value="#{bb.bestSeller}" var="books">
-                        <div onclick="alert('fds')" class="ui fluid card darker">
+                        <div class="ui fluid card darker">
                             <div class="homepageImg">
                                 <h:graphicImage class="img" height="400" width="320" library="images" name="#{books.isbn}.jpg"/>
-                           <div class="cardHoverBtn"> View Cover</div>
+                                <div class="cardHoverBtn"> View Cover</div>
                             </div>
                             <div class="content">
                                 <div class="header">#{books.title}</div>
                                 <div class="meta">
-                                    
-                                        <ui:repeat value="#{books.authorsCollection}" var="author">
-                                                                #{author.name}
-                                        </ui:repeat>
-                                    
-                                    </div>
+
+                                    <ui:repeat value="#{books.authorsCollection}" var="author">
+                                        #{author.name}
+                                    </ui:repeat>
+
+                                </div>
 
                                 <div class="description">
-                                    $#{books.listPrice}
+                                        <div class="ui tag labels">
+  <a class="ui label">
+       $#{books.listPrice}
+  </a>
+                                            </div>
+                                   
                                 </div>
                             </div>
 
-                            <div onclick="addToCart()" class="ui bottom attached button  ">
-                               + Add to Cart
+                            <div class="ui two bottom attached buttons ">
+                                 <div onclick="addToCart()" class="ui button">+ Add to Cart</div>
+                                 
+                                
                             </div>
                         </div>
                     </ui:repeat>
                 </div>
             </h:panelGroup>
 
+<br/><br/>
+            <div class="ui large icon input ">
+  <input type="text" placeholder="Search..."/>
+  <div class="ui button">Search</div>
+</div>
             
             <!-- The Modal -->
-<div id="myModal" class="modal">
+            <div id="myModal" class="modal">
 
-  <!-- The Close Button -->
-  <span class="close">X</span>
+                <!-- The Close Button -->
+                <span class="close">X</span>
 
-  <!-- Modal Content (The Image) -->
-  <h:graphicImage height="100%" width="50%" class="modal-content" id="img01" library="images" name="colorScheme.PNG"  />
+                <!-- Modal Content (The Image) -->
+                <h:graphicImage height="100%" width="50%" class="modal-content" id="img01" library="images" name="colorScheme.PNG"  />
 
-  <!-- Modal Caption (Image Text) -->
-  <div id="caption"></div>
-</div>
+                <!-- Modal Caption (Image Text) -->
+                <div id="caption"></div>
+            </div>
 
         </div>
-        
-        
-         <!-- Survey/Ad Section -->
-        
+
+
+        <!-- Survey/Ad Section -->
+
         <div   class="lightGreyDiv">
-            
+
             <table class="ui table lightGreyDiv" >
- 
-  <tbody>
-    <tr align="center">
-      <td align="center"><div class="ui wide skyscraper test ad left"  data-text="News"></div></td>
-      <td align="center"> <div class="ui netboard test ad survey" data-text="Survey"></div></td>
-      <td align="center"><div class="ui wide skyscraper test ad right" data-text="Ads"></div></td>
-    </tr>
-  </tbody>
-</table>
-          
- 
- 
+
+                <tbody>
+                    <tr align="center">
+                        <td align="center"><div class="ui wide skyscraper test ad left"  data-text="News"></div></td>
+                        <td align="center"> <div class="ui netboard test ad survey" data-text="Survey"></div></td>
+                        <td align="center"><div class="ui wide skyscraper test ad right" data-text="Ads"></div></td>
+                    </tr>
+                </tbody>
+            </table>
 
 
-            
-            
-            
-           
-           
-           
+
+
+
+
+
+
+
+
+
         </div>
-        
-        
-        
-        
+
+
+
+
         <div class="thingy3">
-             <p class="small">Popular Genres</p><br/>
-                  
-             
-               <h:panelGroup>
+            <p class="small">Popular Genres</p><br/>
+
+
+            <h:panelGroup>
                 <div class="ui four doubling stackable cards">
                     <ui:repeat value="#{bb.popularGenres}" var="genres">
                         <div class="ui fluid card darker">
-    
+                            <div class="homepageImg">
+                                <h:graphicImage class="img" height="200" width="320" library="images" name="#{genres}.jpg"/>
+                            </div>
                             <div class="content">
                                 <div class="header">#{genres}</div>
-                               
+
                             </div>
                         </div>
                     </ui:repeat>
                 </div>
             </h:panelGroup>
-             <br/><br/>
-             <div class="ui centered leaderboard test ad"></div>
+            <br/><br/>
+            <div class="ui centered leaderboard test ad"></div>
         </div>
         <div class="thingy4">
-           
-                  <h:graphicImage height="2%" width="15%" library="images" name="logo.png"  />
+
+            <h:graphicImage height="2%" width="15%" library="images" name="logo.png"  />
         </div>
         <!-- Initialize Swiper -->
         <script>

@@ -174,7 +174,9 @@ public class BookJpaController implements Serializable {
 
     public List<Object> getPopularGenres(){
         
-        TypedQuery<Object> query = em.createQuery("SELECT b.genre FROM Book b INNER JOIN b.orders o GROUP BY b.genre ORDER BY count(o.isbn) DESC", Object.class);
+        TypedQuery<Object> query = em.createQuery("SELECT b.genre FROM Book b WHERE b.genre <> :genre GROUP BY b.genre", Object.class);
+        
+        query.setParameter("genre", "Fiction");
         query.setMaxResults(4);
         List<Object> genres = query.getResultList();
         return genres;
