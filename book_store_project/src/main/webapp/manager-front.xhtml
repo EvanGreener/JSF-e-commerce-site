@@ -1,0 +1,81 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:b="http://bootsfaces.net/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+    <h:head>
+        <title>The BookStore</title>
+        <link rel="stylesheet" href="https://unpkg.com/swiper/css/swiper.min.css"/>
+
+
+        <link href="https://fonts.googleapis.com/css?family=Montserrat|Roboto&amp;display=swap" rel="stylesheet"/>
+
+        <h:outputStylesheet library="webjars" name="Semantic-UI/2.4.1/semantic.min.css" />
+        <h:outputStylesheet library="css" name="homepage.css" />
+        <h:outputStylesheet library="managercss" name="manager.css" />
+        <h:outputScript library="js" name="homepage.js" />
+
+        <!-- Swiper JS -->
+        <script src="https://unpkg.com/swiper/js/swiper.min.js"></script>
+    </h:head>
+
+    <h:body>
+
+
+        <b:navBar brand="The Bookstore" brandHref="#" fluid="true" class="headMenu">
+            <f:facet name="kebab">
+                <span class="fa fa-chevron-right"></span>
+            </f:facet>
+
+            
+            
+        </b:navBar>
+        
+        <h:panelGroup>
+            
+            <div class="ui three column row very relaxed grid  manager-container">
+                <div class="column manager-outer-menu"><div class="manager-menu"><p>I am a div</p></div></div>
+                <div class="column manager-outer-menu"><div class="manager-menu"><p>I am a div</p></div></div>
+                <div class="column manager-outer-menu"><div class="manager-menu"><p>I am a div</p></div></div>
+                <div class="column manager-outer-menu"><div class="manager-menu"><p>I am a div</p></div></div>
+                <div class="column manager-outer-menu"><div class="manager-menu"><p>I am a div</p></div></div>
+                <div class="column manager-outer-menu"><div class="manager-menu"><p>I am a div</p></div></div>
+                <div class="column manager-outer-menu"><div class="manager-menu"><p>I am a div</p></div></div>
+                <div class="column manager-outer-menu"><div class="manager-menu"><p>I am a div</p></div></div>
+                <div class="column manager-outer-menu"><div class="manager-menu"><p>I am a div</p></div></div>
+                
+            </div>
+            
+        </h:panelGroup>
+
+
+
+
+
+
+
+
+
+            
+        <!-- Initialize Swiper -->
+        <script>
+            var swiper = new Swiper('.swiper-container', {
+                loop: true,
+                centeredSlides: true,
+                autoplay: {
+                    delay: 5000,
+                    disableOnInteraction: false,
+                },
+                pagination: {
+                    el: '.swiper-pagination',
+                },
+                navigation: {
+                    nextEl: '.swiper-button-next',
+                    prevEl: '.swiper-button-prev',
+                },
+            });
+        </script>
+    </h:body>
+</html>
