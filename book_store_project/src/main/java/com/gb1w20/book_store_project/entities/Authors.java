@@ -6,13 +6,18 @@
 package com.gb1w20.book_store_project.entities;
 
 import java.io.Serializable;
+import java.util.Collection;
 import java.util.Date;
+import java.util.List;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
@@ -52,6 +57,9 @@ public class Authors implements Serializable {
     @Column(name = "Last_Modified")
     @Temporal(TemporalType.TIMESTAMP)
     private Date lastModified;
+    
+    @ManyToMany(mappedBy="authorsCollection", cascade=CascadeType.ALL, fetch = FetchType.EAGER)
+    private List<Book> booksCollection;
 
     public Authors() {
     }
@@ -98,6 +106,10 @@ public class Authors implements Serializable {
 
     public void setLastModified(Date lastModified) {
         this.lastModified = lastModified;
+    }
+    
+    public List<Book> getBooksCollection(){
+        return booksCollection;
     }
 
     @Override

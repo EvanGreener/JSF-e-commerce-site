@@ -68,7 +68,7 @@ body {
 
 .lightGreyDiv{
     padding:5%;
-    background-color: #EFF1F3;
+    background-color: #EFF1F3 !important;
 }
 .thingy{
     padding:5%;
@@ -82,7 +82,7 @@ body {
 }
 .thingy4{
     padding:5%;
-    background-color: #223843;
+    background-color: #223843 !important;
 }
 
 .mainBtn{
@@ -97,11 +97,12 @@ body {
 }
 .sliderTextContent{
     text-align: left;
-    margin: 40px 200px; 
+    margin: 40px 50px; 
 
 }
 .sliderImageContent{
     text-align: center;
+     margin: 20px 40px; 
 }
 h2{
     text-align: center ;
@@ -153,7 +154,7 @@ p.small {
 }
 .homepageImg{
     text-align: center;
-     border:2px solid black;
+    /*border:2px solid black;*/
     background-color: black;
 }
 .homepageImg:hover .cardHoverBtn{
@@ -240,5 +241,7 @@ p.small {
 }
 
 
-
+.survey{
+    background-color:white !important;
+}
 

@@ -22,6 +22,7 @@ com\gb1w20\book_store_project\entities\Tax.class
 com\gb1w20\book_store_project\jpa_controllers\exceptions\PreexistingEntityException.class
 com\gb1w20\book_store_project\jpa_controllers\BookJpaController.class
 com\gb1w20\book_store_project\entities\Book_.class
+com\gb1w20\book_store_project\beans\SearchBean.class
 com\gb1w20\book_store_project\entities\OrderItem_.class
 com\gb1w20\book_store_project\jpa_controllers\OrderItemJpaController.class
 com\gb1w20\book_store_project\entities\CustomerReviews_.class
@@ -30,6 +31,7 @@ com\gb1w20\book_store_project\entities\Ads.class
 com\gb1w20\book_store_project\entities\Authors.class
 com\gb1w20\book_store_project\jpa_controllers\TaxJpaController.class
 com\gb1w20\book_store_project\entities\Publisher.class
+com\gb1w20\book_store_project\beans\BookBean.class
 com\gb1w20\book_store_project\entities\CustomerReviews.class
 com\gb1w20\book_store_project\entities\SurveyData_.class
 com\gb1w20\book_store_project\jpa_controllers\AdsJpaController.class

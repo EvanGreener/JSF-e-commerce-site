@@ -1,4 +1,6 @@
-document.addEventListener('DOMContentLoaded', function () {// Get the modal
+document.addEventListener('DOMContentLoaded', function (event) {// Get the modal
+      
+      event.stopPropagation(); 
     // Get the modal
     var modal = document.getElementById("myModal");
 // Get the image and insert it inside the modal - use its "alt" text as a caption
@@ -96,11 +98,7 @@ function displayCardHoverButton()
     this.appendChild(btn);
 }
 
-function displayBookCover() {
 
-            
-        
-}
 
 
 function addReview() {
