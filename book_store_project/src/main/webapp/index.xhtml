@@ -48,22 +48,22 @@
         </b:navBar>
         <div class="swiper-container">
             <div class="swiper-wrapper">
-               
+
                 <ui:repeat value="#{bb.recentlyAdded}" var="book">
                     <div class="swiper-slide item1">  
 
                         <div class="sliderTextContent">
-                       
+
                             <h1>#{book.title}</h1>
                             <span>    <ui:repeat value="#{book.authorsCollection}" var="author">
                                     #{author.name}
                                 </ui:repeat></span>
                             <p> #{book.description}</p>
-                             <h:form>
-                            <h:commandButton type="submit"
-                 value="Shop Now"
-                 action="#{bb.viewBook(book)}" />
-</h:form>
+                            <h:form>
+                                <h:commandButton type="submit"
+                                                 value="Shop Now"
+                                                 action="#{bb.viewBook(book)}" />
+                            </h:form>
                         </div>
 
 
@@ -94,8 +94,12 @@
                                 <h:graphicImage class="img" height="400" width="320" library="images" name="#{books.isbn}.jpg"/>
                                 <div class="cardHoverBtn"> View Cover</div>
                             </div>
+                            <h:form>
+                             <h:commandLink action = "#{bb.viewBook(books)}" type="submit" value = "">
                             <div class="content">
-                                <div class="header">#{books.title}</div>
+                                <div class="header">
+
+                                    #{books.title}</div>
                                 <div class="meta">
 
                                     <ui:repeat value="#{books.authorsCollection}" var="author">
@@ -105,31 +109,33 @@
                                 </div>
 
                                 <div class="description">
-                                        <div class="ui tag labels">
-  <a class="ui label">
-       $#{books.listPrice}
-  </a>
-                                            </div>
-                                   
+                                    <div class="ui tag labels">
+                                        <a class="ui label">
+                                            $#{books.listPrice}
+                                        </a>
+                                    </div>
+
                                 </div>
                             </div>
+                                 </h:commandLink>
+                                </h:form>
 
                             <div class="ui two bottom attached buttons ">
-                                 <div onclick="addToCart()" class="ui button">+ Add to Cart</div>
-                                 
-                                
+                                <div onclick="addToCart()" class="ui button">+ Add to Cart</div>
+
+
                             </div>
                         </div>
                     </ui:repeat>
                 </div>
             </h:panelGroup>
 
-<br/><br/>
+            <br/><br/>
             <div class="ui large icon input ">
-  <input type="text" placeholder="Search..."/>
-  <div class="ui button">Search</div>
-</div>
-            
+                <input type="text" placeholder="Search..."/>
+                <div class="ui button">Search</div>
+            </div>
+
             <!-- The Modal -->
             <div id="myModal" class="modal">
 
