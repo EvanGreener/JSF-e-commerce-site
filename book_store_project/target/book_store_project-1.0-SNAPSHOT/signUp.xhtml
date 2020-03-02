@@ -24,7 +24,7 @@
         </b:navBar>
         <h:form class="ui form" id="register">
             <div class="ui fluid card">
-                <div class="thingy2">
+                <div class="lightGreyDiv">
                     <div class="thingy5">
                         <h1 class="ui header">Register</h1>
                         <div class="thingy6">
@@ -72,29 +72,29 @@
                                 </div>
                             </div>
                             <div class="fields">
-                            <div class="twelve wide field">
-                                <h:outputLabel for="city" value="City"/>
-                                <h:inputText id="city" label="City" value="#{clientBacking.client.city}" required="true" requiredMessage="Please enter city" a:placeholder="Enter city" />
-                                <br/>
-                                <h:message class="error" for="companyName"/>
-                            </div>
-                            <div class="four wide field">
-                                <h:outputLabel for="postalCode" value="Postal Code"/>
-                                <h:inputText id="postalCode" label="Postal Code" value="#{clientBacking.client.postalCode}" required="true" requiredMessage="Please enter postal code" a:placeholder="Enter postal code" />
-                                <br/>
-                                <h:message class="error" for="companyName"/>
-                            </div>
+                                <div class="twelve wide field">
+                                    <h:outputLabel for="city" value="City"/>
+                                    <h:inputText id="city" label="City" value="#{clientBacking.client.city}" required="true" requiredMessage="Please enter city" a:placeholder="Enter city" />
+                                    <br/>
+                                    <h:message class="error" for="city"/>
+                                </div>
+                                <div class="four wide field">
+                                    <h:outputLabel for="postalCode" value="Postal Code"/>
+                                    <h:inputText id="postalCode" label="Postal Code" value="#{clientBacking.client.postalCode}" required="true" requiredMessage="Please enter postal code" a:placeholder="Enter postal code" validator="#{clientBacking.validatePostalCode}"/>
+                                    <br/>
+                                    <h:message class="error" for="postalCode"/>
+                                </div>
                             </div>
                             <div class="two fields">
                                 <div class="field">
                                     <h:outputLabel for="homePhone" value="Home Phone"/>
-                                    <h:inputText id="homePhone" label="Home Phone" value="#{clientBacking.client.homeTelephone}" required="true" requiredMessage="Please enter home phone" a:placeholder="Enter home phone" />
+                                    <h:inputText id="homePhone" label="homePhone" value="#{clientBacking.client.homeTelephone}" required="true" requiredMessage="Please enter home phone" a:placeholder="Enter home phone" validator="#{clientBacking.validateHomePhone}"/>
                                     <br/>
                                     <h:message class="error" for="homePhone"/>
                                 </div>
                                 <div class="field">
                                     <h:outputLabel for="cellPhone" value="Cell Phone"/>
-                                    <h:inputText id="cellPhone" label="Cell Phone" value="#{clientBacking.client.cellTelephone}" required="true" requiredMessage="Please enter cell phone" a:placeholder="Enter cell phone" />
+                                    <h:inputText id="cellPhone" label="cellPhone" value="#{clientBacking.client.cellTelephone}" required="true" requiredMessage="Please enter cell phone" a:placeholder="Enter cell phone" validator="#{clientBacking.validateCellPhone}"/>
                                     <br/>
                                     <h:message class="error" for="cellPhone"/>
                                 </div>
@@ -107,19 +107,21 @@
                             </div>
                             <div class="field">
                                 <h:outputLabel for="email" value="Email"/>
-                                <h:inputText id="email" label="email" value="#{clientBacking.client.email}" required="true" requiredMessage="Please enter email" a:placeholder="Enter email" validator="#{clientBacking.validateUniqueEmail}"/>
+                                <h:inputText id="email" label="email" value="#{clientBacking.client.email}" required="true" requiredMessage="Please enter email" a:placeholder="Enter email" validator="#{clientBacking.validateUniqueAndValidEmail}">
+                                    <f:validateRegex pattern="([^.@]+)(\.[^.@]+)*@([^.@]+\.)+([^.@]+)" />
+                                </h:inputText>
                                 <br/>
                                 <h:message class="error" for="email"/>
                             </div>
                             <div class="field">
                                 <h:outputLabel for="password" value="Password"/>
-                                <h:inputSecret id="password" value="#{clientBacking.registerPassword}" label="password" required="false" requiredMessage="Please enter password" a:placeholder="Enter password" />
+                                <h:inputSecret id="password" value="#{clientBacking.registerPassword}" label="password" required="true" requiredMessage="Please enter password" a:placeholder="Enter password" />
                                 <br/>
                                 <h:message class="error" for="password"/>
                             </div>
                             <div class="field">
                                 <h:outputLabel for="passwordRe" value="Re-enter Password"/>
-                                <h:inputSecret id="passwordRe" value="#{clientBacking.registerPasswordConfirm}" label="passwordRe" required="false" requiredMessage="Please re-enter password" a:placeholder="Re-enter password" validator="#{clientBacking.validatePassword}"/>
+                                <h:inputSecret id="passwordRe" value="#{clientBacking.registerPasswordConfirm}" label="passwordRe" required="true" requiredMessage="Please re-enter password" a:placeholder="Re-enter password" validator="#{clientBacking.validatePassword}"/>
                                 <br/>
                                 <h:message class="error" for="passwordRe"/>
                             </div>

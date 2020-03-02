@@ -24,20 +24,20 @@
         </b:navBar>
         <h:form class="ui form">
             <div class="ui fluid card">
-                <div class="thingy2">
+                <div class="lightGreyDiv">
                     <div class="thingy5">
                         <h1 class="ui header">Login</h1>
                         <div class="thingy6">
                             <div class="field">
                                 <h:outputLabel for="email" value="Email"/>
-                                <h:inputText id="email" label="Email" value="#{clientBacking.loginEmail}" required="true" requiredMessage="Please enter email" a:placeholder="Enter email" />
+                                <h:inputText id="email" label="Email" value="#{clientBacking.loginEmail}" required="true" requiredMessage="Please enter email" a:placeholder="Enter email" validator="#{clientBacking.validateEmailExists}"/>
                                 <br/>
                                 <h:message class="error" for="email"/>
                             </div>
                             <br/>
                             <div class="field">
                                 <h:outputLabel for="password" value="Password"/>
-                                <h:inputSecret id="password" label="Password" value="#{clientBacking.loginPassword}" required="true" requiredMessage="Please enter password" a:placeholder="Enter password"/>
+                                <h:inputSecret id="password" label="Password" value="#{clientBacking.loginPassword}" required="true" requiredMessage="Please enter password" a:placeholder="Enter password" validator="#{clientBacking.validateCorrectPassword}"/>
                                 <br/>
                                 <h:message class="error" for="password"/>
                             </div>

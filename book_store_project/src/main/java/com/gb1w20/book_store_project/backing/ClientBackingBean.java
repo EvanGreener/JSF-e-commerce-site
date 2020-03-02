@@ -9,6 +9,7 @@ import java.security.SecureRandom;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.regex.Pattern;
 import javax.enterprise.context.RequestScoped;
 import javax.faces.application.FacesMessage;
 import javax.faces.component.UIComponent;
@@ -160,12 +161,49 @@ public class ClientBackingBean implements Serializable {
         }
     }
     
-    public void validateUniqueEmail(FacesContext context, UIComponent component, Object value) {
+    public void validateUniqueAndValidEmail(FacesContext context, UIComponent component, Object value) {
+        String email = (String)value;
+        UIInput emailInput = (UIInput)component.findComponent("email");
+        boolean validEmail = Pattern.matches("([^.@]+)(\\.[^.@]+)*@([^.@]+\\.)+([^.@]+)", email);
+        if (!validEmail) {
+            String message = context.getApplication().evaluateExpressionGet(context, "Invalid email format (example of correct format: alberto@gmail.com)", String.class);
+            FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR, message, message);
+            emailInput.resetValue();
+            throw new ValidatorException(msg);
+        }
+        List<String> emailsByQuery = clientsJpaController.getEmailsByEmail(email);
+        if (emailsByQuery.size() >= 1) {
+            String message = context.getApplication().evaluateExpressionGet(context, "Email already exists in database", String.class);
+            FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR, message, message);
+            emailInput.resetValue();
+            throw new ValidatorException(msg);
+        }
+    }
+    
+    public void validateCorrectPassword(FacesContext context, UIComponent component, Object value) throws Exception {
+        String password = (String)value;
+        UIInput emailInput = (UIInput)component.findComponent("email");
+        String email = (String)emailInput.getLocalValue();
+        if (clientsJpaController.getEmailsByEmail(email).isEmpty())
+        {
+            String message = context.getApplication().evaluateExpressionGet(context, "User with this email does not exist", String.class);
+            FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR, message, message);
+            throw new ValidatorException(msg);
+        }
+        Object[] userInfo = clientsJpaController.getInfoByEmail(email);
+        if (loginTest(email, password) == false) {
+            String message = context.getApplication().evaluateExpressionGet(context, "Incorrect password", String.class);
+            FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR, message, message);
+            throw new ValidatorException(msg);
+        }
+    }
+    
+    public void validateEmailExists(FacesContext context, UIComponent component, Object value) throws Exception {
         String email = (String)value;
         UIInput emailInput = (UIInput)component.findComponent("email");
         List<String> emailsByQuery = clientsJpaController.getEmailsByEmail(email);
-        if (emailsByQuery.size() > 1) {
-            String message = context.getApplication().evaluateExpressionGet(context, "Email already exists in database", String.class);
+        if (emailsByQuery.isEmpty()) {
+            String message = context.getApplication().evaluateExpressionGet(context, "User with this email does not exist", String.class);
             FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR, message, message);
             emailInput.resetValue();
             throw new ValidatorException(msg);
@@ -201,6 +239,99 @@ public class ClientBackingBean implements Serializable {
         else
         {
             return "signIn.xhtml";
+        }
+    }
+    
+    public void validateHomePhone(FacesContext context, UIComponent component, Object value)
+    {
+        String number = (String)value;
+        UIInput homePhoneInput = (UIInput)component.findComponent("homePhone");
+        try
+        {
+            Integer.parseInt(number);
+        }
+        catch(NumberFormatException nfe)
+        {
+            String message = context.getApplication().evaluateExpressionGet(context, "Invalid home phone: contains non-numeric characters", String.class);
+            FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR, message, message);
+            homePhoneInput.resetValue();
+            throw new ValidatorException(msg);
+        }
+        if (number.toCharArray().length != 10)
+        {
+            String message = context.getApplication().evaluateExpressionGet(context, "Invalid home phone: not 10 digits long", String.class);
+            FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR, message, message);
+            homePhoneInput.resetValue();
+            throw new ValidatorException(msg);
+        }
+    }
+    
+    public void validateCellPhone(FacesContext context, UIComponent component, Object value)
+    {
+        String number = (String)value;
+        UIInput cellPhoneInput = (UIInput)component.findComponent("cellPhone");
+        try
+        {
+            Integer.parseInt(number);
+        }
+        catch(NumberFormatException nfe)
+        {
+            String message = context.getApplication().evaluateExpressionGet(context, "Invalid cell phone: contains non-numeric characters", String.class);
+            FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR, message, message);
+            cellPhoneInput.resetValue();
+            throw new ValidatorException(msg);
+        }
+        if (number.toCharArray().length != 10)
+        {
+            String message = context.getApplication().evaluateExpressionGet(context, "Invalid cell phone: not 10 digits long", String.class);
+            FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR, message, message);
+            cellPhoneInput.resetValue();
+            throw new ValidatorException(msg);
+        }
+    }
+    
+    public void validatePostalCode(FacesContext context, UIComponent component, Object value)
+    {
+        String postalCode = (String)value;
+        UIInput postalCodeInput = (UIInput)component.findComponent("postalCode");
+        boolean validPostalCode = Pattern.matches("[a-zA-Z][0-9][a-zA-Z][0-9][a-zA-Z][0-9]", postalCode);
+        if (!validPostalCode)
+        {
+            String message = context.getApplication().evaluateExpressionGet(context, "Incorrect postal code format (correct format: A1A1A1)", String.class);
+            FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR, message, message);
+            postalCodeInput.resetValue();
+            throw new ValidatorException(msg);
+        }
+    }
+    
+    public boolean loginTest(String loginEmail, String password) throws Exception
+    {
+        Object[] info = clientsJpaController.getInfoByEmail(loginEmail);
+        String email = (String)info[0];
+        String dbPasswordHash = (String)info[1];
+        
+        MessageDigest md = MessageDigest.getInstance("SHA-256");
+        byte[] hashEmail = md.digest(email.getBytes(StandardCharsets.UTF_8));
+        byte[] salt = new byte[20];
+        for (int i = 0;i < 20;i++)
+        {
+            salt[i] = hashEmail[i];
+        }
+        md.update(salt);
+        byte[] hashedPassword = md.digest(password.getBytes(StandardCharsets.UTF_8));
+        StringBuilder sb = new StringBuilder();
+        for (byte b : hashedPassword) {
+            sb.append(String.format("%02x", b));
+        }
+        String loginPasswordHash = sb.toString();
+
+        if (dbPasswordHash.equals(loginPasswordHash))
+        {
+            return true;
+        }
+        else
+        {
+            return false;
         }
     }
 }
