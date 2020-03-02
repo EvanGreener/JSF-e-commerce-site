@@ -36,7 +36,6 @@ com\gb1w20\book_store_project\backing\AuthorBackingBean.class
 com\gb1w20\book_store_project\entities\OrderItem.class
 com\gb1w20\book_store_project\entities\Book.class
 com\gb1w20\book_store_project\entities\Orders_.class
-.netbeans_automatic_build
 com\gb1w20\book_store_project\backing\CustomerReviewBackingBean.class
 com\gb1w20\book_store_project\jpa_controllers\CustomerReviewsJpaController.class
 com\gb1w20\book_store_project\jpa_controllers\exceptions\PreexistingEntityException.class

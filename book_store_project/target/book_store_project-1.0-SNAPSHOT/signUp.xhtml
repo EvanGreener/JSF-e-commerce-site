@@ -107,7 +107,7 @@
                             </div>
                             <div class="field">
                                 <h:outputLabel for="email" value="Email"/>
-                                <h:inputText id="email" label="Email" value="#{clientBacking.client.email}" required="true" requiredMessage="Please enter email" a:placeholder="Enter email" />
+                                <h:inputText id="email" label="email" value="#{clientBacking.client.email}" required="true" requiredMessage="Please enter email" a:placeholder="Enter email" validator="#{clientBacking.validateUniqueEmail}"/>
                                 <br/>
                                 <h:message class="error" for="email"/>
                             </div>

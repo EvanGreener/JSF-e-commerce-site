@@ -160,6 +160,18 @@ public class ClientBackingBean implements Serializable {
         }
     }
     
+    public void validateUniqueEmail(FacesContext context, UIComponent component, Object value) {
+        String email = (String)value;
+        UIInput emailInput = (UIInput)component.findComponent("email");
+        List<String> emailsByQuery = clientsJpaController.getEmailsByEmail(email);
+        if (emailsByQuery.size() > 1) {
+            String message = context.getApplication().evaluateExpressionGet(context, "Email already exists in database", String.class);
+            FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR, message, message);
+            emailInput.resetValue();
+            throw new ValidatorException(msg);
+        }
+    }
+    
     public String login() throws Exception
     {
         Object[] info = clientsJpaController.getInfoByEmail(loginEmail);
