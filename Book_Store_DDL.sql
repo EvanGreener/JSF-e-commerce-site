@@ -177,7 +177,7 @@ CREATE TABLE `Clients` (
   `Address_1` VARCHAR(300),
   `Address_2` VARCHAR(300),
   `City` VARCHAR(100),
-  `Province_Abbreviation` INT,
+  `Province_Abbreviation` VARCHAR(2),
   `Country` VARCHAR(30),
   `Postal_Code` VARCHAR(6),
   `Home_Telephone` VARCHAR(10),

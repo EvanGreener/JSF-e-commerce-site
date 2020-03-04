@@ -53,6 +53,9 @@ public class Clients implements Serializable {
     @Basic(optional = false)
     @Column(name = "Client_ID")
     private Integer clientID;
+    @Size(max = 255)
+    @Column(name = "Hashed_Password")
+    private String hashedPassword;
     @Column(name = "Is_Manager")
     private Boolean isManager;
     @Size(max = 50)
@@ -73,8 +76,9 @@ public class Clients implements Serializable {
     @Size(max = 100)
     @Column(name = "City")
     private String city;
+    @Size(max = 2)
     @Column(name = "Province_Abbreviation")
-    private Integer provinceAbbreviation;
+    private String provinceAbbreviation;
     @Size(max = 30)
     @Column(name = "Country")
     private String country;
@@ -102,7 +106,7 @@ public class Clients implements Serializable {
 
     public Clients() {
     }
-
+    
     public Clients(Integer clientID) {
         this.clientID = clientID;
     }
@@ -113,6 +117,14 @@ public class Clients implements Serializable {
 
     public void setClientID(Integer clientID) {
         this.clientID = clientID;
+    }
+    
+    public String getHashedPassword() {
+        return hashedPassword;
+    }
+
+    public void setHashedPassword(String hashedPassword) {
+        this.hashedPassword = hashedPassword;
     }
 
     public Boolean getIsManager() {
@@ -171,11 +183,11 @@ public class Clients implements Serializable {
         this.city = city;
     }
 
-    public Integer getProvinceAbbreviation() {
+    public String getProvinceAbbreviation() {
         return provinceAbbreviation;
     }
 
-    public void setProvinceAbbreviation(Integer provinceAbbreviation) {
+    public void setProvinceAbbreviation(String provinceAbbreviation) {
         this.provinceAbbreviation = provinceAbbreviation;
     }
 

@@ -22,18 +22,17 @@
     </h:head>
 
     <h:body>
-
-
+        <b:alert severity="info">#{clientBacking.message}</b:alert>
         <b:navBar style="background-color:#D77A61;" brand="The Bookstore" brandHref="#" fluid="true" class="headMenu">
             <f:facet name="kebab">
                 <span class="fa fa-chevron-right"></span>
             </f:facet>
 
             <b:navbarLinks>
-
+                <b:navLink value="Log In" href="signIn.xhtml"></b:navLink>
+                <b:navLink  value="Sales" href="#"></b:navLink>
+                <b:navLink value="Genres" href="#"></b:navLink>
                 <b:navLink style="color: white" class="nav" value="Shop" href="./gallery.xhtml"></b:navLink>
-                <b:navLink  style="color: white" value="Sales" href="#"></b:navLink>
-                <b:navLink style="color: white" value="Genres" href="#"></b:navLink>
             </b:navbarLinks>
             <!--Adds spacing in nav bar-->
             <b:navbarLinks pull="right"><b:navLink value="    " href="#"></b:navLink></b:navbarLinks>
@@ -43,10 +42,6 @@
                     <b:navLink id="en" value="English - En" href="#"></b:navLink>
                     <b:navLink id="fr" value="Francais - Fr" href="#"></b:navLink>
                 </b:dropMenu>
-
-                <b:navLink style="color: white" value="Login" href="#">
-
-                </b:navLink>
             </b:navbarLinks>
         </b:navBar>
         <div class="swiper-container">
