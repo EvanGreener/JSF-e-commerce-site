@@ -30,9 +30,11 @@
                         <div class="thingy6">
                             <div class="field">
                                 <h:outputLabel for="email" value="Email"/>
-                                <h:inputText id="email" label="Email" value="#{clientBacking.loginEmail}" required="true" requiredMessage="Please enter email" a:placeholder="Enter email" validator="#{clientBacking.validateEmailExists}"/>
+                                <h:inputText id="email" label="Email" value="#{clientBacking.loginEmail}" required="true" requiredMessage="Please enter email" a:placeholder="Enter email" validator="#{clientBacking.validateEmailExists}">
+                                    <f:ajax event="change" render="emailError"/>
+                                </h:inputText>
                                 <br/>
-                                <h:message class="error" for="email"/>
+                                <h:message id="emailError" class="error" for="email"/>
                             </div>
                             <br/>
                             <div class="field">

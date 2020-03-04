@@ -31,28 +31,36 @@
                             <div class="two fields">
                                 <div class="field">
                                     <h:outputLabel for="firstName" value="First Name"/>
-                                    <h:inputText id="firstName" label="First Name" value="#{clientBacking.client.firstName}" required="true" requiredMessage="Please enter first name" a:placeholder="Enter first name" />
+                                    <h:inputText id="firstName" label="First Name" value="#{clientBacking.client.firstName}" required="true" requiredMessage="Please enter first name" a:placeholder="Enter first name" validator="#{clientBacking.validateNotNull}">
+                                        <f:ajax event="change" render="firstNameError"/>
+                                    </h:inputText>
                                     <br/>
-                                    <h:message class="error" for="firstName"/>
+                                    <h:message id="firstNameError" class="error" for="firstName"/>
                                 </div>
                                 <div class="field">
                                     <h:outputLabel for="lastName" value="Last Name"/>
-                                    <h:inputText id="lastName" label="Last Name" value="#{clientBacking.client.lastName}" required="true" requiredMessage="Please enter last name" a:placeholder="Enter last name" />
+                                    <h:inputText id="lastName" label="Last Name" value="#{clientBacking.client.lastName}" required="true" requiredMessage="Please enter last name" a:placeholder="Enter last name" validator="#{clientBacking.validateNotNull}">
+                                        <f:ajax event="change" render="lastNameError"/>
+                                    </h:inputText>
                                     <br/>
-                                    <h:message class="error" for="lastName"/>
+                                    <h:message id="lastNameError" class="error" for="lastName"/>
                                 </div>
                             </div>
                             <div class="field">
                                 <h:outputLabel for="address1" value="Address 1"/>
-                                <h:inputText id="address1" label="Address 1" value="#{clientBacking.client.address1}" required="true" requiredMessage="Please enter address 1" a:placeholder="Enter address 1" />
+                                <h:inputText id="address1" label="Address 1" value="#{clientBacking.client.address1}" required="true" requiredMessage="Please enter address 1" a:placeholder="Enter address 1" validator="#{clientBacking.validateNotNull}">
+                                    <f:ajax event="change" render="address1Error"/>
+                                </h:inputText>
                                 <br/>
-                                <h:message class="error" for="address1"/>
+                                <h:message id="address1Error" class="error" for="address1"/>
                             </div>
                             <div class="field">
                                 <h:outputLabel for="address2" value="Address 2"/>
-                                <h:inputText id="address2" label="Address 2" value="#{clientBacking.client.address2}" required="true" requiredMessage="Please enter address 2" a:placeholder="Enter address 2" />
+                                <h:inputText id="address2" label="Address 2" value="#{clientBacking.client.address2}" required="true" requiredMessage="Please enter address 2" a:placeholder="Enter address 2" validator="#{clientBacking.validateNotNull}">
+                                    <f:ajax event="change" render="address2Error"/>
+                                </h:inputText>
                                 <br/>
-                                <h:message class="error" for="address2"/>
+                                <h:message id="address2Error" class="error" for="address2"/>
                             </div>
                             <div class="fields">
                                 <div class="twelve wide field">
@@ -60,7 +68,7 @@
                                     <h:selectOneMenu id="country" label="Country" required="true" value="#{clientBacking.client.country}" requiredMessage="Please enter country" a:placeholder="Enter country">
                                         <f:selectItem itemValue="Canada" itemLabel="Canada" />
                                     </h:selectOneMenu>
-                                    <h:message class="error" for="country"/>
+                                    <h:message id="countryError" class="error" for="country"/>
                                 </div>
                                 <div class="four wide field">
                                     <h:outputLabel for="provOrState" value="Province/State"/>
@@ -68,62 +76,75 @@
                                         <f:selectItems value="#{clientBacking.provinces}" />
                                     </h:selectOneMenu>
                                     <br/>
-                                    <h:message class="error" for="provOrState"/>
+                                    <h:message id="provStateError" class="error" for="provOrState"/>
                                 </div>
                             </div>
                             <div class="fields">
                                 <div class="twelve wide field">
                                     <h:outputLabel for="city" value="City"/>
-                                    <h:inputText id="city" label="City" value="#{clientBacking.client.city}" required="true" requiredMessage="Please enter city" a:placeholder="Enter city" />
+                                    <h:inputText id="city" label="City" value="#{clientBacking.client.city}" required="true" requiredMessage="Please enter city" a:placeholder="Enter city" validator="#{clientBacking.validateNotNull}">
+                                        <f:ajax event="change" render="cityError"/>
+                                    </h:inputText>
                                     <br/>
-                                    <h:message class="error" for="city"/>
+                                    <h:message id="cityError" class="error" for="city"/>
                                 </div>
                                 <div class="four wide field">
                                     <h:outputLabel for="postalCode" value="Postal Code"/>
-                                    <h:inputText id="postalCode" label="Postal Code" value="#{clientBacking.client.postalCode}" required="true" requiredMessage="Please enter postal code" a:placeholder="Enter postal code" validator="#{clientBacking.validatePostalCode}"/>
+                                    <h:inputText id="postalCode" label="Postal Code" value="#{clientBacking.client.postalCode}" required="true" requiredMessage="Please enter postal code" a:placeholder="Enter postal code" validator="#{clientBacking.validatePostalCode}">
+                                        <f:ajax event="change" render="postalCodeError"/>
+                                    </h:inputText>
                                     <br/>
-                                    <h:message class="error" for="postalCode"/>
+                                    <h:message id="postalCodeError" class="error" for="postalCode"/>
                                 </div>
                             </div>
                             <div class="two fields">
                                 <div class="field">
                                     <h:outputLabel for="homePhone" value="Home Phone"/>
-                                    <h:inputText id="homePhone" label="homePhone" value="#{clientBacking.client.homeTelephone}" required="true" requiredMessage="Please enter home phone" a:placeholder="Enter home phone" validator="#{clientBacking.validateHomePhone}"/>
+                                    <h:inputText id="homePhone" label="homePhone" value="#{clientBacking.client.homeTelephone}" required="true" requiredMessage="Please enter home phone" a:placeholder="Enter home phone" validator="#{clientBacking.validateHomePhone}">
+                                        <f:ajax event="change" render="homePhoneError"/>
+                                    </h:inputText>
                                     <br/>
-                                    <h:message class="error" for="homePhone"/>
+                                    <h:message id="homePhoneError" class="error" for="homePhone"/>
                                 </div>
                                 <div class="field">
                                     <h:outputLabel for="cellPhone" value="Cell Phone"/>
-                                    <h:inputText id="cellPhone" label="cellPhone" value="#{clientBacking.client.cellTelephone}" required="true" requiredMessage="Please enter cell phone" a:placeholder="Enter cell phone" validator="#{clientBacking.validateCellPhone}"/>
+                                    <h:inputText id="cellPhone" label="cellPhone" value="#{clientBacking.client.cellTelephone}" required="true" requiredMessage="Please enter cell phone" a:placeholder="Enter cell phone" validator="#{clientBacking.validateCellPhone}">
+                                        <f:ajax event="change" render="cellPhoneError"/>
+                                    </h:inputText>
                                     <br/>
-                                    <h:message class="error" for="cellPhone"/>
+                                    <h:message id="cellPhoneError" class="error" for="cellPhone"/>
                                 </div>
                             </div>
                             <div class="field">
                                 <h:outputLabel for="companyName" value="Company Name"/>
-                                <h:inputText id="companyName" label="Company Name" value="#{clientBacking.client.companyName}" required="true" requiredMessage="Please enter company name" a:placeholder="Enter company name" />
+                                <h:inputText id="companyName" label="Company Name" value="#{clientBacking.client.companyName}" required="true" requiredMessage="Please enter company name" a:placeholder="Enter company name" validator="#{clientBacking.validateNotNull}">
+                                    <f:ajax event="change" render="companyNameError"/>
+                                </h:inputText>
                                 <br/>
-                                <h:message class="error" for="companyName"/>
+                                <h:message id="companyNameError" class="error" for="companyName"/>
                             </div>
                             <div class="field">
                                 <h:outputLabel for="email" value="Email"/>
                                 <h:inputText id="email" label="email" value="#{clientBacking.client.email}" required="true" requiredMessage="Please enter email" a:placeholder="Enter email" validator="#{clientBacking.validateUniqueAndValidEmail}">
                                     <f:validateRegex pattern="([^.@]+)(\.[^.@]+)*@([^.@]+\.)+([^.@]+)" />
+                                    <f:ajax event="change" render="emailError"/>
                                 </h:inputText>
                                 <br/>
-                                <h:message class="error" for="email"/>
+                                <h:message id="emailError" class="error" for="email"/>
                             </div>
                             <div class="field">
                                 <h:outputLabel for="password" value="Password"/>
-                                <h:inputSecret id="password" value="#{clientBacking.registerPassword}" label="password" required="true" requiredMessage="Please enter password" a:placeholder="Enter password" />
+                                <h:inputSecret id="password" value="#{clientBacking.registerPassword}" label="password" required="true" requiredMessage="Please enter password" a:placeholder="Enter password" validator="#{clientBacking.validateNotNull}">
+                                    <f:ajax event="change" render="passwordError"/>
+                                </h:inputSecret>
                                 <br/>
-                                <h:message class="error" for="password"/>
+                                <h:message id="passwordError" class="error" for="password"/>
                             </div>
                             <div class="field">
                                 <h:outputLabel for="passwordRe" value="Re-enter Password"/>
-                                <h:inputSecret id="passwordRe" value="#{clientBacking.registerPasswordConfirm}" label="passwordRe" required="true" requiredMessage="Please re-enter password" a:placeholder="Re-enter password" validator="#{clientBacking.validatePassword}"/>
+                                <h:inputSecret id="passwordRe" value="#{clientBacking.registerPasswordConfirm}" label="passwordRe" required="true" requiredMessage="Please re-enter password" a:placeholder="Re-enter password" validator="#{clientBacking.validatePassword}" />
                                 <br/>
-                                <h:message class="error" for="passwordRe"/>
+                                <h:message id="passwordReError" class="error" for="passwordRe"/>
                             </div>
                             <h:commandButton class="huge black fluid ui button" id="registerBtn" value="Register" action="#{clientBacking.createClient()}" />
                             <br/>

@@ -149,6 +149,16 @@ public class ClientBackingBean implements Serializable {
         return "index.xhtml";
     }
     
+    public void validateNotNull(FacesContext context, UIComponent component, Object value) {
+        String input = (String)value;
+        if (input.isBlank() || input.isEmpty() || input == null)
+        {
+            String message = context.getApplication().evaluateExpressionGet(context, "Value must not be left blank", String.class);
+            FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR, message, message);
+            throw new ValidatorException(msg);
+        }
+    }
+    
     public void validatePassword(FacesContext context, UIComponent component, Object value) {
         String confirmPassword = (String)value;
         UIInput passwordInput = (UIInput)component.findComponent("password");
@@ -156,7 +166,6 @@ public class ClientBackingBean implements Serializable {
         if (password == null || confirmPassword == null || !password.equals(confirmPassword)) {
             String message = context.getApplication().evaluateExpressionGet(context, "Passwords do not match", String.class);
             FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR, message, message);
-            passwordInput.resetValue();
             throw new ValidatorException(msg);
         }
     }
@@ -164,24 +173,32 @@ public class ClientBackingBean implements Serializable {
     public void validateUniqueAndValidEmail(FacesContext context, UIComponent component, Object value) {
         String email = (String)value;
         UIInput emailInput = (UIInput)component.findComponent("email");
+        if (email == null) {
+            String message = context.getApplication().evaluateExpressionGet(context, "Please enter email", String.class);
+            FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR, message, message);
+            throw new ValidatorException(msg);
+        }
         boolean validEmail = Pattern.matches("([^.@]+)(\\.[^.@]+)*@([^.@]+\\.)+([^.@]+)", email);
         if (!validEmail) {
             String message = context.getApplication().evaluateExpressionGet(context, "Invalid email format (example of correct format: alberto@gmail.com)", String.class);
             FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR, message, message);
-            emailInput.resetValue();
             throw new ValidatorException(msg);
         }
         List<String> emailsByQuery = clientsJpaController.getEmailsByEmail(email);
         if (emailsByQuery.size() >= 1) {
             String message = context.getApplication().evaluateExpressionGet(context, "Email already exists in database", String.class);
             FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR, message, message);
-            emailInput.resetValue();
             throw new ValidatorException(msg);
         }
     }
     
     public void validateCorrectPassword(FacesContext context, UIComponent component, Object value) throws Exception {
         String password = (String)value;
+        if (password == null) {
+            String message = context.getApplication().evaluateExpressionGet(context, "Please re-enter password", String.class);
+            FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR, message, message);
+            throw new ValidatorException(msg);
+        }
         UIInput emailInput = (UIInput)component.findComponent("email");
         String email = (String)emailInput.getLocalValue();
         if (clientsJpaController.getEmailsByEmail(email).isEmpty())
@@ -200,12 +217,15 @@ public class ClientBackingBean implements Serializable {
     
     public void validateEmailExists(FacesContext context, UIComponent component, Object value) throws Exception {
         String email = (String)value;
-        UIInput emailInput = (UIInput)component.findComponent("email");
+        if (email == null) {
+            String message = context.getApplication().evaluateExpressionGet(context, "Please enter email", String.class);
+            FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR, message, message);
+            throw new ValidatorException(msg);
+        }
         List<String> emailsByQuery = clientsJpaController.getEmailsByEmail(email);
         if (emailsByQuery.isEmpty()) {
             String message = context.getApplication().evaluateExpressionGet(context, "User with this email does not exist", String.class);
             FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR, message, message);
-            emailInput.resetValue();
             throw new ValidatorException(msg);
         }
     }
@@ -245,7 +265,6 @@ public class ClientBackingBean implements Serializable {
     public void validateHomePhone(FacesContext context, UIComponent component, Object value)
     {
         String number = (String)value;
-        UIInput homePhoneInput = (UIInput)component.findComponent("homePhone");
         try
         {
             Integer.parseInt(number);
@@ -254,14 +273,12 @@ public class ClientBackingBean implements Serializable {
         {
             String message = context.getApplication().evaluateExpressionGet(context, "Invalid home phone: contains non-numeric characters", String.class);
             FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR, message, message);
-            homePhoneInput.resetValue();
             throw new ValidatorException(msg);
         }
         if (number.toCharArray().length != 10)
         {
             String message = context.getApplication().evaluateExpressionGet(context, "Invalid home phone: not 10 digits long", String.class);
             FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR, message, message);
-            homePhoneInput.resetValue();
             throw new ValidatorException(msg);
         }
     }
@@ -269,7 +286,6 @@ public class ClientBackingBean implements Serializable {
     public void validateCellPhone(FacesContext context, UIComponent component, Object value)
     {
         String number = (String)value;
-        UIInput cellPhoneInput = (UIInput)component.findComponent("cellPhone");
         try
         {
             Integer.parseInt(number);
@@ -278,14 +294,12 @@ public class ClientBackingBean implements Serializable {
         {
             String message = context.getApplication().evaluateExpressionGet(context, "Invalid cell phone: contains non-numeric characters", String.class);
             FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR, message, message);
-            cellPhoneInput.resetValue();
             throw new ValidatorException(msg);
         }
         if (number.toCharArray().length != 10)
         {
             String message = context.getApplication().evaluateExpressionGet(context, "Invalid cell phone: not 10 digits long", String.class);
             FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR, message, message);
-            cellPhoneInput.resetValue();
             throw new ValidatorException(msg);
         }
     }
