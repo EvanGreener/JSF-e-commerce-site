@@ -32,8 +32,9 @@ public class BookBean implements Serializable {
     private final static Logger LOG = LoggerFactory.getLogger(BookBean.class);
     private List<Book> bestSeller;
     private List<Object> popularGenres;
-     private List<Book> recentlyAdded;
-     private Book book;
+    private List<Book> recentlyAdded;
+    private Book book;
+    private String genre;
 
     @PostConstruct
     public void init() {
@@ -43,27 +44,39 @@ public class BookBean implements Serializable {
 
     public List<Book> getBestSeller() {
         LOG.debug("getBestSeller");
-         bestSeller=bookCtrlr.getBestSeller();
+        bestSeller = bookCtrlr.getBestSeller();
         return bestSeller;
     }
-    public List<Object> getPopularGenres(){
-             LOG.debug("getPopularGenres");
-                 popularGenres=bookCtrlr.getPopularGenres();
+
+    public List<Object> getPopularGenres() {
+        LOG.debug("getPopularGenres");
+        popularGenres = bookCtrlr.getPopularGenres();
         return popularGenres;
     }
 
-    public List<Book> getRecentlyAdded(){
-         LOG.debug("getRecentlyAdded");
-                 recentlyAdded=bookCtrlr.getRecentlyAdded();
+    public List<Book> getRecentlyAdded() {
+        LOG.debug("getRecentlyAdded");
+        recentlyAdded = bookCtrlr.getRecentlyAdded();
         return recentlyAdded;
     }
     
+    public String viewGenreBooks(String genre) {
+        setGenre(genre);
+        return "gallery";
+    }
+
     public String viewBook(Book value) {
-this.book = value;
+        this.book = value;
         return "book";
- 
-}
-    public Book getBook(){
+    }
+    public void setGenre(String genre){
+        this.genre=genre;
+    }
+    public String getGenre(){
+        return this.genre;
+    }
+    
+    public Book getBook() {
         return this.book;
     }
 }

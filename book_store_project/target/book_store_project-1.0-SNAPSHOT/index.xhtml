@@ -83,7 +83,7 @@
         <div class="thingy">
 
             <p class="small">Best Seller Products</p><br/>
-
+  <h:form>
             <h:panelGroup>
                 <div class="ui four doubling stackable cards">
 
@@ -91,12 +91,13 @@
                     <ui:repeat value="#{bb.bestSeller}" var="books">
                         <div class="ui fluid card darker">
                             <div class="homepageImg">
-                                <h:graphicImage class="img" height="400" width="320" library="images" name="#{books.isbn}.jpg"/>
+                                <h:graphicImage class="img" height="250" width="156.25" library="images" name="#{books.isbn}.jpg"/>
                                 <div class="cardHoverBtn"> View Cover</div>
                             </div>
-                            <h:form>
-                             <h:commandLink action = "#{bb.viewBook(books)}" type="submit" value = "">
+                           
                             <div class="content">
+                                 
+                             <h:commandLink action = "#{bb.viewBook(books)}" type="submit" value = "">
                                 <div class="header">
 
                                     #{books.title}</div>
@@ -116,9 +117,10 @@
                                     </div>
 
                                 </div>
-                            </div>
                                  </h:commandLink>
-                                </h:form>
+                               
+                            </div>
+                                 
 
                             <div class="ui two bottom attached buttons ">
                                 <div onclick="addToCart()" class="ui button">+ Add to Cart</div>
@@ -129,6 +131,7 @@
                     </ui:repeat>
                 </div>
             </h:panelGroup>
+      </h:form>
 
             <br/><br/>
             <div class="ui large icon input ">
@@ -185,9 +188,12 @@
         <div class="thingy3">
             <p class="small">Popular Genres</p><br/>
 
-
+ <h:form>
+     <h:commandLink action = "#{bb.viewGenreBooks(genres)}" type="submit" value = "">
             <h:panelGroup>
                 <div class="ui four doubling stackable cards">
+                   
+                  
                     <ui:repeat value="#{bb.popularGenres}" var="genres">
                         <div class="ui fluid card darker">
                             <div class="homepageImg">
@@ -199,8 +205,12 @@
                             </div>
                         </div>
                     </ui:repeat>
+                       
+                      
                 </div>
             </h:panelGroup>
+      </h:commandLink>
+       </h:form>
             <br/><br/>
             <div class="ui centered leaderboard test ad"></div>
         </div>

@@ -43,7 +43,9 @@ public class SearchBean implements Serializable {
     public void setGenreFilters(String[] newValue) {
         genreFilters = newValue;
     }
-
+    public void setGenreFilters(String newValue) {
+        genreFilters = new String[] {newValue};
+    }
     public String getSearchBy() {
         return searchBy;
     }
