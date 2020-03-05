@@ -50,303 +50,303 @@ insert into Client_Inventory
     (Client_ID, ISBN, Date_Purchased, Last_Modified, Is_Removed)
 values (5, "9781416524793", "2019-03-23 03:03:35", "2020-01-28 15:29:58", true);
 
-insert into customer_reviews
+insert into Customer_Reviews
 (Client_ID, ISBN, Rating, Review_Body, Review_Title, Upvotes, Downvotes, Is_Removed, Pending, Last_Modified,
  Date_Entered, Date_Removed)
 values ("21777", "9780142000670", 2, "Poisoning by antiviral drugs, intentional self-harm",
         "Poisoning by antiviral drugs, intentional self-harm", 52, 2, false, false, "2019-03-15 12:51:02",
         "2019-09-22 14:47:10", "2020-03-11 08:39:40");
-insert into customer_reviews
+insert into Customer_Reviews
 (Client_ID, ISBN, Rating, Review_Body, Review_Title, Upvotes, Downvotes, Is_Removed, Pending, Last_Modified,
  Date_Entered, Date_Removed)
 values ("3", "9780061120084", 2, "Puncture wound with foreign body, unspecified thigh, sequela",
         "Puncture wound with foreign body, unspecified thigh, sequela", 82, 65, false, false, "2019-04-20 15:59:37",
         "2019-01-20 09:07:35", "2020-03-03 08:53:49");
-insert into customer_reviews
+insert into Customer_Reviews
 (Client_ID, ISBN, Rating, Review_Body, Review_Title, Upvotes, Downvotes, Is_Removed, Pending, Last_Modified,
  Date_Entered, Date_Removed)
 values ("7", "9780439023481", 3,
         "Nondisplaced oblique fracture of shaft of humerus, right arm, subsequent encounter for fracture with nonunion",
         "Nondisp oblique fx shaft of humer, r arm, 7thK", 90, 18, false, false, "2019-04-30 19:00:59",
         "2019-07-26 12:04:33", "2020-03-15 13:13:46");
-insert into customer_reviews
+insert into Customer_Reviews
 (Client_ID, ISBN, Rating, Review_Body, Review_Title, Upvotes, Downvotes, Is_Removed, Pending, Last_Modified,
  Date_Entered, Date_Removed)
 values ("46807", "9780375831003", 1,
         "Displaced fracture of medial phalanx of left ring finger, subsequent encounter for fracture with nonunion",
         "Disp fx of med phalanx of l rng fngr, subs for fx w nonunion", 70, 30, true, false, "2019-04-27 06:32:32",
         "2019-02-15 04:28:26", "2020-03-13 21:02:12");
-insert into customer_reviews
+insert into Customer_Reviews
 (Client_ID, ISBN, Rating, Review_Body, Review_Title, Upvotes, Downvotes, Is_Removed, Pending, Last_Modified,
  Date_Entered, Date_Removed)
 values ("14416", "9780141439471", 3, "Gastrointestinal stromal tumor of rectum",
         "Gastrointestinal stromal tumor of rectum", 34, 66, false, false, "2019-08-30 21:23:27", "2019-01-14 22:11:32",
         "2020-03-06 06:44:35");
-insert into customer_reviews
+insert into Customer_Reviews
 (Client_ID, ISBN, Rating, Review_Body, Review_Title, Upvotes, Downvotes, Is_Removed, Pending, Last_Modified,
  Date_Entered, Date_Removed)
 values ("4073", "9780770430078", 4, "Displacement of internal fixation device of vertebrae, initial encounter",
         "Displacement of internal fixation device of vertebrae, init", 55, 1, false, true, "2019-03-22 18:56:14",
         "2019-10-07 02:08:47", "2020-03-15 02:23:18");
-insert into customer_reviews
+insert into Customer_Reviews
 (Client_ID, ISBN, Rating, Review_Body, Review_Title, Upvotes, Downvotes, Is_Removed, Pending, Last_Modified,
  Date_Entered, Date_Removed)
 values ("429", "9780143039983", 2, "Laceration with foreign body of left index finger with damage to nail, sequela",
         "Laceration w fb of l idx fngr w damage to nail, sequela", 53, 6, false, true, "2019-12-25 12:30:36",
         "2019-06-24 13:25:19", "2020-03-18 14:28:08");
-insert into customer_reviews
+insert into Customer_Reviews
 (Client_ID, ISBN, Rating, Review_Body, Review_Title, Upvotes, Downvotes, Is_Removed, Pending, Last_Modified,
  Date_Entered, Date_Removed)
 values ("07", "9780062200570", 1, "Follicular cyst of ovary, unspecified side",
         "Follicular cyst of ovary, unspecified side", 53, 59, true, true, "2019-07-31 03:14:33", "2019-11-13 16:50:05",
         "2020-03-04 17:08:07");
-insert into customer_reviews
+insert into Customer_Reviews
 (Client_ID, ISBN, Rating, Review_Body, Review_Title, Upvotes, Downvotes, Is_Removed, Pending, Last_Modified,
  Date_Entered, Date_Removed)
 values ("28", "9780345504968", 3, "Myelodysplastic disease, not classified", "Myelodysplastic disease, not classified",
         32, 38, true, false, "2020-01-19 21:47:58", "2019-04-27 02:05:48", "2020-03-02 05:31:05");
-insert into customer_reviews
+insert into Customer_Reviews
 (Client_ID, ISBN, Rating, Review_Body, Review_Title, Upvotes, Downvotes, Is_Removed, Pending, Last_Modified,
  Date_Entered, Date_Removed)
 values ("37652", "9780062259660", 2, "Borderline leprosy", "Borderline leprosy", 10, 80, true, false,
         "2019-07-14 23:31:46", "2019-05-11 22:48:31", "2020-03-18 07:11:38");
-insert into customer_reviews
+insert into Customer_Reviews
 (Client_ID, ISBN, Rating, Review_Body, Review_Title, Upvotes, Downvotes, Is_Removed, Pending, Last_Modified,
  Date_Entered, Date_Removed)
 values ("09", "9780141439471", 2, "Osteochondritis dissecans, unspecified knee",
         "Osteochondritis dissecans, unspecified knee", 69, 68, false, false, "2019-04-11 09:00:48",
         "2019-01-27 11:39:26", "2020-03-23 08:22:43");
-insert into customer_reviews
+insert into Customer_Reviews
 (Client_ID, ISBN, Rating, Review_Body, Review_Title, Upvotes, Downvotes, Is_Removed, Pending, Last_Modified,
  Date_Entered, Date_Removed)
 values ("0320", "9781982110567", 1, "Other mucopurulent conjunctivitis, left eye",
         "Other mucopurulent conjunctivitis, left eye", 12, 30, false, false, "2019-09-25 02:03:04",
         "2019-05-12 08:28:28", "2020-03-29 01:44:51");
-insert into customer_reviews
+insert into Customer_Reviews
 (Client_ID, ISBN, Rating, Review_Body, Review_Title, Upvotes, Downvotes, Is_Removed, Pending, Last_Modified,
  Date_Entered, Date_Removed)
 values ("3", "9780316323703", 1, "Encounter for routine child health examination without abnormal findings",
         "Encntr for routine child health exam w/o abnormal findings", 76, 41, false, false, "2019-08-02 12:21:11",
         "2019-05-23 01:41:02", "2020-03-15 13:10:32");
-insert into customer_reviews
+insert into Customer_Reviews
 (Client_ID, ISBN, Rating, Review_Body, Review_Title, Upvotes, Downvotes, Is_Removed, Pending, Last_Modified,
  Date_Entered, Date_Removed)
 values ("16", "9780316166683", 1, "Obstructed labor due to breech presentation, fetus 3",
         "Obstructed labor due to breech presentation, fetus 3", 17, 27, false, true, "2019-12-23 23:13:05",
         "2019-09-11 16:27:55", "2020-03-11 01:42:57");
-insert into customer_reviews
+insert into Customer_Reviews
 (Client_ID, ISBN, Rating, Review_Body, Review_Title, Upvotes, Downvotes, Is_Removed, Pending, Last_Modified,
  Date_Entered, Date_Removed)
 values ("3", "9780060584757", 4, "Malignant neoplasm of left olfactory nerve",
         "Malignant neoplasm of left olfactory nerve", 83, 81, false, false, "2019-03-16 23:10:54",
         "2019-07-03 22:50:15", "2020-03-01 03:28:59");
-insert into customer_reviews
+insert into Customer_Reviews
 (Client_ID, ISBN, Rating, Review_Body, Review_Title, Upvotes, Downvotes, Is_Removed, Pending, Last_Modified,
  Date_Entered, Date_Removed)
 values ("3", "9780307346605", 4, "Poisoning by inhaled anesthetics, intentional self-harm",
         "Poisoning by inhaled anesthetics, intentional self-harm", 46, 33, true, true, "2019-05-01 13:41:19",
         "2019-02-09 01:47:56", "2020-03-17 05:58:14");
-insert into customer_reviews
+insert into Customer_Reviews
 (Client_ID, ISBN, Rating, Review_Body, Review_Title, Upvotes, Downvotes, Is_Removed, Pending, Last_Modified,
  Date_Entered, Date_Removed)
 values ("98830", "9780593099322", 2, "Periradicular pathology associated with previous endodontic treatment",
         "Periradicular pathology assoc w previous endodontic trtmt", 87, 70, true, true, "2019-04-22 20:25:04",
         "2019-08-23 16:32:37", "2020-03-24 09:03:43");
-insert into customer_reviews
+insert into Customer_Reviews
 (Client_ID, ISBN, Rating, Review_Body, Review_Title, Upvotes, Downvotes, Is_Removed, Pending, Last_Modified,
  Date_Entered, Date_Removed)
 values ("21", "9780553803716", 5, "Injury of peroneal nerve at lower leg level, right leg",
         "Injury of peroneal nerve at lower leg level, right leg", 31, 68, false, true, "2019-08-24 19:54:29",
         "2019-08-31 02:56:22", "2020-03-21 01:47:39");
-insert into customer_reviews
+insert into Customer_Reviews
 (Client_ID, ISBN, Rating, Review_Body, Review_Title, Upvotes, Downvotes, Is_Removed, Pending, Last_Modified,
  Date_Entered, Date_Removed)
 values ("8", "9780062024039", 4,
         "Monoplegia of lower limb following nontraumatic intracerebral hemorrhage affecting left dominant side",
         "Monoplg low lmb fol ntrm intcrbl hemor aff left dom side", 16, 94, false, true, "2019-11-17 07:41:05",
         "2019-10-10 07:31:46", "2020-03-25 15:43:58");
-insert into customer_reviews
+insert into Customer_Reviews
 (Client_ID, ISBN, Rating, Review_Body, Review_Title, Upvotes, Downvotes, Is_Removed, Pending, Last_Modified,
  Date_Entered, Date_Removed)
 values ("07", "9781451673319", 3,
         "Displaced fracture of hook process of hamate [unciform] bone, right wrist, subsequent encounter for fracture with routine healing",
         "Disp fx of hook pro of hamate bone, r wrs, 7thD", 93, 27, true, true, "2019-11-10 01:18:58",
         "2019-04-14 04:34:10", "2020-03-16 13:12:58");
-insert into customer_reviews
+insert into Customer_Reviews
 (Client_ID, ISBN, Rating, Review_Body, Review_Title, Upvotes, Downvotes, Is_Removed, Pending, Last_Modified,
  Date_Entered, Date_Removed)
 values ("21", "9780553803709", 1,
         "Burn of unspecified degree of single right finger (nail) except thumb, initial encounter",
         "Burn unsp degree of single r finger except thumb, init", 86, 2, true, true, "2019-02-06 03:54:46",
         "2019-05-12 22:36:42", "2020-03-03 05:23:36");
-insert into customer_reviews
+insert into Customer_Reviews
 (Client_ID, ISBN, Rating, Review_Body, Review_Title, Upvotes, Downvotes, Is_Removed, Pending, Last_Modified,
  Date_Entered, Date_Removed)
 values ("311", "9780999851135", 1, "Other and unspecified edema specific to newborn",
         "Other and unspecified edema specific to newborn", 91, 7, false, true, "2019-09-01 04:17:26",
         "2019-01-14 11:18:01", "2020-03-26 22:14:41");
-insert into customer_reviews
+insert into Customer_Reviews
 (Client_ID, ISBN, Rating, Review_Body, Review_Title, Upvotes, Downvotes, Is_Removed, Pending, Last_Modified,
  Date_Entered, Date_Removed)
 values ("51", "9780765311788", 5,
         "Other fracture of upper and lower end of unspecified fibula, subsequent encounter for open fracture type I or II with nonunion",
         "Oth fx upr & low end unsp fibula, 7thM", 94, 85, true, false, "2019-04-20 23:31:04", "2019-03-14 15:19:14",
         "2020-03-26 11:08:32");
-insert into customer_reviews
+insert into Customer_Reviews
 (Client_ID, ISBN, Rating, Review_Body, Review_Title, Upvotes, Downvotes, Is_Removed, Pending, Last_Modified,
  Date_Entered, Date_Removed)
 values ("32336", "9780698165083", 1, "Corrosion of first degree of unspecified forearm, subsequent encounter",
         "Corrosion of first degree of unsp forearm, subs encntr", 62, 57, false, false, "2019-04-24 21:21:51",
         "2019-11-27 08:52:45", "2020-03-20 03:47:15");
-insert into customer_reviews
+insert into Customer_Reviews
 (Client_ID, ISBN, Rating, Review_Body, Review_Title, Upvotes, Downvotes, Is_Removed, Pending, Last_Modified,
  Date_Entered, Date_Removed)
 values ("952", "9780356507217", 5, "Trigger finger, unspecified ring finger", "Trigger finger, unspecified ring finger",
         64, 53, false, true, "2019-04-07 14:42:10", "2019-10-16 05:36:17", "2020-03-09 05:49:49");
-insert into customer_reviews
+insert into Customer_Reviews
 (Client_ID, ISBN, Rating, Review_Body, Review_Title, Upvotes, Downvotes, Is_Removed, Pending, Last_Modified,
  Date_Entered, Date_Removed)
 values ("483", "9780440000587", 2, "Problems related to housing and economic circumstances",
         "Problems related to housing and economic circumstances", 33, 31, true, true, "2019-07-27 05:39:31",
         "2019-03-20 05:01:56", "2020-03-20 01:51:11");
-insert into customer_reviews
+insert into Customer_Reviews
 (Client_ID, ISBN, Rating, Review_Body, Review_Title, Upvotes, Downvotes, Is_Removed, Pending, Last_Modified,
  Date_Entered, Date_Removed)
 values ("9044", "9780143039983", 3,
         "Adverse effect of centrally-acting and adrenergic-neuron-blocking agents, initial encounter",
         "Adverse effect of centr-acting/adren-neurn-block agnt, init", 9, 82, false, false, "2019-02-24 06:43:41",
         "2020-01-03 12:47:04", "2020-03-07 11:05:29");
-insert into customer_reviews
+insert into Customer_Reviews
 (Client_ID, ISBN, Rating, Review_Body, Review_Title, Upvotes, Downvotes, Is_Removed, Pending, Last_Modified,
  Date_Entered, Date_Removed)
 values ("25", "9780679745587", 5,
         "Displaced fracture of left tibial tuberosity, subsequent encounter for open fracture type IIIA, IIIB, or IIIC with malunion",
         "Disp fx of l tibial tuberosity, 7thR", 68, 37, true, false, "2019-12-17 09:37:13", "2019-04-11 10:34:18",
         "2020-03-09 17:20:12");
-insert into customer_reviews
+insert into Customer_Reviews
 (Client_ID, ISBN, Rating, Review_Body, Review_Title, Upvotes, Downvotes, Is_Removed, Pending, Last_Modified,
  Date_Entered, Date_Removed)
 values ("2", "9780143034902", 3, "Toxic effect of homologues of benzene, accidental (unintentional), initial encounter",
         "Toxic effect of homologues of benzene, accidental, init", 69, 4, true, true, "2019-07-07 15:48:24",
         "2019-10-24 23:48:02", "2020-03-09 08:03:26");
-insert into customer_reviews
+insert into Customer_Reviews
 (Client_ID, ISBN, Rating, Review_Body, Review_Title, Upvotes, Downvotes, Is_Removed, Pending, Last_Modified,
  Date_Entered, Date_Removed)
 values ("0", "9780752865331", 1, "Transection (partial) of abdomen", "Transection (partial) of abdomen", 61, 88, true,
         true, "2020-01-30 15:00:30", "2020-01-17 19:31:32", "2020-03-28 21:15:52");
-insert into customer_reviews
+insert into Customer_Reviews
 (Client_ID, ISBN, Rating, Review_Body, Review_Title, Upvotes, Downvotes, Is_Removed, Pending, Last_Modified,
  Date_Entered, Date_Removed)
 values ("5", "9780375831003", 5, "Assault by unspecified means", "Assault by unspecified means", 81, 64, false, false,
         "2019-03-23 14:31:32", "2019-02-27 03:43:16", "2020-03-21 22:10:25");
-insert into customer_reviews
+insert into Customer_Reviews
 (Client_ID, ISBN, Rating, Review_Body, Review_Title, Upvotes, Downvotes, Is_Removed, Pending, Last_Modified,
  Date_Entered, Date_Removed)
 values ("447", "9780770430078", 4, "Toxic effect of unspecified snake venom, intentional self-harm, initial encounter",
         "Toxic effect of unsp snake venom, self-harm, init", 64, 18, true, true, "2019-07-19 04:12:28",
         "2019-05-15 19:24:54", "2020-03-13 23:34:26");
-insert into customer_reviews
+insert into Customer_Reviews
 (Client_ID, ISBN, Rating, Review_Body, Review_Title, Upvotes, Downvotes, Is_Removed, Pending, Last_Modified,
  Date_Entered, Date_Removed)
 values ("543", "9780770430078", 4,
         "Unspecified open wound of left back wall of thorax without penetration into thoracic cavity, initial encounter",
         "Unsp opn wnd l bk wl of thorax w/o penet thor cavity, init", 44, 18, true, false, "2019-03-04 02:43:45",
         "2019-07-05 16:01:31", "2020-03-17 00:25:43");
-insert into customer_reviews
+insert into Customer_Reviews
 (Client_ID, ISBN, Rating, Review_Body, Review_Title, Upvotes, Downvotes, Is_Removed, Pending, Last_Modified,
  Date_Entered, Date_Removed)
 values ("31957", "9780727860996", 5, "Breakdown (mechanical) of artificial skin graft and decellularized allodermis",
         "Breakdown of artificial skin grft /decellular alloderm", 53, 86, true, true, "2020-01-19 19:52:48",
         "2019-01-19 15:49:30", "2020-03-03 15:23:06");
-insert into customer_reviews
+insert into Customer_Reviews
 (Client_ID, ISBN, Rating, Review_Body, Review_Title, Upvotes, Downvotes, Is_Removed, Pending, Last_Modified,
  Date_Entered, Date_Removed)
 values ("6020", "9780316323703", 5,
         "Poisoning by unspecified agents primarily affecting the gastrointestinal system, assault, subsequent encounter",
         "Poisoning by unsp agents aff the GI sys, assault, subs", 42, 9, false, true, "2019-06-25 14:36:54",
         "2019-08-05 23:33:15", "2020-03-17 23:41:01");
-insert into customer_reviews
+insert into Customer_Reviews
 (Client_ID, ISBN, Rating, Review_Body, Review_Title, Upvotes, Downvotes, Is_Removed, Pending, Last_Modified,
  Date_Entered, Date_Removed)
 values ("7512", "9780582418271", 2, "Leakage of vascular dialysis catheter, sequela",
         "Leakage of vascular dialysis catheter, sequela", 44, 83, true, false, "2019-09-06 16:22:47",
         "2019-11-14 05:32:32", "2020-03-06 08:06:17");
-insert into customer_reviews
+insert into Customer_Reviews
 (Client_ID, ISBN, Rating, Review_Body, Review_Title, Upvotes, Downvotes, Is_Removed, Pending, Last_Modified,
  Date_Entered, Date_Removed)
 values ("69007", "9780525945567", 4,
         "Person on outside of car injured in collision with sport utility vehicle in traffic accident",
         "Person on outside of car injured in collision w SUV in traf", 41, 57, false, true, "2019-04-19 12:10:08",
         "2019-05-23 17:03:30", "2020-03-28 07:28:10");
-insert into customer_reviews
+insert into Customer_Reviews
 (Client_ID, ISBN, Rating, Review_Body, Review_Title, Upvotes, Downvotes, Is_Removed, Pending, Last_Modified,
  Date_Entered, Date_Removed)
 values ("50185", "9780593099322", 3, "Salter-Harris Type II physeal fracture of lower end of ulna, unspecified arm",
         "Sltr-haris Type II physeal fx lower end of ulna, unsp arm", 9, 11, true, false, "2019-11-25 19:02:33",
         "2020-01-07 01:26:34", "2020-03-19 12:04:14");
-insert into customer_reviews
+insert into Customer_Reviews
 (Client_ID, ISBN, Rating, Review_Body, Review_Title, Upvotes, Downvotes, Is_Removed, Pending, Last_Modified,
  Date_Entered, Date_Removed)
 values ("928", "9780061007224", 1,
         "Laceration with foreign body of left little finger with damage to nail, subsequent encounter",
         "Laceration w fb of l little finger w damage to nail, subs", 29, 83, false, false, "2019-02-23 16:21:40",
         "2019-05-12 15:35:05", "2020-03-10 02:28:55");
-insert into customer_reviews
+insert into Customer_Reviews
 (Client_ID, ISBN, Rating, Review_Body, Review_Title, Upvotes, Downvotes, Is_Removed, Pending, Last_Modified,
  Date_Entered, Date_Removed)
 values ("650", "9780061139376", 1,
         "Displaced fracture of medial phalanx of right ring finger, subsequent encounter for fracture with malunion",
         "Disp fx of med phalanx of r rng fngr, subs for fx w malunion", 37, 75, false, true, "2019-08-23 14:50:34",
         "2019-08-22 02:26:26", "2020-03-08 07:16:30");
-insert into customer_reviews
+insert into Customer_Reviews
 (Client_ID, ISBN, Rating, Review_Body, Review_Title, Upvotes, Downvotes, Is_Removed, Pending, Last_Modified,
  Date_Entered, Date_Removed)
 values ("4563", "9780141439471", 4, "Breakdown (mechanical) of prosthetic orbit of right eye",
         "Breakdown (mechanical) of prosthetic orbit of right eye", 65, 9, false, false, "2019-05-05 04:48:29",
         "2019-07-18 20:31:06", "2020-03-04 21:56:12");
-insert into customer_reviews
+insert into Customer_Reviews
 (Client_ID, ISBN, Rating, Review_Body, Review_Title, Upvotes, Downvotes, Is_Removed, Pending, Last_Modified,
  Date_Entered, Date_Removed)
 values ("0", "9780812976144", 1, "Other complications of other transplanted tissue",
         "Other complications of other transplanted tissue", 52, 37, false, true, "2019-08-21 17:38:41",
         "2020-01-08 07:48:01", "2020-03-23 23:28:12");
-insert into customer_reviews
+insert into Customer_Reviews
 (Client_ID, ISBN, Rating, Review_Body, Review_Title, Upvotes, Downvotes, Is_Removed, Pending, Last_Modified,
  Date_Entered, Date_Removed)
 values ("00808", "9780553803716", 3,
         "Dislocation of metacarpophalangeal joint of right index finger, initial encounter",
         "Dislocation of MCP joint of right index finger, init", 44, 92, false, false, "2019-10-29 01:25:12",
         "2019-12-22 05:19:52", "2020-03-09 00:11:40");
-insert into customer_reviews
+insert into Customer_Reviews
 (Client_ID, ISBN, Rating, Review_Body, Review_Title, Upvotes, Downvotes, Is_Removed, Pending, Last_Modified,
  Date_Entered, Date_Removed)
 values ("3406", "9780999851104", 4, "Toxic effect of fiberglass, accidental (unintentional), sequela",
         "Toxic effect of fiberglass, accidental, sequela", 67, 4, false, true, "2019-10-07 21:16:03",
         "2019-10-12 01:56:44", "2020-03-23 10:04:50");
-insert into customer_reviews
+insert into Customer_Reviews
 (Client_ID, ISBN, Rating, Review_Body, Review_Title, Upvotes, Downvotes, Is_Removed, Pending, Last_Modified,
  Date_Entered, Date_Removed)
 values ("70", "9780999851135", 1, "Asphyxiation due to smothering in furniture, assault, sequela",
         "Asphyx due to smothering in furniture, assault, sequela", 70, 74, false, true, "2019-10-03 17:15:50",
         "2019-12-27 18:29:03", "2020-03-11 07:48:56");
-insert into customer_reviews
+insert into Customer_Reviews
 (Client_ID, ISBN, Rating, Review_Body, Review_Title, Upvotes, Downvotes, Is_Removed, Pending, Last_Modified,
  Date_Entered, Date_Removed)
 values ("465", "9781937007720", 1, "Other chondrocalcinosis, right hand", "Other chondrocalcinosis, right hand", 74, 45,
         false, true, "2019-07-26 08:36:05", "2019-09-16 08:16:07", "2020-03-01 23:52:31");
-insert into customer_reviews
+insert into Customer_Reviews
 (Client_ID, ISBN, Rating, Review_Body, Review_Title, Upvotes, Downvotes, Is_Removed, Pending, Last_Modified,
  Date_Entered, Date_Removed)
 values ("247", "9780425275757", 2, "Struck by other mammals", "Struck by other mammals", 99, 3, false, true,
         "2019-04-23 18:31:08", "2019-09-12 08:28:34", "2020-03-26 13:02:31");
-insert into customer_reviews
+insert into Customer_Reviews
 (Client_ID, ISBN, Rating, Review_Body, Review_Title, Upvotes, Downvotes, Is_Removed, Pending, Last_Modified,
  Date_Entered, Date_Removed)
 values ("53604", "9780743298025", 4,
         "Maternal care for known or suspected placental insufficiency, second trimester, other fetus",
         "Matern care for known or susp placntl insuff, 2nd tri, oth", 11, 7, false, false, "2019-05-26 15:23:53",
         "2019-10-24 14:00:53", "2020-03-09 08:49:18");
-insert into customer_reviews
+insert into Customer_Reviews
 (Client_ID, ISBN, Rating, Review_Body, Review_Title, Upvotes, Downvotes, Is_Removed, Pending, Last_Modified,
  Date_Entered, Date_Removed)
 values ("7882", "9780743298025", 3, "Salter-Harris Type IV physeal fracture of upper end of radius, unspecified arm",
@@ -359,7 +359,7 @@ values ("Hauck-Crona", "5745 Sheridan Park", "Majingklak", "Indonesia", "China",
         "2019-02-06 23:13:29", "2019-10-28 08:46:16", false);
 insert into publisher
 (Name, Address, City, Country, Postal_Code, Contact_Name, Phone_Number, Date_Created, Last_Modified, Is_Removed)
-values ("Rippin LLC", "7967 Sugar Way", "Villamaría", "Colombia", "Czech Republic", "Gail Tidd", "1585705675",
+values ("Rippin LLC", "7967 Sugar Way", "VillamarÃ­a", "Colombia", "Czech Republic", "Gail Tidd", "1585705675",
         "2019-03-28 03:40:10", "2019-10-30 11:01:30", false);
 insert into publisher
 (Name, Address, City, Country, Postal_Code, Contact_Name, Phone_Number, Date_Created, Last_Modified, Is_Removed)
@@ -1119,7 +1119,7 @@ VALUES ("9781982110567", "The Institute", "Horror", 576,
         "In the middle of the night, in a house on a quiet street in suburban Minneapolis, intruders silently murder Luke Ellis 2019s parents and load him into a black SUV. The operation takes less than two minutes. Luke will wake up at The Institute, in a room that looks just like his own, except there 2019s no window. And outside his door are other doors, behind which are other kids with special talents 2014telekinesis and telepathy 2014who got to this place the same way Luke did: Kalisha, Nick, George, Iris, and ten-year-old Avery Dixon. They are all in Front Half. Others, Luke learns, graduated to Back Half,  201clike the roach motel, 201d Kalisha says.  201cYou check in, but you don 2019t check out. 201dIn this most sinister of institutions, the director, Mrs. Sigsby, and her staff are ruthlessly dedicated to extracting from these children the force of their extranormal gifts. There are no scruples here. If you go along, you get tokens for the vending machines. If you don 2019t, punishment is brutal. As each new victim disappears to Back Half, Luke becomes more and more desperate to get out and get help. But no one has ever escaped from the Institute.As psychically terrifying as Firestarter, and with the spectacular kid power of It, The Institute is Stephen King 2019s gut-wrenchingly dramatic story of good vs. evil in a world where the good guys don 2019t always win.",
         STR_TO_DATE("9/10/2019", "%m/%d/%Y"), 20, STR_TO_DATE("9/10/2019", "%m/%d/%Y"),
         STR_TO_DATE("9/10/2019", "%m/%d/%Y"), FALSE, 15, 15, 9);
-INSERT INTO Boo
+INSERT INTO Book
 (ISBN, Title, Genre, Num_Of_Pages, Description, Date_Of_Publication, Publisher_ID, Date_Entered, Last_Modified,
  Is_Removed, List_Price, Sale_Price, Wholesale_Price)
 VALUES ("9780307949486", "The Girl with the Dragon Tattoo", "Mystery", 465,
@@ -1604,7 +1604,7 @@ insert into Authors
 values ("F. Scott Fitzgerald", true, "2019-09-15 17:32:09", "2020-08-08 16:26:12");
 insert into Authors
     (Name, Is_Removed, Date_Entered, Last_Modified)
-values ("J.K. Rowling, Mary GrandPr�", false, "2019-06-15 14:51:53", "2019-08-13 11:44:24");
+values ("J.K. Rowling, Mary GrandPrï¿½", false, "2019-06-15 14:51:53", "2019-08-13 11:44:24");
 insert into Authors
     (Name, Is_Removed, Date_Entered, Last_Modified)
 values ("George Orwell, Russell Baker", true, "2019-11-16 02:26:05", "2019-10-05 10:16:51");
@@ -1709,7 +1709,7 @@ insert into Authors
 values ("Dennis Lehane", false, "2019-10-13 08:08:00", "2020-08-07 05:37:24");
 insert into Authors
     (Name, Is_Removed, Date_Entered, Last_Modified)
-values ("Carlos Ruiz Zaf�n, Lucia Graves", true, "2019-10-14 11:55:56", "2020-08-01 00:58:09");
+values ("Carlos Ruiz Zafï¿½n, Lucia Graves", true, "2019-10-14 11:55:56", "2020-08-01 00:58:09");
 insert into Authors
     (Name, Is_Removed, Date_Entered, Last_Modified)
 values ("Caleb Carr", false, "2019-03-25 00:45:29", "2021-03-20 12:26:00");
@@ -1800,176 +1800,176 @@ values ("Benedict Jacka", true, "2019-04-11 13:34:51", "2021-01-08 19:40:42");
 
 ## Clients
 insert into clients
-(Is_Manager, First_Name, Last_Name, Company_Name, Address_1, Address_2, City, Province_Abbreviation, Country,
+(Hashed_Password, Is_Manager, First_Name, Last_Name, Company_Name, Address_1, Address_2, City, Province_Abbreviation, Country,
  Postal_Code, Home_Telephone, Cell_Telephone, Email, Date_Entered, Last_Modified, Is_Removed)
-values (false, "Germayne McGrady", "Dosi Castaner", "Oberbrunner LLC", "1875 Artisan Lane", null, "Banaba", 1,
+values ("placeholder12345!",false, "Germayne McGrady", "Dosi Castaner", "Oberbrunner LLC", "1875 Artisan Lane", null, "Banaba", 1,
         "Philippines", "4125", "3409310215", null, "dcastaner0@cbslocal.com", "2019-01-30 00:00:00",
         "2019-06-18 21:37:30", true);
 insert into clients
-(Is_Manager, First_Name, Last_Name, Company_Name, Address_1, Address_2, City, Province_Abbreviation, Country,
+(Hashed_Password, Is_Manager, First_Name, Last_Name, Company_Name, Address_1, Address_2, City, Province_Abbreviation, Country,
  Postal_Code, Home_Telephone, Cell_Telephone, Email, Date_Entered, Last_Modified, Is_Removed)
-values (true, "Carlene Fransemai", "Jane Hutcheon", "Rogahn, Barrows and Wehner", "27173 International Junction", null,
+values ("placeholder12345!",true, "Carlene Fransemai", "Jane Hutcheon", "Rogahn, Barrows and Wehner", "27173 International Junction", null,
         "Amangarh", 2, "Pakistan", "24181", "5401036281", null, "jhutcheon1@last.fm", "2019-01-30 00:00:00",
         "2019-04-13 01:39:14", false);
 insert into clients
-(Is_Manager, First_Name, Last_Name, Company_Name, Address_1, Address_2, City, Province_Abbreviation, Country,
+(Hashed_Password, Is_Manager, First_Name, Last_Name, Company_Name, Address_1, Address_2, City, Province_Abbreviation, Country,
  Postal_Code, Home_Telephone, Cell_Telephone, Email, Date_Entered, Last_Modified, Is_Removed)
-values (true, "Micheline Salack", "Sibley Doud", "Cummerata, Green and Corkery", "115 Banding Drive", null, "Dalai", 3,
+values ("placeholder12345!",true, "Micheline Salack", "Sibley Doud", "Cummerata, Green and Corkery", "115 Banding Drive", null, "Dalai", 3,
         "China", null, "5345304114", "1896606850", "sdoud2@liveinternet.ru", "2019-01-30 00:00:00",
         "2019-08-03 17:51:43", false);
 insert into clients
-(Is_Manager, First_Name, Last_Name, Company_Name, Address_1, Address_2, City, Province_Abbreviation, Country,
+(Hashed_Password, Is_Manager, First_Name, Last_Name, Company_Name, Address_1, Address_2, City, Province_Abbreviation, Country,
  Postal_Code, Home_Telephone, Cell_Telephone, Email, Date_Entered, Last_Modified, Is_Removed)
-values (false, "Emlen Chinnick", "Vernice Grigoli", "Rice, Hegmann and Gorczany", "1161 Loomis Plaza", null,
+values ("placeholder12345!",false, "Emlen Chinnick", "Vernice Grigoli", "Rice, Hegmann and Gorczany", "1161 Loomis Plaza", null,
         "Pasirlimus", 4, "Indonesia", null, "5864802044", "6445467612", "vgrigoli3@github.com", "2019-01-30 00:00:00",
         "2019-08-13 01:38:24", true);
 insert into clients
-(Is_Manager, First_Name, Last_Name, Company_Name, Address_1, Address_2, City, Province_Abbreviation, Country,
+(Hashed_Password, Is_Manager, First_Name, Last_Name, Company_Name, Address_1, Address_2, City, Province_Abbreviation, Country,
  Postal_Code, Home_Telephone, Cell_Telephone, Email, Date_Entered, Last_Modified, Is_Removed)
-values (true, "Buddy Potapczuk", "Sonya Irlam", "O''Hara-Balistreri", "20554 Monterey Hill", null, "Lelekovice", 5,
+values ("placeholder12345!",true, "Buddy Potapczuk", "Sonya Irlam", "O''Hara-Balistreri", "20554 Monterey Hill", null, "Lelekovice", 5,
         "Czech Republic", "664 31", "4927104394", "2407954166", "sirlam4@gravatar.com", "2019-01-30 00:00:00",
         "2019-11-16 12:27:26", true);
 insert into clients
-(Is_Manager, First_Name, Last_Name, Company_Name, Address_1, Address_2, City, Province_Abbreviation, Country,
+(Hashed_Password, Is_Manager, First_Name, Last_Name, Company_Name, Address_1, Address_2, City, Province_Abbreviation, Country,
  Postal_Code, Home_Telephone, Cell_Telephone, Email, Date_Entered, Last_Modified, Is_Removed)
-values (true, "Gardy Farnish", "Kippie Stonner", "Rice-Auer", "95313 Farragut Terrace", null, "Täby", 6, "Sweden",
+values ("placeholder12345!",true, "Gardy Farnish", "Kippie Stonner", "Rice-Auer", "95313 Farragut Terrace", null, "TÃ¤by", 6, "Sweden",
         "183 60", "9607994610", "9609098477", "kstonner5@google.co.uk", "2019-01-30 00:00:00", "2020-01-04 10:45:11",
         true);
 insert into clients
-(Is_Manager, First_Name, Last_Name, Company_Name, Address_1, Address_2, City, Province_Abbreviation, Country,
+(Hashed_Password, Is_Manager, First_Name, Last_Name, Company_Name, Address_1, Address_2, City, Province_Abbreviation, Country,
  Postal_Code, Home_Telephone, Cell_Telephone, Email, Date_Entered, Last_Modified, Is_Removed)
-values (true, "Ave Heims", "Evonne Yearn", "Jenkins, Marvin and Heathcote", "30980 Morrow Drive", "57703",
+values ("placeholder12345!",true, "Ave Heims", "Evonne Yearn", "Jenkins, Marvin and Heathcote", "30980 Morrow Drive", "57703",
         "Borodinskiy", 7, "Russia", "188961", "5643014039", "2404283838", "eyearn6@jiathis.com", "2019-01-30 00:00:00",
         "2019-08-07 07:21:32", true);
 insert into clients
-(Is_Manager, First_Name, Last_Name, Company_Name, Address_1, Address_2, City, Province_Abbreviation, Country,
+(Hashed_Password, Is_Manager, First_Name, Last_Name, Company_Name, Address_1, Address_2, City, Province_Abbreviation, Country,
  Postal_Code, Home_Telephone, Cell_Telephone, Email, Date_Entered, Last_Modified, Is_Removed)
-values (true, "Bertie Latan", "Dannie Basire", "Fahey LLC", "1 Cordelia Alley", null, "Sobreira", 8, "Portugal",
+values ("placeholder12345!",true, "Bertie Latan", "Dannie Basire", "Fahey LLC", "1 Cordelia Alley", null, "Sobreira", 8, "Portugal",
         "464545", "8404866499", "4031844525", "dbasire7@odnoklassniki.ru", "2019-01-30 00:00:00", "2019-11-19 12:23:30",
         false);
 insert into clients
-(Is_Manager, First_Name, Last_Name, Company_Name, Address_1, Address_2, City, Province_Abbreviation, Country,
+(Hashed_Password, Is_Manager, First_Name, Last_Name, Company_Name, Address_1, Address_2, City, Province_Abbreviation, Country,
  Postal_Code, Home_Telephone, Cell_Telephone, Email, Date_Entered, Last_Modified, Is_Removed)
-values (false, "Aland Brosel", "Morley Dolohunty", "Kohler Group", "8 Burning Wood Trail", null, "Hotsk", 9, "Belarus",
+values ("placeholder12345!",false, "Aland Brosel", "Morley Dolohunty", "Kohler Group", "8 Burning Wood Trail", null, "Hotsk", 9, "Belarus",
         null, "1192610936", null, "mdolohunty8@aboutads.info", "2019-01-30 00:00:00", "2019-09-29 02:08:47", true);
 insert into clients
-(Is_Manager, First_Name, Last_Name, Company_Name, Address_1, Address_2, City, Province_Abbreviation, Country,
+(Hashed_Password, Is_Manager, First_Name, Last_Name, Company_Name, Address_1, Address_2, City, Province_Abbreviation, Country,
  Postal_Code, Home_Telephone, Cell_Telephone, Email, Date_Entered, Last_Modified, Is_Removed)
-values (false, "Raynard Pirt", "Shayne Caccavella", "Goodwin-Crist", "152 Namekagon Junction", null, "Larvik", 10,
+values ("placeholder12345!",false, "Raynard Pirt", "Shayne Caccavella", "Goodwin-Crist", "152 Namekagon Junction", null, "Larvik", 10,
         "Norway", "3271", "1074788811", null, "scaccavella9@oakley.com", "2019-01-30 00:00:00", "2019-05-05 08:48:20",
         true);
 insert into clients
-(Is_Manager, First_Name, Last_Name, Company_Name, Address_1, Address_2, City, Province_Abbreviation, Country,
+(Hashed_Password, Is_Manager, First_Name, Last_Name, Company_Name, Address_1, Address_2, City, Province_Abbreviation, Country,
  Postal_Code, Home_Telephone, Cell_Telephone, Email, Date_Entered, Last_Modified, Is_Removed)
-values (true, "Aindrea Fobidge", "Rayna Leggin", "Ruecker-Schuppe", "27 Loeprich Way", "71605", "Caijiang", 11, "China",
+values ("placeholder12345!",true, "Aindrea Fobidge", "Rayna Leggin", "Ruecker-Schuppe", "27 Loeprich Way", "71605", "Caijiang", 11, "China",
         null, "2106855045", null, "rleggina@clickbank.net", "2019-01-30 00:00:00", "2019-03-18 12:02:57", false);
 insert into clients
-(Is_Manager, First_Name, Last_Name, Company_Name, Address_1, Address_2, City, Province_Abbreviation, Country,
+(Hashed_Password, Is_Manager, First_Name, Last_Name, Company_Name, Address_1, Address_2, City, Province_Abbreviation, Country,
  Postal_Code, Home_Telephone, Cell_Telephone, Email, Date_Entered, Last_Modified, Is_Removed)
-values (false, "Pace Mulchrone", "Daphna Stratz", "Thiel, Larkin and Zemlak", "45 Alpine Way", null, "Patitírion", 12,
+values ("placeholder12345!",false, "Pace Mulchrone", "Daphna Stratz", "Thiel, Larkin and Zemlak", "45 Alpine Way", null, "PatitÃ­rion", 12,
         "Greece", null, "5375175146", "9737343634", "dstratzb@mac.com", "2019-01-30 00:00:00", "2020-01-28 19:25:13",
         false);
 insert into clients
-(Is_Manager, First_Name, Last_Name, Company_Name, Address_1, Address_2, City, Province_Abbreviation, Country,
+(Hashed_Password, Is_Manager, First_Name, Last_Name, Company_Name, Address_1, Address_2, City, Province_Abbreviation, Country,
  Postal_Code, Home_Telephone, Cell_Telephone, Email, Date_Entered, Last_Modified, Is_Removed)
-values (true, "Kerk Sheridan", "Carissa Hinrichsen", "Hilll and Sons", "75 Hoffman Circle", "52348", "Utama Wetan", 13,
+values ("placeholder12345!",true, "Kerk Sheridan", "Carissa Hinrichsen", "Hilll and Sons", "75 Hoffman Circle", "52348", "Utama Wetan", 13,
         "Indonesia", null, "5737721134", "6663183047", "chinrichsenc@miitbeian.gov.cn", "2019-01-30 00:00:00",
         "2019-03-30 09:07:55", true);
 insert into clients
-(Is_Manager, First_Name, Last_Name, Company_Name, Address_1, Address_2, City, Province_Abbreviation, Country,
+(Hashed_Password, Is_Manager, First_Name, Last_Name, Company_Name, Address_1, Address_2, City, Province_Abbreviation, Country,
  Postal_Code, Home_Telephone, Cell_Telephone, Email, Date_Entered, Last_Modified, Is_Removed)
-values (true, "Loralie Crothers", "Ferris Chominski", "Spencer-Nikolaus", "0 Reindahl Avenue", null, "Pyhäntä", 14,
+values ("placeholder12345!",true, "Loralie Crothers", "Ferris Chominski", "Spencer-Nikolaus", "0 Reindahl Avenue", null, "PyhÃ¤ntÃ¤", 14,
         "Finland", "92930", "3609732954", "9797858035", "fchominskid@google.co.jp", "2019-01-30 00:00:00",
         "2019-02-24 01:22:47", false);
 insert into clients
-(Is_Manager, First_Name, Last_Name, Company_Name, Address_1, Address_2, City, Province_Abbreviation, Country,
+(Hashed_Password, Is_Manager, First_Name, Last_Name, Company_Name, Address_1, Address_2, City, Province_Abbreviation, Country,
  Postal_Code, Home_Telephone, Cell_Telephone, Email, Date_Entered, Last_Modified, Is_Removed)
-values (true, "Saunder Niccolls", "Valida Skitteral", "Schamberger-Durgan", "4442 Commercial Plaza", "9437", "Blagaj",
+values ("placeholder12345!",true, "Saunder Niccolls", "Valida Skitteral", "Schamberger-Durgan", "4442 Commercial Plaza", "9437", "Blagaj",
         15, "Bosnia and Herzegovina", null, "1134862761", "5421953255", "vskitterale@jalbum.net", "2019-01-30 00:00:00",
         "2019-09-07 06:02:20", false);
 insert into clients
-(Is_Manager, First_Name, Last_Name, Company_Name, Address_1, Address_2, City, Province_Abbreviation, Country,
+(Hashed_Password, Is_Manager, First_Name, Last_Name, Company_Name, Address_1, Address_2, City, Province_Abbreviation, Country,
  Postal_Code, Home_Telephone, Cell_Telephone, Email, Date_Entered, Last_Modified, Is_Removed)
-values (true, "Josey Bracher", "Essa Warburton", "Hoppe Inc", "47921 Grover Lane", null, "Ljungby", 16, "Sweden",
+values ("placeholder12345!",true, "Josey Bracher", "Essa Warburton", "Hoppe Inc", "47921 Grover Lane", null, "Ljungby", 16, "Sweden",
         "341 23", "2323372131", "2275898829", "ewarburtonf@mtv.com", "2019-01-30 00:00:00", "2019-12-05 20:49:04",
         false);
 insert into clients
-(Is_Manager, First_Name, Last_Name, Company_Name, Address_1, Address_2, City, Province_Abbreviation, Country,
+(Hashed_Password, Is_Manager, First_Name, Last_Name, Company_Name, Address_1, Address_2, City, Province_Abbreviation, Country,
  Postal_Code, Home_Telephone, Cell_Telephone, Email, Date_Entered, Last_Modified, Is_Removed)
-values (false, "Ede Wing", "Denys Eastes", "Gleichner Inc", "67423 Pine View Lane", "0", "Saint Petersburg", 17,
+values ("placeholder12345!",false, "Ede Wing", "Denys Eastes", "Gleichner Inc", "67423 Pine View Lane", "0", "Saint Petersburg", 17,
         "United States", "33731", "7271237441", "2138184727", "deastesg@networksolutions.com", "2019-01-30 00:00:00",
         "2019-12-03 16:20:00", true);
 insert into clients
-(Is_Manager, First_Name, Last_Name, Company_Name, Address_1, Address_2, City, Province_Abbreviation, Country,
+(Hashed_Password, Is_Manager, First_Name, Last_Name, Company_Name, Address_1, Address_2, City, Province_Abbreviation, Country,
  Postal_Code, Home_Telephone, Cell_Telephone, Email, Date_Entered, Last_Modified, Is_Removed)
-values (true, "Westbrook Levitt", "Iorgo Montez", "Gusikowski-Wuckert", "95225 Mayer Road", null, "Ushuaia", 18,
+values ("placeholder12345!",true, "Westbrook Levitt", "Iorgo Montez", "Gusikowski-Wuckert", "95225 Mayer Road", null, "Ushuaia", 18,
         "Argentina", "9410", "7083191316", "5105286676", "imontezh@trellian.com", "2019-01-30 00:00:00",
         "2019-10-26 12:47:12", true);
 insert into clients
-(Is_Manager, First_Name, Last_Name, Company_Name, Address_1, Address_2, City, Province_Abbreviation, Country,
+(Hashed_Password, Is_Manager, First_Name, Last_Name, Company_Name, Address_1, Address_2, City, Province_Abbreviation, Country,
  Postal_Code, Home_Telephone, Cell_Telephone, Email, Date_Entered, Last_Modified, Is_Removed)
-values (true, "Fransisco Gligorijevic", "Lucky Vasey", "Auer LLC", "3151 Swallow Park", "16", "Ocongate", 19, "Peru",
+values ("placeholder12345!",true, "Fransisco Gligorijevic", "Lucky Vasey", "Auer LLC", "3151 Swallow Park", "16", "Ocongate", 19, "Peru",
         null, "6899621554", null, "lvaseyi@arizona.edu", "2019-01-30 00:00:00", "2019-07-05 12:09:24", true);
 insert into clients
-(Is_Manager, First_Name, Last_Name, Company_Name, Address_1, Address_2, City, Province_Abbreviation, Country,
+(Hashed_Password, Is_Manager, First_Name, Last_Name, Company_Name, Address_1, Address_2, City, Province_Abbreviation, Country,
  Postal_Code, Home_Telephone, Cell_Telephone, Email, Date_Entered, Last_Modified, Is_Removed)
-values (true, "Gretel Grassin", "Eugene Kubat", "Lemke-Kris", "37 Prentice Drive", null, "Xincun", 20, "China", null,
+values ("placeholder12345!",true, "Gretel Grassin", "Eugene Kubat", "Lemke-Kris", "37 Prentice Drive", null, "Xincun", 20, "China", null,
         "9871584227", "4682878331", "ekubatj@pen.io", "2019-01-30 00:00:00", "2020-01-10 07:36:13", true);
 insert into clients
-(Is_Manager, First_Name, Last_Name, Company_Name, Address_1, Address_2, City, Province_Abbreviation, Country,
+(Hashed_Password, Is_Manager, First_Name, Last_Name, Company_Name, Address_1, Address_2, City, Province_Abbreviation, Country,
  Postal_Code, Home_Telephone, Cell_Telephone, Email, Date_Entered, Last_Modified, Is_Removed)
-values (false, "Byrom Demangeon", "Mandi Heake", "Abshire Group", "2 Hoard Circle", "71717", "Serawai", 21, "Indonesia",
+values ("placeholder12345!",false, "Byrom Demangeon", "Mandi Heake", "Abshire Group", "2 Hoard Circle", "71717", "Serawai", 21, "Indonesia",
         null, "7792616559", "8849248757", "mheakek@epa.gov", "2019-01-30 00:00:00", "2019-03-08 00:29:20", false);
 insert into clients
-(Is_Manager, First_Name, Last_Name, Company_Name, Address_1, Address_2, City, Province_Abbreviation, Country,
+(Hashed_Password, Is_Manager, First_Name, Last_Name, Company_Name, Address_1, Address_2, City, Province_Abbreviation, Country,
  Postal_Code, Home_Telephone, Cell_Telephone, Email, Date_Entered, Last_Modified, Is_Removed)
-values (false, "Whit Bloxam", "Elaina Beavon", "Considine-Mayer", "6 Nova Circle", null, "Fontenay-sous-Bois", 22,
+values ("placeholder12345!",false, "Whit Bloxam", "Elaina Beavon", "Considine-Mayer", "6 Nova Circle", null, "Fontenay-sous-Bois", 22,
         "France", "9410", "1183870703", null, "ebeavonl@ycombinator.com", "2019-01-30 00:00:00", "2019-09-04 05:14:57",
         false);
 insert into clients
-(Is_Manager, First_Name, Last_Name, Company_Name, Address_1, Address_2, City, Province_Abbreviation, Country,
+(Hashed_Password, Is_Manager, First_Name, Last_Name, Company_Name, Address_1, Address_2, City, Province_Abbreviation, Country,
  Postal_Code, Home_Telephone, Cell_Telephone, Email, Date_Entered, Last_Modified, Is_Removed)
-values (false, "Haydon Ashford", "Andriette Brugman", "Bashirian, Hintz and Cruickshank", "0 Washington Crossing", null,
-        "Viamão", 23, "Brazil", "944000", "9078415300", null, "abrugmanm@smh.com.au", "2019-01-30 00:00:00",
+values ("placeholder12345!",false, "Haydon Ashford", "Andriette Brugman", "Bashirian, Hintz and Cruickshank", "0 Washington Crossing", null,
+        "ViamÃ£o", 23, "Brazil", "944000", "9078415300", null, "abrugmanm@smh.com.au", "2019-01-30 00:00:00",
         "2019-11-13 23:58:44", true);
 insert into clients
-(Is_Manager, First_Name, Last_Name, Company_Name, Address_1, Address_2, City, Province_Abbreviation, Country,
+(Hashed_Password, Is_Manager, First_Name, Last_Name, Company_Name, Address_1, Address_2, City, Province_Abbreviation, Country,
  Postal_Code, Home_Telephone, Cell_Telephone, Email, Date_Entered, Last_Modified, Is_Removed)
-values (false, "Callean Imloch", "Brigg Wennington", "Gorczany, Romaguera and Bogan", "2279 Anderson Alley", null,
+values ("placeholder12345!",false, "Callean Imloch", "Brigg Wennington", "Gorczany, Romaguera and Bogan", "2279 Anderson Alley", null,
         "Doloplazy", 24, "Czech Republic", "783 56", "1059529794", null, "bwenningtonn@vistaprint.com",
         "2019-01-30 00:00:00", "2019-07-02 08:58:45", false);
 insert into clients
-(Is_Manager, First_Name, Last_Name, Company_Name, Address_1, Address_2, City, Province_Abbreviation, Country,
+(Hashed_Password, Is_Manager, First_Name, Last_Name, Company_Name, Address_1, Address_2, City, Province_Abbreviation, Country,
  Postal_Code, Home_Telephone, Cell_Telephone, Email, Date_Entered, Last_Modified, Is_Removed)
-values (false, "Dane Toye", "Celisse Bainton", "Predovic, Cummerata and Beer", "59 Farmco Terrace", "5", "Hidalgo", 25,
+values ("placeholder12345!",false, "Dane Toye", "Celisse Bainton", "Predovic, Cummerata and Beer", "59 Farmco Terrace", "5", "Hidalgo", 25,
         "Mexico", "53580", "7511723274", "4468328350", "cbaintono@pbs.org", "2019-01-30 00:00:00",
         "2019-08-29 23:16:56", true);
 insert into clients
-(Is_Manager, First_Name, Last_Name, Company_Name, Address_1, Address_2, City, Province_Abbreviation, Country,
+(Hashed_Password, Is_Manager, First_Name, Last_Name, Company_Name, Address_1, Address_2, City, Province_Abbreviation, Country,
  Postal_Code, Home_Telephone, Cell_Telephone, Email, Date_Entered, Last_Modified, Is_Removed)
-values (true, "Lou Beavers", "Marni Arboin", "Dicki-Effertz", "20 Melody Road", null, "Wujiabao", 26, "China", null,
+values ("placeholder12345!",true, "Lou Beavers", "Marni Arboin", "Dicki-Effertz", "20 Melody Road", null, "Wujiabao", 26, "China", null,
         "3013382811", "8317365586", "marboinp@nbcnews.com", "2019-01-30 00:00:00", "2020-01-28 21:56:43", true);
 insert into clients
-(Is_Manager, First_Name, Last_Name, Company_Name, Address_1, Address_2, City, Province_Abbreviation, Country,
+(Hashed_Password, Is_Manager, First_Name, Last_Name, Company_Name, Address_1, Address_2, City, Province_Abbreviation, Country,
  Postal_Code, Home_Telephone, Cell_Telephone, Email, Date_Entered, Last_Modified, Is_Removed)
-values (true, "Kerk Pestricke", "Angy Clemerson", "Hand, Barton and Homenick", "20788 Springview Park", null,
+values ("placeholder12345!",true, "Kerk Pestricke", "Angy Clemerson", "Hand, Barton and Homenick", "20788 Springview Park", null,
         "Saint Petersburg", 27, "Russia", "190990", "1551913157", "3947077258", "aclemersonq@fema.gov",
         "2019-01-30 00:00:00", "2019-04-29 02:12:55", false);
 insert into clients
-(Is_Manager, First_Name, Last_Name, Company_Name, Address_1, Address_2, City, Province_Abbreviation, Country,
+(Hashed_Password, Is_Manager, First_Name, Last_Name, Company_Name, Address_1, Address_2, City, Province_Abbreviation, Country,
  Postal_Code, Home_Telephone, Cell_Telephone, Email, Date_Entered, Last_Modified, Is_Removed)
-values (true, "Wilow Itzakson", "Federico Tsarovic", "Koss-Rath", "4 Miller Lane", "74427", "Sochaux", 28, "France",
+values ("placeholder12345!",true, "Wilow Itzakson", "Federico Tsarovic", "Koss-Rath", "4 Miller Lane", "74427", "Sochaux", 28, "France",
         "25609", "9773075285", "9016709075", "ftsarovicr@berkeley.edu", "2019-01-30 00:00:00", "2019-10-29 05:24:44",
         false);
 insert into clients
-(Is_Manager, First_Name, Last_Name, Company_Name, Address_1, Address_2, City, Province_Abbreviation, Country,
+(Hashed_Password, Is_Manager, First_Name, Last_Name, Company_Name, Address_1, Address_2, City, Province_Abbreviation, Country,
  Postal_Code, Home_Telephone, Cell_Telephone, Email, Date_Entered, Last_Modified, Is_Removed)
-values (false, "Whitney Godball", "Jeana Nowlan", "Batz-Beatty", "44795 Pawling Way", null, "Duanjia", 29, "China",
+values ("placeholder12345!",false, "Whitney Godball", "Jeana Nowlan", "Batz-Beatty", "44795 Pawling Way", null, "Duanjia", 29, "China",
         null, "9022046786", "3217090311", "jnowlans@ow.ly", "2019-01-30 00:00:00", "2019-10-18 14:24:18", false);
 insert into clients
-(Is_Manager, First_Name, Last_Name, Company_Name, Address_1, Address_2, City, Province_Abbreviation, Country,
+(Hashed_Password, Is_Manager, First_Name, Last_Name, Company_Name, Address_1, Address_2, City, Province_Abbreviation, Country,
  Postal_Code, Home_Telephone, Cell_Telephone, Email, Date_Entered, Last_Modified, Is_Removed)
-values (true, "Tabatha Iston", "Sawyer Gosling", "Pouros, Lynch and Tremblay", "7790 Utah Point", "353", "Duekoué", 30,
+values ("placeholder12345!",true, "Tabatha Iston", "Sawyer Gosling", "Pouros, Lynch and Tremblay", "7790 Utah Point", "353", "DuekouÃ©", 30,
         "Ivory Coast", null, "8377915332", "5413296991", "sgoslingt@soundcloud.com", "2019-01-30 00:00:00",
         "2019-03-08 13:33:42", false);
 
@@ -2439,3 +2439,126 @@ INSERT INTO Book_Format(ISBN, date_created, last_modified, Is_Removed, File_Loca
 VALUES ('9780356507217', '2018-06-05', '2019-06-05', FALSE, '9780356507217.pdf');
 INSERT INTO Book_Format(ISBN, date_created, last_modified, Is_Removed, File_Location)
 VALUES ('9780440000587', '2019-09-24', '2019-09-24', FALSE, '9780440000587.pdf');
+INSERT INTO Book_Format(ISBN,Date_Created,Last_Modified,Is_Removed,File_Location,Format) VALUES ('9780142000670','2017-01-08','2017-02-08',FALSE,'9780142000670.pdf','pdf');
+INSERT INTO Book_Format(ISBN,Date_Created,Last_Modified,Is_Removed,File_Location,Format) VALUES ('9780439244190','2018-09-02','2018-10-02',TRUE,'9780439244190.pdf','pdf');
+INSERT INTO Book_Format(ISBN,Date_Created,Last_Modified,Is_Removed,File_Location,Format) VALUES ('9780061120084','2019-05-23','2019-05-23',FALSE,'9780061120084.pdf','pdf');
+INSERT INTO Book_Format(ISBN,Date_Created,Last_Modified,Is_Removed,File_Location,Format) VALUES ('9781328869333','2017-09-03','2017-10-03',FALSE,'9781328869333.pdf','pdf');
+INSERT INTO Book_Format(ISBN,Date_Created,Last_Modified,Is_Removed,File_Location,Format) VALUES ('9780684830421','2018-09-04','2018-10-04',FALSE,'9780684830421.pdf','pdf');
+INSERT INTO Book_Format(ISBN,Date_Created,Last_Modified,Is_Removed,File_Location,Format) VALUES ('9780606323451','2019-06-26','2019-07-26',FALSE,'9780606323451.pdf','pdf');
+INSERT INTO Book_Format(ISBN,Date_Created,Last_Modified,Is_Removed,File_Location,Format) VALUES ('9780451526342','2017-04-01','2017-05-01',FALSE,'9780451526342.pdf','pdf');
+INSERT INTO Book_Format(ISBN,Date_Created,Last_Modified,Is_Removed,File_Location,Format) VALUES ('9780316769174','2018-01-30','2018-01-30',FALSE,'9780316769174.pdf','pdf');
+INSERT INTO Book_Format(ISBN,Date_Created,Last_Modified,Is_Removed,File_Location,Format) VALUES ('9780439023481','2019-09-14','2019-09-14',FALSE,'9780439023481.pdf','pdf');
+INSERT INTO Book_Format(ISBN,Date_Created,Last_Modified,Is_Removed,File_Location,Format) VALUES ('9780307277671','2017-03-28','2017-03-28',FALSE,'9780307277671.pdf','pdf');
+INSERT INTO Book_Format(ISBN,Date_Created,Last_Modified,Is_Removed,File_Location,Format) VALUES ('9780385490818','2018-04-01','2018-05-01',TRUE,'9780385490818.pdf','pdf');
+INSERT INTO Book_Format(ISBN,Date_Created,Last_Modified,Is_Removed,File_Location,Format) VALUES ('9781594480003','2019-05-04','2019-05-04',FALSE,'9781594480003.pdf','pdf');
+INSERT INTO Book_Format(ISBN,Date_Created,Last_Modified,Is_Removed,File_Location,Format) VALUES ('9780140283334','2017-10-01','2017-11-01',FALSE,'9780140283334.pdf','pdf');
+INSERT INTO Book_Format(ISBN,Date_Created,Last_Modified,Is_Removed,File_Location,Format) VALUES ('9780679601685','2018-10-10','2018-11-10',FALSE,'9780679601685.pdf','pdf');
+INSERT INTO Book_Format(ISBN,Date_Created,Last_Modified,Is_Removed,File_Location,Format) VALUES ('9780062315007','2019-04-15','2019-04-15',FALSE,'9780062315007.pdf','pdf');
+INSERT INTO Book_Format(ISBN,Date_Created,Last_Modified,Is_Removed,File_Location,Format) VALUES ('9780770430078','2017-08-29','2017-08-29',FALSE,'9780770430078.pdf','pdf');
+INSERT INTO Book_Format(ISBN,Date_Created,Last_Modified,Is_Removed,File_Location,Format) VALUES ('9781451690316','2018-11-29','2018-11-29',FALSE,'9781451690316.pdf','pdf');
+INSERT INTO Book_Format(ISBN,Date_Created,Last_Modified,Is_Removed,File_Location,Format) VALUES ('9780375831003','2019-03-14','2019-04-14',FALSE,'9780375831003.pdf','pdf');
+INSERT INTO Book_Format(ISBN,Date_Created,Last_Modified,Is_Removed,File_Location,Format) VALUES ('9780307588371','2017-04-22','2017-05-22',FALSE,'9780307588371.pdf','pdf');
+INSERT INTO Book_Format(ISBN,Date_Created,Last_Modified,Is_Removed,File_Location,Format) VALUES ('9781416524793','2018-04-01','2018-04-01',FALSE,'9781416524793.pdf','pdf');
+INSERT INTO Book_Format(ISBN,Date_Created,Last_Modified,Is_Removed,File_Location,Format) VALUES ('9780393970128','2019-05-12','2019-05-12',FALSE,'9780393970128.pdf','pdf');
+INSERT INTO Book_Format(ISBN,Date_Created,Last_Modified,Is_Removed,File_Location,Format) VALUES ('9780141439471','2017-06-25','2017-07-25',FALSE,'9780141439471.pdf','pdf');
+INSERT INTO Book_Format(ISBN,Date_Created,Last_Modified,Is_Removed,File_Location,Format) VALUES ('9780385603102','2018-03-07','2018-04-07',TRUE,'9780385603102.pdf','pdf');
+INSERT INTO Book_Format(ISBN,Date_Created,Last_Modified,Is_Removed,File_Location,Format) VALUES ('9780143039983','2019-11-28','2019-12-28',FALSE,'9780143039983.pdf','pdf');
+INSERT INTO Book_Format(ISBN,Date_Created,Last_Modified,Is_Removed,File_Location,Format) VALUES ('9780450040184','2017-07-01','2017-08-01',FALSE,'9780450040184.pdf','pdf');
+INSERT INTO Book_Format(ISBN,Date_Created,Last_Modified,Is_Removed,File_Location,Format) VALUES ('9780061007224','2018-02-01','2018-03-01',FALSE,'9780061007224.pdf','pdf');
+INSERT INTO Book_Format(ISBN,Date_Created,Last_Modified,Is_Removed,File_Location,Format) VALUES ('9781416524342','2019-11-01','2019-12-01',FALSE,'9781416524342.pdf','pdf');
+INSERT INTO Book_Format(ISBN,Date_Created,Last_Modified,Is_Removed,File_Location,Format) VALUES ('9780450411434','2017-10-01','2017-10-01',FALSE,'9780450411434.pdf','pdf');
+INSERT INTO Book_Format(ISBN,Date_Created,Last_Modified,Is_Removed,File_Location,Format) VALUES ('9780380729401','2018-03-01','2018-03-01',FALSE,'9780380729401.pdf','pdf');
+INSERT INTO Book_Format(ISBN,Date_Created,Last_Modified,Is_Removed,File_Location,Format) VALUES ('9780345476876','2019-08-31','2019-09-20',FALSE,'9780345476876.pdf','pdf');
+INSERT INTO Book_Format(ISBN,Date_Created,Last_Modified,Is_Removed,File_Location,Format) VALUES ('9780735212510','2018-03-06','2018-03-06',TRUE,'9780735212510.pdf','pdf');
+INSERT INTO Book_Format(ISBN,Date_Created,Last_Modified,Is_Removed,File_Location,Format) VALUES ('9780450031069','2019-06-13','2019-06-13',FALSE,'9780450031069.pdf','pdf');
+INSERT INTO Book_Format(ISBN,Date_Created,Last_Modified,Is_Removed,File_Location,Format) VALUES ('9780307346605','2017-09-12','2017-10-12',FALSE,'9780307346605.pdf','pdf');
+INSERT INTO Book_Format(ISBN,Date_Created,Last_Modified,Is_Removed,File_Location,Format) VALUES ('9780727860996','2018-07-01','2018-08-01',FALSE,'9780727860996.pdf','pdf');
+INSERT INTO Book_Format(ISBN,Date_Created,Last_Modified,Is_Removed,File_Location,Format) VALUES ('9780062200570','2019-04-30','2019-04-30',FALSE,'9780062200570.pdf','pdf');
+INSERT INTO Book_Format(ISBN,Date_Created,Last_Modified,Is_Removed,File_Location,Format) VALUES ('9780061139376','2017-08-29','2017-08-29',FALSE,'9780061139376.pdf','pdf');
+INSERT INTO Book_Format(ISBN,Date_Created,Last_Modified,Is_Removed,File_Location,Format) VALUES ('9780671685638','2018-09-01','2018-10-01',FALSE,'9780671685638.pdf','pdf');
+INSERT INTO Book_Format(ISBN,Date_Created,Last_Modified,Is_Removed,File_Location,Format) VALUES ('9780345504968','2019-06-08','2019-06-08',FALSE,'9780345504968.pdf','pdf');
+INSERT INTO Book_Format(ISBN,Date_Created,Last_Modified,Is_Removed,File_Location,Format) VALUES ('9780062259660','2017-02-10','2017-03-10',FALSE,'9780062259660.pdf','pdf');
+INSERT INTO Book_Format(ISBN,Date_Created,Last_Modified,Is_Removed,File_Location,Format) VALUES ('9781982110567','2019-09-10','2019-09-10',FALSE,'9781982110567.pdf','pdf');
+INSERT INTO Book_Format(ISBN,Date_Created,Last_Modified,Is_Removed,File_Location,Format) VALUES ('9780307949486','2017-09-16','2017-10-16',FALSE,'9780307949486.pdf','pdf');
+INSERT INTO Book_Format(ISBN,Date_Created,Last_Modified,Is_Removed,File_Location,Format) VALUES ('9780312330873','2018-05-03','2019-05-03',FALSE,'9780312330873.pdf','pdf');
+INSERT INTO Book_Format(ISBN,Date_Created,Last_Modified,Is_Removed,File_Location,Format) VALUES ('9781416524793','2019-04-01','2019-04-01',FALSE,'9781416524793.pdf','pdf');
+INSERT INTO Book_Format(ISBN,Date_Created,Last_Modified,Is_Removed,File_Location,Format) VALUES ('9780316323703','2017-12-17','2019-12-17',TRUE,'9780316323703.pdf','pdf');
+INSERT INTO Book_Format(ISBN,Date_Created,Last_Modified,Is_Removed,File_Location,Format) VALUES ('9780679745587','2018-06-16','2019-06-16',FALSE,'9780679745587.pdf','pdf');
+INSERT INTO Book_Format(ISBN,Date_Created,Last_Modified,Is_Removed,File_Location,Format) VALUES ('9780451205766','2019-03-01','2019-03-01',FALSE,'9780451205766.pdf','pdf');
+INSERT INTO Book_Format(ISBN,Date_Created,Last_Modified,Is_Removed,File_Location,Format) VALUES ('9780316166683','2017-09-01','2019-09-01',FALSE,'9780316166683.pdf','pdf');
+INSERT INTO Book_Format(ISBN,Date_Created,Last_Modified,Is_Removed,File_Location,Format) VALUES ('9780156001311','2018-09-28','2019-09-28',FALSE,'9780156001311.pdf','pdf');
+INSERT INTO Book_Format(ISBN,Date_Created,Last_Modified,Is_Removed,File_Location,Format) VALUES ('9780582418271','2019-02-15','2019-02-15',FALSE,'9780582418271.pdf','pdf');
+INSERT INTO Book_Format(ISBN,Date_Created,Last_Modified,Is_Removed,File_Location,Format) VALUES ('9780380731862','2017-04-27','2019-04-27',FALSE,'9780380731862.pdf','pdf');
+INSERT INTO Book_Format(ISBN,Date_Created,Last_Modified,Is_Removed,File_Location,Format) VALUES ('9780307588371','2018-04-22','2019-04-22',FALSE,'9780307588371.pdf','pdf');
+INSERT INTO Book_Format(ISBN,Date_Created,Last_Modified,Is_Removed,File_Location,Format) VALUES ('9780060584757','2019-02-01','2019-02-01',FALSE,'9780060584757.pdf','pdf');
+INSERT INTO Book_Format(ISBN,Date_Created,Last_Modified,Is_Removed,File_Location,Format) VALUES ('9780143034902','2017-01-25','2019-01-25',FALSE,'9780143034902.pdf','pdf');
+INSERT INTO Book_Format(ISBN,Date_Created,Last_Modified,Is_Removed,File_Location,Format) VALUES ('9780812976144','2018-10-24','2019-10-24',FALSE,'9780812976144.pdf','pdf');
+INSERT INTO Book_Format(ISBN,Date_Created,Last_Modified,Is_Removed,File_Location,Format) VALUES ('9780394758282','2019-07-12','2019-07-12',FALSE,'9780394758282.pdf','pdf');
+INSERT INTO Book_Format(ISBN,Date_Created,Last_Modified,Is_Removed,File_Location,Format) VALUES ('9780312362089','2017-06-28','2019-06-28',FALSE,'9780312362089.pdf','pdf');
+INSERT INTO Book_Format(ISBN,Date_Created,Last_Modified,Is_Removed,File_Location,Format) VALUES ('9780752865331','2018-03-01','2019-03-01',FALSE,'9780752865331.pdf','pdf');
+INSERT INTO Book_Format(ISBN,Date_Created,Last_Modified,Is_Removed,File_Location,Format) VALUES ('9780525945567','2019-03-22','2019-03-22',TRUE,'9780525945567.pdf','pdf');
+INSERT INTO Book_Format(ISBN,Date_Created,Last_Modified,Is_Removed,File_Location,Format) VALUES ('9780670038602','2017-03-17','2019-03-17',FALSE,'9780670038602.pdf','pdf');
+INSERT INTO Book_Format(ISBN,Date_Created,Last_Modified,Is_Removed,File_Location,Format) VALUES ('9780446350983','2018-06-10','2019-06-10',FALSE,'9780446350983.pdf','pdf');
+INSERT INTO Book_Format(ISBN,Date_Created,Last_Modified,Is_Removed,File_Location,Format) VALUES ('9780743298025','2019-11-12','2019-11-12',FALSE,'9780743298025.pdf','pdf');
+INSERT INTO Book_Format(ISBN,Date_Created,Last_Modified,Is_Removed,File_Location,Format) VALUES ('9780812550702','2017-09-30','2017-09-30',FALSE,'9780812550702.pdf','pdf');
+INSERT INTO Book_Format(ISBN,Date_Created,Last_Modified,Is_Removed,File_Location,Format) VALUES ('9780439023481','2018-09-14','2019-09-14',FALSE,'9780439023481.pdf','pdf');
+INSERT INTO Book_Format(ISBN,Date_Created,Last_Modified,Is_Removed,File_Location,Format) VALUES ('9780141036144','2019-09-03','2019-09-03',FALSE,'9780141036144.pdf','pdf');
+INSERT INTO Book_Format(ISBN,Date_Created,Last_Modified,Is_Removed,File_Location,Format) VALUES ('9780307887436','2017-08-16','2019-08-16',FALSE,'9780307887436.pdf','pdf');
+INSERT INTO Book_Format(ISBN,Date_Created,Last_Modified,Is_Removed,File_Location,Format) VALUES ('9780593099322','2018-10-01','2019-10-01',FALSE,'9780593099322.pdf','pdf');
+INSERT INTO Book_Format(ISBN,Date_Created,Last_Modified,Is_Removed,File_Location,Format) VALUES ('9781451673319','2019-11-29','2019-11-29',FALSE,'9781451673319.pdf','pdf');
+INSERT INTO Book_Format(ISBN,Date_Created,Last_Modified,Is_Removed,File_Location,Format) VALUES ('9780439023481','2017-09-14','2019-09-14',FALSE,'9780439023481.pdf','pdf');
+INSERT INTO Book_Format(ISBN,Date_Created,Last_Modified,Is_Removed,File_Location,Format) VALUES ('9780804139021','2018-02-11','2019-02-11',FALSE,'9780804139021.pdf','pdf');
+INSERT INTO Book_Format(ISBN,Date_Created,Last_Modified,Is_Removed,File_Location,Format) VALUES ('9780553803716','2019-06-01','2019-06-01',FALSE,'9780553803716.pdf','pdf');
+INSERT INTO Book_Format(ISBN,Date_Created,Last_Modified,Is_Removed,File_Location,Format) VALUES ('9780439023498','2017-09-01','2019-09-01',TRUE,'9780439023498.pdf','pdf');
+INSERT INTO Book_Format(ISBN,Date_Created,Last_Modified,Is_Removed,File_Location,Format) VALUES ('9781524796976','2018-02-26','2019-02-26',FALSE,'9781524796976.pdf','pdf');
+INSERT INTO Book_Format(ISBN,Date_Created,Last_Modified,Is_Removed,File_Location,Format) VALUES ('9780439023511','2019-08-24','2019-08-24',FALSE,'9780439023511.pdf','pdf');
+INSERT INTO Book_Format(ISBN,Date_Created,Last_Modified,Is_Removed,File_Location,Format) VALUES ('9780486284729','2017-10-01','2019-10-01',FALSE,'978-0486284729.pdf','pdf');
+INSERT INTO Book_Format(ISBN,Date_Created,Last_Modified,Is_Removed,File_Location,Format) VALUES ('9780553803709','2018-06-01','2019-06-01',FALSE,'9780553803709.pdf','pdf');
+INSERT INTO Book_Format(ISBN,Date_Created,Last_Modified,Is_Removed,File_Location,Format) VALUES ('9780062024039','2019-02-28','2019-02-28',TRUE,'9780062024039.pdf','pdf');
+INSERT INTO Book_Format(ISBN,Date_Created,Last_Modified,Is_Removed,File_Location,Format) VALUES ('9780441788385','2017-10-01','2019-10-01',FALSE,'9780441788385.pdf','pdf');
+INSERT INTO Book_Format(ISBN,Date_Created,Last_Modified,Is_Removed,File_Location,Format) VALUES ('9780771008795','2018-04-04','2019-04-04',TRUE,'9780771008795.pdf','pdf');
+INSERT INTO Book_Format(ISBN,Date_Created,Last_Modified,Is_Removed,File_Location,Format) VALUES ('9781509808335','2019-04-26','2019-04-26',FALSE,'9781509808335.pdf','pdf');
+INSERT INTO Book_Format(ISBN,Date_Created,Last_Modified,Is_Removed,File_Location,Format) VALUES ('9780345538987','2017-05-14','2017-05-14',FALSE,'9780345538987.pdf','pdf');
+INSERT INTO Book_Format(ISBN,Date_Created,Last_Modified,Is_Removed,File_Location,Format) VALUES ('9780451457998','2018-09-01','2019-09-01',FALSE,'9780451457998.pdf','pdf');
+INSERT INTO Book_Format(ISBN,Date_Created,Last_Modified,Is_Removed,File_Location,Format) VALUES ('9780989671767','2019-06-13','2019-06-13',FALSE,'9780989671767.pdf','pdf');
+INSERT INTO Book_Format(ISBN,Date_Created,Last_Modified,Is_Removed,File_Location,Format) VALUES ('9780989671774','2017-09-26','2017-09-26',FALSE,'9780989671774.pdf','pdf');
+INSERT INTO Book_Format(ISBN,Date_Created,Last_Modified,Is_Removed,File_Location,Format) VALUES ('9780989671781','2017-04-30','2017-04-30',FALSE,'9780989671781.pdf','pdf');
+INSERT INTO Book_Format(ISBN,Date_Created,Last_Modified,Is_Removed,File_Location,Format) VALUES ('9780999851104','2017-09-30','2017-09-30',FALSE,'9780999851104.pdf','pdf');
+INSERT INTO Book_Format(ISBN,Date_Created,Last_Modified,Is_Removed,File_Location,Format) VALUES ('9780999851111','2018-05-31','2018-05-31',FALSE,'9780999851111.pdf','pdf');
+INSERT INTO Book_Format(ISBN,Date_Created,Last_Modified,Is_Removed,File_Location,Format) VALUES ('9780999851128','2019-03-01','2019-03-01',FALSE,'9780999851128.pdf','pdf');
+INSERT INTO Book_Format(ISBN,Date_Created,Last_Modified,Is_Removed,File_Location,Format) VALUES ('9780999851135','2019-09-26','2019-09-26',FALSE,'9780999851135.pdf','pdf');
+INSERT INTO Book_Format(ISBN,Date_Created,Last_Modified,Is_Removed,File_Location,Format) VALUES ('9780316075558','2017-08-25','2017-08-25',FALSE,'9780316075558.pdf','pdf');
+INSERT INTO Book_Format(ISBN,Date_Created,Last_Modified,Is_Removed,File_Location,Format) VALUES ('9780316079914','2018-09-11','2018-09-11',FALSE,'9780316079914.pdf','pdf');
+INSERT INTO Book_Format(ISBN,Date_Created,Last_Modified,Is_Removed,File_Location,Format) VALUES ('9780316058964','2019-08-26','2019-08-26',FALSE,'9780316058964.pdf','pdf');
+INSERT INTO Book_Format(ISBN,Date_Created,Last_Modified,Is_Removed,File_Location,Format) VALUES ('9780316251334','2017-10-25','2017-10-25',FALSE,'9780316251334.pdf','pdf');
+INSERT INTO Book_Format(ISBN,Date_Created,Last_Modified,Is_Removed,File_Location,Format) VALUES ('9780316251303','2019-10-22','2019-10-22',FALSE,'9780316251303.pdf','pdf');
+INSERT INTO Book_Format(ISBN,Date_Created,Last_Modified,Is_Removed,File_Location,Format) VALUES ('9780765311788','2017-06-25','2017-06-25',FALSE,'9780765311788.pdf','pdf');
+INSERT INTO Book_Format(ISBN,Date_Created,Last_Modified,Is_Removed,File_Location,Format) VALUES ('9780765316882','2017-08-21','2017-08-21',FALSE,'9780765316882.pdf','pdf');
+INSERT INTO Book_Format(ISBN,Date_Created,Last_Modified,Is_Removed,File_Location,Format) VALUES ('9780765316899','2018-10-14','2018-10-14',FALSE,'9780765316899.pdf','pdf');
+INSERT INTO Book_Format(ISBN,Date_Created,Last_Modified,Is_Removed,File_Location,Format) VALUES ('9780765330420','2019-11-08','2019-11-08',FALSE,'9780765330420.pdf','pdf');
+INSERT INTO Book_Format(ISBN,Date_Created,Last_Modified,Is_Removed,File_Location,Format) VALUES ('9780765378552','2017-10-06','2017-10-06',FALSE,'9780765378552.pdf','pdf');
+INSERT INTO Book_Format(ISBN,Date_Created,Last_Modified,Is_Removed,File_Location,Format) VALUES ('9781466862678','2018-01-26','2019-01-26',FALSE,'9781466862678.pdf','pdf');
+INSERT INTO Book_Format(ISBN,Date_Created,Last_Modified,Is_Removed,File_Location,Format) VALUES ('9780756404079','2019-04-07','2019-04-07',FALSE,'9780756404079.pdf','pdf');
+INSERT INTO Book_Format(ISBN,Date_Created,Last_Modified,Is_Removed,File_Location,Format) VALUES ('9780756404734','2017-03-01','2019-03-01',FALSE,'9780756404734.pdf','pdf');
+INSERT INTO Book_Format(ISBN,Date_Created,Last_Modified,Is_Removed,File_Location,Format) VALUES ('9781937007294','2018-02-28','2019-02-28',FALSE,'9781937007294.pdf','pdf');
+INSERT INTO Book_Format(ISBN,Date_Created,Last_Modified,Is_Removed,File_Location,Format) VALUES ('9781937007591','2019-05-29','2019-05-29',FALSE,'9781937007591.pdf','pdf');
+INSERT INTO Book_Format(ISBN,Date_Created,Last_Modified,Is_Removed,File_Location,Format) VALUES ('9781937007720','2017-08-28','2019-08-28',FALSE,'9781937007720.pdf','pdf');
+INSERT INTO Book_Format(ISBN,Date_Created,Last_Modified,Is_Removed,File_Location,Format) VALUES ('9780425264928','2018-08-27','2019-08-27',FALSE,'9780425264928.pdf','pdf');
+INSERT INTO Book_Format(ISBN,Date_Created,Last_Modified,Is_Removed,File_Location,Format) VALUES ('9780425264942','2019-09-02','2019-09-02',FALSE,'9780425264942.pdf','pdf');
+INSERT INTO Book_Format(ISBN,Date_Created,Last_Modified,Is_Removed,File_Location,Format) VALUES ('9780425275757','2017-08-04','2019-08-04',FALSE,'9780425275757.pdf','pdf');
+INSERT INTO Book_Format(ISBN,Date_Created,Last_Modified,Is_Removed,File_Location,Format) VALUES ('9780698165083','2018-04-07','2019-04-07',FALSE,'9780698165083.pdf','pdf');
+INSERT INTO Book_Format(ISBN,Date_Created,Last_Modified,Is_Removed,File_Location,Format) VALUES ('9781101988527','2017-04-04','2019-04-04',FALSE,'9781101988527.pdf','pdf');
+INSERT INTO Book_Format(ISBN,Date_Created,Last_Modified,Is_Removed,File_Location,Format) VALUES ('9780356507217','2018-06-05','2019-06-05',FALSE,'9780356507217.pdf','pdf');
+INSERT INTO Book_Format(ISBN,Date_Created,Last_Modified,Is_Removed,File_Location,Format) VALUES ('9780440000587','2019-09-24','2019-09-24',FALSE,'9780440000587.pdf','pdf');
+INSERT INTO News (RSS_Feed,Date_Created,Date_Ended,Is_Removed,Last_Modified) VALUES('http://xkcd.com/atom.xml','2019-05-01',NULL,FALSE,'2019-05-01');
+INSERT INTO News (RSS_Feed,Date_Created,Date_Ended,Is_Removed,Last_Modified) VALUES('http://feeds.feedburner.com/CssTricks','2019-06-01',NULL,FALSE,'2019-07-01');
+INSERT INTO News (RSS_Feed,Date_Created,Date_Ended,Is_Removed,Last_Modified) VALUES('http://rss.slashdot.org/Slashdot/slashdot','2019-07-01',NULL,FALSE,'2019-08-01');
+INSERT INTO News (RSS_Feed,Date_Created,Date_Ended,Is_Removed,Last_Modified) VALUES('http://feeds.mashable.com/Mashable','2019-05-01',NULL,FALSE,'2019-08-01');
+INSERT INTO News (RSS_Feed,Date_Created,Date_Ended,Is_Removed,Last_Modified) VALUES('http://www.theverge.com/rss/index.xml','2020-01-01','2019-02-01',TRUE,'2019-02-01');
+INSERT INTO News (RSS_Feed,Date_Created,Date_Ended,Is_Removed,Last_Modified) VALUES('http://feeds.macrumors.com/MacRumors-All','2020-01-01','2020-01-02',TRUE,'2020-01-02');
+INSERT INTO Ads (Image_Name,Ad_Url,Date_Created,Last_Modified,Is_Removed) VALUES('banana.jpg','https://en.wikipedia.org/wiki/Banana','2019-05-01','2019-05-01',FALSE);
+INSERT INTO Ads (Image_Name,Ad_Url,Date_Created,Last_Modified,Is_Removed) VALUES('apple.jpg','https://en.wikipedia.org/wiki/Apple','2019-05-01','2019-05-01',FALSE);
+INSERT INTO Ads (Image_Name,Ad_Url,Date_Created,Last_Modified,Is_Removed) VALUES('pineapple.jpg','https://en.wikipedia.org/wiki/Pineapple','2019-06-01','2019-07-01',FALSE);
+INSERT INTO Ads (Image_Name,Ad_Url,Date_Created,Last_Modified,Is_Removed) VALUES('melon.jpg','https://en.wikipedia.org/wiki/Melon','2019-06-01','2019-08-01',FALSE);
+INSERT INTO Ads (Image_Name,Ad_Url,Date_Created,Last_Modified,Is_Removed) VALUES('blueberry.jpg','https://en.wikipedia.org/wiki/Blueberry','2019-07-01','2019-09-01',FALSE);
+INSERT INTO Ads (Image_Name,Ad_Url,Date_Created,Last_Modified,Is_Removed) VALUES('grapefruit.jpg','https://en.wikipedia.org/wiki/Grapefruit','2019-08-01','2019-10-01',TRUE);

@@ -23,6 +23,7 @@
 
     <h:body>
 
+ <b:alert severity="info">#{clientBacking.message}</b:alert>
         <b:navBar brandImg="resources/images/logo.png"  brandImgStyleClass="brand-img-style" brandHref="#" fluid="true" class="headMenu">
             <f:facet name="kebab">
                 <span class="fa fa-chevron-right"></span>
@@ -31,6 +32,7 @@
                 <b:navLink style="color: white " class="nav" value="Shop" href="./gallery.xhtml"></b:navLink>
                 <b:navLink  style="color: white;" value="Sales" href="#"></b:navLink>
                 <b:navLink style="color: white" value="Genres" href="#"></b:navLink>
+
             </b:navbarLinks>
             <!--Adds spacing in nav bar-->
             <b:navbarLinks pull="right"><b:navLink value="    " href="#"></b:navLink></b:navbarLinks>
@@ -41,7 +43,7 @@
                     <b:navLink id="fr" value="Francais - Fr" href="#"></b:navLink>
                 </b:dropMenu>
 
-                <b:navLink style="color: white;font-weight: bold" value="Login" href="#">
+                <b:navLink style="color: white;font-weight: bold" value="Log In" href="signIn.xhtml">
 
                 </b:navLink>
             </b:navbarLinks>
