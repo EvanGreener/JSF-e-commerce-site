@@ -12,6 +12,7 @@ import javax.inject.Named;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
 import javax.persistence.EntityNotFoundException;
+import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaBuilder;
@@ -156,12 +157,15 @@ public class OrdersJpaController implements Serializable {
         Root<Orders> order = cq.from(Orders.class);
         cq.where(cb.equal(order.get("orderID"), orderId));
         cq.select(order.get("isRemoved"));
-        TypedQuery<String> query = em.createQuery(cq);
-        String res = query.getSingleResult();
-        if (res.equals("true"))
+        TypedQuery<Boolean> query = em.createQuery(cq);
+        try
+        {
+            query.getSingleResult();
+            return "Not Removed";
+        }
+        catch(NoResultException nre)
         {
             return "Removed";
         }
-        return "Not Removed";
     }
 }
