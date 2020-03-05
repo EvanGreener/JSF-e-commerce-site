@@ -1,5 +1,7 @@
 package com.gb1w20.book_store_project.jpa_controllers;
 
+import com.gb1w20.book_store_project.entities.Clients;
+import com.gb1w20.book_store_project.entities.OrderItem;
 import com.gb1w20.book_store_project.entities.Orders;
 import com.gb1w20.book_store_project.jpa_controllers.exceptions.NonexistentEntityException;
 import java.io.Serializable;
@@ -11,6 +13,8 @@ import javax.persistence.EntityManager;
 import javax.persistence.Query;
 import javax.persistence.EntityNotFoundException;
 import javax.persistence.PersistenceContext;
+import javax.persistence.TypedQuery;
+import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 import javax.transaction.SystemException;
@@ -122,5 +126,42 @@ public class OrdersJpaController implements Serializable {
             System.out.println("order count: " + ((Long) q.getSingleResult()).intValue());
             return ((Long) q.getSingleResult()).intValue();
     }
+
+    public String getClientEmailById(int clientId)
+    {
+        CriteriaBuilder cb = em.getCriteriaBuilder();
+        CriteriaQuery cq = cb.createQuery();
+        Root<Clients> client = cq.from(Clients.class);
+        cq.where(cb.equal(client.get("clientID"), clientId));
+        cq.select(client.get("email"));
+        TypedQuery<String> query = em.createQuery(cq);
+        return query.getSingleResult();
+    }
     
+    public int getOrderItemsCountByOrderId(int orderId)
+    {
+        CriteriaBuilder cb = em.getCriteriaBuilder();
+        CriteriaQuery cq = cb.createQuery();
+        Root<OrderItem> orderitems = cq.from(OrderItem.class);
+        cq.where(cb.equal(orderitems.get("orderID"), orderId));
+        cq.select(cb.count(orderitems.get("itemID")));
+        Query query = em.createQuery(cq);
+        return ((Long) query.getSingleResult()).intValue();
+    }
+    
+    public String getStatusByOrderId(int orderId)
+    {
+        CriteriaBuilder cb = em.getCriteriaBuilder();
+        CriteriaQuery cq = cb.createQuery();
+        Root<Orders> order = cq.from(Orders.class);
+        cq.where(cb.equal(order.get("orderID"), orderId));
+        cq.select(order.get("isRemoved"));
+        TypedQuery<String> query = em.createQuery(cq);
+        String res = query.getSingleResult();
+        if (res.equals("true"))
+        {
+            return "Removed";
+        }
+        return "Not Removed";
+    }
 }
