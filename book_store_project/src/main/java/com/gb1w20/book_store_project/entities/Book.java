@@ -36,20 +36,20 @@ import javax.validation.constraints.Size;
 @Entity
 @Table(name = "book", catalog = "bookstore", schema = "")
 @NamedQueries({
-    @NamedQuery(name = "Book.findAll", query = "SELECT b FROM Book b"),
-    @NamedQuery(name = "Book.findByIsbn", query = "SELECT b FROM Book b WHERE b.isbn = :isbn"),
-    @NamedQuery(name = "Book.findByTitle", query = "SELECT b FROM Book b WHERE b.title = :title"),
-    @NamedQuery(name = "Book.findByPublisherID", query = "SELECT b FROM Book b WHERE b.publisherID = :publisherID"),
-    @NamedQuery(name = "Book.findByDateOfPublication", query = "SELECT b FROM Book b WHERE b.dateOfPublication = :dateOfPublication"),
-    @NamedQuery(name = "Book.findByNumOfPages", query = "SELECT b FROM Book b WHERE b.numOfPages = :numOfPages"),
-    @NamedQuery(name = "Book.findByGenre", query = "SELECT b FROM Book b WHERE b.genre = :genre"),
-    @NamedQuery(name = "Book.findByDescription", query = "SELECT b FROM Book b WHERE b.description = :description"),
-    @NamedQuery(name = "Book.findByWholesalePrice", query = "SELECT b FROM Book b WHERE b.wholesalePrice = :wholesalePrice"),
-    @NamedQuery(name = "Book.findByListPrice", query = "SELECT b FROM Book b WHERE b.listPrice = :listPrice"),
-    @NamedQuery(name = "Book.findBySalePrice", query = "SELECT b FROM Book b WHERE b.salePrice = :salePrice"),
-    @NamedQuery(name = "Book.findByDateEntered", query = "SELECT b FROM Book b WHERE b.dateEntered = :dateEntered"),
-    @NamedQuery(name = "Book.findByLastModified", query = "SELECT b FROM Book b WHERE b.lastModified = :lastModified"),
-    @NamedQuery(name = "Book.findByIsRemoved", query = "SELECT b FROM Book b WHERE b.isRemoved = :isRemoved")})
+     @NamedQuery(name = "Book.findAll", query = "SELECT b FROM Book b"),
+     @NamedQuery(name = "Book.findByIsbn", query = "SELECT b FROM Book b WHERE b.isbn = :isbn"),
+     @NamedQuery(name = "Book.findByTitle", query = "SELECT b FROM Book b WHERE b.title = :title"),
+     @NamedQuery(name = "Book.findByPublisherID", query = "SELECT b FROM Book b WHERE b.publisherID = :publisherID"),
+     @NamedQuery(name = "Book.findByDateOfPublication", query = "SELECT b FROM Book b WHERE b.dateOfPublication = :dateOfPublication"),
+     @NamedQuery(name = "Book.findByNumOfPages", query = "SELECT b FROM Book b WHERE b.numOfPages = :numOfPages"),
+     @NamedQuery(name = "Book.findByGenre", query = "SELECT b FROM Book b WHERE b.genre = :genre"),
+     @NamedQuery(name = "Book.findByDescription", query = "SELECT b FROM Book b WHERE b.description = :description"),
+     @NamedQuery(name = "Book.findByWholesalePrice", query = "SELECT b FROM Book b WHERE b.wholesalePrice = :wholesalePrice"),
+     @NamedQuery(name = "Book.findByListPrice", query = "SELECT b FROM Book b WHERE b.listPrice = :listPrice"),
+     @NamedQuery(name = "Book.findBySalePrice", query = "SELECT b FROM Book b WHERE b.salePrice = :salePrice"),
+     @NamedQuery(name = "Book.findByDateEntered", query = "SELECT b FROM Book b WHERE b.dateEntered = :dateEntered"),
+     @NamedQuery(name = "Book.findByLastModified", query = "SELECT b FROM Book b WHERE b.lastModified = :lastModified"),
+     @NamedQuery(name = "Book.findByIsRemoved", query = "SELECT b FROM Book b WHERE b.isRemoved = :isRemoved")})
 public class Book implements Serializable {
 
     private static final long serialVersionUID = 1L;
