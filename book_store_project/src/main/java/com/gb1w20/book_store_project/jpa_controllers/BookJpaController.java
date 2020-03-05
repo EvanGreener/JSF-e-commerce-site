@@ -1,9 +1,10 @@
 package com.gb1w20.book_store_project.jpa_controllers;
 
-import com.gb1w20.book_store_project.beans.SearchBean;
 import com.gb1w20.book_store_project.entities.Authors_;
 import com.gb1w20.book_store_project.entities.Book;
 import com.gb1w20.book_store_project.entities.Book_;
+import com.gb1w20.book_store_project.entities.OrderItem;
+import com.gb1w20.book_store_project.entities.OrderItem_;
 import com.gb1w20.book_store_project.jpa_controllers.exceptions.NonexistentEntityException;
 import java.io.Serializable;
 import java.util.List;
@@ -142,7 +143,7 @@ public class BookJpaController implements Serializable {
         CriteriaQuery<Book> cq = cb.createQuery(Book.class);
         Root<Book> book = cq.from(Book.class);
         Join author = book.join("authorsCollection");
-        
+
         switch (searchBy) {
             case "title":
                 cq.where(cb.like(book.get(Book_.title), expression));
@@ -159,7 +160,42 @@ public class BookJpaController implements Serializable {
         return query.getResultList();
 
     }
+    public List<Book> getBestSeller() {
 
+        TypedQuery<Book> query = em.createQuery("SELECT b FROM Book b INNER JOIN b.orders o GROUP BY o.isbn ORDER BY count(o.isbn) DESC", Book.class);
+        query.setMaxResults(8);
+        List<Book> books = query.getResultList();
+        return books;
+    }
+
+    public List<Object> getPopularGenres(){
+        
+        TypedQuery<Object> query = em.createQuery("SELECT b.genre FROM Book b WHERE b.genre <> :genre GROUP BY b.genre", Object.class);
+        
+        query.setParameter("genre", "Fiction");
+        query.setMaxResults(4);
+        List<Object> genres = query.getResultList();
+        return genres;
+        
+    }
+    
+   //TODO books that user does not already contain
+    public List<Book> getSimilarGenres(Book b){
+         TypedQuery<Book> query = em.createQuery("SELECT b FROM Book b WHERE b.genre = :genre AND b.isbn <> :isbn", Book.class);
+         query.setParameter("genre", b.getGenre());
+           query.setParameter("isbn", b.getIsbn());
+         query.setMaxResults(4);
+        List<Book> books = query.getResultList();
+        return books; 
+    }
+    
+    public List<Book> getRecentlyAdded(){
+         TypedQuery<Book> query = em.createQuery("SELECT b FROM Book b ORDER BY b.dateEntered ASC", Book.class);
+        query.setMaxResults(8);
+        List<Book> books = query.getResultList();
+        return books; 
+    }
+    
     public List<Book> getRecommended() {
 
         return null;

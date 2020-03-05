@@ -1,11 +1,12 @@
 package com.gb1w20.book_store_project.entities;
 
+import com.gb1w20.book_store_project.entities.Book;
 import java.util.Date;
-import javax.annotation.processing.Generated;
+import javax.annotation.Generated;
 import javax.persistence.metamodel.SingularAttribute;
 import javax.persistence.metamodel.StaticMetamodel;
 
-@Generated(value="org.eclipse.persistence.internal.jpa.modelgen.CanonicalModelProcessor", date="2020-02-25T15:05:08", comments="EclipseLink-2.7.6.v20200131-rNA")
+@Generated(value="EclipseLink-2.7.1.v20171221-rNA", date="2020-03-05T09:40:20")
 @StaticMetamodel(OrderItem.class)
 public class OrderItem_ { 
 
@@ -15,5 +16,6 @@ public class OrderItem_ {
     public static volatile SingularAttribute<OrderItem, Integer> orderID;
     public static volatile SingularAttribute<OrderItem, Double> priceSold;
     public static volatile SingularAttribute<OrderItem, String> isbn;
+    public static volatile SingularAttribute<OrderItem, Book> book;
 
 }

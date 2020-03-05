@@ -1,4 +1,4 @@
-CREATE DATABASE IF NOT EXISTS store;
+CREATE DATABASE IF NOT EXISTS bookstore;
 USE bookstore;
 
 DROP TABLE IF EXISTS `Tax`;
@@ -169,6 +169,7 @@ CREATE TABLE `Book_Authors` (
 
 CREATE TABLE `Clients` (
   `Client_ID` INT AUTO_INCREMENT,
+  `Hashed_Password` VARCHAR(255),
   `Is_Manager` BOOL,
   `First_Name` VARCHAR(50),
   `Last_Name` VARCHAR(50),
@@ -176,7 +177,7 @@ CREATE TABLE `Clients` (
   `Address_1` VARCHAR(300),
   `Address_2` VARCHAR(300),
   `City` VARCHAR(100),
-  `Province_Abbreviation` INT,
+  `Province_Abbreviation` VARCHAR(2),
   `Country` VARCHAR(30),
   `Postal_Code` VARCHAR(6),
   `Home_Telephone` VARCHAR(10),
