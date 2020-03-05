@@ -1832,7 +1832,9 @@ values ("placeholder12345!",true, "Buddy Potapczuk", "Sonya Irlam", "O''Hara-Bal
 insert into clients
 (Hashed_Password, Is_Manager, First_Name, Last_Name, Company_Name, Address_1, Address_2, City, Province_Abbreviation, Country,
  Postal_Code, Home_Telephone, Cell_Telephone, Email, Date_Entered, Last_Modified, Is_Removed)
-values ("placeholder12345!",true, "Gardy Farnish", "Kippie Stonner", "Rice-Auer", "95313 Farragut Terrace", null, "TÃ¤by", 6, "Sweden",
+
+values ("placeholder12345!",true, "Gardy Farnish", "Kippie Stonner", "Rice-Auer", "95313 Farragut Terrace", null, "Täby", 6, "Sweden",
+
         "183 60", "9607994610", "9609098477", "kstonner5@google.co.uk", "2019-01-30 00:00:00", "2020-01-04 10:45:11",
         true);
 insert into clients
@@ -1866,7 +1868,8 @@ values ("placeholder12345!",true, "Aindrea Fobidge", "Rayna Leggin", "Ruecker-Sc
 insert into clients
 (Hashed_Password, Is_Manager, First_Name, Last_Name, Company_Name, Address_1, Address_2, City, Province_Abbreviation, Country,
  Postal_Code, Home_Telephone, Cell_Telephone, Email, Date_Entered, Last_Modified, Is_Removed)
-values ("placeholder12345!",false, "Pace Mulchrone", "Daphna Stratz", "Thiel, Larkin and Zemlak", "45 Alpine Way", null, "PatitÃ­rion", 12,
+
+values ("placeholder12345!",false, "Pace Mulchrone", "Daphna Stratz", "Thiel, Larkin and Zemlak", "45 Alpine Way", null, "Patitírion", 12,
         "Greece", null, "5375175146", "9737343634", "dstratzb@mac.com", "2019-01-30 00:00:00", "2020-01-28 19:25:13",
         false);
 insert into clients
@@ -1878,7 +1881,8 @@ values ("placeholder12345!",true, "Kerk Sheridan", "Carissa Hinrichsen", "Hilll 
 insert into clients
 (Hashed_Password, Is_Manager, First_Name, Last_Name, Company_Name, Address_1, Address_2, City, Province_Abbreviation, Country,
  Postal_Code, Home_Telephone, Cell_Telephone, Email, Date_Entered, Last_Modified, Is_Removed)
-values ("placeholder12345!",true, "Loralie Crothers", "Ferris Chominski", "Spencer-Nikolaus", "0 Reindahl Avenue", null, "PyhÃ¤ntÃ¤", 14,
+
+values ("placeholder12345!",true, "Loralie Crothers", "Ferris Chominski", "Spencer-Nikolaus", "0 Reindahl Avenue", null, "Pyhäntä", 14,
         "Finland", "92930", "3609732954", "9797858035", "fchominskid@google.co.jp", "2019-01-30 00:00:00",
         "2019-02-24 01:22:47", false);
 insert into clients
@@ -1930,7 +1934,8 @@ insert into clients
 (Hashed_Password, Is_Manager, First_Name, Last_Name, Company_Name, Address_1, Address_2, City, Province_Abbreviation, Country,
  Postal_Code, Home_Telephone, Cell_Telephone, Email, Date_Entered, Last_Modified, Is_Removed)
 values ("placeholder12345!",false, "Haydon Ashford", "Andriette Brugman", "Bashirian, Hintz and Cruickshank", "0 Washington Crossing", null,
-        "ViamÃ£o", 23, "Brazil", "944000", "9078415300", null, "abrugmanm@smh.com.au", "2019-01-30 00:00:00",
+        "Viamão", 23, "Brazil", "944000", "9078415300", null, "abrugmanm@smh.com.au", "2019-01-30 00:00:00",
+
         "2019-11-13 23:58:44", true);
 insert into clients
 (Hashed_Password, Is_Manager, First_Name, Last_Name, Company_Name, Address_1, Address_2, City, Province_Abbreviation, Country,
@@ -1969,7 +1974,8 @@ values ("placeholder12345!",false, "Whitney Godball", "Jeana Nowlan", "Batz-Beat
 insert into clients
 (Hashed_Password, Is_Manager, First_Name, Last_Name, Company_Name, Address_1, Address_2, City, Province_Abbreviation, Country,
  Postal_Code, Home_Telephone, Cell_Telephone, Email, Date_Entered, Last_Modified, Is_Removed)
-values ("placeholder12345!",true, "Tabatha Iston", "Sawyer Gosling", "Pouros, Lynch and Tremblay", "7790 Utah Point", "353", "DuekouÃ©", 30,
+values ("placeholder12345!",true, "Tabatha Iston", "Sawyer Gosling", "Pouros, Lynch and Tremblay", "7790 Utah Point", "353", "Duekoué", 30,
+
         "Ivory Coast", null, "8377915332", "5413296991", "sgoslingt@soundcloud.com", "2019-01-30 00:00:00",
         "2019-03-08 13:33:42", false);
 
@@ -2223,6 +2229,7 @@ VALUES ("9780356507217", "E-Pub", "sample.epub", "2019-12-26 12:38:58", SYSDATE(
 INSERT INTO Book_Format
 VALUES ("9780440000587", "E-Pub", "sample.epub", "2019-12-26 12:38:58", SYSDATE(), FALSE);
 
+
 INSERT INTO Book_Format(ISBN, date_created, last_modified, Is_Removed, File_Location)
 VALUES ('9780142000670', '2017-01-08', '2017-02-08', FALSE, '9780142000670.pdf');
 INSERT INTO Book_Format(ISBN, date_created, last_modified, Is_Removed, File_Location)
@@ -2439,6 +2446,7 @@ INSERT INTO Book_Format(ISBN, date_created, last_modified, Is_Removed, File_Loca
 VALUES ('9780356507217', '2018-06-05', '2019-06-05', FALSE, '9780356507217.pdf');
 INSERT INTO Book_Format(ISBN, date_created, last_modified, Is_Removed, File_Location)
 VALUES ('9780440000587', '2019-09-24', '2019-09-24', FALSE, '9780440000587.pdf');
+>>>>>>> ff5d724aee3685972ee3f77f4b11f3a576e5602a
 INSERT INTO Book_Format(ISBN,Date_Created,Last_Modified,Is_Removed,File_Location,Format) VALUES ('9780142000670','2017-01-08','2017-02-08',FALSE,'9780142000670.pdf','pdf');
 INSERT INTO Book_Format(ISBN,Date_Created,Last_Modified,Is_Removed,File_Location,Format) VALUES ('9780439244190','2018-09-02','2018-10-02',TRUE,'9780439244190.pdf','pdf');
 INSERT INTO Book_Format(ISBN,Date_Created,Last_Modified,Is_Removed,File_Location,Format) VALUES ('9780061120084','2019-05-23','2019-05-23',FALSE,'9780061120084.pdf','pdf');
@@ -2561,4 +2569,75 @@ INSERT INTO Ads (Image_Name,Ad_Url,Date_Created,Last_Modified,Is_Removed) VALUES
 INSERT INTO Ads (Image_Name,Ad_Url,Date_Created,Last_Modified,Is_Removed) VALUES('pineapple.jpg','https://en.wikipedia.org/wiki/Pineapple','2019-06-01','2019-07-01',FALSE);
 INSERT INTO Ads (Image_Name,Ad_Url,Date_Created,Last_Modified,Is_Removed) VALUES('melon.jpg','https://en.wikipedia.org/wiki/Melon','2019-06-01','2019-08-01',FALSE);
 INSERT INTO Ads (Image_Name,Ad_Url,Date_Created,Last_Modified,Is_Removed) VALUES('blueberry.jpg','https://en.wikipedia.org/wiki/Blueberry','2019-07-01','2019-09-01',FALSE);
+
 INSERT INTO Ads (Image_Name,Ad_Url,Date_Created,Last_Modified,Is_Removed) VALUES('grapefruit.jpg','https://en.wikipedia.org/wiki/Grapefruit','2019-08-01','2019-10-01',TRUE);
+INSERT INTO Surveys (Survey_Name,Date_Created,Last_Modified,Is_Removed,Survey_Description)
+    VALUES('Do you like to read?','2019-06-01','2019-06-01',FALSE,'Here at TheBookStore we would like to ask our community what their opinion on reading is, positive, negative, or something else');
+INSERT INTO Surveys (Survey_Name,Date_Created,Last_Modified,Is_Removed,Survey_Description)
+    VALUES('What is your favorite year in history','2019-07-01','2019-07-01',FALSE,'Here at TheBookStore we are interested in the opinion of our audience on contemporary history, in particular we want your opinion on our selection of the juciest recent years.');
+INSERT INTO Surveys (Survey_Name,Date_Created,Last_Modified,Is_Removed,Survey_Description)
+    VALUES('Is Shakespeare overrated?','2019-08-01','2019-09-01',FALSE,'Here at TheBookStore we ask the buring questions we suppose are on everyones mind. Shakespeare brilliant artist or overrated hack? You decide.');
+INSERT INTO Surveys (Survey_Name,Date_Created,Last_Modified,Is_Removed,Survey_Description)
+    VALUES('What is your opinion on Trains','2019-09-01','2019-09-01',FALSE,'Trains some people obesess over them, others could not care less. Where do you fall?');
+INSERT INTO Surveys (Survey_Name,Date_Created,Last_Modified,Is_Removed,Survey_Description)
+    VALUES('Should we ban the word however?','2019-10-01','2019-10-01',FALSE,'We at TheBookstore would argue the word however has been overused and abused in too many school essays and should never see the light of day again, however it could be argued it has a place in mature literature. You decide its fate.');
+INSERT INTO Surveys (Survey_Name,Date_Created,Last_Modified,Is_Removed,Survey_Description)
+    VALUES('Would you survive a zombie apocalipse?','2019-011-01','2019-012-01',FALSE,'The real questions right now. In light of all you know about zombies from countless educational sources would you survive a zombie apocalipse and why?');
+INSERT INTO Survey_Data (Survey_ID,Votes,Date_Created,Last_Modified,Choice)
+    VALUES(FALSE,1,10,'2019-06-01','2019-06-01','Yes');
+INSERT INTO Survey_Data (Is_Removed,Survey_ID,Votes,Date_Created,Last_Modified,Choice)
+    VALUES(FALSE,1,20,'2019-06-01','2019-06-01','No');
+INSERT INTO Survey_Data (Is_Removed,Survey_ID,Votes,Date_Created,Last_Modified,Choice)
+    VALUES(FALSE,1,5,'2019-06-01','2019-06-01','Sometimes');
+INSERT INTO Survey_Data (Is_Removed,Survey_ID,Votes,Date_Created,Last_Modified,Choice)
+    VALUES(FALSE,1,2,'2019-06-01','2019-06-01','Only morally questionable material.');
+INSERT INTO Survey_Data (Is_Removed,Survey_ID,Votes,Date_Created,Last_Modified,Choice)
+    VALUES(FALSE,1,1,'2019-06-01','2019-06-01','Actually I am illiterate, someone helped me vote here');
+INSERT INTO Survey_Data (Is_Removed,Survey_ID,Votes,Date_Created,Last_Modified,Choice)
+    VALUES(FALSE,2,10,'2019-07-01','2019-07-01','1984');
+INSERT INTO Survey_Data (Is_Removed,Survey_ID,Votes,Date_Created,Last_Modified,Choice)
+    VALUES(FALSE,2,15,'2019-07-01','2019-07-01','1999');
+INSERT INTO Survey_Data (Is_Removed,Survey_ID,Votes,Date_Created,Last_Modified,Choice)
+    VALUES(FALSE,2,20,'2019-07-01','2019-07-01','2000');
+INSERT INTO Survey_Data (Is_Removed,Survey_ID,Votes,Date_Created,Last_Modified,Choice)
+    VALUES(FALSE,2,15,'2019-07-01','2019-07-01','2008');
+INSERT INTO Survey_Data (Is_Removed,Survey_ID,Votes,Date_Created,Last_Modified,Choice)
+    VALUES(FALSE,2,5,'2019-07-01','2019-07-01','2020');
+INSERT INTO Survey_Data (Is_Removed,Survey_ID,Votes,Date_Created,Last_Modified,Choice)
+    VALUES(FALSE,2,3,'2019-07-01','2019-07-01','3000 (I think I am funny)');
+INSERT INTO Survey_Data (Is_Removed,Survey_ID,Votes,Date_Created,Last_Modified,Choice)
+    VALUES(FALSE,3,10,'2019-08-01','2019-08-01','Yes');
+INSERT INTO Survey_Data (Is_Removed,Survey_ID,Votes,Date_Created,Last_Modified,Choice)
+    VALUES(FALSE,3,20,'2019-08-01','2019-08-01','No');
+INSERT INTO Survey_Data (Is_Removed,Survey_ID,Votes,Date_Created,Last_Modified,Choice)
+    VALUES(FALSE,3,5,'2019-08-01','2019-08-01','Who is Sakespeare?');
+INSERT INTO Survey_Data (Is_Removed,Survey_ID,Votes,Date_Created,Last_Modified,Choice)
+    VALUES(FALSE,3,2,'2019-08-01','2019-10-01','I feel we really first need to properly define overrated');
+INSERT INTO Survey_Data (Is_Removed,Survey_ID,Votes,Date_Created,Last_Modified,Choice)
+    VALUES(FALSE,4,10,'2019-09-01','2019-09-01','Trains are justice');
+INSERT INTO Survey_Data (Is_Removed,Survey_ID,Votes,Date_Created,Last_Modified,Choice)
+    VALUES(FALSE,4,15,'2019-09-01','2019-09-01','Dude, they are just machines');
+INSERT INTO Survey_Data (Is_Removed,Survey_ID,Votes,Date_Created,Last_Modified,Choice)
+    VALUES(FALSE,4,2,'2019-09-01','2019-09-01','I build and design trains, so they are important to me.');
+INSERT INTO Survey_Data (Is_Removed,Survey_ID,Votes,Date_Created,Last_Modified,Choice)
+    VALUES(FALSE,4,1,'2019-09-01','2019-10-01','I live in 1910, so they are my best form of transportation.');
+INSERT INTO Survey_Data (Is_Removed,Survey_ID,Votes,Date_Created,Last_Modified,Choice)
+    VALUES(FALSE,5,25,'2019-10-01','2019-10-01','Dear god yes.');
+INSERT INTO Survey_Data (Is_Removed,Survey_ID,Votes,Date_Created,Last_Modified,Choice)
+    VALUES(FALSE,5,10,'2019-10-01','2019-10-01','No! It is my favorite word, however I understand where you are coming from.');
+INSERT INTO Survey_Data (Is_Removed,Survey_ID,Votes,Date_Created,Last_Modified,Choice)
+    VALUES(FALSE,5,15,'2019-10-01','2019-10-01','I am sorry, but this is stupid, who cares?');
+INSERT INTO Survey_Data (Is_Removed,Survey_ID,Votes,Date_Created,Last_Modified,Choice)
+    VALUES(FALSE,5,5,'2019-10-01','2019-10-02','However, however, however, however, however....');
+INSERT INTO Survey_Data (Is_Removed,Survey_ID,Votes,Date_Created,Last_Modified,Choice)
+    VALUES(FALSE,6,10,'2019-11-01','2019-11-01','I think so, yeah.');
+INSERT INTO Survey_Data (Is_Removed,Survey_ID,Votes,Date_Created,Last_Modified,Choice)
+    VALUES(FALSE,6,20,'2019-11-01','2019-11-01','Are you kidding, I have trained for this my whole life.');
+INSERT INTO Survey_Data (Is_Removed,Survey_ID,Votes,Date_Created,Last_Modified,Choice)
+    VALUES(FALSE,6,5,'2019-11-01','2019-11-01','Honestly, no, probably not.');
+INSERT INTO Survey_Data (Is_Removed,Survey_ID,Votes,Date_Created,Last_Modified,Choice)
+    VALUES(FALSE,6,2,'2019-11-01','2019-11-01','Two words: plot armour.');
+INSERT INTO Survey_Data (Is_Removed,Survey_ID,Votes,Date_Created,Last_Modified,Choice)
+    VALUES(FALSE,6,5,'2019-11-01','2019-11-01','You do know zombies are not real right?');
+INSERT INTO Survey_Data (Is_Removed,Survey_ID,Votes,Date_Created,Last_Modified,Choice)
+    VALUES(FALSE,6,1,'2019-11-01','2019-11-01','I will be fine, as I will be on mars.');
