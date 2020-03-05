@@ -105,6 +105,7 @@ public class Book implements Serializable {
     @OneToMany(cascade = CascadeType.ALL,mappedBy="book")
     private List<CustomerReviews> reviews;
     
+    
     public Book() {
     }
 

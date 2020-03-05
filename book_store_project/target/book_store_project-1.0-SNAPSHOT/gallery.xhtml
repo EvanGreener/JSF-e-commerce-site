@@ -40,7 +40,6 @@
                         <!--Search by & genre filters-->
                         <p>Filter By Genre</p>
                         <h:selectManyCheckbox layout="pageDirection" value="#{search.genreFilters}">
-                            <ui:repeat value="#{bb.genre}" var="book">#{book}</ui:repeat>
                             <p:ajax update="gallery pagination resLabel" listener="#{search.onChecked}" />
                             <f:selectItem itemValue = "Science Fiction" itemLabel = "Sci-Fi"/>
                             <f:selectItem itemValue = "Mystery" itemLabel = "Mystery" /> 

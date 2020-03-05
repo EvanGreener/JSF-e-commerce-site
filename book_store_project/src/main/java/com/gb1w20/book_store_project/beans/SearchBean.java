@@ -124,5 +124,10 @@ public class SearchBean implements Serializable {
     public void onChecked() {
         updateSearchBean();
     }
+    
+    public String showGenreBooks(String genre){
+        setGenreFilters(genre);
+        return "gallery";
+    }
 
 }
