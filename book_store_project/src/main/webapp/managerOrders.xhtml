@@ -49,6 +49,16 @@
                 <f:facet name="header">Status</f:facet>
                 #{ordersJpaController.getStatusByOrderId(orders.orderID)}
             </h:column>
+            <h:column>
+                <h:form>
+                    <h:commandLink value="Edit Order" action="#" disabled="#{orders.isRemoved}"/> 
+                </h:form>
+            </h:column>
+            <h:column>
+                <h:form>
+                    <h:commandLink value="#{orderBacking.getRemovalStatus(orders.isRemoved)}" action="#{orderBacking.removeOrder(orders)}" disabled="#{orders.isRemoved}"/> 
+                </h:form>
+            </h:column>
         </h:dataTable>
         <bookstore:footer/>
     </h:body>
