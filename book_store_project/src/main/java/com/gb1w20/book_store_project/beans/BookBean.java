@@ -34,6 +34,7 @@ public class BookBean implements Serializable {
     private List<Object> popularGenres;
     private List<Book> recentlyAdded;
     private Book book;
+    private List<Book> similarGenreBooks;
     private String genre;
 
     @PostConstruct
@@ -59,23 +60,37 @@ public class BookBean implements Serializable {
         recentlyAdded = bookCtrlr.getRecentlyAdded();
         return recentlyAdded;
     }
-    
+
     public String viewGenreBooks(String genre) {
         setGenre(genre);
         return "gallery";
     }
 
-    public String viewBook(Book value) {
-        this.book = value;
-        return "book";
-    }
-    public void setGenre(String genre){
-        this.genre=genre;
-    }
-    public String getGenre(){
-        return this.genre;
+    public String viewBook(Book book) {
+        LOG.debug("getSimilarGenresBooks");
+        this.book = book;
+        return "book.xhtml";
     }
     
+    /**
+     * Get books with similar genre that user is currently viewing
+     * @param book
+     * @return similarGenreBooks
+     */
+    public List<Book> getSimilarGenreBooks(Book book) {
+        LOG.debug("getSimilarGenreBooks");
+        similarGenreBooks = bookCtrlr.getSimilarGenres(book);
+        return similarGenreBooks;
+    }
+
+    public void setGenre(String genre) {
+        this.genre = genre;
+    }
+
+    public String getGenre() {
+        return this.genre;
+    }
+
     public Book getBook() {
         return this.book;
     }

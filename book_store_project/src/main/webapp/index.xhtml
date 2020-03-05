@@ -4,7 +4,10 @@
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:b="http://bootsfaces.net/ui"
       xmlns:f="http://xmlns.jcp.org/jsf/core"
-      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:bookstore="http://java.sun.com/jsf/composite/default_components"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:a="http://xmlns.jcp.org/jsf/passthrough">
     <h:head>
         <title>The BookStore</title>
         <link rel="stylesheet" href="https://unpkg.com/swiper/css/swiper.min.css"/>
@@ -23,31 +26,11 @@
 
     <h:body>
 
- <b:alert severity="info">#{clientBacking.message}</b:alert>
-        <b:navBar brandImg="resources/images/logo.png"  brandImgStyleClass="brand-img-style" brandHref="#" fluid="true" class="headMenu">
-            <f:facet name="kebab">
-                <span class="fa fa-chevron-right"></span>
-            </f:facet>
-            <b:navbarLinks pull="center">
-                <b:navLink style="color: white " class="nav" value="Shop" href="./gallery.xhtml"></b:navLink>
-                <b:navLink  style="color: white;" value="Sales" href="#"></b:navLink>
-                <b:navLink style="color: white" value="Genres" href="#"></b:navLink>
+        <b:alert severity="info">#{clientBacking.message}</b:alert>
 
-            </b:navbarLinks>
-            <!--Adds spacing in nav bar-->
-            <b:navbarLinks pull="right"><b:navLink value="    " href="#"></b:navLink></b:navbarLinks>
-            <b:navbarLinks pull="right" styleClass="hidden-xs">
-                <b:navLink style="color: white" class="nav" value="Cart" href="#"></b:navLink>
-                <b:dropMenu value="En" style="color: white">
-                    <b:navLink id="en" value="English - En" href="#"></b:navLink>
-                    <b:navLink id="fr" value="Francais - Fr" href="#"></b:navLink>
-                </b:dropMenu>
+        <!--composite component that comes from the navbar.xhtml file to avoid coding nav bar in all web pages-->
+        <bookstore:navbar/>
 
-                <b:navLink style="color: white;font-weight: bold" value="Log In" href="signIn.xhtml">
-
-                </b:navLink>
-            </b:navbarLinks>
-        </b:navBar>
         <div class="swiper-container">
             <div class="swiper-wrapper">
 
@@ -82,65 +65,66 @@
             <div class="swiper-button-next"></div>
             <div class="swiper-button-prev"></div>
         </div>
-        <div class="thingy">
+        <div class="lightOrangeDiv">
 
             <p class="small">Best Seller Products</p><br/>
-  <h:form>
-            <h:panelGroup>
-                <div class="ui four doubling stackable cards">
+            <h:form>
+                <h:panelGroup>
+                    <div class="ui four doubling stackable cards">
 
 
-                    <ui:repeat value="#{bb.bestSeller}" var="books">
-                        <div class="ui fluid card darker">
-                            <div class="homepageImg">
-                                <h:graphicImage class="img" height="250" width="156.25" library="images" name="#{books.isbn}.jpg"/>
-                                <div class="cardHoverBtn"> View Cover</div>
-                            </div>
-                           
-                            <div class="content">
-                                 
-                             <h:commandLink action = "#{bb.viewBook(books)}" type="submit" value = "">
-                                <div class="header">
+                        <ui:repeat value="#{bb.bestSeller}" var="books">
+                            <div class="ui fluid card darker">
+                                <div class="homepageImg">
+                                    <h:graphicImage class="img" height="250" width="156.25" library="images" name="#{books.isbn}.jpg"/>
+                                    <div class="cardHoverBtn"> View Cover</div>
+                                </div>
 
-                                    #{books.title}</div>
-                                <div class="meta">
+                                <div class="content">
 
-                                    <ui:repeat value="#{books.authorsCollection}" var="author">
-                                        #{author.name}
-                                    </ui:repeat>
+                                    <h:commandLink action = "#{bb.viewBook(books)}" type="submit" value = "">
+                                        <div class="header">
+
+                                            #{books.title}</div>
+                                        <div class="meta">
+
+                                            <ui:repeat value="#{books.authorsCollection}" var="author">
+                                                #{author.name}
+                                            </ui:repeat>
+
+                                        </div>
+
+                                        <div class="description">
+                                            <div class="ui tag labels">
+                                                <a class="ui label">
+                                                    $#{books.listPrice}
+                                                </a>
+                                            </div>
+
+                                        </div>
+                                    </h:commandLink>
 
                                 </div>
 
-                                <div class="description">
-                                    <div class="ui tag labels">
-                                        <a class="ui label">
-                                            $#{books.listPrice}
-                                        </a>
-                                    </div>
+
+                                <div class="ui two bottom attached buttons ">
+                                    <div onclick="addToCart()" class="ui button">+ Add to Cart</div>
+
 
                                 </div>
-                                 </h:commandLink>
-                               
                             </div>
-                                 
-
-                            <div class="ui two bottom attached buttons ">
-                                <div onclick="addToCart()" class="ui button">+ Add to Cart</div>
-
-
-                            </div>
-                        </div>
-                    </ui:repeat>
-                </div>
-            </h:panelGroup>
-      </h:form>
+                        </ui:repeat>
+                    </div>
+                </h:panelGroup>
+            </h:form>
 
             <br/><br/>
-            <div class="ui large icon input ">
-                <input type="text" placeholder="Search..."/>
-                <div class="ui button">Search</div>
+<h:form>
+            <div class=" searchBarDiv">
+                <h:inputText a:placeholder="Search books..." style=" float: center; margin-top: -30px;" class="searchBar"/>
+             <h:commandButton class="searchButton" type="submit" value = "Search"/>
             </div>
-
+</h:form>
             <!-- The Modal -->
             <div id="myModal" class="modal">
 
@@ -167,7 +151,9 @@
                     <tr align="center">
                         <td align="center"><div class="ui wide skyscraper test ad left"  data-text="News"></div></td>
                         <td align="center"> <div class="ui netboard test ad survey" data-text="Survey"></div></td>
-                        <td align="center"><div class="ui wide skyscraper test ad right" data-text="Ads"></div></td>
+                        <td align="center"><div class="ui wide skyscraper test ad right" data-text="">
+                                <h:graphicImage height="100%" width="100%" library="images" name="apples.png"  />
+                            </div></td>
                     </tr>
                 </tbody>
             </table>
@@ -187,39 +173,46 @@
 
 
 
-        <div class="thingy3">
+        <div class="lightPurpleDiv">
             <p class="small">Popular Genres</p><br/>
 
- <h:form>
-     <h:commandLink action = "#{bb.viewGenreBooks(genres)}" type="submit" value = "">
-            <h:panelGroup>
-                <div class="ui four doubling stackable cards">
-                   
-                  
-                    <ui:repeat value="#{bb.popularGenres}" var="genres">
-                        <div class="ui fluid card darker">
-                            <div class="homepageImg">
-                                <h:graphicImage class="img" height="200" width="320" library="images" name="#{genres}.jpg"/>
-                            </div>
-                            <div class="content">
-                                <div class="header">#{genres}</div>
+            <h:form>
+                <h:commandLink action = "#{bb.viewGenreBooks(genre)}" type="submit" value = "">
+                    <h:panelGroup>
+                        <div class="ui four doubling stackable cards">
 
-                            </div>
+
+                            <ui:repeat value="#{bb.popularGenres}" var="genres">
+                                
+                                <div class="ui fluid card darker">
+                                    <div class="homepageImg">
+                                        <h:graphicImage class="img" height="200" width="320" library="images" name="#{genres}.jpg"/>
+                                    </div>
+                                    <div class="content">
+                                        <div class="header">#{genres}</div>
+
+                                    </div>
+                                </div>
+                                      
+                            </ui:repeat>
+
+
                         </div>
-                    </ui:repeat>
-                       
-                      
-                </div>
-            </h:panelGroup>
-      </h:commandLink>
-       </h:form>
+                    </h:panelGroup>
+                      </h:commandLink>
+             
+            </h:form>
             <br/><br/>
-            <div class="ui centered leaderboard test ad"></div>
+            <div class="ui centered leaderboard test ad">
+                <h:graphicImage height="100%" width="100%" library="images" name="blueberry.png"  />
+            </div>
         </div>
-        <div class="thingy4">
 
-            <h:graphicImage height="2%" width="15%" library="images" name="logo.png"  />
-        </div>
+
+
+        <!--composite component that comes from the footer.xhtml file to avoid coding the website footer in all web pages-->
+        <bookstore:footer/>
+
         <!-- Initialize Swiper -->
         <script>
             var swiper = new Swiper('.swiper-container', {

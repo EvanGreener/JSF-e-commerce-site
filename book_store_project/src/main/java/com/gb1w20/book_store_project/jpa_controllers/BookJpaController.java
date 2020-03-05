@@ -1,6 +1,5 @@
 package com.gb1w20.book_store_project.jpa_controllers;
 
-import com.gb1w20.book_store_project.beans.SearchBean;
 import com.gb1w20.book_store_project.entities.Authors_;
 import com.gb1w20.book_store_project.entities.Book;
 import com.gb1w20.book_store_project.entities.Book_;
@@ -17,11 +16,9 @@ import javax.persistence.Query;
 import javax.persistence.EntityNotFoundException;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
-import javax.persistence.criteria.CollectionJoin;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Join;
-import javax.persistence.criteria.ListJoin;
 import javax.persistence.criteria.Root;
 import javax.transaction.SystemException;
 import javax.transaction.UserTransaction;
@@ -163,7 +160,6 @@ public class BookJpaController implements Serializable {
         return query.getResultList();
 
     }
-
     public List<Book> getBestSeller() {
 
         TypedQuery<Book> query = em.createQuery("SELECT b FROM Book b INNER JOIN b.orders o GROUP BY o.isbn ORDER BY count(o.isbn) DESC", Book.class);
@@ -181,6 +177,16 @@ public class BookJpaController implements Serializable {
         List<Object> genres = query.getResultList();
         return genres;
         
+    }
+    
+   //TODO books that user does not already contain
+    public List<Book> getSimilarGenres(Book b){
+         TypedQuery<Book> query = em.createQuery("SELECT b FROM Book b WHERE b.genre = :genre AND b.isbn <> :isbn", Book.class);
+         query.setParameter("genre", b.getGenre());
+           query.setParameter("isbn", b.getIsbn());
+         query.setMaxResults(4);
+        List<Book> books = query.getResultList();
+        return books; 
     }
     
     public List<Book> getRecentlyAdded(){

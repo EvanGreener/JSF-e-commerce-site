@@ -13,6 +13,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
@@ -81,6 +83,14 @@ public class CustomerReviews implements Serializable {
     @Temporal(TemporalType.TIMESTAMP)
     private Date dateRemoved;
 
+      @JoinColumn(name = "ISBN", referencedColumnName = "ISBN", insertable = false, updatable = false)
+    @ManyToOne(optional = false)
+    private Book book;
+      
+    public Book getBook(){
+        return book;
+    }
+    
     public CustomerReviews() {
     }
 

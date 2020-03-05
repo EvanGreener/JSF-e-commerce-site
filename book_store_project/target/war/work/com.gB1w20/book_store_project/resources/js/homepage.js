@@ -1,4 +1,6 @@
-document.addEventListener('DOMContentLoaded', function () {// Get the modal
+document.addEventListener('DOMContentLoaded', function (event) {// Get the modal
+      
+
     // Get the modal
     var modal = document.getElementById("myModal");
 // Get the image and insert it inside the modal - use its "alt" text as a caption
@@ -9,7 +11,7 @@ document.addEventListener('DOMContentLoaded', function () {// Get the modal
     var index;
     for (index = 0; index < bookCards.length; index++) {
         bookCards[index].onclick = function () {
-           // TODO
+          
             
         }
     }
@@ -17,7 +19,8 @@ document.addEventListener('DOMContentLoaded', function () {// Get the modal
 var imgBtn = document.getElementsByClassName('cardHoverBtn');
     for (index = 0; index < imgBtn.length; index++) {
         imgBtn[index].onclick = function () {
-          // Get the modal
+         
+            // Get the modal
     var modal = document.getElementById("myModal");
 // Get the image and insert it inside the modal - use its "alt" text as a caption
        var img1 = document.getElementById("img01");
@@ -96,11 +99,7 @@ function displayCardHoverButton()
     this.appendChild(btn);
 }
 
-function displayBookCover() {
 
-            
-        
-}
 
 
 function addReview() {
@@ -113,9 +112,11 @@ function removeCardHoverButton()
 }
 function addToCart()
 {
+  event.stopPropagation();
     alert("Successfuly added to cart");
 }
 function showMore() {
+    
     var dots = document.getElementById("dots");
     var moreText = document.getElementById("more");
     var btnText = document.getElementById("moreBtn");

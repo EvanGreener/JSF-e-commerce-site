@@ -5,7 +5,8 @@
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:b="http://bootsfaces.net/ui"
       xmlns:f="http://xmlns.jcp.org/jsf/core"
-      xmlns:a="http://xmlns.jcp.org/jsf/passthrough">
+      xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
+      xmlns:bookstore="http://java.sun.com/jsf/composite/default_components">
     <h:head>
         <title>Register</title>
         <link href="https://fonts.googleapis.com/css?family=Montserrat|Roboto&amp;display=swap" rel="stylesheet"/>
@@ -13,15 +14,9 @@
         <h:outputStylesheet library="css" name="homepage.css" />
     </h:head>
     <h:body>
-        <b:navBar brand="Brand" brandHref="#" fluid="true" class="headMenu">
-            <f:facet name="kebab">
-                <span class="fa fa-chevron-right"></span>
-            </f:facet>
-            <b:navbarLinks>
-                <b:navLink value="Login" href="signIn.xhtml"></b:navLink>
-                <b:navLink value="Home Page" href="index.xhtml"></b:navLink>
-            </b:navbarLinks>
-        </b:navBar>
+        <!--composite component that comes from the navbar.xhtml file to avoid coding nav bar in all web pages-->
+        <bookstore:navbar/>
+
         <h:form class="ui form" id="register">
             <div class="ui fluid card">
                 <div class="lightGreyDiv">
@@ -154,8 +149,8 @@
                 </div>
             </div>
         </h:form>
-        <div class="thingy4">
-            <h2 class="white">This is where the footer goes</h2>
-        </div>
+        
+        <!--composite component that comes from the footer.xhtml file to avoid coding the website footer in all web pages-->
+        <bookstore:footer/>
     </h:body>
 </html>
