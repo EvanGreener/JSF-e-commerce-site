@@ -163,7 +163,6 @@ public class BookJpaController implements Serializable {
         return query.getResultList();
 
     }
-
     public List<Book> getBestSeller() {
 
         TypedQuery<Book> query = em.createQuery("SELECT b FROM Book b INNER JOIN b.orders o GROUP BY o.isbn ORDER BY count(o.isbn) DESC", Book.class);

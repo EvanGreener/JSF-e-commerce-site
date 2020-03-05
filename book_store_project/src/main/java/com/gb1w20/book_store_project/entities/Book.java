@@ -99,8 +99,12 @@ public class Book implements Serializable {
     )
     private List<Authors> authorsCollection;
     
-    @OneToMany(cascade = CascadeType.ALL,mappedBy="ba")
+    @OneToMany(cascade = CascadeType.ALL,mappedBy="book")
     private List<OrderItem> orders;
+    
+    @OneToMany(cascade = CascadeType.ALL,mappedBy="book")
+    private List<CustomerReviews> reviews;
+    
     public Book() {
     }
 
@@ -220,7 +224,9 @@ public class Book implements Serializable {
     public List<OrderItem> getOrders(){
          return orders;
     }
-    
+     public List<CustomerReviews> getReviews(){
+         return reviews;
+    }
     @Override
     public int hashCode() {
         int hash = 0;

@@ -60,7 +60,7 @@ body {
 .headMenu{
     margin-bottom: 0px !important;
 }
-.thingy{
+.lightOrangeDiv{
     padding:5%;
     background-color: #EBD9CF;
 }
@@ -68,14 +68,11 @@ body {
     padding:5%;
     background-color: #EFF1F3;
 }
-.thingy3{
+.lightPurpleDiv{
     padding:5%;
     background-color: #DBD3DB;
 }
-.thingy3{
-    padding:5%;
-    background-color: #DBD3DB;
-}
+
 
 .bookFormatBtn{
     background-color: white;

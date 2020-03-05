@@ -62,13 +62,13 @@ public class OrderItem implements Serializable {
     
     @JoinColumn(name = "ISBN", referencedColumnName = "ISBN", insertable = false, updatable = false)
     @ManyToOne(optional = false)
-    private Book ba;
+    private Book book;
 
     public OrderItem() {
     }
     
-    public Book getBa(){
-        return ba;
+    public Book getBook(){
+        return book;
     }
     public OrderItem(Integer itemID) {
         this.itemID = itemID;
