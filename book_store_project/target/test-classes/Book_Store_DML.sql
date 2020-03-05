@@ -2446,7 +2446,7 @@ INSERT INTO Book_Format(ISBN, date_created, last_modified, Is_Removed, File_Loca
 VALUES ('9780356507217', '2018-06-05', '2019-06-05', FALSE, '9780356507217.pdf');
 INSERT INTO Book_Format(ISBN, date_created, last_modified, Is_Removed, File_Location)
 VALUES ('9780440000587', '2019-09-24', '2019-09-24', FALSE, '9780440000587.pdf');
->>>>>>> ff5d724aee3685972ee3f77f4b11f3a576e5602a
+
 INSERT INTO Book_Format(ISBN,Date_Created,Last_Modified,Is_Removed,File_Location,Format) VALUES ('9780142000670','2017-01-08','2017-02-08',FALSE,'9780142000670.pdf','pdf');
 INSERT INTO Book_Format(ISBN,Date_Created,Last_Modified,Is_Removed,File_Location,Format) VALUES ('9780439244190','2018-09-02','2018-10-02',TRUE,'9780439244190.pdf','pdf');
 INSERT INTO Book_Format(ISBN,Date_Created,Last_Modified,Is_Removed,File_Location,Format) VALUES ('9780061120084','2019-05-23','2019-05-23',FALSE,'9780061120084.pdf','pdf');
@@ -2583,7 +2583,7 @@ INSERT INTO Surveys (Survey_Name,Date_Created,Last_Modified,Is_Removed,Survey_De
     VALUES('Should we ban the word however?','2019-10-01','2019-10-01',FALSE,'We at TheBookstore would argue the word however has been overused and abused in too many school essays and should never see the light of day again, however it could be argued it has a place in mature literature. You decide its fate.');
 INSERT INTO Surveys (Survey_Name,Date_Created,Last_Modified,Is_Removed,Survey_Description)
     VALUES('Would you survive a zombie apocalipse?','2019-011-01','2019-012-01',FALSE,'The real questions right now. In light of all you know about zombies from countless educational sources would you survive a zombie apocalipse and why?');
-INSERT INTO Survey_Data (Survey_ID,Votes,Date_Created,Last_Modified,Choice)
+INSERT INTO Survey_Data (Is_Removed,Survey_ID,Votes,Date_Created,Last_Modified,Choice)
     VALUES(FALSE,1,10,'2019-06-01','2019-06-01','Yes');
 INSERT INTO Survey_Data (Is_Removed,Survey_ID,Votes,Date_Created,Last_Modified,Choice)
     VALUES(FALSE,1,20,'2019-06-01','2019-06-01','No');
