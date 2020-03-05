@@ -1,0 +1,222 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : Feb. 4, 2020, 9:28:27 p.m.
+    Author     : Saad,Shruti
+*/
+*{
+    font-family: 'Roboto', sans-serif !important;
+}
+html, body {
+    position: relative;
+    height: 100%;
+}
+body {
+    background: #eee;
+    font-size: 14px;
+    color:#000;
+    margin: 0;
+    padding: 0;
+}
+.nav {
+    margin: 0 auto 0 10px;
+
+}
+.item1{
+    background-color:  #CB4025 !important;
+}
+.item2{
+    background-color:  #CB2578 !important;
+}
+.item3{
+    background-color:  #3625CB !important;
+}
+.swiper-container {
+    width: 100%;
+    height: 80%;
+}
+.swiper-slide {
+    text-align: center;
+    font-size: 18px;
+    background: #fff;
+
+    /* Center slide text vertically */
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    -webkit-justify-content: center;
+    justify-content: center;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    -webkit-align-items: center;
+    align-items: center;
+}
+.headMenu{
+    margin-bottom: 0px !important;
+}
+.thingy{
+    padding:5%;
+    background-color: #EBD9CF;
+}
+.thingy2{
+    padding:5%;
+    background-color: #EFF1F3;
+}
+.thingy3{
+    padding:5%;
+    background-color: #DBD3DB;
+}
+.thingy3{
+    padding:5%;
+    background-color: #DBD3DB;
+}
+
+.bookFormatBtn{
+    background-color: white;
+    cursor: pointer;
+    font-size: 16px;
+    padding: 0.5% 2%;
+    transition-duration: 0.4s;
+    border-radius: 4px;
+    border: 2px solid #D77A61;
+}
+#more {
+    display: none;
+}
+input[type=number]{
+    width: 4%;
+    height: 30px;
+} 
+
+.bookFormatBtn:hover {
+    background-color: #D77A61;
+    color: white;
+}
+.mainBtn{
+    width: 15% !important;
+    background-color: white !important;
+}
+.darker:hover {
+    -webkit-filter:brightness(50%);
+    -moz-filter:brightness(50%);
+    filter: url(#brightness); 
+    filter:brightness(70%);
+}
+.sliderTextContent{
+    text-align: left;
+    margin: 40px 200px; 
+
+}
+.sliderImageContent{
+    text-align: center;
+}
+h2{
+    text-align: center ;
+}
+.cardHoverBtn{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    display:block;
+    background-color: white;
+    color: black;
+    opacity:0.5;
+    font-size: 16px;
+    padding: 12px 24px;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+    text-align: center;
+}
+
+.cardHoverBtn:hover {
+    background-color: grey;
+}
+
+.addToCartBtn{
+    width:10%; 
+    position:relative;
+    background-color: #223843;
+    color: white;
+    cursor: pointer;
+    font-size: 16px;
+    border-radius: 10px;
+    padding: 0.5% 2%;
+    border: 2px solid #223843;
+    
+}
+.bookInfo{
+      width: 100%;
+  padding: 10px;
+  display: flex;
+}
+.bookCover{
+      width: 50%;
+     text-align: center;
+     vertical-align: middle;  
+}
+.bookTextInfo{
+    width: 50%;
+  float: left;
+}
+.addToCartBtn:hover{
+    background-color: white;
+    color: black;
+    
+    
+}
+.addReviewBtn{
+    background-color: white;
+     border: none;
+    font-size: 30px;
+}
+h4{
+    text-align: center ;
+}
+
+/* The Modal (background) */
+.modal {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  padding-top: 100px; /* Location of the box */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0,0,0); /* Fallback color */
+  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+/* Modal Content */
+.modal-content {
+  background-color: #fefefe;
+  margin: auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 40%;
+}
+
+/* The Close Button */
+.close {
+  color: #aaaaaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: #000;
+  text-decoration: none;
+  cursor: pointer;
+}

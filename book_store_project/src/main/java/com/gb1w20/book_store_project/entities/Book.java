@@ -10,6 +10,7 @@ import java.math.BigDecimal;
 import java.util.Collection;
 import java.util.Date;
 import java.util.List;
+import java.util.Set;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -21,6 +22,7 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -97,7 +99,8 @@ public class Book implements Serializable {
     )
     private List<Authors> authorsCollection;
     
-
+    @OneToMany(cascade = CascadeType.ALL,mappedBy="ba")
+    private List<OrderItem> orders;
     public Book() {
     }
 
@@ -214,6 +217,10 @@ public class Book implements Serializable {
     }
     
 
+    public List<OrderItem> getOrders(){
+         return orders;
+    }
+    
     @Override
     public int hashCode() {
         int hash = 0;
