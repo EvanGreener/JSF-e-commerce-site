@@ -40,13 +40,16 @@ public class SearchBean implements Serializable {
           return genreFilters;
      }
 
-     public void setGenreFilters(String[] newValue) {
-          genreFilters = newValue;
-     }
 
-     public String getSearchBy() {
-          return searchBy;
-     }
+    public void setGenreFilters(String[] newValue) {
+        genreFilters = newValue;
+    }
+    public void setGenreFilters(String newValue) {
+        genreFilters = new String[] {newValue};
+    }
+    public String getSearchBy() {
+        return searchBy;
+    }
 
      public void setSearchBy(String newValue) {
           searchBy = newValue;
@@ -122,5 +125,10 @@ public class SearchBean implements Serializable {
      public void onChecked() {
           updateSearchBean();
      }
+    
+    public String showGenreBooks(String genre){
+        setGenreFilters(genre);
+        return "gallery";
+    }
 
 }

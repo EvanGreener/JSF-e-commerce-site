@@ -13,8 +13,12 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -55,10 +59,17 @@ public class OrderItem implements Serializable {
     private Date lastUpdated;
     @Column(name = "Is_Removed")
     private Boolean isRemoved;
+    
+    @JoinColumn(name = "ISBN", referencedColumnName = "ISBN", insertable = false, updatable = false)
+    @ManyToOne(optional = false)
+    private Book book;
 
     public OrderItem() {
     }
-
+    
+    public Book getBook(){
+        return book;
+    }
     public OrderItem(Integer itemID) {
         this.itemID = itemID;
     }

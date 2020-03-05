@@ -9,8 +9,8 @@
       xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:p="http://primefaces.org/ui"
-      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
-
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+      xmlns:bookstore="http://java.sun.com/jsf/composite/default_components">
 
 
      <h:head>
@@ -29,31 +29,9 @@
 
      </h:head>
      <h:body>
-          <b:navBar style="background-color:#D77A61;" brand="The Bookstore" brandHref="/book_store_project" fluid="true" class="headMenu">
-               <f:facet name="kebab">
-                    <span class="fa fa-chevron-right"></span>
-               </f:facet>
+          <!--composite component that comes from the navbar.xhtml file to avoid coding nav bar in all web pages-->
+          <bookstore:navbar/>
 
-               <b:navbarLinks>
-
-                    <b:navLink style="color: white" class="nav" value="Shop" href="./gallery.xhtml"></b:navLink>
-                    <b:navLink  style="color: white" value="Sales" href="#"></b:navLink>
-                    <b:navLink style="color: white" value="Genres" href="#"></b:navLink>
-               </b:navbarLinks>
-               <!--Adds spacing in nav bar-->
-               <b:navbarLinks pull="right"><b:navLink value="    " href="#"></b:navLink></b:navbarLinks>
-               <b:navbarLinks pull="right" styleClass="hidden-xs">
-                    <b:navLink style="color: white" class="nav" value="Cart" href="#"></b:navLink>
-                    <b:dropMenu value="En" style="color: white">
-                         <b:navLink id="en" value="English - En" href="#"></b:navLink>
-                         <b:navLink id="fr" value="Francais - Fr" href="#"></b:navLink>
-                    </b:dropMenu>
-
-                    <b:navLink style="color: white" value="Login" href="#">
-
-                    </b:navLink>
-               </b:navbarLinks>
-          </b:navBar>
           <h:form>
                <div class="gallery">
                     <div class="ui grid">
@@ -185,8 +163,6 @@
                                                   </h:commandButton>
                                              </c:otherwise>
                                         </c:choose>
-
-
                                    </h:panelGroup>
 
                               </div>
@@ -231,7 +207,7 @@
                          <div class="swiper-pagination"></div>
                     </div>
                </div>
-               <div class="thingy4">
+               <div class="darkBlueDiv">
                     <div class="ui four doubling stackable cards">
                          <div class="ui fluid card">
                               <div class="image">
@@ -307,6 +283,10 @@
                     </div>
                </div>
           </h:form>
+
+          <!--composite component that comes from the footer.xhtml file to avoid coding the website footer in all web pages-->
+          <bookstore:footer/>
+
           <!-- Initialize Swiper -->
           <script>
                var swiper = new Swiper('.swiper-container', {
@@ -323,8 +303,6 @@
                     },
                });
           </script>
-
-
 
      </h:body>
 </html>
