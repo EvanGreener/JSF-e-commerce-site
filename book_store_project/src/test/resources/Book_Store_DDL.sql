@@ -186,7 +186,8 @@ CREATE TABLE `Clients` (
   `Last_Modified` DATETIME,
   `Is_Removed` BOOL,
   PRIMARY KEY (`Client_ID`),
-  KEY `FK` (`Province_Abbreviation`)
+  KEY `FK` (`Province_Abbreviation`),
+  CONSTRAINT `Email` UNIQUE
 );
 
 CREATE TABLE `Tax` (
