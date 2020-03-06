@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:b="http://bootsfaces.net/ui"
+      xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+      xmlns:bookstore="http://java.sun.com/jsf/composite/default_components">
+
+     <head>
+          <title>Manager - Client Page</title>
+          <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+          <h:outputStylesheet library="webjars" name="Semantic-UI/2.4.1/semantic.min.css" />
+          <h:outputStylesheet library="webjars" name="swiper/4.5.1/dist/css/swiper.min.css" />
+     </head>
+     <body>
+          <div>
+               <bookstore:navbar/>
+
+               <!--Loading modal-->
+               <p:ajaxStatus onstart="PF('statusDialog').show()" onsuccess="PF('statusDialog').hide()" />
+               <p:dialog widgetVar="statusDialog" modal="true" draggable="false" closable="false" resizable="false" showHeader="false">
+                    <p:graphicImage style="display: inline;" class="loading" library="images" name="double-ring.svg" />
+               </p:dialog>
+
+               <!--Search bar-->
+               <div style="display: inline;" class="ui search">
+                    <h:inputText  id="query" value="#{ clientManagement.query}" a:placeholder="Search clients..." style="float: right; margin-top: -30px;" class="prompt" >
+                         <p:ajax event="keyup" listener="#{clientManagement.onKeyUp()}" update="clientsTable" />
+                    </h:inputText>
+               </div> 
+
+               <h:dataTable id="clientsTable" var="client" value="#{clientManagement.results}" >
+                    <h:column>
+                         <f:facet name="header">Login email</f:facet>
+                              #{client[0]}
+                    </h:column>
+                    <h:column>
+                         <f:facet name="header">First name</f:facet>
+                              #{client[1]}
+                    </h:column>
+                    <h:column>
+                         <f:facet name="header">Last name</f:facet>
+                              #{client[2]}
+                    </h:column>
+                    <h:column>
+                         <f:facet name="header">Value of all books purchased</f:facet>
+                              #{client[3]}
+                    </h:column>
+                    
+               </h:dataTable>
+
+               <bookstore:footer/>
+          </div>
+     </body>
+</html>
