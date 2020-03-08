@@ -116,7 +116,13 @@ function addToCart(isbn, format)
         cartItems.push(bookItem);
         localStorage.setItem("BOOK_STORE_CART",JSON.stringify(cartItems));
     }
-    event.stopPropagation();
+     event.stopPropagation();
+}
+
+function removeFromCart(isbn){
+    var cartItems = JSON.parse(localStorage.getItem("BOOK_STORE_CART"));
+    var updatedCart = cartItems.filter(item=>item.ISBN !== isbn);
+    localStorage.setItem("BOOK_STORE_CART",JSON.stringify(updatedCart));
 }
 
 function checkIfLoggedIn(){
