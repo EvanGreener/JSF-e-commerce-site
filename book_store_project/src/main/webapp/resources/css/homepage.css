@@ -29,8 +29,9 @@ body {
      height: 100%;
      width: auto;
 }
+
 .item1{
-     background-color:  #CB4025 !important;
+     background-color:  #d77a61 !important;
 }
 .item2{
      background-color:  #CB2578 !important;
@@ -85,6 +86,8 @@ body {
 .headMenu{
      margin-bottom: 0px !important;
      background-color: #D77A61 !important;
+     border:none !important;
+     border-radius: 0px !important;
 }
 
 .thingy{
