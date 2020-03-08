@@ -1802,145 +1802,141 @@ values ("Benedict Jacka", true, "2019-04-11 13:34:51", "2021-01-08 19:40:42");
 insert into clients
 (Hashed_Password, Is_Manager, First_Name, Last_Name, Company_Name, Address_1, Address_2, City, Province_Abbreviation, Country,
  Postal_Code, Home_Telephone, Cell_Telephone, Email, Date_Entered, Last_Modified, Is_Removed)
-values ("placeholder12345!",false, "Germayne McGrady", "Dosi Castaner", "Oberbrunner LLC", "1875 Artisan Lane", null, "Banaba", 1,
+values ("placeholder12345!",false, "Dosi", "Castaner", "Oberbrunner LLC", "1875 Artisan Lane", null, "Banaba", 1,
         "Philippines", "4125", "3409310215", null, "dcastaner0@cbslocal.com", "2019-01-30 00:00:00",
         "2019-06-18 21:37:30", true);
 insert into clients
 (Hashed_Password, Is_Manager, First_Name, Last_Name, Company_Name, Address_1, Address_2, City, Province_Abbreviation, Country,
  Postal_Code, Home_Telephone, Cell_Telephone, Email, Date_Entered, Last_Modified, Is_Removed)
-values ("placeholder12345!",true, "Carlene Fransemai", "Jane Hutcheon", "Rogahn, Barrows and Wehner", "27173 International Junction", null,
+values ("placeholder12345!",true, "Jane", "Hutcheon", "Rogahn, Barrows and Wehner", "27173 International Junction", null,
         "Amangarh", 2, "Pakistan", "24181", "5401036281", null, "jhutcheon1@last.fm", "2019-01-30 00:00:00",
         "2019-04-13 01:39:14", false);
 insert into clients
 (Hashed_Password, Is_Manager, First_Name, Last_Name, Company_Name, Address_1, Address_2, City, Province_Abbreviation, Country,
  Postal_Code, Home_Telephone, Cell_Telephone, Email, Date_Entered, Last_Modified, Is_Removed)
-values ("placeholder12345!",true, "Micheline Salack", "Sibley Doud", "Cummerata, Green and Corkery", "115 Banding Drive", null, "Dalai", 3,
+values ("placeholder12345!",true, "Sibley", "Doud", "Cummerata, Green and Corkery", "115 Banding Drive", null, "Dalai", 3,
         "China", null, "5345304114", "1896606850", "sdoud2@liveinternet.ru", "2019-01-30 00:00:00",
         "2019-08-03 17:51:43", false);
 insert into clients
 (Hashed_Password, Is_Manager, First_Name, Last_Name, Company_Name, Address_1, Address_2, City, Province_Abbreviation, Country,
  Postal_Code, Home_Telephone, Cell_Telephone, Email, Date_Entered, Last_Modified, Is_Removed)
-values ("placeholder12345!",false, "Emlen Chinnick", "Vernice Grigoli", "Rice, Hegmann and Gorczany", "1161 Loomis Plaza", null,
+values ("placeholder12345!",false, "Vernice", "Grigoli", "Rice, Hegmann and Gorczany", "1161 Loomis Plaza", null,
         "Pasirlimus", 4, "Indonesia", null, "5864802044", "6445467612", "vgrigoli3@github.com", "2019-01-30 00:00:00",
         "2019-08-13 01:38:24", true);
 insert into clients
 (Hashed_Password, Is_Manager, First_Name, Last_Name, Company_Name, Address_1, Address_2, City, Province_Abbreviation, Country,
  Postal_Code, Home_Telephone, Cell_Telephone, Email, Date_Entered, Last_Modified, Is_Removed)
-values ("placeholder12345!",true, "Buddy Potapczuk", "Sonya Irlam", "O''Hara-Balistreri", "20554 Monterey Hill", null, "Lelekovice", 5,
+values ("placeholder12345!",true, "Sonya", "Irlam", "O''Hara-Balistreri", "20554 Monterey Hill", null, "Lelekovice", 5,
         "Czech Republic", "664 31", "4927104394", "2407954166", "sirlam4@gravatar.com", "2019-01-30 00:00:00",
         "2019-11-16 12:27:26", true);
 insert into clients
 (Hashed_Password, Is_Manager, First_Name, Last_Name, Company_Name, Address_1, Address_2, City, Province_Abbreviation, Country,
  Postal_Code, Home_Telephone, Cell_Telephone, Email, Date_Entered, Last_Modified, Is_Removed)
-
-values ("placeholder12345!",true, "Gardy Farnish", "Kippie Stonner", "Rice-Auer", "95313 Farragut Terrace", null, "Täby", 6, "Sweden",
-
+values ("placeholder12345!",true, "Kippie", "Stonner", "Rice-Auer", "95313 Farragut Terrace", null, "Täby", 6, "Sweden",
         "183 60", "9607994610", "9609098477", "kstonner5@google.co.uk", "2019-01-30 00:00:00", "2020-01-04 10:45:11",
         true);
 insert into clients
 (Hashed_Password, Is_Manager, First_Name, Last_Name, Company_Name, Address_1, Address_2, City, Province_Abbreviation, Country,
  Postal_Code, Home_Telephone, Cell_Telephone, Email, Date_Entered, Last_Modified, Is_Removed)
-values ("placeholder12345!",true, "Ave Heims", "Evonne Yearn", "Jenkins, Marvin and Heathcote", "30980 Morrow Drive", "57703",
+values ("placeholder12345!",true, "Evonne", "Yearn", "Jenkins, Marvin and Heathcote", "30980 Morrow Drive", "57703",
         "Borodinskiy", 7, "Russia", "188961", "5643014039", "2404283838", "eyearn6@jiathis.com", "2019-01-30 00:00:00",
         "2019-08-07 07:21:32", true);
 insert into clients
 (Hashed_Password, Is_Manager, First_Name, Last_Name, Company_Name, Address_1, Address_2, City, Province_Abbreviation, Country,
  Postal_Code, Home_Telephone, Cell_Telephone, Email, Date_Entered, Last_Modified, Is_Removed)
-values ("placeholder12345!",true, "Bertie Latan", "Dannie Basire", "Fahey LLC", "1 Cordelia Alley", null, "Sobreira", 8, "Portugal",
+values ("placeholder12345!",true, "Dannie", "Basire", "Fahey LLC", "1 Cordelia Alley", null, "Sobreira", 8, "Portugal",
         "464545", "8404866499", "4031844525", "dbasire7@odnoklassniki.ru", "2019-01-30 00:00:00", "2019-11-19 12:23:30",
         false);
 insert into clients
 (Hashed_Password, Is_Manager, First_Name, Last_Name, Company_Name, Address_1, Address_2, City, Province_Abbreviation, Country,
  Postal_Code, Home_Telephone, Cell_Telephone, Email, Date_Entered, Last_Modified, Is_Removed)
-values ("placeholder12345!",false, "Aland Brosel", "Morley Dolohunty", "Kohler Group", "8 Burning Wood Trail", null, "Hotsk", 9, "Belarus",
+values ("placeholder12345!",false, "Morley", "Dolohunty", "Kohler Group", "8 Burning Wood Trail", null, "Hotsk", 9, "Belarus",
         null, "1192610936", null, "mdolohunty8@aboutads.info", "2019-01-30 00:00:00", "2019-09-29 02:08:47", true);
 insert into clients
 (Hashed_Password, Is_Manager, First_Name, Last_Name, Company_Name, Address_1, Address_2, City, Province_Abbreviation, Country,
  Postal_Code, Home_Telephone, Cell_Telephone, Email, Date_Entered, Last_Modified, Is_Removed)
-values ("placeholder12345!",false, "Raynard Pirt", "Shayne Caccavella", "Goodwin-Crist", "152 Namekagon Junction", null, "Larvik", 10,
+values ("placeholder12345!",false, "Shayne", " Caccavella", "Goodwin-Crist", "152 Namekagon Junction", null, "Larvik", 10,
         "Norway", "3271", "1074788811", null, "scaccavella9@oakley.com", "2019-01-30 00:00:00", "2019-05-05 08:48:20",
         true);
 insert into clients
 (Hashed_Password, Is_Manager, First_Name, Last_Name, Company_Name, Address_1, Address_2, City, Province_Abbreviation, Country,
  Postal_Code, Home_Telephone, Cell_Telephone, Email, Date_Entered, Last_Modified, Is_Removed)
-values ("placeholder12345!",true, "Aindrea Fobidge", "Rayna Leggin", "Ruecker-Schuppe", "27 Loeprich Way", "71605", "Caijiang", 11, "China",
+values ("placeholder12345!",true, "Rayna", "Leggin", "Ruecker-Schuppe", "27 Loeprich Way", "71605", "Caijiang", 11, "China",
         null, "2106855045", null, "rleggina@clickbank.net", "2019-01-30 00:00:00", "2019-03-18 12:02:57", false);
 insert into clients
 (Hashed_Password, Is_Manager, First_Name, Last_Name, Company_Name, Address_1, Address_2, City, Province_Abbreviation, Country,
  Postal_Code, Home_Telephone, Cell_Telephone, Email, Date_Entered, Last_Modified, Is_Removed)
-
-values ("placeholder12345!",false, "Pace Mulchrone", "Daphna Stratz", "Thiel, Larkin and Zemlak", "45 Alpine Way", null, "Patitírion", 12,
+values ("placeholder12345!",false, "Daphna", "Stratz", "Thiel, Larkin and Zemlak", "45 Alpine Way", null, "Patitírion", 12,
         "Greece", null, "5375175146", "9737343634", "dstratzb@mac.com", "2019-01-30 00:00:00", "2020-01-28 19:25:13",
         false);
 insert into clients
 (Hashed_Password, Is_Manager, First_Name, Last_Name, Company_Name, Address_1, Address_2, City, Province_Abbreviation, Country,
  Postal_Code, Home_Telephone, Cell_Telephone, Email, Date_Entered, Last_Modified, Is_Removed)
-values ("placeholder12345!",true, "Kerk Sheridan", "Carissa Hinrichsen", "Hilll and Sons", "75 Hoffman Circle", "52348", "Utama Wetan", 13,
+values ("placeholder12345!",true, "Carissa", "Hinrichsen", "Hilll and Sons", "75 Hoffman Circle", "52348", "Utama Wetan", 13,
         "Indonesia", null, "5737721134", "6663183047", "chinrichsenc@miitbeian.gov.cn", "2019-01-30 00:00:00",
         "2019-03-30 09:07:55", true);
 insert into clients
 (Hashed_Password, Is_Manager, First_Name, Last_Name, Company_Name, Address_1, Address_2, City, Province_Abbreviation, Country,
  Postal_Code, Home_Telephone, Cell_Telephone, Email, Date_Entered, Last_Modified, Is_Removed)
-
-values ("placeholder12345!",true, "Loralie Crothers", "Ferris Chominski", "Spencer-Nikolaus", "0 Reindahl Avenue", null, "Pyhäntä", 14,
+values ("placeholder12345!",true, "Ferris", "Chominski", "Spencer-Nikolaus", "0 Reindahl Avenue", null, "Pyhäntä", 14,
         "Finland", "92930", "3609732954", "9797858035", "fchominskid@google.co.jp", "2019-01-30 00:00:00",
         "2019-02-24 01:22:47", false);
 insert into clients
 (Hashed_Password, Is_Manager, First_Name, Last_Name, Company_Name, Address_1, Address_2, City, Province_Abbreviation, Country,
  Postal_Code, Home_Telephone, Cell_Telephone, Email, Date_Entered, Last_Modified, Is_Removed)
-values ("placeholder12345!",true, "Saunder Niccolls", "Valida Skitteral", "Schamberger-Durgan", "4442 Commercial Plaza", "9437", "Blagaj",
+values ("placeholder12345!",true, "Valida", "Skitteral", "Schamberger-Durgan", "4442 Commercial Plaza", "9437", "Blagaj",
         15, "Bosnia and Herzegovina", null, "1134862761", "5421953255", "vskitterale@jalbum.net", "2019-01-30 00:00:00",
         "2019-09-07 06:02:20", false);
 insert into clients
 (Hashed_Password, Is_Manager, First_Name, Last_Name, Company_Name, Address_1, Address_2, City, Province_Abbreviation, Country,
  Postal_Code, Home_Telephone, Cell_Telephone, Email, Date_Entered, Last_Modified, Is_Removed)
-values ("placeholder12345!",true, "Josey Bracher", "Essa Warburton", "Hoppe Inc", "47921 Grover Lane", null, "Ljungby", 16, "Sweden",
+values ("placeholder12345!",true, "Essa", "Warburton", "Hoppe Inc", "47921 Grover Lane", null, "Ljungby", 16, "Sweden",
         "341 23", "2323372131", "2275898829", "ewarburtonf@mtv.com", "2019-01-30 00:00:00", "2019-12-05 20:49:04",
         false);
 insert into clients
 (Hashed_Password, Is_Manager, First_Name, Last_Name, Company_Name, Address_1, Address_2, City, Province_Abbreviation, Country,
  Postal_Code, Home_Telephone, Cell_Telephone, Email, Date_Entered, Last_Modified, Is_Removed)
-values ("placeholder12345!",false, "Ede Wing", "Denys Eastes", "Gleichner Inc", "67423 Pine View Lane", "0", "Saint Petersburg", 17,
+values ("placeholder12345!",false, "Denys", "Eastes", "Gleichner Inc", "67423 Pine View Lane", "0", "Saint Petersburg", 17,
         "United States", "33731", "7271237441", "2138184727", "deastesg@networksolutions.com", "2019-01-30 00:00:00",
         "2019-12-03 16:20:00", true);
 insert into clients
 (Hashed_Password, Is_Manager, First_Name, Last_Name, Company_Name, Address_1, Address_2, City, Province_Abbreviation, Country,
  Postal_Code, Home_Telephone, Cell_Telephone, Email, Date_Entered, Last_Modified, Is_Removed)
-values ("placeholder12345!",true, "Westbrook Levitt", "Iorgo Montez", "Gusikowski-Wuckert", "95225 Mayer Road", null, "Ushuaia", 18,
+values ("placeholder12345!",true, "Lorgo", " Montez", "Gusikowski-Wuckert", "95225 Mayer Road", null, "Ushuaia", 18,
         "Argentina", "9410", "7083191316", "5105286676", "imontezh@trellian.com", "2019-01-30 00:00:00",
         "2019-10-26 12:47:12", true);
 insert into clients
 (Hashed_Password, Is_Manager, First_Name, Last_Name, Company_Name, Address_1, Address_2, City, Province_Abbreviation, Country,
  Postal_Code, Home_Telephone, Cell_Telephone, Email, Date_Entered, Last_Modified, Is_Removed)
-values ("placeholder12345!",true, "Fransisco Gligorijevic", "Lucky Vasey", "Auer LLC", "3151 Swallow Park", "16", "Ocongate", 19, "Peru",
+values ("placeholder12345!",true, "Lucky", "Vasey", "Auer LLC", "3151 Swallow Park", "16", "Ocongate", 19, "Peru",
         null, "6899621554", null, "lvaseyi@arizona.edu", "2019-01-30 00:00:00", "2019-07-05 12:09:24", true);
 insert into clients
 (Hashed_Password, Is_Manager, First_Name, Last_Name, Company_Name, Address_1, Address_2, City, Province_Abbreviation, Country,
  Postal_Code, Home_Telephone, Cell_Telephone, Email, Date_Entered, Last_Modified, Is_Removed)
-values ("placeholder12345!",true, "Gretel Grassin", "Eugene Kubat", "Lemke-Kris", "37 Prentice Drive", null, "Xincun", 20, "China", null,
+values ("placeholder12345!",true, "Eugene", "Kubat", "Lemke-Kris", "37 Prentice Drive", null, "Xincun", 20, "China", null,
         "9871584227", "4682878331", "ekubatj@pen.io", "2019-01-30 00:00:00", "2020-01-10 07:36:13", true);
 insert into clients
 (Hashed_Password, Is_Manager, First_Name, Last_Name, Company_Name, Address_1, Address_2, City, Province_Abbreviation, Country,
  Postal_Code, Home_Telephone, Cell_Telephone, Email, Date_Entered, Last_Modified, Is_Removed)
-values ("placeholder12345!",false, "Byrom Demangeon", "Mandi Heake", "Abshire Group", "2 Hoard Circle", "71717", "Serawai", 21, "Indonesia",
+values ("placeholder12345!",false, "Mandi", "Heake", "Abshire Group", "2 Hoard Circle", "71717", "Serawai", 21, "Indonesia",
         null, "7792616559", "8849248757", "mheakek@epa.gov", "2019-01-30 00:00:00", "2019-03-08 00:29:20", false);
 insert into clients
 (Hashed_Password, Is_Manager, First_Name, Last_Name, Company_Name, Address_1, Address_2, City, Province_Abbreviation, Country,
  Postal_Code, Home_Telephone, Cell_Telephone, Email, Date_Entered, Last_Modified, Is_Removed)
-values ("placeholder12345!",false, "Whit Bloxam", "Elaina Beavon", "Considine-Mayer", "6 Nova Circle", null, "Fontenay-sous-Bois", 22,
+values ("placeholder12345!",false, "Elaina", "Beavon", "Considine-Mayer", "6 Nova Circle", null, "Fontenay-sous-Bois", 22,
         "France", "9410", "1183870703", null, "ebeavonl@ycombinator.com", "2019-01-30 00:00:00", "2019-09-04 05:14:57",
         false);
 insert into clients
 (Hashed_Password, Is_Manager, First_Name, Last_Name, Company_Name, Address_1, Address_2, City, Province_Abbreviation, Country,
  Postal_Code, Home_Telephone, Cell_Telephone, Email, Date_Entered, Last_Modified, Is_Removed)
-values ("placeholder12345!",false, "Haydon Ashford", "Andriette Brugman", "Bashirian, Hintz and Cruickshank", "0 Washington Crossing", null,
+values ("placeholder12345!",false, "Andriette", "Brugman", "Bashirian, Hintz and Cruickshank", "0 Washington Crossing", null,
         "Viamão", 23, "Brazil", "944000", "9078415300", null, "abrugmanm@smh.com.au", "2019-01-30 00:00:00",
 
         "2019-11-13 23:58:44", true);
 insert into clients
 (Hashed_Password, Is_Manager, First_Name, Last_Name, Company_Name, Address_1, Address_2, City, Province_Abbreviation, Country,
  Postal_Code, Home_Telephone, Cell_Telephone, Email, Date_Entered, Last_Modified, Is_Removed)
-values ("placeholder12345!",false, "Callean Imloch", "Brigg Wennington", "Gorczany, Romaguera and Bogan", "2279 Anderson Alley", null,
+values ("placeholder12345!",false, "Brigg", "Wennington", "Gorczany, Romaguera and Bogan", "2279 Anderson Alley", null,
         "Doloplazy", 24, "Czech Republic", "783 56", "1059529794", null, "bwenningtonn@vistaprint.com",
         "2019-01-30 00:00:00", "2019-07-02 08:58:45", false);
 insert into clients
@@ -1974,10 +1970,9 @@ values ("placeholder12345!",false, "Whitney Godball", "Jeana Nowlan", "Batz-Beat
 insert into clients
 (Hashed_Password, Is_Manager, First_Name, Last_Name, Company_Name, Address_1, Address_2, City, Province_Abbreviation, Country,
  Postal_Code, Home_Telephone, Cell_Telephone, Email, Date_Entered, Last_Modified, Is_Removed)
-values ("placeholder12345!",true, "Tabatha Iston", "Sawyer Gosling", "Pouros, Lynch and Tremblay", "7790 Utah Point", "353", "Duekoué", 30,
-
-        "Ivory Coast", null, "8377915332", "5413296991", "sgoslingt@soundcloud.com", "2019-01-30 00:00:00",
-        "2019-03-08 13:33:42", false);
+values ("placeholder12345!",true, "Sawyer", "Gosling", "Pouros, Lynch and Tremblay", "7790 Utah Point", "353", "Duekoué", 30,
+"Ivory Coast", null, "8377915332", "5413296991", "sgoslingt@soundcloud.com", "2019-01-30 00:00:00",
+"2019-03-08 13:33:42", false);
 
 ## TAX
 insert into tax

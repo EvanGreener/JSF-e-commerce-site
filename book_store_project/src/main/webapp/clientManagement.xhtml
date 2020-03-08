@@ -15,16 +15,31 @@ and open the template in the editor.
       xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
       xmlns:bookstore="http://java.sun.com/jsf/composite/default_components">
 
-     <head>
+     <h:head>
           <title>Manager - Client Page</title>
           <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 
           <h:outputStylesheet library="webjars" name="Semantic-UI/2.4.1/semantic.min.css" />
           <h:outputStylesheet library="webjars" name="swiper/4.5.1/dist/css/swiper.min.css" />
-     </head>
-     <body>
-          <div>
-               <bookstore:navbar/>
+          <h:outputStylesheet library="css" name="homepage.css" />
+
+          <style>
+               h1 {
+                    margin-top: 20px !important;
+                    text-align: center;
+                    color: gray;
+               }
+               .middle{
+                    padding: 0px 40px 0px 40px;
+               }
+
+          </style>
+
+
+     </h:head>
+     <h:body>
+          <h:form>
+               <bookstore:navbar ></bookstore:navbar>
 
                <!--Loading modal-->
                <p:ajaxStatus onstart="PF('statusDialog').show()" onsuccess="PF('statusDialog').hide()" />
@@ -32,34 +47,39 @@ and open the template in the editor.
                     <p:graphicImage style="display: inline;" class="loading" library="images" name="double-ring.svg" />
                </p:dialog>
 
-               <!--Search bar-->
-               <div style="display: inline;" class="ui search">
-                    <h:inputText  id="query" value="#{ clientManagement.query}" a:placeholder="Search clients..." style="float: right; margin-top: -30px;" class="prompt" >
-                         <p:ajax event="keyup" listener="#{clientManagement.onKeyUp()}" update="clientsTable" />
-                    </h:inputText>
-               </div> 
+               <div class="middle">
+                    <h1>Client Management</h1>
 
-               <h:dataTable id="clientsTable" var="client" value="#{clientManagement.results}" >
-                    <h:column>
-                         <f:facet name="header">Login email</f:facet>
-                              #{client[0]}
-                    </h:column>
-                    <h:column>
-                         <f:facet name="header">First name</f:facet>
-                              #{client[1]}
-                    </h:column>
-                    <h:column>
-                         <f:facet name="header">Last name</f:facet>
-                              #{client[2]}
-                    </h:column>
-                    <h:column>
-                         <f:facet name="header">Value of all books purchased</f:facet>
-                              #{client[3]}
-                    </h:column>
-                    
-               </h:dataTable>
+                    <!--Search bar-->
+                    <div style="display: inline;" class="ui search">
+                         <h:inputText  id="query" value="#{ clientManagement.query}" a:placeholder="Search clients..." style="float: right; margin-top: 10px; margin-bottom: 10px; " class="prompt" >
+                              <p:ajax event="keyup" listener="#{clientManagement.onKeyUp()}" update="clientsTable" />
+                         </h:inputText>
+                    </div> 
 
-               <bookstore:footer/>
-          </div>
-     </body>
+                    <h:dataTable  id="clientsTable" var="client" class="ui celled table" value="#{clientManagement.results}" >
+                         <h:column>
+                              <f:facet name="header">Login email</f:facet>
+                                   #{client[0]}
+                         </h:column>
+                         <h:column>
+                              <f:facet name="header">First name</f:facet>
+                                   #{client[1]}
+                         </h:column>
+                         <h:column>
+                              <f:facet name="header">Last name</f:facet>
+                                   #{client[2]}
+                         </h:column>
+                         <h:column>
+                              <f:facet name="header">Value of all books purchased</f:facet>
+                                   #{client[3]}
+                         </h:column>
+
+                    </h:dataTable>
+               </div>
+
+               <bookstore:footer></bookstore:footer>
+
+          </h:form>
+     </h:body>
 </html>

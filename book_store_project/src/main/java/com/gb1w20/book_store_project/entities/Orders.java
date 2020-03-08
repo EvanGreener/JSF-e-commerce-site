@@ -6,7 +6,6 @@
 package com.gb1w20.book_store_project.entities;
 
 import java.io.Serializable;
-import java.util.Collection;
 import java.util.Date;
 import java.util.List;
 import javax.persistence.Basic;
@@ -16,6 +15,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
@@ -55,7 +56,11 @@ public class Orders implements Serializable {
     @Column(name = "Is_Removed")
     private Boolean isRemoved;
     
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "orders")
+    @ManyToOne
+    private Clients client;
+    
+    @OneToMany(  cascade = CascadeType.ALL)
+    @JoinColumn(name = "Order_ID")
     private List<OrderItem> orderItemsCollection;
 
     public Orders() {
@@ -107,6 +112,10 @@ public class Orders implements Serializable {
     
     public List<OrderItem> getOrderItemsCollection() {
          return orderItemsCollection;
+    }
+    
+    public Clients getClient(){
+         return client;
     }
 
     @Override

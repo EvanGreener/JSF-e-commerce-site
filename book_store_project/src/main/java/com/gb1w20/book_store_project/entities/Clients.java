@@ -16,6 +16,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
@@ -108,7 +109,8 @@ public class Clients implements Serializable {
     @Column(name = "Is_Removed")
     private Boolean isRemoved;
     
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "clients")
+    @OneToMany( cascade = CascadeType.ALL)
+    @JoinColumn(name = "Client_ID")
     private List<Orders> ordersCollection;
 
     public Clients() {

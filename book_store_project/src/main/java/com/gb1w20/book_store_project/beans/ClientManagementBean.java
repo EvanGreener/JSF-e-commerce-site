@@ -4,6 +4,7 @@ package com.gb1w20.book_store_project.beans;
 import com.gb1w20.book_store_project.entities.Clients;
 import com.gb1w20.book_store_project.jpa_controllers.ClientsJpaController;
 import java.io.Serializable;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 import javax.annotation.PostConstruct;
@@ -17,7 +18,7 @@ import org.slf4j.LoggerFactory;
 @SessionScoped
 public class ClientManagementBean implements Serializable  {
      
-     private final static Logger LOG = LoggerFactory.getLogger(SearchBean.class);
+     private final static Logger LOG = LoggerFactory.getLogger(ClientManagementBean.class);
      
       @Inject
       private ClientsJpaController clientCtrl;
@@ -46,7 +47,7 @@ public class ClientManagementBean implements Serializable  {
      private void updateBean() {
           LOG.debug(query);
           results = clientCtrl.searchClients(query);
-          
+          LOG.debug(results.toString());
      }
      
      public void onKeyUp() {

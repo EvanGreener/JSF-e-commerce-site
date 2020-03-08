@@ -2,6 +2,7 @@ package com.gb1w20.book_store_project.jpa_controllers;
 
 import com.gb1w20.book_store_project.entities.Clients;
 import com.gb1w20.book_store_project.entities.Clients_;
+import com.gb1w20.book_store_project.entities.OrderItem_;
 import com.gb1w20.book_store_project.jpa_controllers.exceptions.NonexistentEntityException;
 import java.io.Serializable;
 import java.util.Collection;
@@ -20,6 +21,8 @@ import javax.persistence.criteria.Join;
 import javax.persistence.criteria.Root;
 import javax.transaction.SystemException;
 import javax.transaction.UserTransaction;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  *
@@ -28,6 +31,8 @@ import javax.transaction.UserTransaction;
 @Named
 @RequestScoped
 public class ClientsJpaController implements Serializable {
+
+     private final static Logger LOG = LoggerFactory.getLogger(ClientsJpaController.class);
 
      @Resource
      private UserTransaction utx;
@@ -150,30 +155,29 @@ public class ClientsJpaController implements Serializable {
      }
 
      /**
-      * SELECT c.email,  c.fname,  c.lname, SUM(price_sold) FROM clients c
-      * JOIN orders o ON c.client_id = o.client_id
-      * JOIN orderItems oi oN o.order_id = oi.order_id
+      * SELECT c.email, c.fname, c.lname, SUM(price_sold) FROM clients c 
+      * JOIN orders o ON c.client_id = o.client_id 
+      * JOIN orderItems oi oN o.order_id = oi.order_id 
       * WHERE c.email LIKE :query 
       * GROUP BY o.client_id;
-      * 
+      *
       * @param query
-      * @return 
+      * @return
       */
      public Collection<Object[]> searchClients(String query) {
           String expression = "%" + query + "%";
-          
+
           CriteriaBuilder cb = em.getCriteriaBuilder();
           CriteriaQuery<Object[]> cq = cb.createQuery(Object[].class);
           Root<Clients> client = cq.from(Clients.class);
           Join clientOrders = client.join("ordersCollection");
           Join orderOrderItems = clientOrders.join("orderItemsCollection");
-          cq.where(cb.like(client.get("Email"), expression));
-          cq.groupBy(clientOrders.get("Client_ID"));
-          cq.multiselect(client.get(Clients_.email), client.get(Clients_.firstName), client.get(Clients_.lastName), cb.sum(orderOrderItems.get("Price_Sold")));
+          cq.where(cb.like(client.get(Clients_.email), expression));
+          cq.groupBy(clientOrders.get(Clients_.clientID));
+          cq.multiselect(client.get(Clients_.email), client.get(Clients_.firstName), client.get(Clients_.lastName), cb.sum(orderOrderItems.get(OrderItem_.priceSold)));
           TypedQuery<Object[]> q = em.createQuery(cq);
-          return  q.getResultList();
-          
-          
+          return q.getResultList();
+
      }
 
 }
