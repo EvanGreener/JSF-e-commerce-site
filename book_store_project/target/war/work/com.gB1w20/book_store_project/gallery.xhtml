@@ -1,0 +1,308 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html [
+     ]>
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:b="http://bootsfaces.net/ui"
+      xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+      xmlns:bookstore="http://java.sun.com/jsf/composite/default_components">
+
+
+     <h:head>
+          <title> Gallery Page </title>
+          <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+          <h:outputStylesheet library="webjars" name="Semantic-UI/2.4.1/semantic.min.css" />
+          <h:outputStylesheet library="webjars" name="swiper/4.5.1/dist/css/swiper.min.css" />
+          <h:outputStylesheet library="galleryCss" name="gallery.css" />
+          <h:outputStylesheet library="css" name="homepage.css" />
+
+          <h:outputScript library="js" name="homepage.js" />
+
+
+          <script src="https://unpkg.com/swiper/js/swiper.min.js"></script>
+
+     </h:head>
+     <h:body>
+          <!--composite component that comes from the navbar.xhtml file to avoid coding nav bar in all web pages-->
+          <bookstore:navbar/>
+
+          <h:form>
+               <div class="gallery">
+                    <div class="ui grid">
+                         <div class="three wide column">
+                              <!--Search by & genre filters-->
+                              <p>Filter By Genre</p>
+                              <h:selectManyCheckbox layout="pageDirection" value="#{search.genreFilters}">
+                                   <p:ajax update="gallery pagination resLabel" listener="#{search.onChecked}" />
+                                   <f:selectItem itemValue = "Science Fiction" itemLabel = "Sci-Fi"/>
+                                   <f:selectItem itemValue = "Mystery" itemLabel = "Mystery" /> 
+                                   <f:selectItem itemValue = "Fantasy" itemLabel = "Fantasy" /> 
+                                   <f:selectItem itemValue = "Horror" itemLabel = "Horror" />
+                                   <f:selectItem itemValue = "Fiction" itemLabel = "Fiction" />
+                              </h:selectManyCheckbox>
+
+                              <div class="ui divider" />
+
+                              <p>Search by</p>
+                              <h:selectOneRadio layout="pageDirection" value="#{search.searchBy}" >
+                                   <p:ajax update="gallery pagination resLabel" />
+                                   <f:selectItem itemValue = "title" itemLabel = "Title"/>
+                                   <f:selectItem itemValue = "author" itemLabel = "Author" />
+                                   <f:selectItem itemValue = "isbn" itemLabel = "ISBN#" />
+                              </h:selectOneRadio>
+                         </div>
+                         <div class="one wide column"></div>
+                         <div class="twelve wide column">
+                              <div style="margin-bottom: 2px;" class="upper">
+
+                                   <h:panelGroup id="resLabel">
+                                        <h3  style="display: inline;">Found #{search.results.size()} result(s) matching your search query</h3>
+                                   </h:panelGroup>
+
+                                   <!--Loading modal-->
+                                   <p:ajaxStatus onstart="PF('statusDialog').show()" onsuccess="PF('statusDialog').hide()" />
+                                   <p:dialog widgetVar="statusDialog" modal="true" draggable="false" closable="false" resizable="false" showHeader="false">
+                                        <p:graphicImage style="display: inline;" class="loading" library="images" name="double-ring.svg" />
+                                   </p:dialog>
+
+                                   <!--Search bar-->
+                                   <div style="display: inline;" class="ui search">
+                                        <h:inputText  id="query" value="#{search.query}" a:placeholder="Search books..." style="float: right; margin-top: -30px;" class="prompt" >
+                                             <p:ajax event="keyup" listener="#{search.onKeyUp}" update="gallery pagination resLabel" />
+                                        </h:inputText>
+                                   </div> 
+
+                              </div>
+
+                              <div class="middle">
+
+                                   <!--Actual gallery-->
+                                   <h:panelGroup id="gallery">
+                                        <div class="ui four doubling stackable cards">
+
+                                             <ui:param name="limit" value="8"/>
+                                             <!-- -1 because collections are 0-indexed-->
+                                             <ui:repeat offset="#{(search.page - 1) * 8}" value="#{search.results}" var="book" varStatus="status">
+                                                  <ui:fragment rendered="#{status.index lt limit * search.page}">
+                                                       <div class="ui fluid card darker">
+                                                            <div class="homepageImg">
+                                                                 <h:graphicImage class="img" height="250" width="156.25" library="images" name="#{book.isbn}.jpg"/>
+                                                                 <div class="cardHoverBtn"> View Cover</div>
+                                                            </div>
+                                                            <div class="content">
+                                                                 <div class="header">#{book.title}</div>
+                                                                 <div class="meta">By
+                                                                      <ui:repeat value="#{book.authorsCollection}" var="author">
+                                                                           #{author.name}
+                                                                      </ui:repeat>
+                                                                 </div>
+
+                                                                 <div class="description">
+                                                                      $#{book.listPrice}
+                                                                 </div>
+                                                            </div>
+
+                                                            <div onclick="addToCart()" class="ui bottom attached button  ">
+                                                                 + Add to Cart
+                                                            </div>
+                                                       </div>
+                                                  </ui:fragment>
+                                             </ui:repeat>
+                                        </div>
+
+                                   </h:panelGroup>
+
+                              </div>
+
+                              <div class="bot">
+                                   <!-- Pagination -->
+                                   <h:panelGroup id="pagination">
+                                        <!--Previous-->
+                                        <c:choose>
+                                             <c:when test="#{search.page == 1}">
+                                                  <button disabled="true"  class="ui button"> Prev. </button>
+                                             </c:when>
+                                             <c:otherwise>
+                                                  <h:commandButton value="Prev." class="ui button"> 
+                                                       <p:ajax update="gallery pagination resLabel" listener="#{search.onPrevious}" />
+                                                  </h:commandButton>
+                                             </c:otherwise>
+                                        </c:choose>
+
+
+                                        <!--Page numbers-->
+                                        <c:forEach begin="1" end="#{search.numPages}" varStatus="status">
+                                             <c:choose>
+                                                  <c:when test="#{status.index == search.page}">
+                                                       <h:commandButton value="#{status.index} " class="ui active button"> 
+                                                            <p:ajax event="click" update="gallery pagination resLabel" listener="#{search.onPageSelect(status.index)}" />
+                                                       </h:commandButton>
+                                                  </c:when>
+                                                  <c:otherwise>
+                                                       <h:commandButton value="#{status.index} " class="ui button"> 
+                                                            <p:ajax event="click" update="gallery pagination resLabel" listener="#{search.onPageSelect(status.index)}" />
+                                                       </h:commandButton>
+                                                  </c:otherwise>
+                                             </c:choose>
+                                        </c:forEach>
+
+                                        <!--Next-->
+                                        <c:choose>
+                                             <c:when test="#{search.page == search.numPages}">
+                                                  <button disabled="true"  class="ui button"> Next </button>
+                                             </c:when>
+                                             <c:otherwise>
+                                                  <h:commandButton value="Next" class="ui button"> 
+                                                       <p:ajax update="gallery pagination resLabel" listener="#{search.onNext}" />
+                                                  </h:commandButton>
+                                             </c:otherwise>
+                                        </c:choose>
+                                   </h:panelGroup>
+
+                              </div>
+                         </div>
+                    </div>
+
+               </div>
+               <div class="recommendations">
+                    <h3 style="text-align: center;">You may also like</h3>
+                    <div class="swiper-container">
+                         <div class="swiper-wrapper">
+
+                              <!--1-->
+                              <div class="swiper-slide">
+                                   <h:graphicImage height="250" width="156.25"  style="margin-bottom: 40px;" library="images" name="9780060584757.jpg"/>
+
+                              </div>
+                              <!--2-->
+
+                              <div class="swiper-slide">
+                                   <h:graphicImage height="250" width="156.25" style="margin-bottom: 40px;" library="images" name="9780061007224.jpg"/>
+
+                              </div>
+                              <!--3-->
+                              <div class="swiper-slide">
+                                   <h:graphicImage height="250" width="156.25" style="margin-bottom: 40px;" library="images" name="9780061120084.jpg"/>
+
+                              </div>
+                              <!--4-->
+                              <div class="swiper-slide">
+                                   <h:graphicImage height="250" width="156.25" style="margin-bottom: 40px;" library="images" name="9780061139376.jpg"/>
+
+                              </div>
+                              <!--5-->
+                              <div class="swiper-slide">
+                                   <h:graphicImage height="250" width="156.25" style="margin-bottom: 40px;" library="images" name="9780062024039.jpg"/>
+
+                              </div>
+
+                         </div>
+                         <!-- Add Pagination -->
+                         <div class="swiper-pagination"></div>
+                    </div>
+               </div>
+               <div class="darkBlueDiv">
+                    <div class="ui four doubling stackable cards">
+                         <div class="ui fluid card">
+                              <div class="image">
+                                   <h:graphicImage library="images" name="colorScheme.PNG"  /></div>
+                              <div class="content">
+                                   <div class="header">Elliot Baker</div>
+                                   <div class="meta">Friend</div>
+                                   <div class="description">
+                                        Elliot is a sound engineer living in Nashville who enjoys playing guitar and hanging with his
+                                        cat.
+                                   </div>
+                              </div>
+                              <div class="extra content">
+                                   <a>
+                                        <i aria-hidden="true" class="user icon"></i>
+                                        16 Friends
+                                   </a>
+                              </div>
+                         </div>
+                         <div class="ui fluid card">
+                              <div class="image">
+                                   <h:graphicImage library="images" name="colorScheme.PNG"  /></div>
+                              <div class="content">
+                                   <div class="header">Elliot Baker</div>
+                                   <div class="meta">Friend</div>
+                                   <div class="description">
+                                        Elliot is a sound engineer living in Nashville who enjoys playing guitar and hanging with his
+                                        cat.
+                                   </div>
+                              </div>
+                              <div class="extra content">
+                                   <a>
+                                        <i aria-hidden="true" class="user icon"></i>
+                                        16 Friends
+                                   </a>
+                              </div>
+                         </div>
+                         <div class="ui fluid card">
+                              <div class="image">
+                                   <h:graphicImage library="images" name="colorScheme.PNG"  /></div>
+                              <div class="content">
+                                   <div class="header">Elliot Baker</div>
+                                   <div class="meta">Friend</div>
+                                   <div class="description">
+                                        Elliot is a sound engineer living in Nashville who enjoys playing guitar and hanging with his
+                                        cat.
+                                   </div>
+                              </div>
+                              <div class="extra content">
+                                   <a>
+                                        <i aria-hidden="true" class="user icon"></i>
+                                        16 Friends
+                                   </a>
+                              </div>
+                         </div>                <div class="ui fluid card">
+                              <div class="image">
+                                   <h:graphicImage library="images" name="colorScheme.PNG"  /></div>
+                              <div class="content">
+                                   <div class="header">Elliot Baker</div>
+                                   <div class="meta">Friend</div>
+                                   <div class="description">
+                                        Elliot is a sound engineer living in Nashville who enjoys playing guitar and hanging with his
+                                        cat.
+                                   </div>
+                              </div>
+                              <div class="extra content">
+                                   <a>
+                                        <i aria-hidden="true" class="user icon"></i>
+                                        16 Friends
+                                   </a>
+                              </div>
+                         </div>               
+                    </div>
+               </div>
+          </h:form>
+
+          <!--composite component that comes from the footer.xhtml file to avoid coding the website footer in all web pages-->
+          <bookstore:footer/>
+
+          <!-- Initialize Swiper -->
+          <script>
+               var swiper = new Swiper('.swiper-container', {
+                    slidesPerView: 4,
+                    spaceBetween: 0,
+                    autoplay: {
+                         delay: 5500,
+                         disableOnInteraction: false,
+                    },
+                    loop: true,
+                    pagination: {
+                         el: '.swiper-pagination',
+                         clickable: true,
+                    },
+               });
+          </script>
+
+     </h:body>
+</html>
