@@ -1,7 +1,6 @@
 package com.gb1w20.book_store_project.jpa_controllers;
 
-import com.gb1w20.book_store_project.entities.Clients;
-import com.gb1w20.book_store_project.entities.Clients_;
+import com.gb1w20.book_store_project.entities.BookFormat;
 import com.gb1w20.book_store_project.jpa_controllers.exceptions.NonexistentEntityException;
 import java.io.Serializable;
 import java.util.List;
@@ -12,8 +11,6 @@ import javax.persistence.EntityManager;
 import javax.persistence.Query;
 import javax.persistence.EntityNotFoundException;
 import javax.persistence.PersistenceContext;
-import javax.persistence.TypedQuery;
-import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 import javax.transaction.SystemException;
@@ -25,7 +22,7 @@ import javax.transaction.UserTransaction;
  */
 @Named
 @RequestScoped
-public class ClientsJpaController implements Serializable {
+public class BookFormatJpaController implements Serializable {
     
     @Resource
     private UserTransaction utx;
@@ -33,12 +30,12 @@ public class ClientsJpaController implements Serializable {
     @PersistenceContext
     private EntityManager em;
 
-    public ClientsJpaController() {}
+    public BookFormatJpaController() {}
 
-    public void create(Clients clients) throws Exception {
+    public void create(BookFormat bookFormat) throws Exception {
     try {
         utx.begin();
-        em.persist(clients);
+        em.persist(bookFormat);
         utx.commit();
     } catch (Exception ex) {
         try {
@@ -50,10 +47,10 @@ public class ClientsJpaController implements Serializable {
     }
 }
 
-    public void edit(Clients clients) throws NonexistentEntityException, Exception {
+    public void edit(BookFormat bookFormat) throws NonexistentEntityException, Exception {
         try {
             utx.begin();
-            clients = em.merge(clients);
+            bookFormat = em.merge(bookFormat);
             utx.commit();
         } catch (Exception ex) {
             try {
@@ -63,9 +60,9 @@ public class ClientsJpaController implements Serializable {
             }
             String msg = ex.getLocalizedMessage();
             if (msg == null || msg.length() == 0) {
-                Integer id = clients.getClientID();
-                if (findClients(id) == null) {
-                    throw new NonexistentEntityException("The client with id " + id + " no longer exists.");
+                Integer id = bookFormat.getFormatID();
+                if (findBookFormat(id) == null) {
+                    throw new NonexistentEntityException("The bookFormat with id " + id + " no longer exists.");
                 }
             }
             throw ex;
@@ -75,14 +72,14 @@ public class ClientsJpaController implements Serializable {
     public void destroy(Integer id) throws NonexistentEntityException, Exception {
         try {
             utx.begin();
-            Clients clients;
+            BookFormat bookFormat;
             try {
-                clients = em.getReference(Clients.class, id);
-                clients.getClientID();
+                bookFormat = em.getReference(BookFormat.class, id);
+                bookFormat.getFormatID();
             } catch (EntityNotFoundException enfe) {
-                throw new NonexistentEntityException("The client with id " + id + " no longer exists.", enfe);
+                throw new NonexistentEntityException("The bookFormat with id " + id + " no longer exists.", enfe);
             }
-            em.remove(clients);
+            em.remove(bookFormat);
             utx.commit();
         } catch (Exception ex) {
             try {
@@ -94,17 +91,17 @@ public class ClientsJpaController implements Serializable {
         }
     }
 
-    public List<Clients> findClientsEntities() {
-        return findClientsEntities(true, -1, -1);
+    public List<BookFormat> findBookFormatEntities() {
+        return findBookFormatEntities(true, -1, -1);
     }
 
-    public List<Clients> findClientsEntities(int maxResults, int firstResult) {
-        return findClientsEntities(false, maxResults, firstResult);
+    public List<BookFormat> findBookFormatEntities(int maxResults, int firstResult) {
+        return findBookFormatEntities(false, maxResults, firstResult);
     }
 
-    private List<Clients> findClientsEntities(boolean all, int maxResults, int firstResult) {
+    private List<BookFormat> findBookFormatEntities(boolean all, int maxResults, int firstResult) {
         CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
-        cq.select(cq.from(Clients.class));
+        cq.select(cq.from(BookFormat.class));
         Query q = em.createQuery(cq);
         if (!all) {
             q.setMaxResults(maxResults);
@@ -113,39 +110,17 @@ public class ClientsJpaController implements Serializable {
         return q.getResultList();
     }
 
-    public Clients findClients(Integer id) {
-            return em.find(Clients.class, id);
+    public BookFormat findBookFormat(Integer id) {
+            return em.find(BookFormat.class, id);
     }
 
-    public int getClientsCount() {
+    public int getBookFormatCount() {
             CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
-            Root<Clients> rt = cq.from(Clients.class);
+            Root<BookFormat> rt = cq.from(BookFormat.class);
             cq.select(em.getCriteriaBuilder().count(rt));
             Query q = em.createQuery(cq);
-            System.out.println("client count: " + ((Long) q.getSingleResult()).intValue());
+            System.out.println("bookFormat count: " + ((Long) q.getSingleResult()).intValue());
             return ((Long) q.getSingleResult()).intValue();
-    }
-    
-    public Object[] getInfoByEmail(String email)
-    {
-        CriteriaBuilder cb = em.getCriteriaBuilder();
-        CriteriaQuery cq = cb.createQuery();
-        Root<Clients> client = cq.from(Clients.class);
-        cq.where(cb.equal(client.get(Clients_.email), email));
-        cq.multiselect(client.get(Clients_.email), client.get(Clients_.hashedPassword));
-        TypedQuery<Object[]> query = em.createQuery(cq);
-        return query.getSingleResult();
-    }
-    
-    public List<String> getEmailsByEmail(String email)
-    {
-        CriteriaBuilder cb = em.getCriteriaBuilder();
-        CriteriaQuery cq = cb.createQuery();
-        Root<Clients> client = cq.from(Clients.class);
-        cq.where(cb.equal(client.get(Clients_.email), email));
-        cq.select(client.get(Clients_.email));
-        TypedQuery<String> query = em.createQuery(cq);
-        return query.getResultList();
     }
     
 }
