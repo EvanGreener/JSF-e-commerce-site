@@ -1,8 +1,11 @@
 package com.gb1w20.book_store_project.jpa_controllers;
 
 import com.gb1w20.book_store_project.entities.Clients;
+import com.gb1w20.book_store_project.entities.Clients_;
 import com.gb1w20.book_store_project.entities.OrderItem;
+import com.gb1w20.book_store_project.entities.OrderItem_;
 import com.gb1w20.book_store_project.entities.Orders;
+import com.gb1w20.book_store_project.entities.Orders_;
 import com.gb1w20.book_store_project.jpa_controllers.exceptions.NonexistentEntityException;
 import java.io.Serializable;
 import java.util.List;
@@ -133,8 +136,8 @@ public class OrdersJpaController implements Serializable {
         CriteriaBuilder cb = em.getCriteriaBuilder();
         CriteriaQuery cq = cb.createQuery();
         Root<Clients> client = cq.from(Clients.class);
-        cq.where(cb.equal(client.get("clientID"), clientId));
-        cq.select(client.get("email"));
+        cq.where(cb.equal(client.get(Clients_.clientID), clientId));
+        cq.select(client.get(Clients_.email));
         TypedQuery<String> query = em.createQuery(cq);
         return query.getSingleResult();
     }
@@ -144,8 +147,8 @@ public class OrdersJpaController implements Serializable {
         CriteriaBuilder cb = em.getCriteriaBuilder();
         CriteriaQuery cq = cb.createQuery();
         Root<OrderItem> orderitems = cq.from(OrderItem.class);
-        cq.where(cb.equal(orderitems.get("orderID"), orderId));
-        cq.select(cb.count(orderitems.get("itemID")));
+        cq.where(cb.equal(orderitems.get(OrderItem_.orderID), orderId));
+        cq.select(cb.count(orderitems.get(OrderItem_.itemID)));
         Query query = em.createQuery(cq);
         return ((Long) query.getSingleResult()).intValue();
     }
@@ -155,8 +158,8 @@ public class OrdersJpaController implements Serializable {
         CriteriaBuilder cb = em.getCriteriaBuilder();
         CriteriaQuery cq = cb.createQuery();
         Root<Orders> order = cq.from(Orders.class);
-        cq.where(cb.equal(order.get("orderID"), orderId));
-        cq.select(order.get("isRemoved"));
+        cq.where(cb.equal(order.get(Orders_.orderID), orderId));
+        cq.select(order.get(Orders_.isRemoved));
         TypedQuery<Boolean> query = em.createQuery(cq);
         try
         {
