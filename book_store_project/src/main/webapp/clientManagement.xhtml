@@ -28,11 +28,11 @@
                .middle{
                     padding: 0px 40px 0px 40px;
                }
-               
-               button{
-                    margin: 10px 10px 20px 10px !important;
-                    font-size: 20px !important;              
-               }
+
+               /*               button{
+                                   margin: 10px 10px 20px 10px !important;
+                                   font-size: 20px !important;              
+                              }*/
 
           </style>
 
@@ -58,7 +58,7 @@
                          </h:inputText>
                     </div> 
 
-                    <h:dataTable  id="clientsTable" var="client"  class="ui celled table" value="#{clientManagement.results}" >
+                    <h:dataTable  id="clientsTable" var="client" style="margin-bottom: 20px;"  class="ui celled table" value="#{clientManagement.results}" >
                          <h:column>
                               <f:facet name="header">Login email</f:facet>
                                    #{client[1]}
@@ -72,22 +72,32 @@
                                    #{client[3]}
                          </h:column>
                          <h:column>
-                              <f:facet name="header">Value of all books purchased</f:facet>
+                              <f:facet name="header">Address 1</f:facet>
                                    #{client[4]}
                          </h:column>
                          <h:column>
-                              <p:link href="edit_client.xhtml"  value="Edit">
-                                   <f:param name="currentClientId" value="#{client[0]}" />
-                              </p:link>
-                              
+                              <f:facet name="header">Address 2</f:facet>
+                                   #{client[5]}
+                         </h:column>
+                         <h:column>
+                              <f:facet name="header">Company Name</f:facet>
+                                   #{client[6]}
+                         </h:column>
+                         <h:column>
+                              <f:facet name="header">Cell</f:facet>
+                                   #{client[7]}
+                         </h:column>
+                         <h:column>
+                              <f:facet name="header">Value of all books purchased</f:facet>
+                                   $#{client[8]}0
+                         </h:column>
+                         <h:column>
+                              <button class="big ui primary button">
+                                   Edit
+                              </button>
                          </h:column>
 
                     </h:dataTable>
-
-                    <div class="bot">
-                         <button class="positive ui button">Save Changes</button>
-                         <button class="ui button" >Cancel</button>
-                    </div>
                </div>
 
                <bookstore:footer></bookstore:footer>
