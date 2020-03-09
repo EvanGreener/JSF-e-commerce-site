@@ -8,10 +8,12 @@ C:\Users\1733408\Desktop\gb1w20\book_store_project\src\main\java\com\gb1w20\book
 C:\Users\1733408\Desktop\gb1w20\book_store_project\src\main\java\com\gb1w20\book_store_project\resources\JavaEE8Resource.java
 C:\Users\1733408\Desktop\gb1w20\book_store_project\src\main\java\com\gb1w20\book_store_project\backing\NewsBackingBean.java
 C:\Users\1733408\Desktop\gb1w20\book_store_project\src\main\java\com\gb1w20\book_store_project\entities\Tax.java
+C:\Users\1733408\Desktop\gb1w20\book_store_project\src\main\java\com\gb1w20\book_store_project\jpa_controllers\BookFormatJpaController.java
 C:\Users\1733408\Desktop\gb1w20\book_store_project\src\main\java\com\gb1w20\book_store_project\backing\OrderBackingBean.java
 C:\Users\1733408\Desktop\gb1w20\book_store_project\src\main\java\com\gb1w20\book_store_project\beans\SearchBean.java
 C:\Users\1733408\Desktop\gb1w20\book_store_project\src\main\java\com\gb1w20\book_store_project\jpa_controllers\AdsJpaController.java
 C:\Users\1733408\Desktop\gb1w20\book_store_project\src\main\java\com\gb1w20\book_store_project\backing\TaxBackingBean.java
+C:\Users\1733408\Desktop\gb1w20\book_store_project\src\main\java\com\gb1w20\book_store_project\entities\BookFormat.java
 C:\Users\1733408\Desktop\gb1w20\book_store_project\src\main\java\com\gb1w20\book_store_project\entities\Clients.java
 C:\Users\1733408\Desktop\gb1w20\book_store_project\src\main\java\com\gb1w20\book_store_project\entities\OrderItem.java
 C:\Users\1733408\Desktop\gb1w20\book_store_project\src\main\java\com\gb1w20\book_store_project\entities\Ads.java
@@ -38,6 +40,7 @@ C:\Users\1733408\Desktop\gb1w20\book_store_project\src\main\java\com\gb1w20\book
 C:\Users\1733408\Desktop\gb1w20\book_store_project\src\main\java\com\gb1w20\book_store_project\JAXRSConfiguration.java
 C:\Users\1733408\Desktop\gb1w20\book_store_project\src\main\java\com\gb1w20\book_store_project\jpa_controllers\exceptions\IllegalOrphanException.java
 C:\Users\1733408\Desktop\gb1w20\book_store_project\src\main\java\com\gb1w20\book_store_project\jpa_controllers\PublisherJpaController.java
+C:\Users\1733408\Desktop\gb1w20\book_store_project\src\main\java\com\gb1w20\book_store_project\backing\BookFormatBackingBean.java
 C:\Users\1733408\Desktop\gb1w20\book_store_project\src\main\java\com\gb1w20\book_store_project\backing\CustomerReviewBackingBean.java
 C:\Users\1733408\Desktop\gb1w20\book_store_project\src\main\java\com\gb1w20\book_store_project\entities\Publisher.java
 C:\Users\1733408\Desktop\gb1w20\book_store_project\src\main\java\com\gb1w20\book_store_project\entities\CustomerReviews.java

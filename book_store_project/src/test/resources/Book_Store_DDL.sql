@@ -152,12 +152,14 @@ CREATE TABLE `Ads` (
 );
 
 CREATE TABLE `Book_Format` (
+  `Format_ID` INT AUTO_INCREMENT,
   `ISBN` VARCHAR(13),
   `Format` VARCHAR(6),
   `File_Location` VARCHAR(1000),
   `Date_Created` DATETIME,
   `Last_Modified` DATETIME,
   `Is_Removed` BOOL,
+   PRIMARY KEY (`Format_ID`),
   KEY `FK` (`ISBN`)
 );
 
