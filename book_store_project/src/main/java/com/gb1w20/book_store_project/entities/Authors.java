@@ -6,13 +6,18 @@
 package com.gb1w20.book_store_project.entities;
 
 import java.io.Serializable;
+import java.util.Collection;
 import java.util.Date;
+import java.util.List;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
@@ -27,102 +32,109 @@ import javax.validation.constraints.Size;
 @Entity
 @Table(name = "authors", catalog = "bookstore", schema = "")
 @NamedQueries({
-    @NamedQuery(name = "Authors.findAll", query = "SELECT a FROM Authors a"),
-    @NamedQuery(name = "Authors.findByAuthorID", query = "SELECT a FROM Authors a WHERE a.authorID = :authorID"),
-    @NamedQuery(name = "Authors.findByName", query = "SELECT a FROM Authors a WHERE a.name = :name"),
-    @NamedQuery(name = "Authors.findByIsRemoved", query = "SELECT a FROM Authors a WHERE a.isRemoved = :isRemoved"),
-    @NamedQuery(name = "Authors.findByDateEntered", query = "SELECT a FROM Authors a WHERE a.dateEntered = :dateEntered"),
-    @NamedQuery(name = "Authors.findByLastModified", query = "SELECT a FROM Authors a WHERE a.lastModified = :lastModified")})
+     @NamedQuery(name = "Authors.findAll", query = "SELECT a FROM Authors a"),
+     @NamedQuery(name = "Authors.findByAuthorID", query = "SELECT a FROM Authors a WHERE a.authorID = :authorID"),
+     @NamedQuery(name = "Authors.findByName", query = "SELECT a FROM Authors a WHERE a.name = :name"),
+     @NamedQuery(name = "Authors.findByIsRemoved", query = "SELECT a FROM Authors a WHERE a.isRemoved = :isRemoved"),
+     @NamedQuery(name = "Authors.findByDateEntered", query = "SELECT a FROM Authors a WHERE a.dateEntered = :dateEntered"),
+     @NamedQuery(name = "Authors.findByLastModified", query = "SELECT a FROM Authors a WHERE a.lastModified = :lastModified")})
 public class Authors implements Serializable {
 
-    private static final long serialVersionUID = 1L;
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Basic(optional = false)
-    @Column(name = "Author_ID")
-    private Integer authorID;
-    @Size(max = 100)
-    @Column(name = "Name")
-    private String name;
-    @Column(name = "Is_Removed")
-    private Boolean isRemoved;
-    @Column(name = "Date_Entered")
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date dateEntered;
-    @Column(name = "Last_Modified")
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date lastModified;
+     private static final long serialVersionUID = 1L;
+     @Id
+     @GeneratedValue(strategy = GenerationType.IDENTITY)
+     @Basic(optional = false)
+     @Column(name = "Author_ID")
+     private Integer authorID;
+     @Size(max = 100)
+     @Column(name = "Name")
+     private String name;
+     @Column(name = "Is_Removed")
+     private Boolean isRemoved;
+     @Column(name = "Date_Entered")
+     @Temporal(TemporalType.TIMESTAMP)
+     private Date dateEntered;
+     @Column(name = "Last_Modified")
+     @Temporal(TemporalType.TIMESTAMP)
+     private Date lastModified;
 
-    public Authors() {
-    }
+     @ManyToMany(mappedBy = "authorsCollection", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+     private List<Book> booksCollection;
 
-    public Authors(Integer authorID) {
-        this.authorID = authorID;
-    }
+     public Authors() {
+     }
 
-    public Integer getAuthorID() {
-        return authorID;
-    }
+     public Authors(Integer authorID) {
+          this.authorID = authorID;
+     }
 
-    public void setAuthorID(Integer authorID) {
-        this.authorID = authorID;
-    }
+     public Integer getAuthorID() {
+          return authorID;
+     }
 
-    public String getName() {
-        return name;
-    }
+     public void setAuthorID(Integer authorID) {
+          this.authorID = authorID;
+     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
+     public String getName() {
+          return name;
+     }
 
-    public Boolean getIsRemoved() {
-        return isRemoved;
-    }
+     public void setName(String name) {
+          this.name = name;
+     }
 
-    public void setIsRemoved(Boolean isRemoved) {
-        this.isRemoved = isRemoved;
-    }
+     public Boolean getIsRemoved() {
+          return isRemoved;
+     }
 
-    public Date getDateEntered() {
-        return dateEntered;
-    }
+     public void setIsRemoved(Boolean isRemoved) {
+          this.isRemoved = isRemoved;
+     }
 
-    public void setDateEntered(Date dateEntered) {
-        this.dateEntered = dateEntered;
-    }
+     public Date getDateEntered() {
+          return dateEntered;
+     }
 
-    public Date getLastModified() {
-        return lastModified;
-    }
+     public void setDateEntered(Date dateEntered) {
+          this.dateEntered = dateEntered;
+     }
 
-    public void setLastModified(Date lastModified) {
-        this.lastModified = lastModified;
-    }
+     public Date getLastModified() {
+          return lastModified;
+     }
 
-    @Override
-    public int hashCode() {
-        int hash = 0;
-        hash += (authorID != null ? authorID.hashCode() : 0);
-        return hash;
-    }
+     public void setLastModified(Date lastModified) {
+          this.lastModified = lastModified;
+     }
 
-    @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Authors)) {
-            return false;
-        }
-        Authors other = (Authors) object;
-        if ((this.authorID == null && other.authorID != null) || (this.authorID != null && !this.authorID.equals(other.authorID))) {
-            return false;
-        }
-        return true;
-    }
+     public List<Book> getBooksCollection() {
+          return booksCollection;
+     }
 
-    @Override
-    public String toString() {
-        return "com.gb1w20.book_store_project.entities.Authors[ authorID=" + authorID + " ]";
-    }
-    
+     @Override
+     public int hashCode() {
+          int hash = 0;
+          hash += (authorID != null ? authorID.hashCode() : 0);
+          return hash;
+     }
+
+     @Override
+     public boolean equals(Object object) {
+          // TODO: Warning - this method won't work in the case the id fields are not set
+          if (!(object instanceof Authors)) {
+               return false;
+          }
+          Authors other = (Authors) object;
+          if ((this.authorID == null && other.authorID != null) || (this.authorID != null && !this.authorID.equals(other.authorID))) {
+               return false;
+          }
+          return true;
+     }
+
+     @Override
+     public String toString() {
+          return "com.gb1w20.book_store_project.entities.Authors[ authorID=" + authorID + " ]";
+     }
+
 }

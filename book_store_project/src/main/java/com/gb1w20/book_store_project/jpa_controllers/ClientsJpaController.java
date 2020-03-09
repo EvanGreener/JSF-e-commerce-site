@@ -11,6 +11,8 @@ import javax.persistence.EntityManager;
 import javax.persistence.Query;
 import javax.persistence.EntityNotFoundException;
 import javax.persistence.PersistenceContext;
+import javax.persistence.TypedQuery;
+import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 import javax.transaction.SystemException;
@@ -121,6 +123,28 @@ public class ClientsJpaController implements Serializable {
             Query q = em.createQuery(cq);
             System.out.println("client count: " + ((Long) q.getSingleResult()).intValue());
             return ((Long) q.getSingleResult()).intValue();
+    }
+    
+    public Object[] getInfoByEmail(String email)
+    {
+        CriteriaBuilder cb = em.getCriteriaBuilder();
+        CriteriaQuery cq = cb.createQuery();
+        Root<Clients> client = cq.from(Clients.class);
+        cq.where(cb.equal(client.get("email"), email));
+        cq.multiselect(client.get("email"), client.get("hashedPassword"));
+        TypedQuery<Object[]> query = em.createQuery(cq);
+        return query.getSingleResult();
+    }
+    
+    public List<String> getEmailsByEmail(String email)
+    {
+        CriteriaBuilder cb = em.getCriteriaBuilder();
+        CriteriaQuery cq = cb.createQuery();
+        Root<Clients> client = cq.from(Clients.class);
+        cq.where(cb.equal(client.get("email"), email));
+        cq.select(client.get("email"));
+        TypedQuery<String> query = em.createQuery(cq);
+        return query.getResultList();
     }
     
 }

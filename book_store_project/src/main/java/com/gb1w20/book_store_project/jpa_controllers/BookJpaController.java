@@ -1,6 +1,11 @@
 package com.gb1w20.book_store_project.jpa_controllers;
 
+import com.gb1w20.book_store_project.entities.Authors;
+import com.gb1w20.book_store_project.entities.Authors_;
 import com.gb1w20.book_store_project.entities.Book;
+import com.gb1w20.book_store_project.entities.Book_;
+import com.gb1w20.book_store_project.entities.OrderItem;
+import com.gb1w20.book_store_project.entities.OrderItem_;
 import com.gb1w20.book_store_project.jpa_controllers.exceptions.NonexistentEntityException;
 import java.io.Serializable;
 import java.util.List;
@@ -11,10 +16,15 @@ import javax.persistence.EntityManager;
 import javax.persistence.Query;
 import javax.persistence.EntityNotFoundException;
 import javax.persistence.PersistenceContext;
+import javax.persistence.TypedQuery;
+import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Join;
 import javax.persistence.criteria.Root;
 import javax.transaction.SystemException;
 import javax.transaction.UserTransaction;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  *
@@ -23,29 +33,33 @@ import javax.transaction.UserTransaction;
 @Named
 @RequestScoped
 public class BookJpaController implements Serializable {
-    
+
+
+    private final static Logger LOG = LoggerFactory.getLogger(BookJpaController.class);
+
     @Resource
     private UserTransaction utx;
 
     @PersistenceContext
     private EntityManager em;
 
-    public BookJpaController() {}
+    public BookJpaController() {
+    }
 
     public void create(Book books) throws Exception {
-    try {
-        utx.begin();
-        em.persist(books);
-        utx.commit();
-    } catch (Exception ex) {
         try {
-            utx.rollback();
-        } catch (Exception re) {
-            throw new Exception("An error occurred attempting to roll back the transaction.", re);
+            utx.begin();
+            em.persist(books);
+            utx.commit();
+        } catch (Exception ex) {
+            try {
+                utx.rollback();
+            } catch (Exception re) {
+                throw new Exception("An error occurred attempting to roll back the transaction.", re);
+            }
+            throw ex;
         }
-        throw ex;
     }
-}
 
     public void edit(Book books) throws NonexistentEntityException, Exception {
         try {
@@ -111,16 +125,82 @@ public class BookJpaController implements Serializable {
     }
 
     public Book findBook(Integer id) {
-            return em.find(Book.class, id);
+        return em.find(Book.class, id);
     }
 
     public int getBookCount() {
-            CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
-            Root<Book> rt = cq.from(Book.class);
-            cq.select(em.getCriteriaBuilder().count(rt));
-            Query q = em.createQuery(cq);
-            System.out.println("book count: " + ((Long) q.getSingleResult()).intValue());
-            return ((Long) q.getSingleResult()).intValue();
+        CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
+        Root<Book> rt = cq.from(Book.class);
+        cq.select(em.getCriteriaBuilder().count(rt));
+        Query q = em.createQuery(cq);
+        System.out.println("book count: " + ((Long) q.getSingleResult()).intValue());
+        return ((Long) q.getSingleResult()).intValue();
+    }
+
+    public List<Book> search(String searchBy, String q, int page) {
+
+        String expression = "%" + q + "%";
+
+        CriteriaBuilder cb = em.getCriteriaBuilder();
+        CriteriaQuery<Book> cq = cb.createQuery(Book.class);
+        Root<Book> book = cq.from(Book.class);
+        Join author = book.join("authorsCollection");
+
+        switch (searchBy) {
+            case "title":
+                cq.where(cb.like(book.get(Book_.title), expression));
+                break;
+            case "author":
+                cq.where(cb.like(author.get(Authors_.name), expression));
+                break;
+            default:
+                cq.where(cb.like(book.get(Book_.isbn), expression));
+                break;
+        }
+
+        TypedQuery<Book> query = em.createQuery(cq);
+        return query.getResultList();
+
+    }
+    public List<Book> getBestSeller() {
+
+        TypedQuery<Book> query = em.createQuery("SELECT b FROM Book b INNER JOIN b.orders o GROUP BY o.isbn ORDER BY count(o.isbn) DESC", Book.class);
+        query.setMaxResults(8);
+        List<Book> books = query.getResultList();
+        return books;
+    }
+
+    public List<Object> getPopularGenres(){
+        
+        TypedQuery<Object> query = em.createQuery("SELECT b.genre FROM Book b WHERE b.genre <> :genre GROUP BY b.genre", Object.class);
+        
+        query.setParameter("genre", "Fiction");
+        query.setMaxResults(4);
+        List<Object> genres = query.getResultList();
+        return genres;
+        
     }
     
+   //TODO books that user does not already contain
+    public List<Book> getSimilarGenres(Book b){
+         TypedQuery<Book> query = em.createQuery("SELECT b FROM Book b WHERE b.genre = :genre AND b.isbn <> :isbn", Book.class);
+         query.setParameter("genre", b.getGenre());
+           query.setParameter("isbn", b.getIsbn());
+         query.setMaxResults(4);
+        List<Book> books = query.getResultList();
+        return books; 
+    }
+    
+    public List<Book> getRecentlyAdded(){
+         TypedQuery<Book> query = em.createQuery("SELECT b FROM Book b ORDER BY b.dateEntered ASC", Book.class);
+        query.setMaxResults(8);
+        List<Book> books = query.getResultList();
+        return books; 
+    }
+    
+    public List<Book> getRecommended() {
+
+        return null;
+    }
+
 }
