@@ -32,6 +32,13 @@ and open the template in the editor.
                .middle{
                     padding: 0px 40px 0px 40px;
                }
+               .bot{
+                    text-align: center;
+               }
+               .save-changes{
+                    margin: 10px 0px 20px 0px !important;
+                    font-size: 20px !important;              
+               }
 
           </style>
 
@@ -74,8 +81,15 @@ and open the template in the editor.
                               <f:facet name="header">Value of all books purchased</f:facet>
                                    #{client[3]}
                          </h:column>
+                         <h:column>
+                              <p:link href="edit?email=#{client[0]}" value="Edit"/>
+                         </h:column>
 
                     </h:dataTable>
+
+                    <div class="bot">
+                         <button class="positive ui button save-changes">Save Changes</button>
+                    </div>
                </div>
 
                <bookstore:footer></bookstore:footer>

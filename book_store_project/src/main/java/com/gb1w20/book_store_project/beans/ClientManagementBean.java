@@ -53,4 +53,5 @@ public class ClientManagementBean implements Serializable  {
      public void onKeyUp() {
           updateBean();
      }
+     
 }

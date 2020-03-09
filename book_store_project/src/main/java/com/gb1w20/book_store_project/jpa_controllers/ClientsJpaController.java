@@ -18,6 +18,7 @@ import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Join;
+import javax.persistence.criteria.JoinType;
 import javax.persistence.criteria.Root;
 import javax.transaction.SystemException;
 import javax.transaction.UserTransaction;
@@ -156,10 +157,10 @@ public class ClientsJpaController implements Serializable {
 
      /**
       * SELECT c.email, c.fname, c.lname, SUM(price_sold) FROM clients c 
-      * JOIN orders o ON c.client_id = o.client_id 
-      * JOIN orderItems oi oN o.order_id = oi.order_id 
-      * WHERE c.email LIKE :query 
-      * GROUP BY o.client_id;
+      * LEFT JOIN orders o ON c.client_id = o.client_id 
+      * LEFT JOIN orderItems oi oN o.order_id = oi.order_id 
+      * WHERE c.email LIKE :query AND c.is_manager = false
+      * GROUP BY c.client_id, c.fname, c.lname;
       *
       * @param query
       * @return
@@ -170,10 +171,10 @@ public class ClientsJpaController implements Serializable {
           CriteriaBuilder cb = em.getCriteriaBuilder();
           CriteriaQuery<Object[]> cq = cb.createQuery(Object[].class);
           Root<Clients> client = cq.from(Clients.class);
-          Join clientOrders = client.join("ordersCollection");
-          Join orderOrderItems = clientOrders.join("orderItemsCollection");
-          cq.where(cb.like(client.get(Clients_.email), expression));
-          cq.groupBy(clientOrders.get(Clients_.clientID));
+          Join clientOrders = client.join("ordersCollection", JoinType.LEFT);
+          Join orderOrderItems = clientOrders.join("orderItemsCollection", JoinType.LEFT);
+          cq.where( cb.and( cb.isFalse(client.get(Clients_.isManager)), cb.like(client.get(Clients_.email), expression)) );
+          cq.groupBy(client.get(Clients_.clientID));
           cq.multiselect(client.get(Clients_.email), client.get(Clients_.firstName), client.get(Clients_.lastName), cb.sum(orderOrderItems.get(OrderItem_.priceSold)));
           TypedQuery<Object[]> q = em.createQuery(cq);
           return q.getResultList();
