@@ -3,9 +3,13 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:b="http://bootsfaces.net/ui"
-      xmlns:f="http://xmlns.jcp.org/jsf/core">
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:bookstore="http://java.sun.com/jsf/composite/default_components">
     <h:head>
-        <title>The BookStore</title>
+        <ui:repeat value="#{bb.book}" var="book">
+            <title>#{book.title}</title>
+        </ui:repeat>
         <link rel="stylesheet" href="https://unpkg.com/swiper/css/swiper.min.css"/>
 
 
@@ -23,54 +27,45 @@
     <h:body>
 
 
-        <b:navBar  brand="The Bookstore" brandHref="#" fluid="true" class="headMenu ">
-
-
-            <b:navbarLinks>
-                <b:navLink class="nav" value="Shop" href="#"></b:navLink>
-                <b:navLink value="Sales" href="#"></b:navLink>
-                <b:navLink value="Genres" href="#"></b:navLink>
-            </b:navbarLinks>
-            <!--Adds spacing in nav bar-->
-            <b:navbarLinks pull="right"><b:navLink value="    " href="#"></b:navLink></b:navbarLinks>
-            <b:navbarLinks pull="right" styleClass="hidden-xs">
-                <b:navLink class="nav" value="Cart" href="#"></b:navLink>
-                <b:dropMenu value="En">
-                    <b:navLink id="en" value="English - En" href="#"></b:navLink>
-                    <b:navLink id="fr" value="Francais - Fr" href="#"></b:navLink>
-                </b:dropMenu>
-
-                <b:navLink value="Login" href="#">
-
-                </b:navLink>
-            </b:navbarLinks>
-        </b:navBar>
+        <!--composite component that comes from the navbar.xhtml file to avoid coding nav bar in all web pages-->
+        <bookstore:navbar/>
 
         <!--Book description section-->
         <div class="lightGreyDiv">
             <div class="ui stackable cards">
                 <div class="ui fluid card">
                     <div class="content">
-                        
-                        <h1>Of Mice And Men</h1>
-                        <section class="bookInfo">
-                        <div class="bookTextInfo">
-                        <p>- John Steinbeck</p><br></br>
-                        <h:commandButton class="bookFormatBtn button" value="PDF" type="button" />
-                        <h:commandButton  class="bookFormatBtn button" value="EPUB" type="button" />
-                        <br></br><br></br>
-                        <a>### Avg Rating 435 Reviews</a>
-                           <br></br>
-                            Elliot is a sound engineer living in Nashville who enjoys playing guitar and hanging with hi scat. hfsdkjhfks fhkjdshfkjhdskfjhdskjfhkdsjhfkdjshfkjhdskfjhdksjfhkds Elliot is a sound engineer living in Nashville who enjoys playing guitar and hanging with guitar and hanging with guitar and hanging with guitar and hanging with guitar and hanging with guitar and hanging with guitar and hanging with guitar and hanging with guitar and hanging with guitar and hanging with guitar and hanging with guitar and hanging with guitar and hanging with guitar and hanging with guitar and hanging with guitar and hanging with guitar and hanging with guitar and hanging with guitar and hanging with guitar and hanging with guitar and hanging with guitar and hanging with guitar and hanging with guitar and hanging with guitar and hanging with guitar and hanging with guitar and hanging with guitar and hanging with guitar and hanging with guitar and hanging with guitar and hanging with guitar and hanging with guitar and hanging with guitar and hanging with guitar and hanging with guitar and hanging with guitar and hanging with guitar and hanging with guitar and hanging with guitar and hanging with guitar and hanging with guitar and hanging with guitar and hanging with guitar and hanging with guitar and hanging with guitar and hanging with guitar and hanging with guitar and hanging with guitar and hanging with guitar and hanging with guitar and hanging with guitar and hanging with guitar and hanging with guitar <span id="dots">...</span><span id="more">and hanging with guitar and hanging with guitar and hanging with guitar and hanging with guitar and hanging with guitar and hanging with guitar and hanging with guitar and hanging with guitar and hanging with guitar and hanging with guitar and hanging with guitar and hanging with guitar and hanging with guitar and hanging with guitar and hanging with guitar and hanging with guitar and hanging with guitar and hanging with guitar and hanging with guitar and hanging with guitar and hanging with guitar and hanging with guitar and hanging with guitar and hanging with guitar and hanging with guitar and hanging with guitar and hanging with guitar and hanging with guitar and hanging with guitar and hanging with guitar and hanging with guitar and hanging with guitar and hanging with guitar and hanging with guitar and hanging with guitar and hanging with guitar and hanging with guitar and hanging with guitar and hanging with guitar and hanging with guitar and hanging with guitar and hanging with guitar and hanging with guitar and hanging with guitar and hanging with guitar and hanging with guitar and hanging with guitar and hanging with guitar and hanging with guitar and hanging with guitar and hanging with guitar and hanging with guitar and hanging with guitar and hanging with guitar and hanging with guitar and hanging with guitar and hanging with guitar and hanging with guitar and hanging with guitar and hanging with guitar and hanging with guitar and hanging with guitar and hanging with guitar and hanging with guitar and hanging with guitar and hanging with guitar and hanging with guitar and hanging with guitar and hanging with guitar and hanging with guitar and hanging with guitar and hanging with guitar and hanging with guitar and hanging with guitar and hanging with anwith guitar and hanging with guitar and hanging with his</span>
-                            <a  onclick="showMore()" id="moreBtn">Read more</a>
-                        </div>
-                        <div class="bookCover">
-                                <h:graphicImage class="image"  width="40%" library="images" name="9780061007224.jpg"  />
-                        </div>
-                         </section>   
-                         <br></br>
-                           <input type="number" id="quantity" name="quantity" min="1" max="5"></input>
-                            <h:commandButton  class="addToCartBtn button" value="Add to cart" type="button" />
+                        <ui:repeat value="#{bb.book}" var="book">
+                            <h1>#{book.title}</h1>
+                            <section class="bookInfo">
+                                <div class="bookTextInfo">
+                                    <p>- <ui:repeat value="#{book.authorsCollection}" var="author">
+                                            #{author.name}
+                                        </ui:repeat>
+                                    </p><br></br>
+                                    <h:commandButton class="bookFormatBtn button" value="PDF" type="button" />
+                                    <h:commandButton  class="bookFormatBtn button" value="EPUB" type="button" />
+                                    <br></br><br></br>
+                                    <a>### Avg Rating 435 Reviews</a>
+                                    <br></br>
+                                    #{book.description}
+                                    ing with guitar and hanging with guitar and hanging with guitar <span id="dots">...</span><span id="more">and hanging with guitar and hanging with guitar and hanging with guitar and hanging with guitar and hanging with guitar and hanging with guitar and hanging with guitar and hanging with guitar and hanging with guitar and hanging with guitar and hanging with guitar and hanging with guitar and hanging with guitar and hanging with guitar and hanging with guitar and hanging with guitar and hanging with guitar and hanging with guitar and hanging with guitar and hanging with guitar and hanging with guitar and hanging with guitar and hanging with guitar and hanging with guitar and hanging with guitar and hanging with guitar and hanging with guitar and hanging with guitar and hanging with guitar and hanging with guitar and hanging with guitar and hanging with guitar and hanging with guitar and hanging with guitar and hanging with guitar and hanging with guitar and hanging with guitar and hanging with guitar and hanging with guitar and hanging with guitar and hanging with guitar and hanging with guitar and hanging with guitar and hanging with guitar and hanging with guitar and hanging with guitar and hanging with guitar and hanging with guitar and hanging with guitar and hanging with guitar and hanging with guitar and hanging with guitar and hanging with guitar and hanging with guitar and hanging with guitar and hanging with guitar and hanging with guitar and hanging with guitar and hanging with guitar and hanging with guitar and hanging with guitar and hanging with guitar and hanging with guitar and hanging with guitar and hanging with guitar and hanging with guitar and hanging with guitar and hanging with guitar and hanging with guitar and hanging with guitar and hanging with guitar and hanging with guitar and hanging with guitar and hanging with guitar and hanging with </span>
+                                    <a  onclick="showMore()" id="moreBtn">Read more</a>
+
+                                </div>
+                                <div class="bookCover">
+                                    <h:graphicImage class="image" height="350px" width="300px" library="images" name="#{book.isbn}.jpg"  />
+                                    <br/>
+                                    <h1>$#{book.listPrice}</h1>   
+
+                                </div>
+
+                            </section>   
+                        </ui:repeat>
+
+                        <input type="number" value="1" id="quantity" name="quantity" min="1" max="5"></input>
+                        <h:commandButton  class="addToCartBtn button" value="Add to cart" type="button" />
+
                     </div>
                 </div>
             </div>
@@ -78,309 +73,243 @@
 
         <!--Reviews section-->
 
-        <div class="thingy3">
+        <div class="lightPurpleDiv">
 
 
-           <table class="ui padded table">
-    <tr><td  colspan="5" class="right aligned single line">    
-            <h:commandButton onclick="addReview()" id="reviewBtn" class="button addReviewBtn" value="+" type="button" />
-        </td>
-    
-  </tr>
-  <tbody>
-    <tr>
-      <td>
-         
-          
-           <div class="ui items">
-  <div class="item">
-    <div class="content">
-      <a class="header">Of Mice and Men</a>
-      <div class="meta">
-        <span>Firstname Lastname</span>
-      </div>
-      <div class="description">
-        <p> nkjdsfkjd fkdjhgkjhsdgkjfhd fkd hgksjfhdgkjfsdhgkjfdhg d gfdjskhg fdsgjhsdf fdghdkjgsd </p>
-      </div>
-      <div class="extra">
-        
-         
-        <div align="right" class="ui">
-          Jan 1st 2019
+
+
+            <table class="ui padded table">
+                <tr><td  colspan="5" class="right aligned single line">    
+                        <h:commandButton onclick="addReview()" id="reviewBtn" class="button addReviewBtn" value="+" type="button" />
+                    </td>
+
+                </tr>
+                <tbody>
+
+
+                    <ui:repeat value="#{bb.book.reviews}" var="book">
+                        <tr>
+                            <td>
+
+
+                                <div class="ui items">
+                                    <div class="item">
+                                        <div class="content">
+                                            <a class="header">#{book.reviewTitle}</a>
+                                            <div class="meta">
+                                                <span>#{book.clientID}</span>
+                                            </div>
+                                            <div class="description">
+                                                <p>#{book.reviewBody} </p>
+                                            </div>
+                                            <div class="extra">
+
+
+                                                <div align="right" class="ui">
+                                                    #{book.dateEntered}
+                                                </div>
+
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div> 
+
+                            </td>
+                        </tr>
+                    </ui:repeat>
+                    <tr>
+                        <td class="single line">
+
+
+
+
+
+                            <div class="ui items">
+                                <div class="item">
+                                    <div class="content">
+                                        <a class="header">Of Mice and Men</a>
+                                        <div class="meta">
+                                            <span>Firstname Lastname</span>
+                                        </div>
+                                        <div class="description">
+                                            <p> nkjdsfkjd fkdjhgkjhsdgkjfhd fkd hgksjfhdgkjfsdhgkjfdhg d gfdjskhg fdsgjhsdf fdghdkjgsd </p>
+                                        </div>
+                                        <div class="extra">
+
+
+                                            <div align="right" class="ui">
+                                                Jan 1st 2019
+                                            </div>
+
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+
+
+
+
+
+
+
+
+
+
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div class="ui items">
+                                <div class="item">
+                                    <div class="content">
+                                        <a class="header">Of Mice and Men</a>
+                                        <div class="meta">
+                                            <span>Firstname Lastname</span>
+                                        </div>
+                                        <div class="description">
+                                            <p> nkjdsfkjd fkdjhgkjhsdgkjfhd fkd hgksjfhdgkjfsdhgkjfdhg d gfdjskhg fdsgjhsdf fdghdkjgsd </p>
+                                        </div>
+                                        <div class="extra">
+
+
+                                            <div align="right" class="ui">
+                                                Jan 1st 2019
+                                            </div>
+
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </td>
+                        <td class="single line">
+                            <div class="ui items">
+                                <div class="item">
+                                    <div class="content">
+                                        <a class="header">Of Mice and Men</a>
+                                        <div class="meta">
+                                            <span>Firstname Lastname</span>
+                                        </div>
+                                        <div class="description">
+                                            <p> nkjdsfkjd fkdjhgkjhsdgkjfhd fkd hgksjfhdgkjfsdhgkjfdhg d gfdjskhg fdsgjhsdf fdghdkjgsd </p>
+                                        </div>
+                                        <div class="extra">
+
+
+                                            <div align="right" class="ui">
+                                                Jan 1st 2019
+                                            </div>
+
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+
+
+                <tfoot>
+                    <tr><th colspan="5">
+                            <div class="ui right floated pagination menu">
+                                <a class="icon item">
+                                    <i class="left chevron icon"></i>
+                                </a>
+                                <a class="item">1</a>
+                                <a class="item">2</a>
+                                <a class="item">3</a>
+                                <a class="item">4</a>
+                                <a class="icon item">
+                                    <i class="right chevron icon"></i>
+                                </a>
+                            </div>
+                        </th>
+                    </tr></tfoot>
+            </table>                     
+
+
         </div>
- 
-          
-      </div>
-    </div>
-  </div>
-  </div> 
-      
-      </td>
-      <td class="single line">
-       
-          
-          
-          
-          
-           <div class="ui items">
-  <div class="item">
-    <div class="content">
-      <a class="header">Of Mice and Men</a>
-      <div class="meta">
-        <span>Firstname Lastname</span>
-      </div>
-      <div class="description">
-        <p> nkjdsfkjd fkdjhgkjhsdgkjfhd fkd hgksjfhdgkjfsdhgkjfdhg d gfdjskhg fdsgjhsdf fdghdkjgsd </p>
-      </div>
-      <div class="extra">
-        
-         
-        <div align="right" class="ui">
-          Jan 1st 2019
-        </div>
- 
-          
-      </div>
-    </div>
-  </div>
-  </div>
-          
-          
-          
-          
-          
-          
-          
-          
-          
-          
-          
-      </td>
-      </tr>
-    <tr>
-      <td>
-               <div class="ui items">
-  <div class="item">
-    <div class="content">
-      <a class="header">Of Mice and Men</a>
-      <div class="meta">
-        <span>Firstname Lastname</span>
-      </div>
-      <div class="description">
-        <p> nkjdsfkjd fkdjhgkjhsdgkjfhd fkd hgksjfhdgkjfsdhgkjfdhg d gfdjskhg fdsgjhsdf fdghdkjgsd </p>
-      </div>
-      <div class="extra">
-        
-         
-        <div align="right" class="ui">
-          Jan 1st 2019
-        </div>
- 
-          
-      </div>
-    </div>
-  </div>
-  </div>
-      </td>
-      <td class="single line">
-                <div class="ui items">
-  <div class="item">
-    <div class="content">
-      <a class="header">Of Mice and Men</a>
-      <div class="meta">
-        <span>Firstname Lastname</span>
-      </div>
-      <div class="description">
-        <p> nkjdsfkjd fkdjhgkjhsdgkjfhd fkd hgksjfhdgkjfsdhgkjfdhg d gfdjskhg fdsgjhsdf fdghdkjgsd </p>
-      </div>
-      <div class="extra">
-        
-         
-        <div align="right" class="ui">
-          Jan 1st 2019
-        </div>
- 
-          
-      </div>
-    </div>
-  </div>
-  </div>
-      </td>
-      </tr>
-  </tbody>
-               
-               
-  <tfoot>
-    <tr><th colspan="5">
-      <div class="ui right floated pagination menu">
-        <a class="icon item">
-          <i class="left chevron icon"></i>
-        </a>
-        <a class="item">1</a>
-        <a class="item">2</a>
-        <a class="item">3</a>
-        <a class="item">4</a>
-        <a class="icon item">
-          <i class="right chevron icon"></i>
-        </a>
-      </div>
-    </th>
-  </tr></tfoot>
-</table>                     
-                
-          
-        </div>
 
 
-<!-- The Modal -->
-<div id="myModal" class="modal">
+        <!-- The Modal -->
+        <div id="myModal" class="modal">
 
-  <!-- Modal content -->
-  <div class="modal-content">
-    <span class="close">x</span>
-    <h4>Create Review</h4>
-    <br></br>
-    <h5>Of Mice and Men</h5>
-    <hr></hr>
-    <p>Add a Title</p>
-    <input type="text"></input>
-    <p>Overall Rating</p>
-    <input type="text"></input>
-    <p>/5</p>
-    <p>Add a Review</p>
-    <textarea id="w3mission" rows="4" cols="50">
-</textarea>
-     <br></br>
-    <input type="submit"></input>
-  </div>
+            <!-- Modal content -->
+            <div class="modal-content">
+                <span class="close">x</span>
+                <h4>Create Review</h4>
+                <br></br>
+                <h5>Of Mice and Men</h5>
+                <hr></hr>
+                <p>Add a Title</p>
+                <input type="text"></input>
+                <p>Overall Rating</p>
+                <input type="text"></input>
+                <p>/5</p>
+                <p>Add a Review</p>
+                <textarea id="w3mission" rows="4" cols="50">
+                </textarea>
+                <br></br>
+                <input type="submit"></input>
+            </div>
 
-</div>
+        </div>
 
 
         <!--Suggestions section-->
-        <div class="thingy">
+        <div class="lightOrangeDiv">
 
-            <h4>You may also like</h4><br></br>
-
-            <div class="ui four doubling stackable cards">
-                <div class="ui fluid card darker">
-                    <div class="image">
-                        <h:graphicImage library="images" name="colorScheme.PNG"  />
-
-                    </div>
-                    <div class="content">
-                        <div class="header">Elliot Baker</div>
-                        <div class="meta">By Friend</div>
-                    </div>
-                    <div class="ui bottom attached button">
-                        + Add to Cart
-                    </div>
-                </div>
-                <div class="ui fluid card darker">
-                    <div class="image">
-                        <h:graphicImage library="images" name="colorScheme.PNG"  /></div>
-                    <div class="content">
-                        <div class="header">Elliot Baker</div>
-                        <div class="meta">Friend</div>
-                    </div>
-                    <div class="ui bottom attached button">
-                        + Add to Cart
-                    </div>
-                </div>
-                <div class="ui fluid card darker">
-                    <div class="image">
-                        <h:graphicImage library="images" name="colorScheme.PNG"  /></div>
-                    <div class="content">
-                        <div class="header">Elliot Baker</div>
-                        <div class="meta">Friend</div>
-
-                    </div>
-<div class="ui bottom attached button">
-                        + Add to Cart
-                    </div>
-                </div>                <div class="ui fluid card darker">
-                    <div class="image">
-                        <h:graphicImage library="images" name="colorScheme.PNG"  /></div>
-                    <div class="content">
-                        <div class="header">Elliot Baker</div>
-                        <div class="meta">Friend</div>
-
-                    </div>
-                    <div class="ui bottom attached button">
-                        + Add to Cart
-                    </div>
-
-                </div>         
-            </div>
 
             <br></br>
             <h4>Similar Genre</h4><br></br>
 
             <div class="ui four doubling stackable cards">
-                <div class="ui fluid card darker">
-                    <div class="image">
-                        <h:graphicImage library="images" name="colorScheme.PNG"  />
+                <ui:repeat value="#{bb.getSimilarGenreBooks(bb.book)}" var="bo">
+
+
+                    <div class="ui fluid card darker">
+                        <div class="homepageImg">
+                            <h:graphicImage class="img" height="250" width="156.25" library="images" name="#{bo.isbn}.jpg"  />
+                        </div>
+                        <div class="content">
+                              <h:commandLink action = "#{bb.viewBook(bo)}" type="submit" value = "">
+                                        <div class="header">
+
+                                            #{bo.title}</div>
+                                        <div class="meta">
+
+                                            <ui:repeat value="#{bo.authorsCollection}" var="author">
+                                                #{author.name}
+                                            </ui:repeat>
+
+                                        </div>
+
+                                        <div class="description">
+                                            <div class="ui tag labels">
+                                                <a class="ui label">
+                                                    $#{bo.listPrice}
+                                                </a>
+                                            </div>
+
+                                        </div>
+                                    </h:commandLink>
+                        </div>
+                        <div class="ui bottom attached button">
+                            + Add to Cart
+                        </div>
 
                     </div>
-                    <div class="content">
-                        <div class="header">Elliot Baker</div>
-                        <div class="meta">By Friend</div>
-                    </div>
-                    <div class="ui bottom attached button">
-                        + Add to Cart
-                    </div>
-                    
-                </div>
-                <div class="ui fluid card darker">
-                    <div class="image">
-                        <h:graphicImage library="images" name="colorScheme.PNG"  /></div>
-                    <div class="content">
-                        <div class="header">Elliot Baker</div>
-                        <div class="meta">Friend</div>
 
-                    </div>
-                    <div class="ui bottom attached button">
-                        + Add to Cart
-                    </div>
-                </div>
-                <div class="ui fluid card darker">
-                    <div class="image">
-                        <h:graphicImage library="images" name="colorScheme.PNG"  /></div>
-                    <div class="content">
-                        <div class="header">Elliot Baker</div>
-                        <div class="meta">Friend</div>
-
-                    </div>
-                    <div class="ui bottom attached button">
-                        + Add to Cart
-                    </div>
-
-                </div>                <div class="ui fluid card darker">
-                    <div class="image">
-                        <h:graphicImage library="images" name="colorScheme.PNG"  /></div>
-                    <div class="content">
-                        <div class="header">Elliot Baker</div>
-                        <div class="meta">Friend</div>
-
-                    </div>
-                    <div class="ui bottom attached button">
-                        + Add to Cart
-                    </div>
-
-                </div>         
+                </ui:repeat>
             </div> 
         </div>
 
-
-
-
-
-
-
-        <div class="thingy4">
-
-
-        </div>
+        <!--composite component that comes from the footer.xhtml file to avoid coding the website footer in all web pages-->
+        <bookstore:footer/>
 
 
 

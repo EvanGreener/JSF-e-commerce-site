@@ -15,7 +15,9 @@
         <h:outputStylesheet library="webjars" name="Semantic-UI/2.4.1/semantic.min.css" />
         <h:outputStylesheet library="css" name="homepage.css" />
         <h:outputStylesheet library="managercss" name="manager.css" />
-        <h:outputScript library="js" name="homepage.js" />
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        
+        <h:outputScript library="js" name="manager.js" />
 
         <!-- Swiper JS -->
         <script src="https://unpkg.com/swiper/js/swiper.min.js"></script>
@@ -36,16 +38,52 @@
         <h:panelGroup>
             
             <div class="ui three column row very relaxed grid  manager-container">
-                <div class="column manager-outer-menu"><div class="manager-menu"><p>I am a div</p></div></div>
-                <div class="column manager-outer-menu"><div class="manager-menu"><p>I am a div</p></div></div>
-                <div class="column manager-outer-menu"><div class="manager-menu"><p>I am a div</p></div></div>
-                <div class="column manager-outer-menu"><div class="manager-menu"><p>I am a div</p></div></div>
-                <div class="column manager-outer-menu"><div class="manager-menu"><p>I am a div</p></div></div>
-                <div class="column manager-outer-menu"><div class="manager-menu"><p>I am a div</p></div></div>
-                <div class="column manager-outer-menu"><div class="manager-menu"><p>I am a div</p></div></div>
-                <div class="column manager-outer-menu"><div class="manager-menu"><p>I am a div</p></div></div>
-                <div class="column manager-outer-menu"><div class="manager-menu"><p>I am a div</p></div></div>
                 
+                <div class="column manager-outer-menu">
+                    <div class="manager-menu">
+                        <h:commandButton class="front-button" id="manage-client-button" value="User Management"/>
+                    </div>
+                </div>
+                <div class="column manager-outer-menu">
+                    <div class="manager-menu">
+                        <h:commandButton class="front-button" id="edit-inventory-button" value="Inventory"/>
+                    </div>
+                </div>
+                <div class="column manager-outer-menu">
+                    <div class="manager-menu">
+                        <h:commandButton class="front-button" id="set-sales-button" value="Sales"/>
+                    </div>
+                </div>
+                <div class="column manager-outer-menu">
+                    <div class="manager-menu">
+                        <h:commandButton class="front-button" id="order-management-button" value="Orders"/>
+                    </div>
+                </div>
+                <div class="column manager-outer-menu">
+                    <div class="manager-menu">
+                        <h:commandButton class="front-button" id="review-management-button" value="Reviews Management"/>
+                    </div>
+                </div>
+                <div class="column manager-outer-menu">
+                    <div class="manager-menu">
+                        <h:commandButton class="front-button" id="reporting-button" value="Reports"/>
+                    </div>
+                </div>
+                <div class="column manager-outer-menu">
+                    <div class="manager-menu">
+                        <h:commandButton class="front-button" id="newsfeed-management-button" value="Newsfeeds"/>
+                    </div>
+                </div>
+                <div class="column manager-outer-menu">
+                    <div class="manager-menu">
+                        <h:commandButton class="front-button" id="survey-management-button" value="Surveys"/>
+                    </div>
+                </div>
+                <div class="column manager-outer-menu">
+                    <div class="manager-menu">
+                        <h:commandButton class="front-button" id="ad-management-button" value="Ads"/>
+                    </div>
+                </div>
             </div>
             
         </h:panelGroup>
