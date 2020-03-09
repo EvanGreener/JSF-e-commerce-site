@@ -1,5 +1,6 @@
 package com.gb1w20.book_store_project.jpa_controllers;
 
+import com.gb1w20.book_store_project.entities.Authors;
 import com.gb1w20.book_store_project.entities.Authors_;
 import com.gb1w20.book_store_project.entities.Book;
 import com.gb1w20.book_store_project.entities.Book_;
@@ -32,6 +33,7 @@ import org.slf4j.LoggerFactory;
 @Named
 @RequestScoped
 public class BookJpaController implements Serializable {
+
 
     private final static Logger LOG = LoggerFactory.getLogger(BookJpaController.class);
 

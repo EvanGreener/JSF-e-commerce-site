@@ -82,7 +82,7 @@ CREATE TABLE `Book` (
 CREATE TABLE `Surveys` (
   `Survey_ID` INT AUTO_INCREMENT,
   `Survey_Description` VARCHAR(500),
-  `Survery_Name` VARCHAR(100),
+  `Survey_Name` VARCHAR(100),
   `Date_Created` DATETIME,
   `Last_Modified` DATETIME,
   `Is_Removed` BOOL,
@@ -182,7 +182,7 @@ CREATE TABLE `Clients` (
   `Postal_Code` VARCHAR(6),
   `Home_Telephone` VARCHAR(10),
   `Cell_Telephone` VARCHAR(10),
-  `Email` VARCHAR(300),
+  `Email` VARCHAR(300) UNIQUE,
   `Date_Entered` DATETIME,
   `Last_Modified` DATETIME,
   `Is_Removed` BOOL,
