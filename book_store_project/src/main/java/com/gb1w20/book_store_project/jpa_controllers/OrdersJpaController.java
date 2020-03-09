@@ -1,5 +1,6 @@
 package com.gb1w20.book_store_project.jpa_controllers;
 
+import com.gb1w20.book_store_project.beans.BookBean;
 import com.gb1w20.book_store_project.entities.Clients;
 import com.gb1w20.book_store_project.entities.Clients_;
 import com.gb1w20.book_store_project.entities.OrderItem;
@@ -23,6 +24,8 @@ import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 import javax.transaction.SystemException;
 import javax.transaction.UserTransaction;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  *
@@ -37,6 +40,8 @@ public class OrdersJpaController implements Serializable {
 
     @PersistenceContext
     private EntityManager em;
+    
+    private final static Logger LOG = LoggerFactory.getLogger(OrdersJpaController.class);
 
     public OrdersJpaController() {}
 
