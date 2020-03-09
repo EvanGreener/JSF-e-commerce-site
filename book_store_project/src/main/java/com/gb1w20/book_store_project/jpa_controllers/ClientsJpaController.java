@@ -135,26 +135,29 @@ public class ClientsJpaController implements Serializable {
           return ((Long) q.getSingleResult()).intValue();
      }
 
-     public Object[] getInfoByEmail(String email) {
-          CriteriaBuilder cb = em.getCriteriaBuilder();
-          CriteriaQuery cq = cb.createQuery();
-          Root<Clients> client = cq.from(Clients.class);
-          cq.where(cb.equal(client.get("email"), email));
-          cq.multiselect(client.get("email"), client.get("hashedPassword"));
-          TypedQuery<Object[]> query = em.createQuery(cq);
-          return query.getSingleResult();
-     }
+     public Object[] getInfoByEmail(String email)
+    {
+        CriteriaBuilder cb = em.getCriteriaBuilder();
+        CriteriaQuery cq = cb.createQuery();
+        Root<Clients> client = cq.from(Clients.class);
+        cq.where(cb.equal(client.get(Clients_.email), email));
+        cq.multiselect(client.get(Clients_.email), client.get(Clients_.hashedPassword));
+        TypedQuery<Object[]> query = em.createQuery(cq);
+        return query.getSingleResult();
+    }
+    
+    public List<String> getEmailsByEmail(String email)
+    {
+        CriteriaBuilder cb = em.getCriteriaBuilder();
+        CriteriaQuery cq = cb.createQuery();
+        Root<Clients> client = cq.from(Clients.class);
+        cq.where(cb.equal(client.get(Clients_.email), email));
+        cq.select(client.get(Clients_.email));
+        TypedQuery<String> query = em.createQuery(cq);
+        return query.getResultList();
+    }
 
-     public List<String> getEmailsByEmail(String email) {
-          CriteriaBuilder cb = em.getCriteriaBuilder();
-          CriteriaQuery cq = cb.createQuery();
-          Root<Clients> client = cq.from(Clients.class);
-          cq.where(cb.equal(client.get("email"), email));
-          cq.select(client.get("email"));
-          TypedQuery<String> query = em.createQuery(cq);
-          return query.getResultList();
-     }
-
+     
      /**
       * SELECT c.email, c.fname, c.lname, SUM(price_sold) FROM clients c 
       * LEFT JOIN orders o ON c.client_id = o.client_id 
@@ -190,4 +193,5 @@ public class ClientsJpaController implements Serializable {
 
      }
 
+   
 }
