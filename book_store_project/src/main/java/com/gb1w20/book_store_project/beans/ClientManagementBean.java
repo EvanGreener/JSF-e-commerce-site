@@ -24,7 +24,12 @@ public class ClientManagementBean implements Serializable  {
       private ClientsJpaController clientCtrl;
       
       private String query = "";
-      private Collection<Object[]> results;
+      private List<Object[]> results;
+      private String currentClientId;
+      private String newEmail;
+      private String newFname;
+      private String newLname;
+      
       
       @PostConstruct
      public void init() {
@@ -40,18 +45,42 @@ public class ClientManagementBean implements Serializable  {
           query = newValue;
      }
      
-     public Collection<Object[]> getResults(){
+     public List<Object[]> getResults(){
           return results;
      }
-
-     private void updateBean() {
+     
+     public String getCurrentClientId(){
+          return currentClientId;
+     }
+     
+     public String getNewEmail(){
+          return newEmail;
+     }
+     
+     public void setNewEmail(String newValue){
+          newEmail = newValue;
+     }
+     
+     public String getNewFname(){
+          return newFname;
+     }
+     
+     public void setNewFname(String newValue){
+          newFname = newValue;
+     }
+     
+     public String getNewLname(){
+          return newLname;
+     }
+     
+     public void setNewLname(String newValue){
+          newLname = newValue;
+     }
+     
+     public void updateBean() {
           LOG.debug(query);
           results = clientCtrl.searchClients(query);
           LOG.debug(results.toString());
-     }
-     
-     public void onKeyUp() {
-          updateBean();
      }
      
 }

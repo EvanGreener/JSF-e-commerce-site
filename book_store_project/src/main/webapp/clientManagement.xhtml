@@ -1,9 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!--
-To change this license header, choose License Headers in Project Properties.
-To change this template file, choose Tools | Templates
-and open the template in the editor.
--->
+
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://java.sun.com/jsf/html"
@@ -32,11 +28,9 @@ and open the template in the editor.
                .middle{
                     padding: 0px 40px 0px 40px;
                }
-               .bot{
-                    text-align: center;
-               }
-               .save-changes{
-                    margin: 10px 0px 20px 0px !important;
+               
+               button{
+                    margin: 10px 10px 20px 10px !important;
                     font-size: 20px !important;              
                }
 
@@ -58,37 +52,41 @@ and open the template in the editor.
                     <h1>Client Management</h1>
 
                     <!--Search bar-->
-                    <div style="display: inline;" class="ui search">
+                    <div style="display: inline;" class="ui search" >
                          <h:inputText  id="query" value="#{ clientManagement.query}" a:placeholder="Search clients..." style="float: right; margin-top: 10px; margin-bottom: 10px; " class="prompt" >
-                              <p:ajax event="keyup" listener="#{clientManagement.onKeyUp()}" update="clientsTable" />
+                              <p:ajax event="keyup" listener="#{clientManagement.updateBean()}" update="clientsTable" />
                          </h:inputText>
                     </div> 
 
-                    <h:dataTable  id="clientsTable" var="client" class="ui celled table" value="#{clientManagement.results}" >
+                    <h:dataTable  id="clientsTable" var="client"  class="ui celled table" value="#{clientManagement.results}" >
                          <h:column>
                               <f:facet name="header">Login email</f:facet>
-                                   #{client[0]}
-                         </h:column>
-                         <h:column>
-                              <f:facet name="header">First name</f:facet>
                                    #{client[1]}
                          </h:column>
                          <h:column>
-                              <f:facet name="header">Last name</f:facet>
+                              <f:facet name="header">First name</f:facet>
                                    #{client[2]}
                          </h:column>
                          <h:column>
-                              <f:facet name="header">Value of all books purchased</f:facet>
+                              <f:facet name="header">Last name</f:facet>
                                    #{client[3]}
                          </h:column>
                          <h:column>
-                              <p:link href="edit?email=#{client[0]}" value="Edit"/>
+                              <f:facet name="header">Value of all books purchased</f:facet>
+                                   #{client[4]}
+                         </h:column>
+                         <h:column>
+                              <p:link href="edit_client.xhtml"  value="Edit">
+                                   <f:param name="currentClientId" value="#{client[0]}" />
+                              </p:link>
+                              
                          </h:column>
 
                     </h:dataTable>
 
                     <div class="bot">
-                         <button class="positive ui button save-changes">Save Changes</button>
+                         <button class="positive ui button">Save Changes</button>
+                         <button class="ui button" >Cancel</button>
                     </div>
                </div>
 

@@ -165,7 +165,7 @@ public class ClientsJpaController implements Serializable {
       * @param query
       * @return
       */
-     public Collection<Object[]> searchClients(String query) {
+     public List<Object[]> searchClients(String query) {
           String expression = "%" + query + "%";
 
           CriteriaBuilder cb = em.getCriteriaBuilder();
@@ -175,7 +175,7 @@ public class ClientsJpaController implements Serializable {
           Join orderOrderItems = clientOrders.join("orderItemsCollection", JoinType.LEFT);
           cq.where( cb.and( cb.isFalse(client.get(Clients_.isManager)), cb.like(client.get(Clients_.email), expression)) );
           cq.groupBy(client.get(Clients_.clientID));
-          cq.multiselect(client.get(Clients_.email), client.get(Clients_.firstName), client.get(Clients_.lastName), cb.sum(orderOrderItems.get(OrderItem_.priceSold)));
+          cq.multiselect(client.get(Clients_.clientID), client.get(Clients_.email), client.get(Clients_.firstName), client.get(Clients_.lastName), cb.sum(orderOrderItems.get(OrderItem_.priceSold)));
           TypedQuery<Object[]> q = em.createQuery(cq);
           return q.getResultList();
 
