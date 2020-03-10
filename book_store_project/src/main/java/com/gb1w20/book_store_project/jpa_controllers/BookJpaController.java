@@ -116,6 +116,7 @@ public class BookJpaController implements Serializable {
     private List<Book> findBookEntities(boolean all, int maxResults, int firstResult) {
         CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
         cq.select(cq.from(Book.class));
+    
         Query q = em.createQuery(cq);
         if (!all) {
             q.setMaxResults(maxResults);
