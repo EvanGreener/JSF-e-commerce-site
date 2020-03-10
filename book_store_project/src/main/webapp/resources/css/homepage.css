@@ -108,6 +108,12 @@ body {
      padding:5%;
      background-color: #EFF1F3 !important;
 }
+
+.lightGreyDivLessSpacing{
+     padding:2%;
+     background-color: #EFF1F3 !important;
+}
+
 .lightOrangeDiv{
      padding:5%;
      background-color: #D8B4A0;

@@ -16,50 +16,60 @@
         <h:outputStylesheet library="webjars" name="Semantic-UI/2.4.1/semantic.min.css" />
         <h:outputStylesheet library="css" name="homepage.css" />
         <h:outputStylesheet library="book_css" name="bookpage.css" />
-        <h:outputScript library="js" name="homepage.js" />
+        <h:outputScript library="js" name="managerOrders.js" />
         <h:outputStylesheet library="webjars" name="font-awesome/4.7.0/css/font-awesome.min-jsf.css" />
         <!-- Swiper JS -->
         <script src="https://unpkg.com/swiper/js/swiper.min.js"></script>
     </h:head>
-    
+
     <h:body>
         <bookstore:navbar/>
+        <div class="lightGreyDivLessSpacing">
         <h:dataTable class="ui celled table" value="#{ordersJpaController.findOrdersEntities()}" var="orders">
             <h:column>
                 <f:facet name="header">Order #</f:facet>
-                #{orders.orderID}
+                    #{orders.orderID}
             </h:column>
             <h:column>
                 <f:facet name="header">Email</f:facet>
-                #{ordersJpaController.getClientEmailById(orders.clientID)}
+                    #{ordersJpaController.getClientEmailById(orders.clientID)}
             </h:column>
             <h:column>
                 <f:facet name="header"># of Items</f:facet>
-                #{ordersJpaController.getOrderItemsCountByOrderId(orders.orderID)}
+                    #{ordersJpaController.getOrderItemsCountByOrderId(orders.orderID)}
             </h:column>
             <h:column>
                 <f:facet name="header">Date Placed</f:facet>
-                #{orders.dateCreated}
+                    #{orders.dateCreated}
             </h:column>
             <h:column>
                 <f:facet name="header">Last Updated</f:facet>
-                #{orders.lastUpdated}
+                    #{orders.lastUpdated}
             </h:column>
             <h:column>
                 <f:facet name="header">Status</f:facet>
-                #{ordersJpaController.getStatusByOrderId(orders.orderID)}
+                    #{ordersJpaController.getStatusByOrderId(orders.orderID)}
             </h:column>
             <h:column>
                 <h:form>
-                    <h:commandLink value="Edit Order" action="#" disabled="#{orders.isRemoved}"/> 
+                    <h:commandLink onclick="return showModal()" value="Edit Order" disabled="#{orders.isRemoved}">
+                        <f:param name="email" value="#{ordersJpaController.getClientEmailById(orders.clientID)}" />
+                    </h:commandLink>
+                    <div id="test" class="modal">
+                        <div class="modal-content">
+                            <span class="close">x</span>
+                            This is a test. Will be fixed in due time.
+                        </div>
+                    </div>
                 </h:form>
             </h:column>
             <h:column>
                 <h:form>
-                    <h:commandLink value="#{orderBacking.getRemovalStatus(orders.isRemoved)}" action="#{orderBacking.removeOrder(orders)}" disabled="#{orders.isRemoved}"/> 
+                    <h:commandLink value="#{orderBacking.getRemovalStatus(orders.isRemoved)}" action="#{orderBacking.addOrRemoveOrder(orders)}"/> 
                 </h:form>
             </h:column>
         </h:dataTable>
+        </div>
         <bookstore:footer/>
     </h:body>
 </html>
