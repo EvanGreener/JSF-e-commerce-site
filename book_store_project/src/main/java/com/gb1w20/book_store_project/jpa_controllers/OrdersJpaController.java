@@ -138,12 +138,14 @@ public class OrdersJpaController implements Serializable {
 
     public String getClientEmailById(int clientId)
     {
+        LOG.debug(clientId + "");
         CriteriaBuilder cb = em.getCriteriaBuilder();
         CriteriaQuery cq = cb.createQuery();
         Root<Clients> client = cq.from(Clients.class);
         cq.where(cb.equal(client.get(Clients_.clientID), clientId));
         cq.select(client.get(Clients_.email));
         TypedQuery<String> query = em.createQuery(cq);
+        LOG.debug(query.getSingleResult());
         return query.getSingleResult();
     }
     

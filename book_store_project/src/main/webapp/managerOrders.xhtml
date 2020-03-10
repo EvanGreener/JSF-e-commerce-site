@@ -24,6 +24,7 @@
 
     <h:body>
         <bookstore:navbar/>
+        <div class="lightGreyDivLessSpacing">
         <h:dataTable class="ui celled table" value="#{ordersJpaController.findOrdersEntities()}" var="orders">
             <h:column>
                 <f:facet name="header">Order #</f:facet>
@@ -51,21 +52,24 @@
             </h:column>
             <h:column>
                 <h:form>
-                    <h:commandLink onclick="return showModal()" value="Edit Order" disabled="#{orders.isRemoved}" />
+                    <h:commandLink onclick="return showModal()" value="Edit Order" disabled="#{orders.isRemoved}">
+                        <f:param name="email" value="#{ordersJpaController.getClientEmailById(orders.clientID)}" />
+                    </h:commandLink>
                     <div id="test" class="modal">
                         <div class="modal-content">
                             <span class="close">x</span>
-                            #{ordersJpaController.getClientEmailById(orders.clientID)}
+                            This is a test. Will be fixed in due time.
                         </div>
                     </div>
                 </h:form>
             </h:column>
             <h:column>
                 <h:form>
-                    <h:commandLink value="#{orderBacking.getRemovalStatus(orders.isRemoved)}" action="#{orderBacking.removeOrder(orders)}" disabled="#{orders.isRemoved}"/> 
+                    <h:commandLink value="#{orderBacking.getRemovalStatus(orders.isRemoved)}" action="#{orderBacking.addOrRemoveOrder(orders)}"/> 
                 </h:form>
             </h:column>
         </h:dataTable>
+        </div>
         <bookstore:footer/>
     </h:body>
 </html>
