@@ -271,7 +271,10 @@ public class ClientBackingBean implements Serializable {
         String number = (String)value;
         try
         {
-            Integer.parseInt(number);
+            for (char c: number.toCharArray())
+            {
+                Integer.parseInt(Character.toString(c));
+            }
         }
         catch(NumberFormatException nfe)
         {
@@ -292,7 +295,10 @@ public class ClientBackingBean implements Serializable {
         String number = (String)value;
         try
         {
-            Integer.parseInt(number);
+            for (char c: number.toCharArray())
+            {
+                Integer.parseInt(Character.toString(c));
+            }
         }
         catch(NumberFormatException nfe)
         {

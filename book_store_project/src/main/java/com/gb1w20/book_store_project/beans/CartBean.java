@@ -29,7 +29,7 @@ public class CartBean implements Serializable {
     @Inject
     private BookJpaController bookCtrlr;
     
-    private List<Book> CartItems;
+    private List<Book> CartItems; 
     
     public List<Book> getCartItems(){
         return null;

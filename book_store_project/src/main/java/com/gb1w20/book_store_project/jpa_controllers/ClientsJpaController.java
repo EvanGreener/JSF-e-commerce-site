@@ -1,6 +1,7 @@
 package com.gb1w20.book_store_project.jpa_controllers;
 
 import com.gb1w20.book_store_project.entities.Clients;
+import com.gb1w20.book_store_project.entities.Clients_;
 import com.gb1w20.book_store_project.jpa_controllers.exceptions.NonexistentEntityException;
 import java.io.Serializable;
 import java.util.List;
@@ -130,8 +131,8 @@ public class ClientsJpaController implements Serializable {
         CriteriaBuilder cb = em.getCriteriaBuilder();
         CriteriaQuery cq = cb.createQuery();
         Root<Clients> client = cq.from(Clients.class);
-        cq.where(cb.equal(client.get("email"), email));
-        cq.multiselect(client.get("email"), client.get("hashedPassword"));
+        cq.where(cb.equal(client.get(Clients_.email), email));
+        cq.multiselect(client.get(Clients_.email), client.get(Clients_.hashedPassword));
         TypedQuery<Object[]> query = em.createQuery(cq);
         return query.getSingleResult();
     }
@@ -141,8 +142,8 @@ public class ClientsJpaController implements Serializable {
         CriteriaBuilder cb = em.getCriteriaBuilder();
         CriteriaQuery cq = cb.createQuery();
         Root<Clients> client = cq.from(Clients.class);
-        cq.where(cb.equal(client.get("email"), email));
-        cq.select(client.get("email"));
+        cq.where(cb.equal(client.get(Clients_.email), email));
+        cq.select(client.get(Clients_.email));
         TypedQuery<String> query = em.createQuery(cq);
         return query.getResultList();
     }
