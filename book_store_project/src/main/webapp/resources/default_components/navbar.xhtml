@@ -30,16 +30,16 @@
             <b:navbarLinks pull="right"><b:navLink value="    " href="#"></b:navLink></b:navbarLinks>
             <b:navbarLinks pull="right" styleClass="hidden-xs">
 
-                <b:navLink style="color: white" class="nav" value="Cart" href="#"></b:navLink>
+                <b:navLink style="color: white" class="nav" value="Cart" href="cart.xhtml"></b:navLink>
                 <b:dropMenu value="En" style="color: white">
                     <b:navLink id="en" value="English - En" href="#"></b:navLink>
                     <b:navLink id="fr" value="Francais - Fr" href="#"></b:navLink>
                 </b:dropMenu>
 
-                <b:navLink rendered="true" style="color: white;font-weight: bold" value="Log In" href="signIn.xhtml">
+                <b:navLink rendered="#{!UserLoginBean.getSignInStatus()}" style="color: white;font-weight: bold" value="Log In" href="signIn.xhtml">
                 </b:navLink>
 
-                <b:dropMenu rendered="true" value="Hello #{clientBacking.getClient().getFirstName()}" style="color: white">
+                <b:dropMenu rendered="#{UserLoginBean.getSignInStatus()}" value="Hello #{clientBacking.getClient().getFirstName()}" style="color: white">
                     <b:navLink id="signout" value="Signout" href="#" onclick="signOut()"></b:navLink>
                 </b:dropMenu>
 

@@ -2231,221 +2231,221 @@ VALUES ("9780440000587", "E-Pub", "sample.epub", "2019-12-26 12:38:58", SYSDATE(
 
 
 INSERT INTO Book_Format(ISBN, date_created, last_modified, Is_Removed, File_Location)
-VALUES ('9780142000670', '2017-01-08', '2017-02-08', FALSE, '9780142000670.pdf');
+VALUES ('9780142000670', '2017-01-08', '2017-02-08', FALSE, 'sample.pdf');
 INSERT INTO Book_Format(ISBN, date_created, last_modified, Is_Removed, File_Location)
-VALUES ('9780439244190', '2018-09-02', '2018-10-02', TRUE, '9780439244190.pdf');
+VALUES ('9780439244190', '2018-09-02', '2018-10-02', TRUE, 'sample.pdf');
 INSERT INTO Book_Format(ISBN, date_created, last_modified, Is_Removed, File_Location)
-VALUES ('9780061120084', '2019-05-23', '2019-05-23', FALSE, '9780061120084.pdf');
+VALUES ('9780061120084', '2019-05-23', '2019-05-23', FALSE, 'sample.pdf');
 INSERT INTO Book_Format(ISBN, date_created, last_modified, Is_Removed, File_Location)
-VALUES ('9780684830421', '2018-09-04', '2018-10-04', FALSE, '9780684830421.pdf');
+VALUES ('9780684830421', '2018-09-04', '2018-10-04', FALSE, 'sample.pdf');
 INSERT INTO Book_Format(ISBN, date_created, last_modified, Is_Removed, File_Location)
-VALUES ('9780606323451', '2019-06-26', '2019-07-26', FALSE, '9780606323451.pdf');
+VALUES ('9780606323451', '2019-06-26', '2019-07-26', FALSE, 'sample.pdf');
 INSERT INTO Book_Format(ISBN, date_created, last_modified, Is_Removed, File_Location)
-VALUES ('9780451526342', '2017-04-01', '2017-05-01', FALSE, '9780451526342.pdf');
+VALUES ('9780451526342', '2017-04-01', '2017-05-01', FALSE, 'sample.pdf');
 INSERT INTO Book_Format(ISBN, date_created, last_modified, Is_Removed, File_Location)
-VALUES ('9780316769174', '2018-01-30', '2018-01-30', FALSE, '9780316769174.pdf');
+VALUES ('9780316769174', '2018-01-30', '2018-01-30', FALSE, 'sample.pdf');
 INSERT INTO Book_Format(ISBN, date_created, last_modified, Is_Removed, File_Location)
-VALUES ('9780439023481', '2019-09-14', '2019-09-14', FALSE, '9780439023481.pdf');
+VALUES ('9780439023481', '2019-09-14', '2019-09-14', FALSE, 'sample.pdf');
 INSERT INTO Book_Format(ISBN, date_created, last_modified, Is_Removed, File_Location)
-VALUES ('9780307277671', '2017-03-28', '2017-03-28', FALSE, '9780307277671.pdf');
+VALUES ('9780307277671', '2017-03-28', '2017-03-28', FALSE, 'sample.pdf');
 INSERT INTO Book_Format(ISBN, date_created, last_modified, Is_Removed, File_Location)
-VALUES ('9781594480003', '2019-05-04', '2019-05-04', FALSE, '9781594480003.pdf');
+VALUES ('9781594480003', '2019-05-04', '2019-05-04', FALSE, 'sample.pdf');
 INSERT INTO Book_Format(ISBN, date_created, last_modified, Is_Removed, File_Location)
-VALUES ('9780140283334', '2017-10-01', '2017-11-01', FALSE, '9780140283334.pdf');
+VALUES ('9780140283334', '2017-10-01', '2017-11-01', FALSE, 'sample.pdf');
 INSERT INTO Book_Format(ISBN, date_created, last_modified, Is_Removed, File_Location)
-VALUES ('9780679601685', '2018-10-10', '2018-11-10', FALSE, '9780679601685.pdf');
+VALUES ('9780679601685', '2018-10-10', '2018-11-10', FALSE, 'sample.pdf');
 INSERT INTO Book_Format(ISBN, date_created, last_modified, Is_Removed, File_Location)
-VALUES ('9780062315007', '2019-04-15', '2019-04-15', FALSE, '9780062315007.pdf');
+VALUES ('9780062315007', '2019-04-15', '2019-04-15', FALSE, 'sample.pdf');
 INSERT INTO Book_Format(ISBN, date_created, last_modified, Is_Removed, File_Location)
-VALUES ('9780770430078', '2017-08-29', '2017-08-29', FALSE, '9780770430078.pdf');
+VALUES ('9780770430078', '2017-08-29', '2017-08-29', FALSE, 'sample.pdf');
 INSERT INTO Book_Format(ISBN, date_created, last_modified, Is_Removed, File_Location)
-VALUES ('9780375831003', '2019-03-14', '2019-04-14', FALSE, '9780375831003.pdf');
+VALUES ('9780375831003', '2019-03-14', '2019-04-14', FALSE, 'sample.pdf');
 INSERT INTO Book_Format(ISBN, date_created, last_modified, Is_Removed, File_Location)
-VALUES ('9780307588371', '2017-04-22', '2017-05-22', FALSE, '9780307588371.pdf');
+VALUES ('9780307588371', '2017-04-22', '2017-05-22', FALSE, 'sample.pdf');
 INSERT INTO Book_Format(ISBN, date_created, last_modified, Is_Removed, File_Location)
-VALUES ('9781416524793', '2018-04-01', '2018-04-01', FALSE, '9781416524793.pdf');
+VALUES ('9781416524793', '2018-04-01', '2018-04-01', FALSE, 'sample.pdf');
 INSERT INTO Book_Format(ISBN, date_created, last_modified, Is_Removed, File_Location)
-VALUES ('9780393970128', '2019-05-12', '2019-05-12', FALSE, '9780393970128.pdf');
+VALUES ('9780393970128', '2019-05-12', '2019-05-12', FALSE, 'sample.pdf');
 INSERT INTO Book_Format(ISBN, date_created, last_modified, Is_Removed, File_Location)
-VALUES ('9780141439471', '2017-06-25', '2017-07-25', FALSE, '9780141439471.pdf');
+VALUES ('9780141439471', '2017-06-25', '2017-07-25', FALSE, 'sample.pdf');
 INSERT INTO Book_Format(ISBN, date_created, last_modified, Is_Removed, File_Location)
-VALUES ('9780385603102', '2018-03-07', '2018-04-07', TRUE, '9780385603102.pdf');
+VALUES ('9780385603102', '2018-03-07', '2018-04-07', TRUE, 'sample.pdf');
 INSERT INTO Book_Format(ISBN, date_created, last_modified, Is_Removed, File_Location)
-VALUES ('9780143039983', '2019-11-28', '2019-12-28', FALSE, '9780143039983.pdf');
+VALUES ('9780143039983', '2019-11-28', '2019-12-28', FALSE, 'sample.pdf');
 INSERT INTO Book_Format(ISBN, date_created, last_modified, Is_Removed, File_Location)
-VALUES ('9780450040184', '2017-07-01', '2017-08-01', FALSE, '9780450040184.pdf');
+VALUES ('9780450040184', '2017-07-01', '2017-08-01', FALSE, 'sample.pdf');
 INSERT INTO Book_Format(ISBN, date_created, last_modified, Is_Removed, File_Location)
-VALUES ('9780061007224', '2018-02-01', '2018-03-01', FALSE, '9780061007224.pdf');
+VALUES ('9780061007224', '2018-02-01', '2018-03-01', FALSE, 'sample.pdf');
 INSERT INTO Book_Format(ISBN, date_created, last_modified, Is_Removed, File_Location)
-VALUES ('9781416524342', '2019-11-01', '2019-12-01', FALSE, '9781416524342.pdf');
+VALUES ('9781416524342', '2019-11-01', '2019-12-01', FALSE, 'sample.pdf');
 INSERT INTO Book_Format(ISBN, date_created, last_modified, Is_Removed, File_Location)
-VALUES ('9780450411434', '2017-10-01', '2017-10-01', FALSE, '9780450411434.pdf');
+VALUES ('9780450411434', '2017-10-01', '2017-10-01', FALSE, 'sample.pdf');
 INSERT INTO Book_Format(ISBN, date_created, last_modified, Is_Removed, File_Location)
-VALUES ('9780380729401', '2018-03-01', '2018-03-01', FALSE, '9780380729401.pdf');
+VALUES ('9780380729401', '2018-03-01', '2018-03-01', FALSE, 'sample.pdf');
 INSERT INTO Book_Format(ISBN, date_created, last_modified, Is_Removed, File_Location)
-VALUES ('9780345476876', '2019-08-31', '2019-09-20', FALSE, '9780345476876.pdf');
+VALUES ('9780345476876', '2019-08-31', '2019-09-20', FALSE, 'sample.pdf');
 INSERT INTO Book_Format(ISBN, date_created, last_modified, Is_Removed, File_Location)
-VALUES ('9780735212510', '2018-03-06', '2018-03-06', TRUE, '9780735212510.pdf');
+VALUES ('9780735212510', '2018-03-06', '2018-03-06', TRUE, 'sample.pdf');
 INSERT INTO Book_Format(ISBN, date_created, last_modified, Is_Removed, File_Location)
-VALUES ('9780450031069', '2019-06-13', '2019-06-13', FALSE, '9780450031069.pdf');
+VALUES ('9780450031069', '2019-06-13', '2019-06-13', FALSE, 'sample.pdf');
 INSERT INTO Book_Format(ISBN, date_created, last_modified, Is_Removed, File_Location)
-VALUES ('9780307346605', '2017-09-12', '2017-10-12', FALSE, '9780307346605.pdf');
+VALUES ('9780307346605', '2017-09-12', '2017-10-12', FALSE, 'sample.pdf');
 INSERT INTO Book_Format(ISBN, date_created, last_modified, Is_Removed, File_Location)
-VALUES ('9780727860996', '2018-07-01', '2018-08-01', FALSE, '9780727860996.pdf');
+VALUES ('9780727860996', '2018-07-01', '2018-08-01', FALSE, 'sample.pdf');
 INSERT INTO Book_Format(ISBN, date_created, last_modified, Is_Removed, File_Location)
-VALUES ('9780062200570', '2019-04-30', '2019-04-30', FALSE, '9780062200570.pdf');
+VALUES ('9780062200570', '2019-04-30', '2019-04-30', FALSE, 'sample.pdf');
 INSERT INTO Book_Format(ISBN, date_created, last_modified, Is_Removed, File_Location)
-VALUES ('9780061139376', '2017-08-29', '2017-08-29', FALSE, '9780061139376.pdf');
+VALUES ('9780061139376', '2017-08-29', '2017-08-29', FALSE, 'sample.pdf');
 INSERT INTO Book_Format(ISBN, date_created, last_modified, Is_Removed, File_Location)
-VALUES ('9780671685638', '2018-09-01', '2018-10-01', FALSE, '9780671685638.pdf');
+VALUES ('9780671685638', '2018-09-01', '2018-10-01', FALSE, 'sample.pdf');
 INSERT INTO Book_Format(ISBN, date_created, last_modified, Is_Removed, File_Location)
-VALUES ('9780345504968', '2019-06-08', '2019-06-08', FALSE, '9780345504968.pdf');
+VALUES ('9780345504968', '2019-06-08', '2019-06-08', FALSE, 'sample.pdf');
 INSERT INTO Book_Format(ISBN, date_created, last_modified, Is_Removed, File_Location)
-VALUES ('9780062259660', '2017-02-10', '2017-03-10', FALSE, '9780062259660.pdf');
+VALUES ('9780062259660', '2017-02-10', '2017-03-10', FALSE, 'sample.pdf');
 INSERT INTO Book_Format(ISBN, date_created, last_modified, Is_Removed, File_Location)
-VALUES ('9781982110567', '2019-09-10', '2019-09-10', FALSE, '9781982110567.pdf');
+VALUES ('9781982110567', '2019-09-10', '2019-09-10', FALSE, 'sample.pdf');
 INSERT INTO Book_Format(ISBN, date_created, last_modified, Is_Removed, File_Location)
-VALUES ('9780307949486', '2017-09-16', '2017-10-16', FALSE, '9780307949486.pdf');
+VALUES ('9780307949486', '2017-09-16', '2017-10-16', FALSE, 'sample.pdf');
 INSERT INTO Book_Format(ISBN, date_created, last_modified, Is_Removed, File_Location)
-VALUES ('9780312330873', '2018-05-03', '2019-05-03', FALSE, '9780312330873.pdf');
+VALUES ('9780312330873', '2018-05-03', '2019-05-03', FALSE, 'sample.pdf');
 INSERT INTO Book_Format(ISBN, date_created, last_modified, Is_Removed, File_Location)
-VALUES ('9781416524793', '2019-04-01', '2019-04-01', FALSE, '9781416524793.pdf');
+VALUES ('9781416524793', '2019-04-01', '2019-04-01', FALSE, 'sample.pdf');
 INSERT INTO Book_Format(ISBN, date_created, last_modified, Is_Removed, File_Location)
-VALUES ('9780316323703', '2017-12-17', '2019-12-17', TRUE, '9780316323703.pdf');
+VALUES ('9780316323703', '2017-12-17', '2019-12-17', TRUE, 'sample.pdf');
 INSERT INTO Book_Format(ISBN, date_created, last_modified, Is_Removed, File_Location)
-VALUES ('9780679745587', '2018-06-16', '2019-06-16', FALSE, '9780679745587.pdf');
+VALUES ('9780679745587', '2018-06-16', '2019-06-16', FALSE, 'sample.pdf');
 INSERT INTO Book_Format(ISBN, date_created, last_modified, Is_Removed, File_Location)
-VALUES ('9780451205766', '2019-03-01', '2019-03-01', FALSE, '9780451205766.pdf');
+VALUES ('9780451205766', '2019-03-01', '2019-03-01', FALSE, 'sample.pdf');
 INSERT INTO Book_Format(ISBN, date_created, last_modified, Is_Removed, File_Location)
-VALUES ('9780316166683', '2017-09-01', '2019-09-01', FALSE, '9780316166683.pdf');
+VALUES ('9780316166683', '2017-09-01', '2019-09-01', FALSE, 'sample.pdf');
 INSERT INTO Book_Format(ISBN, date_created, last_modified, Is_Removed, File_Location)
-VALUES ('9780156001311', '2018-09-28', '2019-09-28', FALSE, '9780156001311.pdf');
+VALUES ('9780156001311', '2018-09-28', '2019-09-28', FALSE, 'sample.pdf');
 INSERT INTO Book_Format(ISBN, date_created, last_modified, Is_Removed, File_Location)
-VALUES ('9780582418271', '2019-02-15', '2019-02-15', FALSE, '9780582418271.pdf');
+VALUES ('9780582418271', '2019-02-15', '2019-02-15', FALSE, 'sample.pdf');
 INSERT INTO Book_Format(ISBN, date_created, last_modified, Is_Removed, File_Location)
-VALUES ('9780380731862', '2017-04-27', '2019-04-27', FALSE, '9780380731862.pdf');
+VALUES ('9780380731862', '2017-04-27', '2019-04-27', FALSE, 'sample.pdf');
 INSERT INTO Book_Format(ISBN, date_created, last_modified, Is_Removed, File_Location)
-VALUES ('9780307588371', '2018-04-22', '2019-04-22', FALSE, '9780307588371.pdf');
+VALUES ('9780307588371', '2018-04-22', '2019-04-22', FALSE, 'sample.pdf');
 INSERT INTO Book_Format(ISBN, date_created, last_modified, Is_Removed, File_Location)
-VALUES ('9780060584757', '2019-02-01', '2019-02-01', FALSE, '9780060584757.pdf');
+VALUES ('9780060584757', '2019-02-01', '2019-02-01', FALSE, 'sample.pdf');
 INSERT INTO Book_Format(ISBN, date_created, last_modified, Is_Removed, File_Location)
-VALUES ('9780143034902', '2017-01-25', '2019-01-25', FALSE, '9780143034902.pdf');
+VALUES ('9780143034902', '2017-01-25', '2019-01-25', FALSE, 'sample.pdf');
 INSERT INTO Book_Format(ISBN, date_created, last_modified, Is_Removed, File_Location)
-VALUES ('9780812976144', '2018-10-24', '2019-10-24', FALSE, '9780812976144.pdf');
+VALUES ('9780812976144', '2018-10-24', '2019-10-24', FALSE, 'sample.pdf');
 INSERT INTO Book_Format(ISBN, date_created, last_modified, Is_Removed, File_Location)
-VALUES ('9780394758282', '2019-07-12', '2019-07-12', FALSE, '9780394758282.pdf');
+VALUES ('9780394758282', '2019-07-12', '2019-07-12', FALSE, 'sample.pdf');
 INSERT INTO Book_Format(ISBN, date_created, last_modified, Is_Removed, File_Location)
-VALUES ('9780312362089', '2017-06-28', '2019-06-28', FALSE, '9780312362089.pdf');
+VALUES ('9780312362089', '2017-06-28', '2019-06-28', FALSE, 'sample.pdf');
 INSERT INTO Book_Format(ISBN, date_created, last_modified, Is_Removed, File_Location)
-VALUES ('9780752865331', '2018-03-01', '2019-03-01', FALSE, '9780752865331.pdf');
+VALUES ('9780752865331', '2018-03-01', '2019-03-01', FALSE, 'sample.pdf');
 INSERT INTO Book_Format(ISBN, date_created, last_modified, Is_Removed, File_Location)
-VALUES ('9780525945567', '2019-03-22', '2019-03-22', TRUE, '9780525945567.pdf');
+VALUES ('9780525945567', '2019-03-22', '2019-03-22', TRUE, 'sample.pdf');
 INSERT INTO Book_Format(ISBN, date_created, last_modified, Is_Removed, File_Location)
-VALUES ('9780670038602', '2017-03-17', '2019-03-17', FALSE, '9780670038602.pdf');
+VALUES ('9780670038602', '2017-03-17', '2019-03-17', FALSE, 'sample.pdf');
 INSERT INTO Book_Format(ISBN, date_created, last_modified, Is_Removed, File_Location)
-VALUES ('9780446350983', '2018-06-10', '2019-06-10', FALSE, '9780446350983.pdf');
+VALUES ('9780446350983', '2018-06-10', '2019-06-10', FALSE, 'sample.pdf');
 INSERT INTO Book_Format(ISBN, date_created, last_modified, Is_Removed, File_Location)
-VALUES ('9780743298025', '2019-11-12', '2019-11-12', FALSE, '9780743298025.pdf');
+VALUES ('9780743298025', '2019-11-12', '2019-11-12', FALSE, 'sample.pdf');
 INSERT INTO Book_Format(ISBN, date_created, last_modified, Is_Removed, File_Location)
-VALUES ('9780812550702', '2017-09-30', '2017-09-30', FALSE, '9780812550702.pdf');
+VALUES ('9780812550702', '2017-09-30', '2017-09-30', FALSE, 'sample.pdf');
 INSERT INTO Book_Format(ISBN, date_created, last_modified, Is_Removed, File_Location)
-VALUES ('9780439023481', '2018-09-14', '2019-09-14', FALSE, '9780439023481.pdf');
+VALUES ('9780439023481', '2018-09-14', '2019-09-14', FALSE, 'sample.pdf');
 INSERT INTO Book_Format(ISBN, date_created, last_modified, Is_Removed, File_Location)
-VALUES ('9780141036144', '2019-09-03', '2019-09-03', FALSE, '9780141036144.pdf');
+VALUES ('9780141036144', '2019-09-03', '2019-09-03', FALSE, 'sample.pdf');
 INSERT INTO Book_Format(ISBN, date_created, last_modified, Is_Removed, File_Location)
-VALUES ('9780307887436', '2017-08-16', '2019-08-16', FALSE, '9780307887436.pdf');
+VALUES ('9780307887436', '2017-08-16', '2019-08-16', FALSE, 'sample.pdf');
 INSERT INTO Book_Format(ISBN, date_created, last_modified, Is_Removed, File_Location)
-VALUES ('9780593099322', '2018-10-01', '2019-10-01', FALSE, '9780593099322.pdf');
+VALUES ('9780593099322', '2018-10-01', '2019-10-01', FALSE, 'sample.pdf');
 INSERT INTO Book_Format(ISBN, date_created, last_modified, Is_Removed, File_Location)
-VALUES ('9781451673319', '2019-11-29', '2019-11-29', FALSE, '9781451673319.pdf');
+VALUES ('9781451673319', '2019-11-29', '2019-11-29', FALSE, 'sample.pdf');
 INSERT INTO Book_Format(ISBN, date_created, last_modified, Is_Removed, File_Location)
-VALUES ('9780439023481', '2017-09-14', '2019-09-14', FALSE, '9780439023481.pdf');
+VALUES ('9780439023481', '2017-09-14', '2019-09-14', FALSE, 'sample.pdf');
 INSERT INTO Book_Format(ISBN, date_created, last_modified, Is_Removed, File_Location)
-VALUES ('9780804139021', '2018-02-11', '2019-02-11', FALSE, '9780804139021.pdf');
+VALUES ('9780804139021', '2018-02-11', '2019-02-11', FALSE, 'sample.pdf');
 INSERT INTO Book_Format(ISBN, date_created, last_modified, Is_Removed, File_Location)
-VALUES ('9780553803716', '2019-06-01', '2019-06-01', FALSE, '9780553803716.pdf');
+VALUES ('9780553803716', '2019-06-01', '2019-06-01', FALSE, 'sample.pdf');
 INSERT INTO Book_Format(ISBN, date_created, last_modified, Is_Removed, File_Location)
-VALUES ('9780439023498', '2017-09-01', '2019-09-01', TRUE, '9780439023498.pdf');
+VALUES ('9780439023498', '2017-09-01', '2019-09-01', TRUE, 'sample.pdf');
 INSERT INTO Book_Format(ISBN, date_created, last_modified, Is_Removed, File_Location)
-VALUES ('9781524796976', '2018-02-26', '2019-02-26', FALSE, '9781524796976.pdf');
+VALUES ('9781524796976', '2018-02-26', '2019-02-26', FALSE, 'sample.pdf');
 INSERT INTO Book_Format(ISBN, date_created, last_modified, Is_Removed, File_Location)
-VALUES ('9780439023511', '2019-08-24', '2019-08-24', FALSE, '9780439023511.pdf');
+VALUES ('9780439023511', '2019-08-24', '2019-08-24', FALSE, 'sample.pdf');
 INSERT INTO Book_Format(ISBN, date_created, last_modified, Is_Removed, File_Location)
-VALUES ('9780486284729', '2017-10-01', '2019-10-01', FALSE, '978-0486284729.pdf');
+VALUES ('9780486284729', '2017-10-01', '2019-10-01', FALSE, 'sample.pdf');
 INSERT INTO Book_Format(ISBN, date_created, last_modified, Is_Removed, File_Location)
-VALUES ('9780553803709', '2018-06-01', '2019-06-01', FALSE, '9780553803709.pdf');
+VALUES ('9780553803709', '2018-06-01', '2019-06-01', FALSE, 'sample.pdf');
 INSERT INTO Book_Format(ISBN, date_created, last_modified, Is_Removed, File_Location)
-VALUES ('9780062024039', '2019-02-28', '2019-02-28', TRUE, '9780062024039.pdf');
+VALUES ('9780062024039', '2019-02-28', '2019-02-28', TRUE, 'sample.pdf');
 INSERT INTO Book_Format(ISBN, date_created, last_modified, Is_Removed, File_Location)
-VALUES ('9780441788385', '2017-10-01', '2019-10-01', FALSE, '9780441788385.pdf');
+VALUES ('9780441788385', '2017-10-01', '2019-10-01', FALSE, 'sample.pdf');
 INSERT INTO Book_Format(ISBN, date_created, last_modified, Is_Removed, File_Location)
-VALUES ('9780771008795', '2018-04-04', '2019-04-04', TRUE, '9780771008795.pdf');
+VALUES ('9780771008795', '2018-04-04', '2019-04-04', TRUE, 'sample.pdf');
 INSERT INTO Book_Format(ISBN, date_created, last_modified, Is_Removed, File_Location)
-VALUES ('9781509808335', '2019-04-26', '2019-04-26', FALSE, '9781509808335.pdf');
+VALUES ('9781509808335', '2019-04-26', '2019-04-26', FALSE, 'sample.pdf');
 INSERT INTO Book_Format(ISBN, date_created, last_modified, Is_Removed, File_Location)
-VALUES ('9780345538987', '2017-05-14', '2017-05-14', FALSE, '9780345538987.pdf');
+VALUES ('9780345538987', '2017-05-14', '2017-05-14', FALSE, 'sample.pdf');
 INSERT INTO Book_Format(ISBN, date_created, last_modified, Is_Removed, File_Location)
-VALUES ('9780451457998', '2018-09-01', '2019-09-01', FALSE, '9780451457998.pdf');
+VALUES ('9780451457998', '2018-09-01', '2019-09-01', FALSE, 'sample.pdf');
 INSERT INTO Book_Format(ISBN, date_created, last_modified, Is_Removed, File_Location)
-VALUES ('9780989671767', '2019-06-13', '2019-06-13', FALSE, '9780989671767.pdf');
+VALUES ('9780989671767', '2019-06-13', '2019-06-13', FALSE, 'sample.pdf');
 INSERT INTO Book_Format(ISBN, date_created, last_modified, Is_Removed, File_Location)
-VALUES ('9780989671774', '2017-09-26', '2017-09-26', FALSE, '9780989671774.pdf');
+VALUES ('9780989671774', '2017-09-26', '2017-09-26', FALSE, 'sample.pdf');
 INSERT INTO Book_Format(ISBN, date_created, last_modified, Is_Removed, File_Location)
-VALUES ('9780989671781', '2017-04-30', '2017-04-30', FALSE, '9780989671781.pdf');
+VALUES ('9780989671781', '2017-04-30', '2017-04-30', FALSE, 'sample.pdf');
 INSERT INTO Book_Format(ISBN, date_created, last_modified, Is_Removed, File_Location)
-VALUES ('9780999851104', '2017-09-30', '2017-09-30', FALSE, '9780999851104.pdf');
+VALUES ('9780999851104', '2017-09-30', '2017-09-30', FALSE, 'sample.pdf');
 INSERT INTO Book_Format(ISBN, date_created, last_modified, Is_Removed, File_Location)
-VALUES ('9780999851111', '2018-05-31', '2018-05-31', FALSE, '9780999851111.pdf');
+VALUES ('9780999851111', '2018-05-31', '2018-05-31', FALSE, 'sample.pdf');
 INSERT INTO Book_Format(ISBN, date_created, last_modified, Is_Removed, File_Location)
-VALUES ('9780999851128', '2019-03-01', '2019-03-01', FALSE, '9780999851128.pdf');
+VALUES ('9780999851128', '2019-03-01', '2019-03-01', FALSE, 'sample.pdf');
 INSERT INTO Book_Format(ISBN, date_created, last_modified, Is_Removed, File_Location)
-VALUES ('9780999851135', '2019-09-26', '2019-09-26', FALSE, '9780999851135.pdf');
+VALUES ('9780999851135', '2019-09-26', '2019-09-26', FALSE, 'sample.pdf');
 INSERT INTO Book_Format(ISBN, date_created, last_modified, Is_Removed, File_Location)
-VALUES ('9780316075558', '2017-08-25', '2017-08-25', FALSE, '9780316075558.pdf');
+VALUES ('9780316075558', '2017-08-25', '2017-08-25', FALSE, 'sample.pdf');
 INSERT INTO Book_Format(ISBN, date_created, last_modified, Is_Removed, File_Location)
-VALUES ('9780316079914', '2018-09-11', '2018-09-11', FALSE, '9780316079914.pdf');
+VALUES ('9780316079914', '2018-09-11', '2018-09-11', FALSE, 'sample.pdf');
 INSERT INTO Book_Format(ISBN, date_created, last_modified, Is_Removed, File_Location)
-VALUES ('9780316058964', '2019-08-26', '2019-08-26', FALSE, '9780316058964.pdf');
+VALUES ('9780316058964', '2019-08-26', '2019-08-26', FALSE, 'sample.pdf');
 INSERT INTO Book_Format(ISBN, date_created, last_modified, Is_Removed, File_Location)
-VALUES ('9780316251334', '2017-10-25', '2017-10-25', FALSE, '9780316251334.pdf');
+VALUES ('9780316251334', '2017-10-25', '2017-10-25', FALSE, 'sample.pdf');
 INSERT INTO Book_Format(ISBN, date_created, last_modified, Is_Removed, File_Location)
-VALUES ('9780316251303', '2019-10-22', '2019-10-22', FALSE, '9780316251303.pdf');
+VALUES ('9780316251303', '2019-10-22', '2019-10-22', FALSE, 'sample.pdf');
 INSERT INTO Book_Format(ISBN, date_created, last_modified, Is_Removed, File_Location)
-VALUES ('9780765311788', '2017-06-25', '2017-06-25', FALSE, '9780765311788.pdf');
+VALUES ('9780765311788', '2017-06-25', '2017-06-25', FALSE, 'sample.pdf');
 INSERT INTO Book_Format(ISBN, date_created, last_modified, Is_Removed, File_Location)
-VALUES ('9780765316882', '2017-08-21', '2017-08-21', FALSE, '9780765316882.pdf');
+VALUES ('9780765316882', '2017-08-21', '2017-08-21', FALSE, 'sample.pdf');
 INSERT INTO Book_Format(ISBN, date_created, last_modified, Is_Removed, File_Location)
-VALUES ('9780765316899', '2018-10-14', '2018-10-14', FALSE, '9780765316899.pdf');
+VALUES ('9780765316899', '2018-10-14', '2018-10-14', FALSE, 'sample.pdf');
 INSERT INTO Book_Format(ISBN, date_created, last_modified, Is_Removed, File_Location)
-VALUES ('9780765330420', '2019-11-08', '2019-11-08', FALSE, '9780765330420.pdf');
+VALUES ('9780765330420', '2019-11-08', '2019-11-08', FALSE, 'sample.pdf');
 INSERT INTO Book_Format(ISBN, date_created, last_modified, Is_Removed, File_Location)
-VALUES ('9780765378552', '2017-10-06', '2017-10-06', FALSE, '9780765378552.pdf');
+VALUES ('9780765378552', '2017-10-06', '2017-10-06', FALSE, 'sample.pdf');
 INSERT INTO Book_Format(ISBN, date_created, last_modified, Is_Removed, File_Location)
-VALUES ('9781466862678', '2018-01-26', '2019-01-26', FALSE, '9781466862678.pdf');
+VALUES ('9781466862678', '2018-01-26', '2019-01-26', FALSE, 'sample.pdf');
 INSERT INTO Book_Format(ISBN, date_created, last_modified, Is_Removed, File_Location)
-VALUES ('9780756404079', '2019-04-07', '2019-04-07', FALSE, '9780756404079.pdf');
+VALUES ('9780756404079', '2019-04-07', '2019-04-07', FALSE, 'sample.pdf');
 INSERT INTO Book_Format(ISBN, date_created, last_modified, Is_Removed, File_Location)
-VALUES ('9780756404734', '2017-03-01', '2019-03-01', FALSE, '9780756404734.pdf');
+VALUES ('9780756404734', '2017-03-01', '2019-03-01', FALSE, 'sample.pdf');
 INSERT INTO Book_Format(ISBN, date_created, last_modified, Is_Removed, File_Location)
-VALUES ('9781937007294', '2018-02-28', '2019-02-28', FALSE, '9781937007294.pdf');
+VALUES ('9781937007294', '2018-02-28', '2019-02-28', FALSE, 'sample.pdf');
 INSERT INTO Book_Format(ISBN, date_created, last_modified, Is_Removed, File_Location)
-VALUES ('9781937007591', '2019-05-29', '2019-05-29', FALSE, '9781937007591.pdf');
+VALUES ('9781937007591', '2019-05-29', '2019-05-29', FALSE, 'sample.pdf');
 INSERT INTO Book_Format(ISBN, date_created, last_modified, Is_Removed, File_Location)
-VALUES ('9781937007720', '2017-08-28', '2019-08-28', FALSE, '9781937007720.pdf');
+VALUES ('9781937007720', '2017-08-28', '2019-08-28', FALSE, 'sample.pdf');
 INSERT INTO Book_Format(ISBN, date_created, last_modified, Is_Removed, File_Location)
-VALUES ('9780425264928', '2018-08-27', '2019-08-27', FALSE, '9780425264928.pdf');
+VALUES ('9780425264928', '2018-08-27', '2019-08-27', FALSE, 'sample.pdf');
 INSERT INTO Book_Format(ISBN, date_created, last_modified, Is_Removed, File_Location)
-VALUES ('9780425264942', '2019-09-02', '2019-09-02', FALSE, '9780425264942.pdf');
+VALUES ('9780425264942', '2019-09-02', '2019-09-02', FALSE, 'sample.pdf');
 INSERT INTO Book_Format(ISBN, date_created, last_modified, Is_Removed, File_Location)
-VALUES ('9780425275757', '2017-08-04', '2019-08-04', FALSE, '9780425275757.pdf');
+VALUES ('9780425275757', '2017-08-04', '2019-08-04', FALSE, 'sample.pdf');
 INSERT INTO Book_Format(ISBN, date_created, last_modified, Is_Removed, File_Location)
-VALUES ('9780698165083', '2018-04-07', '2019-04-07', FALSE, '9780698165083.pdf');
+VALUES ('9780698165083', '2018-04-07', '2019-04-07', FALSE, 'sample.pdf');
 INSERT INTO Book_Format(ISBN, date_created, last_modified, Is_Removed, File_Location)
-VALUES ('9781101988527', '2017-04-04', '2019-04-04', FALSE, '9781101988527.pdf');
+VALUES ('9781101988527', '2017-04-04', '2019-04-04', FALSE, 'sample.pdf');
 INSERT INTO Book_Format(ISBN, date_created, last_modified, Is_Removed, File_Location)
-VALUES ('9780356507217', '2018-06-05', '2019-06-05', FALSE, '9780356507217.pdf');
+VALUES ('9780356507217', '2018-06-05', '2019-06-05', FALSE, 'sample.pdf');
 INSERT INTO Book_Format(ISBN, date_created, last_modified, Is_Removed, File_Location)
-VALUES ('9780440000587', '2019-09-24', '2019-09-24', FALSE, '9780440000587.pdf');
+VALUES ('9780440000587', '2019-09-24', '2019-09-24', FALSE, 'sample.pdf');
 
 INSERT INTO Book_Format(ISBN,Date_Created,Last_Modified,Is_Removed,File_Location,Format) VALUES ('9780142000670','2017-01-08','2017-02-08',FALSE,'9780142000670.pdf','pdf');
 INSERT INTO Book_Format(ISBN,Date_Created,Last_Modified,Is_Removed,File_Location,Format) VALUES ('9780439244190','2018-09-02','2018-10-02',TRUE,'9780439244190.pdf','pdf');
