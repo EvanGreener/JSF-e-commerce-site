@@ -15,6 +15,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
@@ -54,8 +56,13 @@ public class Orders implements Serializable {
     @Column(name = "Is_Removed")
     private Boolean isRemoved;
     
-    @OneToMany(cascade = CascadeType.ALL,mappedBy="order")
-    private List<OrderItem> orderItems;
+    @ManyToOne
+    private Clients client;
+    
+    @OneToMany(  cascade = CascadeType.ALL)
+    @JoinColumn(name = "Order_ID")
+    private List<OrderItem> orderItemsCollection;
+
 
     public Orders() {
     }
@@ -65,7 +72,7 @@ public class Orders implements Serializable {
     }
     
     public List<OrderItem> getOrderItems() {
-        return orderItems;
+        return orderItemsCollection;
     }
 
     public Integer getOrderID() {
@@ -106,6 +113,14 @@ public class Orders implements Serializable {
 
     public void setIsRemoved(Boolean isRemoved) {
         this.isRemoved = isRemoved;
+    }
+    
+    public List<OrderItem> getOrderItemsCollection() {
+         return orderItemsCollection;
+    }
+    
+    public Clients getClient(){
+         return client;
     }
 
     @Override

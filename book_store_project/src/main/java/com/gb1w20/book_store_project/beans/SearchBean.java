@@ -25,7 +25,7 @@ public class SearchBean implements Serializable {
 
      private String query = "";
      private String[] genreFilters;
-     private String searchBy;
+     private String searchBy = "title";
      private List<Book> results;
      private int page = 1;
      private int numPages;

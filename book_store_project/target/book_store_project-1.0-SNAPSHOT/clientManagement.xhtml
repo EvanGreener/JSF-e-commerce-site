@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:b="http://bootsfaces.net/ui"
+      xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+      xmlns:bookstore="http://java.sun.com/jsf/composite/default_components">
+
+     <h:head>
+          <title>Manager - Client Page</title>
+          <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+          <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+          <h:outputStylesheet library="webjars" name="Semantic-UI/2.4.1/semantic.min.css" />
+          <h:outputStylesheet library="webjars" name="swiper/4.5.1/dist/css/swiper.min.css" />
+          <h:outputStylesheet library="css" name="homepage.css" />
+
+          <h:outputScript library="webjars" name="Semantic-UI/2.4.1/semantic.min.js"/>
+
+          <style>
+               .middle h1 {
+                    margin-top: 20px !important;
+                    text-align: center;
+                    color: gray;
+               }
+               .middle{
+                    padding: 0px 40px 0px 40px;
+               }
+               h3{
+                    display: inline;
+               }
+               .bot{
+                    text-align: center;
+               }
+               .footer button{
+                    font-size: 20px !important;
+                    margin: 0px 10px 0px 10px !important;
+               }
+
+          </style>
+
+
+     </h:head>
+     <h:body>
+
+
+
+          <h:form>
+               <bookstore:navbar ></bookstore:navbar>
+
+               <!--Loading modal-->
+               <p:ajaxStatus onstart="PF('statusDialog').show()" onsuccess="PF('statusDialog').hide()" />
+               <p:dialog widgetVar="statusDialog" modal="true" draggable="false" closable="false" resizable="false" showHeader="false">
+                    <p:graphicImage style="display: inline;" class="loading" library="images" name="double-ring.svg" />
+               </p:dialog>
+
+               <div class="middle">
+                    <h1>Client Management</h1>
+
+                    <!--Search bar-->
+                    <div style="display: inline;" class="ui search" >
+                         <h:inputText  id="query" value="#{ clientManagement.query}" a:placeholder="Search clients..." style="float: right; margin-top: 10px; margin-bottom: 10px; " class="prompt" >
+                              <p:ajax event="keyup" listener="#{clientManagement.updateBean()}" update="clientsTable" />
+                         </h:inputText>
+                    </div> 
+
+                    
+
+                    <h:dataTable  id="clientsTable" var="client" style="margin-bottom: 20px;"  class="ui celled table" value="#{clientManagement.results}" >
+                         <h:column>
+                              <f:facet name="header">Login email</f:facet>
+                                   #{client[1]}
+                         </h:column>
+                         <h:column>
+                              <f:facet name="header">First name</f:facet>
+                                   #{client[2]}
+                         </h:column>
+                         <h:column>
+                              <f:facet name="header">Last name</f:facet>
+                                   #{client[3]}
+                         </h:column>
+                         <h:column>
+                              <f:facet name="header">Address 1</f:facet>
+                                   #{client[4]}
+                         </h:column>
+                         <h:column>
+                              <f:facet name="header">Address 2</f:facet>
+                                   #{client[5]}
+                         </h:column>
+                         <h:column>
+                              <f:facet name="header">Company Name</f:facet>
+                                   #{client[6]}
+                         </h:column>
+                         <h:column>
+                              <f:facet name="header">Cell</f:facet>
+                                   #{client[7]}
+                         </h:column>
+                         <h:column>
+                              <f:facet name="header">Value of all books purchased</f:facet>
+                              $#{client[8]}0
+                         </h:column>
+                         <h:column>
+                              <p:commandButton
+                                               action="#{clientManagement.onEdit(client[0])}" 
+                                               update="clientsTable" 
+                                               value="Edit" 
+                                               class="big ui primary button edit_btn" >
+
+                              </p:commandButton>
+
+                         </h:column>
+
+                    </h:dataTable>
+               </div>
+
+
+
+               <bookstore:footer></bookstore:footer>
+               
+               <h:panelGroup id="edit_form">
+                         <div  class="ui modal">
+                              <div class="header"><h1>Edit client </h1></div>
+                              <div class="content">
+                                   <h3>First Name</h3>
+
+                              </div>
+                              <div class="footer">
+                                   <div class="bot">
+                                        <button class="positive ui button">Save Changes</button>
+                                        <button class="ui button" >Cancel</button>
+                                   </div>
+                              </div>
+
+                         </div>
+
+                    </h:panelGroup>
+          </h:form>
+          <script>
+               $(document).ready(function () {
+                    $(".edit_btn").click(function () {
+                         $(".ui.modal").modal('show');
+                         return false;
+                    });
+                    $(document).ajaxComplete(function (){
+                         $(".edit_btn").click(function () {
+                         $(".ui.modal").modal('show');
+                         return false;
+                    });
+                    })
+               });
+               
+               
+          </script>
+
+     </h:body>
+</html>
