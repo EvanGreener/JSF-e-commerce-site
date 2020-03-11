@@ -63,8 +63,16 @@ public class OrderItem implements Serializable {
     @JoinColumn(name = "ISBN", referencedColumnName = "ISBN", insertable = false, updatable = false)
     @ManyToOne(optional = false)
     private Book book;
+    
+    @JoinColumn(name = "Order_ID", referencedColumnName = "Order_ID", insertable = false, updatable = false)
+    @ManyToOne(optional = false)
+    private Orders order;
 
     public OrderItem() {
+    }
+    
+    public Orders getOrder() {
+        return order;
     }
     
     public Book getBook(){

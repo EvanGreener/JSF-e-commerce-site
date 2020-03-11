@@ -5,6 +5,7 @@ import com.gb1w20.book_store_project.jpa_controllers.OrdersJpaController;
 import java.io.Serializable;
 import java.util.Date;
 import javax.enterprise.context.RequestScoped;
+import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
 import org.slf4j.Logger;
@@ -51,10 +52,31 @@ public class OrderBackingBean implements Serializable {
         return null;
     }
     
+    public String addOrder(Orders order) throws Exception {
+        order.setIsRemoved(false);
+        order.setLastUpdated(new Date());
+        ordersJpaController.edit(order);
+        return null;
+    }
+    
+    public String addOrRemoveOrder(Orders order) throws Exception
+    {
+        if (order.getIsRemoved())
+        {
+            addOrder(order);
+        }
+        else
+        {
+            removeOrder(order);
+        }
+        FacesContext.getCurrentInstance().getExternalContext().redirect("managerOrders.xhtml");
+        return null;
+    }
+    
     public String getRemovalStatus(boolean isRemoved) throws Exception {
         if (isRemoved)
         {
-            return "Removed";
+            return "Add Order";
         }
         else
         {

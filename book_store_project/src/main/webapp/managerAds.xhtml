@@ -1,0 +1,90 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:b="http://bootsfaces.net/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:bookstore="http://java.sun.com/jsf/composite/default_components">
+    <h:head>
+        <title>Manager Ads</title>
+        <link rel="stylesheet" href="https://unpkg.com/swiper/css/swiper.min.css"/>
+
+
+        <link href="https://fonts.googleapis.com/css?family=Montserrat|Roboto&amp;display=swap" rel="stylesheet"/>
+
+        <h:outputStylesheet library="webjars" name="Semantic-UI/2.4.1/semantic.min.css" />
+        <h:outputStylesheet library="css" name="homepage.css" />
+        <h:outputStylesheet library="book_css" name="bookpage.css" />
+        <h:outputScript library="js" name="managerOrders.js" />
+        <h:outputStylesheet library="webjars" name="font-awesome/4.7.0/css/font-awesome.min-jsf.css" />
+        <!-- Swiper JS -->
+        <script src="https://unpkg.com/swiper/js/swiper.min.js"></script>
+    </h:head>
+
+    <h:body>
+        <bookstore:navbar/>
+        <div class="lightGreyDivLessSpacing">
+        <h:form>
+            <h:commandButton class="big pink ui button" onclick="return showModal()" value="Add Ad"/>
+        </h:form>
+        <div id="test" class="modal">
+            <div class="modal-content">
+                <span class="close">x</span>
+                <h:form class="ui form" id="addAd">
+                    <div class="field">
+                        <h:outputLabel for="adUrl" value="Ad URL"/>
+                        <h:inputText id="adURL" label="Ad URL" value="#{adBacking.ad.adUrl}" required="true" requiredMessage="Please enter ad URL" a:placeholder="Enter ad URL" validator="#{adBacking.validateNotNull}">
+                            <f:ajax event="change" render="adUrlError"/>
+                        </h:inputText>
+                        <br/>
+                        <h:message id="adUrlError" class="error" for="adUrl"/>
+                    </div>
+                    <div class="field">
+                        <h:outputLabel for="imageName" value="Image Name"/>
+                        <h:inputText id="imageName" label="Image Name" value="#{adBacking.ad.imageName}" required="true" requiredMessage="Please enter image name" a:placeholder="Enter image name" validator="#{adBacking.validateNotNull}">
+                            <f:ajax event="change" render="imageNameError"/>
+                        </h:inputText>
+                        <br/>
+                        <h:message id="imageNameError" class="error" for="imageName"/>
+                    </div>
+                    <h:commandButton class="huge black fluid ui button" id="registerBtn" value="Register" action="#{adBacking.createAd()}" />
+                </h:form>
+            </div>
+        </div>
+        <h:dataTable class="ui celled table" value="#{adsJpaController.findAdsEntities()}" var="ads">
+            <h:column>
+                <f:facet name="header">Ad #</f:facet>
+                    #{ads.adID}
+            </h:column>
+            <h:column>
+                <f:facet name="header">Ad URL</f:facet>
+                    #{ads.adUrl}
+            </h:column>
+            <h:column>
+                <f:facet name="header">Ad Image</f:facet>
+                    #{ads.imageName}
+            </h:column>
+            <h:column>
+                <f:facet name="header">Date Created</f:facet>
+                    #{ads.dateCreated}
+            </h:column>
+            <h:column>
+                <f:facet name="header">Last Modified</f:facet>
+                    #{ads.lastModified}
+            </h:column>
+            <h:column>
+                <f:facet name="header">Status</f:facet>
+                    #{adsJpaController.getStatusByAdId(ads.adID)}
+            </h:column>
+            <h:column>
+                <h:form>
+                    <h:commandLink value="#{adBacking.getRemovalStatus(ads.isRemoved)}" action="#{adBacking.addOrRemoveAd(ads)}"/> 
+                </h:form>
+            </h:column>
+        </h:dataTable>
+        </div>
+        <bookstore:footer/>
+    </h:body>
+</html>

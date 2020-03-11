@@ -149,7 +149,8 @@ public class ClientBackingBean implements Serializable {
         client.setIsRemoved(false);
         client.setIsManager(false);
         clientsJpaController.create(client);
-        return "index.xhtml";
+        FacesContext.getCurrentInstance().getExternalContext().redirect("signIn.xhtml");
+        return "signIn.xhtml";
     }
     
     public void validateNotNull(FacesContext context, UIComponent component, Object value) {
