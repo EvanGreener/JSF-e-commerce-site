@@ -41,8 +41,8 @@
                               <h:selectManyCheckbox layout="pageDirection" value="#{search.genreFilters}">
                                    <p:ajax update="gallery pagination resLabel" listener="#{search.onChecked}" />
                                    <f:selectItem itemValue = "Science Fiction" itemLabel = "Sci-Fi"/>
-                                   <f:selectItem itemValue = "Mystery" itemLabel = "Mystery" /> 
-                                   <f:selectItem itemValue = "Fantasy" itemLabel = "Fantasy" /> 
+                                   <f:selectItem itemValue = "Mystery" itemLabel = "Mystery" />
+                                   <f:selectItem itemValue = "Fantasy" itemLabel = "Fantasy" />
                                    <f:selectItem itemValue = "Horror" itemLabel = "Horror" />
                                    <f:selectItem itemValue = "Fiction" itemLabel = "Fiction" />
                               </h:selectManyCheckbox>
@@ -76,7 +76,7 @@
                                         <h:inputText  id="query" value="#{search.query}" a:placeholder="Search books..." style="float: right; margin-top: -30px;" class="prompt" >
                                              <p:ajax event="keyup" listener="#{search.onKeyUp}" update="gallery pagination resLabel" />
                                         </h:inputText>
-                                   </div> 
+                                   </div>
 
                               </div>
 
@@ -88,28 +88,45 @@
 
                                              <ui:param name="limit" value="8"/>
                                              <!-- -1 because collections are 0-indexed-->
-                                             <ui:repeat offset="#{(search.page - 1) * 8}" value="#{search.results}" var="book" varStatus="status">
+                                             <ui:repeat offset="#{(search.page - 1) * 8}" value="#{search.results}" var="books" varStatus="status">
                                                   <ui:fragment rendered="#{status.index lt limit * search.page}">
                                                        <div class="ui fluid card darker">
                                                             <div class="homepageImg">
-                                                                 <h:graphicImage class="img" height="250" width="156.25" library="images" name="#{book.isbn}.jpg"/>
+                                                                 <h:graphicImage class="img" height="250" width="156.25" library="images" name="#{books.isbn}.jpg"/>
                                                                  <div class="cardHoverBtn"> View Cover</div>
                                                             </div>
-                                                            <div class="content">
-                                                                 <div class="header">#{book.title}</div>
-                                                                 <div class="meta">By
-                                                                      <ui:repeat value="#{book.authorsCollection}" var="author">
-                                                                           #{author.name}
-                                                                      </ui:repeat>
-                                                                 </div>
 
-                                                                 <div class="description">
-                                                                      $#{book.listPrice}
-                                                                 </div>
+                                                            <div class="content">
+
+                                                                 <h:commandLink action = "#{bb.viewBook(books)}" type="submit" value = "">
+                                                                      <div class="header">
+
+                                                                           #{books.title}</div>
+                                                                      <div class="meta">
+
+                                                                           <ui:repeat value="#{books.authorsCollection}" var="author">
+                                                                                #{author.name}
+                                                                           </ui:repeat>
+
+                                                                      </div>
+
+                                                                      <div class="description">
+                                                                           <div class="ui tag labels">
+                                                                                <a class="ui label">
+                                                                                     $#{books.listPrice}
+                                                                                </a>
+                                                                           </div>
+
+                                                                      </div>
+                                                                 </h:commandLink>
+
                                                             </div>
 
-                                                            <div onclick="addToCart()" class="ui bottom attached button  ">
-                                                                 + Add to Cart
+
+                                                            <div class="ui two bottom attached buttons ">
+                                                                 <div onclick="addToCart(#{books.isbn}, 'pdf')" class="ui button">+ Add to Cart</div>
+
+
                                                             </div>
                                                        </div>
                                                   </ui:fragment>
@@ -129,7 +146,7 @@
                                                   <button disabled="true"  class="ui button"> Prev. </button>
                                              </c:when>
                                              <c:otherwise>
-                                                  <h:commandButton value="Prev." class="ui button"> 
+                                                  <h:commandButton value="Prev." class="ui button">
                                                        <p:ajax update="gallery pagination resLabel" listener="#{search.onPrevious}" />
                                                   </h:commandButton>
                                              </c:otherwise>
@@ -140,12 +157,12 @@
                                         <c:forEach begin="1" end="#{search.numPages}" varStatus="status">
                                              <c:choose>
                                                   <c:when test="#{status.index == search.page}">
-                                                       <h:commandButton value="#{status.index} " class="ui active button"> 
+                                                       <h:commandButton value="#{status.index} " class="ui active button">
                                                             <p:ajax event="click" update="gallery pagination resLabel" listener="#{search.onPageSelect(status.index)}" />
                                                        </h:commandButton>
                                                   </c:when>
                                                   <c:otherwise>
-                                                       <h:commandButton value="#{status.index} " class="ui button"> 
+                                                       <h:commandButton value="#{status.index} " class="ui button">
                                                             <p:ajax event="click" update="gallery pagination resLabel" listener="#{search.onPageSelect(status.index)}" />
                                                        </h:commandButton>
                                                   </c:otherwise>
@@ -158,7 +175,7 @@
                                                   <button disabled="true"  class="ui button"> Next </button>
                                              </c:when>
                                              <c:otherwise>
-                                                  <h:commandButton value="Next" class="ui button"> 
+                                                  <h:commandButton value="Next" class="ui button">
                                                        <p:ajax update="gallery pagination resLabel" listener="#{search.onNext}" />
                                                   </h:commandButton>
                                              </c:otherwise>
@@ -288,82 +305,10 @@
                          </div>
                     </div>
 
-                    <div class="darkBlueDiv">
-                         <div class="ui four doubling stackable cards">
-                              <div class="ui fluid card">
-                                   <div class="image">
-                                        <h:graphicImage library="images" name="colorScheme.PNG"  /></div>
-                                   <div class="content">
-                                        <div class="header">Elliot Baker</div>
-                                        <div class="meta">Friend</div>
-                                        <div class="description">
-                                             Elliot is a sound engineer living in Nashville who enjoys playing guitar and hanging with his
-                                             cat.
-                                        </div>
-                                   </div>
-                                   <div class="extra content">
-                                        <a>
-                                             <i aria-hidden="true" class="user icon"></i>
-                                             16 Friends
-                                        </a>
-                                   </div>
-                              </div>
-                              <div class="ui fluid card">
-                                   <div class="image">
-                                        <h:graphicImage library="images" name="colorScheme.PNG"  /></div>
-                                   <div class="content">
-                                        <div class="header">Elliot Baker</div>
-                                        <div class="meta">Friend</div>
-                                        <div class="description">
-                                             Elliot is a sound engineer living in Nashville who enjoys playing guitar and hanging with his
-                                             cat.
-                                        </div>
-                                   </div>
-                                   <div class="extra content">
-                                        <a>
-                                             <i aria-hidden="true" class="user icon"></i>
-                                             16 Friends
-                                        </a>
-                                   </div>
-                              </div>
-                              <div class="ui fluid card">
-                                   <div class="image">
-                                        <h:graphicImage library="images" name="colorScheme.PNG"  /></div>
-                                   <div class="content">
-                                        <div class="header">Elliot Baker</div>
-                                        <div class="meta">Friend</div>
-                                        <div class="description">
-                                             Elliot is a sound engineer living in Nashville who enjoys playing guitar and hanging with his
-                                             cat.
-                                        </div>
-                                   </div>
-                                   <div class="extra content">
-                                        <a>
-                                             <i aria-hidden="true" class="user icon"></i>
-                                             16 Friends
-                                        </a>
-                                   </div>
-                              </div>                <div class="ui fluid card">
-                                   <div class="image">
-                                        <h:graphicImage library="images" name="colorScheme.PNG"  /></div>
-                                   <div class="content">
-                                        <div class="header">Elliot Baker</div>
-                                        <div class="meta">Friend</div>
-                                        <div class="description">
-                                             Elliot is a sound engineer living in Nashville who enjoys playing guitar and hanging with his
-                                             cat.
-                                        </div>
-                                   </div>
-                                   <div class="extra content">
-                                        <a>
-                                             <i aria-hidden="true" class="user icon"></i>
-                                             16 Friends
-                                        </a>
-                                   </div>
-                              </div>               
-                         </div>
-                    </div>
                </div>
+               <!-- Add Pagination -->
+               <div class="swiper-pagination"></div>
+               
           </h:form>
 
           <!--composite component that comes from the footer.xhtml file to avoid coding the website footer in all web pages-->

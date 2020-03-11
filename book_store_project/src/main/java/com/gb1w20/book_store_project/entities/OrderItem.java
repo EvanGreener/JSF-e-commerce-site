@@ -58,14 +58,19 @@ public class OrderItem implements Serializable {
     @Column(name = "Is_Removed")
     private Boolean isRemoved;
     
-    @ManyToOne
-    private Orders order;
-    
     @JoinColumn(name = "ISBN", referencedColumnName = "ISBN", insertable = false, updatable = false)
     @ManyToOne(optional = false)
     private Book book;
+    
+    @JoinColumn(name = "Order_ID", referencedColumnName = "Order_ID", insertable = false, updatable = false)
+    @ManyToOne(optional = false)
+    private Orders order;
 
     public OrderItem() {
+    }
+    
+    public Orders getOrder() {
+        return order;
     }
     
     public Book getBook(){
@@ -121,10 +126,6 @@ public class OrderItem implements Serializable {
 
     public void setIsRemoved(Boolean isRemoved) {
         this.isRemoved = isRemoved;
-    }
-    
-    public Orders getOrder(){
-         return order;
     }
 
     @Override

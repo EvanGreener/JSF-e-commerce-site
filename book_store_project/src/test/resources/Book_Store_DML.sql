@@ -887,7 +887,7 @@ INSERT INTO Book
 VALUES ("9780684830421", "The Great Gatsby", "Fiction", 200,
         "Alternate Cover Edition ISBN: 0743273567 (ISBN13: 9780743273565)The Great Gatsby, F. Scott Fitzgerald\'s third book, stands as the supreme achievement of his career. This exemplary novel of the Jazz Age has been acclaimed by generations of readers. The story is of the fabulously wealthy Jay Gatsby and his new love for the beautiful Daisy Buchanan, of lavish parties on Long Island at a time when The New York Times noted \"gin was the national drink and sex the national obsession,\" it is an exquisitely crafted tale of America in the 1920s.The Great Gatsby is one of the great classics of twentieth-century literature.(back cover)",
         STR_TO_DATE("9/4/2020", "%m/%d/%Y"), 1, STR_TO_DATE("9/4/2018", "%m/%d/%Y"),
-        STR_TO_DATE("10/4/2018", "%m/%d/%Y"), FALSE, 16, 14, 8);
+        STR_TO_DATE("10/4/2018", "%m/%d/%Y"), TRUE, 16, 14, 8);
 INSERT INTO Book
 (ISBN, Title, Genre, Num_Of_Pages, Description, Date_Of_Publication, Publisher_ID, Date_Entered, Last_Modified,
  Is_Removed, List_Price, Sale_Price, Wholesale_Price)
@@ -901,7 +901,7 @@ INSERT INTO Book
 VALUES ("9780451526342", "Animal Farm", "Fiction", 141,
         "Librarian\'s note: There is an Alternate Cover Edition for this edition of this book here.A farm is taken over by its overworked, mistreated animals. With flaming idealism and stirring slogans, they set out to create a paradise of progress, justice, and equality. Thus the stage is set for one of the most telling satiric fables ever penned  2013a razor-edged fairy tale for grown-ups that records the evolution from revolution against tyranny to a totalitarianism just as terrible. When Animal Farm was first published, Stalinist Russia was seen as its target. Today it is devastatingly clear that wherever and whenever freedom is attacked, under whatever banner, the cutting clarity and savage comedy of George Orwell 2019s masterpiece have a meaning and message still ferociously fresh.",
         STR_TO_DATE("4/1/1996", "%m/%d/%Y"), 4, STR_TO_DATE("4/1/2017", "%m/%d/%Y"),
-        STR_TO_DATE("5/1/2017", "%m/%d/%Y"), FALSE, 15, 12, 7);
+        STR_TO_DATE("5/1/2017", "%m/%d/%Y"), TRUE, 15, 12, 7);
 INSERT INTO Book
 (ISBN, Title, Genre, Num_Of_Pages, Description, Date_Of_Publication, Publisher_ID, Date_Entered, Last_Modified,
  Is_Removed, List_Price, Sale_Price, Wholesale_Price)
@@ -957,7 +957,7 @@ INSERT INTO Book
 VALUES ("9780770430078", "Life of Pi", "Fiction", 460,
         "Life of Pi is a fantasy adventure novel by Yann Martel published in 2001. The protagonist, Piscine Molitor \"Pi\" Patel, a Tamil boy from Pondicherry, explores issues of spirituality and practicality from an early age. He survives 227 days after a shipwreck while stranded on a boat in the Pacific Ocean with a Bengal tiger named Richard Parker.",
         STR_TO_DATE("8/29/2006", "%m/%d/%Y"), 1, STR_TO_DATE("8/29/2017", "%m/%d/%Y"),
-        STR_TO_DATE("8/29/2017", "%m/%d/%Y"), FALSE, 15, 15, 5);
+        STR_TO_DATE("8/29/2017", "%m/%d/%Y"), TRUE, 15, 15, 5);
 INSERT INTO Book
 (ISBN, Title, Genre, Num_Of_Pages, Description, Date_Of_Publication, Publisher_ID, Date_Entered, Last_Modified,
  Is_Removed, List_Price, Sale_Price, Wholesale_Price)
@@ -971,7 +971,7 @@ INSERT INTO Book
 VALUES ("9780307588371", "Gone Girl", "Fiction", 415,
         "Marriage can be a real killer.On a warm summer morning in North Carthage, Missouri, it is Nick and Amy Dunne 2019s fifth wedding anniversary. Presents are being wrapped and reservations are being made when Nick 2019s clever and beautiful wife disappears from their rented McMansion on the Mississippi River. Husband-of-the-Year Nick isn 2019t doing himself any favors with cringe-worthy daydreams about the slope and shape of his wife 2019s head, but passages from Amy\'s diary reveal the alpha-girl perfectionist could have put anyone dangerously on edge. Under mounting pressure from the police and the media 2014as well as Amy 2019s fiercely doting parents 2014the town golden boy parades an endless series of lies, deceits, and inappropriate behavior. Nick is oddly evasive, and he 2019s definitely bitter 2014but is he really a killer?As the cops close in, every couple in town is soon wondering how well they know the one that they love. With his twin sister, Margo, at his side, Nick stands by his innocence. Trouble is, if Nick didn 2019t do it, where is that beautiful wife? And what was in that silvery gift box hidden in the back of her bedroom closet?With her razor-sharp writing and trademark psychological insight, Gillian Flynn delivers a fast-paced, devilishly dark, and ingeniously plotted thriller that confirms her status as one of the hottest writers around.One of the most critically acclaimed suspense writers of our time, New York Times bestseller Gillian Flynn takes that statement to its darkest place in this unputdownable masterpiece about a marriage gone terribly, terribly wrong. The Chicago Tribune proclaimed that her work  201cdraws you in and keeps you reading with the force of a pure but nasty addiction. 201d Gone Girl 2019s toxic mix of sharp-edged wit and deliciously chilling prose creates a nerve-fraying thriller that confounds you at every turn.Source: gillian-flynn.com",
         STR_TO_DATE("4/22/2014", "%m/%d/%Y"), 1, STR_TO_DATE("4/22/2017", "%m/%d/%Y"),
-        STR_TO_DATE("5/22/2017", "%m/%d/%Y"), FALSE, 16, 10, 5);
+        STR_TO_DATE("5/22/2017", "%m/%d/%Y"), TRUE, 16, 10, 5);
 INSERT INTO Book
 (ISBN, Title, Genre, Num_Of_Pages, Description, Date_Of_Publication, Publisher_ID, Date_Entered, Last_Modified,
  Is_Removed, List_Price, Sale_Price, Wholesale_Price)
@@ -992,14 +992,14 @@ INSERT INTO Book
 VALUES ("9780141439471", "Frankenstein", "Horror", 335,
         "Mary Shelley began writing Frankenstein when she was only eighteen. At once a Gothic thriller, a passionate romance, and a cautionary tale about the dangers of science, Frankenstein tells the story of committed science student Victor Frankenstein. Obsessed with discovering the cause of generation and life and bestowing animation upon lifeless matter, Frankenstein assembles a human being from stolen body parts but; upon bringing it to life, he recoils in horror at the creature\'s hideousness. Tormented by isolation and loneliness, the once-innocent creature turns to evil and unleashes a campaign of murderous revenge against his creator, Frankenstein.Frankenstein, an instant bestseller and an important ancestor of both the horror and science fiction genres, not only tells a terrifying story, but also raises profound, disturbing questions about the very nature of life and the place of humankind within the cosmos: What does it mean to be human? What responsibilities do we have to each other? How far can we go in tampering with Nature? In our age, filled with news of organ donation genetic engineering, and bio-terrorism, these questions are more relevant than ever.",
         STR_TO_DATE("6/25/2005", "%m/%d/%Y"), 1, STR_TO_DATE("6/25/2017", "%m/%d/%Y"),
-        STR_TO_DATE("7/25/2017", "%m/%d/%Y"), FALSE, 17, 15, 9);
+        STR_TO_DATE("7/25/2017", "%m/%d/%Y"), TRUE, 17, 15, 9);
 INSERT INTO Book
 (ISBN, Title, Genre, Num_Of_Pages, Description, Date_Of_Publication, Publisher_ID, Date_Entered, Last_Modified,
  Is_Removed, List_Price, Sale_Price, Wholesale_Price)
 VALUES ("9780385603102", "House of Leaves", "Horror", 705,
         "Years ago, when House of Leaves was first being passed around, it was nothing more than a badly bundled heap of paper, parts of which would occasionally surface on the Internet. No one could have anticipated the small but devoted following this terrifying story would soon command. Starting with an odd assortment of marginalized youth 2014musicians, tattoo artists, programmers, strippers, environmentalists, and adrenaline junkies 2014the book eventually made its way into the hands of older generations, who not only found themselves in those strangely arranged pages but also discovered a way back into the lives of their estranged children.Now, for the first time, this astonishing novel is made available in book form, complete with the original colored words, vertical footnotes, and newly added second and third appendices.The story remains unchanged, focusing on a young family that moves into a small home on Ash Tree Lane where they discover something is terribly wrong: their house is bigger on the inside than it is on the outside.Of course, neither Pulitzer Prize-winning photojournalist Will Navidson nor his companion Karen Green was prepared to face the consequences of that impossibility, until the day their two little children wandered off and their voices eerily began to return another story 2014of creature darkness, of an ever-growing abyss behind a closet door, and of that unholy growl which soon enough would tear through their walls and consume all their dreams.",
         STR_TO_DATE("3/7/2000", "%m/%d/%Y"), 1, STR_TO_DATE("3/7/2018", "%m/%d/%Y"),
-        STR_TO_DATE("4/7/2018", "%m/%d/%Y"), TRUE, 15, 14, 7);
+        STR_TO_DATE("4/7/2018", "%m/%d/%Y"), FALSE, 15, 14, 7);
 INSERT INTO Book
 (ISBN, Title, Genre, Num_Of_Pages, Description, Date_Of_Publication, Publisher_ID, Date_Entered, Last_Modified,
  Is_Removed, List_Price, Sale_Price, Wholesale_Price)
@@ -1041,14 +1041,14 @@ INSERT INTO Book
 VALUES ("9780380729401", "Something Wicked This Way Comes", "Horror", 293,
         "One of Ray Bradbury 2019s best-known and most popular novels, Something Wicked This Way Comes, now featuring a new introduction and material about its longstanding influence on culture and genre.For those who still dream and remember, for those yet to experience the hypnotic power of its dark poetry, step inside. The show is about to begin. Cooger & Dark 2019s Pandemonium Shadow Show has come to Green Town, Illinois, to destroy every life touched by its strange and sinister mystery. The carnival rolls in sometime after midnight, ushering in Halloween a week early. A calliope 2019s shrill siren song beckons to all with a seductive promise of dreams and youth regained. Two boys will discover the secret of its smoke, mazes, and mirrors; two friends who will soon know all too well the heavy cost of wishes 2026and the stuff of nightmares.Few novels have endured in the heart and memory as has Ray Bradbury 2019s unparalleled literary masterpiece Something Wicked This Way Comes. Scary and suspenseful, it is a timeless classic in the American canon.",
         STR_TO_DATE("3/1/1998", "%m/%d/%Y"), 11, STR_TO_DATE("3/1/2018", "%m/%d/%Y"),
-        STR_TO_DATE("3/1/2018", "%m/%d/%Y"), FALSE, 15, 11, 6);
+        STR_TO_DATE("3/1/2018", "%m/%d/%Y"), TRUE, 15, 11, 6);
 INSERT INTO Book
 (ISBN, Title, Genre, Num_Of_Pages, Description, Date_Of_Publication, Publisher_ID, Date_Entered, Last_Modified,
  Is_Removed, List_Price, Sale_Price, Wholesale_Price)
 VALUES ("9780345476876", "Interview with the Vampire", "Horror", 342,
         "This is the story of Louis, as told in his own words, of his journey through mortal and immortal life. Louis recounts how he became a vampire at the hands of the radiant and sinister Lestat and how he became indoctrinated, unwillingly, into the vampire way of life. His story ebbs and flows through the streets of New Orleans, defining crucial moments such as his discovery of the exquisite lost young child Claudia, wanting not to hurt but to comfort her with the last breaths of humanity he has inside. Yet, he makes Claudia a vampire, trapping her womanly passion, will, and intelligence inside the body of a small child. Louis and Claudia form a seemingly unbreakable alliance and even settle down for a while in the opulent French Quarter. Louis remembers Claudia\'s struggle to understand herself and the hatred they both have for Lestat that sends them halfway across the world to seek others of their kind. Louis and Claudia are desperate to find somewhere they belong, to find others who understand, and someone who knows what and why they are.Louis and Claudia travel Europe, eventually coming to Paris and the ragingly successful Theatre des Vampires--a theatre of vampires pretending to be mortals pretending to be vampires. Here they meet the magnetic and ethereal Armand, who brings them into a whole society of vampires. But Louis and Claudia find that finding others like themselves provides no easy answers and in fact presents dangers they scarcely imagined.Originally begun as a short story, the book took off as Anne wrote it, spinning the tragic and triumphant life experiences of a soul. As well as the struggles of its characters, Interview captures the political and social changes of two continents. The novel also introduces Lestat, Anne\'s most enduring character, a heady mixture of attraction and revulsion. The book, full of lush description, centers on the themes of immortality, change, loss, sexuality, and power.source: annerice.com",
         STR_TO_DATE("8/31/2004", "%m/%d/%Y"), 1, STR_TO_DATE("8/31/2019", "%m/%d/%Y"),
-        STR_TO_DATE("9/20/2019", "%m/%d/%Y"), FALSE, 19, 14, 5);
+        STR_TO_DATE("9/20/2019", "%m/%d/%Y"), TRUE, 19, 14, 5);
 INSERT INTO Book
 (ISBN, Title, Genre, Num_Of_Pages, Description, Date_Of_Publication, Publisher_ID, Date_Entered, Last_Modified,
  Is_Removed, List_Price, Sale_Price, Wholesale_Price)
@@ -1076,7 +1076,7 @@ INSERT INTO Book
 VALUES ("9780727860996", "Hell House", "Horror", 301,
         "Can any soul survive?Regarded as the Mount Everest of haunted houses, Belasco House has witnessed scenes of almost unimaginable horror and depravity. Two previous expeditions to investigate its secrets met with disaster, the participants destroyed by murder, suicide or insanity. Now a new investigation has been mounted - four strangers, each with his or her own reason for daring the unknown torments and temptations of the mansion...",
         STR_TO_DATE("7/1/2004", "%m/%d/%Y"), 1, STR_TO_DATE("7/1/2018", "%m/%d/%Y"),
-        STR_TO_DATE("8/1/2018", "%m/%d/%Y"), FALSE, 15, 10, 7);
+        STR_TO_DATE("8/1/2018", "%m/%d/%Y"), TRUE, 15, 10, 7);
 INSERT INTO Book
 (ISBN, Title, Genre, Num_Of_Pages, Description, Date_Of_Publication, Publisher_ID, Date_Entered, Last_Modified,
  Is_Removed, List_Price, Sale_Price, Wholesale_Price)
@@ -1111,7 +1111,7 @@ INSERT INTO Book
 VALUES ("9780062259660", "Bird Box", "Horror", 262,
         "Written with the narrative tension of The Road and the exquisite terror of classic Stephen King, Bird Box is a propulsive, edge-of-your-seat horror thriller, set in an apocalyptic near-future world 2014a masterpiece of suspense from the brilliantly imaginative Josh Malerman.Something is out there . . . Something terrifying that must not be seen. One glimpse and a person is driven to deadly violence. No one knows what it is or where it came from.Five years after it began, a handful of scattered survivors remain, including Malorie and her two young children. Living in an abandoned house near the river, she has dreamed of fleeing to a place where they might be safe. Now, that the boy and girl are four, it is time to go. But the journey ahead will be terrifying: twenty miles downriver in a rowboat 2014blindfolded 2014with nothing to rely on but her wits and the children 2019s trained ears. One wrong choice and they will die. And something is following them. But is it man, animal, or monster?Engulfed in darkness, surrounded by sounds both familiar and frightening, Malorie embarks on a harrowing odyssey 2014a trip that takes her into an unseen world and back into the past, to the companions who once saved her. Under the guidance of the stalwart Tom, a motely group of strangers banded together against the unseen terror, creating order from the chaos. But when supplies ran low, they were forced to venture outside 2014and confront the ultimate question: in a world gone mad, who can really be trusted?Interweaving past and present, Josh Malerman 2019s breathtaking debut is a horrific and gripping snapshot of a world unraveled that will have you racing to the final page.",
         STR_TO_DATE("2/10/2015", "%m/%d/%Y"), 1, STR_TO_DATE("2/10/2017", "%m/%d/%Y"),
-        STR_TO_DATE("3/10/2017", "%m/%d/%Y"), FALSE, 15, 15, 9);
+        STR_TO_DATE("3/10/2017", "%m/%d/%Y"), TRUE, 15, 15, 9);
 INSERT INTO Book
 (ISBN, Title, Genre, Num_Of_Pages, Description, Date_Of_Publication, Publisher_ID, Date_Entered, Last_Modified,
  Is_Removed, List_Price, Sale_Price, Wholesale_Price)
@@ -1146,35 +1146,35 @@ INSERT INTO Book
 VALUES ("9780679745587", "In Cold Blood", "Mystery", 343,
         "On November 15, 1959, in the small town of Holcomb, Kansas, four members of the Clutter family were savagely murdered by blasts from a shotgun held a few inches from their faces. There was no apparent motive for the crime, and there were almost no clues. As Truman Capote reconstructs the murder and the investigation that led to the capture, trial, and execution of the killers, he generates both mesmerizing suspense and astonishing empathy. At the center of his study are the amoral young killers Perry Smith and Dick Hickcock, who, vividly drawn by Capote, are shown to be reprehensible yet entirely and frighteningly human. In Cold Blood is a seminal work of modern prose, a remarkable synthesis of journalistic skill and powerfully evocative narrative.",
         STR_TO_DATE("6/16/2005", "%m/%d/%Y"), 1, STR_TO_DATE("6/16/2018", "%m/%d/%Y"),
-        STR_TO_DATE("6/16/2019", "%m/%d/%Y"), FALSE, 16, 13, 10);
+        STR_TO_DATE("6/16/2019", "%m/%d/%Y"), TRUE, 16, 13, 10);
 INSERT INTO Book
 (ISBN, Title, Genre, Num_Of_Pages, Description, Date_Of_Publication, Publisher_ID, Date_Entered, Last_Modified,
  Is_Removed, List_Price, Sale_Price, Wholesale_Price)
 VALUES ("9780451205766", "The Godfather", "Mystery", 448,
         "The Godfather 2014the epic tale of crime and betrayal that became a global phenomenon.Almost fifty years ago, a classic was born. A searing portrayal of the Mafia underworld, The Godfather introduced readers to the first family of American crime fiction, the Corleones, and their powerful legacy of tradition, blood, and honor. The seduction of power, the pitfalls of greed, and the allegiance to family 2014these are the themes that have resonated with millions of readers around the world and made The Godfather the definitive novel of the violent subculture that, steeped in intrigue and controversy, remains indelibly etched in our collective consciousness.~penguin.com",
         STR_TO_DATE("3/1/2002", "%m/%d/%Y"), 1, STR_TO_DATE("3/1/2019", "%m/%d/%Y"),
-        STR_TO_DATE("3/1/2019", "%m/%d/%Y"), FALSE, 15, 11, 8);
+        STR_TO_DATE("3/1/2019", "%m/%d/%Y"), TRUE, 15, 11, 8);
 INSERT INTO Book
 (ISBN, Title, Genre, Num_Of_Pages, Description, Date_Of_Publication, Publisher_ID, Date_Entered, Last_Modified,
  Is_Removed, List_Price, Sale_Price, Wholesale_Price)
 VALUES ("9780316166683", "The Lovely Bones", "Mystery", 372,
         "The Lovely Bones is the story of a family devastated by a gruesome murder -- a murder recounted by the teenage victim. Upsetting, you say? Remarkably, first-time novelist Alice Sebold takes this difficult material and delivers a compelling and accomplished exploration of a fractured family\'s need for peace and closure.The details of the crime are laid out in the first few pages: from her vantage point in heaven, Susie Salmon describes how she was confronted by the murderer one December afternoon on her way home from school. Lured into an underground hiding place, she was raped and killed. But what the reader knows, her family does not. Anxiously, we keep vigil with Susie, aching for her grieving family, desperate for the killer to be found and punished.Sebold creates a heaven that\'s calm and comforting, a place whose residents can have whatever they enjoyed when they were alive -- and then some. But Susie isn''t ready to release her hold on life just yet, and she intensely watches her family and friends as they struggle to cope with a reality in which she is no longer a part. To her great credit, Sebold has shaped one of the most loving and sympathetic fathers in contemporary literature.",
         STR_TO_DATE("9/1/2006", "%m/%d/%Y"), 16, STR_TO_DATE("9/1/2017", "%m/%d/%Y"),
-        STR_TO_DATE("9/1/2019", "%m/%d/%Y"), FALSE, 18, 14, 8);
+        STR_TO_DATE("9/1/2019", "%m/%d/%Y"), TRUE, 18, 14, 8);
 INSERT INTO Book
 (ISBN, Title, Genre, Num_Of_Pages, Description, Date_Of_Publication, Publisher_ID, Date_Entered, Last_Modified,
  Is_Removed, List_Price, Sale_Price, Wholesale_Price)
 VALUES ("9780156001311", "The Name of the Rose", "Mystery", 536,
         "The year is 1327. Benedictines in a wealthy Italian abbey are suspected of heresy, and Brother William of Baskerville arrives to investigate. When his delicate mission is suddenly overshadowed by seven bizarre deaths, Brother William turns detective. His tools are the logic of Aristotle, the theology of Aquinas, the empirical insights of Roger Bacon 2014all sharpened to a glistening edge by wry humor and a ferocious curiosity. He collects evidence, deciphers secret symbols and coded manuscripts, and digs into the eerie labyrinth of the abbey, where  201cthe most interesting things happen at night. 201d",
         STR_TO_DATE("9/28/1994", "%m/%d/%Y"), 1, STR_TO_DATE("9/28/2018", "%m/%d/%Y"),
-        STR_TO_DATE("9/28/2019", "%m/%d/%Y"), FALSE, 19, 13, 5);
+        STR_TO_DATE("9/28/2019", "%m/%d/%Y"), TRUE, 19, 13, 5);
 INSERT INTO Book
 (ISBN, Title, Genre, Num_Of_Pages, Description, Date_Of_Publication, Publisher_ID, Date_Entered, Last_Modified,
  Is_Removed, List_Price, Sale_Price, Wholesale_Price)
 VALUES ("9780582418271", "The Firm", "Mystery", 76,
         "Adaptation for younger readers.Mitch McDeere, a Harvard Law graduate, becomes suspicious of his Memphis tax firm when mysterious deaths, obsessive office security, and the Chicago mob figure into its operations.",
         STR_TO_DATE("2/15/2000", "%m/%d/%Y"), 1, STR_TO_DATE("2/15/2019", "%m/%d/%Y"),
-        STR_TO_DATE("2/15/2019", "%m/%d/%Y"), FALSE, 15, 15, 7);
+        STR_TO_DATE("2/15/2019", "%m/%d/%Y"), TRUE, 15, 15, 7);
 INSERT INTO Book
 (ISBN, Title, Genre, Num_Of_Pages, Description, Date_Of_Publication, Publisher_ID, Date_Entered, Last_Modified,
  Is_Removed, List_Price, Sale_Price, Wholesale_Price)
@@ -1195,7 +1195,7 @@ INSERT INTO Book
 VALUES ("9780143034902", "The Shadow of the Wind", "Mystery", 487,
         "Barcelona, 1945. Just after the war, a great world city lies in shadow, nursing its wounds, and a boy named Daniel awakes on his eleventh birthday to find that he can no longer remember his mother 2019s face. To console his only child, Daniel 2019s widowed father, an antiquarian book dealer, initiates him into the secret of the Cemetery of Forgotten Books, a library tended by Barcelona 2019s guild of rare-book dealers as a repository for books forgotten by the world, waiting for someone who will care about them again. Daniel 2019s father coaxes him to choose a volume from the spiraling labyrinth of shelves, one that, it is said, will have a special meaning for him. And Daniel so loves the novel he selects, \"'The Shadow of the Wind'\", by one Julian Carax, that he sets out to find the rest of Carax 2019s work. To his shock, he discovers that someone has been systematically destroying every copy of every book this author has written. In fact, he may have the last one in existence. Before Daniel knows it his seemingly innocent quest has opened a door into one of Barcelona 2019s darkest secrets, an epic story of murder, magic, madness and doomed love. And before long he realizes that if he doesn 2019t find out the truth about Julian Carax, he and those closest to him will suffer horribly.",
         STR_TO_DATE("1/25/2005", "%m/%d/%Y"), 17, STR_TO_DATE("1/25/2017", "%m/%d/%Y"),
-        STR_TO_DATE("1/25/2019", "%m/%d/%Y"), FALSE, 19, 12, 6);
+        STR_TO_DATE("1/25/2019", "%m/%d/%Y"), TRUE, 19, 12, 6);
 INSERT INTO Book
 (ISBN, Title, Genre, Num_Of_Pages, Description, Date_Of_Publication, Publisher_ID, Date_Entered, Last_Modified,
  Is_Removed, List_Price, Sale_Price, Wholesale_Price)
@@ -1216,14 +1216,14 @@ INSERT INTO Book
 VALUES ("9780312362089", "One for the Money", "Mystery", 320,
         "You''ve lost your job as a department store lingerie buyer, your car\'s been repossessed, and most of your furniture and small appliances have been sold off to pay last month\'s rent. Now the rent is due again. And you live in New Jersey. What do you do?If you''re Stephanie Plum, you become a bounty hunter. But not just a nickel-and-dime bounty hunter; you go after the big money. That means a cop gone bad. And not just any cop. She goes after Joe Morelli, a disgraced former vice cop who is also the man who took Stephanie\'s virginity at age 16 and then wrote details on a bathroom wall. With pride and rent money on the line, Plum plunges headlong into her first case, one that pits her against ruthless adversaries - people who''d rather kill than lose.In Stephanie Plum, Evanovich has created a resourceful and humorous character who stands apart from the pack of gritty female detectives.",
         STR_TO_DATE("6/28/2005", "%m/%d/%Y"), 1, STR_TO_DATE("6/28/2017", "%m/%d/%Y"),
-        STR_TO_DATE("6/28/2019", "%m/%d/%Y"), FALSE, 16, 11, 7);
+        STR_TO_DATE("6/28/2019", "%m/%d/%Y"), TRUE, 16, 11, 7);
 INSERT INTO Book
 (ISBN, Title, Genre, Num_Of_Pages, Description, Date_Of_Publication, Publisher_ID, Date_Entered, Last_Modified,
  Is_Removed, List_Price, Sale_Price, Wholesale_Price)
 VALUES ("9780752865331", "The Maltese Falcon", "Mystery", 213,
         "Sam Spade is hired by the fragrant Miss Wonderley to track down her sister, who has eloped with a louse called Floyd Thursby. But Miss Wonderley is in fact the beautiful and treacherous Brigid O\'shaughnessy, and when Spade\'s partner Miles Archer is shot while on Thursby\'s trail, Spade finds himself both hunter and hunted: can he track down the jewel-encrusted bird, a treasure worth killing for, before the Fat Man finds him?",
         STR_TO_DATE("3/1/2005", "%m/%d/%Y"), 2, STR_TO_DATE("3/1/2018", "%m/%d/%Y"),
-        STR_TO_DATE("3/1/2019", "%m/%d/%Y"), FALSE, 16, 12, 5);
+        STR_TO_DATE("3/1/2019", "%m/%d/%Y"), TRUE, 16, 12, 5);
 INSERT INTO Book
 (ISBN, Title, Genre, Num_Of_Pages, Description, Date_Of_Publication, Publisher_ID, Date_Entered, Last_Modified,
  Is_Removed, List_Price, Sale_Price, Wholesale_Price)
@@ -1258,7 +1258,7 @@ INSERT INTO Book
 VALUES ("9780812550702", "Ender\'s Game", "Science Fiction", 324,
         "Andrew \"Ender\" Wiggin thinks he is playing computer simulated war games; he is, in fact, engaged in something far more desperate. The result of genetic experimentation, Ender may be the military genius Earth desperately needs in a war against an alien enemy seeking to destroy all human life. The only way to find out is to throw Ender into ever harsher training, to chip away and find the diamond inside, or destroy him utterly. Ender Wiggin is six years old when it begins. He will grow up fast.But Ender is not the only result of the experiment. The war with the Buggers has been raging for a hundred years, and the quest for the perfect general has been underway almost as long. Ender\'s two older siblings, Peter and Valentine, are every bit as unusual as he is, but in very different ways. While Peter was too uncontrollably violent, Valentine very nearly lacks the capability for violence altogether. Neither was found suitable for the military\'s purpose. But they are driven by their jealousy of Ender, and by their inbred drive for power. Peter seeks to control the political process, to become a ruler. Valentine\'s abilities turn more toward the subtle control of the beliefs of commoner and elite alike, through powerfully convincing essays. Hiding their youth and identities behind the anonymity of the computer networks, these two begin working together to shape the destiny of Earth-an Earth that has no future at all if their brother Ender fails.Source: hatrack.com",
         STR_TO_DATE("9/30/2004", "%m/%d/%Y"), 1, STR_TO_DATE("9/30/2017", "%m/%d/%Y"),
-        STR_TO_DATE("9/30/2017", "%m/%d/%Y"), FALSE, 20, 10, 7);
+        STR_TO_DATE("9/30/2017", "%m/%d/%Y"), TRUE, 20, 10, 7);
 INSERT INTO Book
 (ISBN, Title, Genre, Num_Of_Pages, Description, Date_Of_Publication, Publisher_ID, Date_Entered, Last_Modified,
  Is_Removed, List_Price, Sale_Price, Wholesale_Price)
@@ -1272,7 +1272,7 @@ INSERT INTO Book
 VALUES ("9780307887436", "Ready Player One", "Science Fiction", 374,
         "IN THE YEAR 2044, reality is an ugly place. The only time teenage Wade Watts really feels alive is when he\'s jacked into the virtual utopia known as the OASIS. Wade\'s devoted his life to studying the puzzles hidden within this world\'s digital confines, puzzles that are based on their creator\'s obsession with the pop culture of decades past and that promise massive power and fortune to whoever can unlock them. But when Wade stumbles upon the first clue, he finds himself beset by players willing to kill to take this ultimate prize. The race is on, and if Wade\'s going to survive, he''ll have to win 2014and confront the real world he\'s always been so desperate to escape.",
         STR_TO_DATE("8/16/2011", "%m/%d/%Y"), 1, STR_TO_DATE("8/16/2017", "%m/%d/%Y"),
-        STR_TO_DATE("8/16/2019", "%m/%d/%Y"), FALSE, 20, 14, 9);
+        STR_TO_DATE("8/16/2019", "%m/%d/%Y"), TRUE, 20, 14, 9);
 INSERT INTO Book
 (ISBN, Title, Genre, Num_Of_Pages, Description, Date_Of_Publication, Publisher_ID, Date_Entered, Last_Modified,
  Is_Removed, List_Price, Sale_Price, Wholesale_Price)
@@ -1286,7 +1286,7 @@ INSERT INTO Book
 VALUES ("9781451673319", "Fahrenheit 451", "Science Fiction", 194,
         "Guy Montag is a fireman. In his world, where television rules and literature is on the brink of extinction, firemen start fires rather than put them out. His job is to destroy the most illegal of commodities, the printed book, along with the houses in which they are hidden.Montag never questions the destruction and ruin his actions produce, returning each day to his bland life and wife, Mildred, who spends all day with her television ''family''. But then he meets an eccentric young neighbor, Clarisse, who introduces him to a past where people did not live in fear and to a present where one sees the world through the ideas in books instead of the mindless chatter of television.When Mildred attempts suicide and Clarisse suddenly disappears, Montag begins to question everything he has ever known.",
         STR_TO_DATE("11/29/2011", "%m/%d/%Y"), 15, STR_TO_DATE("11/29/2019", "%m/%d/%Y"),
-        STR_TO_DATE("11/29/2019", "%m/%d/%Y"), FALSE, 15, 14, 9);
+        STR_TO_DATE("11/29/2019", "%m/%d/%Y"), TRUE, 15, 14, 9);
 INSERT INTO Book
 (ISBN, Title, Genre, Num_Of_Pages, Description, Date_Of_Publication, Publisher_ID, Date_Entered, Last_Modified,
  Is_Removed, List_Price, Sale_Price, Wholesale_Price)
@@ -1307,7 +1307,7 @@ INSERT INTO Book
 VALUES ("9780439023498", "Catching Fire", "Science Fiction", 391,
         "Sparks are igniting.Flames are spreading.And the Capitol wants revenge.Against all odds, Katniss has won the Hunger Games. She and fellow District 12 tribute Peeta Mellark are miraculously still alive. Katniss should be relieved, happy even. After all, she has returned to her family and her longtime friend, Gale. Yet nothing is the way Katniss wishes it to be. Gale holds her at an icy distance. Peeta has turned his back on her completely. And there are whispers of a rebellion against the Capitol - a rebellion that Katniss and Peeta may have helped create.Much to her shock, Katniss has fueled an unrest she\'s afraid she cannot stop. And what scares her even more is that she\'s not entirely convinced she should try. As time draws near for Katniss and Peeta to visit the districts on the Capitol\'s cruel Victory Tour, the stakes are higher than ever. If they can''t prove, without a shadow of a doubt, that they are lost in their love for each other, the consequences will be horrifying.In Catching Fire, the second novel in the Hunger Games trilogy, Suzanne Collins continues the story of Katniss Everdeen, testing her more than ever before...and surprising readers at every turn.",
         STR_TO_DATE("9/1/2009", "%m/%d/%Y"), 1, STR_TO_DATE("9/1/2017", "%m/%d/%Y"),
-        STR_TO_DATE("9/1/2019", "%m/%d/%Y"), TRUE, 19, 14, 9);
+        STR_TO_DATE("9/1/2019", "%m/%d/%Y"), FALSE, 19, 14, 9);
 INSERT INTO Book
 (ISBN, Title, Genre, Num_Of_Pages, Description, Date_Of_Publication, Publisher_ID, Date_Entered, Last_Modified,
  Is_Removed, List_Price, Sale_Price, Wholesale_Price)
@@ -1356,14 +1356,14 @@ INSERT INTO Book
 VALUES ("9780771008795", "The Handmaid\'s Tale", "Science Fiction", 312,
         "Offred is a Handmaid in the Republic of Gilead. She may leave the home of the Commander and his wife once a day to walk to food markets whose signs are now pictures instead of words because women are no longer allowed to read. She must lie on her back once a month and pray that the Commander makes her pregnant, because in an age of declining births, Offred and the other Handmaids are valued only if their ovaries are viable. Offred can remember the years before, when she lived and made love with her husband, Luke; when she played with and protected her daughter; when she had a job, money of her own, and access to knowledge. But all of that is gone now . . . Funny, unexpected, horrifying, and altogether convincing, The Handmaid\'s Tale is at once scathing satire, dire warning, and tour de force.",
         STR_TO_DATE("4/4/1998", "%m/%d/%Y"), 17, STR_TO_DATE("4/4/2018", "%m/%d/%Y"),
-        STR_TO_DATE("4/4/2019", "%m/%d/%Y"), TRUE, 18, 13, 7);
+        STR_TO_DATE("4/4/2019", "%m/%d/%Y"), FALSE, 18, 13, 7);
 INSERT INTO Book
 (ISBN, Title, Genre, Num_Of_Pages, Description, Date_Of_Publication, Publisher_ID, Date_Entered, Last_Modified,
  Is_Removed, List_Price, Sale_Price, Wholesale_Price)
 VALUES ("9781509808335", "The Restaurant at the End of the Universe", "Science Fiction", 250,
         "Alternate Cover Edition ISBN 0345418921 (ISBN13: 9780345418920)Facing annihilation at the hands of the warlike Vogons is a curious time to have a cosmically displaced Arthur Dent and his curious comrades in arms as they hurtle through space powered by pure improbability - and desperately in search of a place to eat. Among Arthur\'s motley shipmates are Ford Prefect, a long-time friend and contributor to the The Hitch Hiker\'s Guide to the Galaxy; Zaphod Beeblebrox, the three-armed, two-headed ex-president of the galaxy; Tricia McMilan, a fellow Earth refuge who\'s gone native (her name is Trillian now); and Marvin, who suffers nothing and no one gladly.Source: douglasadams.com",
         STR_TO_DATE("4/26/2005", "%m/%d/%Y"), 18, STR_TO_DATE("4/26/2019", "%m/%d/%Y"),
-        STR_TO_DATE("4/26/2019", "%m/%d/%Y"), FALSE, 19, 13, 6);
+        STR_TO_DATE("4/26/2019", "%m/%d/%Y"), TRUE, 19, 13, 6);
 INSERT INTO Book
 (ISBN, Title, Genre, Num_Of_Pages, Description, Date_Of_Publication, Publisher_ID, Date_Entered, Last_Modified,
  Is_Removed, List_Price, Sale_Price, Wholesale_Price)
@@ -1433,77 +1433,77 @@ INSERT INTO Book
 VALUES ("9780316075558", "The Black Prism", "Fantasy", 629,
         "Guile is the Prism, the most powerful man in the world. He is high priest and emperor, a man whose power, wit, and charm are all that preserves a tenuous peace. Yet Prisms never last, and Guile knows exactly how long he has left to live.When Guile discovers he has a son, born in a far kingdom after the war that put him in power, he must decide how much he\'s willing to pay to protect a secret that could tear his world apart.",
         STR_TO_DATE("8/25/2010", "%m/%d/%Y"), 8, STR_TO_DATE("8/25/2017", "%m/%d/%Y"),
-        STR_TO_DATE("8/25/2017", "%m/%d/%Y"), FALSE, 18, 14, 8);
+        STR_TO_DATE("8/25/2017", "%m/%d/%Y"), TRUE, 18, 14, 8);
 INSERT INTO Book
 (ISBN, Title, Genre, Num_Of_Pages, Description, Date_Of_Publication, Publisher_ID, Date_Entered, Last_Modified,
  Is_Removed, List_Price, Sale_Price, Wholesale_Price)
 VALUES ("9780316079914", "The Blinding Knife", "Fantasy", 671,
         "Gavin Guile is dying.He 2019d thought he had five years left 2014now he has less than one. With fifty thousand refugees, a bastard son, and an ex-fianc\xe9e who may have learned his darkest secret, Gavin has problems on every side. All magic in the world is running wild and threatens to destroy the Seven Satrapies.Worst of all, the old gods are being reborn, and their army of color wights is unstoppable. The only salvation may be the brother whose freedom and life Gavin stole sixteen years ago.",
         STR_TO_DATE("9/11/2012", "%m/%d/%Y"), 9, STR_TO_DATE("9/11/2018", "%m/%d/%Y"),
-        STR_TO_DATE("9/11/2018", "%m/%d/%Y"), FALSE, 15, 10, 7);
+        STR_TO_DATE("9/11/2018", "%m/%d/%Y"), TRUE, 15, 10, 7);
 INSERT INTO Book
 (ISBN, Title, Genre, Num_Of_Pages, Description, Date_Of_Publication, Publisher_ID, Date_Entered, Last_Modified,
  Is_Removed, List_Price, Sale_Price, Wholesale_Price)
 VALUES ("9780316058964", "The Broken Eye", "Fantasy", 846,
         "As the old gods awaken, the Chromeria is in a race to find its lost Prism, the only man who may be able to stop catastrophe, Gavin Guile. But Gavin\'s enslaved on a galley, and when he finally escapes, he finds himself in less than friendly hands. Without the ability to draft which has defined him . . .Meanwhile, the Color Prince\'s army continues its inexorable advance, having swallowed two of the seven satrapies, they now invade the Blood Forest. Andross Guile, thinking his son Gavin lost, tasks his two grandsons with stopping the advance. Kip and his psychopathic half-brother Zymun will compete for the ultimate prize: who will become the next Prism.",
         STR_TO_DATE("8/26/2014", "%m/%d/%Y"), 1, STR_TO_DATE("8/26/2019", "%m/%d/%Y"),
-        STR_TO_DATE("8/26/2019", "%m/%d/%Y"), FALSE, 18, 10, 10);
+        STR_TO_DATE("8/26/2019", "%m/%d/%Y"), TRUE, 18, 10, 10);
 INSERT INTO Book
 (ISBN, Title, Genre, Num_Of_Pages, Description, Date_Of_Publication, Publisher_ID, Date_Entered, Last_Modified,
  Is_Removed, List_Price, Sale_Price, Wholesale_Price)
 VALUES ("9780316251334", "The Blood Mirror", "Fantasy", 704,
         "Stripped of both magical and political power, the people he once ruled told he\'s dead, and now imprisoned in his own magical dungeon, former Emperor Gavin Guile has no prospect of escape. But the world faces a calamity greater than the Seven Satrapies has ever seen... and only he can save it.As the armies of the White King defeat the Chromeria and old gods are born anew, the fate of worlds will come down to one question: Who is the Lightbringer?LightbringerThe Black PrismThe Blinding KnifeThe Broken EyeThe Blood Mirror",
         STR_TO_DATE("10/25/2016", "%m/%d/%Y"), 10, STR_TO_DATE("10/25/2017", "%m/%d/%Y"),
-        STR_TO_DATE("10/25/2017", "%m/%d/%Y"), FALSE, 18, 12, 8);
+        STR_TO_DATE("10/25/2017", "%m/%d/%Y"), TRUE, 18, 12, 8);
 INSERT INTO Book
 (ISBN, Title, Genre, Num_Of_Pages, Description, Date_Of_Publication, Publisher_ID, Date_Entered, Last_Modified,
  Is_Removed, List_Price, Sale_Price, Wholesale_Price)
 VALUES ("9780316251303", "The Burning White", "Fantasy", 992,
         "The nail-biting conclusion to the Lightbringer series! Stripped of both magical and political power, the people he once ruled told he\'s dead, and now imprisoned in his own magical dungeon, former Emperor Gavin Guile has no prospect of escape. But the world faces a calamity greater than the Seven Satrapies has ever seen... and only he can save it.As the armies of the White King defeat the Chromeria and old gods are born anew, the fate of worlds will come down to one question: Who is the Lightbringer?",
         STR_TO_DATE("10/22/2019", "%m/%d/%Y"), 11, STR_TO_DATE("10/22/2019", "%m/%d/%Y"),
-        STR_TO_DATE("10/22/2019", "%m/%d/%Y"), FALSE, 20, 12, 6);
+        STR_TO_DATE("10/22/2019", "%m/%d/%Y"), TRUE, 20, 12, 6);
 INSERT INTO Book
 (ISBN, Title, Genre, Num_Of_Pages, Description, Date_Of_Publication, Publisher_ID, Date_Entered, Last_Modified,
  Is_Removed, List_Price, Sale_Price, Wholesale_Price)
 VALUES ("9780765311788", "The Final Empire", "Fantasy", 541,
         "Where ash falls from the sky, and mist dominates the night, evil cloaks the land and stifles all life. Criminal mastermind Kelsier teaches Allomancy, the magic of metals, to another Mistborn, urchin Vin 16. The unlikely heroine is distracted by rich Venture heir Elend. Can Kelsier\'s thieving crew take on the tyrant Lord Ruler and bring back colour to their world?",
         STR_TO_DATE("6/25/2006", "%m/%d/%Y"), 1, STR_TO_DATE("6/25/2017", "%m/%d/%Y"),
-        STR_TO_DATE("6/25/2017", "%m/%d/%Y"), FALSE, 19, 12, 9);
+        STR_TO_DATE("6/25/2017", "%m/%d/%Y"), TRUE, 19, 12, 9);
 INSERT INTO Book
 (ISBN, Title, Genre, Num_Of_Pages, Description, Date_Of_Publication, Publisher_ID, Date_Entered, Last_Modified,
  Is_Removed, List_Price, Sale_Price, Wholesale_Price)
 VALUES ("9780765316882", "The Well of Ascension", "Fantasy", 590,
         "Vin, the street urchin who has grown into the most powerful Mistborn in the land, and Elend Venture, the idealistic young nobleman who loves her, must build a healthy new society in the ashes of an empire. Three separate armies attack. As the siege tightens, an ancient legend seems to offer a glimmer of hope. But even if it really exists, no one knows where to find the Well of Ascension or what manner of power it bestows.",
         STR_TO_DATE("8/21/2007", "%m/%d/%Y"), 12, STR_TO_DATE("8/21/2017", "%m/%d/%Y"),
-        STR_TO_DATE("8/21/2017", "%m/%d/%Y"), FALSE, 18, 15, 5);
+        STR_TO_DATE("8/21/2017", "%m/%d/%Y"), TRUE, 18, 15, 5);
 INSERT INTO Book
 (ISBN, Title, Genre, Num_Of_Pages, Description, Date_Of_Publication, Publisher_ID, Date_Entered, Last_Modified,
  Is_Removed, List_Price, Sale_Price, Wholesale_Price)
 VALUES ("9780765316899", "The Hero of Ages", "Fantasy", 572,
         "Tricked into releasing the evil spirit Ruin while attempting to close the Well of Ascension, new emperor Elend Venture and his wife, the assassin Vin, are now hard-pressed to save the world.",
         STR_TO_DATE("10/14/2008", "%m/%d/%Y"), 14, STR_TO_DATE("10/14/2018", "%m/%d/%Y"),
-        STR_TO_DATE("10/14/2018", "%m/%d/%Y"), FALSE, 18, 12, 8);
+        STR_TO_DATE("10/14/2018", "%m/%d/%Y"), TRUE, 18, 12, 8);
 INSERT INTO Book
 (ISBN, Title, Genre, Num_Of_Pages, Description, Date_Of_Publication, Publisher_ID, Date_Entered, Last_Modified,
  Is_Removed, List_Price, Sale_Price, Wholesale_Price)
 VALUES ("9780765330420", "The Alloy of Law", "Fantasy", 332,
         "Three hundred years after the events of the Mistborn trilogy, Scadrial is now on the verge of modernity, with railroads to supplement the canals, electric lighting in the streets and the homes of the wealthy, and the first steel-framed skyscrapers racing for the clouds.Kelsier, Vin, Elend, Sazed, Spook, and the rest are now part of history 2014or religion. Yet even as science and technology are reaching new heights, the old magics of Allomancy and Feruchemy continue to play a role in this reborn world. Out in the frontier lands known as the Roughs, they are crucial tools for the brave men and women attempting to establish order and justice.One such is Waxillium Ladrian, a rare Twinborn who can Push on metals with his Allomancy and use Feruchemy to become lighter or heavier at will. After twenty years in the Roughs, Wax has been forced by family tragedy to return to the metropolis of Elendel. Now he must reluctantly put away his guns and assume the duties and dignity incumbent upon the head of a noble house. Or so he thinks, until he learns the hard way that the mansions and elegant tree-lined streets of the city can be even more dangerous than the dusty plains of the Roughs.",
         STR_TO_DATE("11/8/2011", "%m/%d/%Y"), 1, STR_TO_DATE("11/8/2019", "%m/%d/%Y"),
-        STR_TO_DATE("11/8/2019", "%m/%d/%Y"), FALSE, 15, 15, 7);
+        STR_TO_DATE("11/8/2019", "%m/%d/%Y"), TRUE, 15, 15, 7);
 INSERT INTO Book
 (ISBN, Title, Genre, Num_Of_Pages, Description, Date_Of_Publication, Publisher_ID, Date_Entered, Last_Modified,
  Is_Removed, List_Price, Sale_Price, Wholesale_Price)
 VALUES ("9780765378552", "Shadows of Self", "Fantasy", 383,
         "u\'shadows of Self shows Mistborn 2019s society evolving as technology and magic mix, the economy grows, democracy contends with corruption, and religion becomes a growing cultural force, with four faiths competing for converts.This bustling, optimistic, but still shaky society now faces its first instance of terrorism, crimes intended to stir up labor strife and religious conflict. Wax and Wayne, assisted by the lovely, brilliant Marasi, must unravel the conspiracy before civil strife stops Scadrial 2019s progress in its tracks.Shadows of Self will give fans of The Alloy of Law everything they 2019ve been hoping for and, this being a Brandon Sanderson book, more, much more.",
         STR_TO_DATE("10/6/2015", "%m/%d/%Y"), 1, STR_TO_DATE("10/6/2017", "%m/%d/%Y"),
-        STR_TO_DATE("10/6/2017", "%m/%d/%Y"), FALSE, 17, 14, 9);
+        STR_TO_DATE("10/6/2017", "%m/%d/%Y"), TRUE, 17, 14, 9);
 INSERT INTO Book
 (ISBN, Title, Genre, Num_Of_Pages, Description, Date_Of_Publication, Publisher_ID, Date_Entered, Last_Modified,
  Is_Removed, List_Price, Sale_Price, Wholesale_Price)
 VALUES ("9781466862678", "The Bands of Mourning", "Fantasy", 448,
         "From #1 New York Times bestselling author Brandon Sanderson, the Mistborn series is a heist story of political intrigue and magical, martial-arts action. Three hundred years after the events of the Mistborn trilogy, Scadrial is now on the verge of modernity, with railroads to supplement the canals, electric lighting in the streets and the homes of the wealthy, and the first steel-framed skyscrapers racing for the clouds.The Bands of Mourning are the mythical metal minds owned by the Lord Ruler, said to grant anyone who wears them the powers that the Lord Ruler had at his command. Hardly anyone thinks they really exist. A kandra researcher has returned to Elendel with images that seem to depict the Bands, as well as writings in a language that no one can read. Waxillium Ladrian is recruited to travel south to the city of New Seran to investigate. Along the way he discovers hints that point to the true goals of his uncle Edwarn and the shadowy organization known as The Set.",
         STR_TO_DATE("1/26/2016", "%m/%d/%Y"), 3, STR_TO_DATE("1/26/2018", "%m/%d/%Y"),
-        STR_TO_DATE("1/26/2019", "%m/%d/%Y"), FALSE, 19, 11, 6);
+        STR_TO_DATE("1/26/2019", "%m/%d/%Y"), TRUE, 19, 11, 6);
 INSERT INTO Book
 (ISBN, Title, Genre, Num_Of_Pages, Description, Date_Of_Publication, Publisher_ID, Date_Entered, Last_Modified,
  Is_Removed, List_Price, Sale_Price, Wholesale_Price)
@@ -1524,70 +1524,70 @@ INSERT INTO Book
 VALUES ("9781937007294", "Fated", "Fantasy", 295,
         "Alex Verus is part of a world hidden in plain sight, running a magic shop in London. And while Alex\'s own powers aren''t as showy as some mages, he does have the advantage of foreseeing the possible future--allowing him to pull off operations that have a million-to-one-chance of success. But when Alex is approached by multiple factions to crack open a relic from a long-ago mage war, he knows that whatever\'s inside must be beyond powerful. And thanks to his abilities, Alex can predict that by taking the job, his odds of survival are about to go from slim to none...",
         STR_TO_DATE("2/28/2012", "%m/%d/%Y"), 3, STR_TO_DATE("2/28/2018", "%m/%d/%Y"),
-        STR_TO_DATE("2/28/2019", "%m/%d/%Y"), FALSE, 19, 10, 10);
+        STR_TO_DATE("2/28/2019", "%m/%d/%Y"), TRUE, 19, 10, 10);
 INSERT INTO Book
 (ISBN, Title, Genre, Num_Of_Pages, Description, Date_Of_Publication, Publisher_ID, Date_Entered, Last_Modified,
  Is_Removed, List_Price, Sale_Price, Wholesale_Price)
 VALUES ("9781937007591", "Cursed", "Fantasy", 293,
         "Benedict Jacka\'s acclaimed Alex Verus series continues with Cursed.Since his second sight made him infamous for defeating powerful dark mages, Alex has been keeping his head down. But now he\'s\xa0discovered the resurgence of a forbidden ritual. Someone is harvesting the life-force of magical creatures 2014destroying them in the process. And draining humans is next on the agenda. Hired to investigate, Alex\xa0realizes that\xa0not everyone on the Council wants him delving any deeper. Struggling to distinguish ally from enemy, he finds himself the target of those who would risk their own sanity for power...",
         STR_TO_DATE("5/29/2012", "%m/%d/%Y"), 2, STR_TO_DATE("5/29/2019", "%m/%d/%Y"),
-        STR_TO_DATE("5/29/2019", "%m/%d/%Y"), FALSE, 18, 14, 7);
+        STR_TO_DATE("5/29/2019", "%m/%d/%Y"), TRUE, 18, 14, 7);
 INSERT INTO Book
 (ISBN, Title, Genre, Num_Of_Pages, Description, Date_Of_Publication, Publisher_ID, Date_Entered, Last_Modified,
  Is_Removed, List_Price, Sale_Price, Wholesale_Price)
 VALUES ("9781937007720", "Taken", "Fantasy", 313,
         "Mage apprentices have been vanishing without a trace 2014and someone on the council might be involved. Alex Verus has no evidence, no witnesses, and no suspects. All he knows is that someone is keeping tabs on him. And after assassins target his own apprentice 2019s classmate, Alex sees that he doesn 2019t know the half of it 2014and that he could be the next to disappear...",
         STR_TO_DATE("8/28/2012", "%m/%d/%Y"), 3, STR_TO_DATE("8/28/2017", "%m/%d/%Y"),
-        STR_TO_DATE("8/28/2019", "%m/%d/%Y"), FALSE, 19, 13, 7);
+        STR_TO_DATE("8/28/2019", "%m/%d/%Y"), TRUE, 19, 13, 7);
 INSERT INTO Book
 (ISBN, Title, Genre, Num_Of_Pages, Description, Date_Of_Publication, Publisher_ID, Date_Entered, Last_Modified,
  Is_Removed, List_Price, Sale_Price, Wholesale_Price)
 VALUES ("9780425264928", "Chosen", "Fantasy", 294,
         "I don 2019t publicly advertise that I 2019m a mage, but I don 2019t exactly hide it either, and one of the odd things I 2019ve learnt over the years is just how much you can get away with if you 2019re blatant enough. Hide something behind smoke and mirrors and make people work to find it, and they 2019ll tear the place down looking for what 2019s there. Alex Verus is a diviner who can see probable futures 2014a talent that 2019s gotten him out of many a tough scrape. But this time, he may be in over his head. Alex was once apprenticed to a Dark mage, and in his service he did a lot of things he isn 2019t proud of. As rumors swirl that his old master is coming back, Alex comes face to face with his misdeeds in the form of a young adept whose only goal is to get revenge. Alex has changed his life for the better, but he 2019s afraid of what his friends 2014including his apprentice, Luna 2014will think of his past. But if they 2019re going to put themselves at risk, they need to know exactly what kind of man they 2019re fighting for...",
         STR_TO_DATE("8/27/2013", "%m/%d/%Y"), 4, STR_TO_DATE("8/27/2018", "%m/%d/%Y"),
-        STR_TO_DATE("8/27/2019", "%m/%d/%Y"), FALSE, 16, 14, 6);
+        STR_TO_DATE("8/27/2019", "%m/%d/%Y"), TRUE, 16, 14, 6);
 INSERT INTO Book
 (ISBN, Title, Genre, Num_Of_Pages, Description, Date_Of_Publication, Publisher_ID, Date_Entered, Last_Modified,
  Is_Removed, List_Price, Sale_Price, Wholesale_Price)
 VALUES ("9780425264942", "Hidden", "Fantasy", 336,
         "Alternate cover edition of ASIN B00HP4HC2SAlex Verus is a diviner who can see probable futures - a talent that\'s gotten him and his friends out of many a tough scrape. But what happens when someone doesn''t want Alex\'s help?Alex\'s friend, the life mage Anne, distanced herself from him when she found out about his past as a Dark apprentice. Now she\'s in serious trouble, but wants nothing to do with him. Alex has to start wondering if Anne\'s problem is really with him - or if there\'s a secret she\'s trying to hide.On top of that, rumours are swirling around London that Alex\'s former master may be back in town. Alex has no idea what his agenda may be, or who it involves . . .",
         STR_TO_DATE("9/2/2014", "%m/%d/%Y"), 4, STR_TO_DATE("9/2/2019", "%m/%d/%Y"),
-        STR_TO_DATE("9/2/2019", "%m/%d/%Y"), FALSE, 19, 14, 9);
+        STR_TO_DATE("9/2/2019", "%m/%d/%Y"), TRUE, 19, 14, 9);
 INSERT INTO Book
 (ISBN, Title, Genre, Num_Of_Pages, Description, Date_Of_Publication, Publisher_ID, Date_Entered, Last_Modified,
  Is_Removed, List_Price, Sale_Price, Wholesale_Price)
 VALUES ("9780425275757", "Veiled", "Fantasy", 304,
         "National bestselling author Benedict Jacka returns to the world of Alex Verus...I thought I 2019d escaped my past. But my old master is back and making a new play for power. And he 2019s not the only one targeting me 2026Diviner Alex Verus and the Council that governs the magical community have never gotten along. But with his former teacher back in Britain, Alex is in desperate need of allies, and he 2019ll do whatever it takes to get them 2014even if it means accepting a job with the Keepers, enforcing magical law.Alex forms an uneasy alliance with his new partner, Caldera, but his attempt at legitimacy quickly turns lethal when a mission puts him in possession of an item that factions both inside and outside of the Council would kill to get their hands on.Once again caught in the middle of a deadly conflict, Alex will need all his abilities to figure out who his friends are 2014especially when enemies are hiding on all sides 2026",
         STR_TO_DATE("8/4/2015", "%m/%d/%Y"), 6, STR_TO_DATE("8/4/2017", "%m/%d/%Y"),
-        STR_TO_DATE("8/4/2019", "%m/%d/%Y"), FALSE, 16, 10, 9);
+        STR_TO_DATE("8/4/2019", "%m/%d/%Y"), TRUE, 16, 10, 9);
 INSERT INTO Book
 (ISBN, Title, Genre, Num_Of_Pages, Description, Date_Of_Publication, Publisher_ID, Date_Entered, Last_Modified,
  Is_Removed, List_Price, Sale_Price, Wholesale_Price)
 VALUES ("9780698165083", "Burned", "Fantasy", 326,
         "Mage Alex Verus is back in the seventh in the  201cgorgeously realized 201d* urban fantasy series from the national bestselling author of Veiled. I 2019m used to people wanting me dead. But, this time, I 2019m not the only one on the hit list 2014and time is running out... Diviner Alex Verus finally made one too many enemies on the Council of Mages, and now one of them is angry enough to have him executed. Fighting for his life is nothing new, but this kill order also calls for the death of Alex 2019s dependents 2014and there 2019s no way that he 2019ll let Luna, Anne, and Vari take the heat. With only a week before he 2019s history, Alex will have to figure out how to disassociate himself from his friends, scrounge up allies on the Council, and hopefully keep his head attached to his body. But saving himself is going to bring him into direct opposition with his former master and the Dark mages surrounding him. And, this time, escaping with his life might mean losing his soul...",
         STR_TO_DATE("4/7/2016", "%m/%d/%Y"), 5, STR_TO_DATE("4/7/2018", "%m/%d/%Y"),
-        STR_TO_DATE("4/7/2019", "%m/%d/%Y"), FALSE, 17, 12, 9);
+        STR_TO_DATE("4/7/2019", "%m/%d/%Y"), TRUE, 17, 12, 9);
 INSERT INTO Book
 (ISBN, Title, Genre, Num_Of_Pages, Description, Date_Of_Publication, Publisher_ID, Date_Entered, Last_Modified,
  Is_Removed, List_Price, Sale_Price, Wholesale_Price)
 VALUES ("9781101988527", "Bound", "Fantasy", 336,
         "Mage Alex Verus is caught between a rock and a hard place in the eighth urban fantasy novel from the national bestselling author of Burned.Right now I wasn 2019t seeing Richard as the teacher out of my nightmares, he was just another Dark mage, and I looked into the future to see what would happen if I turned that knife on him instead... Alex Verus is still haunted by his time apprenticed to Richard Drakh. He\'s been free of him for many years, but now the only way to keep his friends from being harmed is to again work for Richard and his deadly ally. Even worse, he 2019s forced to bring the Light mage Anne into this servitude as well. After weeks of being hunted and finally cornered into what he thought was his last stand, Alex never thought his life would be spared 2014and never anticipated at what price. This time, the diviner can see no way out...",
         STR_TO_DATE("4/4/2017", "%m/%d/%Y"), 7, STR_TO_DATE("4/4/2017", "%m/%d/%Y"),
-        STR_TO_DATE("4/4/2019", "%m/%d/%Y"), FALSE, 18, 13, 6);
+        STR_TO_DATE("4/4/2019", "%m/%d/%Y"), TRUE, 18, 13, 6);
 INSERT INTO Book
 (ISBN, Title, Genre, Num_Of_Pages, Description, Date_Of_Publication, Publisher_ID, Date_Entered, Last_Modified,
  Is_Removed, List_Price, Sale_Price, Wholesale_Price)
 VALUES ("9780356507217", "Marked", "Fantasy", 354,
         "Mage Alex Verus is hanging on by a thread in the ninth urban fantasy novel from the national bestselling author of Burned.When Mage Alex Verus ends up with a position on the Light Council, no one is happy, least of all him. But Alex is starting to realize that if he wants to protect his friends, he''ll need to become a power player himself. His first order of business is to track down dangerous magical items unleashed into the world by Dark Mages.But when the Council decides they need his help in negotiating with the perpetrators, Alex will have to use all his cunning and magic to strike a deal--and stop the rising tension between the Council, the Dark Mages, and the adept community from turning into a bloodbath.",
         STR_TO_DATE("6/5/2018", "%m/%d/%Y"), 5, STR_TO_DATE("6/5/2018", "%m/%d/%Y"),
-        STR_TO_DATE("6/5/2019", "%m/%d/%Y"), FALSE, 16, 14, 5);
+        STR_TO_DATE("6/5/2019", "%m/%d/%Y"), TRUE, 16, 14, 5);
 INSERT INTO Book
 (ISBN, Title, Genre, Num_Of_Pages, Description, Date_Of_Publication, Publisher_ID, Date_Entered, Last_Modified,
  Is_Removed, List_Price, Sale_Price, Wholesale_Price)
 VALUES ("9780440000587", "Fallen", "Fantasy", 296,
         "For Mage Alex Verus, everything is on the line in the tenth urban fantasy novel from the national bestselling author of Marked.Once Alex Verus was a diviner trying to live quietly under the radar. Now he\'s a member of the Light Council who\'s found success, friends...and love. But it\'s come with a price--the Council is investigating him, and if they find out the truth, he''ll lose everything.Meanwhile, Alex\'s old master, Richard Drakh, is waging a war against the Council, and he\'s preparing a move that will bring Alex and the life mage, Anne, under his control. Caught between Richard and the Council, Alex\'s time is running out. To protect those he cares for, Alex will have to become something different. Something darker...",
         STR_TO_DATE("9/24/2019", "%m/%d/%Y"), 6, STR_TO_DATE("9/24/2019", "%m/%d/%Y"),
-        STR_TO_DATE("9/24/2019", "%m/%d/%Y"), FALSE, 17, 15, 5);
+        STR_TO_DATE("9/24/2019", "%m/%d/%Y"), TRUE, 17, 15, 5);
 
 ## Authors
 insert into Authors
@@ -2226,221 +2226,221 @@ VALUES ("9780440000587", "E-Pub", "sample.epub", "2019-12-26 12:38:58", SYSDATE(
 
 
 INSERT INTO Book_Format(ISBN, date_created, last_modified, Is_Removed, File_Location)
-VALUES ('9780142000670', '2017-01-08', '2017-02-08', FALSE, '9780142000670.pdf');
+VALUES ('9780142000670', '2017-01-08', '2017-02-08', FALSE, 'sample.pdf');
 INSERT INTO Book_Format(ISBN, date_created, last_modified, Is_Removed, File_Location)
-VALUES ('9780439244190', '2018-09-02', '2018-10-02', TRUE, '9780439244190.pdf');
+VALUES ('9780439244190', '2018-09-02', '2018-10-02', TRUE, 'sample.pdf');
 INSERT INTO Book_Format(ISBN, date_created, last_modified, Is_Removed, File_Location)
-VALUES ('9780061120084', '2019-05-23', '2019-05-23', FALSE, '9780061120084.pdf');
+VALUES ('9780061120084', '2019-05-23', '2019-05-23', FALSE, 'sample.pdf');
 INSERT INTO Book_Format(ISBN, date_created, last_modified, Is_Removed, File_Location)
-VALUES ('9780684830421', '2018-09-04', '2018-10-04', FALSE, '9780684830421.pdf');
+VALUES ('9780684830421', '2018-09-04', '2018-10-04', FALSE, 'sample.pdf');
 INSERT INTO Book_Format(ISBN, date_created, last_modified, Is_Removed, File_Location)
-VALUES ('9780606323451', '2019-06-26', '2019-07-26', FALSE, '9780606323451.pdf');
+VALUES ('9780606323451', '2019-06-26', '2019-07-26', FALSE, 'sample.pdf');
 INSERT INTO Book_Format(ISBN, date_created, last_modified, Is_Removed, File_Location)
-VALUES ('9780451526342', '2017-04-01', '2017-05-01', FALSE, '9780451526342.pdf');
+VALUES ('9780451526342', '2017-04-01', '2017-05-01', FALSE, 'sample.pdf');
 INSERT INTO Book_Format(ISBN, date_created, last_modified, Is_Removed, File_Location)
-VALUES ('9780316769174', '2018-01-30', '2018-01-30', FALSE, '9780316769174.pdf');
+VALUES ('9780316769174', '2018-01-30', '2018-01-30', FALSE, 'sample.pdf');
 INSERT INTO Book_Format(ISBN, date_created, last_modified, Is_Removed, File_Location)
-VALUES ('9780439023481', '2019-09-14', '2019-09-14', FALSE, '9780439023481.pdf');
+VALUES ('9780439023481', '2019-09-14', '2019-09-14', FALSE, 'sample.pdf');
 INSERT INTO Book_Format(ISBN, date_created, last_modified, Is_Removed, File_Location)
-VALUES ('9780307277671', '2017-03-28', '2017-03-28', FALSE, '9780307277671.pdf');
+VALUES ('9780307277671', '2017-03-28', '2017-03-28', FALSE, 'sample.pdf');
 INSERT INTO Book_Format(ISBN, date_created, last_modified, Is_Removed, File_Location)
-VALUES ('9781594480003', '2019-05-04', '2019-05-04', FALSE, '9781594480003.pdf');
+VALUES ('9781594480003', '2019-05-04', '2019-05-04', FALSE, 'sample.pdf');
 INSERT INTO Book_Format(ISBN, date_created, last_modified, Is_Removed, File_Location)
-VALUES ('9780140283334', '2017-10-01', '2017-11-01', FALSE, '9780140283334.pdf');
+VALUES ('9780140283334', '2017-10-01', '2017-11-01', FALSE, 'sample.pdf');
 INSERT INTO Book_Format(ISBN, date_created, last_modified, Is_Removed, File_Location)
-VALUES ('9780679601685', '2018-10-10', '2018-11-10', FALSE, '9780679601685.pdf');
+VALUES ('9780679601685', '2018-10-10', '2018-11-10', FALSE, 'sample.pdf');
 INSERT INTO Book_Format(ISBN, date_created, last_modified, Is_Removed, File_Location)
-VALUES ('9780062315007', '2019-04-15', '2019-04-15', FALSE, '9780062315007.pdf');
+VALUES ('9780062315007', '2019-04-15', '2019-04-15', FALSE, 'sample.pdf');
 INSERT INTO Book_Format(ISBN, date_created, last_modified, Is_Removed, File_Location)
-VALUES ('9780770430078', '2017-08-29', '2017-08-29', FALSE, '9780770430078.pdf');
+VALUES ('9780770430078', '2017-08-29', '2017-08-29', FALSE, 'sample.pdf');
 INSERT INTO Book_Format(ISBN, date_created, last_modified, Is_Removed, File_Location)
-VALUES ('9780375831003', '2019-03-14', '2019-04-14', FALSE, '9780375831003.pdf');
+VALUES ('9780375831003', '2019-03-14', '2019-04-14', FALSE, 'sample.pdf');
 INSERT INTO Book_Format(ISBN, date_created, last_modified, Is_Removed, File_Location)
-VALUES ('9780307588371', '2017-04-22', '2017-05-22', FALSE, '9780307588371.pdf');
+VALUES ('9780307588371', '2017-04-22', '2017-05-22', FALSE, 'sample.pdf');
 INSERT INTO Book_Format(ISBN, date_created, last_modified, Is_Removed, File_Location)
-VALUES ('9781416524793', '2018-04-01', '2018-04-01', FALSE, '9781416524793.pdf');
+VALUES ('9781416524793', '2018-04-01', '2018-04-01', FALSE, 'sample.pdf');
 INSERT INTO Book_Format(ISBN, date_created, last_modified, Is_Removed, File_Location)
-VALUES ('9780393970128', '2019-05-12', '2019-05-12', FALSE, '9780393970128.pdf');
+VALUES ('9780393970128', '2019-05-12', '2019-05-12', FALSE, 'sample.pdf');
 INSERT INTO Book_Format(ISBN, date_created, last_modified, Is_Removed, File_Location)
-VALUES ('9780141439471', '2017-06-25', '2017-07-25', FALSE, '9780141439471.pdf');
+VALUES ('9780141439471', '2017-06-25', '2017-07-25', FALSE, 'sample.pdf');
 INSERT INTO Book_Format(ISBN, date_created, last_modified, Is_Removed, File_Location)
-VALUES ('9780385603102', '2018-03-07', '2018-04-07', TRUE, '9780385603102.pdf');
+VALUES ('9780385603102', '2018-03-07', '2018-04-07', TRUE, 'sample.pdf');
 INSERT INTO Book_Format(ISBN, date_created, last_modified, Is_Removed, File_Location)
-VALUES ('9780143039983', '2019-11-28', '2019-12-28', FALSE, '9780143039983.pdf');
+VALUES ('9780143039983', '2019-11-28', '2019-12-28', FALSE, 'sample.pdf');
 INSERT INTO Book_Format(ISBN, date_created, last_modified, Is_Removed, File_Location)
-VALUES ('9780450040184', '2017-07-01', '2017-08-01', FALSE, '9780450040184.pdf');
+VALUES ('9780450040184', '2017-07-01', '2017-08-01', FALSE, 'sample.pdf');
 INSERT INTO Book_Format(ISBN, date_created, last_modified, Is_Removed, File_Location)
-VALUES ('9780061007224', '2018-02-01', '2018-03-01', FALSE, '9780061007224.pdf');
+VALUES ('9780061007224', '2018-02-01', '2018-03-01', FALSE, 'sample.pdf');
 INSERT INTO Book_Format(ISBN, date_created, last_modified, Is_Removed, File_Location)
-VALUES ('9781416524342', '2019-11-01', '2019-12-01', FALSE, '9781416524342.pdf');
+VALUES ('9781416524342', '2019-11-01', '2019-12-01', FALSE, 'sample.pdf');
 INSERT INTO Book_Format(ISBN, date_created, last_modified, Is_Removed, File_Location)
-VALUES ('9780450411434', '2017-10-01', '2017-10-01', FALSE, '9780450411434.pdf');
+VALUES ('9780450411434', '2017-10-01', '2017-10-01', FALSE, 'sample.pdf');
 INSERT INTO Book_Format(ISBN, date_created, last_modified, Is_Removed, File_Location)
-VALUES ('9780380729401', '2018-03-01', '2018-03-01', FALSE, '9780380729401.pdf');
+VALUES ('9780380729401', '2018-03-01', '2018-03-01', FALSE, 'sample.pdf');
 INSERT INTO Book_Format(ISBN, date_created, last_modified, Is_Removed, File_Location)
-VALUES ('9780345476876', '2019-08-31', '2019-09-20', FALSE, '9780345476876.pdf');
+VALUES ('9780345476876', '2019-08-31', '2019-09-20', FALSE, 'sample.pdf');
 INSERT INTO Book_Format(ISBN, date_created, last_modified, Is_Removed, File_Location)
-VALUES ('9780735212510', '2018-03-06', '2018-03-06', TRUE, '9780735212510.pdf');
+VALUES ('9780735212510', '2018-03-06', '2018-03-06', TRUE, 'sample.pdf');
 INSERT INTO Book_Format(ISBN, date_created, last_modified, Is_Removed, File_Location)
-VALUES ('9780450031069', '2019-06-13', '2019-06-13', FALSE, '9780450031069.pdf');
+VALUES ('9780450031069', '2019-06-13', '2019-06-13', FALSE, 'sample.pdf');
 INSERT INTO Book_Format(ISBN, date_created, last_modified, Is_Removed, File_Location)
-VALUES ('9780307346605', '2017-09-12', '2017-10-12', FALSE, '9780307346605.pdf');
+VALUES ('9780307346605', '2017-09-12', '2017-10-12', FALSE, 'sample.pdf');
 INSERT INTO Book_Format(ISBN, date_created, last_modified, Is_Removed, File_Location)
-VALUES ('9780727860996', '2018-07-01', '2018-08-01', FALSE, '9780727860996.pdf');
+VALUES ('9780727860996', '2018-07-01', '2018-08-01', FALSE, 'sample.pdf');
 INSERT INTO Book_Format(ISBN, date_created, last_modified, Is_Removed, File_Location)
-VALUES ('9780062200570', '2019-04-30', '2019-04-30', FALSE, '9780062200570.pdf');
+VALUES ('9780062200570', '2019-04-30', '2019-04-30', FALSE, 'sample.pdf');
 INSERT INTO Book_Format(ISBN, date_created, last_modified, Is_Removed, File_Location)
-VALUES ('9780061139376', '2017-08-29', '2017-08-29', FALSE, '9780061139376.pdf');
+VALUES ('9780061139376', '2017-08-29', '2017-08-29', FALSE, 'sample.pdf');
 INSERT INTO Book_Format(ISBN, date_created, last_modified, Is_Removed, File_Location)
-VALUES ('9780671685638', '2018-09-01', '2018-10-01', FALSE, '9780671685638.pdf');
+VALUES ('9780671685638', '2018-09-01', '2018-10-01', FALSE, 'sample.pdf');
 INSERT INTO Book_Format(ISBN, date_created, last_modified, Is_Removed, File_Location)
-VALUES ('9780345504968', '2019-06-08', '2019-06-08', FALSE, '9780345504968.pdf');
+VALUES ('9780345504968', '2019-06-08', '2019-06-08', FALSE, 'sample.pdf');
 INSERT INTO Book_Format(ISBN, date_created, last_modified, Is_Removed, File_Location)
-VALUES ('9780062259660', '2017-02-10', '2017-03-10', FALSE, '9780062259660.pdf');
+VALUES ('9780062259660', '2017-02-10', '2017-03-10', FALSE, 'sample.pdf');
 INSERT INTO Book_Format(ISBN, date_created, last_modified, Is_Removed, File_Location)
-VALUES ('9781982110567', '2019-09-10', '2019-09-10', FALSE, '9781982110567.pdf');
+VALUES ('9781982110567', '2019-09-10', '2019-09-10', FALSE, 'sample.pdf');
 INSERT INTO Book_Format(ISBN, date_created, last_modified, Is_Removed, File_Location)
-VALUES ('9780307949486', '2017-09-16', '2017-10-16', FALSE, '9780307949486.pdf');
+VALUES ('9780307949486', '2017-09-16', '2017-10-16', FALSE, 'sample.pdf');
 INSERT INTO Book_Format(ISBN, date_created, last_modified, Is_Removed, File_Location)
-VALUES ('9780312330873', '2018-05-03', '2019-05-03', FALSE, '9780312330873.pdf');
+VALUES ('9780312330873', '2018-05-03', '2019-05-03', FALSE, 'sample.pdf');
 INSERT INTO Book_Format(ISBN, date_created, last_modified, Is_Removed, File_Location)
-VALUES ('9781416524793', '2019-04-01', '2019-04-01', FALSE, '9781416524793.pdf');
+VALUES ('9781416524793', '2019-04-01', '2019-04-01', FALSE, 'sample.pdf');
 INSERT INTO Book_Format(ISBN, date_created, last_modified, Is_Removed, File_Location)
-VALUES ('9780316323703', '2017-12-17', '2019-12-17', TRUE, '9780316323703.pdf');
+VALUES ('9780316323703', '2017-12-17', '2019-12-17', TRUE, 'sample.pdf');
 INSERT INTO Book_Format(ISBN, date_created, last_modified, Is_Removed, File_Location)
-VALUES ('9780679745587', '2018-06-16', '2019-06-16', FALSE, '9780679745587.pdf');
+VALUES ('9780679745587', '2018-06-16', '2019-06-16', FALSE, 'sample.pdf');
 INSERT INTO Book_Format(ISBN, date_created, last_modified, Is_Removed, File_Location)
-VALUES ('9780451205766', '2019-03-01', '2019-03-01', FALSE, '9780451205766.pdf');
+VALUES ('9780451205766', '2019-03-01', '2019-03-01', FALSE, 'sample.pdf');
 INSERT INTO Book_Format(ISBN, date_created, last_modified, Is_Removed, File_Location)
-VALUES ('9780316166683', '2017-09-01', '2019-09-01', FALSE, '9780316166683.pdf');
+VALUES ('9780316166683', '2017-09-01', '2019-09-01', FALSE, 'sample.pdf');
 INSERT INTO Book_Format(ISBN, date_created, last_modified, Is_Removed, File_Location)
-VALUES ('9780156001311', '2018-09-28', '2019-09-28', FALSE, '9780156001311.pdf');
+VALUES ('9780156001311', '2018-09-28', '2019-09-28', FALSE, 'sample.pdf');
 INSERT INTO Book_Format(ISBN, date_created, last_modified, Is_Removed, File_Location)
-VALUES ('9780582418271', '2019-02-15', '2019-02-15', FALSE, '9780582418271.pdf');
+VALUES ('9780582418271', '2019-02-15', '2019-02-15', FALSE, 'sample.pdf');
 INSERT INTO Book_Format(ISBN, date_created, last_modified, Is_Removed, File_Location)
-VALUES ('9780380731862', '2017-04-27', '2019-04-27', FALSE, '9780380731862.pdf');
+VALUES ('9780380731862', '2017-04-27', '2019-04-27', FALSE, 'sample.pdf');
 INSERT INTO Book_Format(ISBN, date_created, last_modified, Is_Removed, File_Location)
-VALUES ('9780307588371', '2018-04-22', '2019-04-22', FALSE, '9780307588371.pdf');
+VALUES ('9780307588371', '2018-04-22', '2019-04-22', FALSE, 'sample.pdf');
 INSERT INTO Book_Format(ISBN, date_created, last_modified, Is_Removed, File_Location)
-VALUES ('9780060584757', '2019-02-01', '2019-02-01', FALSE, '9780060584757.pdf');
+VALUES ('9780060584757', '2019-02-01', '2019-02-01', FALSE, 'sample.pdf');
 INSERT INTO Book_Format(ISBN, date_created, last_modified, Is_Removed, File_Location)
-VALUES ('9780143034902', '2017-01-25', '2019-01-25', FALSE, '9780143034902.pdf');
+VALUES ('9780143034902', '2017-01-25', '2019-01-25', FALSE, 'sample.pdf');
 INSERT INTO Book_Format(ISBN, date_created, last_modified, Is_Removed, File_Location)
-VALUES ('9780812976144', '2018-10-24', '2019-10-24', FALSE, '9780812976144.pdf');
+VALUES ('9780812976144', '2018-10-24', '2019-10-24', FALSE, 'sample.pdf');
 INSERT INTO Book_Format(ISBN, date_created, last_modified, Is_Removed, File_Location)
-VALUES ('9780394758282', '2019-07-12', '2019-07-12', FALSE, '9780394758282.pdf');
+VALUES ('9780394758282', '2019-07-12', '2019-07-12', FALSE, 'sample.pdf');
 INSERT INTO Book_Format(ISBN, date_created, last_modified, Is_Removed, File_Location)
-VALUES ('9780312362089', '2017-06-28', '2019-06-28', FALSE, '9780312362089.pdf');
+VALUES ('9780312362089', '2017-06-28', '2019-06-28', FALSE, 'sample.pdf');
 INSERT INTO Book_Format(ISBN, date_created, last_modified, Is_Removed, File_Location)
-VALUES ('9780752865331', '2018-03-01', '2019-03-01', FALSE, '9780752865331.pdf');
+VALUES ('9780752865331', '2018-03-01', '2019-03-01', FALSE, 'sample.pdf');
 INSERT INTO Book_Format(ISBN, date_created, last_modified, Is_Removed, File_Location)
-VALUES ('9780525945567', '2019-03-22', '2019-03-22', TRUE, '9780525945567.pdf');
+VALUES ('9780525945567', '2019-03-22', '2019-03-22', TRUE, 'sample.pdf');
 INSERT INTO Book_Format(ISBN, date_created, last_modified, Is_Removed, File_Location)
-VALUES ('9780670038602', '2017-03-17', '2019-03-17', FALSE, '9780670038602.pdf');
+VALUES ('9780670038602', '2017-03-17', '2019-03-17', FALSE, 'sample.pdf');
 INSERT INTO Book_Format(ISBN, date_created, last_modified, Is_Removed, File_Location)
-VALUES ('9780446350983', '2018-06-10', '2019-06-10', FALSE, '9780446350983.pdf');
+VALUES ('9780446350983', '2018-06-10', '2019-06-10', FALSE, 'sample.pdf');
 INSERT INTO Book_Format(ISBN, date_created, last_modified, Is_Removed, File_Location)
-VALUES ('9780743298025', '2019-11-12', '2019-11-12', FALSE, '9780743298025.pdf');
+VALUES ('9780743298025', '2019-11-12', '2019-11-12', FALSE, 'sample.pdf');
 INSERT INTO Book_Format(ISBN, date_created, last_modified, Is_Removed, File_Location)
-VALUES ('9780812550702', '2017-09-30', '2017-09-30', FALSE, '9780812550702.pdf');
+VALUES ('9780812550702', '2017-09-30', '2017-09-30', FALSE, 'sample.pdf');
 INSERT INTO Book_Format(ISBN, date_created, last_modified, Is_Removed, File_Location)
-VALUES ('9780439023481', '2018-09-14', '2019-09-14', FALSE, '9780439023481.pdf');
+VALUES ('9780439023481', '2018-09-14', '2019-09-14', FALSE, 'sample.pdf');
 INSERT INTO Book_Format(ISBN, date_created, last_modified, Is_Removed, File_Location)
-VALUES ('9780141036144', '2019-09-03', '2019-09-03', FALSE, '9780141036144.pdf');
+VALUES ('9780141036144', '2019-09-03', '2019-09-03', FALSE, 'sample.pdf');
 INSERT INTO Book_Format(ISBN, date_created, last_modified, Is_Removed, File_Location)
-VALUES ('9780307887436', '2017-08-16', '2019-08-16', FALSE, '9780307887436.pdf');
+VALUES ('9780307887436', '2017-08-16', '2019-08-16', FALSE, 'sample.pdf');
 INSERT INTO Book_Format(ISBN, date_created, last_modified, Is_Removed, File_Location)
-VALUES ('9780593099322', '2018-10-01', '2019-10-01', FALSE, '9780593099322.pdf');
+VALUES ('9780593099322', '2018-10-01', '2019-10-01', FALSE, 'sample.pdf');
 INSERT INTO Book_Format(ISBN, date_created, last_modified, Is_Removed, File_Location)
-VALUES ('9781451673319', '2019-11-29', '2019-11-29', FALSE, '9781451673319.pdf');
+VALUES ('9781451673319', '2019-11-29', '2019-11-29', FALSE, 'sample.pdf');
 INSERT INTO Book_Format(ISBN, date_created, last_modified, Is_Removed, File_Location)
-VALUES ('9780439023481', '2017-09-14', '2019-09-14', FALSE, '9780439023481.pdf');
+VALUES ('9780439023481', '2017-09-14', '2019-09-14', FALSE, 'sample.pdf');
 INSERT INTO Book_Format(ISBN, date_created, last_modified, Is_Removed, File_Location)
-VALUES ('9780804139021', '2018-02-11', '2019-02-11', FALSE, '9780804139021.pdf');
+VALUES ('9780804139021', '2018-02-11', '2019-02-11', FALSE, 'sample.pdf');
 INSERT INTO Book_Format(ISBN, date_created, last_modified, Is_Removed, File_Location)
-VALUES ('9780553803716', '2019-06-01', '2019-06-01', FALSE, '9780553803716.pdf');
+VALUES ('9780553803716', '2019-06-01', '2019-06-01', FALSE, 'sample.pdf');
 INSERT INTO Book_Format(ISBN, date_created, last_modified, Is_Removed, File_Location)
-VALUES ('9780439023498', '2017-09-01', '2019-09-01', TRUE, '9780439023498.pdf');
+VALUES ('9780439023498', '2017-09-01', '2019-09-01', TRUE, 'sample.pdf');
 INSERT INTO Book_Format(ISBN, date_created, last_modified, Is_Removed, File_Location)
-VALUES ('9781524796976', '2018-02-26', '2019-02-26', FALSE, '9781524796976.pdf');
+VALUES ('9781524796976', '2018-02-26', '2019-02-26', FALSE, 'sample.pdf');
 INSERT INTO Book_Format(ISBN, date_created, last_modified, Is_Removed, File_Location)
-VALUES ('9780439023511', '2019-08-24', '2019-08-24', FALSE, '9780439023511.pdf');
+VALUES ('9780439023511', '2019-08-24', '2019-08-24', FALSE, 'sample.pdf');
 INSERT INTO Book_Format(ISBN, date_created, last_modified, Is_Removed, File_Location)
-VALUES ('9780486284729', '2017-10-01', '2019-10-01', FALSE, '978-0486284729.pdf');
+VALUES ('9780486284729', '2017-10-01', '2019-10-01', FALSE, 'sample.pdf');
 INSERT INTO Book_Format(ISBN, date_created, last_modified, Is_Removed, File_Location)
-VALUES ('9780553803709', '2018-06-01', '2019-06-01', FALSE, '9780553803709.pdf');
+VALUES ('9780553803709', '2018-06-01', '2019-06-01', FALSE, 'sample.pdf');
 INSERT INTO Book_Format(ISBN, date_created, last_modified, Is_Removed, File_Location)
-VALUES ('9780062024039', '2019-02-28', '2019-02-28', TRUE, '9780062024039.pdf');
+VALUES ('9780062024039', '2019-02-28', '2019-02-28', TRUE, 'sample.pdf');
 INSERT INTO Book_Format(ISBN, date_created, last_modified, Is_Removed, File_Location)
-VALUES ('9780441788385', '2017-10-01', '2019-10-01', FALSE, '9780441788385.pdf');
+VALUES ('9780441788385', '2017-10-01', '2019-10-01', FALSE, 'sample.pdf');
 INSERT INTO Book_Format(ISBN, date_created, last_modified, Is_Removed, File_Location)
-VALUES ('9780771008795', '2018-04-04', '2019-04-04', TRUE, '9780771008795.pdf');
+VALUES ('9780771008795', '2018-04-04', '2019-04-04', TRUE, 'sample.pdf');
 INSERT INTO Book_Format(ISBN, date_created, last_modified, Is_Removed, File_Location)
-VALUES ('9781509808335', '2019-04-26', '2019-04-26', FALSE, '9781509808335.pdf');
+VALUES ('9781509808335', '2019-04-26', '2019-04-26', FALSE, 'sample.pdf');
 INSERT INTO Book_Format(ISBN, date_created, last_modified, Is_Removed, File_Location)
-VALUES ('9780345538987', '2017-05-14', '2017-05-14', FALSE, '9780345538987.pdf');
+VALUES ('9780345538987', '2017-05-14', '2017-05-14', FALSE, 'sample.pdf');
 INSERT INTO Book_Format(ISBN, date_created, last_modified, Is_Removed, File_Location)
-VALUES ('9780451457998', '2018-09-01', '2019-09-01', FALSE, '9780451457998.pdf');
+VALUES ('9780451457998', '2018-09-01', '2019-09-01', FALSE, 'sample.pdf');
 INSERT INTO Book_Format(ISBN, date_created, last_modified, Is_Removed, File_Location)
-VALUES ('9780989671767', '2019-06-13', '2019-06-13', FALSE, '9780989671767.pdf');
+VALUES ('9780989671767', '2019-06-13', '2019-06-13', FALSE, 'sample.pdf');
 INSERT INTO Book_Format(ISBN, date_created, last_modified, Is_Removed, File_Location)
-VALUES ('9780989671774', '2017-09-26', '2017-09-26', FALSE, '9780989671774.pdf');
+VALUES ('9780989671774', '2017-09-26', '2017-09-26', FALSE, 'sample.pdf');
 INSERT INTO Book_Format(ISBN, date_created, last_modified, Is_Removed, File_Location)
-VALUES ('9780989671781', '2017-04-30', '2017-04-30', FALSE, '9780989671781.pdf');
+VALUES ('9780989671781', '2017-04-30', '2017-04-30', FALSE, 'sample.pdf');
 INSERT INTO Book_Format(ISBN, date_created, last_modified, Is_Removed, File_Location)
-VALUES ('9780999851104', '2017-09-30', '2017-09-30', FALSE, '9780999851104.pdf');
+VALUES ('9780999851104', '2017-09-30', '2017-09-30', FALSE, 'sample.pdf');
 INSERT INTO Book_Format(ISBN, date_created, last_modified, Is_Removed, File_Location)
-VALUES ('9780999851111', '2018-05-31', '2018-05-31', FALSE, '9780999851111.pdf');
+VALUES ('9780999851111', '2018-05-31', '2018-05-31', FALSE, 'sample.pdf');
 INSERT INTO Book_Format(ISBN, date_created, last_modified, Is_Removed, File_Location)
-VALUES ('9780999851128', '2019-03-01', '2019-03-01', FALSE, '9780999851128.pdf');
+VALUES ('9780999851128', '2019-03-01', '2019-03-01', FALSE, 'sample.pdf');
 INSERT INTO Book_Format(ISBN, date_created, last_modified, Is_Removed, File_Location)
-VALUES ('9780999851135', '2019-09-26', '2019-09-26', FALSE, '9780999851135.pdf');
+VALUES ('9780999851135', '2019-09-26', '2019-09-26', FALSE, 'sample.pdf');
 INSERT INTO Book_Format(ISBN, date_created, last_modified, Is_Removed, File_Location)
-VALUES ('9780316075558', '2017-08-25', '2017-08-25', FALSE, '9780316075558.pdf');
+VALUES ('9780316075558', '2017-08-25', '2017-08-25', FALSE, 'sample.pdf');
 INSERT INTO Book_Format(ISBN, date_created, last_modified, Is_Removed, File_Location)
-VALUES ('9780316079914', '2018-09-11', '2018-09-11', FALSE, '9780316079914.pdf');
+VALUES ('9780316079914', '2018-09-11', '2018-09-11', FALSE, 'sample.pdf');
 INSERT INTO Book_Format(ISBN, date_created, last_modified, Is_Removed, File_Location)
-VALUES ('9780316058964', '2019-08-26', '2019-08-26', FALSE, '9780316058964.pdf');
+VALUES ('9780316058964', '2019-08-26', '2019-08-26', FALSE, 'sample.pdf');
 INSERT INTO Book_Format(ISBN, date_created, last_modified, Is_Removed, File_Location)
-VALUES ('9780316251334', '2017-10-25', '2017-10-25', FALSE, '9780316251334.pdf');
+VALUES ('9780316251334', '2017-10-25', '2017-10-25', FALSE, 'sample.pdf');
 INSERT INTO Book_Format(ISBN, date_created, last_modified, Is_Removed, File_Location)
-VALUES ('9780316251303', '2019-10-22', '2019-10-22', FALSE, '9780316251303.pdf');
+VALUES ('9780316251303', '2019-10-22', '2019-10-22', FALSE, 'sample.pdf');
 INSERT INTO Book_Format(ISBN, date_created, last_modified, Is_Removed, File_Location)
-VALUES ('9780765311788', '2017-06-25', '2017-06-25', FALSE, '9780765311788.pdf');
+VALUES ('9780765311788', '2017-06-25', '2017-06-25', FALSE, 'sample.pdf');
 INSERT INTO Book_Format(ISBN, date_created, last_modified, Is_Removed, File_Location)
-VALUES ('9780765316882', '2017-08-21', '2017-08-21', FALSE, '9780765316882.pdf');
+VALUES ('9780765316882', '2017-08-21', '2017-08-21', FALSE, 'sample.pdf');
 INSERT INTO Book_Format(ISBN, date_created, last_modified, Is_Removed, File_Location)
-VALUES ('9780765316899', '2018-10-14', '2018-10-14', FALSE, '9780765316899.pdf');
+VALUES ('9780765316899', '2018-10-14', '2018-10-14', FALSE, 'sample.pdf');
 INSERT INTO Book_Format(ISBN, date_created, last_modified, Is_Removed, File_Location)
-VALUES ('9780765330420', '2019-11-08', '2019-11-08', FALSE, '9780765330420.pdf');
+VALUES ('9780765330420', '2019-11-08', '2019-11-08', FALSE, 'sample.pdf');
 INSERT INTO Book_Format(ISBN, date_created, last_modified, Is_Removed, File_Location)
-VALUES ('9780765378552', '2017-10-06', '2017-10-06', FALSE, '9780765378552.pdf');
+VALUES ('9780765378552', '2017-10-06', '2017-10-06', FALSE, 'sample.pdf');
 INSERT INTO Book_Format(ISBN, date_created, last_modified, Is_Removed, File_Location)
-VALUES ('9781466862678', '2018-01-26', '2019-01-26', FALSE, '9781466862678.pdf');
+VALUES ('9781466862678', '2018-01-26', '2019-01-26', FALSE, 'sample.pdf');
 INSERT INTO Book_Format(ISBN, date_created, last_modified, Is_Removed, File_Location)
-VALUES ('9780756404079', '2019-04-07', '2019-04-07', FALSE, '9780756404079.pdf');
+VALUES ('9780756404079', '2019-04-07', '2019-04-07', FALSE, 'sample.pdf');
 INSERT INTO Book_Format(ISBN, date_created, last_modified, Is_Removed, File_Location)
-VALUES ('9780756404734', '2017-03-01', '2019-03-01', FALSE, '9780756404734.pdf');
+VALUES ('9780756404734', '2017-03-01', '2019-03-01', FALSE, 'sample.pdf');
 INSERT INTO Book_Format(ISBN, date_created, last_modified, Is_Removed, File_Location)
-VALUES ('9781937007294', '2018-02-28', '2019-02-28', FALSE, '9781937007294.pdf');
+VALUES ('9781937007294', '2018-02-28', '2019-02-28', FALSE, 'sample.pdf');
 INSERT INTO Book_Format(ISBN, date_created, last_modified, Is_Removed, File_Location)
-VALUES ('9781937007591', '2019-05-29', '2019-05-29', FALSE, '9781937007591.pdf');
+VALUES ('9781937007591', '2019-05-29', '2019-05-29', FALSE, 'sample.pdf');
 INSERT INTO Book_Format(ISBN, date_created, last_modified, Is_Removed, File_Location)
-VALUES ('9781937007720', '2017-08-28', '2019-08-28', FALSE, '9781937007720.pdf');
+VALUES ('9781937007720', '2017-08-28', '2019-08-28', FALSE, 'sample.pdf');
 INSERT INTO Book_Format(ISBN, date_created, last_modified, Is_Removed, File_Location)
-VALUES ('9780425264928', '2018-08-27', '2019-08-27', FALSE, '9780425264928.pdf');
+VALUES ('9780425264928', '2018-08-27', '2019-08-27', FALSE, 'sample.pdf');
 INSERT INTO Book_Format(ISBN, date_created, last_modified, Is_Removed, File_Location)
-VALUES ('9780425264942', '2019-09-02', '2019-09-02', FALSE, '9780425264942.pdf');
+VALUES ('9780425264942', '2019-09-02', '2019-09-02', FALSE, 'sample.pdf');
 INSERT INTO Book_Format(ISBN, date_created, last_modified, Is_Removed, File_Location)
-VALUES ('9780425275757', '2017-08-04', '2019-08-04', FALSE, '9780425275757.pdf');
+VALUES ('9780425275757', '2017-08-04', '2019-08-04', FALSE, 'sample.pdf');
 INSERT INTO Book_Format(ISBN, date_created, last_modified, Is_Removed, File_Location)
-VALUES ('9780698165083', '2018-04-07', '2019-04-07', FALSE, '9780698165083.pdf');
+VALUES ('9780698165083', '2018-04-07', '2019-04-07', FALSE, 'sample.pdf');
 INSERT INTO Book_Format(ISBN, date_created, last_modified, Is_Removed, File_Location)
-VALUES ('9781101988527', '2017-04-04', '2019-04-04', FALSE, '9781101988527.pdf');
+VALUES ('9781101988527', '2017-04-04', '2019-04-04', FALSE, 'sample.pdf');
 INSERT INTO Book_Format(ISBN, date_created, last_modified, Is_Removed, File_Location)
-VALUES ('9780356507217', '2018-06-05', '2019-06-05', FALSE, '9780356507217.pdf');
+VALUES ('9780356507217', '2018-06-05', '2019-06-05', FALSE, 'sample.pdf');
 INSERT INTO Book_Format(ISBN, date_created, last_modified, Is_Removed, File_Location)
-VALUES ('9780440000587', '2019-09-24', '2019-09-24', FALSE, '9780440000587.pdf');
+VALUES ('9780440000587', '2019-09-24', '2019-09-24', FALSE, 'sample.pdf');
 
 INSERT INTO Book_Format(ISBN,Date_Created,Last_Modified,Is_Removed,File_Location,Format) VALUES ('9780142000670','2017-01-08','2017-02-08',FALSE,'9780142000670.pdf','pdf');
 INSERT INTO Book_Format(ISBN,Date_Created,Last_Modified,Is_Removed,File_Location,Format) VALUES ('9780439244190','2018-09-02','2018-10-02',TRUE,'9780439244190.pdf','pdf');

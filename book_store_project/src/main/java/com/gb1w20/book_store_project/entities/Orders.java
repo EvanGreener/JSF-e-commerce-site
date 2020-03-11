@@ -63,11 +63,16 @@ public class Orders implements Serializable {
     @JoinColumn(name = "Order_ID")
     private List<OrderItem> orderItemsCollection;
 
+
     public Orders() {
     }
 
     public Orders(Integer orderID) {
         this.orderID = orderID;
+    }
+    
+    public List<OrderItem> getOrderItems() {
+        return orderItemsCollection;
     }
 
     public Integer getOrderID() {
