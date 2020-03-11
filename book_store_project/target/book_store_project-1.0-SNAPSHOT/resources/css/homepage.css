@@ -174,8 +174,15 @@ body {
 }
 .sliderTextContent{
      text-align: left;
-     margin: 40px 200px; 
+     margin: 40px 100px; 
 
+}
+.invisible{
+    position: absolute;
+    visibility:hidden;
+}
+.visible{
+     visibility:visible;
 }
 
 .sliderImageContent{

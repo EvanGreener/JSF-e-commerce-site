@@ -155,9 +155,36 @@
                 <tbody>
                     <tr align="center">
                         <td align="center"><div class="ui wide skyscraper test ad left"  data-text="News"></div></td>
-                        <td align="center"> <div class="ui netboard test ad survey" data-text="Survey" >
-
-                                <h:form>
+                        <td align="center"> <div id="surveyDiv" class="ui netboard test ad survey" data-text="" >
+                                <div id="results" class="invisible">
+                                    <h1>Results</h1>
+                                    <hr/>
+                                    <div class="ui horizontal statistics">
+                                        <div class="ui statistic">
+                                            <div class="value">22</div>
+                                            <div class="label">Yes</div>
+                                        </div>
+                                        <div class="ui statistic">
+                                            <div class="value">31,200</div>
+                                            <div class="label">No</div>
+                                        </div>
+                                        <div class="ui statistic">
+                                            <div class="value">22</div>
+                                            <div class="label">Sometimes</div>
+                                        </div>
+                                        <div class="ui statistic">
+                                            <div class="value">22</div>
+                                            <div class="label">Only morally questionable material</div>
+                                        </div>
+                                        <div class="ui statistic">
+                                            <div class="value">22</div>
+                                            <div class="label">Actually I am illiterate, someone helped me vote here</div>
+                                        </div>
+                                    </div>
+                                     <hr/>
+                                </div>
+                               
+                                <h:form id="survey">
 
                                     <ui:repeat value="#{ss.survey}" var="s">
 
@@ -165,22 +192,24 @@
 
                                         <p>#{s.surveyDescription}</p>
 
-                                        <h:selectOneRadio required="true" layout="pageDirection" value="" >
+                                        <h:selectOneRadio required="true" layout="pageDirection" value="yes" >
 
 
-                                            <f:selectItem itemValue = "isbn" itemLabel = "Yes" />
-                                            <f:selectItem itemValue = "isbn" itemLabel = "No" />
+                                            <f:selectItem itemValue="yes" itemLabel = "Yes" />
+                                            <f:selectItem itemValue = "false" itemLabel = "No" />
 
-                                            <f:selectItem itemValue = "isbn" itemLabel = "Sometimes" />
-                                            <f:selectItem itemValue = "isbn" itemLabel = "Only morally questionable material" />
-                                            <f:selectItem itemValue = "isbn" itemLabel = "Actually I am illiterate, someone helped me vote here" />
+                                            <f:selectItem itemValue = "false" itemLabel = "Sometimes" />
+                                            <f:selectItem itemValue = "false" itemLabel = "Only morally questionable material" />
+                                            <f:selectItem itemValue = "false" itemLabel = "Actually I am illiterate, someone helped me vote here" />
                                         </h:selectOneRadio>
 
 
                                     </ui:repeat>
 
 
-                                    <h:commandButton type="submit" value="Submit"/>
+                                    <h:commandButton onclick="showResults()" type="button" value="Submit">
+
+                                    </h:commandButton>
 
                                 </h:form>
                             </div></td>
@@ -199,6 +228,7 @@
 
             <h:form>
 
+
                 <h:panelGroup>
                     <div class="ui four doubling stackable cards">
                         <ui:repeat value="#{bb.popularGenres}" var="genres">
@@ -208,7 +238,7 @@
                                         <h:graphicImage class="img" height="200" width="320" library="images" name="#{genres}.jpg"/>
                                     </div>
                                     <div class="content">
-                                        <div class="header">#{genres}</div>
+                                        <div class="header"><h3>#{genres}</h3></div>
                                     </div>
                                 </h:commandLink>
                             </div>

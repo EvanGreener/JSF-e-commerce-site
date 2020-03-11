@@ -118,6 +118,15 @@ function addToCart()
   event.stopPropagation();
     alert("Successfuly added to cart");
 }
+
+function showResults(){
+   
+    document.getElementById("survey").remove();
+    var newElement = document.createElement("h2");
+    newElement.innerHTML="Thank you for answering!"
+     document.getElementById("surveyDiv").appendChild(newElement);
+     document.getElementById("results").setAttribute("class","visible");
+}
 function showMore() {
     
     var dots = document.getElementById("dots");
