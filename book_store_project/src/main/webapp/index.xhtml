@@ -26,6 +26,9 @@
 
     <h:body>
 
+      <!--<b:alert severity="info">{clientBacking.message}</b:alert>-->
+
+
         <!--composite component that comes from the navbar.xhtml file to avoid coding nav bar in all web pages-->
         <bookstore:navbar/>
 
@@ -33,7 +36,9 @@
             <div class="swiper-wrapper">
 
                 <ui:repeat value="#{bb.recentlyAdded}" var="book">
+
                     <div class="swiper-slide item1">
+
 
                         <div class="sliderTextContent">
 
@@ -55,6 +60,7 @@
                         </div>
                     </div>
                 </ui:repeat>
+
 
             </div>
             <!-- Add Pagination -->
@@ -105,8 +111,10 @@
                                 </div>
 
 
+                                
                                 <div class="ui two bottom attached buttons ">
                                     <div onclick="addToCart(#{books.isbn}, 'pdf')" class="ui button">+ Add to Cart</div>
+
 
 
                                 </div>
@@ -119,8 +127,8 @@
             <br/><br/>
             <h:form>
                 <div class=" searchBarDiv">
-                    <h:inputText a:placeholder="Search books..." style=" float: center; margin-top: -30px;" class="searchBar"/>
-                    <h:commandButton class="searchButton" type="submit" value = "Search"/>
+                    <h:inputText a:placeholder="Search books..." value="#{search.query}" style=" float: center; margin-top: -30px;" class="searchBar"/>
+                    <h:commandButton class="searchButton" action="#{search.showSearch()}" type="submit" value = "Search"/>
                 </div>
             </h:form>
             <!-- The Modal -->
@@ -139,18 +147,79 @@
         </div>
 
 
-        <!-- Survey/Ad Section -->
+        <!-- Survey/Ad/News Section -->
 
         <div   class="lightGreyDiv">
+
+
 
             <table class="ui table lightGreyDiv" >
 
                 <tbody>
                     <tr align="center">
                         <td align="center"><div class="ui wide skyscraper test ad left"  data-text="News"></div></td>
-                        <td align="center"> <div class="ui netboard test ad survey" data-text="Survey"></div></td>
+                        <td align="center"> <div id="surveyDiv" class="ui netboard test ad survey" data-text="" >
+                                <div id="results" class="invisible">
+                                 
+                                     <h1>Do you like to read?</h1>
+                                    <hr/>
+                                    <h4>Votes | Choices</h4>
+                                    <div class="ui horizontal statistics">
+                                        <div class="ui statistic">
+                                            <div class="value">10</div>
+                                            <div class="label">Yes</div>
+                                        </div>
+                                        <div class="ui statistic">
+                                            <div class="value">20</div>
+                                            <div class="label">No</div>
+                                        </div>
+                                        <div class="ui statistic">
+                                            <div class="value">5</div>
+                                            <div class="label">Sometimes</div>
+                                        </div>
+                                        <div class="ui statistic">
+                                            <div class="value">2</div>
+                                            <div class="label">Only morally questionable material</div>
+                                        </div>
+                                        <div class="ui statistic">
+                                            <div class="value">1</div>
+                                            <div class="label">Actually I am illiterate, someone helped me vote here</div>
+                                        </div>
+                                    </div>
+                                     <hr/>
+                                </div>
+                               
+                                <h:form id="survey">
+
+                                    <ui:repeat value="#{ss.survey}" var="s">
+
+                                        <h1>  #{s.surveyName}</h1>
+
+                                        <p>#{s.surveyDescription}</p>
+
+                                        <h:selectOneRadio required="true" layout="pageDirection" value="yes" >
+
+
+                                            <f:selectItem itemValue="yes" itemLabel = "Yes" />
+                                            <f:selectItem itemValue = "false" itemLabel = "No" />
+
+                                            <f:selectItem itemValue = "false" itemLabel = "Sometimes" />
+                                            <f:selectItem itemValue = "false" itemLabel = "Only morally questionable material" />
+                                            <f:selectItem itemValue = "false" itemLabel = "Actually I am illiterate, someone helped me vote here" />
+                                        </h:selectOneRadio>
+
+
+                                    </ui:repeat>
+
+
+                                    <h:commandButton onclick="showResults()" type="button" value="Submit">
+
+                                    </h:commandButton>
+
+                                </h:form>
+                            </div></td>
                         <td align="center"><div class="ui wide skyscraper test ad right" data-text="">
-                                <h:graphicImage height="100%" width="100%" library="images" name="apples.png"  />
+                                <h:graphicImage height="100%" width="100%" library="images" name="apples.png"  onclick="viewAd('https://en.wikipedia.org/wiki/Apple')"/>
                             </div></td>
                     </tr>
                 </tbody>
@@ -163,34 +232,32 @@
             <p class="small">Popular Genres</p><br/>
 
             <h:form>
-                <h:commandLink action = "#{bb.viewGenreBooks(genre)}" type="submit" value = "">
-                    <h:panelGroup>
-                        <div class="ui four doubling stackable cards">
 
 
-                            <ui:repeat value="#{bb.popularGenres}" var="genres">
-
-                                <div class="ui fluid card darker">
+                <h:panelGroup>
+                    <div class="ui four doubling stackable cards">
+                        <ui:repeat value="#{bb.popularGenres}" var="genres">
+                            <div class="ui fluid card darker">
+                                <h:commandLink action = "#{search.showGenreBooks(genres)}" type="submit" value = "">
                                     <div class="homepageImg">
                                         <h:graphicImage class="img" height="200" width="320" library="images" name="#{genres}.jpg"/>
                                     </div>
                                     <div class="content">
-                                        <div class="header">#{genres}</div>
-
+                                        <div class="header"><h3>#{genres}</h3></div>
                                     </div>
-                                </div>
+                                </h:commandLink>
+                            </div>
 
-                            </ui:repeat>
+                        </ui:repeat>
+                    </div>
+                </h:panelGroup>
 
-
-                        </div>
-                    </h:panelGroup>
-                </h:commandLink>
 
             </h:form>
             <br/><br/>
             <div class="ui centered leaderboard test ad">
-                <h:graphicImage height="100%" width="100%" library="images" name="blueberry.png"  />
+
+                <h:graphicImage height="100%" width="100%" library="images" name="blueberry.png" onclick="viewAd('https://en.wikipedia.org/wiki/Blueberry')" />
             </div>
         </div>
 

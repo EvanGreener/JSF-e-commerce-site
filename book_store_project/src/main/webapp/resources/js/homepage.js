@@ -51,7 +51,7 @@ var imgBtn = document.getElementsByClassName('cardHoverBtn');
     }
 
 
-    /*  
+    /*
      //Get the modal
      var modal = document.getElementById("myModal");
      
@@ -94,6 +94,14 @@ function displayCardHoverButton()
     this.appendChild(btn);
 }
 
+
+function viewAd(url){
+    window.open(url);
+}
+
+
+
+
 function addReview() {
     document.getElementById("reviewModal").style.display = 'block';
 }
@@ -135,6 +143,16 @@ function checkIfLoggedIn(){
 
 function signOut(){
     document.cookie = 'BOOK_STORE_LOGIN=; expires=Thu, 01 Jan 1970 00:00:01 GMT;';
+}
+
+
+function showResults(){
+   
+    document.getElementById("survey").remove();
+    var newElement = document.createElement("h2");
+    newElement.innerHTML="Thank you for answering!"
+     document.getElementById("surveyDiv").appendChild(newElement);
+     document.getElementById("results").setAttribute("class","visible");
 }
 
 function showMore() {
