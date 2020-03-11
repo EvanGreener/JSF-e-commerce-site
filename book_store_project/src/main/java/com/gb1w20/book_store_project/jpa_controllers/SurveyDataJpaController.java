@@ -124,8 +124,8 @@ public class SurveyDataJpaController implements Serializable {
             System.out.println("surveyData count: " + ((Long) q.getSingleResult()).intValue());
             return ((Long) q.getSingleResult()).intValue();
     }
-    
-    public List<SurveyData> getfirstSurvey(){
+
+   public List<SurveyData> getfirstSurvey(){
         TypedQuery<SurveyData> query = em.createQuery("SELECT s FROM SurveyData s WHERE s.Survey_ID = :id", SurveyData.class);
          query.setParameter("id", 1);
         List<SurveyData> surveyData = query.getResultList();

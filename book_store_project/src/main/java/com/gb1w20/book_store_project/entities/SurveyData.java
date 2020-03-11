@@ -72,7 +72,7 @@ public class SurveyData implements Serializable {
     public SurveyData() {
     }
 
-    public SurveyData(Integer dataID) {
+    public SurveyData(Integer dataID,Integer surveyID) {
         this.dataID = dataID;
     }
 
