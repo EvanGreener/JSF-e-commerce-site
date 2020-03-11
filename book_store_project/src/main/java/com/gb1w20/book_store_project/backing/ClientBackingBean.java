@@ -19,6 +19,9 @@ import javax.faces.model.SelectItem;
 import javax.faces.validator.ValidatorException;
 import javax.inject.Inject;
 import javax.inject.Named;
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -39,7 +42,7 @@ public class ClientBackingBean implements Serializable {
     private String loginEmail;
     private String loginPassword;
     private String message = "You are not logged in";
-
+    
     /**
      * Clients created if it does not exist.
      * registerPassword
@@ -254,6 +257,7 @@ public class ClientBackingBean implements Serializable {
 
         if (dbPasswordHash.equals(loginPasswordHash))
         {
+            createLoginCookie(email);
             this.message = "You are logged in, " + email;
             return "index.xhtml";
         }
@@ -354,5 +358,32 @@ public class ClientBackingBean implements Serializable {
         {
             return false;
         }
+    }
+
+    private void createLoginCookie(String email) {
+        
+        FacesContext facesContext = FacesContext.getCurrentInstance();
+        HttpServletRequest request = (HttpServletRequest) facesContext.getExternalContext().getRequest();
+        Cookie cookie = null;
+        
+        Cookie[] userCookies = request.getCookies();
+            if (userCookies != null && userCookies.length > 0 ) {
+        for (int i = 0; i < userCookies.length; i++) {
+            if (userCookies[i].getName().equals("BOOK_STORE_LOGIN")) {
+                cookie = userCookies[i];
+                break;
+            }
+        }
+    }
+
+    if (cookie != null) {
+        cookie.setValue(email);
+    } else {
+        System.out.println("what?");
+        cookie = new Cookie("BOOK_STORE_LOGIN", email);
+        cookie.setPath(request.getContextPath());
+    }
+        HttpServletResponse response = (HttpServletResponse) facesContext.getExternalContext().getResponse();
+        response.addCookie(cookie);        
     }
 }

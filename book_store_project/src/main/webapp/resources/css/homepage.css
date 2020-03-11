@@ -29,8 +29,9 @@ body {
      height: 100%;
      width: auto;
 }
+
 .item1{
-     background-color:  #CB4025 !important;
+     background-color:  #d77a61 !important;
 }
 .item2{
      background-color:  #CB2578 !important;
@@ -85,6 +86,8 @@ body {
 .headMenu{
      margin-bottom: 0px !important;
      background-color: #D77A61 !important;
+     border:none !important;
+     border-radius: 0px !important;
 }
 
 .thingy{
@@ -337,3 +340,18 @@ p.small {
      background-color:white !important;
 }
 
+.purpleContainer{
+    color: #DBD3DB;
+}
+
+.cartContainer{
+    color:#EFF1F3;
+}
+
+.itemContainer{
+    margin-left: 50px;
+    margin-top: 50px;
+    height: 400px;
+    width: 600px;
+    overflow-y: scroll;
+}
