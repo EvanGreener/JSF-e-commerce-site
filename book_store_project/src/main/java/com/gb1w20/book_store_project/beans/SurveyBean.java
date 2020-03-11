@@ -28,8 +28,10 @@ import org.slf4j.LoggerFactory;
 public class SurveyBean implements Serializable {
      @Inject
     private SurveysJpaController surveyCtrlr;
+     
+     
      private List<Surveys> survey;
-     private String surveyName;
+     private List<Integer> votes;
      
     private final static Logger LOG = LoggerFactory.getLogger(SurveyBean.class);
     
@@ -43,5 +45,10 @@ public class SurveyBean implements Serializable {
     public List<Surveys> getSurvey(){
         survey=surveyCtrlr.getfirstSurvey();
         return survey;
+    }
+    
+     public List<Integer> getVotes(int id){
+        votes= surveyCtrlr.getTotalVotes(id);
+        return votes;
     }
 }

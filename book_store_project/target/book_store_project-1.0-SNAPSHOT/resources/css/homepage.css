@@ -14,6 +14,10 @@ html, body {
      position: relative;
      height: 100%;
 }
+.genre{
+    color:black;
+    padding:10px;
+}
 body {
      background: #eee;
      font-size: 14px;
@@ -321,16 +325,17 @@ p.small {
      position: absolute;
      top: 15px;
      right: 35px;
-     color: white;
-     font-size: 90px;
+     color: white !important;
+     font-size: 90px !important;
      font-weight: bold;
      transition: 0.3s;
+     opacity: 1 !important;
 }
 
 .close:hover,
 .close:focus {
      
-     color: #bbb;
+     color: white;
      text-decoration: none;
      cursor: pointer;
 }

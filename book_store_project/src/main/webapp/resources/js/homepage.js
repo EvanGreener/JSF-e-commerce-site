@@ -33,9 +33,6 @@ var imgBtn = document.getElementsByClassName('cardHoverBtn');
     }
 
 
- 
-
-
 
       
     
@@ -149,11 +146,11 @@ function signOut(){
 function showResults(){
    
     document.getElementById("survey").remove();
-    var newElement = document.createElement("h2");
-    newElement.innerHTML="Thank you for answering!"
-     document.getElementById("surveyDiv").appendChild(newElement);
      document.getElementById("results").setAttribute("class","visible");
 }
+
+
+
 
 function showMore() {
     

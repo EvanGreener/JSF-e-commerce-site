@@ -20,13 +20,13 @@
 
         <h:outputScript library="js" name="homepage.js" />
 
-
+        <script  src="https://www.gstatic.com/charts/loader.js"></script>
         <script src="https://unpkg.com/swiper/js/swiper.min.js"></script>
     </h:head>
 
     <h:body>
 
-      <!--<b:alert severity="info">{clientBacking.message}</b:alert>-->
+        <!--<b:alert severity="info">{clientBacking.message}</b:alert>-->
 
 
         <!--composite component that comes from the navbar.xhtml file to avoid coding nav bar in all web pages-->
@@ -111,7 +111,7 @@
                                 </div>
 
 
-                                
+
                                 <div class="ui two bottom attached buttons ">
                                     <div onclick="addToCart(#{books.isbn}, 'pdf')" class="ui button">+ Add to Cart</div>
 
@@ -135,7 +135,7 @@
             <div id="myModal" class="modal">
 
                 <!-- The Close Button -->
-                <span class="close">X</span>
+                <span class="close">x</span>
 
                 <!-- Modal Content (The Image) -->
                 <h:graphicImage height="100%" width="50%" class="modal-content" id="img01" library="images" name="colorScheme.PNG"  />
@@ -159,62 +159,55 @@
                     <tr align="center">
                         <td align="center"><div class="ui wide skyscraper test ad left"  data-text="News"></div></td>
                         <td align="center"> <div id="surveyDiv" class="ui netboard test ad survey" data-text="" >
-                                <div id="results" class="invisible">
-                                 
-                                     <h1>Do you like to read?</h1>
-                                    <hr/>
-                                    <h4>Votes | Choices</h4>
-                                    <div class="ui horizontal statistics">
-                                        <div class="ui statistic">
-                                            <div class="value">10</div>
-                                            <div class="label">Yes</div>
-                                        </div>
-                                        <div class="ui statistic">
-                                            <div class="value">20</div>
-                                            <div class="label">No</div>
-                                        </div>
-                                        <div class="ui statistic">
-                                            <div class="value">5</div>
-                                            <div class="label">Sometimes</div>
-                                        </div>
-                                        <div class="ui statistic">
-                                            <div class="value">2</div>
-                                            <div class="label">Only morally questionable material</div>
-                                        </div>
-                                        <div class="ui statistic">
-                                            <div class="value">1</div>
-                                            <div class="label">Actually I am illiterate, someone helped me vote here</div>
-                                        </div>
-                                    </div>
-                                     <hr/>
-                                </div>
-                               
-                                <h:form id="survey">
+
+
+                                <h:form >
 
                                     <ui:repeat value="#{ss.survey}" var="s">
 
                                         <h1>  #{s.surveyName}</h1>
 
-                                        <p>#{s.surveyDescription}</p>
 
-                                        <h:selectOneRadio required="true" layout="pageDirection" value="yes" >
+                                        <div id="results" class="invisible">
+                                            <hr/>
+                                             <div class="ui horizontal statistics">
+                                                    <h4>Votes | Choices</h4>
+                                            <ui:repeat value="#{s.surveyData}" var="sd">
+
+                                               
+                                                    <div class="ui statistic">
+                                                        <div class="value">#{sd.votes}</div>
+                                                        <div class="label">#{sd.choice}</div>
+                                                    </div>
+                                              
+                                                <p:progressBar value="#{sd.votes*(100/38)}" labelTemplate="" displayOnly="true" style="width:100%"/>
+                                         
+                                                 </ui:repeat>
+                                                     </div>
+                                            <hr/>
+                                            <h2>Thank you for answering!</h2>
+                                        </div>
 
 
-                                            <f:selectItem itemValue="yes" itemLabel = "Yes" />
-                                            <f:selectItem itemValue = "false" itemLabel = "No" />
+                                        <div id="survey">
 
-                                            <f:selectItem itemValue = "false" itemLabel = "Sometimes" />
-                                            <f:selectItem itemValue = "false" itemLabel = "Only morally questionable material" />
-                                            <f:selectItem itemValue = "false" itemLabel = "Actually I am illiterate, someone helped me vote here" />
-                                        </h:selectOneRadio>
+                                            <p>#{s.surveyDescription}</p>
+                                            <ui:repeat value="#{s.surveyData}" var="sd">
+                                                <h:selectOneRadio required="true" layout="pageDirection" value="" >
+                                                    <f:selectItem itemValue="yes" itemLabel = "#{sd.choice}" />
+                                                </h:selectOneRadio>
 
+
+                                            </ui:repeat>
+
+                                            <h:commandButton onclick="showResults()" type="button" value="Submit">
+
+                                            </h:commandButton>
+                                        </div>
 
                                     </ui:repeat>
 
 
-                                    <h:commandButton onclick="showResults()" type="button" value="Submit">
-
-                                    </h:commandButton>
 
                                 </h:form>
                             </div></td>
@@ -243,7 +236,7 @@
                                         <h:graphicImage class="img" height="200" width="320" library="images" name="#{genres}.jpg"/>
                                     </div>
                                     <div class="content">
-                                        <div class="header"><h3>#{genres}</h3></div>
+                                        <div class="header"><h3 class="genre">#{genres}</h3></div>
                                     </div>
                                 </h:commandLink>
                             </div>

@@ -120,7 +120,12 @@ public class SurveysJpaController implements Serializable {
         return survey; 
     }
     
-    
+        public  List<Integer> getTotalVotes(int id){
+        TypedQuery<Integer> query = em.createQuery("SELECT sum(sd.votes) FROM Surveys s inner join Survey_Data sd on s.survey_ID=sd.survey_ID", Integer.class);
+        // query.setParameter("id", id);
+        List<Integer> sum = query.getResultList();
+        return sum;
+    } 
     
 
     public Surveys findSurveys(Integer id) {

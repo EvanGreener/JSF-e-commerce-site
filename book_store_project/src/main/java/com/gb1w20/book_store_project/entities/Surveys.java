@@ -65,9 +65,7 @@ public class Surveys implements Serializable {
 
     public Surveys() {
     }
-    public  List<SurveyData> getSurveyData(){
-        return surveyData;
-    }
+
     public Surveys(Integer surveyID) {
         this.surveyID = surveyID;
     }
@@ -120,6 +118,9 @@ public class Surveys implements Serializable {
         this.isRemoved = isRemoved;
     }
 
+        public  List<SurveyData> getSurveyData(){
+        return surveyData;
+    }
     @Override
     public int hashCode() {
         int hash = 0;
