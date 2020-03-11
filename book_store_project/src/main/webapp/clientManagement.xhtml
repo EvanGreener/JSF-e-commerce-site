@@ -15,12 +15,15 @@
           <title>Manager - Client Page</title>
           <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 
+          <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
           <h:outputStylesheet library="webjars" name="Semantic-UI/2.4.1/semantic.min.css" />
           <h:outputStylesheet library="webjars" name="swiper/4.5.1/dist/css/swiper.min.css" />
           <h:outputStylesheet library="css" name="homepage.css" />
 
+          <h:outputScript library="webjars" name="Semantic-UI/2.4.1/semantic.min.js"/>
+
           <style>
-               h1 {
+               .middle h1 {
                     margin-top: 20px !important;
                     text-align: center;
                     color: gray;
@@ -28,17 +31,25 @@
                .middle{
                     padding: 0px 40px 0px 40px;
                }
-
-               /*               button{
-                                   margin: 10px 10px 20px 10px !important;
-                                   font-size: 20px !important;              
-                              }*/
+               h3{
+                    display: inline;
+               }
+               .bot{
+                    text-align: center;
+               }
+               .footer button{
+                    font-size: 20px !important;
+                    margin: 0px 10px 0px 10px !important;
+               }
 
           </style>
 
 
      </h:head>
      <h:body>
+
+
+
           <h:form>
                <bookstore:navbar ></bookstore:navbar>
 
@@ -57,6 +68,8 @@
                               <p:ajax event="keyup" listener="#{clientManagement.updateBean()}" update="clientsTable" />
                          </h:inputText>
                     </div> 
+
+                    
 
                     <h:dataTable  id="clientsTable" var="client" style="margin-bottom: 20px;"  class="ui celled table" value="#{clientManagement.results}" >
                          <h:column>
@@ -89,19 +102,60 @@
                          </h:column>
                          <h:column>
                               <f:facet name="header">Value of all books purchased</f:facet>
-                                   $#{client[8]}0
+                              $#{client[8]}0
                          </h:column>
                          <h:column>
-                              <button class="big ui primary button">
-                                   Edit
-                              </button>
+                              <p:commandButton ajax="true" 
+                                               action="#{clientManagement.onEdit(client[0])}" 
+                                               update="edit_form clientsTable" 
+                                               value="Edit" 
+                                               class="big ui primary button edit_btn" >
+
+                              </p:commandButton>
+
                          </h:column>
 
                     </h:dataTable>
                </div>
 
-               <bookstore:footer></bookstore:footer>
 
+
+               <bookstore:footer></bookstore:footer>
+               
+               <h:panelGroup id="edit_form">
+                         <div  class="ui modal">
+                              <div class="header"><h1>Edit client </h1></div>
+                              <div class="content">
+                                   <h3>First Name</h3>
+
+                              </div>
+                              <div class="footer">
+                                   <div class="bot">
+                                        <button class="positive ui button">Save Changes</button>
+                                        <button class="ui button" >Cancel</button>
+                                   </div>
+                              </div>
+
+                         </div>
+
+                    </h:panelGroup>
           </h:form>
+          <script>
+               $(document).ready(function () {
+                    $(".edit_btn").click(function () {
+                         $(".ui.modal").modal('show');
+                         return false;
+                    });
+                    $(document).ajaxComplete(function (){
+                         $(".edit_btn").click(function () {
+                         $(".ui.modal").modal('show');
+                         return false;
+                    });
+                    })
+               });
+               
+               
+          </script>
+
      </h:body>
 </html>

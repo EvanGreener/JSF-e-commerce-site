@@ -33,6 +33,7 @@ img {
 }
 
 .swiper-slide{
+     padding: 20px 40px 20px 40px !important;
      text-align: center;
      background-color: #D8B4A0 !important;
 }
