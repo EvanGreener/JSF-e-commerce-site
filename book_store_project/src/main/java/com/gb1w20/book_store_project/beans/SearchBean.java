@@ -18,7 +18,7 @@ import org.slf4j.LoggerFactory;
 @SessionScoped
 public class SearchBean implements Serializable {
 
-<<<<<<< HEAD
+
      private final static Logger LOG = LoggerFactory.getLogger(SearchBean.class);
 
      @Inject
@@ -40,29 +40,7 @@ public class SearchBean implements Serializable {
      public String[] getGenreFilters() {
           return genreFilters;
      }
-=======
-    private final static Logger LOG = LoggerFactory.getLogger(SearchBean.class);
 
-    @Inject
-    private BookJpaController bookCtrlr;
-
-    private String query = "";
-    private String[] genreFilters;
-    private String searchBy;
-    private List<Book> results;
-    private int page = 1;
-    private int numPages;
-
-    @PostConstruct
-    public void init() {
-        LOG.debug("Init called!");
-        updateSearchBean();
-    }
->>>>>>> client_homepage
-
-    public String[] getGenreFilters() {
-        return genreFilters;
-    }
 
     public void setGenreFilters(String[] newValue) {
         genreFilters = newValue;
