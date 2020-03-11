@@ -29,6 +29,7 @@
 
      </h:head>
      <h:body>
+         <f:event type="preRenderView" listener="#{search.init}" />
           <!--composite component that comes from the navbar.xhtml file to avoid coding nav bar in all web pages-->
           <bookstore:navbar/>
 
