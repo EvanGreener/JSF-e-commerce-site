@@ -120,8 +120,8 @@
             <br/><br/>
             <h:form>
                 <div class=" searchBarDiv">
-                    <h:inputText a:placeholder="Search books..." style=" float: center; margin-top: -30px;" class="searchBar"/>
-                    <h:commandButton class="searchButton" type="submit" value = "Search"/>
+                    <h:inputText a:placeholder="Search books..." value="#{search.query}" style=" float: center; margin-top: -30px;" class="searchBar"/>
+                    <h:commandButton class="searchButton" action="#{search.showSearch()}" type="submit" value = "Search"/>
                 </div>
             </h:form>
             <!-- The Modal -->
@@ -140,18 +140,52 @@
         </div>
 
 
-        <!-- Survey/Ad Section -->
+        <!-- Survey/Ad/News Section -->
 
         <div   class="lightGreyDiv">
+
+
+
+
+
+
 
             <table class="ui table lightGreyDiv" >
 
                 <tbody>
                     <tr align="center">
                         <td align="center"><div class="ui wide skyscraper test ad left"  data-text="News"></div></td>
-                        <td align="center"> <div class="ui netboard test ad survey" data-text="Survey"></div></td>
+                        <td align="center"> <div class="ui netboard test ad survey" data-text="Survey" >
+
+                                <h:form>
+
+                                    <ui:repeat value="#{ss.survey}" var="s">
+
+                                        <h1>  #{s.surveyName}</h1>
+
+                                        <p>#{s.surveyDescription}</p>
+
+                                        <h:selectOneRadio required="true" layout="pageDirection" value="" >
+
+
+                                            <f:selectItem itemValue = "isbn" itemLabel = "Yes" />
+                                            <f:selectItem itemValue = "isbn" itemLabel = "No" />
+
+                                            <f:selectItem itemValue = "isbn" itemLabel = "Sometimes" />
+                                            <f:selectItem itemValue = "isbn" itemLabel = "Only morally questionable material" />
+                                            <f:selectItem itemValue = "isbn" itemLabel = "Actually I am illiterate, someone helped me vote here" />
+                                        </h:selectOneRadio>
+
+
+                                    </ui:repeat>
+
+
+                                    <h:commandButton type="submit" value="Submit"/>
+
+                                </h:form>
+                            </div></td>
                         <td align="center"><div class="ui wide skyscraper test ad right" data-text="">
-                                <h:graphicImage height="100%" width="100%" library="images" name="apples.png"  />
+                                <h:graphicImage height="100%" width="100%" library="images" name="apples.png"  onclick="viewAd('https://en.wikipedia.org/wiki/Apple')"/>
                             </div></td>
                     </tr>
                 </tbody>
@@ -187,7 +221,7 @@
             </h:form>
             <br/><br/>
             <div class="ui centered leaderboard test ad">
-                <h:graphicImage height="100%" width="100%" library="images" name="blueberry.png"  />
+                <h:graphicImage height="100%" width="100%" library="images" name="blueberry.png" onclick="viewAd('https://en.wikipedia.org/wiki/Blueberry')" />
             </div>
         </div>
 

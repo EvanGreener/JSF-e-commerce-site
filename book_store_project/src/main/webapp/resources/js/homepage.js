@@ -51,7 +51,7 @@ var imgBtn = document.getElementsByClassName('cardHoverBtn');
     }
 
 
-    /*  
+    /*
      //Get the modal
      var modal = document.getElementById("myModal");
      
@@ -99,6 +99,9 @@ function displayCardHoverButton()
     this.appendChild(btn);
 }
 
+function viewAd(url){
+    window.open(url);
+}
 
 
 

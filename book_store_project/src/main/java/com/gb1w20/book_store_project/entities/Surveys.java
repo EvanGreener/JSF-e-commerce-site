@@ -7,7 +7,9 @@ package com.gb1w20.book_store_project.entities;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -15,6 +17,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -30,7 +33,7 @@ import javax.validation.constraints.Size;
     @NamedQuery(name = "Surveys.findAll", query = "SELECT s FROM Surveys s"),
     @NamedQuery(name = "Surveys.findBySurveyID", query = "SELECT s FROM Surveys s WHERE s.surveyID = :surveyID"),
     @NamedQuery(name = "Surveys.findBySurveyDescription", query = "SELECT s FROM Surveys s WHERE s.surveyDescription = :surveyDescription"),
-    @NamedQuery(name = "Surveys.findBySurveryName", query = "SELECT s FROM Surveys s WHERE s.surveryName = :surveryName"),
+    @NamedQuery(name = "Surveys.findBySurveyName", query = "SELECT s FROM Surveys s WHERE s.surveyName = :surveyName"),
     @NamedQuery(name = "Surveys.findByDateCreated", query = "SELECT s FROM Surveys s WHERE s.dateCreated = :dateCreated"),
     @NamedQuery(name = "Surveys.findByLastModified", query = "SELECT s FROM Surveys s WHERE s.lastModified = :lastModified"),
     @NamedQuery(name = "Surveys.findByIsRemoved", query = "SELECT s FROM Surveys s WHERE s.isRemoved = :isRemoved")})
@@ -46,8 +49,8 @@ public class Surveys implements Serializable {
     @Column(name = "Survey_Description")
     private String surveyDescription;
     @Size(max = 100)
-    @Column(name = "Survery_Name")
-    private String surveryName;
+    @Column(name = "Survey_Name")
+    private String surveyName;
     @Column(name = "Date_Created")
     @Temporal(TemporalType.TIMESTAMP)
     private Date dateCreated;
@@ -56,10 +59,15 @@ public class Surveys implements Serializable {
     private Date lastModified;
     @Column(name = "Is_Removed")
     private Boolean isRemoved;
+    
+     @OneToMany(cascade = CascadeType.ALL,mappedBy="survey")
+    private List<SurveyData> surveyData;
 
     public Surveys() {
     }
-
+    public  List<SurveyData> getSurveyData(){
+        return surveyData;
+    }
     public Surveys(Integer surveyID) {
         this.surveyID = surveyID;
     }
@@ -80,12 +88,12 @@ public class Surveys implements Serializable {
         this.surveyDescription = surveyDescription;
     }
 
-    public String getSurveryName() {
-        return surveryName;
+    public String getSurveyName() {
+        return surveyName;
     }
 
-    public void setSurveryName(String surveryName) {
-        this.surveryName = surveryName;
+    public void setSurveyName(String surveyName) {
+        this.surveyName = surveyName;
     }
 
     public Date getDateCreated() {
