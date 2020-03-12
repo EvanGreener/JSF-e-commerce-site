@@ -10,6 +10,7 @@
       xmlns:p="http://primefaces.org/ui"
       xmlns:a="http://xmlns.jcp.org/jsf/passthrough">
     <h:head>
+
         <title>The BookStore</title>
         <link rel="stylesheet" href="https://unpkg.com/swiper/css/swiper.min.css"/>
 
@@ -153,35 +154,37 @@
 
         <div   class="lightGreyDiv">
 
-<!--            <p:feedReader value="http://rss.news.yahoo.com/rss/sports" var="feed">
-                <h:outputText value="#{feed.title}" style="font-weight: bold"/>
-                <br />
-                <h:outputText value="#{feed.description.value}" escape="false"/>
-                <p:separator />
-            </p:feedReader>-->
 
 
-            <p:feedReader value="http://rss.news.yahoo.com/rss/sports" var="feed">
-                <h:outputText value="#{feed.title}" style="font-weight: bold"/>
-                <h:outputText value="#{feed.description.value}" escape="false"/>
-                <p:separator />
-                <f:facet name="error">
-                    Something went wrong.
-                </f:facet>
-            </p:feedReader>            
+
+
 
             <table class="ui table lightGreyDiv" >
 
                 <tbody>
                     <tr align="center">
-                        <td align="center"><div class="ui wide skyscraper test ad left"  data-text="News"></div></td>
+                        <td align="center">
+                            <div style="background-color:#d77a61;" class="ui half page test ad left" data-text="">
+                                <h3 style="color:white;padding-top: 10px;" >News</h3>
+                                <p:scrollPanel style="overflow-y: auto;height: 100%;">
+                                    <p:feedReader size="10" value="https://www.theverge.com/rss/index.xml" var="feed">
+                                        <h:outputText value="#{feed.title}" style="font-weight: bold"/>
+                                        <h:outputText value="#{feed.description.value}" escape="false"/>
+                                        <p:separator />
+                                        <f:facet name="error">
+                                            Something went wrong.
+                                        </f:facet>
+                                    </p:feedReader>  
+                                </p:scrollPanel>
+
+                            </div></td>
                         <td align="center"> <div id="surveyDiv" class="ui netboard test ad survey" data-text="" >
 
 
                                 <h:form >
                                     <ui:repeat value="#{ss.survey}" var="s">
 
-                                        <h1>  #{s.surveyName}</h1>
+                                        <h1 style="text-align:center">  #{s.surveyName}</h1>
 
 
 
@@ -207,13 +210,13 @@
 
 
                                         <div id="survey">
-                                            <p>#{s.surveyDescription}</p>
+                                            <p style="font-size:20px;padding:2%">#{s.surveyDescription}</p>
                                             <ui:repeat value="#{s.surveyData}" var="sd">
-                                                <h:selectOneRadio required="true" layout="pageDirection" value="#{ss.surveyChoice}" >
+                                                <h:selectOneRadio style="font-size:20px" required="true" layout="pageDirection" value="#{ss.surveyChoice}" >
                                                     <f:selectItem itemValue="#{sd.dataID}" itemLabel = " #{sd.choice}" />
                                                 </h:selectOneRadio>
                                             </ui:repeat>
-                                            <h:commandButton action="#{ss.setHello(sd.dataID)}" onclick="showResults()" type="button" value="Submit"/>
+                                            <h:commandButton class="bookFormatBtn" action="#{ss.setHello(sd.dataID)}" onclick="showResults()" type="button" value="Submit"/>
                                         </div>
                                     </ui:repeat>
                                 </h:form>
@@ -257,7 +260,7 @@
 
             </h:form>
             <br/><br/>
-            <div class="ui centered leaderboard test ad">
+            <div class="ui centered leaderboard test ad" data-text="">
 
                 <h:graphicImage height="100%" width="100%" library="images" name="blueberry.png" onclick="viewAd('https://en.wikipedia.org/wiki/Blueberry')" />
             </div>
