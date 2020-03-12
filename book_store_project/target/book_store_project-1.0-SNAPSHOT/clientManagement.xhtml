@@ -28,8 +28,6 @@
                     position: fixed;
                     padding-top: 0px;
                     height: fit-content;
-                    /*                    left: 50%;
-                                        margin-left: -680px;*/
                }
 
                .middle h1 {
@@ -40,13 +38,18 @@
                .middle{
                     padding: 0px 40px 0px 40px;
                }
-               h3{
-                    display: inline;
-               }
+               
                .actions{
+                    height: 80%;
                     text-align: center !important;
                     font-size: 20px;
+                    margin: 10px 10px 10px 10px;
                }
+               
+               .actions .ui.button {
+                    margin: 10px 10px 10px 10px;
+               }
+               
                .footer button{
                     font-size: 20px !important;
                     margin: 0px 10px 0px 10px !important;
@@ -56,12 +59,12 @@
                     text-align: center !important;
                }
 
-               .content h3 {
-                    display: inline;
-                    margin-right: 15px;
-               }
+/*               .content h3 {
+                    
+               }*/
 
                .form-field{
+                    font-size: 18px;
                     margin: 10px 0px 10px 5px;
 
                }
@@ -98,7 +101,7 @@
 
                     <!--Search bar-->
                     <div style="display: inline;" class="ui search" >
-                         <h:inputText  id="query" value="#{ clientManagement.query}" a:placeholder="Search clients..." style="float: right; margin-top: 10px; margin-bottom: 10px; " class="prompt" >
+                         <h:inputText  id="query" value="#{ clientManagement.query}"  a:placeholder="Search clients by email..." style="float: right; margin-top: 10px; margin-bottom: 10px; width: 200px; " class="prompt" >
                               <p:ajax event="keyup" listener="#{clientManagement.updateBean()}" update="clientsTable" />
                          </h:inputText>
                     </div> 
@@ -141,7 +144,7 @@
                          <h:column>
                               <h:commandButton type="button" onclick="setTimeout(function(){$('#editModal').modal('show', hideGrowl())}, 100)" 
                                                value="Edit" class="big ui primary button edit_btn" >
-                                   <f:ajax event="click"  render="editForm" listener="#{clientManagement.onEdit(client[0])}"/>
+                                   <f:ajax event="click"  render="editForm" listener="#{clientManagement.onClickEdit(client[0])}"/>
                               </h:commandButton>
 
                          </h:column>
@@ -159,39 +162,43 @@
 
                          <div class="form-field">
                               <h3>First Name</h3>
-                              <p:inputText placeholder="#{clientManagement.currentClient.firstName}" value="#{clientManagement.newFname}" />
+                              <p:inputText placeholder="#{clientManagement.currentClient.firstName}" value="#{clientManagement.newFname} " validator="#{clientBacking.validateNotNull}"/>
+<!--                              <h:outputText value="First name cannot contain only whitespace" />-->
                          </div>
 
                          <div class="form-field">
                               <h3>Last Name</h3>
-                              <p:inputText placeholder="#{clientManagement.currentClient.lastName}" value="#{clientManagement.newLname}" />
+                              <p:inputText placeholder="#{clientManagement.currentClient.lastName}" value="#{clientManagement.newLname}" validator="#{clientBacking.validateNotNull}"/>
                          </div>
 
                          <div class="form-field">
                               <h3>Address 1</h3>
-                              <p:inputText placeholder="#{clientManagement.currentClient.address1}" value="#{clientManagement.newAddress1}" />
+                              <p:inputText placeholder="#{clientManagement.currentClient.address1}" value="#{clientManagement.newAddress1}" validator="#{clientBacking.validateNotNull}"/>
                          </div>
 
                          <div class="form-field">
                               <h3>Address 2</h3>
-                              <p:inputText placeholder="#{clientManagement.currentClient.address2}" value="#{clientManagement.newAddress2}" />
+                              <p:inputText placeholder="#{clientManagement.currentClient.address2}" value="#{clientManagement.newAddress2}" validator="#{clientBacking.validateNotNull}"/>
                          </div>
 
                          <div class="form-field">
                               <h3>Company name</h3>
-                              <p:inputText placeholder="#{clientManagement.currentClient.companyName}" value="#{clientManagement.newCompanyName}" />
+                              <p:inputText placeholder="#{clientManagement.currentClient.companyName}" value="#{clientManagement.newCompanyName}" validator="#{clientBacking.validateNotNull}"/>
                          </div>
 
                          <div class="form-field">
                               <h3>Cell #</h3>
-                              <p:inputText placeholder="#{clientManagement.currentClient.cellTelephone}" value="#{clientManagement.newCell}" />
+                              <p:inputText placeholder="#{clientManagement.currentClient.cellTelephone}" value="#{clientManagement.newCell}" validator="#{clientBacking.validateCellPhone}"/>
                          </div>
 
                     </div>
 
                     <div class="actions">
-                         <h:commandButton style="font-size: 20px;"  value="Save Changes" class="ui positive button"
-                                          onclick="$('#editFormGrowl').show('slow', hideGrowl()); console.log('bbb')" />
+                         <h:commandButton type="button" action="#{clientManagement.onSubmitEdit()}" style="font-size: 20px;"  value="Save Changes" class="ui positive button"
+                              onclick="$('#editFormGrowl').show('slow')">
+                              <p:ajax listener="#{clientManagement.onSubmitEdit()}"/>
+                         </h:commandButton>
+                         
                          <div style="font-size: 20px;" type="button" class="ui cancel button" >Cancel</div>
 
                     </div>
@@ -203,7 +210,7 @@
           <script>
                function hideGrowl() {
                     $('#editFormGrowl').hide('slow');
-                    console.log("aaaaa")
+//                    console.log('Hiding growl...');
                }
                
           </script>
