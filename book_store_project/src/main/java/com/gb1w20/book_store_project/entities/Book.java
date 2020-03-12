@@ -5,6 +5,7 @@
  */
 package com.gb1w20.book_store_project.entities;
 
+import com.gb1w20.book_store_project.beans.BookBean;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Collection;
@@ -28,6 +29,8 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  *
@@ -98,6 +101,7 @@ public class Book implements Serializable {
             inverseJoinColumns = {@JoinColumn(name = "Author_ID")}
     )
     private List<Authors> authorsCollection;
+        private final static Logger LOG = LoggerFactory.getLogger(Book.class);
     
     @OneToMany(cascade = CascadeType.ALL,mappedBy="book")
     private List<OrderItem> orders;
@@ -218,6 +222,7 @@ public class Book implements Serializable {
     }
     
     public List<Authors> getAuthorsCollection(){
+        LOG.debug("getAuthorsCollection");
         return authorsCollection;
     }
     
