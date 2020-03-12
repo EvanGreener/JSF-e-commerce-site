@@ -25,9 +25,11 @@
           <style>
 
                .modal{
+                    position: fixed;
                     padding-top: 0px;
                     height: fit-content;
-                    
+                    /*                    left: 50%;
+                                        margin-left: -680px;*/
                }
 
                .middle h1 {
@@ -43,6 +45,7 @@
                }
                .actions{
                     text-align: center !important;
+                    font-size: 20px;
                }
                .footer button{
                     font-size: 20px !important;
@@ -63,26 +66,34 @@
 
                }
 
+               #editFormGrowl{
+                    position: fixed;
+                    display: none;
+                    z-index: 777;
+                    left: 100%;
+                    margin-left: -257.42px;
+                   
+
+               }
+
           </style>
 
 
      </h:head>
      <h:body>
 
-
-
           <h:form id="editForm">
                <bookstore:navbar ></bookstore:navbar>
 
-               <!--Loading modal-->
-               <p:ajaxStatus onstart="PF('statusDialog').show()" onsuccess="PF('statusDialog').hide()" />
-               <p:dialog widgetVar="statusDialog" modal="true" draggable="false" closable="false" resizable="false" showHeader="false">
-                    <p:graphicImage style="display: inline;" class="loading" library="images" name="double-ring.svg" />
-               </p:dialog>
-
-
-
                <div class="middle">
+
+                    <div id="editFormGrowl" class="ui floating positive message" >
+                         <!--<i class="close icon"></i>-->
+                         <div class="header">
+                              Changes have been saved!
+                         </div>
+                    </div>
+                    
                     <h1>Client Management</h1>
 
                     <!--Search bar-->
@@ -128,7 +139,8 @@
                               $#{client[8]}0
                          </h:column>
                          <h:column>
-                              <h:commandButton type="button" onclick="$('#editModal').modal('show')" value="Edit" class="big ui primary button edit_btn" >
+                              <h:commandButton type="button" onclick="setTimeout(function(){$('#editModal').modal('show', hideGrowl())}, 100)" 
+                                               value="Edit" class="big ui primary button edit_btn" >
                                    <f:ajax event="click"  render="editForm" listener="#{clientManagement.onEdit(client[0])}"/>
                               </h:commandButton>
 
@@ -178,7 +190,8 @@
                     </div>
 
                     <div class="actions">
-                         <h:commandButton style="font-size: 20px;" value="Save Changes" class="ui positive button"></h:commandButton>
+                         <h:commandButton style="font-size: 20px;"  value="Save Changes" class="ui positive button"
+                                          onclick="$('#editFormGrowl').show('slow', hideGrowl()); console.log('bbb')" />
                          <div style="font-size: 20px;" type="button" class="ui cancel button" >Cancel</div>
 
                     </div>
@@ -187,5 +200,15 @@
 
           </h:form>
 
+          <script>
+               function hideGrowl() {
+                    $('#editFormGrowl').hide('slow');
+                    console.log("aaaaa")
+               }
+               
+          </script>
+
      </h:body>
+
+
 </html>
