@@ -5,6 +5,7 @@ import com.gb1w20.book_store_project.entities.Orders;
 import com.gb1w20.book_store_project.jpa_controllers.OrdersJpaController;
 import java.io.Serializable;
 import java.util.List;
+import javax.annotation.PostConstruct;
 import javax.enterprise.context.SessionScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -22,31 +23,45 @@ public class OrderSearchBean implements Serializable {
     private final static Logger LOG = LoggerFactory.getLogger(OrderSearchBean.class);
     private String query = "";
     private List<Orders> searchResults;
-    private String searchBy;
+    private Orders currentOrder;
     
     @Inject
-    private OrdersJpaController bookCtrlr;
+    private OrdersJpaController orderCtrl;
     
-    public String getSearchBy()
-    {
-        return searchBy;
-    }
-    public void setSearchBy(String newValue)
-    {
-        this.searchBy = newValue;
-    }
+    @PostConstruct
+     public void init() {
+          LOG.debug("Init called!");
+          updateBean();
+     }
+    
     public String getQuery()
     {
         return query;
     }
+    
     public void setQuery(String newValue)
     {
         this.query = newValue;
     }
+    
     public List<Orders> getSearchResults() {
           return searchResults;
+    }
+    
+    public Orders getCurrentOrder()
+    {
+        return this.currentOrder;
+    }
+    
+    
+    public void updateBean() {
+          LOG.debug(query);
+          //searchResults = orderCtrl.searchOrdersByClientEmail(query);
      }
-    public void onKeyUp() {
-          LOG.debug("onKeyUp called");
+
+     public void onEdit(int id) {
+          LOG.debug(id + "");
+          currentOrder = orderCtrl.findOrders(id);
+
      }
 }

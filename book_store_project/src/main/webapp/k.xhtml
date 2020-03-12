@@ -32,14 +32,15 @@ and open the template in the editor.
 
     <h:body>
 
-
-            <p:feedReader value="http://rss.news.yahoo.com/rss/sports" var="feed">
+        <p:scrollPanel style="overflow-y: auto;height: 400px;">
+        <p:feedReader size="10" value="https://rss.news.yahoo.com/rss/sports" var="feed">
                 <h:outputText value="#{feed.title}" style="font-weight: bold"/>
                 <h:outputText value="#{feed.description.value}" escape="false"/>
                 <p:separator />
                 <f:facet name="error">
                     Something went wrong.
                 </f:facet>
-            </p:feedReader>       
+            </p:feedReader>  
+        </p:scrollPanel>
     </h:body>
 </html>
