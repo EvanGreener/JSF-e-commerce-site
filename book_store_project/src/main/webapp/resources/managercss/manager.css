@@ -7,7 +7,9 @@ and open the template in the editor.
     Created on : Feb. 24, 2020, 2:03:48 p.m.
     Author     : cawri
 */
-
+.manager-menu-container{
+    height:65%;
+}
 .manager-menu {
   
   background-color: #FFFFFF !important;
@@ -46,6 +48,6 @@ body{
     position: absolute;
     top: 15%;
     left: 20%;
-    height: 70%;
+    height: 50%;
     width: 60%
 }
