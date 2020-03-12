@@ -6,11 +6,13 @@ import com.gb1w20.book_store_project.jpa_controllers.BookJpaController;
 import com.gb1w20.book_store_project.jpa_controllers.OrderItemJpaController;
 import java.io.Serializable;
 import java.util.List;
+import java.util.Random;
 import javax.annotation.PostConstruct;
 import javax.enterprise.context.SessionScoped;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
+import org.primefaces.model.chart.ChartSeries;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -31,6 +33,7 @@ public class BookBean implements Serializable {
     private Book book;
     private List<Book> similarGenreBooks;
     private String genre;
+    private int bookSlideColor=0;
 
     @PostConstruct
     public void init() {
@@ -38,6 +41,21 @@ public class BookBean implements Serializable {
 
     }
 
+    public int getBookSlideColor(){
+        if(bookSlideColor==0){
+            bookSlideColor++;
+        }
+        else if(bookSlideColor==1){
+              bookSlideColor++;
+        }
+        else if(bookSlideColor==2){
+            bookSlideColor++;
+        }
+        else{
+            bookSlideColor=1;
+        }
+        return bookSlideColor;
+    }
     public List<Book> getBestSeller() {
         LOG.debug("getBestSeller");
         bestSeller = bookCtrlr.getBestSeller();

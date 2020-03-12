@@ -37,7 +37,7 @@
 
                 <ui:repeat value="#{bb.recentlyAdded}" var="book">
 
-                    <div class="swiper-slide item1">
+                    <div class="swiper-slide item#{bb.bookSlideColor}">
 
 
                         <div class="sliderTextContent">
@@ -51,6 +51,7 @@
                                 <h:commandButton type="submit"
                                                  value="Shop Now"
                                                  action="#{bb.viewBook(book)}" />
+
                             </h:form>
                         </div>
 
@@ -78,16 +79,17 @@
 
 
                         <ui:repeat value="#{bb.bestSeller}" var="books">
-                            <div class="ui fluid card darker">
+
+                            <div class="ui fluid card darker homepageCard">
                                 <div class="homepageImg">
-                                    <h:graphicImage class="img" height="250" width="156.25" library="images" name="#{books.isbn}.jpg"/>
+                                    <h:graphicImage class="img" height="250" width="200" library="images" name="#{books.isbn}.jpg"/>
                                     <div class="cardHoverBtn"> View Cover</div>
                                 </div>
 
                                 <div class="content">
 
                                     <h:commandLink action = "#{bb.viewBook(books)}" type="submit" value = "">
-                                        <div class="header">
+                                        <div class="header textColor">
 
                                             #{books.title}</div>
                                         <div class="meta">
@@ -151,7 +153,22 @@
 
         <div   class="lightGreyDiv">
 
+<!--            <p:feedReader value="http://rss.news.yahoo.com/rss/sports" var="feed">
+                <h:outputText value="#{feed.title}" style="font-weight: bold"/>
+                <br />
+                <h:outputText value="#{feed.description.value}" escape="false"/>
+                <p:separator />
+            </p:feedReader>-->
 
+
+            <p:feedReader value="http://rss.news.yahoo.com/rss/sports" var="feed">
+                <h:outputText value="#{feed.title}" style="font-weight: bold"/>
+                <h:outputText value="#{feed.description.value}" escape="false"/>
+                <p:separator />
+                <f:facet name="error">
+                    Something went wrong.
+                </f:facet>
+            </p:feedReader>            
 
             <table class="ui table lightGreyDiv" >
 
@@ -162,56 +179,48 @@
 
 
                                 <h:form >
-
                                     <ui:repeat value="#{ss.survey}" var="s">
 
                                         <h1>  #{s.surveyName}</h1>
 
 
+
                                         <div id="results" class="invisible">
                                             <hr/>
-                                             <div class="ui horizontal statistics">
-                                                    <h4>Votes | Choices</h4>
-                                            <ui:repeat value="#{s.surveyData}" var="sd">
+                                            <p:chart id="barchart" type="bar"  model="#{ss.cartChart}"  style="width:530px"/>
+                                            <div class="ui horizontal statistics">
 
-                                               
+                                                <ui:repeat value="#{s.surveyData}" var="sd">
+
+
                                                     <div class="ui statistic">
                                                         <div class="value">#{sd.votes}</div>
                                                         <div class="label">#{sd.choice}</div>
                                                     </div>
-                                              
-                                                <p:progressBar value="#{sd.votes*(100/38)}" labelTemplate="" displayOnly="true" style="width:100%"/>
-                                         
-                                                 </ui:repeat>
-                                                     </div>
+
+
+                                                </ui:repeat>
+                                            </div>
                                             <hr/>
                                             <h2>Thank you for answering!</h2>
                                         </div>
 
 
                                         <div id="survey">
-
                                             <p>#{s.surveyDescription}</p>
                                             <ui:repeat value="#{s.surveyData}" var="sd">
-                                                <h:selectOneRadio required="true" layout="pageDirection" value="" >
-                                                    <f:selectItem itemValue="yes" itemLabel = "#{sd.choice}" />
+                                                <h:selectOneRadio required="true" layout="pageDirection" value="#{ss.surveyChoice}" >
+                                                    <f:selectItem itemValue="#{sd.dataID}" itemLabel = " #{sd.choice}" />
                                                 </h:selectOneRadio>
-
-
                                             </ui:repeat>
-
-                                            <h:commandButton onclick="showResults()" type="button" value="Submit">
-
-                                            </h:commandButton>
+                                            <h:commandButton action="#{ss.setHello(sd.dataID)}" onclick="showResults()" type="button" value="Submit"/>
                                         </div>
-
                                     </ui:repeat>
-
-
-
                                 </h:form>
+
+
                             </div></td>
-                        <td align="center"><div class="ui wide skyscraper test ad right" data-text="">
+                        <td align="center"><div class="ui wide skyscraper test ad right homepageCard" data-text="">
                                 <h:graphicImage height="100%" width="100%" library="images" name="apples.png"  onclick="viewAd('https://en.wikipedia.org/wiki/Apple')"/>
                             </div></td>
                     </tr>

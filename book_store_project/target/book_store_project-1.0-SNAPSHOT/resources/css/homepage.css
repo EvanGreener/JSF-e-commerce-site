@@ -35,13 +35,13 @@ body {
 }
 
 .item1{
-     background-color:  #d77a61 !important;
+     background-color:  orange !important;
 }
 .item2{
-     background-color:  #CB2578 !important;
+     background-color: #ff6c17 !important;
 }
 .item3{
-     background-color:  #3625CB !important;
+     background-color:  coral !important;
 }
 .searchBarDiv{
      text-align: center;
@@ -66,7 +66,7 @@ body {
 }
 .swiper-container {
      width: 100%;
-     height: 90%;
+     height: 80%;
 }
 .swiper-slide {
      text-align: center;
@@ -124,6 +124,10 @@ body {
 .lightOrangeDiv{
      padding:5%;
      background-color: #D8B4A0;
+}
+.orangeDiv{
+     padding:5%;
+     background-color: #d77a61 important;
 }
 
 .lightPurpleDiv{
@@ -201,6 +205,7 @@ body {
 .sliderImageContent{
      text-align: center;
      margin: 20px 40px; 
+  box-shadow: 5px 10px 8px black;
 }
 h2{
      text-align: center ;
@@ -254,12 +259,25 @@ p.small {
      
      text-align: center;
      /*border:2px solid black;*/
-     background-color: #223843;
+    background-color: #223843;
+    
 }
 .homepageImg:hover .cardHoverBtn{
      opacity: 1;
 }
+.homepageCard{
+       box-shadow: 5px 10px 8px black !important; 
+    
+}
+.textColor{
+ color:black !important;   
+ font-family: georgia !important;
+ font-size: 20px;
+}
+.homepageCardContent{
+        background-color: #D8B4A0 !important;
 
+}
 #myImg {
      
      border-radius: 5px;
@@ -359,7 +377,18 @@ p.small {
 .purpleContainer{
     color: #DBD3DB;
 }
-
+.centerItems{
+   justify-content: center;
+  display:flex;
+   
+}
+.downloadDiv{
+    width:60% !important;
+      background-color: white;
+      height:50% !important;
+      padding:40px !important;
+       overflow: auto;
+}
 .cartContainer{
     color:#EFF1F3;
 }
