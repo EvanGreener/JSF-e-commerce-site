@@ -18,7 +18,10 @@
 
         <h:outputStylesheet library="webjars" name="Semantic-UI/2.4.1/semantic.min.css" />
         <h:outputStylesheet library="css" name="homepage.css" />
+        <h:outputStylesheet library="book_css" name="bookpage.css" />
         <h:outputStylesheet library="managercss" name="manager.css" />
+        <h:outputStylesheet library="webjars" name="font-awesome/4.7.0/css/font-awesome.min-jsf.css" />
+        
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 
         
@@ -31,7 +34,20 @@
 
 
         <bookstore:navbar ></bookstore:navbar>
-        
+        <div class="ui form">
+        <div class="lightGreyDivLessSpacing">
+        <div class="two fields">
+            <div class="field">
+                <p:outputLabel for="startDateTime" value="Start Date and Time" />
+                <p:datePicker id="startDateTime" value="" showTime="true" mindate="#{date.minDate}" maxdate="#{date.maxDate}"/>
+            </div>
+            <div class="field">
+                <p:outputLabel for="endDateTime" value="End Date and Time" />
+                <p:datePicker id="endDateTime" value="" showTime="true" mindate="#{date.minDate}" maxdate="#{date.maxDate}"/>
+            </div>
+        </div>
+        </div>
+        </div>
         <div class="manager-menu-container">
       
         <h:panelGroup>
@@ -41,45 +57,45 @@
                 <div class="column manager-outer-menu">
                     <div class="manager-menu">
                         <a href="managerClients.xhtml" style="color:black">
-                            <h:commandButton class="front-button" id="manage-client-button" value="1"/>
+                            <h:commandButton class="front-button" id="manage-client-button" value="Total Sales"/>
                         </a>
                     </div>
                 </div>
                 <div class="column manager-outer-menu">
                     <div class="manager-menu">
-                        <h:commandButton class="front-button" id="edit-inventory-button" value="2"/>
+                        <h:commandButton class="front-button" id="edit-inventory-button" value="Sales by Client"/>
                     </div>
                 </div>
                 <div class="column manager-outer-menu">
                     <div class="manager-menu">
-                        <h:commandButton class="front-button" id="set-sales-button" value="3"/>
+                        <h:commandButton class="front-button" id="set-sales-button" value="Sales by Author"/>
                     </div>
                 </div>
                 <div class="column manager-outer-menu">
                     <div class="manager-menu">
                         <a href="managerOrders.xhtml" style="color:black">
-                            <h:commandButton class="front-button" id="order-management-button" value="4"/>
+                            <h:commandButton class="front-button" id="order-management-button" value="Sales by Publisher"/>
                         </a>
                     </div>
                 </div>
                 <div class="column manager-outer-menu">
                     <div class="manager-menu">
-                        <h:commandButton class="front-button" id="review-management-button" value="5"/>
+                        <h:commandButton class="front-button" id="review-management-button" value="Top Sellers"/>
                     </div>
                 </div>
                 <div class="column manager-outer-menu">
                     <div class="manager-menu">
-                        <h:commandButton class="front-button" id="reporting-button" value="6"/>
+                        <h:commandButton class="front-button" id="reporting-button" value="Top Clients"/>
                     </div>
                 </div>
                 <div class="column manager-outer-menu">
                     <div class="manager-menu">
-                        <h:commandButton class="front-button" id="newsfeed-management-button" value="7"/>
+                        <h:commandButton class="front-button" id="newsfeed-management-button" value="Zero Sales"/>
                     </div>
                 </div>
                 <div class="column manager-outer-menu">
                     <div class="manager-menu">
-                        <h:commandButton class="front-button" id="survey-management-button" value="8"/>
+                        <h:commandButton class="front-button" id="survey-management-button" value="Stock Report"/>
                     </div>
                 </div>
                 
