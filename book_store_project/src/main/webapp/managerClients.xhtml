@@ -23,6 +23,13 @@
           <h:outputScript library="webjars" name="Semantic-UI/2.4.1/semantic.min.js"/>
 
           <style>
+
+               .modal{
+                    position: fixed;
+                    padding-top: 0px;
+                    height: fit-content;
+               }
+
                .middle h1 {
                     margin-top: 20px !important;
                     text-align: center;
@@ -31,15 +38,45 @@
                .middle{
                     padding: 0px 40px 0px 40px;
                }
-               h3{
-                    display: inline;
+               
+               .actions{
+                    height: 80%;
+                    text-align: center !important;
+                    font-size: 20px;
+                    margin: 10px 10px 10px 10px;
                }
-               .bot{
-                    text-align: center;
+               
+               .actions .ui.button {
+                    margin: 10px 10px 10px 10px;
                }
+               
                .footer button{
                     font-size: 20px !important;
                     margin: 0px 10px 0px 10px !important;
+               }
+
+               .header h1 {
+                    text-align: center !important;
+               }
+
+/*               .content h3 {
+                    
+               }*/
+
+               .form-field{
+                    font-size: 18px;
+                    margin: 10px 0px 10px 5px;
+
+               }
+
+               #editFormGrowl{
+                    position: fixed;
+                    display: none;
+                    z-index: 777;
+                    left: 100%;
+                    margin-left: -257.42px;
+                   
+
                }
 
           </style>
@@ -48,28 +85,28 @@
      </h:head>
      <h:body>
 
-
-
-          <h:form>
+          <h:form id="editForm">
                <bookstore:navbar ></bookstore:navbar>
 
-               <!--Loading modal-->
-               <p:ajaxStatus onstart="PF('statusDialog').show()" onsuccess="PF('statusDialog').hide()" />
-               <p:dialog widgetVar="statusDialog" modal="true" draggable="false" closable="false" resizable="false" showHeader="false">
-                    <p:graphicImage style="display: inline;" class="loading" library="images" name="double-ring.svg" />
-               </p:dialog>
-
                <div class="middle">
+
+                    <div id="editFormGrowl" class="ui floating positive message" >
+                         <!--<i class="close icon"></i>-->
+                         <div class="header">
+                              Changes have been saved!
+                         </div>
+                    </div>
+                    
                     <h1>Client Management</h1>
 
                     <!--Search bar-->
                     <div style="display: inline;" class="ui search" >
-                         <h:inputText  id="query" value="#{ clientManagement.query}" a:placeholder="Search clients..." style="float: right; margin-top: 10px; margin-bottom: 10px; " class="prompt" >
+                         <h:inputText  id="query" value="#{ clientManagement.query}"  a:placeholder="Search clients by email..." style="float: right; margin-top: 10px; margin-bottom: 10px; width: 200px; " class="prompt" >
                               <p:ajax event="keyup" listener="#{clientManagement.updateBean()}" update="clientsTable" />
                          </h:inputText>
                     </div> 
 
-                    
+
 
                     <h:dataTable  id="clientsTable" var="client" style="margin-bottom: 20px;"  class="ui celled table" value="#{clientManagement.results}" >
                          <h:column>
@@ -105,57 +142,80 @@
                               $#{client[8]}0
                          </h:column>
                          <h:column>
-                              <p:commandButton
-                                               action="#{clientManagement.onEdit(client[0])}" 
-                                               update="clientsTable" 
-                                               value="Edit" 
-                                               class="big ui primary button edit_btn" >
-
-                              </p:commandButton>
+                              <h:commandButton type="button" onclick="setTimeout(function(){$('#editModal').modal('show', hideGrowl())}, 100)" 
+                                               value="Edit" class="big ui primary button edit_btn" >
+                                   <f:ajax event="click"  render="editForm" listener="#{clientManagement.onClickEdit(client[0])}"/>
+                              </h:commandButton>
 
                          </h:column>
 
                     </h:dataTable>
                </div>
 
-
-
                <bookstore:footer></bookstore:footer>
-               
-               <h:panelGroup id="edit_form">
-                         <div  class="ui modal">
-                              <div class="header"><h1>Edit client </h1></div>
-                              <div class="content">
-                                   <h3>First Name</h3>
 
-                              </div>
-                              <div class="footer">
-                                   <div class="bot">
-                                        <button class="positive ui button">Save Changes</button>
-                                        <button class="ui button" >Cancel</button>
-                                   </div>
-                              </div>
+               <div id="editModal" class=" small ui modal">
+                    <div class="header">
+                         <h1>Client ID##{clientManagement.currentClient.clientID} </h1>
+                    </div>
+                    <div class="content">
 
+                         <div class="form-field">
+                              <h3>First Name</h3>
+                              <p:inputText placeholder="#{clientManagement.currentClient.firstName}" value="#{clientManagement.newFname} " validator="#{clientBacking.validateNotNull}"/>
+<!--                              <h:outputText value="First name cannot contain only whitespace" />-->
                          </div>
 
-                    </h:panelGroup>
+                         <div class="form-field">
+                              <h3>Last Name</h3>
+                              <p:inputText placeholder="#{clientManagement.currentClient.lastName}" value="#{clientManagement.newLname}" validator="#{clientBacking.validateNotNull}"/>
+                         </div>
+
+                         <div class="form-field">
+                              <h3>Address 1</h3>
+                              <p:inputText placeholder="#{clientManagement.currentClient.address1}" value="#{clientManagement.newAddress1}" validator="#{clientBacking.validateNotNull}"/>
+                         </div>
+
+                         <div class="form-field">
+                              <h3>Address 2</h3>
+                              <p:inputText placeholder="#{clientManagement.currentClient.address2}" value="#{clientManagement.newAddress2}" validator="#{clientBacking.validateNotNull}"/>
+                         </div>
+
+                         <div class="form-field">
+                              <h3>Company name</h3>
+                              <p:inputText placeholder="#{clientManagement.currentClient.companyName}" value="#{clientManagement.newCompanyName}" validator="#{clientBacking.validateNotNull}"/>
+                         </div>
+
+                         <div class="form-field">
+                              <h3>Cell #</h3>
+                              <p:inputText placeholder="#{clientManagement.currentClient.cellTelephone}" value="#{clientManagement.newCell}" validator="#{clientBacking.validateCellPhone}"/>
+                         </div>
+
+                    </div>
+
+                    <div class="actions">
+                         <h:commandButton type="button" action="#{clientManagement.onSubmitEdit()}" style="font-size: 20px;"  value="Save Changes" class="ui positive button"
+                              onclick="$('#editFormGrowl').show('slow')">
+                              <p:ajax listener="#{clientManagement.onSubmitEdit()}"/>
+                         </h:commandButton>
+                         
+                         <div style="font-size: 20px;" type="button" class="ui cancel button" >Cancel</div>
+
+                    </div>
+
+               </div>
+
           </h:form>
+
           <script>
-               $(document).ready(function () {
-                    $(".edit_btn").click(function () {
-                         $(".ui.modal").modal('show');
-                         return false;
-                    });
-                    $(document).ajaxComplete(function (){
-                         $(".edit_btn").click(function () {
-                         $(".ui.modal").modal('show');
-                         return false;
-                    });
-                    })
-               });
-               
+               function hideGrowl() {
+                    $('#editFormGrowl').hide('slow');
+//                    console.log('Hiding growl...');
+               }
                
           </script>
 
      </h:body>
+
+
 </html>

@@ -26,63 +26,64 @@
     <h:body>
         <bookstore:navbar/>
         <div class="ui form">
-        <div class="lightGreyDivLessSpacing">
-            <div class="two fields">
-            <div class="field">
-                <p:outputLabel for="startDateTime" value="Start Date and Time" />
-                <p:datePicker id="startDateTime" value="" showTime="true" mindate="#{date.minDate}" maxdate="#{date.maxDate}"/>
-            </div>
-            <div class="field">
-                <p:outputLabel for="endDateTime" value="End Date and Time" />
-                <p:datePicker id="endDateTime" value="" showTime="true" mindate="#{date.minDate}" maxdate="#{date.maxDate}"/>
-            </div>
-            </div>
-        <h:dataTable class="ui celled table" value="#{ordersJpaController.findOrdersEntities()}" var="orders">
-            <h:column>
-                <f:facet name="header">Order #</f:facet>
-                    #{orders.orderID}
-            </h:column>
-            <h:column>
-                <f:facet name="header">Email</f:facet>
-                    #{ordersJpaController.getClientEmailById(orders.clientID)}
-            </h:column>
-            <h:column>
-                <f:facet name="header"># of Items</f:facet>
-                    #{ordersJpaController.getOrderItemsCountByOrderId(orders.orderID)}
-            </h:column>
-            <h:column>
-                <f:facet name="header">Date Placed</f:facet>
-                    #{orders.dateCreated}
-            </h:column>
-            <h:column>
-                <f:facet name="header">Last Updated</f:facet>
-                    #{orders.lastUpdated}
-            </h:column>
-            <h:column>
-                <f:facet name="header">Status</f:facet>
-                    #{ordersJpaController.getStatusByOrderId(orders.orderID)}
-            </h:column>
-            <h:column>
-                <h:form>
-                    <h:commandLink onclick="return showModal()" value="Edit Order" disabled="#{orders.isRemoved}">
-                        <f:param name="email" value="#{ordersJpaController.getClientEmailById(orders.clientID)}" />
-                    </h:commandLink>
-                    <div id="test" class="modal">
-                        <div class="modal-content">
-                            <span class="close">x</span>
-                            This is a test. Will be fixed in due time.
-                        </div>
+            <div class="lightGreyDivLessSpacing">
+                <div class="two fields">
+                    <div class="field">
+                        <p:outputLabel for="startDateTime" value="Start Date and Time" />
+                        <p:datePicker id="startDateTime" value="" showTime="true" mindate="#{date.minDate}" maxdate="#{date.maxDate}"/>
                     </div>
-                </h:form>
-            </h:column>
-            <h:column>
-                <h:form>
-                    <h:commandLink value="#{orderBacking.getRemovalStatus(orders.isRemoved)}" action="#{orderBacking.addOrRemoveOrder(orders)}"/> 
-                </h:form>
-            </h:column>
-        </h:dataTable>
-        </div>
+                    <div class="field">
+                        <p:outputLabel for="endDateTime" value="End Date and Time" />
+                        <p:datePicker id="endDateTime" value="" showTime="true" mindate="#{date.minDate}" maxdate="#{date.maxDate}"/>
+                    </div>
+                </div>
+                <h:dataTable class="ui celled table" value="#{ordersJpaController.findOrdersEntities()}" var="orders">
+                    <h:column>
+                        <f:facet name="header">Order #</f:facet>
+                            #{orders.orderID}
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">Email</f:facet>
+                            #{orders.client.email}
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header"># of Items</f:facet>
+                            #{orders.orderItems.size()}
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">Date Placed</f:facet>
+                            #{orders.dateCreated}
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">Last Updated</f:facet>
+                            #{orders.lastUpdated}
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">Status</f:facet>
+                            #{ordersJpaController.getStatusByOrderId(orders.orderID)}
+                    </h:column>
+                    <h:column>
+                        <h:form id="editForm">
+                            <h:commandLink onclick="return showModal()" value="Edit Order" disabled="#{orders.isRemoved}">
+                                <f:ajax event="click" render="editForm" listener="#{modalBean.onEdit(orders.client.clientID)}"/>
+                            </h:commandLink>
+                            <div id="editOrderModal" class="modal">
+                                <div class="modal-content">
+                                    Order ID# #{modalBean.currentOrder.orderID}
+                                </div>
+                            </div>
+                        </h:form>
+                    </h:column>
+                    <h:column>
+                        <!--
+                        <h:form>
+                            <h:commandLink value="{orderBacking.getRemovalStatus(orders.isRemoved)}" action="{orderBacking.addOrRemoveOrder(orders)}" />
+                        </h:form>
+                        -->
+                    </h:column>
+                </h:dataTable>
             </div>
+        </div>
         <bookstore:footer/>
     </h:body>
 </html>

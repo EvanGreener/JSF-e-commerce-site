@@ -62,6 +62,5 @@ public class OrderSearchBean implements Serializable {
      public void onEdit(int id) {
           LOG.debug(id + "");
           currentOrder = orderCtrl.findOrders(id);
-
      }
 }

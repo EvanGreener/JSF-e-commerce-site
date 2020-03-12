@@ -1,9 +1,11 @@
 package com.gb1w20.book_store_project.beans;
 
+import com.gb1w20.book_store_project.entities.Orders;
+import com.gb1w20.book_store_project.jpa_controllers.OrdersJpaController;
 import java.io.Serializable;
-import javax.enterprise.context.RequestScoped;
+import javax.annotation.PostConstruct;
 import javax.enterprise.context.SessionScoped;
-import javax.faces.annotation.ManagedProperty;
+import javax.inject.Inject;
 import javax.inject.Named;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -18,18 +20,35 @@ import org.slf4j.LoggerFactory;
 public class OrderEditModalBean implements Serializable {
     
     private final static Logger LOG = LoggerFactory.getLogger(OrderEditModalBean.class);
+    private String query = "";
+    private Orders currentOrder;
     
-    private String email;
+    @Inject
+    private OrdersJpaController orderCtrl;
     
-    public String getEmail()
+    @PostConstruct
+     public void init() {
+          LOG.debug("Init called!");
+     }
+    
+    public String getQuery()
     {
-        LOG.debug(email);
-        return email;
+        return query;
     }
     
-    public void setEmail(String newValue)
+    public void setQuery(String newVal)
     {
-        this.email = newValue;
+        query = newVal;
     }
+    
+    public Orders getCurrentOrder()
+    {
+        return currentOrder;
+    }
+    
+    public void onEdit(int id) {
+          LOG.debug("Edit called!");
+          currentOrder = orderCtrl.findOrders(id);
+     }
     
 }

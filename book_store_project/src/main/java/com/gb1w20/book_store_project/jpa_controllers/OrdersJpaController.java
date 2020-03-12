@@ -21,6 +21,8 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Join;
+import javax.persistence.criteria.JoinType;
 import javax.persistence.criteria.Root;
 import javax.transaction.SystemException;
 import javax.transaction.UserTransaction;
@@ -138,15 +140,25 @@ public class OrdersJpaController implements Serializable {
 
     public String getClientEmailById(int clientId)
     {
-        LOG.debug(clientId + "");
         CriteriaBuilder cb = em.getCriteriaBuilder();
         CriteriaQuery cq = cb.createQuery();
         Root<Clients> client = cq.from(Clients.class);
         cq.where(cb.equal(client.get(Clients_.clientID), clientId));
         cq.select(client.get(Clients_.email));
         TypedQuery<String> query = em.createQuery(cq);
-        LOG.debug(query.getSingleResult());
         return query.getSingleResult();
+    }
+    
+    public List<OrderItem> getOrderItemsByOrderId(int orderId)
+    {
+        CriteriaBuilder cb = em.getCriteriaBuilder();
+        CriteriaQuery cq = cb.createQuery();
+        Root<Orders> order = cq.from(Orders.class);
+        Join orderToItems = order.join("orderItemsCollection", JoinType.LEFT);
+        cq.where(cb.equal(order.get(Orders_.orderID), orderId));
+        cq.select(cq.from(OrderItem.class));
+        TypedQuery<OrderItem> query = em.createQuery(cq);
+        return query.getResultList();
     }
     
     public int getOrderItemsCountByOrderId(int orderId)
