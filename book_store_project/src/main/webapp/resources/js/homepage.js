@@ -33,9 +33,6 @@ var imgBtn = document.getElementsByClassName('cardHoverBtn');
     }
 
 
- 
-
-
 
       
     
@@ -51,7 +48,7 @@ var imgBtn = document.getElementsByClassName('cardHoverBtn');
     }
 
 
-    /*  
+    /*
      //Get the modal
      var modal = document.getElementById("myModal");
      
@@ -85,13 +82,8 @@ var imgBtn = document.getElementsByClassName('cardHoverBtn');
      }*/
 });
 
-
-
-
-
 function displayCardHoverButton()
 {
-    console.log("HERE");
     var btn = document.createElement("BUTTON");
     btn.addEventListener('click', displayBookCover);
     btn.innerHTML = "View Cover";
@@ -100,21 +92,66 @@ function displayCardHoverButton()
 }
 
 
+function viewAd(url){
+    window.open(url);
+}
+
+
 
 
 function addReview() {
     document.getElementById("reviewModal").style.display = 'block';
 }
+
 function removeCardHoverButton()
 {
     var btn = document.getElementsByClassName("cardHoverBtn");
     btn[0].remove();
 }
-function addToCart()
+
+function addToCart(isbn, format)
 {
-  event.stopPropagation();
-    alert("Successfuly added to cart");
+    var bookItem = {
+        ISBN: isbn,
+        bookFormat:format
+    };
+    var cartItems = localStorage.getItem("BOOK_STORE_CART") ? JSON.parse(localStorage.getItem("BOOK_STORE_CART")) : [] ;
+    var duplicateFound = cartItems.find(item => item.ISBN === bookItem.ISBN);
+    if(!duplicateFound){
+        cartItems.push(bookItem);
+        localStorage.setItem("BOOK_STORE_CART",JSON.stringify(cartItems));
+    }
+     event.stopPropagation();
 }
+
+function removeFromCart(isbn){
+    var cartItems = JSON.parse(localStorage.getItem("BOOK_STORE_CART"));
+    var updatedCart = cartItems.filter(item=>item.ISBN !== isbn);
+    localStorage.setItem("BOOK_STORE_CART",JSON.stringify(updatedCart));
+}
+
+function checkIfLoggedIn(){
+       var userCookies = document.cookie.split(';');
+       for(var i =0; i<userCookies.length; i++){
+           console.log(userCookies[i]);
+       }
+       return true;
+}
+
+function signOut(){
+    document.cookie = 'BOOK_STORE_LOGIN=; expires=Thu, 01 Jan 1970 00:00:01 GMT;';
+}
+
+
+function showResults(){
+   
+    document.getElementById("survey").remove();
+     document.getElementById("results").setAttribute("class","visible");
+}
+
+
+
+
 function showMore() {
     
     var dots = document.getElementById("dots");

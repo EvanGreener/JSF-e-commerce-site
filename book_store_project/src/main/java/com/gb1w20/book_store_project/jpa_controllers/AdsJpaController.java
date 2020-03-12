@@ -1,6 +1,9 @@
 package com.gb1w20.book_store_project.jpa_controllers;
 
 import com.gb1w20.book_store_project.entities.Ads;
+import com.gb1w20.book_store_project.entities.Ads_;
+import com.gb1w20.book_store_project.entities.Orders;
+import com.gb1w20.book_store_project.entities.Orders_;
 import com.gb1w20.book_store_project.jpa_controllers.exceptions.NonexistentEntityException;
 import java.io.Serializable;
 import java.util.List;
@@ -10,7 +13,10 @@ import javax.inject.Named;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
 import javax.persistence.EntityNotFoundException;
+import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
+import javax.persistence.TypedQuery;
+import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 import javax.transaction.SystemException;
@@ -121,6 +127,25 @@ public class AdsJpaController implements Serializable {
             Query q = em.createQuery(cq);
             System.out.println("ad count: " + ((Long) q.getSingleResult()).intValue());
             return ((Long) q.getSingleResult()).intValue();
+    }
+    
+    public String getStatusByAdId(int adID)
+    {
+        CriteriaBuilder cb = em.getCriteriaBuilder();
+        CriteriaQuery cq = cb.createQuery();
+        Root<Ads> order = cq.from(Ads.class);
+        cq.where(cb.equal(order.get(Ads_.adID), adID));
+        cq.select(order.get(Ads_.isRemoved));
+        TypedQuery<Boolean> query = em.createQuery(cq);
+        try
+        {
+            query.getSingleResult();
+            return "Not Removed";
+        }
+        catch(NoResultException nre)
+        {
+            return "Removed";
+        }
     }
     
 }

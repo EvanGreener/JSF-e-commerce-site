@@ -1,5 +1,6 @@
 package com.gb1w20.book_store_project.jpa_controllers;
 
+import com.gb1w20.book_store_project.entities.Book;
 import com.gb1w20.book_store_project.entities.Surveys;
 import com.gb1w20.book_store_project.jpa_controllers.exceptions.NonexistentEntityException;
 import java.io.Serializable;
@@ -11,6 +12,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.Query;
 import javax.persistence.EntityNotFoundException;
 import javax.persistence.PersistenceContext;
+import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 import javax.transaction.SystemException;
@@ -109,6 +111,22 @@ public class SurveysJpaController implements Serializable {
         }
         return q.getResultList();
     }
+    
+    public List<Surveys> getfirstSurvey(){
+        TypedQuery<Surveys> query = em.createQuery("SELECT s FROM Surveys s", Surveys.class);
+        query.setMaxResults(1);
+        List<Surveys> survey = query.getResultList();
+        
+        return survey; 
+    }
+    
+        public  List<Integer> getTotalVotes(int id){
+        TypedQuery<Integer> query = em.createQuery("SELECT sum(sd.votes) FROM Surveys s inner join Survey_Data sd on s.survey_ID=sd.survey_ID", Integer.class);
+        // query.setParameter("id", id);
+        List<Integer> sum = query.getResultList();
+        return sum;
+    } 
+    
 
     public Surveys findSurveys(Integer id) {
             return em.find(Surveys.class, id);

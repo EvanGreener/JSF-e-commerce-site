@@ -13,6 +13,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
@@ -58,11 +60,19 @@ public class SurveyData implements Serializable {
     private Date lastModified;
     @Column(name = "Is_Removed")
     private Boolean isRemoved;
-
+    
+     @JoinColumn(name = "Survey_ID", referencedColumnName = "Survey_ID", insertable = false, updatable = false)
+    @ManyToOne(optional = false)
+    private Surveys survey;
+     
+     public Surveys getSurvey(){
+         return survey;
+     }
+     
     public SurveyData() {
     }
 
-    public SurveyData(Integer dataID) {
+    public SurveyData(Integer dataID,Integer surveyID) {
         this.dataID = dataID;
     }
 
