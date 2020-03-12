@@ -10,7 +10,7 @@
         </session-timeout>
     </session-config>
     <welcome-file-list>
-        <welcome-file>managerFront.xhtml</welcome-file>
+        <welcome-file>managerReports.xhtml</welcome-file>
 
 
     </welcome-file-list>

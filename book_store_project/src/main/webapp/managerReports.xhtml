@@ -21,7 +21,7 @@
         <h:outputStylesheet library="managercss" name="manager.css" />
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 
-        <h:outputScript library="js" name="manager.js" />
+        
 
         <!-- Swiper JS -->
         <script src="https://unpkg.com/swiper/js/swiper.min.js"></script>
@@ -31,65 +31,61 @@
 
 
         <bookstore:navbar ></bookstore:navbar>
-
+        <div class="manager-menu-container">
         <h:panelGroup>
 
-            <div class="ui three column row very relaxed grid  manager-container">
+            <div class="ui four column row grid  manager-container">
 
                 <div class="column manager-outer-menu">
                     <div class="manager-menu">
                         <a href="managerClients.xhtml" style="color:black">
-                            <h:commandButton class="front-button" id="manage-client-button" value="Users"/>
+                            <h:commandButton class="front-button" id="manage-client-button" value="1"/>
                         </a>
                     </div>
                 </div>
                 <div class="column manager-outer-menu">
                     <div class="manager-menu">
-                        <h:commandButton class="front-button" id="edit-inventory-button" value="Inventory"/>
+                        <h:commandButton class="front-button" id="edit-inventory-button" value="2"/>
                     </div>
                 </div>
                 <div class="column manager-outer-menu">
                     <div class="manager-menu">
-                        <h:commandButton class="front-button" id="set-sales-button" value="Sales"/>
+                        <h:commandButton class="front-button" id="set-sales-button" value="3"/>
                     </div>
                 </div>
                 <div class="column manager-outer-menu">
                     <div class="manager-menu">
                         <a href="managerOrders.xhtml" style="color:black">
-                            <h:commandButton class="front-button" id="order-management-button" value="Orders"/>
+                            <h:commandButton class="front-button" id="order-management-button" value="4"/>
                         </a>
                     </div>
                 </div>
                 <div class="column manager-outer-menu">
                     <div class="manager-menu">
-                        <h:commandButton class="front-button" id="review-management-button" value="Reviews "/>
+                        <h:commandButton class="front-button" id="review-management-button" value="5"/>
                     </div>
                 </div>
                 <div class="column manager-outer-menu">
                     <div class="manager-menu">
-                        <h:commandButton class="front-button" id="reporting-button" value="Reports"/>
+                        <h:commandButton class="front-button" id="reporting-button" value="6"/>
                     </div>
                 </div>
                 <div class="column manager-outer-menu">
                     <div class="manager-menu">
-                        <h:commandButton class="front-button" id="newsfeed-management-button" value="Newsfeeds"/>
+                        <h:commandButton class="front-button" id="newsfeed-management-button" value="7"/>
                     </div>
                 </div>
                 <div class="column manager-outer-menu">
                     <div class="manager-menu">
-                        <h:commandButton class="front-button" id="survey-management-button" value="Surveys"/>
+                        <h:commandButton class="front-button" id="survey-management-button" value="8"/>
                     </div>
                 </div>
-                <div class="column manager-outer-menu">
-                    <div class="manager-menu">
-                        <a href="managerAds.xhtml" style="color:black">
-                            <h:commandButton class="front-button" id="ad-management-button" value="Ads"/>
-                        </a>
-                    </div>
-                </div>
+                
             </div>
 
         </h:panelGroup>
+        </div>
+        <bookstore:footer/>
 
 
 
