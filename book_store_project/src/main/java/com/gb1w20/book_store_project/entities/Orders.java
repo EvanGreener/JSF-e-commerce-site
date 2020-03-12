@@ -56,7 +56,8 @@ public class Orders implements Serializable {
     @Column(name = "Is_Removed")
     private Boolean isRemoved;
     
-    @ManyToOne
+    @JoinColumn(name = "Client_ID", referencedColumnName = "Client_ID", insertable = false, updatable = false)
+    @ManyToOne(optional = false)
     private Clients client;
     
     @OneToMany(  cascade = CascadeType.ALL)

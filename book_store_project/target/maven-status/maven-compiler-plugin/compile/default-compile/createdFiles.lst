@@ -13,6 +13,7 @@ com\gb1w20\book_store_project\jpa_controllers\OrdersJpaController.class
 com\gb1w20\book_store_project\beans\UserLoginBean.class
 com\gb1w20\book_store_project\backing\BookFormatBackingBean.class
 com\gb1w20\book_store_project\backing\SurveyBackingBean.class
+com\gb1w20\book_store_project\beans\DateValueBean.class
 com\gb1w20\book_store_project\backing\NewsBackingBean.class
 com\gb1w20\book_store_project\jpa_controllers\SurveysJpaController.class
 com\gb1w20\book_store_project\entities\Tax.class
