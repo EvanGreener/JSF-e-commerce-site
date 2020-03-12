@@ -1,4 +1,5 @@
 com\gb1w20\book_store_project\backing\TaxBackingBean.class
+com\gb1w20\book_store_project\entities\BookFormat.class
 com\gb1w20\book_store_project\entities\Clients_.class
 com\gb1w20\book_store_project\entities\Orders.class
 com\gb1w20\book_store_project\jpa_controllers\ClientsJpaController.class
@@ -8,6 +9,7 @@ com\gb1w20\book_store_project\backing\BookBackingBean.class
 com\gb1w20\book_store_project\jpa_controllers\exceptions\IllegalOrphanException.class
 com\gb1w20\book_store_project\jpa_controllers\NewsJpaController.class
 com\gb1w20\book_store_project\jpa_controllers\OrdersJpaController.class
+com\gb1w20\book_store_project\backing\BookFormatBackingBean.class
 com\gb1w20\book_store_project\backing\SurveyBackingBean.class
 com\gb1w20\book_store_project\backing\NewsBackingBean.class
 com\gb1w20\book_store_project\jpa_controllers\SurveysJpaController.class
@@ -25,6 +27,7 @@ com\gb1w20\book_store_project\entities\SurveyData.class
 com\gb1w20\book_store_project\entities\Clients.class
 com\gb1w20\book_store_project\backing\PublisherBackingBean.class
 com\gb1w20\book_store_project\jpa_controllers\AuthorsJpaController.class
+com\gb1w20\book_store_project\jpa_controllers\BookFormatJpaController.class
 com\gb1w20\book_store_project\entities\News.class
 com\gb1w20\book_store_project\backing\AdBackingBean.class
 com\gb1w20\book_store_project\jpa_controllers\SurveyDataJpaController.class
@@ -50,4 +53,5 @@ com\gb1w20\book_store_project\entities\Authors.class
 com\gb1w20\book_store_project\entities\CustomerReviews.class
 com\gb1w20\book_store_project\entities\SurveyData_.class
 com\gb1w20\book_store_project\entities\Authors_.class
+com\gb1w20\book_store_project\entities\BookFormat_.class
 com\gb1w20\book_store_project\entities\Surveys_.class

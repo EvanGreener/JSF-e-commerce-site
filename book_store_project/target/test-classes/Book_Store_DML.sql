@@ -2020,213 +2020,213 @@ insert into tax
     (Province_Abbreviation, GST, PST, HST)
 values ("YT", 0.05, 0.00, 0.00);
 
-INSERT INTO Book_Format
+INSERT INTO Book_Format(ISBN, Format, File_Location, date_created, last_modified, Is_Removed)
 VALUES ("9780142000670", "E-Pub", "sample.epub", "2019-12-26 12:38:58", SYSDATE(), FALSE);
-INSERT INTO Book_Format
+INSERT INTO Book_Format(ISBN, Format, File_Location, date_created, last_modified, Is_Removed)
 VALUES ("9780439244190", "E-Pub", "sample.epub", "2019-12-26 12:38:58", SYSDATE(), FALSE);
-INSERT INTO Book_Format
+INSERT INTO Book_Format(ISBN, Format, File_Location, date_created, last_modified, Is_Removed)
 VALUES ("9780061120084", "E-Pub", "sample.epub", "2019-12-26 12:38:58", SYSDATE(), FALSE);
-INSERT INTO Book_Format
+INSERT INTO Book_Format(ISBN, Format, File_Location, date_created, last_modified, Is_Removed)
 VALUES ("9780684830421", "E-Pub", "sample.epub", "2019-12-26 12:38:58", SYSDATE(), FALSE);
-INSERT INTO Book_Format
+INSERT INTO Book_Format(ISBN, Format, File_Location, date_created, last_modified, Is_Removed)
 VALUES ("9780606323451", "E-Pub", "sample.epub", "2019-12-26 12:38:58", SYSDATE(), FALSE);
-INSERT INTO Book_Format
+INSERT INTO Book_Format(ISBN, Format, File_Location, date_created, last_modified, Is_Removed)
 VALUES ("9780451526342", "E-Pub", "sample.epub", "2019-12-26 12:38:58", SYSDATE(), FALSE);
-INSERT INTO Book_Format
+INSERT INTO Book_Format(ISBN, Format, File_Location, date_created, last_modified, Is_Removed)
 VALUES ("9780316769174", "E-Pub", "sample.epub", "2019-12-26 12:38:58", SYSDATE(), FALSE);
-INSERT INTO Book_Format
+INSERT INTO Book_Format(ISBN, Format, File_Location, date_created, last_modified, Is_Removed)
 VALUES ("9780439023481", "E-Pub", "sample.epub", "2019-12-26 12:38:58", SYSDATE(), FALSE);
-INSERT INTO Book_Format
+INSERT INTO Book_Format(ISBN, Format, File_Location, date_created, last_modified, Is_Removed)
 VALUES ("9780307277671", "E-Pub", "sample.epub", "2019-12-26 12:38:58", SYSDATE(), FALSE);
-INSERT INTO Book_Format
+INSERT INTO Book_Format(ISBN, Format, File_Location, date_created, last_modified, Is_Removed)
 VALUES ("9781594480003", "E-Pub", "sample.epub", "2019-12-26 12:38:58", SYSDATE(), FALSE);
-INSERT INTO Book_Format
+INSERT INTO Book_Format(ISBN, Format, File_Location, date_created, last_modified, Is_Removed)
 VALUES ("9780140283334", "E-Pub", "sample.epub", "2019-12-26 12:38:58", SYSDATE(), FALSE);
-INSERT INTO Book_Format
+INSERT INTO Book_Format(ISBN, Format, File_Location, date_created, last_modified, Is_Removed)
 VALUES ("9780679601685", "E-Pub", "sample.epub", "2019-12-26 12:38:58", SYSDATE(), FALSE);
-INSERT INTO Book_Format
+INSERT INTO Book_Format(ISBN, Format, File_Location, date_created, last_modified, Is_Removed)
 VALUES ("9780062315007", "E-Pub", "sample.epub", "2019-12-26 12:38:58", SYSDATE(), FALSE);
-INSERT INTO Book_Format
+INSERT INTO Book_Format(ISBN, Format, File_Location, date_created, last_modified, Is_Removed)
 VALUES ("9780770430078", "E-Pub", "sample.epub", "2019-12-26 12:38:58", SYSDATE(), FALSE);
-INSERT INTO Book_Format
+INSERT INTO Book_Format(ISBN, Format, File_Location, date_created, last_modified, Is_Removed)
 VALUES ("9780375831003", "E-Pub", "sample.epub", "2019-12-26 12:38:58", SYSDATE(), FALSE);
-INSERT INTO Book_Format
+INSERT INTO Book_Format(ISBN, Format, File_Location, date_created, last_modified, Is_Removed)
 VALUES ("9780307588371", "E-Pub", "sample.epub", "2019-12-26 12:38:58", SYSDATE(), FALSE);
-INSERT INTO Book_Format
+INSERT INTO Book_Format(ISBN, Format, File_Location, date_created, last_modified, Is_Removed)
 VALUES ("9781416524793", "E-Pub", "sample.epub", "2019-12-26 12:38:58", SYSDATE(), FALSE);
-INSERT INTO Book_Format
+INSERT INTO Book_Format(ISBN, Format, File_Location, date_created, last_modified, Is_Removed)
 VALUES ("9780393970128", "E-Pub", "sample.epub", "2019-12-26 12:38:58", SYSDATE(), FALSE);
-INSERT INTO Book_Format
+INSERT INTO Book_Format(ISBN, Format, File_Location, date_created, last_modified, Is_Removed)
 VALUES ("9780141439471", "E-Pub", "sample.epub", "2019-12-26 12:38:58", SYSDATE(), FALSE);
-INSERT INTO Book_Format
+INSERT INTO Book_Format(ISBN, Format, File_Location, date_created, last_modified, Is_Removed)
 VALUES ("9780385603102", "E-Pub", "sample.epub", "2019-12-26 12:38:58", SYSDATE(), FALSE);
-INSERT INTO Book_Format
+INSERT INTO Book_Format(ISBN, Format, File_Location, date_created, last_modified, Is_Removed)
 VALUES ("9780143039983", "E-Pub", "sample.epub", "2019-12-26 12:38:58", SYSDATE(), FALSE);
-INSERT INTO Book_Format
+INSERT INTO Book_Format(ISBN, Format, File_Location, date_created, last_modified, Is_Removed)
 VALUES ("9780450040184", "E-Pub", "sample.epub", "2019-12-26 12:38:58", SYSDATE(), FALSE);
-INSERT INTO Book_Format
+INSERT INTO Book_Format(ISBN, Format, File_Location, date_created, last_modified, Is_Removed)
 VALUES ("9780061007224", "E-Pub", "sample.epub", "2019-12-26 12:38:58", SYSDATE(), FALSE);
-INSERT INTO Book_Format
+INSERT INTO Book_Format(ISBN, Format, File_Location, date_created, last_modified, Is_Removed)
 VALUES ("9781416524342", "E-Pub", "sample.epub", "2019-12-26 12:38:58", SYSDATE(), FALSE);
-INSERT INTO Book_Format
+INSERT INTO Book_Format(ISBN, Format, File_Location, date_created, last_modified, Is_Removed)
 VALUES ("9780450411434", "E-Pub", "sample.epub", "2019-12-26 12:38:58", SYSDATE(), FALSE);
-INSERT INTO Book_Format
+INSERT INTO Book_Format(ISBN, Format, File_Location, date_created, last_modified, Is_Removed)
 VALUES ("9780380729401", "E-Pub", "sample.epub", "2019-12-26 12:38:58", SYSDATE(), FALSE);
-INSERT INTO Book_Format
+INSERT INTO Book_Format(ISBN, Format, File_Location, date_created, last_modified, Is_Removed)
 VALUES ("9780345476876", "E-Pub", "sample.epub", "2019-12-26 12:38:58", SYSDATE(), FALSE);
-INSERT INTO Book_Format
+INSERT INTO Book_Format(ISBN, Format, File_Location, date_created, last_modified, Is_Removed)
 VALUES ("9780735212510", "E-Pub", "sample.epub", "2019-12-26 12:38:58", SYSDATE(), FALSE);
-INSERT INTO Book_Format
+INSERT INTO Book_Format(ISBN, Format, File_Location, date_created, last_modified, Is_Removed)
 VALUES ("9780450031069", "E-Pub", "sample.epub", "2019-12-26 12:38:58", SYSDATE(), FALSE);
-INSERT INTO Book_Format
+INSERT INTO Book_Format(ISBN, Format, File_Location, date_created, last_modified, Is_Removed)
 VALUES ("9780307346605", "E-Pub", "sample.epub", "2019-12-26 12:38:58", SYSDATE(), FALSE);
-INSERT INTO Book_Format
+INSERT INTO Book_Format(ISBN, Format, File_Location, date_created, last_modified, Is_Removed)
 VALUES ("9780727860996", "E-Pub", "sample.epub", "2019-12-26 12:38:58", SYSDATE(), FALSE);
-INSERT INTO Book_Format
+INSERT INTO Book_Format(ISBN, Format, File_Location, date_created, last_modified, Is_Removed)
 VALUES ("9780062200570", "E-Pub", "sample.epub", "2019-12-26 12:38:58", SYSDATE(), FALSE);
-INSERT INTO Book_Format
+INSERT INTO Book_Format(ISBN, Format, File_Location, date_created, last_modified, Is_Removed)
 VALUES ("9780061139376", "E-Pub", "sample.epub", "2019-12-26 12:38:58", SYSDATE(), FALSE);
-INSERT INTO Book_Format
+INSERT INTO Book_Format(ISBN, Format, File_Location, date_created, last_modified, Is_Removed)
 VALUES ("9780671685638", "E-Pub", "sample.epub", "2019-12-26 12:38:58", SYSDATE(), FALSE);
-INSERT INTO Book_Format
+INSERT INTO Book_Format(ISBN, Format, File_Location, date_created, last_modified, Is_Removed)
 VALUES ("9780345504968", "E-Pub", "sample.epub", "2019-12-26 12:38:58", SYSDATE(), FALSE);
-INSERT INTO Book_Format
+INSERT INTO Book_Format(ISBN, Format, File_Location, date_created, last_modified, Is_Removed)
 VALUES ("9780062259660", "E-Pub", "sample.epub", "2019-12-26 12:38:58", SYSDATE(), FALSE);
-INSERT INTO Book_Format
+INSERT INTO Book_Format(ISBN, Format, File_Location, date_created, last_modified, Is_Removed)
 VALUES ("9781982110567", "E-Pub", "sample.epub", "2019-12-26 12:38:58", SYSDATE(), FALSE);
-INSERT INTO Book_Format
+INSERT INTO Book_Format(ISBN, Format, File_Location, date_created, last_modified, Is_Removed)
 VALUES ("9780307949486", "E-Pub", "sample.epub", "2019-12-26 12:38:58", SYSDATE(), FALSE);
-INSERT INTO Book_Format
+INSERT INTO Book_Format(ISBN, Format, File_Location, date_created, last_modified, Is_Removed)
 VALUES ("9780312330873", "E-Pub", "sample.epub", "2019-12-26 12:38:58", SYSDATE(), FALSE);
-INSERT INTO Book_Format
+INSERT INTO Book_Format(ISBN, Format, File_Location, date_created, last_modified, Is_Removed)
 VALUES ("9780316323703", "E-Pub", "sample.epub", "2019-12-26 12:38:58", SYSDATE(), FALSE);
-INSERT INTO Book_Format
+INSERT INTO Book_Format(ISBN, Format, File_Location, date_created, last_modified, Is_Removed)
 VALUES ("9780679745587", "E-Pub", "sample.epub", "2019-12-26 12:38:58", SYSDATE(), FALSE);
-INSERT INTO Book_Format
+INSERT INTO Book_Format(ISBN, Format, File_Location, date_created, last_modified, Is_Removed)
 VALUES ("9780451205766", "E-Pub", "sample.epub", "2019-12-26 12:38:58", SYSDATE(), FALSE);
-INSERT INTO Book_Format
+INSERT INTO Book_Format(ISBN, Format, File_Location, date_created, last_modified, Is_Removed)
 VALUES ("9780316166683", "E-Pub", "sample.epub", "2019-12-26 12:38:58", SYSDATE(), FALSE);
-INSERT INTO Book_Format
+INSERT INTO Book_Format(ISBN, Format, File_Location, date_created, last_modified, Is_Removed)
 VALUES ("9780156001311", "E-Pub", "sample.epub", "2019-12-26 12:38:58", SYSDATE(), FALSE);
-INSERT INTO Book_Format
+INSERT INTO Book_Format(ISBN, Format, File_Location, date_created, last_modified, Is_Removed)
 VALUES ("9780582418271", "E-Pub", "sample.epub", "2019-12-26 12:38:58", SYSDATE(), FALSE);
-INSERT INTO Book_Format
+INSERT INTO Book_Format(ISBN, Format, File_Location, date_created, last_modified, Is_Removed)
 VALUES ("9780380731862", "E-Pub", "sample.epub", "2019-12-26 12:38:58", SYSDATE(), FALSE);
-INSERT INTO Book_Format
+INSERT INTO Book_Format(ISBN, Format, File_Location, date_created, last_modified, Is_Removed)
 VALUES ("9780060584757", "E-Pub", "sample.epub", "2019-12-26 12:38:58", SYSDATE(), FALSE);
-INSERT INTO Book_Format
+INSERT INTO Book_Format(ISBN, Format, File_Location, date_created, last_modified, Is_Removed)
 VALUES ("9780143034902", "E-Pub", "sample.epub", "2019-12-26 12:38:58", SYSDATE(), FALSE);
-INSERT INTO Book_Format
+INSERT INTO Book_Format(ISBN, Format, File_Location, date_created, last_modified, Is_Removed)
 VALUES ("9780812976144", "E-Pub", "sample.epub", "2019-12-26 12:38:58", SYSDATE(), FALSE);
-INSERT INTO Book_Format
+INSERT INTO Book_Format(ISBN, Format, File_Location, date_created, last_modified, Is_Removed)
 VALUES ("9780394758282", "E-Pub", "sample.epub", "2019-12-26 12:38:58", SYSDATE(), FALSE);
-INSERT INTO Book_Format
+INSERT INTO Book_Format(ISBN, Format, File_Location, date_created, last_modified, Is_Removed)
 VALUES ("9780312362089", "E-Pub", "sample.epub", "2019-12-26 12:38:58", SYSDATE(), FALSE);
-INSERT INTO Book_Format
+INSERT INTO Book_Format(ISBN, Format, File_Location, date_created, last_modified, Is_Removed)
 VALUES ("9780752865331", "E-Pub", "sample.epub", "2019-12-26 12:38:58", SYSDATE(), FALSE);
-INSERT INTO Book_Format
+INSERT INTO Book_Format(ISBN, Format, File_Location, date_created, last_modified, Is_Removed)
 VALUES ("9780525945567", "E-Pub", "sample.epub", "2019-12-26 12:38:58", SYSDATE(), FALSE);
-INSERT INTO Book_Format
+INSERT INTO Book_Format(ISBN, Format, File_Location, date_created, last_modified, Is_Removed)
 VALUES ("9780670038602", "E-Pub", "sample.epub", "2019-12-26 12:38:58", SYSDATE(), FALSE);
-INSERT INTO Book_Format
+INSERT INTO Book_Format(ISBN, Format, File_Location, date_created, last_modified, Is_Removed)
 VALUES ("9780446350983", "E-Pub", "sample.epub", "2019-12-26 12:38:58", SYSDATE(), FALSE);
-INSERT INTO Book_Format
+INSERT INTO Book_Format(ISBN, Format, File_Location, date_created, last_modified, Is_Removed)
 VALUES ("9780743298025", "E-Pub", "sample.epub", "2019-12-26 12:38:58", SYSDATE(), FALSE);
-INSERT INTO Book_Format
+INSERT INTO Book_Format(ISBN, Format, File_Location, date_created, last_modified, Is_Removed)
 VALUES ("9780812550702", "E-Pub", "sample.epub", "2019-12-26 12:38:58", SYSDATE(), FALSE);
-INSERT INTO Book_Format
+INSERT INTO Book_Format(ISBN, Format, File_Location, date_created, last_modified, Is_Removed)
 VALUES ("9780141036144", "E-Pub", "sample.epub", "2019-12-26 12:38:58", SYSDATE(), FALSE);
-INSERT INTO Book_Format
+INSERT INTO Book_Format(ISBN, Format, File_Location, date_created, last_modified, Is_Removed)
 VALUES ("9780307887436", "E-Pub", "sample.epub", "2019-12-26 12:38:58", SYSDATE(), FALSE);
-INSERT INTO Book_Format
+INSERT INTO Book_Format(ISBN, Format, File_Location, date_created, last_modified, Is_Removed)
 VALUES ("9780593099322", "E-Pub", "sample.epub", "2019-12-26 12:38:58", SYSDATE(), FALSE);
-INSERT INTO Book_Format
+INSERT INTO Book_Format(ISBN, Format, File_Location, date_created, last_modified, Is_Removed)
 VALUES ("9781451673319", "E-Pub", "sample.epub", "2019-12-26 12:38:58", SYSDATE(), FALSE);
-INSERT INTO Book_Format
+INSERT INTO Book_Format(ISBN, Format, File_Location, date_created, last_modified, Is_Removed)
 VALUES ("9780804139021", "E-Pub", "sample.epub", "2019-12-26 12:38:58", SYSDATE(), FALSE);
-INSERT INTO Book_Format
+INSERT INTO Book_Format(ISBN, Format, File_Location, date_created, last_modified, Is_Removed)
 VALUES ("9780553803716", "E-Pub", "sample.epub", "2019-12-26 12:38:58", SYSDATE(), FALSE);
-INSERT INTO Book_Format
+INSERT INTO Book_Format(ISBN, Format, File_Location, date_created, last_modified, Is_Removed)
 VALUES ("9780439023498", "E-Pub", "sample.epub", "2019-12-26 12:38:58", SYSDATE(), FALSE);
-INSERT INTO Book_Format
+INSERT INTO Book_Format(ISBN, Format, File_Location, date_created, last_modified, Is_Removed)
 VALUES ("9781524796976", "E-Pub", "sample.epub", "2019-12-26 12:38:58", SYSDATE(), FALSE);
-INSERT INTO Book_Format
+INSERT INTO Book_Format(ISBN, Format, File_Location, date_created, last_modified, Is_Removed)
 VALUES ("9780439023511", "E-Pub", "sample.epub", "2019-12-26 12:38:58", SYSDATE(), FALSE);
-INSERT INTO Book_Format
+INSERT INTO Book_Format(ISBN, Format, File_Location, date_created, last_modified, Is_Removed)
 VALUES ("9780486284729", "E-Pub", "sample.epub", "2019-12-26 12:38:58", SYSDATE(), FALSE);
-INSERT INTO Book_Format
+INSERT INTO Book_Format(ISBN, Format, File_Location, date_created, last_modified, Is_Removed)
 VALUES ("9780553803709", "E-Pub", "sample.epub", "2019-12-26 12:38:58", SYSDATE(), FALSE);
-INSERT INTO Book_Format
+INSERT INTO Book_Format(ISBN, Format, File_Location, date_created, last_modified, Is_Removed)
 VALUES ("9780062024039", "E-Pub", "sample.epub", "2019-12-26 12:38:58", SYSDATE(), FALSE);
-INSERT INTO Book_Format
+INSERT INTO Book_Format(ISBN, Format, File_Location, date_created, last_modified, Is_Removed)
 VALUES ("9780441788385", "E-Pub", "sample.epub", "2019-12-26 12:38:58", SYSDATE(), FALSE);
-INSERT INTO Book_Format
+INSERT INTO Book_Format(ISBN, Format, File_Location, date_created, last_modified, Is_Removed)
 VALUES ("9780771008795", "E-Pub", "sample.epub", "2019-12-26 12:38:58", SYSDATE(), FALSE);
-INSERT INTO Book_Format
+INSERT INTO Book_Format(ISBN, Format, File_Location, date_created, last_modified, Is_Removed)
 VALUES ("9781509808335", "E-Pub", "sample.epub", "2019-12-26 12:38:58", SYSDATE(), FALSE);
-INSERT INTO Book_Format
+INSERT INTO Book_Format(ISBN, Format, File_Location, date_created, last_modified, Is_Removed)
 VALUES ("9780345538987", "E-Pub", "sample.epub", "2019-12-26 12:38:58", SYSDATE(), FALSE);
-INSERT INTO Book_Format
+INSERT INTO Book_Format(ISBN, Format, File_Location, date_created, last_modified, Is_Removed)
 VALUES ("9780451457998", "E-Pub", "sample.epub", "2019-12-26 12:38:58", SYSDATE(), FALSE);
-INSERT INTO Book_Format
+INSERT INTO Book_Format(ISBN, Format, File_Location, date_created, last_modified, Is_Removed)
 VALUES ("9780989671767", "E-Pub", "sample.epub", "2019-12-26 12:38:58", SYSDATE(), FALSE);
-INSERT INTO Book_Format
+INSERT INTO Book_Format(ISBN, Format, File_Location, date_created, last_modified, Is_Removed)
 VALUES ("9780989671774", "E-Pub", "sample.epub", "2019-12-26 12:38:58", SYSDATE(), FALSE);
-INSERT INTO Book_Format
+INSERT INTO Book_Format(ISBN, Format, File_Location, date_created, last_modified, Is_Removed)
 VALUES ("9780989671781", "E-Pub", "sample.epub", "2019-12-26 12:38:58", SYSDATE(), FALSE);
-INSERT INTO Book_Format
+INSERT INTO Book_Format(ISBN, Format, File_Location, date_created, last_modified, Is_Removed)
 VALUES ("9780999851104", "E-Pub", "sample.epub", "2019-12-26 12:38:58", SYSDATE(), FALSE);
-INSERT INTO Book_Format
+INSERT INTO Book_Format(ISBN, Format, File_Location, date_created, last_modified, Is_Removed)
 VALUES ("9780999851111", "E-Pub", "sample.epub", "2019-12-26 12:38:58", SYSDATE(), FALSE);
-INSERT INTO Book_Format
+INSERT INTO Book_Format(ISBN, Format, File_Location, date_created, last_modified, Is_Removed)
 VALUES ("9780999851128", "E-Pub", "sample.epub", "2019-12-26 12:38:58", SYSDATE(), FALSE);
-INSERT INTO Book_Format
+INSERT INTO Book_Format(ISBN, Format, File_Location, date_created, last_modified, Is_Removed)
 VALUES ("9780999851135", "E-Pub", "sample.epub", "2019-12-26 12:38:58", SYSDATE(), FALSE);
-INSERT INTO Book_Format
+INSERT INTO Book_Format(ISBN, Format, File_Location, date_created, last_modified, Is_Removed)
 VALUES ("9780316075558", "E-Pub", "sample.epub", "2019-12-26 12:38:58", SYSDATE(), FALSE);
-INSERT INTO Book_Format
+INSERT INTO Book_Format(ISBN, Format, File_Location, date_created, last_modified, Is_Removed)
 VALUES ("9780316079914", "E-Pub", "sample.epub", "2019-12-26 12:38:58", SYSDATE(), FALSE);
-INSERT INTO Book_Format
+INSERT INTO Book_Format(ISBN, Format, File_Location, date_created, last_modified, Is_Removed)
 VALUES ("9780316058964", "E-Pub", "sample.epub", "2019-12-26 12:38:58", SYSDATE(), FALSE);
-INSERT INTO Book_Format
+INSERT INTO Book_Format(ISBN, Format, File_Location, date_created, last_modified, Is_Removed)
 VALUES ("9780316251334", "E-Pub", "sample.epub", "2019-12-26 12:38:58", SYSDATE(), FALSE);
-INSERT INTO Book_Format
+INSERT INTO Book_Format(ISBN, Format, File_Location, date_created, last_modified, Is_Removed)
 VALUES ("9780316251303", "E-Pub", "sample.epub", "2019-12-26 12:38:58", SYSDATE(), FALSE);
-INSERT INTO Book_Format
+INSERT INTO Book_Format(ISBN, Format, File_Location, date_created, last_modified, Is_Removed)
 VALUES ("9780765311788", "E-Pub", "sample.epub", "2019-12-26 12:38:58", SYSDATE(), FALSE);
-INSERT INTO Book_Format
+INSERT INTO Book_Format(ISBN, Format, File_Location, date_created, last_modified, Is_Removed)
 VALUES ("9780765316882", "E-Pub", "sample.epub", "2019-12-26 12:38:58", SYSDATE(), FALSE);
-INSERT INTO Book_Format
+INSERT INTO Book_Format(ISBN, Format, File_Location, date_created, last_modified, Is_Removed)
 VALUES ("9780765316899", "E-Pub", "sample.epub", "2019-12-26 12:38:58", SYSDATE(), FALSE);
-INSERT INTO Book_Format
+INSERT INTO Book_Format(ISBN, Format, File_Location, date_created, last_modified, Is_Removed)
 VALUES ("9780765330420", "E-Pub", "sample.epub", "2019-12-26 12:38:58", SYSDATE(), FALSE);
-INSERT INTO Book_Format
+INSERT INTO Book_Format(ISBN, Format, File_Location, date_created, last_modified, Is_Removed)
 VALUES ("9780765378552", "E-Pub", "sample.epub", "2019-12-26 12:38:58", SYSDATE(), FALSE);
-INSERT INTO Book_Format
+INSERT INTO Book_Format(ISBN, Format, File_Location, date_created, last_modified, Is_Removed)
 VALUES ("9781466862678", "E-Pub", "sample.epub", "2019-12-26 12:38:58", SYSDATE(), FALSE);
-INSERT INTO Book_Format
+INSERT INTO Book_Format(ISBN, Format, File_Location, date_created, last_modified, Is_Removed)
 VALUES ("9780756404079", "E-Pub", "sample.epub", "2019-12-26 12:38:58", SYSDATE(), FALSE);
-INSERT INTO Book_Format
+INSERT INTO Book_Format(ISBN, Format, File_Location, date_created, last_modified, Is_Removed)
 VALUES ("9780756404734", "E-Pub", "sample.epub", "2019-12-26 12:38:58", SYSDATE(), FALSE);
-INSERT INTO Book_Format
+INSERT INTO Book_Format(ISBN, Format, File_Location, date_created, last_modified, Is_Removed)
 VALUES ("9781937007294", "E-Pub", "sample.epub", "2019-12-26 12:38:58", SYSDATE(), FALSE);
-INSERT INTO Book_Format
+INSERT INTO Book_Format(ISBN, Format, File_Location, date_created, last_modified, Is_Removed)
 VALUES ("9781937007591", "E-Pub", "sample.epub", "2019-12-26 12:38:58", SYSDATE(), FALSE);
-INSERT INTO Book_Format
+INSERT INTO Book_Format(ISBN, Format, File_Location, date_created, last_modified, Is_Removed)
 VALUES ("9781937007720", "E-Pub", "sample.epub", "2019-12-26 12:38:58", SYSDATE(), FALSE);
-INSERT INTO Book_Format
+INSERT INTO Book_Format(ISBN, Format, File_Location, date_created, last_modified, Is_Removed)
 VALUES ("9780425264928", "E-Pub", "sample.epub", "2019-12-26 12:38:58", SYSDATE(), FALSE);
-INSERT INTO Book_Format
+INSERT INTO Book_Format(ISBN, Format, File_Location, date_created, last_modified, Is_Removed)
 VALUES ("9780425264942", "E-Pub", "sample.epub", "2019-12-26 12:38:58", SYSDATE(), FALSE);
-INSERT INTO Book_Format
+INSERT INTO Book_Format(ISBN, Format, File_Location, date_created, last_modified, Is_Removed)
 VALUES ("9780425275757", "E-Pub", "sample.epub", "2019-12-26 12:38:58", SYSDATE(), FALSE);
-INSERT INTO Book_Format
+INSERT INTO Book_Format(ISBN, Format, File_Location, date_created, last_modified, Is_Removed)
 VALUES ("9780698165083", "E-Pub", "sample.epub", "2019-12-26 12:38:58", SYSDATE(), FALSE);
-INSERT INTO Book_Format
+INSERT INTO Book_Format(ISBN, Format, File_Location, date_created, last_modified, Is_Removed)
 VALUES ("9781101988527", "E-Pub", "sample.epub", "2019-12-26 12:38:58", SYSDATE(), FALSE);
-INSERT INTO Book_Format
+INSERT INTO Book_Format(ISBN, Format, File_Location, date_created, last_modified, Is_Removed)
 VALUES ("9780356507217", "E-Pub", "sample.epub", "2019-12-26 12:38:58", SYSDATE(), FALSE);
-INSERT INTO Book_Format
+INSERT INTO Book_Format(ISBN, Format, File_Location, date_created, last_modified, Is_Removed)
 VALUES ("9780440000587", "E-Pub", "sample.epub", "2019-12-26 12:38:58", SYSDATE(), FALSE);
 
 
