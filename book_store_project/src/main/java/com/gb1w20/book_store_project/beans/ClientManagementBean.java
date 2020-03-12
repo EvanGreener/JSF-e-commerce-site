@@ -3,13 +3,9 @@ package com.gb1w20.book_store_project.beans;
 import com.gb1w20.book_store_project.entities.Clients;
 import com.gb1w20.book_store_project.jpa_controllers.ClientsJpaController;
 import java.io.Serializable;
-import java.util.Arrays;
-import java.util.Collection;
 import java.util.List;
-import java.util.Map;
 import javax.annotation.PostConstruct;
 import javax.enterprise.context.SessionScoped;
-import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
 import org.slf4j.Logger;
@@ -27,9 +23,12 @@ public class ClientManagementBean implements Serializable {
      private String query = "";
      private List<Object[]> results;
      private Clients currentClient;
-     private String newEmail;
      private String newFname;
      private String newLname;
+     private String newAddress1;
+     private String newAddress2;
+     private String newCell;
+     private String newCompanyName;
 
      @PostConstruct
      public void init() {
@@ -53,14 +52,6 @@ public class ClientManagementBean implements Serializable {
           return currentClient;
      }
 
-     public String getNewEmail() {
-          return newEmail;
-     }
-
-     public void setNewEmail(String newValue) {
-          newEmail = newValue;
-     }
-
      public String getNewFname() {
           return newFname;
      }
@@ -76,15 +67,50 @@ public class ClientManagementBean implements Serializable {
      public void setNewLname(String newValue) {
           newLname = newValue;
      }
+     
+      public String getNewAddress1() {
+          return newAddress1;
+     }
+
+     public String getNewAddress2() {
+          return newAddress2;
+     }
+
+     public String getNewCell() {
+          return newCell;
+     }
+
+     public String getNewCompanyName() {
+          return newCompanyName;
+     }
+
+     public void setNewAddress1(String newAddress1) {
+          this.newAddress1 = newAddress1;
+     }
+
+     public void setNewAddress2(String newAddress2) {
+          this.newAddress2 = newAddress2;
+     }
+
+     public void setNewCell(String newCell) {
+          this.newCell = newCell;
+     }
+
+     public void setNewCompanyName(String newCompanyName) {
+          this.newCompanyName = newCompanyName;
+     }
+     
+     
 
      public void updateBean() {
           LOG.debug(query);
           results = clientCtrl.searchClients(query);
      }
 
-     public void onEdit(Object id) {
-          System.out.println(id);
-          LOG.debug((String) id);
+     public void onEdit(int id) {
+          LOG.debug(id + "");
+          currentClient = clientCtrl.findClients(id);
+
      }
 
 }

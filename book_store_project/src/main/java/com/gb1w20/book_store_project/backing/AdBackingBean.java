@@ -84,11 +84,11 @@ public class AdBackingBean implements Serializable {
     public String getRemovalStatus(boolean isRemoved) throws Exception {
         if (isRemoved)
         {
-            return "Show Ad on Front Page";
+            return "Display Ad";
         }
         else
         {
-            return "Remove Ad from Front Page";
+            return "Remove Ad";
         }
     }
     
