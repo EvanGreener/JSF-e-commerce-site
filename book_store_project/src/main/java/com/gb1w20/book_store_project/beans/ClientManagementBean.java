@@ -110,7 +110,41 @@ public class ClientManagementBean implements Serializable {
      public void onEdit(int id) {
           LOG.debug(id + "");
           currentClient = clientCtrl.findClients(id);
+     }
 
+     public void onClickEdit(int id) {
+          LOG.debug(id + "");
+          currentClient = clientCtrl.findClients(id);
+
+     }
+     
+     /**
+      * Because of the way our database works, the client's email cannot be changed.
+      */
+     public void onSubmitEdit() throws Exception{
+          if (newFname != null && !newFname.isBlank() ){
+               currentClient.setFirstName(newFname);
+          }
+          if (newLname != null && !newLname.isBlank() ){
+               currentClient.setLastName(newLname);
+          }
+          if (newAddress1 != null && !newAddress1.isBlank() ){
+               currentClient.setAddress1(newAddress1);
+          }
+          if (newAddress2 != null && !newAddress2.isBlank() ){
+               currentClient.setAddress2(newAddress2);
+          }
+          if (newCell != null && !newCell.isBlank() ){
+               currentClient.setCellTelephone(newCell);
+          }
+          if (newCompanyName != null && !newCompanyName.isBlank() ){
+               currentClient.setCompanyName(newCompanyName);
+          }
+          
+          LOG.debug(newAddress2);
+          LOG.debug(currentClient.getAddress2());
+          
+          clientCtrl.edit(currentClient);
      }
 
 }

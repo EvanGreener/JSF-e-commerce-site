@@ -142,7 +142,7 @@
                               $#{client[8]}0
                          </h:column>
                          <h:column>
-                              <h:commandButton type="button" onclick="setTimeout(function(){$('#editModal').modal('show', hideGrowl())}, 100)" 
+                              <h:commandButton type="button" onclick="setTimeout(function(){$('#editModal').modal('show', hideGrowl())}, 500)" 
                                                value="Edit" class="big ui primary button edit_btn" >
                                    <f:ajax event="click"  render="editForm" listener="#{clientManagement.onClickEdit(client[0])}"/>
                               </h:commandButton>

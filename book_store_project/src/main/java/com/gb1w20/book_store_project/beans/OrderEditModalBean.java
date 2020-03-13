@@ -15,7 +15,7 @@ import org.slf4j.LoggerFactory;
  * @author 1733408
  */
 
-@Named("modalBean")
+@Named("orderEdit")
 @SessionScoped
 public class OrderEditModalBean implements Serializable {
     
@@ -48,7 +48,14 @@ public class OrderEditModalBean implements Serializable {
     
     public void onEdit(int id) {
           LOG.debug("Edit called!");
+          LOG.debug("ID we searching for: " + id);
           currentOrder = orderCtrl.findOrders(id);
-     }
+          LOG.debug("Current order ID " + currentOrder.getOrderID());
+          LOG.debug("Current order email " + currentOrder.getClient().getEmail());
+    }
+    
+    public void onSubmitEdit() throws Exception{
+        LOG.debug("onSubmitEdit called");
+    }
     
 }

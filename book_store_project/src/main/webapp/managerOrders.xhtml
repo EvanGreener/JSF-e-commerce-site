@@ -6,13 +6,15 @@
       xmlns:f="http://xmlns.jcp.org/jsf/core"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:bookstore="http://java.sun.com/jsf/composite/default_components"
-      xmlns:p="http://primefaces.org/ui">
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:a="http://xmlns.jcp.org/jsf/passthrough">
     <h:head>
         <title>Manager Orders</title>
         <link rel="stylesheet" href="https://unpkg.com/swiper/css/swiper.min.css"/>
 
 
         <link href="https://fonts.googleapis.com/css?family=Montserrat|Roboto&amp;display=swap" rel="stylesheet"/>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 
         <h:outputStylesheet library="webjars" name="Semantic-UI/2.4.1/semantic.min.css" />
         <h:outputStylesheet library="css" name="homepage.css" />
@@ -21,69 +23,158 @@
         <h:outputStylesheet library="webjars" name="font-awesome/4.7.0/css/font-awesome.min-jsf.css" />
         <!-- Swiper JS -->
         <script src="https://unpkg.com/swiper/js/swiper.min.js"></script>
+                  <style>
+
+               .modal{
+                    position: fixed;
+                    padding-top: 0px;
+                    height: fit-content;
+               }
+
+               .middle h1 {
+                    margin-top: 20px !important;
+                    text-align: center;
+                    color: gray;
+               }
+               .middle{
+                    padding: 0px 40px 0px 40px;
+               }
+               
+               .actions{
+                    height: 80%;
+                    text-align: center !important;
+                    font-size: 20px;
+                    margin: 10px 10px 10px 10px;
+               }
+               
+               .actions .ui.button {
+                    margin: 10px 10px 10px 10px;
+               }
+               
+               .footer button{
+                    font-size: 20px !important;
+                    margin: 0px 10px 0px 10px !important;
+               }
+
+               .header h1 {
+                    text-align: center !important;
+               }
+
+/*               .content h3 {
+                    
+               }*/
+
+               .form-field{
+                    font-size: 18px;
+                    margin: 10px 0px 10px 5px;
+
+               }
+
+               #editFormGrowl{
+                    position: fixed;
+                    display: none;
+                    z-index: 777;
+                    left: 100%;
+                    margin-left: -257.42px;
+                   
+
+               }
+
+          </style>
     </h:head>
 
-    <h:body>
-        <bookstore:navbar/>
-        <div class="ui form">
-            <div class="lightGreyDivLessSpacing">
-                <div class="two fields">
-                    <div class="field">
-                        <p:outputLabel for="startDateTime" value="Start Date and Time" />
-                        <p:datePicker id="startDateTime" value="" showTime="true" mindate="#{date.minDate}" maxdate="#{date.maxDate}"/>
+     <h:body>
+
+          <h:form id="editForm">
+               <bookstore:navbar />
+
+               <div class="middle">
+
+                    <div id="editFormGrowl" class="ui floating positive message" >
+                         <!--<i class="close icon"></i>-->
+                         <div class="header">
+                              Changes have been saved!
+                         </div>
                     </div>
-                    <div class="field">
-                        <p:outputLabel for="endDateTime" value="End Date and Time" />
-                        <p:datePicker id="endDateTime" value="" showTime="true" mindate="#{date.minDate}" maxdate="#{date.maxDate}"/>
+                    
+                    <h1>Order Management</h1>
+
+                    <!--Search bar: UPDATE FOR ORDERS-->
+                    <div style="display: inline;" class="ui search" >
+                         <h:inputText  id="query" value="#{clientManagement.query}"  a:placeholder="Search orders by email..." style="float: right; margin-top: 10px; margin-bottom: 10px; width: 200px; " class="prompt" >
+                              <p:ajax event="keyup" listener="#{clientManagement.updateBean()}" update="ordersTable" />
+                         </h:inputText>
+                    </div> 
+
+
+
+                    <h:dataTable  id="ordersTable" var="orders" style="margin-bottom: 20px;"  class="ui celled table" value="#{ordersJpaController.findOrdersEntities()}" >
+                         <h:column>
+                              <f:facet name="header">Order ID</f:facet>
+                                   #{orders.orderID}
+                         </h:column>
+                         <h:column>
+                              <f:facet name="header">Client Email</f:facet>
+                                   #{orders.client.email}
+                         </h:column>
+                         <h:column>
+                              <f:facet name="header">Number of Items</f:facet>
+                                   #{orders.orderItems.size()}
+                         </h:column>
+                         <h:column>
+                              <f:facet name="header">Date Created</f:facet>
+                                   #{orders.dateCreated}
+                         </h:column>
+                         <h:column>
+                              <f:facet name="header">Last Modified</f:facet>
+                                   #{orders.lastUpdated}
+                         </h:column>
+                         <h:column>
+                              <f:facet name="header">Status</f:facet>
+                                   #{ordersJpaController.getStatusByOrderId(orders.orderID)}
+                         </h:column>
+                         <h:column>
+                              <h:commandButton type="button" onclick="setTimeout(function(){$('#editModal').modal('show', hideGrowl())}, 500)" 
+                                               value="Edit Order" class="big ui primary button edit_btn" >
+                                  <f:ajax event="click"  render="editForm" listener="#{orderEdit.onEdit(orders.orderID)}"/>
+                              </h:commandButton>
+
+                         </h:column>
+
+                    </h:dataTable>
+               </div>
+
+               <bookstore:footer />
+
+               <div id="editModal" class="ui modal">
+                   <div id="modal-content">
+                    <div class="header">
+                        <h1>Order ID# #{orderEdit.currentOrder.orderID} </h1>
                     </div>
-                </div>
-                <h:dataTable class="ui celled table" value="#{ordersJpaController.findOrdersEntities()}" var="orders">
-                    <h:column>
-                        <f:facet name="header">Order #</f:facet>
-                            #{orders.orderID}
-                    </h:column>
-                    <h:column>
-                        <f:facet name="header">Email</f:facet>
-                            #{orders.client.email}
-                    </h:column>
-                    <h:column>
-                        <f:facet name="header"># of Items</f:facet>
-                            #{orders.orderItems.size()}
-                    </h:column>
-                    <h:column>
-                        <f:facet name="header">Date Placed</f:facet>
-                            #{orders.dateCreated}
-                    </h:column>
-                    <h:column>
-                        <f:facet name="header">Last Updated</f:facet>
-                            #{orders.lastUpdated}
-                    </h:column>
-                    <h:column>
-                        <f:facet name="header">Status</f:facet>
-                            #{ordersJpaController.getStatusByOrderId(orders.orderID)}
-                    </h:column>
-                    <h:column>
-                        <h:form id="editForm">
-                            <h:commandLink onclick="return showModal()" value="Edit Order" disabled="#{orders.isRemoved}">
-                                <f:ajax event="click" render="editForm" listener="#{modalBean.onEdit(orders.client.clientID)}"/>
-                            </h:commandLink>
-                            <div id="editOrderModal" class="modal">
-                                <div class="modal-content">
-                                    Order ID# #{modalBean.currentOrder.orderID}
-                                </div>
-                            </div>
-                        </h:form>
-                    </h:column>
-                    <h:column>
-                        <!--
-                        <h:form>
-                            <h:commandLink value="{orderBacking.getRemovalStatus(orders.isRemoved)}" action="{orderBacking.addOrRemoveOrder(orders)}" />
-                        </h:form>
-                        -->
-                    </h:column>
-                </h:dataTable>
-            </div>
-        </div>
-        <bookstore:footer/>
-    </h:body>
+                    <div class="content">
+
+                    </div>
+
+                    <div class="actions">
+                         <h:commandButton type="button" action="#{orderEdit.onSubmitEdit()}" style="font-size: 20px;"  value="Save Changes" class="ui positive button"
+                              onclick="$('#editFormGrowl').show('slow')">
+                              <p:ajax listener="#{orderEdit.onSubmitEdit()}"/>
+                         </h:commandButton>    
+                         <div style="font-size: 20px;" type="button" class="ui cancel button" >Cancel</div>
+                    </div>
+
+               </div>
+               </div>
+
+          </h:form>
+
+          <script>
+               function hideGrowl() {
+                    $('#editFormGrowl').hide('slow');
+//                    console.log('Hiding growl...');
+               }
+               
+          </script>
+
+     </h:body>
 </html>
