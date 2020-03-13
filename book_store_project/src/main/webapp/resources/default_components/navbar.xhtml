@@ -30,8 +30,14 @@
             <b:navbarLinks pull="right"><b:navLink value="    " href="#"></b:navLink></b:navbarLinks>
             <b:navbarLinks pull="right" styleClass="hidden-xs">
 
+                <b:dropMenu value="Site View" rendered="#{UserLoginBean.getIfManager()}" style="color: white">
+                    <b:navLink id="man" value="Man - En" href="managerFront.xhtml"></b:navLink>
+                    <b:navLink id="cli" value="Clinet - Fr" href="index.xhtml"></b:navLink>
+                </b:dropMenu>
+
                 <b:navLink style="color: white" class="nav" value="My Books" href="mybooks.xhtml"></b:navLink>
                 <b:navLink style="color: white" class="nav" value="Cart" href="cart.xhtml"></b:navLink>
+
                 <b:dropMenu value="En" style="color: white">
                     <b:navLink id="en" value="English - En" href="#"></b:navLink>
                     <b:navLink id="fr" value="Francais - Fr" href="#"></b:navLink>
@@ -40,7 +46,7 @@
                 <b:navLink rendered="#{!UserLoginBean.getSignInStatus()}" style="color: white;font-weight: bold" value="Log In" href="signIn.xhtml">
                 </b:navLink>
 
-                <b:dropMenu rendered="#{UserLoginBean.getSignInStatus()}" value="Hello #{clientBacking.getClient().getFirstName()}" style="color: white">
+                <b:dropMenu rendered="#{UserLoginBean.getSignInStatus()}" value="Hello #{UserLoginBean.getFirstName()}" style="color: white">
                     <b:navLink id="signout" value="Signout" href="#" onclick="signOut()"></b:navLink>
                 </b:dropMenu>
 

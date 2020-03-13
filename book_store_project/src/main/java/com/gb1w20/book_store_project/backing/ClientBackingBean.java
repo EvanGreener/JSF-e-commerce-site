@@ -239,6 +239,7 @@ public class ClientBackingBean implements Serializable {
         Object[] info = clientsJpaController.getInfoByEmail(loginEmail);
         String email = (String)info[0];
         String dbPasswordHash = (String)info[1];
+        Boolean isManager = (Boolean)info[2];
         
         MessageDigest md = MessageDigest.getInstance("SHA-256");
         byte[] hashEmail = md.digest(email.getBytes(StandardCharsets.UTF_8));
@@ -259,7 +260,7 @@ public class ClientBackingBean implements Serializable {
         {
             createLoginCookie(email);
             this.message = "You are logged in, " + email;
-            return "index.xhtml";
+            return isManager ? "managerFront.xhtml" : "index.xhtml";
         }
         else
         {
