@@ -33,35 +33,49 @@
 
             <!-- lists all books already bought by user for them to download -->
             <div class="ui">
-                <div class="ui fluid ">
+                <div class="ui fluid">
 
                     <br/>
-                    <h3>Download MyBooks</h3>
+                    <h3 style="text-align: center;font-variant: small-caps;">Download MyBooks</h3>
                     <br/>
-                    
-                    <!--TODO list actual books owned by user from database -->
-                    <div class="ui divided items">
-                        <ui:repeat value="#{bb.bestSeller}" var="book">
+                    <div class="centerItems">
+                        <!--TODO list actual books owned by user from database -->
+                        <div class="ui divided items downloadDiv">
 
-                            <div class="item">
-                                <div class="ui tiny image">
-                                    <h:graphicImage library="images" name="#{book.isbn}.jpg"  />
 
-                                </div>
-                                <div class="middle aligned content">
-                                    #{book.title}
-                                    <br/>
-                                    ePub
-                                    <div class="extra">
-                                        <div class="ui right floated button">
-                                            Download
+
+
+
+                            <ui:repeat value="#{bb.bestSeller}" var="book">
+
+                                <div class="item">
+                                    <div class="ui tiny image">
+                                        <h:graphicImage library="images" name="#{book.isbn}.jpg"  />
+
+                                    </div>
+
+                                    <div class="middle aligned content">
+                                        #{book.title}
+                                        <br/>
+                                        ePub
+                                        <div class="extra">
+                                            <div class="ui right floated button">
+                                                Download
+                                            </div>
                                         </div>
                                     </div>
+
                                 </div>
 
-                            </div>
+                            </ui:repeat>
 
-                        </ui:repeat>
+
+
+
+
+
+
+                        </div>
                     </div>
                 </div>
             </div>
