@@ -17,8 +17,9 @@ import org.slf4j.LoggerFactory;
 @RequestScoped
 public class UserLoginBean implements Serializable {
     
-        private final static Logger LOG = LoggerFactory.getLogger(UserLoginBean.class);
+     private final static Logger LOG = LoggerFactory.getLogger(UserLoginBean.class);
 
+     
     
     public Boolean getSignInStatus(){
         FacesContext facesContext = FacesContext.getCurrentInstance();
