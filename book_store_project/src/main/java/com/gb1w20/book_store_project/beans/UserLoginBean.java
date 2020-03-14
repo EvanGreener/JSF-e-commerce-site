@@ -4,13 +4,13 @@ import com.gb1w20.book_store_project.jpa_controllers.ClientsJpaController;
 import java.io.Serializable;
 import javax.annotation.PostConstruct;
 
-import javax.enterprise.context.RequestScoped;
 import javax.enterprise.context.SessionScoped;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 /**
@@ -34,18 +34,15 @@ public class UserLoginBean implements Serializable {
     public void init() {
         LOG.debug("Init called!");
         checkIsManager();
-        isSignedIn = getSignInStatus();
+        getSignInStatus();
     }
     
     public void checkIsManager(){
-        String cookieEmail;
-                LOG.error("yoooooooooooooooooooooooooooo 1");
-
+        LOG.error("yoooooooooooooooooooooooooooo 1");
         FacesContext facesContext = FacesContext.getCurrentInstance();
         HttpServletRequest request = (HttpServletRequest) facesContext.getExternalContext().getRequest();
-        Cookie cookie = null;
-        
         Cookie[] userCookies = request.getCookies();
+        
         if (userCookies != null && userCookies.length > 0 ) {
             for (int i = 0; i < userCookies.length; i++) {
                 if (userCookies[i].getName().equals("BOOK_STORE_LOGIN")) {
@@ -58,32 +55,61 @@ public class UserLoginBean implements Serializable {
         LOG.error("yoooooooooooooooooooooooooooo 4");
     }
     
-    public Boolean getSignInStatus(){
+    public void getSignInStatus(){
         FacesContext facesContext = FacesContext.getCurrentInstance();
         HttpServletRequest request = (HttpServletRequest) facesContext.getExternalContext().getRequest();
-        Cookie cookie = null;
-        
         Cookie[] userCookies = request.getCookies();
+        
         if (userCookies != null && userCookies.length > 0 ) {
             for (int i = 0; i < userCookies.length; i++) {
                 if (userCookies[i].getName().equals("BOOK_STORE_LOGIN")) {
                     LOG.error("true");
-                    return true;
+                    isSignedIn = true;
+                    break;
+                }else{
+                    isSignedIn = false;
+                }
+            }
+        }
+        
+    }
+    
+    public void signOut(){
+        FacesContext facesContext = FacesContext.getCurrentInstance();
+        HttpServletRequest request = (HttpServletRequest) facesContext.getExternalContext().getRequest();
+        Cookie[] userCookies = request.getCookies();
+        
+        if (userCookies != null && userCookies.length > 0 ) {
+            for (int i = 0; i < userCookies.length; i++) {
+                if (userCookies[i].getName().equals("BOOK_STORE_LOGIN")) {
+                    userCookies[i].setMaxAge(0);
+                    isSignedIn = false;
+                    isManager = false;
+                    FirstName = "";
+                    LOG.error("yooooooooooooooooooo deleting "+userCookies[i].getName());
                 }
             }
         }
         LOG.error("false");
-        return false;
     }
     
     public Boolean getIfManager() {
         return this.isManager;
     }
 
-    public void setSurveyChoice(Boolean status) {
+    public void setManagerStatus(Boolean status) {
         this.isManager = status;
     }
-        public String getFirstName() {
+    
+    public Boolean getIfSignedIn() {
+        return this.isSignedIn;
+    }
+
+    public void setSignInStatus(Boolean status) {
+        this.isSignedIn = status;
+    }
+    
+    public String getFirstName() {
         return this.FirstName;
     }
 

@@ -43,11 +43,11 @@
                     <b:navLink id="fr" value="Francais - Fr" href="#"></b:navLink>
                 </b:dropMenu>
 
-                <b:navLink rendered="#{!UserLoginBean.getSignInStatus()}" style="color: white;font-weight: bold" value="Log In" href="signIn.xhtml">
+                <b:navLink rendered="#{!UserLoginBean.getIfSignedIn()}" style="color: white;font-weight: bold" value="Log In" href="signIn.xhtml">
                 </b:navLink>
 
-                <b:dropMenu rendered="#{UserLoginBean.getSignInStatus()}" value="Hello #{UserLoginBean.getFirstName()}" style="color: white">
-                    <b:navLink id="signout" value="Signout" href="#" onclick="signOut()"></b:navLink>
+                <b:dropMenu rendered="#{UserLoginBean.getIfSignedIn()}" value="Hello #{UserLoginBean.getFirstName()}" style="color: white">
+                    <b:navLink id="signout" value="Signout" href="#" onclick="#{UserLoginBean.signOut()}"></b:navLink>
                 </b:dropMenu>
 
 

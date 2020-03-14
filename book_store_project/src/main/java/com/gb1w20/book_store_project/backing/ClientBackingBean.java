@@ -260,6 +260,7 @@ public class ClientBackingBean implements Serializable {
         {
             createLoginCookie(email);
             this.message = "You are logged in, " + email;
+            LOG.error("yo this should be the value for is manager" + isManager);
             return isManager ? "managerFront.xhtml" : "index.xhtml";
         }
         else
