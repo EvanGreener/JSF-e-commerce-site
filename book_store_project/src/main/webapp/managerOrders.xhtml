@@ -10,25 +10,21 @@
       xmlns:a="http://xmlns.jcp.org/jsf/passthrough">
     <h:head>
         <title>Manager Orders</title>
-        <link rel="stylesheet" href="https://unpkg.com/swiper/css/swiper.min.css"/>
+          <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 
-
-        <link href="https://fonts.googleapis.com/css?family=Montserrat|Roboto&amp;display=swap" rel="stylesheet"/>
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-
-        <h:outputStylesheet library="webjars" name="Semantic-UI/2.4.1/semantic.min.css" />
-        <h:outputStylesheet library="css" name="homepage.css" />
-        <h:outputStylesheet library="book_css" name="bookpage.css" />
-        <h:outputScript library="js" name="managerOrders.js" />
-        <h:outputStylesheet library="webjars" name="font-awesome/4.7.0/css/font-awesome.min-jsf.css" />
-        <!-- Swiper JS -->
-        <script src="https://unpkg.com/swiper/js/swiper.min.js"></script>
-                  <style>
+          <link href="https://fonts.googleapis.com/css?family=Montserrat|Roboto&amp;display=swap" rel="stylesheet"/>
+          <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+          <h:outputStylesheet library="webjars" name="Semantic-UI/2.4.1/semantic.min.css" />
+          <h:outputStylesheet library="webjars" name="swiper/4.5.1/dist/css/swiper.min.css" />
+          <h:outputStylesheet library="css" name="homepage.css" />
+          <h:outputScript library="webjars" name="Semantic-UI/2.4.1/semantic.min.js"/>
+          <style>
 
                .modal{
                     position: fixed;
                     padding-top: 0px;
                     height: fit-content;
+                    text-align: center;
                }
 
                .middle h1 {
@@ -135,25 +131,44 @@
                          </h:column>
                          <h:column>
                               <h:commandButton type="button" onclick="setTimeout(function(){$('#editModal').modal('show', hideGrowl())}, 500)" 
-                                               value="Edit Order" class="big ui primary button edit_btn" >
+                                               value="Edit Order" class="big ui primary button edit_btn" disabled="#{orders.isRemoved}">
                                   <f:ajax event="click"  render="editForm" listener="#{orderEdit.onEdit(orders.orderID)}"/>
                               </h:commandButton>
-
                          </h:column>
-
+                        <h:column>
+                            <h:commandLink value="#{orderBacking.getRemovalStatus(orders.isRemoved)}" action="#{orderBacking.addOrRemoveOrder(orders)}" />
+                        </h:column>
                     </h:dataTable>
                </div>
 
                <bookstore:footer />
 
-               <div id="editModal" class="ui modal">
-                   <div id="modal-content">
+               <div id="editModal" class="small ui modal">
                     <div class="header">
                         <h1>Order ID# #{orderEdit.currentOrder.orderID} </h1>
                     </div>
-                    <div class="content">
-
-                    </div>
+                   <div class="content">
+                        <h:dataTable class="ui celled table" value="#{orderEdit.currentOrder.orderItems}" var="items">
+                            <h:column>
+                                <f:facet name="header">ISBN</f:facet>
+                                #{items.isbn}
+                            </h:column>
+                            <h:column>
+                                <f:facet name="header">Title</f:facet>
+                                #{items.book.title}
+                            </h:column>
+                            <h:column>
+                                <f:facet name="header">Price Sold</f:facet>
+                                #{items.priceSold}
+                            </h:column>
+                            <h:column>
+                                <f:facet name="header">Status</f:facet>
+                                #{orderItemJpaController.getStatusByItemId(items.itemID)}
+                            </h:column>
+                            <h:column>
+                                <h:commandLink value="#{orderItemBacking.getRemovalStatus(items.isRemoved)}" action="#{orderItemBacking.addOrRemoveItem(items)}" />
+                            </h:column>
+                        </h:dataTable>
 
                     <div class="actions">
                          <h:commandButton type="button" action="#{orderEdit.onSubmitEdit()}" style="font-size: 20px;"  value="Save Changes" class="ui positive button"

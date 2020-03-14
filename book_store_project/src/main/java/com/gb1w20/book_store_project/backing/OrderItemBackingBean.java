@@ -3,7 +3,9 @@ package com.gb1w20.book_store_project.backing;
 import com.gb1w20.book_store_project.entities.OrderItem;
 import com.gb1w20.book_store_project.jpa_controllers.OrderItemJpaController;
 import java.io.Serializable;
+import java.util.Date;
 import javax.enterprise.context.RequestScoped;
+import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
 import org.slf4j.Logger;
@@ -40,6 +42,45 @@ public class OrderItemBackingBean implements Serializable {
      */
     public String createOrderItem() throws Exception {
         orderItemJpaController.create(orderItem);
+        return null;
+    }
+    
+    public String getRemovalStatus(boolean isRemoved) throws Exception {
+        if (isRemoved)
+        {
+            return "Add Item";
+        }
+        else
+        {
+            return "Remove Item";
+        }
+    }
+    
+    public String removeItem(OrderItem item) throws Exception {
+        item.setIsRemoved(true);
+        item.setLastUpdated(new Date());
+        orderItemJpaController.edit(item);
+        return null;
+    }
+    
+    public String addItem(OrderItem item) throws Exception {
+        item.setIsRemoved(false);
+        item.setLastUpdated(new Date());
+        orderItemJpaController.edit(item);
+        return null;
+    }
+    
+    public String addOrRemoveItem(OrderItem item) throws Exception
+    {
+        if (item.getIsRemoved())
+        {
+            addItem(item);
+        }
+        else
+        {
+            removeItem(item);
+        }
+        FacesContext.getCurrentInstance().getExternalContext().redirect("managerOrders.xhtml");
         return null;
     }
 }

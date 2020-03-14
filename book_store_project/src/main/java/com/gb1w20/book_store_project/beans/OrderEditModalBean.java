@@ -22,6 +22,7 @@ public class OrderEditModalBean implements Serializable {
     private final static Logger LOG = LoggerFactory.getLogger(OrderEditModalBean.class);
     private String query = "";
     private Orders currentOrder;
+    private double newSalePrice;
     
     @Inject
     private OrdersJpaController orderCtrl;
@@ -29,6 +30,16 @@ public class OrderEditModalBean implements Serializable {
     @PostConstruct
      public void init() {
           LOG.debug("Init called!");
+     }
+     
+     public double getNewSalePrice()
+     {
+         return newSalePrice;
+     }
+     
+     public void setNewSalePrice(double newVal)
+     {
+         newSalePrice = newVal;
      }
     
     public String getQuery()

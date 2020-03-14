@@ -3,6 +3,7 @@ package com.gb1w20.book_store_project.jpa_controllers;
 import com.gb1w20.book_store_project.entities.Book;
 import com.gb1w20.book_store_project.entities.Book_;
 import com.gb1w20.book_store_project.entities.OrderItem;
+import com.gb1w20.book_store_project.entities.OrderItem_;
 import com.gb1w20.book_store_project.jpa_controllers.exceptions.NonexistentEntityException;
 import java.io.Serializable;
 import java.util.List;
@@ -12,6 +13,7 @@ import javax.inject.Named;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
 import javax.persistence.EntityNotFoundException;
+import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaBuilder;
@@ -29,29 +31,30 @@ import javax.transaction.UserTransaction;
 @Named
 @RequestScoped
 public class OrderItemJpaController implements Serializable {
-    
+
     @Resource
     private UserTransaction utx;
 
     @PersistenceContext
     private EntityManager em;
 
-    public OrderItemJpaController() {}
+    public OrderItemJpaController() {
+    }
 
     public void create(OrderItem orderItem) throws Exception {
-    try {
-        utx.begin();
-        em.persist(orderItem);
-        utx.commit();
-    } catch (Exception ex) {
         try {
-            utx.rollback();
-        } catch (Exception re) {
-            throw new Exception("An error occurred attempting to roll back the transaction.", re);
+            utx.begin();
+            em.persist(orderItem);
+            utx.commit();
+        } catch (Exception ex) {
+            try {
+                utx.rollback();
+            } catch (Exception re) {
+                throw new Exception("An error occurred attempting to roll back the transaction.", re);
+            }
+            throw ex;
         }
-        throw ex;
     }
-}
 
     public void edit(OrderItem orderItem) throws NonexistentEntityException, Exception {
         try {
@@ -117,20 +120,35 @@ public class OrderItemJpaController implements Serializable {
     }
 
     public OrderItem findOrderItem(Integer id) {
-            return em.find(OrderItem.class, id);
+        return em.find(OrderItem.class, id);
     }
 
     public int getOrderItemCount() {
-            CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
-            Root<OrderItem> rt = cq.from(OrderItem.class);
-            cq.select(em.getCriteriaBuilder().count(rt));
-            Query q = em.createQuery(cq);
-            System.out.println("orderItem count: " + ((Long) q.getSingleResult()).intValue());
-            return ((Long) q.getSingleResult()).intValue();
+        CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
+        Root<OrderItem> rt = cq.from(OrderItem.class);
+        cq.select(em.getCriteriaBuilder().count(rt));
+        Query q = em.createQuery(cq);
+        System.out.println("orderItem count: " + ((Long) q.getSingleResult()).intValue());
+        return ((Long) q.getSingleResult()).intValue();
+    }
+    
+        public String getStatusByItemId(int itemId)
+    {
+        CriteriaBuilder cb = em.getCriteriaBuilder();
+        CriteriaQuery cq = cb.createQuery();
+        Root<OrderItem> order = cq.from(OrderItem.class);
+        cq.where(cb.equal(order.get(OrderItem_.itemID), itemId));
+        cq.select(order.get(OrderItem_.isRemoved));
+        TypedQuery<Boolean> query = em.createQuery(cq);
+        try
+        {
+            query.getSingleResult();
+            return "Not Removed";
+        }
+        catch(NoResultException nre)
+        {
+            return "Removed";
+        }
     }
 
-    
-    
-    
-    
 }
