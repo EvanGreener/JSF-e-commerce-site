@@ -1616,7 +1616,7 @@ insert into Authors
 values ("Khaled Hosseini", false, "2019-04-23 07:02:41", "2021-04-09 14:37:02");
 insert into Authors
     (Name, Is_Removed, Date_Entered, Last_Modified)
-values ("William Golding", false, "2019-07-14 09:21:21", "2020-07-03 03:59:01");
+values ("William Golding", false, "2019-07-14 09:21:21", "2020-07-05 03:59:01");
 insert into Authors
     (Name, Is_Removed, Date_Entered, Last_Modified)
 values ("Jane Austen, Anna Quindlen", false, "2019-05-24 03:06:27", "2020-11-15 10:48:04");
@@ -1625,7 +1625,7 @@ insert into Authors
 values ("Paulo Coelho", false, "2019-05-12 05:11:53", "2019-01-04 05:05:15");
 insert into Authors
     (Name, Is_Removed, Date_Entered, Last_Modified)
-values ("Yann Martel", true, "2019-12-14 15:27:12", "2021-03-14 02:58:40");
+values ("Yann Martel", true, "2019-12-14 15:27:12", "2021-03-15 02:58:40");
 insert into Authors
     (Name, Is_Removed, Date_Entered, Last_Modified)
 values ("Markus Zusak", false, "2019-11-25 16:21:30", "2021-01-13 15:56:21");
@@ -1766,7 +1766,7 @@ insert into Authors
 values ("Isaac Asimov", false, "2019-05-12 05:11:53", "2019-01-04 05:05:15");
 insert into Authors
     (Name, Is_Removed, Date_Entered, Last_Modified)
-values ("Veronica Roth", true, "2019-12-14 15:27:12", "2021-03-14 02:58:40");
+values ("Veronica Roth", true, "2019-12-14 15:27:12", "2021-03-15 02:58:40");
 insert into Authors
     (Name, Is_Removed, Date_Entered, Last_Modified)
 values ("Robert A. Heinlein", false, "2019-11-25 16:21:30", "2021-01-13 15:56:21");
