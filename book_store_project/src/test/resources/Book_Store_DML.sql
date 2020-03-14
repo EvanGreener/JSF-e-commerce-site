@@ -1616,7 +1616,7 @@ insert into Authors
 values ("Khaled Hosseini", false, "2019-04-23 07:02:41", "2021-04-09 14:37:02");
 insert into Authors
     (Name, Is_Removed, Date_Entered, Last_Modified)
-values ("William Golding", false, "2019-07-14 09:21:21", "2020-07-03 03:59:01");
+values ("William Golding", false, "2019-07-14 09:21:21", "2020-07-05 03:59:01");
 insert into Authors
     (Name, Is_Removed, Date_Entered, Last_Modified)
 values ("Jane Austen, Anna Quindlen", false, "2019-05-24 03:06:27", "2020-11-15 10:48:04");
@@ -1625,7 +1625,7 @@ insert into Authors
 values ("Paulo Coelho", false, "2019-05-12 05:11:53", "2019-01-04 05:05:15");
 insert into Authors
     (Name, Is_Removed, Date_Entered, Last_Modified)
-values ("Yann Martel", true, "2019-12-14 15:27:12", "2021-03-14 02:58:40");
+values ("Yann Martel", true, "2019-12-14 15:27:12", "2021-03-15 02:58:40");
 insert into Authors
     (Name, Is_Removed, Date_Entered, Last_Modified)
 values ("Markus Zusak", false, "2019-11-25 16:21:30", "2021-01-13 15:56:21");
@@ -1766,7 +1766,7 @@ insert into Authors
 values ("Isaac Asimov", false, "2019-05-12 05:11:53", "2019-01-04 05:05:15");
 insert into Authors
     (Name, Is_Removed, Date_Entered, Last_Modified)
-values ("Veronica Roth", true, "2019-12-14 15:27:12", "2021-03-14 02:58:40");
+values ("Veronica Roth", true, "2019-12-14 15:27:12", "2021-03-15 02:58:40");
 insert into Authors
     (Name, Is_Removed, Date_Entered, Last_Modified)
 values ("Robert A. Heinlein", false, "2019-11-25 16:21:30", "2021-01-13 15:56:21");
@@ -2553,11 +2553,11 @@ INSERT INTO Book_Format(ISBN,Date_Created,Last_Modified,Is_Removed,File_Location
 INSERT INTO Book_Format(ISBN,Date_Created,Last_Modified,Is_Removed,File_Location,Format) VALUES ('9781101988527','2017-04-04','2019-04-04',FALSE,'9781101988527.pdf','pdf');
 INSERT INTO Book_Format(ISBN,Date_Created,Last_Modified,Is_Removed,File_Location,Format) VALUES ('9780356507217','2018-06-05','2019-06-05',FALSE,'9780356507217.pdf','pdf');
 INSERT INTO Book_Format(ISBN,Date_Created,Last_Modified,Is_Removed,File_Location,Format) VALUES ('9780440000587','2019-09-24','2019-09-24',FALSE,'9780440000587.pdf','pdf');
-INSERT INTO News (RSS_Feed,Date_Created,Date_Ended,Is_Removed,Last_Modified) VALUES('http://xkcd.com/atom.xml','2019-05-01',NULL,FALSE,'2019-05-01');
-INSERT INTO News (RSS_Feed,Date_Created,Date_Ended,Is_Removed,Last_Modified) VALUES('http://feeds.feedburner.com/CssTricks','2019-06-01',NULL,FALSE,'2019-07-01');
+INSERT INTO News (RSS_Feed,Date_Created,Date_Ended,Is_Removed,Last_Modified) VALUES('https://xkcd.com/atom.xml','2019-05-01',NULL,FALSE,'2019-05-01');
+INSERT INTO News (RSS_Feed,Date_Created,Date_Ended,Is_Removed,Last_Modified) VALUES('https://feeds.feedburner.com/CssTricks','2019-06-01',NULL,FALSE,'2019-07-01');
 INSERT INTO News (RSS_Feed,Date_Created,Date_Ended,Is_Removed,Last_Modified) VALUES('http://rss.slashdot.org/Slashdot/slashdot','2019-07-01',NULL,FALSE,'2019-08-01');
 INSERT INTO News (RSS_Feed,Date_Created,Date_Ended,Is_Removed,Last_Modified) VALUES('http://feeds.mashable.com/Mashable','2019-05-01',NULL,FALSE,'2019-08-01');
-INSERT INTO News (RSS_Feed,Date_Created,Date_Ended,Is_Removed,Last_Modified) VALUES('http://www.theverge.com/rss/index.xml','2020-01-01','2019-02-01',TRUE,'2019-02-01');
+INSERT INTO News (RSS_Feed,Date_Created,Date_Ended,Is_Removed,Last_Modified) VALUES('https://www.theverge.com/rss/index.xml','2020-01-01','2019-02-01',TRUE,'2019-02-01');
 INSERT INTO News (RSS_Feed,Date_Created,Date_Ended,Is_Removed,Last_Modified) VALUES('http://feeds.macrumors.com/MacRumors-All','2020-01-01','2020-01-02',TRUE,'2020-01-02');
 INSERT INTO Ads (Image_Name,Ad_Url,Date_Created,Last_Modified,Is_Removed) VALUES('banana.jpg','https://en.wikipedia.org/wiki/Banana','2019-05-01','2019-05-01',FALSE);
 INSERT INTO Ads (Image_Name,Ad_Url,Date_Created,Last_Modified,Is_Removed) VALUES('apple.jpg','https://en.wikipedia.org/wiki/Apple','2019-05-01','2019-05-01',FALSE);
