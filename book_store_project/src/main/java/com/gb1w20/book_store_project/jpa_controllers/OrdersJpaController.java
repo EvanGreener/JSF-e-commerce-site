@@ -9,6 +9,7 @@ import com.gb1w20.book_store_project.entities.Orders;
 import com.gb1w20.book_store_project.entities.Orders_;
 import com.gb1w20.book_store_project.jpa_controllers.exceptions.NonexistentEntityException;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.Resource;
 import javax.enterprise.context.RequestScoped;
@@ -190,4 +191,18 @@ public class OrdersJpaController implements Serializable {
             return "Removed";
         }
     }
+    
+     public List<Orders> searchOrders(String query) {
+          String expression = "%" + query + "%";
+
+          CriteriaBuilder cb = em.getCriteriaBuilder();
+          CriteriaQuery<Orders> cq = cb.createQuery(Orders.class);
+          Root<Orders> order = cq.from(Orders.class);
+          cq.where(cb.like(order.get(Orders_.client).get(Clients_.email), expression));
+          cq.select(order);
+          cq.orderBy(cb.asc(order.get(Orders_.orderID)));
+          TypedQuery<Orders> q = em.createQuery(cq);
+          return q.getResultList();
+
+     }
 }

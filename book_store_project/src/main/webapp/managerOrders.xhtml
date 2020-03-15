@@ -2,9 +2,7 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:b="http://bootsfaces.net/ui"
       xmlns:f="http://xmlns.jcp.org/jsf/core"
-      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:bookstore="http://java.sun.com/jsf/composite/default_components"
       xmlns:p="http://primefaces.org/ui"
       xmlns:a="http://xmlns.jcp.org/jsf/passthrough">
@@ -25,6 +23,7 @@
                     padding-top: 0px;
                     height: fit-content;
                     text-align: center;
+                    text-size: 18px;
                }
 
                .middle h1 {
@@ -97,14 +96,14 @@
 
                     <!--Search bar: UPDATE FOR ORDERS-->
                     <div style="display: inline;" class="ui search" >
-                         <h:inputText  id="query" value="#{clientManagement.query}"  a:placeholder="Search orders by email..." style="float: right; margin-top: 10px; margin-bottom: 10px; width: 200px; " class="prompt" >
-                              <p:ajax event="keyup" listener="#{clientManagement.updateBean()}" update="ordersTable" />
+                         <h:inputText  id="query" value="#{orderSearch.query}"  a:placeholder="Search orders by email..." style="float: right; margin-top: 10px; margin-bottom: 10px; width: 200px; " class="prompt" >
+                              <p:ajax event="keyup" listener="#{orderSearch.updateBean()}" update="ordersTable" />
                          </h:inputText>
                     </div> 
 
 
 
-                    <h:dataTable  id="ordersTable" var="orders" style="margin-bottom: 20px;"  class="ui celled table" value="#{ordersJpaController.findOrdersEntities()}" >
+                    <h:dataTable  id="ordersTable" var="orders" style="margin-bottom: 20px;"  class="ui celled table" value="#{orderSearch.searchResults}" >
                          <h:column>
                               <f:facet name="header">Order ID</f:facet>
                                    #{orders.orderID}
@@ -186,7 +185,6 @@
           <script>
                function hideGrowl() {
                     $('#editFormGrowl').hide('slow');
-//                    console.log('Hiding growl...');
                }
                
           </script>
