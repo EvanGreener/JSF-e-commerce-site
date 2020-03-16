@@ -41,7 +41,7 @@ public class SurveyBean implements Serializable {
     private int count = 0;
     private BarChartModel cartChart;
     private String surveyChoice;
-private String hello;
+    private String hello;
     private final static Logger LOG = LoggerFactory.getLogger(SurveyBean.class);
 
     @PostConstruct

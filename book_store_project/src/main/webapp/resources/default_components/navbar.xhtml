@@ -15,44 +15,46 @@
 
     <!-- A Composite component created for nav bar to avoid code duplication in all web pages-->
     <composite:implementation>
-        <b:navBar brandImg="resources/images/logo.png"  brandImgStyleClass="brand-img-style" brandHref="index.xhtml" fluid="true" class="headMenu">
-            <f:facet name="kebab">
-                <span class="fa fa-chevron-right"></span>
-            </f:facet>
+        <h:form>
+            <b:navBar brandImg="resources/images/logo.png"  brandImgStyleClass="brand-img-style" brandHref="index.xhtml" fluid="true" class="headMenu">
+                <f:facet name="kebab">
+                    <span class="fa fa-chevron-right"></span>
+                </f:facet>
 
-            <b:navbarLinks pull="center">
-                <b:navLink style="color: white " class="nav" value="Shop" href="./gallery.xhtml"></b:navLink>
-                <b:navLink  style="color: white;" value="Sales" href="#"></b:navLink>
-                <b:navLink style="color: white" value="Genres" href="#"></b:navLink>
-            </b:navbarLinks>
+                <b:navbarLinks pull="center">
+                    <b:navLink style="color: white " class="nav" value="Shop" href="./gallery.xhtml"></b:navLink>
+                    <b:navLink  style="color: white;" value="Sales" href="#"></b:navLink>
+                    <b:navLink style="color: white" value="Genres" href="#"></b:navLink>
+                </b:navbarLinks>
 
-            <!--Adds spacing in nav bar-->
-            <b:navbarLinks pull="right"><b:navLink value="    " href="#"></b:navLink></b:navbarLinks>
-            <b:navbarLinks pull="right" styleClass="hidden-xs">
+                <!--Adds spacing in nav bar-->
+                <b:navbarLinks pull="right"><b:navLink value="    " href="#"></b:navLink></b:navbarLinks>
+                <b:navbarLinks pull="right" styleClass="hidden-xs">
 
-                <b:dropMenu value="Site View" rendered="#{UserLoginBean.getIfManager()}" style="color: white">
-                    <b:navLink id="man" value="Man - En" href="managerFront.xhtml"></b:navLink>
-                    <b:navLink id="cli" value="Clinet - Fr" href="index.xhtml"></b:navLink>
-                </b:dropMenu>
+                    <b:dropMenu value="Site View" rendered="#{UserLoginBean.getIfManager()}" style="color: white">
+                        <b:navLink id="man" value="Man - En" href="managerFront.xhtml"></b:navLink>
+                        <b:navLink id="cli" value="Clinet - Fr" href="index.xhtml"></b:navLink>
+                    </b:dropMenu>
 
-                <b:navLink style="color: white" class="nav" value="My Books" href="mybooks.xhtml"></b:navLink>
-                <b:navLink style="color: white" class="nav" value="Cart" href="cart.xhtml"></b:navLink>
+                    <b:navLink style="color: white" class="nav" value="My Books" href="mybooks.xhtml"></b:navLink>
+                    <b:navLink style="color: white" class="nav" value="Cart" href="cart.xhtml"></b:navLink>
 
-                <b:dropMenu value="En" style="color: white">
-                    <b:navLink id="en" value="English - En" href="#"></b:navLink>
-                    <b:navLink id="fr" value="Francais - Fr" href="#"></b:navLink>
-                </b:dropMenu>
+                    <b:dropMenu value="En" style="color: white">
+                        <b:navLink id="en" value="English - En" href="#"></b:navLink>
+                        <b:navLink id="fr" value="Francais - Fr" href="#"></b:navLink>
+                    </b:dropMenu>
 
-                <b:navLink rendered="#{!UserLoginBean.getIfSignedIn()}" style="color: white;font-weight: bold" value="Log In" href="signIn.xhtml">
-                </b:navLink>
+                    <b:navLink rendered="#{!UserLoginBean.getIfSignedIn()}" style="color: white;font-weight: bold" value="Log In" href="signIn.xhtml">
+                    </b:navLink>
 
-                <b:dropMenu rendered="#{UserLoginBean.getIfSignedIn()}" value="Hello #{UserLoginBean.getFirstName()}" style="color: white">
-                    <b:navLink id="signout" value="Signout" href="#" onclick="#{UserLoginBean.signOut()}"></b:navLink>
-                </b:dropMenu>
+                    <b:dropMenu rendered="#{UserLoginBean.getIfSignedIn()}" value="Hello #{UserLoginBean.getFirstName()}" style="color: white">
+                        <b:navCommandLink id="signout" value="Signout" href="#" action="#{UserLoginBean.signOut()}"></b:navCommandLink>
+                    </b:dropMenu>
 
 
-            </b:navbarLinks>
-        </b:navBar>
+                </b:navbarLinks>
+            </b:navBar>
+        </h:form>
     </composite:implementation>
 
 </html>
