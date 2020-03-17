@@ -5,6 +5,7 @@
  */
 package com.gb1w20.book_store_project.beans;
 
+import com.gb1w20.book_store_project.entities.Book;
 import com.gb1w20.book_store_project.entities.SurveyData;
 import com.gb1w20.book_store_project.entities.Surveys;
 import com.gb1w20.book_store_project.jpa_controllers.BookJpaController;
@@ -41,7 +42,8 @@ public class SurveyBean implements Serializable {
     private int count = 0;
     private BarChartModel cartChart;
     private String surveyChoice;
-private String hello;
+    private SurveyData surveyData;
+    
     private final static Logger LOG = LoggerFactory.getLogger(SurveyBean.class);
 
     @PostConstruct
@@ -62,24 +64,31 @@ private String hello;
 
         }
     }
-    public String getHello(){
+    public void getHello(){
         LOG.debug("jklkljl");
-        hello="gallery.xhtml";
-        return hello;
     }
+    public String viewBook(String choice) {
+         this.surveyChoice = choice;
+        LOG.debug(choice+"ghdhg");
+      
+        return "gallery.xhtml";
+    }
+    
     public void setHello(){
              LOG.debug("jklklhjjkhkjhkjhkjhkjhkjhkjhkjhkjhjkhkjl");
-        hello="s";
     }
     public String getSurveyChoice() {
+          LOG.debug("getSurveyChoice");
         return this.surveyChoice;
     }
 
     public void setSurveyChoice(String choice) {
+            LOG.debug("setSurveyChoice");
         this.surveyChoice = choice;
     }
 
     public List<Surveys> getSurvey() {
+         LOG.debug("getSurvey");
         survey = surveyCtrlr.getfirstSurvey();
         return survey;
     }
@@ -107,7 +116,7 @@ private String hello;
     }
 
     public BarChartModel getCartChart() {
-        LOG.debug("reached");
+        LOG.debug("getCartChart");
         createRigTestModel();
         return cartChart;
     }

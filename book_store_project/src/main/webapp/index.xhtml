@@ -192,17 +192,19 @@
                                             <hr/>
                                             <p:chart id="barchart" type="bar"  model="#{ss.cartChart}"  style="width:530px"/>
                                             <div class="ui horizontal statistics">
-
-                                                <ui:repeat value="#{s.surveyData}" var="sd">
+                                                <h:panelGroup id="other" >
+                                                <ui:repeat  value="#{s.surveyData}" var="sd">
 
 
                                                     <div class="ui statistic">
                                                         <div class="value">#{sd.votes}</div>
                                                         <div class="label">#{sd.choice}</div>
                                                     </div>
+                                                    <br/>
 
 
                                                 </ui:repeat>
+                                                    </h:panelGroup>
                                             </div>
                                             <hr/>
                                             <h2>Thank you for answering!</h2>
@@ -211,14 +213,19 @@
 
                                         <div id="survey">
                                             <p style="font-size:20px;padding:2%">#{s.surveyDescription}</p>
-                                            <ui:repeat value="#{s.surveyData}" var="sd">
-                                                <h:selectOneRadio style="font-size:20px" required="true" layout="pageDirection" value="#{ss.surveyChoice}" >
-                                                    <f:selectItem itemValue="#{sd.dataID}" itemLabel = " #{sd.choice}" />
+                                           
+                                                <h:selectOneRadio style="font-size:20px" required="true" layout="pageDirection" value="#{surveyDataBacking.surveyDataChoice}" >
+                                                    <f:selectItems value="#{s.surveyData}" var="sd" itemValue="#{sd.dataID}" itemLabel = " #{sd.choice}" />
                                                 </h:selectOneRadio>
-                                            </ui:repeat>
-                                            <h:commandButton class="bookFormatBtn" action="#{ss.setHello(sd.dataID)}" onclick="showResults()" type="button" value="Submit"/>
+
+                                           
+                                            <p:commandButton  update="other barchart"  class="bookFormatBtn"  value="Submit" oncomplete="showResults()">
+                  
+                                            </p:commandButton>
+                                            
                                         </div>
                                     </ui:repeat>
+                                    
                                 </h:form>
 
 

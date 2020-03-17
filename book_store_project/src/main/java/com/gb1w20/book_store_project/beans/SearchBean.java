@@ -30,6 +30,7 @@ public class SearchBean implements Serializable {
      private List<Book> results;
      private int page = 1;
      private int numPages;
+      private String surveyChoice;
 
      @PostConstruct
      public void init() {
@@ -41,7 +42,13 @@ public class SearchBean implements Serializable {
           return genreFilters;
      }
 
-
+ public String viewBook(String choice) {
+         this.surveyChoice = choice;
+        LOG.debug(choice+"ghdhg");
+      
+        return "gallery.xhtml";
+    }
+    
     public void setGenreFilters(String[] newValue) {
         genreFilters = newValue;
     }

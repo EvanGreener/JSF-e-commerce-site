@@ -1,5 +1,10 @@
 document.addEventListener('DOMContentLoaded', function (event) {// Get the modal
       
+      
+     if (sessionStorage.surveydone) {
+  document.getElementById("survey").remove();
+     document.getElementById("results").setAttribute("class","visible");
+} 
 
     // Get the modal
     var modal = document.getElementById("myModal");
@@ -144,11 +149,10 @@ function signOut(){
 
 
 function showResults(){
-   
+   sessionStorage.surveydone = "yes";
     document.getElementById("survey").remove();
      document.getElementById("results").setAttribute("class","visible");
 }
-
 
 
 
