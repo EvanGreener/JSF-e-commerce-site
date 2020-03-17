@@ -91,26 +91,20 @@ function displayCardHoverButton()
     this.appendChild(btn);
 }
 
-
 function viewAd(url){
     window.open(url);
 }
-
-
-
 
 function addReview() {
     document.getElementById("reviewModal").style.display = 'block';
 }
 
-function removeCardHoverButton()
-{
+function removeCardHoverButton(){
     var btn = document.getElementsByClassName("cardHoverBtn");
     btn[0].remove();
 }
 
-function addToCart(isbn, format)
-{
+function addToCart(isbn, format){
     var bookItem = {
         ISBN: isbn,
         bookFormat:format
@@ -130,27 +124,14 @@ function removeFromCart(isbn){
     localStorage.setItem("BOOK_STORE_CART",JSON.stringify(updatedCart));
 }
 
-function checkIfLoggedIn(){
-       var userCookies = document.cookie.split(';');
-       for(var i =0; i<userCookies.length; i++){
-           console.log(userCookies[i]);
-       }
-       return true;
-}
-
 function signOut(){
     document.cookie = 'BOOK_STORE_LOGIN=; expires=Thu, 01 Jan 1970 00:00:01 GMT;';
 }
 
-
-function showResults(){
-   
+function showResults(){   
     document.getElementById("survey").remove();
-     document.getElementById("results").setAttribute("class","visible");
+    document.getElementById("results").setAttribute("class","visible");
 }
-
-
-
 
 function showMore() {
     
