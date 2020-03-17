@@ -5,7 +5,6 @@ import com.gb1w20.book_store_project.jpa_controllers.ClientsJpaController;
 import java.io.Serializable;
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
-import java.security.SecureRandom;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -17,6 +16,7 @@ import javax.faces.component.UIInput;
 import javax.faces.context.FacesContext;
 import javax.faces.model.SelectItem;
 import javax.faces.validator.ValidatorException;
+import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 import javax.servlet.http.Cookie;
@@ -24,6 +24,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
 
 @Named("clientBacking")
 @RequestScoped
@@ -33,7 +34,8 @@ public class ClientBackingBean implements Serializable {
 
     @Inject
     private ClientsJpaController clientsJpaController;
-
+    
+   
     private Clients client;
     private String registerPassword;
     private String registerPasswordConfirm;
@@ -239,6 +241,7 @@ public class ClientBackingBean implements Serializable {
         Object[] info = clientsJpaController.getInfoByEmail(loginEmail);
         String email = (String)info[0];
         String dbPasswordHash = (String)info[1];
+        Boolean isManager = (Boolean)info[2];
         
         MessageDigest md = MessageDigest.getInstance("SHA-256");
         byte[] hashEmail = md.digest(email.getBytes(StandardCharsets.UTF_8));
@@ -258,8 +261,9 @@ public class ClientBackingBean implements Serializable {
         if (dbPasswordHash.equals(loginPasswordHash))
         {
             createLoginCookie(email);
+
             this.message = "You are logged in, " + email;
-            return "index.xhtml";
+            return isManager ? "managerFront.xhtml?faces-redirect=true" : "index.xhtml?faces-redirect=true";
         }
         else
         {
@@ -367,22 +371,22 @@ public class ClientBackingBean implements Serializable {
         Cookie cookie = null;
         
         Cookie[] userCookies = request.getCookies();
-            if (userCookies != null && userCookies.length > 0 ) {
-        for (int i = 0; i < userCookies.length; i++) {
-            if (userCookies[i].getName().equals("BOOK_STORE_LOGIN")) {
-                cookie = userCookies[i];
-                break;
+        if (userCookies != null && userCookies.length > 0 ) {
+            for (int i = 0; i < userCookies.length; i++) {
+                if (userCookies[i].getName().equals("BOOK_STORE_LOGIN")) {
+                    cookie = userCookies[i];
+                    break;
+                }
             }
         }
-    }
 
-    if (cookie != null) {
-        cookie.setValue(email);
-    } else {
-        System.out.println("what?");
-        cookie = new Cookie("BOOK_STORE_LOGIN", email);
-        cookie.setPath(request.getContextPath());
-    }
+        if (cookie != null) {
+            cookie.setValue(email);
+        } else {
+            cookie = new Cookie("BOOK_STORE_LOGIN", email);
+            cookie.setPath(request.getContextPath());
+        }
+        
         HttpServletResponse response = (HttpServletResponse) facesContext.getExternalContext().getResponse();
         response.addCookie(cookie);        
     }
