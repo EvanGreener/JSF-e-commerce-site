@@ -5,7 +5,6 @@ import com.gb1w20.book_store_project.jpa_controllers.ClientsJpaController;
 import java.io.Serializable;
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
-import java.security.SecureRandom;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;

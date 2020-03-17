@@ -4,10 +4,9 @@
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:f="http://xmlns.jcp.org/jsf/core"
       xmlns:bookstore="http://java.sun.com/jsf/composite/default_components"
-      xmlns:p="http://primefaces.org/ui"
       xmlns:a="http://xmlns.jcp.org/jsf/passthrough">
     <h:head>
-        <title>Manager Orders</title>
+        <title>Manager Ads</title>
           <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 
           <link href="https://fonts.googleapis.com/css?family=Montserrat|Roboto&amp;display=swap" rel="stylesheet"/>
@@ -23,7 +22,7 @@
                     padding-top: 0px;
                     height: fit-content;
                     text-align: center;
-                    text-size: 18px;
+                    font-size: 18px;
                }
 
                .middle h1 {
@@ -92,22 +91,17 @@
                          </div>
                     </div>
                     
-                    <h1>Ad Management</h1>
-
-                    <!--Search bar: UPDATE FOR ORDERS-->
-                    <div style="display: inline;" class="ui search" >
-                         <h:inputText  id="query" value="#{clientManagement.query}"  a:placeholder="Search orders by email..." style="float: right; margin-top: 10px; margin-bottom: 10px; width: 200px; " class="prompt" >
-                              <p:ajax event="keyup" listener="#{clientManagement.updateBean()}" update="adsTable" />
-                         </h:inputText>
-                    </div> 
+                    <h1 class="ui header">Ad Management</h1>
 
 
-
-                <h:commandButton type="button" value="Add Ad" class="big pink ui button" onclick="setTimeout(function () {
+                <h:commandButton value="Add Ad" class="big pink ui button" onclick="setTimeout(function () {
                             $('#addModal').modal('show', hideGrowl())
-                        }, 500)" />
+                        }, 500)">
+                    <f:ajax event="click" render="editForm" listener="#{adBacking.onCreate()}"/>
+                </h:commandButton>
+                    
 
-                <h:dataTable id="adsTable" class="ui celled table" value="#{adsJpaController.findAdsEntities()}" var="ads">
+                <h:dataTable id="adsTable" var="ads" style="margin-bottom: 20px;" class="ui celled table" value="#{adsJpaController.findAdsEntities()}">
                     <h:column>
                         <f:facet name="header">Ad #</f:facet>
                             #{ads.adID}
@@ -133,7 +127,9 @@
                             #{adsJpaController.getStatusByAdId(ads.adID)}
                     </h:column>
                     <h:column>
-                        <h:commandLink value="#{adBacking.getRemovalStatus(ads.isRemoved)}" action="#{adBacking.addOrRemoveAd(ads)}"/> 
+                        <h:commandLink value="#{adBacking.getRemovalStatus(ads.isRemoved)}">
+                            <f:ajax event="click" listener="#{adBacking.addOrRemoveAd(ads)}" />
+                        </h:commandLink>
                     </h:column>
                 </h:dataTable>
                </div>
@@ -153,6 +149,7 @@
                         <br/>
                         <h:message id="adUrlError" class="error" for="adUrl"/>
                     </div>
+                    <br/>
                     <div class="ui form field">
                         <h:outputLabel for="imageName" value="Image Name"/>
                         <h:inputText id="imageName" label="Image Name" value="#{adBacking.ad.imageName}" required="true" requiredMessage="Please enter image name" a:placeholder="Enter image name" validator="#{adBacking.validateNotNull}">
@@ -161,7 +158,10 @@
                         <br/>
                         <h:message id="imageNameError" class="error" for="imageName"/>
                     </div>
-                    <h:commandButton type="button" class="huge black fluid ui button" id="createAd" value="Create Ad" action="#{adBacking.createAd()}" />
+                    <br/>
+                       <h:commandButton type="button" class="huge black fluid ui button" id="createAd" value="Create Ad" action="#{adBacking.createAd()}">
+                            <f:ajax event="click" render="editForm"/>
+                       </h:commandButton>
 
                    </div>
                </div>

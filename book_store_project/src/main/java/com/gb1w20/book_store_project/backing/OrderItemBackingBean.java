@@ -44,40 +44,33 @@ public class OrderItemBackingBean implements Serializable {
         orderItemJpaController.create(orderItem);
         return null;
     }
-    
+
     public String getRemovalStatus(boolean isRemoved) throws Exception {
-        if (isRemoved)
-        {
+        if (isRemoved) {
             return "Add Item";
-        }
-        else
-        {
+        } else {
             return "Remove Item";
         }
     }
-    
+
     public String removeItem(OrderItem item) throws Exception {
         item.setIsRemoved(true);
         item.setLastUpdated(new Date());
         orderItemJpaController.edit(item);
         return null;
     }
-    
+
     public String addItem(OrderItem item) throws Exception {
         item.setIsRemoved(false);
         item.setLastUpdated(new Date());
         orderItemJpaController.edit(item);
         return null;
     }
-    
-    public String addOrRemoveItem(OrderItem item) throws Exception
-    {
-        if (item.getIsRemoved())
-        {
+
+    public String addOrRemoveItem(OrderItem item) throws Exception {
+        if (item.getIsRemoved()) {
             addItem(item);
-        }
-        else
-        {
+        } else {
             removeItem(item);
         }
         FacesContext.getCurrentInstance().getExternalContext().redirect("managerOrders.xhtml");

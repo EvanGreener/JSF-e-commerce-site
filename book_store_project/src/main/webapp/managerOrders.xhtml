@@ -23,7 +23,7 @@
                     padding-top: 0px;
                     height: fit-content;
                     text-align: center;
-                    text-size: 18px;
+                    font-size: 18px;
                }
 
                .middle h1 {
@@ -93,8 +93,8 @@
                     </div>
                     
                     <h1>Order Management</h1>
-
-                    <!--Search bar: UPDATE FOR ORDERS-->
+                                        
+                    <!--Search bar-->
                     <div style="display: inline;" class="ui search" >
                          <h:inputText  id="query" value="#{orderSearch.query}"  a:placeholder="Search orders by email..." style="float: right; margin-top: 10px; margin-bottom: 10px; width: 200px; " class="prompt" >
                               <p:ajax event="keyup" listener="#{orderSearch.updateBean()}" update="ordersTable" />
@@ -167,17 +167,38 @@
                             <h:column>
                                 <h:commandLink value="#{orderItemBacking.getRemovalStatus(items.isRemoved)}" action="#{orderItemBacking.addOrRemoveItem(items)}" />
                             </h:column>
+                            <h:column>
+                                <h:commandButton type="button" onclick="setTimeout(function(){$('#editItemModal').modal('show', hideGrowl())}, 500)" 
+                                               value="Edit Item" class="big ui primary button edit_btn" disabled="#{items.isRemoved}">
+                                    <f:ajax event="click"  render="editForm" listener="#{orderEdit.onItemEdit(items.itemID)}"/>
+                              </h:commandButton>
+                            </h:column>
                         </h:dataTable>
 
-                    <div class="actions">
-                         <h:commandButton type="button" action="#{orderEdit.onSubmitEdit()}" style="font-size: 20px;"  value="Save Changes" class="ui positive button"
-                              onclick="$('#editFormGrowl').show('slow')">
-                              <p:ajax listener="#{orderEdit.onSubmitEdit()}"/>
-                         </h:commandButton>    
+                    <div class="actions">   
                          <div style="font-size: 20px;" type="button" class="ui cancel button" >Cancel</div>
                     </div>
 
                </div>
+               </div>
+               
+               <div id="editItemModal" class="small ui modal">
+                    <div class="header">
+                        <h1>Item ID# #{orderEdit.currentItem.itemID} </h1>
+                    </div>
+                   <div class="content">
+                       <div class="ui form field">
+                           <h:outputLabel for="salePrice" value="New Sale Price" />
+                           <h:inputText id="salePrice" value="#{orderEdit.newSalePriceStr}" a:placeholder="#{orderEdit.currentItem.priceSold}" />
+                       </div>
+                       <div class="actions">
+                         <h:commandButton type="button" action="#{orderEdit.onSubmitEdit()}" style="font-size: 20px;"  value="Save Changes" class="ui positive button"
+                             onclick="$('#editFormGrowl').show('slow')">
+                              <f:ajax event="click" listener="#{orderEdit.onSubmitEdit()}"/>
+                         </h:commandButton>    
+                         <div style="font-size: 20px;" type="button" class="ui cancel button" >Cancel</div>
+                        </div>
+                   </div>
                </div>
 
           </h:form>
@@ -186,7 +207,6 @@
                function hideGrowl() {
                     $('#editFormGrowl').hide('slow');
                }
-               
           </script>
 
      </h:body>

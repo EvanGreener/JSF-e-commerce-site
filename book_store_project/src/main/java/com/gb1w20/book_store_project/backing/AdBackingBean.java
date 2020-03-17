@@ -1,7 +1,6 @@
 package com.gb1w20.book_store_project.backing;
 
 import com.gb1w20.book_store_project.entities.Ads;
-import com.gb1w20.book_store_project.entities.Orders;
 import com.gb1w20.book_store_project.jpa_controllers.AdsJpaController;
 import java.io.Serializable;
 import java.util.Date;
@@ -45,6 +44,8 @@ public class AdBackingBean implements Serializable {
      * @throws Exception
      */
     public String createAd() throws Exception {
+        LOG.debug("createAd called");
+        LOG.debug(ad == null ? "Ad is null" : "Ad is not null");
         ad.setLastModified(new Date());
         ad.setDateCreated(new Date());
         ad.setIsRemoved(true);
@@ -54,16 +55,24 @@ public class AdBackingBean implements Serializable {
     }
     
     public String removeAd(Ads ad) throws Exception {
+        LOG.debug("Reached the remove method");
         ad.setIsRemoved(true);
+        LOG.debug("Reached the setRemoved method");
         ad.setLastModified(new Date());
+        LOG.debug("Reached the setModified method");
         adsJpaController.edit(ad);
+        LOG.debug("Reached the edit method");
         return null;
     }
     
     public String addAd(Ads ad) throws Exception {
+        LOG.debug("Reached the add method");
         ad.setIsRemoved(false);
+        LOG.debug("Reached the setRemoved method");
         ad.setLastModified(new Date());
+        LOG.debug("Reached the lastModified method");
         adsJpaController.edit(ad);
+        LOG.debug("Reached the edit method");
         return null;
     }
     
@@ -100,5 +109,14 @@ public class AdBackingBean implements Serializable {
             FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR, message, message);
             throw new ValidatorException(msg);
         }
+    }
+    
+    public void onStatusEdit()
+    {
+        LOG.debug("Status edit called");
+    }
+    
+    public void onCreate(){
+        LOG.debug("onCreate called!");
     }
 }

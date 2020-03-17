@@ -54,6 +54,7 @@ com/gb1w20/book_store_project/jpa_controllers/AuthorsJpaController.class
 com/gb1w20/book_store_project/jpa_controllers/BookFormatJpaController.class
 com/gb1w20/book_store_project/backing/AuthorBackingBean.class
 com/gb1w20/book_store_project/backing/PublisherBackingBean.class
+com/gb1w20/book_store_project/beans/NewAdBean.class
 com/gb1w20/book_store_project/entities/Ads_.class
 com/gb1w20/book_store_project/jpa_controllers/TaxJpaController.class
 com/gb1w20/book_store_project/jpa_controllers/BookJpaController.class
