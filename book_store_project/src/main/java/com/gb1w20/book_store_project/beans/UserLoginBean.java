@@ -50,7 +50,7 @@ public class UserLoginBean implements Serializable {
                 if (userCookies[i].getName().equals("BOOK_STORE_LOGIN") && !userCookies[i].getValue().equals("")) {
                     LOG.error("cookie info " + userCookies[i].getName() + " : " + userCookies[i].getValue());
                     Object[] clientInformation = clientsJpaController.getInfoByEmail(userCookies[i].getValue());
-                    isManager = clientInformation[2] != null;
+                    isManager = clientInformation[2] != null ? (Boolean) clientInformation[2] : false;
                     FirstName = (String) clientInformation[3];
                 }
             }

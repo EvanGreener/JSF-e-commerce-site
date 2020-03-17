@@ -17,7 +17,7 @@ function frontButtons()
     });
     $('#manage-client-button').mouseout(
     function () {  
-       $('#manage-client-button').attr("value","User Management");
+       $('#manage-client-button').attr("value","Users");
     });
     
     $('#edit-inventory-button').hover(
@@ -53,7 +53,7 @@ function frontButtons()
     });
     $('#review-management-button').mouseout(
     function () {  
-       $('#review-management-button').attr("value","Reviews Management");
+       $('#review-management-button').attr("value","Reviews");
     });
     
     $('#reporting-button').hover(

@@ -27,7 +27,7 @@ import org.slf4j.LoggerFactory;
 
 
 @Named("clientBacking")
-@ViewScoped
+@RequestScoped
 public class ClientBackingBean implements Serializable {
 
     private final static Logger LOG = LoggerFactory.getLogger(ClientBackingBean.class);
@@ -264,7 +264,7 @@ public class ClientBackingBean implements Serializable {
 
             this.message = "You are logged in, " + email;
             LOG.error("yo this should be the value for is manager " + isManager);
-            return isManager ? "managerFront.xhtml" : "index.xhtml";
+            return isManager ? "managerFront.xhtml?faces-redirect=true" : "index.xhtml?faces-redirect=true";
         }
         else
         {
