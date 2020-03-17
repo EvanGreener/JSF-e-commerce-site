@@ -40,34 +40,32 @@ public class UserLoginBean implements Serializable {
     }
 
     public void checkIsManager() {
-        LOG.error("yoooooooooooooooooooooooooooo 1");
         FacesContext facesContext = FacesContext.getCurrentInstance();
         HttpServletRequest request = (HttpServletRequest) facesContext.getExternalContext().getRequest();
         Cookie[] userCookies = request.getCookies();
+        LOG.info("checking if manager");
 
         if (userCookies != null && userCookies.length > 0) {
             for (int i = 0; i < userCookies.length; i++) {
                 if (userCookies[i].getName().equals("BOOK_STORE_LOGIN") && !userCookies[i].getValue().equals("")) {
-                    LOG.error("cookie info " + userCookies[i].getName() + " : " + userCookies[i].getValue());
+                    LOG.info("cookie info " + userCookies[i].getName() + " : " + userCookies[i].getValue());
                     Object[] clientInformation = clientsJpaController.getInfoByEmail(userCookies[i].getValue());
                     isManager = clientInformation[2] != null ? (Boolean) clientInformation[2] : false;
                     FirstName = (String) clientInformation[3];
                 }
             }
         }
-        LOG.error("yoooooooooooooooooooooooooooo 4");
     }
 
     public void getSignInStatus() {
         FacesContext facesContext = FacesContext.getCurrentInstance();
         HttpServletRequest request = (HttpServletRequest) facesContext.getExternalContext().getRequest();
         Cookie[] userCookies = request.getCookies();
-        LOG.error("checking signin");
+        LOG.info("checking signin");
 
         if (userCookies != null && userCookies.length > 0) {
             for (int i = 0; i < userCookies.length; i++) {
                 if (userCookies[i].getName().equals("BOOK_STORE_LOGIN") && !userCookies[i].getValue().equals("")) {
-                    LOG.error("true");
                     isSignedIn = true;
                     checkIsManager();
                     break;
@@ -95,18 +93,16 @@ public class UserLoginBean implements Serializable {
                     isSignedIn = false;
                     isManager = false;
                     FirstName = "";
-                    LOG.error("yooooooooooooooooooo deleting " + userCookies[i].getName());
                     response.sendRedirect(request.getContextPath());
                     page = "index.xhtml";
                 }
             }
         }
-        LOG.error("false");
+        LOG.info("false");
         return page;
     }
 
     public Boolean getIfManager() {
-        LOG.error("yo this shit is manager " + this.isManager);
         return this.isManager;
     }
 
@@ -115,7 +111,6 @@ public class UserLoginBean implements Serializable {
     }
 
     public Boolean getIfSignedIn() {
-        LOG.error("yo this shit is signedin " + this.isSignedIn);
         return this.isSignedIn;
     }
 
