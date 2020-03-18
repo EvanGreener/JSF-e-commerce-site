@@ -2,11 +2,13 @@ package com.gb1w20.book_store_project.jpa_controllers;
 
 import com.gb1w20.book_store_project.entities.Ads;
 import com.gb1w20.book_store_project.entities.Ads_;
+import com.gb1w20.book_store_project.entities.Book;
 import com.gb1w20.book_store_project.entities.Orders;
 import com.gb1w20.book_store_project.entities.Orders_;
 import com.gb1w20.book_store_project.jpa_controllers.exceptions.NonexistentEntityException;
 import java.io.Serializable;
 import java.util.List;
+import java.util.Random;
 import javax.annotation.Resource;
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Named;
@@ -121,14 +123,20 @@ public class AdsJpaController implements Serializable {
     }
 
     public int getAdsCount() {
-            CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
-            Root<Ads> rt = cq.from(Ads.class);
-            cq.select(em.getCriteriaBuilder().count(rt));
-            Query q = em.createQuery(cq);
-            System.out.println("ad count: " + ((Long) q.getSingleResult()).intValue());
-            return ((Long) q.getSingleResult()).intValue();
+           TypedQuery<Ads> query = em.createQuery("SELECT a FROM Ads a WHERE a.isRemoved = :removed", Ads.class);
+           query.setParameter("removed",false);
+        List<Ads> a = query.getResultList();
+        return a.size();
     }
-    
+    public Ads getRandomAd(){
+        TypedQuery<Ads> query = em.createQuery("SELECT a FROM Ads a WHERE a.isRemoved = :removed", Ads.class);
+         query.setParameter("removed",false);
+         Random r = new Random();
+         query.setFirstResult((r.nextInt(getAdsCount())));
+         query.setMaxResults(1);
+        Ads a = query.getSingleResult();
+        return a;
+    }
     public String getStatusByAdId(int adID)
     {
         CriteriaBuilder cb = em.getCriteriaBuilder();

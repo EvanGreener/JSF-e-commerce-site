@@ -33,38 +33,29 @@
         <!--composite component that comes from the navbar.xhtml file to avoid coding nav bar in all web pages-->
         <bookstore:navbar/>
 
+        <!--Carousel that displays recently added books and their information-->
         <div class="swiper-container">
             <div class="swiper-wrapper">
-
                 <ui:repeat value="#{bb.recentlyAdded}" var="book">
-
                     <div class="swiper-slide item#{bb.bookSlideColor}">
-
-
                         <div class="sliderTextContent">
-
                             <h1>#{book.title}</h1>
                             <span>    <ui:repeat value="#{book.authorsCollection}" var="author">
                                     #{author.name}
                                 </ui:repeat></span>
                             <p> #{book.description}</p>
+                            <!--Button directs you to the book page for the current book being displayed in the carousel-->
                             <h:form>
-                                <h:commandButton type="submit"
-                                                 value="Shop Now"
-                                                 action="#{bb.viewBook(book)}" />
-
+                                <h:commandButton type="submit" value="Shop Now" action="#{bb.viewBook(book)}" />
                             </h:form>
                         </div>
-
-
                         <div  class="sliderImageContent">
                             <h:graphicImage width="300px" height="400px" library="images" name="#{book.isbn}.jpg"  />
                         </div>
                     </div>
                 </ui:repeat>
-
-
             </div>
+
             <!-- Add Pagination -->
             <div class="swiper-pagination"></div>
             <!-- Add Arrows -->
@@ -73,6 +64,7 @@
         </div>
         <div class="lightOrangeDiv">
 
+            <!--Shows top eight books with that have been purchased most-->
             <p class="small">Best Seller Products</p><br/>
             <h:form>
                 <h:panelGroup>
@@ -113,8 +105,7 @@
 
                                 </div>
 
-
-
+                                <!--Button to add to shopping cart-->
                                 <div class="ui two bottom attached buttons ">
                                     <div onclick="addToCart(#{books.isbn}, 'pdf')" class="ui button">+ Add to Cart</div>
 
@@ -128,12 +119,16 @@
             </h:form>
 
             <br/><br/>
+
+            <!--Search bar used searching for books that will display results in gallery page-->
             <h:form>
                 <div class=" searchBarDiv">
                     <h:inputText a:placeholder="Search books..." value="#{search.query}" style=" float: center; margin-top: -30px;" class="searchBar"/>
                     <h:commandButton class="searchButton" action="#{search.showSearch()}" type="submit" value = "Search"/>
                 </div>
             </h:form>
+
+
             <!-- The Modal -->
             <div id="myModal" class="modal">
 
@@ -153,14 +148,9 @@
         <!-- Survey/Ad/News Section -->
 
         <div   class="lightGreyDiv">
-
-
-
-
-
-
             <table class="ui table lightGreyDiv" >
 
+                <!-- Shows the News -->
                 <tbody>
                     <tr align="center">
                         <td align="center">
@@ -180,58 +170,50 @@
                             </div></td>
                         <td align="center"> <div id="surveyDiv" class="ui netboard test ad survey" data-text="" >
 
-
+                                <!-- Survey Section -->
                                 <h:form >
                                     <ui:repeat value="#{ss.survey}" var="s">
-
                                         <h1 style="text-align:center">  #{s.surveyName}</h1>
 
 
-
+                                        <!-- Shows the survey results once survey completed-->
                                         <div id="results" class="invisible">
                                             <hr/>
                                             <p:chart id="barchart" type="bar"  model="#{ss.cartChart}"  style="width:530px"/>
                                             <div class="ui horizontal statistics">
                                                 <h:panelGroup id="other" >
-                                                <ui:repeat  value="#{s.surveyData}" var="sd">
-
-
-                                                    <div class="ui statistic">
-                                                        <div class="value">#{sd.votes}</div>
-                                                        <div class="label">#{sd.choice}</div>
-                                                    </div>
-                                                    <br/>
-
-
-                                                </ui:repeat>
-                                                    </h:panelGroup>
+                                                    <ui:repeat  value="#{s.surveyData}" var="sd">
+                                                        <div class="ui statistic">
+                                                            <div class="value">#{sd.votes}</div>
+                                                            <div class="label">#{sd.choice}</div>
+                                                        </div>
+                                                        <br/>
+                                                    </ui:repeat>
+                                                </h:panelGroup>
                                             </div>
                                             <hr/>
                                             <h2>Thank you for answering!</h2>
                                         </div>
 
 
+                                        <!-- Shows the actual survey-->
                                         <div id="survey">
                                             <p style="font-size:20px;padding:2%">#{s.surveyDescription}</p>
-                                           
-                                                <h:selectOneRadio style="font-size:20px" required="true" layout="pageDirection" value="#{surveyDataBacking.surveyDataChoice}" >
-                                                    <f:selectItems value="#{s.surveyData}" var="sd" itemValue="#{sd.dataID}" itemLabel = " #{sd.choice}" />
-                                                </h:selectOneRadio>
 
-                                           
-                                            <p:commandButton  update="other barchart"  class="bookFormatBtn"  value="Submit" oncomplete="showResults()">
-                  
-                                            </p:commandButton>
-                                            
+                                            <h:selectOneRadio style="font-size:20px" required="true" layout="pageDirection" value="#{surveyDataBacking.surveyDataChoice}" >
+                                                <f:selectItems value="#{s.surveyData}" var="sd" itemValue="#{sd.dataID}" itemLabel = " #{sd.choice}" />
+                                            </h:selectOneRadio>
+                                            <p:commandButton  update="other barchart"  class="bookFormatBtn"  value="Submit" oncomplete="showResults()"/>
                                         </div>
                                     </ui:repeat>
-                                    
                                 </h:form>
-
-
                             </div></td>
+
+                        <!-- First Ad location -->
                         <td align="center"><div class="ui wide skyscraper test ad right homepageCard" data-text="">
-                                <h:graphicImage height="100%" width="100%" library="images" name="apples.png"  onclick="viewAd('https://en.wikipedia.org/wiki/Apple')"/>
+                                <ui:repeat value="#{adsBean.randomAd}" var="ad">
+                                    <h:graphicImage height="100%" width="100%" library="images" name="#{ad.imageName}1.png"  onclick="viewAd('#{ad.adUrl}')"/>
+                                </ui:repeat>
                             </div></td>
                     </tr>
                 </tbody>
@@ -239,13 +221,10 @@
 
         </div>
 
-
+        <!-- Shows the most popular book genres -->
         <div class="lightPurpleDiv">
             <p class="small">Popular Genres</p><br/>
-
             <h:form>
-
-
                 <h:panelGroup>
                     <div class="ui four doubling stackable cards">
                         <ui:repeat value="#{bb.popularGenres}" var="genres">
@@ -259,21 +238,19 @@
                                     </div>
                                 </h:commandLink>
                             </div>
-
                         </ui:repeat>
                     </div>
                 </h:panelGroup>
-
-
             </h:form>
             <br/><br/>
-            <div class="ui centered leaderboard test ad" data-text="">
 
-                <h:graphicImage height="100%" width="100%" library="images" name="blueberry.png" onclick="viewAd('https://en.wikipedia.org/wiki/Blueberry')" />
+            <!-- Second Ad location -->
+            <div class="ui centered leaderboard test ad" data-text="">
+                <ui:repeat value="#{adsBean.randomAd}" var="ad">
+                    <h:graphicImage height="100%" width="100%" library="images" name="#{ad.imageName}2.png" onclick="viewAd('#{ad.adUrl}')" />
+                </ui:repeat>
             </div>
         </div>
-
-
 
         <!--composite component that comes from the footer.xhtml file to avoid coding the website footer in all web pages-->
         <bookstore:footer/>
