@@ -125,8 +125,8 @@ public class AdsJpaController implements Serializable {
     public int getAdsCount() {
            TypedQuery<Ads> query = em.createQuery("SELECT a FROM Ads a WHERE a.isRemoved = :removed", Ads.class);
            query.setParameter("removed",false);
-        List<Ads> a = query.getResultList();
-        return a.size();
+        List<Ads> ads = query.getResultList();
+        return ads.size();
     }
     public Ads getRandomAd(){
         TypedQuery<Ads> query = em.createQuery("SELECT a FROM Ads a WHERE a.isRemoved = :removed", Ads.class);
