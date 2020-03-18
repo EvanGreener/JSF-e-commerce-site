@@ -46,10 +46,12 @@ public class AdBackingBean implements Serializable {
     public String createAd() throws Exception {
         LOG.debug("createAd called");
         LOG.debug(ad == null ? "Ad is null" : "Ad is not null");
+        if (ad != null && !ad.getImageName().isBlank() && !ad.getImageName().isEmpty() && !ad.getAdUrl().isBlank() && !ad.getAdUrl().isEmpty() ) {
         ad.setLastModified(new Date());
         ad.setDateCreated(new Date());
         ad.setIsRemoved(true);
         adsJpaController.create(ad);
+        }
         FacesContext.getCurrentInstance().getExternalContext().redirect("managerAds.xhtml");
         return "managerAds.xhtml";
     }
@@ -119,4 +121,5 @@ public class AdBackingBean implements Serializable {
     public void onCreate(){
         LOG.debug("onCreate called!");
     }
+    
 }

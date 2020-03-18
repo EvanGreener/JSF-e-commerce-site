@@ -170,7 +170,7 @@
                             <h:column>
                                 <h:commandButton type="button" onclick="setTimeout(function(){$('#editItemModal').modal('show', hideGrowl())}, 500)" 
                                                value="Edit Item" class="big ui primary button edit_btn" disabled="#{items.isRemoved}">
-                                    <f:ajax event="click"  render="editForm" listener="#{orderEdit.onItemEdit(items.itemID)}"/>
+                                    <f:ajax event="click" render="editForm" listener="#{orderEdit.onItemEdit(items.itemID)}"/>
                               </h:commandButton>
                             </h:column>
                         </h:dataTable>

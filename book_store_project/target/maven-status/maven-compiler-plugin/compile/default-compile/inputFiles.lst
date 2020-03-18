@@ -39,6 +39,7 @@
 /Users/giancarlo/Desktop/gb1w20/book_store_project/src/main/java/com/gb1w20/book_store_project/entities/Ads.java
 /Users/giancarlo/Desktop/gb1w20/book_store_project/src/main/java/com/gb1w20/book_store_project/beans/BookBean.java
 /Users/giancarlo/Desktop/gb1w20/book_store_project/src/main/java/com/gb1w20/book_store_project/jpa_controllers/NewsJpaController.java
+/Users/giancarlo/Desktop/gb1w20/book_store_project/src/main/java/com/gb1w20/book_store_project/beans/EditAdBean.java
 /Users/giancarlo/Desktop/gb1w20/book_store_project/src/main/java/com/gb1w20/book_store_project/jpa_controllers/AuthorsJpaController.java
 /Users/giancarlo/Desktop/gb1w20/book_store_project/src/main/java/com/gb1w20/book_store_project/backing/SurveyDataBackingBean.java
 /Users/giancarlo/Desktop/gb1w20/book_store_project/src/main/java/com/gb1w20/book_store_project/jpa_controllers/CustomerReviewsJpaController.java

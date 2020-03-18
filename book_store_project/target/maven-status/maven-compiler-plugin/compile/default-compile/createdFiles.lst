@@ -15,6 +15,7 @@ com/gb1w20/book_store_project/entities/Publisher.class
 com/gb1w20/book_store_project/entities/News_.class
 com/gb1w20/book_store_project/jpa_controllers/ClientsJpaController.class
 com/gb1w20/book_store_project/backing/ClientBackingBean.class
+com/gb1w20/book_store_project/beans/EditAdBean.class
 com/gb1w20/book_store_project/entities/SurveyData.class
 com/gb1w20/book_store_project/backing/CustomerReviewBackingBean.class
 com/gb1w20/book_store_project/beans/BookBean.class
