@@ -18,37 +18,45 @@ import org.slf4j.LoggerFactory;
 @SessionScoped
 public class SearchBean implements Serializable {
 
+    private final static Logger LOG = LoggerFactory.getLogger(SearchBean.class);
 
-     private final static Logger LOG = LoggerFactory.getLogger(SearchBean.class);
+    @Inject
+    private BookJpaController bookCtrlr;
 
-     @Inject
-     private BookJpaController bookCtrlr;
+    private String query = "";
+    private String[] genreFilters;
+    private String searchBy = "title";
+    private List<Book> results;
+    private int page = 1;
+    private int numPages;
+    private String surveyChoice;
 
-     private String query = "";
-     private String[] genreFilters;
-     private String searchBy = "title";
-     private List<Book> results;
-     private int page = 1;
-     private int numPages;
-      private String surveyChoice;
+    @PostConstruct
+    public void init() {
+        LOG.debug("Init called!");
+        updateSearchBean();
+    }
 
-     @PostConstruct
-     public void init() {
-          LOG.debug("Init called!");
-          updateSearchBean();
-     }
+    public String[] getGenreFilters() {
+        return genreFilters;
+    }
 
-     public String[] getGenreFilters() {
-          return genreFilters;
-     }
+    public void resetGenreFilters() {
+        this.genreFilters = null;
+    }
+    public void resetQuery(){
+        setQuery("");
+    }
+    public void resetSearchBy(){
+        setSearchBy("title");
+    }
+    public String viewBook(String choice) {
+        this.surveyChoice = choice;
+        LOG.debug(choice + "ghdhg");
 
- public String viewBook(String choice) {
-         this.surveyChoice = choice;
-        LOG.debug(choice+"ghdhg");
-      
         return "gallery.xhtml";
     }
-    
+
     public void setGenreFilters(String[] newValue) {
         genreFilters = newValue;
     }
@@ -140,10 +148,14 @@ public class SearchBean implements Serializable {
 
     public String showGenreBooks(String genre) {
         setGenreFilters(genre);
+        resetQuery();
+        resetSearchBy();
         return "gallery";
     }
 
     public String showSearch() {
+        resetGenreFilters();
+        resetSearchBy();
         return "gallery";
     }
 }
