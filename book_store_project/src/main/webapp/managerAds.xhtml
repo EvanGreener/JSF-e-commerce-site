@@ -4,8 +4,7 @@
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:f="http://xmlns.jcp.org/jsf/core"
       xmlns:bookstore="http://java.sun.com/jsf/composite/default_components"
-      xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
-      xmlns:p="http://primefaces.org/ui">
+      xmlns:a="http://xmlns.jcp.org/jsf/passthrough">
     <h:head>
         <title>Manager Ads</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
@@ -199,7 +198,7 @@
                         <h:message id="newAdImageNameError" class="error" for="newAdImageName"/>
                     </div>
                     <br/>
-                    <h:commandButton type="button" class="huge black fluid ui button" id="createAd" value="Edit Ad" action="#{editAd.onSubmitEdit()}">
+                    <h:commandButton type="button" class="huge black fluid ui button" id="editAd" value="Edit Ad" action="#{editAd.onSubmitEdit()}">
                         <f:ajax event="click" execute="adUrl imageName" render="editForm"/>
                     </h:commandButton>
                 </h:form>

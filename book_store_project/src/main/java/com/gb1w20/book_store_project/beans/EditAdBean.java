@@ -75,6 +75,8 @@ public class EditAdBean implements Serializable {
         LOG.debug("Current ID: " + currentAd.getAdID());
         LOG.debug("Current image: " + currentAd.getImageName());
         LOG.debug("Current URL: " + currentAd.getAdUrl());
+        LOG.debug("Current image (var): " + newImage);
+        LOG.debug("Current URL (var): " + newUrl);
     }
     
     public String onSubmitEdit() throws Exception

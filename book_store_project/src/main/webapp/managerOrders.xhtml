@@ -192,9 +192,8 @@
                            <h:inputText id="salePrice" value="#{orderEdit.newSalePriceStr}" a:placeholder="#{orderEdit.currentItem.priceSold}" />
                        </div>
                        <div class="actions">
-                         <h:commandButton type="button" action="#{orderEdit.onSubmitEdit()}" style="font-size: 20px;"  value="Save Changes" class="ui positive button"
-                             onclick="$('#editFormGrowl').show('slow')">
-                              <f:ajax event="click" listener="#{orderEdit.onSubmitEdit()}"/>
+                         <h:commandButton type="button" action="#{orderEdit.onSubmitEdit()}" style="font-size: 20px;" value="Save Changes" class="huge black ui button">
+                              <f:ajax event="click" execute="salePrice" listener="#{orderEdit.onSubmitEdit()}"/>
                          </h:commandButton>    
                          <div style="font-size: 20px;" type="button" class="ui cancel button" >Cancel</div>
                         </div>
