@@ -65,8 +65,7 @@ public class Orders implements Serializable {
     private List<OrderItem> orderItemsCollection;
 
 
-    public Orders() {
-    }
+    public Orders() {}
 
     public Orders(Integer orderID) {
         this.orderID = orderID;

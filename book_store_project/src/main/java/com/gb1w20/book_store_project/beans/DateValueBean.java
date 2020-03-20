@@ -22,13 +22,14 @@ public class DateValueBean implements Serializable {
     
     @PostConstruct
     public void init() {
+        LOG.error("hit");
         Calendar minDateCalendar = Calendar.getInstance();
-        minDateCalendar.set(2020, 1, 1, 0, 0, 0);
+        minDateCalendar.set(2020, 1, 1);
         minDate = minDateCalendar.getTime();
         LOG.debug("Start Date: " + minDateCalendar.getTime());
         
         Calendar maxDateCalendar = Calendar.getInstance();
-        maxDateCalendar.set(2020, 12, 31, 23, 59, 59);
+        maxDateCalendar.set(2020, 12, 31);
         maxDate = maxDateCalendar.getTime();
         LOG.debug("End Date: " + maxDateCalendar.getTime());
     }
