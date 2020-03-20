@@ -55,13 +55,13 @@ public class OrderSearchBean implements Serializable {
     
     
     public void updateBean() {
+          LOG.debug("Update called");
           LOG.debug(query);
-          //searchResults = orderCtrl.searchOrdersByClientEmail(query);
+          searchResults = orderCtrl.searchOrders(query);
      }
 
      public void onEdit(int id) {
           LOG.debug(id + "");
           currentOrder = orderCtrl.findOrders(id);
-
      }
 }

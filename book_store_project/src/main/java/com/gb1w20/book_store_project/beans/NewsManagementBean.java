@@ -7,6 +7,7 @@ package com.gb1w20.book_store_project.beans;
 
 import com.gb1w20.book_store_project.entities.News;
 import com.gb1w20.book_store_project.jpa_controllers.NewsJpaController;
+import com.gb1w20.book_store_project.jpa_controllers.exceptions.NonexistentEntityException;
 import java.io.Serializable;
 import java.util.List;
 import javax.annotation.PostConstruct;
@@ -43,7 +44,7 @@ public class NewsManagementBean implements Serializable {
           return results;
      }
 
-     public void onChangedRemoved(int id, boolean isRemoved) {
+     public void onChangedRemoved(int id, boolean isRemoved) throws NonexistentEntityException, Exception {
           LOG.debug("onChangedRemoved called");
           LOG.debug("wasRemoved:   " + !isRemoved);
           News news = newsCtrlr.findNews(id);
