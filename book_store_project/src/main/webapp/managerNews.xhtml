@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:b="http://bootsfaces.net/ui"
+      xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+      xmlns:bookstore="http://java.sun.com/jsf/composite/default_components">
+
+     <h:head>
+          <title>Manager - News Management </title>
+          <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+          <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+          <h:outputStylesheet library="webjars" name="Semantic-UI/2.4.1/semantic.min.css" />
+          <h:outputStylesheet library="webjars" name="swiper/4.5.1/dist/css/swiper.min.css" />
+          <h:outputStylesheet library="css" name="homepage.css" />
+
+          <h:outputScript library="webjars" name="Semantic-UI/2.4.1/semantic.min.js"/>
+
+
+          <style>
+               .middle h1 {
+                    margin-top: 20px !important;
+                    text-align: center;
+                    color: gray;
+               }
+               .middle{
+                    padding: 0px 40px 0px 40px;
+                    min-height: 65%;
+               }
+
+               .header h1 {
+                    text-align: center !important;
+               }
+
+               #editFormGrowl{
+                    position: fixed;
+                    display: none;
+                    z-index: 777;
+                    left: 100%;
+                    margin-left: -257.42px;
+               }
+
+          </style>
+
+
+     </h:head>
+     <h:body>
+          <bookstore:navbar ></bookstore:navbar>
+
+          <div class="middle">
+               <h:form id="editForm">
+                    <!--Loading modal-->
+                    <p:ajaxStatus onstart="PF('statusDialog').show()" onsuccess="PF('statusDialog').hide()" />
+                    <p:dialog widgetVar="statusDialog" modal="true" draggable="false" closable="false" resizable="false" showHeader="false">
+                         <p:graphicImage style="display: inline;" class="loading" library="images" name="double-ring.svg" />
+                    </p:dialog>
+
+                    <div id="editFormGrowl" class="ui floating positive message" >
+                         <!--<i class="close icon"></i>-->
+                         <div class="header">
+                              Changes have been saved!
+                         </div>
+                    </div>
+
+                    <h1>News Feed Management</h1>
+
+                    <h:dataTable  id="newsTable" var="news"  value="#{newsManagement.results}" class="ui celled table" 
+                                  style="margin-bottom: 20px;">
+                         <h:column>
+                              <f:facet name="header">RSS Feed</f:facet>
+                                   #{news.RSSFeed}
+                         </h:column>
+                         <h:column>
+                              <f:facet name="header">Date created</f:facet>
+                                   #{news.dateCreated}
+                         </h:column>
+                         <h:column>
+                              <f:facet name="header">Removed</f:facet>
+                              <h:selectBooleanCheckbox value="#{news.isRemoved}" onclick="showGrowl()">
+                                   <p:ajax listener="#{newsManagement.onChangedRemoved(news.newsID, news.isRemoved )}" />
+                              </h:selectBooleanCheckbox>
+                               
+                         </h:column>
+
+
+                    </h:dataTable>
+
+
+
+               </h:form>
+          </div>
+
+          <bookstore:footer></bookstore:footer>
+
+          <script>
+               function showGrowl() {
+                    $('#editFormGrowl').show('slow');
+                    setTimeout(function(){
+                         $('#editFormGrowl').hide('slow');
+                    },5000)
+               }
+
+          </script>
+
+
+
+     </h:body>
+</html>

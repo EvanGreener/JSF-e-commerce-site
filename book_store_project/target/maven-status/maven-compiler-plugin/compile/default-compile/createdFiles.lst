@@ -59,6 +59,7 @@ com/gb1w20/book_store_project/entities/Ads_.class
 com/gb1w20/book_store_project/jpa_controllers/TaxJpaController.class
 com/gb1w20/book_store_project/jpa_controllers/BookJpaController.class
 com/gb1w20/book_store_project/beans/ClientManagementBean.class
+com/gb1w20/book_store_project/beans/NewsManagementBean.class
 com/gb1w20/book_store_project/entities/CustomerReviews_.class
 com/gb1w20/book_store_project/beans/SearchBean.class
 com/gb1w20/book_store_project/backing/SurveyBackingBean.class
