@@ -25,29 +25,30 @@ import javax.transaction.UserTransaction;
 @Named
 @RequestScoped
 public class SurveyDataJpaController implements Serializable {
-    
+
     @Resource
     private UserTransaction utx;
 
     @PersistenceContext
     private EntityManager em;
 
-    public SurveyDataJpaController() {}
+    public SurveyDataJpaController() {
+    }
 
     public void create(SurveyData surveyData) throws Exception {
-    try {
-        utx.begin();
-        em.persist(surveyData);
-        utx.commit();
-    } catch (Exception ex) {
         try {
-            utx.rollback();
-        } catch (Exception re) {
-            throw new Exception("An error occurred attempting to roll back the transaction.", re);
+            utx.begin();
+            em.persist(surveyData);
+            utx.commit();
+        } catch (Exception ex) {
+            try {
+                utx.rollback();
+            } catch (Exception re) {
+                throw new Exception("An error occurred attempting to roll back the transaction.", re);
+            }
+            throw ex;
         }
-        throw ex;
     }
-}
 
     public void edit(SurveyData surveyData) throws NonexistentEntityException, Exception {
         try {
@@ -113,23 +114,24 @@ public class SurveyDataJpaController implements Serializable {
     }
 
     public SurveyData findSurveyData(Integer id) {
-            return em.find(SurveyData.class, id);
+        return em.find(SurveyData.class, id);
     }
 
     public int getSurveyDataCount() {
-            CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
-            Root<SurveyData> rt = cq.from(SurveyData.class);
-            cq.select(em.getCriteriaBuilder().count(rt));
-            Query q = em.createQuery(cq);
-            System.out.println("surveyData count: " + ((Long) q.getSingleResult()).intValue());
-            return ((Long) q.getSingleResult()).intValue();
+        CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
+        Root<SurveyData> rt = cq.from(SurveyData.class);
+        cq.select(em.getCriteriaBuilder().count(rt));
+        Query q = em.createQuery(cq);
+        System.out.println("surveyData count: " + ((Long) q.getSingleResult()).intValue());
+        return ((Long) q.getSingleResult()).intValue();
     }
 
-   public List<SurveyData> getfirstSurvey(){
-        TypedQuery<SurveyData> query = em.createQuery("SELECT s FROM SurveyData s WHERE s.Survey_ID = :id", SurveyData.class);
-         query.setParameter("id", 1);
+    public List<SurveyData> getSurveyChoices(Integer surveyId) {
+        TypedQuery<SurveyData> query = em.createQuery("SELECT s FROM SurveyData s WHERE s.surveyID = :id AND s.isRemoved = :removed", SurveyData.class);
+        query.setParameter("id", surveyId);
+        query.setParameter("removed", false);
         List<SurveyData> surveyData = query.getResultList();
-        return surveyData; 
+        return surveyData;
     }
-    
+
 }
