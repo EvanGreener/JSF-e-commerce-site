@@ -126,17 +126,10 @@ public class SurveyDataJpaController implements Serializable {
         return ((Long) q.getSingleResult()).intValue();
     }
 
-    public List<SurveyData> getFirstChoice() {
-TypedQuery<SurveyData> query = em.createQuery("SELECT s FROM SurveyData s WHERE s.surveyID = :id", SurveyData.class);
-        query.setParameter("id", 1);
-        List<SurveyData> surveyData = query.getResultList();
-        return surveyData;
-
-    }
-
-    public List<SurveyData> getfirstSurvey() {
-        TypedQuery<SurveyData> query = em.createQuery("SELECT s FROM SurveyData s WHERE s.Survey_ID = :id", SurveyData.class);
-        query.setParameter("id", 1);
+    public List<SurveyData> getSurveyChoices(Integer surveyId) {
+        TypedQuery<SurveyData> query = em.createQuery("SELECT s FROM SurveyData s WHERE s.surveyID = :id AND s.isRemoved = :removed", SurveyData.class);
+        query.setParameter("id", surveyId);
+        query.setParameter("removed", false);
         List<SurveyData> surveyData = query.getResultList();
         return surveyData;
     }

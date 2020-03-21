@@ -38,105 +38,45 @@ public class SurveyBean implements Serializable {
     @Inject
     private SurveysJpaController surveyCtrlr;
 
-    private List<Surveys> survey;
-    private int count = 0;
-    private BarChartModel cartChart;
-    private String surveyChoice;
-    private SurveyData surveyData;
+    private Surveys survey;
+    private Integer surveyChoice;
     
     private final static Logger LOG = LoggerFactory.getLogger(SurveyBean.class);
 
     @PostConstruct
     public void init() {
         LOG.debug("Init called!");
-
-        List<Surveys> rList = getSurvey();
-
-        for (Surveys o : rList) {
-
-            List<SurveyData> d = o.getSurveyData();
-
-            for (SurveyData b : d) {
-                surveyChoice = b.getDataID() + "";
-                break;
-            }
-            break;
-
-        }
-    }
-    public void getHello(){
-        LOG.debug("jklkljl");
-    }
-    public String viewBook(String choice) {
-         this.surveyChoice = choice;
-        LOG.debug(choice+"ghdhg");
       
-        return "gallery.xhtml";
     }
-    
-    public void setHello(){
-             LOG.debug("jklklhjjkhkjhkjhkjhkjhkjhkjhkjhkjhjkhkjl");
-    }
-    public String getSurveyChoice() {
+
+    public Integer getSurveyChoice() {
           LOG.debug("getSurveyChoice");
+        this.survey=getSurvey();
+        for(SurveyData s:this.survey.getSurveyData()){
+            this.surveyChoice=s.getDataID();
+            break;
+        }
+        
         return this.surveyChoice;
     }
 
-    public void setSurveyChoice(String choice) {
+    public void setSurveyChoice(Integer choice) {
             LOG.debug("setSurveyChoice");
         this.surveyChoice = choice;
     }
-
-    public List<Surveys> getSurvey() {
+    public void setSurvey(){
+          LOG.debug("setSurvey");
+          survey = surveyCtrlr.getRandomSurvey();
+    }
+    public Surveys getSurvey() {
          LOG.debug("getSurvey");
-        survey = surveyCtrlr.getfirstSurvey();
         return survey;
     }
 
-    public void createRigTestModel() {
-        LOG.debug("createRigTestModel");
-        ChartSeries rigs = new ChartSeries();
+    
+    
+    
+    
+  
 
-        List<Surveys> rList = getSurvey();
-        Map<Object, Number> rigMap = new HashMap<>();
-        for (Surveys o : rList) {
-
-            List<SurveyData> d = o.getSurveyData();
-
-            for (SurveyData b : d) {
-                rigMap.put(b.getChoice().substring(0, Math.min(b.getChoice().length(), 15)), b.getVotes());
-
-                cartChart = new BarChartModel();
-                rigs.setData(rigMap);
-                cartChart.addSeries(rigs);
-            }
-
-        }
-
-    }
-
-    public BarChartModel getCartChart() {
-        LOG.debug("getCartChart");
-        createRigTestModel();
-        return cartChart;
-    }
-
-    public int getCount() {
-        count = 0;
-        List<Surveys> rList = getSurvey();
-
-        for (Surveys o : rList) {
-
-            List<SurveyData> d = o.getSurveyData();
-
-            for (SurveyData b : d) {
-
-                count += b.getVotes();
-            }
-            return count;
-
-        }
-        return 0;
-
-    }
 }
