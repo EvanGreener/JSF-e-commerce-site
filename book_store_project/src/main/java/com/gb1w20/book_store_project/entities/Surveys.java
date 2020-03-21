@@ -59,8 +59,8 @@ public class Surveys implements Serializable {
     private Date lastModified;
     @Column(name = "Is_Removed")
     private Boolean isRemoved;
-    
-     @OneToMany(cascade = CascadeType.ALL,mappedBy="survey")
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "survey")
     private List<SurveyData> surveyData;
 
     public Surveys() {
@@ -118,9 +118,10 @@ public class Surveys implements Serializable {
         this.isRemoved = isRemoved;
     }
 
-        public  List<SurveyData> getSurveyData(){
+    public List<SurveyData> getSurveyData() {
         return surveyData;
     }
+
     @Override
     public int hashCode() {
         int hash = 0;
@@ -145,5 +146,5 @@ public class Surveys implements Serializable {
     public String toString() {
         return "com.gb1w20.book_store_project.entities.Surveys[ surveyID=" + surveyID + " ]";
     }
-    
+
 }
