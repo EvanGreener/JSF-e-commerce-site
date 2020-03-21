@@ -1,5 +1,5 @@
 document.addEventListener('DOMContentLoaded', function (event) {
-    var editModal = document.getElementById("editOrderModal");
+    var editModal = document.getElementById("editModal");
     
     // Get the <span> element that closes the modal
     var span = document.getElementsByClassName("close")[0];
