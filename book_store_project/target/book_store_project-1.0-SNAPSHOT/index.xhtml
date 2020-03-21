@@ -33,38 +33,29 @@
         <!--composite component that comes from the navbar.xhtml file to avoid coding nav bar in all web pages-->
         <bookstore:navbar/>
 
+        <!--Carousel that displays recently added books and their information-->
         <div class="swiper-container">
             <div class="swiper-wrapper">
-
                 <ui:repeat value="#{bb.recentlyAdded}" var="book">
-
                     <div class="swiper-slide item#{bb.bookSlideColor}">
-
-
                         <div class="sliderTextContent">
-
                             <h1>#{book.title}</h1>
                             <span>    <ui:repeat value="#{book.authorsCollection}" var="author">
                                     #{author.name}
                                 </ui:repeat></span>
                             <p> #{book.description}</p>
+                            <!--Button directs you to the book page for the current book being displayed in the carousel-->
                             <h:form>
-                                <h:commandButton type="submit"
-                                                 value="Shop Now"
-                                                 action="#{bb.viewBook(book)}" />
-
+                                <h:commandButton type="submit" value="Shop Now" action="#{bb.viewBook(book)}" />
                             </h:form>
                         </div>
-
-
                         <div  class="sliderImageContent">
                             <h:graphicImage width="300px" height="400px" library="images" name="#{book.isbn}.jpg"  />
                         </div>
                     </div>
                 </ui:repeat>
-
-
             </div>
+
             <!-- Add Pagination -->
             <div class="swiper-pagination"></div>
             <!-- Add Arrows -->
@@ -73,6 +64,7 @@
         </div>
         <div class="lightOrangeDiv">
 
+            <!--Shows top eight books with that have been purchased most-->
             <p class="small">Best Seller Products</p><br/>
             <h:form>
                 <h:panelGroup>
@@ -113,8 +105,7 @@
 
                                 </div>
 
-
-
+                                <!--Button to add to shopping cart-->
                                 <div class="ui two bottom attached buttons ">
                                     <div onclick="addToCart(#{books.isbn}, 'pdf')" class="ui button">+ Add to Cart</div>
 
@@ -128,12 +119,16 @@
             </h:form>
 
             <br/><br/>
+
+            <!--Search bar used searching for books that will display results in gallery page-->
             <h:form>
                 <div class=" searchBarDiv">
                     <h:inputText a:placeholder="Search books..." value="#{search.query}" style=" float: center; margin-top: -30px;" class="searchBar"/>
                     <h:commandButton class="searchButton" action="#{search.showSearch()}" type="submit" value = "Search"/>
                 </div>
             </h:form>
+
+
             <!-- The Modal -->
             <div id="myModal" class="modal">
 
@@ -153,21 +148,17 @@
         <!-- Survey/Ad/News Section -->
 
         <div   class="lightGreyDiv">
-
-
-
-
-
-
             <table class="ui table lightGreyDiv" >
 
+                <!-- Shows the News -->
                 <tbody>
                     <tr align="center">
                         <td align="center">
                             <div style="background-color:#d77a61;" class="ui half page test ad left" data-text="">
                                 <h3 style="color:white;padding-top: 10px;" >News</h3>
                                 <p:scrollPanel style="overflow-y: auto;height: 100%;">
-                                    <p:feedReader size="10" value="https://www.theverge.com/rss/index.xml" var="feed">
+                                
+                                    <p:feedReader size="10" value="#{newsBean.randomNews.RSSFeed}" var="feed">
                                         <h:outputText value="#{feed.title}" style="font-weight: bold"/>
                                         <h:outputText value="#{feed.description.value}" escape="false"/>
                                         <p:separator />
@@ -175,56 +166,64 @@
                                             Something went wrong.
                                         </f:facet>
                                     </p:feedReader>  
+                                                   
                                 </p:scrollPanel>
 
                             </div></td>
                         <td align="center"> <div id="surveyDiv" class="ui netboard test ad survey" data-text="" >
 
-
+                                <!-- Survey Section -->
                                 <h:form >
+                                    <p>#{ss.setSurvey()}</p>
                                     <ui:repeat value="#{ss.survey}" var="s">
-
-                                        <h1 style="text-align:center">  #{s.surveyName}</h1>
-
-
-
+                                        <h1 id="surveyStatus" style="text-align:center">  #{s.surveyName}</h1>
+                                        <!-- Shows the survey results once survey completed-->
+                                        <p id="surveyId" class="invisible">#{s.surveyID}</p>
                                         <div id="results" class="invisible">
+                                       
                                             <hr/>
-                                            <p:chart id="barchart" type="bar"  model="#{ss.cartChart}"  style="width:530px"/>
+                                            <p:chart id="barchart" type="bar"  model="#{surveyDataBacking.getBarChart(s.surveyID)}"  style="width:530px"/>
                                             <div class="ui horizontal statistics">
-
-                                                <ui:repeat value="#{s.surveyData}" var="sd">
-
-
-                                                    <div class="ui statistic">
-                                                        <div class="value">#{sd.votes}</div>
-                                                        <div class="label">#{sd.choice}</div>
-                                                    </div>
-
-
-                                                </ui:repeat>
+                                                <h:panelGroup id="other" >
+                                                    <ui:repeat  value="#{surveyDataBacking.getSurveyChoices(s.surveyID)}" var="sd">
+                                                        <div class="ui statistic">
+                                                            <div class="value">#{sd.votes}</div>
+                                                            <div class="label">#{sd.choice}</div>
+                                                        </div>
+                                                        <br/>
+                                                    </ui:repeat>
+                                                </h:panelGroup>
                                             </div>
                                             <hr/>
                                             <h2>Thank you for answering!</h2>
                                         </div>
 
 
+                                        <!-- Shows the actual survey-->
                                         <div id="survey">
                                             <p style="font-size:20px;padding:2%">#{s.surveyDescription}</p>
-                                            <ui:repeat value="#{s.surveyData}" var="sd">
-                                                <h:selectOneRadio style="font-size:20px" required="true" layout="pageDirection" value="#{ss.surveyChoice}" >
-                                                    <f:selectItem itemValue="#{sd.dataID}" itemLabel = " #{sd.choice}" />
-                                                </h:selectOneRadio>
-                                            </ui:repeat>
-                                            <h:commandButton class="bookFormatBtn" action="#{ss.setHello(sd.dataID)}" onclick="showResults()" type="button" value="Submit"/>
+
+                                            <p:selectOneRadio style="font-size:20px" required="true" layout="pageDirection" value="#{surveyDataBacking.surveyDataChoice}" >
+                                                <f:selectItems value="#{s.surveyData}" var="sd" itemValue="#{sd.dataID}" itemLabel = " #{sd.choice}" />
+                                            </p:selectOneRadio>
+                           
+                                            <p:commandButton  update="other barchart" class="bookFormatBtn"  value="Submit" oncomplete="showResults(#{s.surveyID})"/>
+
                                         </div>
                                     </ui:repeat>
                                 </h:form>
-
-
                             </div></td>
+
+                        
+                        
+               
+                        
+                        
+                        <!-- First Ad location -->
                         <td align="center"><div class="ui wide skyscraper test ad right homepageCard" data-text="">
-                                <h:graphicImage height="100%" width="100%" library="images" name="apples.png"  onclick="viewAd('https://en.wikipedia.org/wiki/Apple')"/>
+                                <ui:repeat value="#{adsBean.randomAd}" var="ad">
+                                    <h:graphicImage height="100%" width="100%" library="images" name="#{ad.imageName}1.png"  onclick="viewAd('#{ad.adUrl}')"/>
+                                </ui:repeat>
                             </div></td>
                     </tr>
                 </tbody>
@@ -232,13 +231,10 @@
 
         </div>
 
-
+        <!-- Shows the most popular book genres -->
         <div class="lightPurpleDiv">
             <p class="small">Popular Genres</p><br/>
-
             <h:form>
-
-
                 <h:panelGroup>
                     <div class="ui four doubling stackable cards">
                         <ui:repeat value="#{bb.popularGenres}" var="genres">
@@ -252,21 +248,19 @@
                                     </div>
                                 </h:commandLink>
                             </div>
-
                         </ui:repeat>
                     </div>
                 </h:panelGroup>
-
-
             </h:form>
             <br/><br/>
-            <div class="ui centered leaderboard test ad" data-text="">
 
-                <h:graphicImage height="100%" width="100%" library="images" name="blueberry.png" onclick="viewAd('https://en.wikipedia.org/wiki/Blueberry')" />
+            <!-- Second Ad location -->
+            <div class="ui centered leaderboard test ad" data-text="">
+                <ui:repeat value="#{adsBean.randomAd}" var="ad">
+                    <h:graphicImage height="100%" width="100%" library="images" name="#{ad.imageName}2.png" onclick="viewAd('#{ad.adUrl}')" />
+                </ui:repeat>
             </div>
         </div>
-
-
 
         <!--composite component that comes from the footer.xhtml file to avoid coding the website footer in all web pages-->
         <bookstore:footer/>

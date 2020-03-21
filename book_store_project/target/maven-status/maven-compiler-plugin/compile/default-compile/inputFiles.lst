@@ -25,6 +25,7 @@
 /Users/giancarlo/Desktop/gb1w20/book_store_project/src/main/java/com/gb1w20/book_store_project/beans/NewsManagementBean.java
 /Users/giancarlo/Desktop/gb1w20/book_store_project/src/main/java/com/gb1w20/book_store_project/resources/JavaEE8Resource.java
 /Users/giancarlo/Desktop/gb1w20/book_store_project/src/main/java/com/gb1w20/book_store_project/entities/Surveys.java
+/Users/giancarlo/Desktop/gb1w20/book_store_project/src/main/java/com/gb1w20/book_store_project/beans/AdsBean.java
 /Users/giancarlo/Desktop/gb1w20/book_store_project/src/main/java/com/gb1w20/book_store_project/beans/DateValueBean.java
 /Users/giancarlo/Desktop/gb1w20/book_store_project/src/main/java/com/gb1w20/book_store_project/jpa_controllers/TaxJpaController.java
 /Users/giancarlo/Desktop/gb1w20/book_store_project/src/main/java/com/gb1w20/book_store_project/beans/CartBean.java
@@ -46,6 +47,7 @@
 /Users/giancarlo/Desktop/gb1w20/book_store_project/src/main/java/com/gb1w20/book_store_project/jpa_controllers/CustomerReviewsJpaController.java
 /Users/giancarlo/Desktop/gb1w20/book_store_project/src/main/java/com/gb1w20/book_store_project/jpa_controllers/SurveyDataJpaController.java
 /Users/giancarlo/Desktop/gb1w20/book_store_project/src/main/java/com/gb1w20/book_store_project/jpa_controllers/PublisherJpaController.java
+/Users/giancarlo/Desktop/gb1w20/book_store_project/src/main/java/com/gb1w20/book_store_project/beans/NewsBean.java
 /Users/giancarlo/Desktop/gb1w20/book_store_project/src/main/java/com/gb1w20/book_store_project/entities/Tax.java
 /Users/giancarlo/Desktop/gb1w20/book_store_project/src/main/java/com/gb1w20/book_store_project/entities/Book.java
 /Users/giancarlo/Desktop/gb1w20/book_store_project/src/main/java/com/gb1w20/book_store_project/jpa_controllers/exceptions/PreexistingEntityException.java

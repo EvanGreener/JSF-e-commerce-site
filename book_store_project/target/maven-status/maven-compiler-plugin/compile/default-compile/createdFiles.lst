@@ -26,6 +26,7 @@ com/gb1w20/book_store_project/beans/UserLoginBean.class
 com/gb1w20/book_store_project/entities/Surveys_.class
 com/gb1w20/book_store_project/entities/SurveyData_.class
 com/gb1w20/book_store_project/entities/CustomerReviews.class
+com/gb1w20/book_store_project/beans/NewsBean.class
 com/gb1w20/book_store_project/entities/News.class
 com/gb1w20/book_store_project/beans/SurveyBean.class
 com/gb1w20/book_store_project/backing/OrderItemBackingBean.class
@@ -39,6 +40,7 @@ com/gb1w20/book_store_project/entities/Authors.class
 com/gb1w20/book_store_project/entities/Tax_.class
 com/gb1w20/book_store_project/jpa_controllers/exceptions/IllegalOrphanException.class
 com/gb1w20/book_store_project/entities/Book_.class
+com/gb1w20/book_store_project/beans/AdsBean.class
 com/gb1w20/book_store_project/entities/Tax.class
 com/gb1w20/book_store_project/backing/BookFormatBackingBean.class
 com/gb1w20/book_store_project/jpa_controllers/PublisherJpaController.class

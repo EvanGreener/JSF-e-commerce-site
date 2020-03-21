@@ -1,43 +1,53 @@
 document.addEventListener('DOMContentLoaded', function (event) {// Get the modal
-      
+
+if (sessionStorage.surveydone) {
+        for (i = 0; i < sessionStorage.surveydone.length; i++) {
+            if (sessionStorage.surveydone.charAt(i) == document.getElementById("surveyId").innerHTML) {
+                document.getElementById("survey").remove();
+                document.getElementById("surveyStatus").innerHTML="No new survey at the moment";
+                break;
+            }
+        }
+
+    }
 
     // Get the modal
     var modal = document.getElementById("myModal");
 // Get the image and insert it inside the modal - use its "alt" text as a caption
-       var img1 = document.getElementById("img01");
+    var img1 = document.getElementById("img01");
     var captionText = document.getElementById("caption");
 
     var bookCards = document.getElementsByClassName('homepageImg');
     var index;
     for (index = 0; index < bookCards.length; index++) {
         bookCards[index].onclick = function () {
-          
-            
+
+
         }
     }
 
-var imgBtn = document.getElementsByClassName('cardHoverBtn');
+    var imgBtn = document.getElementsByClassName('cardHoverBtn');
     for (index = 0; index < imgBtn.length; index++) {
         imgBtn[index].onclick = function () {
-         
+
             // Get the modal
-    var modal = document.getElementById("myModal");
+            var modal = document.getElementById("myModal");
 // Get the image and insert it inside the modal - use its "alt" text as a caption
-       var img1 = document.getElementById("img01");
-    var captionText = document.getElementById("caption");
-          modal.style.display = "block";
-            img1.src=this.parentElement.getElementsByTagName('img')[0].src;
+            var img1 = document.getElementById("img01");
+            var captionText = document.getElementById("caption");
+            modal.style.display = "block";
+            img1.src = this.parentElement.getElementsByTagName('img')[0].src;
             captionText.innerHTML = this.alt;
-            
+
         }
     }
 
 
 
-      
-    
 
-            
+
+
+
 
 // Get the <span> element that closes the modal
     var span = document.getElementsByClassName("close")[0];
@@ -91,7 +101,8 @@ function displayCardHoverButton()
     this.appendChild(btn);
 }
 
-function viewAd(url){
+
+function viewAd(url) {
     window.open(url);
 }
 
@@ -107,34 +118,50 @@ function removeCardHoverButton(){
 function addToCart(isbn, format){
     var bookItem = {
         ISBN: isbn,
-        bookFormat:format
+        bookFormat: format
     };
-    var cartItems = localStorage.getItem("BOOK_STORE_CART") ? JSON.parse(localStorage.getItem("BOOK_STORE_CART")) : [] ;
+    var cartItems = localStorage.getItem("BOOK_STORE_CART") ? JSON.parse(localStorage.getItem("BOOK_STORE_CART")) : [];
     var duplicateFound = cartItems.find(item => item.ISBN === bookItem.ISBN);
-    if(!duplicateFound){
+    if (!duplicateFound) {
         cartItems.push(bookItem);
-        localStorage.setItem("BOOK_STORE_CART",JSON.stringify(cartItems));
+        localStorage.setItem("BOOK_STORE_CART", JSON.stringify(cartItems));
     }
-     event.stopPropagation();
+    event.stopPropagation();
 }
 
-function removeFromCart(isbn){
+function removeFromCart(isbn) {
     var cartItems = JSON.parse(localStorage.getItem("BOOK_STORE_CART"));
-    var updatedCart = cartItems.filter(item=>item.ISBN !== isbn);
-    localStorage.setItem("BOOK_STORE_CART",JSON.stringify(updatedCart));
+    var updatedCart = cartItems.filter(item => item.ISBN !== isbn);
+    localStorage.setItem("BOOK_STORE_CART", JSON.stringify(updatedCart));
 }
 
-function signOut(){
+
+function checkIfLoggedIn() {
+    var userCookies = document.cookie.split(';');
+    for (var i = 0; i < userCookies.length; i++) {
+        console.log(userCookies[i]);
+    }
+    return true;
+}
+
+function signOut() {
     document.cookie = 'BOOK_STORE_LOGIN=; expires=Thu, 01 Jan 1970 00:00:01 GMT;';
 }
 
-function showResults(){   
+
+function showResults(surveyId) {
+     if (sessionStorage.surveydone) {
+         sessionStorage.surveydone = sessionStorage.surveydone + surveyId + ",";
+     }
+     else{
+         sessionStorage.surveydone=""+surveyId + ",";
+     }
     document.getElementById("survey").remove();
-    document.getElementById("results").setAttribute("class","visible");
+    document.getElementById("results").setAttribute("class", "visible");
 }
 
 function showMore() {
-    
+
     var dots = document.getElementById("dots");
     var moreText = document.getElementById("more");
     var btnText = document.getElementById("moreBtn");
