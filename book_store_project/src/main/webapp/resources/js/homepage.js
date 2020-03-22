@@ -1,7 +1,8 @@
             $(document).ready(function(){
                 $('.ui .item').on('click', function() {
-                    $('.ui .item').removeClass('active');
-                    $('.segment').removeClass('active');
+                    var id = $(this).parent().attr('id');
+                    $('.ui .' + id + '.item').removeClass('active');
+                    $('.' + id + '.segment').removeClass('active');
                     var currentTab = $(this).attr("data-tab");
                     $("[data-tab='" + currentTab + "']").addClass('active');
                     $(this).addClass('active');

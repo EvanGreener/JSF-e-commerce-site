@@ -151,41 +151,6 @@
             </div>
         </h:form>
         
-        <div class='lightGreyDivLessSpacing'>
-          <div class="ui top attached tabular menu" id="tabs">
-              <a class="active item" data-tab="genInfo">General Registration Info</a>
-              <a class="item" data-tab="email">Email Format</a>
-              <a class="item" data-tab="postalCode">Postal Code Format</a>
-              <a class="item" data-tab="province">Province Information</a>
-          </div>
-          <div class="ui bottom attached active tab segment" data-tab="genInfo">
-              When registering to be a new user, keep in mind that your email cannot be changed
-              due to the structure of our database. If something is unable to be mailed to you
-              due to the fact that you have provided a nonexistent or malformed email address,
-              you will have to register for a new account and repeat the order process again.
-              That being said, make sure no fields are left blank and the proper structure
-              of certain required fields are met. If a changed field is left blank or a certain
-              expected format (for postal code and email) is not respected, an error message will
-              be displayed. As long as errors are present, a user cannot be registered. Once all
-              fields have been filled and all required criteria is met, a user can successfully
-              be registered. Upon registration, you will be redirected to the login page where
-              you can proceed to sign in and start experiencing the site as an actual user.
-          </div>
-          <div class="ui bottom attached tab segment" data-tab="email">
-              Email addresses follow the traditional format (for example, albertfish@gmail.com or
-              mirandalambert@outlook.com)
-          </div>
-          <div class="ui bottom attached tab segment" data-tab="postalCode">
-              Postal codes follow the Canadian format: letter, number, letter, number, letter, 
-              number (for example. H1C5D7 or H1V8J0).
-          </div>
-          <div class="ui bottom attached tab segment" data-tab="province">
-              The province you select will determine the taxes applied on orders. Keep in mind that
-              managers are able to change your province at any time, so in case a mistake was made,
-              it can easily be fixed on the manager's end.
-          </div>
-        </div>
-        
         <!--composite component that comes from the footer.xhtml file to avoid coding the website footer in all web pages-->
         <bookstore:footer/>
     </h:body>
