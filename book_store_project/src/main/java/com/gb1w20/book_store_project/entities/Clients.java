@@ -110,8 +110,10 @@ public class Clients implements Serializable {
     private Boolean isRemoved;
     
     @OneToMany( cascade = CascadeType.ALL)
-    @JoinColumn(name = "Client_ID")
     private List<Orders> ordersCollection;
+    
+    @OneToMany(cascade = CascadeType.ALL,mappedBy="clients")
+    private List<CustomerReviews> reviews;
 
     public Clients() {
     }
@@ -119,7 +121,9 @@ public class Clients implements Serializable {
     public Clients(Integer clientID) {
         this.clientID = clientID;
     }
-
+    public List<CustomerReviews> getReviews(){
+        return this.reviews;
+    }
     public Integer getClientID() {
         return clientID;
     }

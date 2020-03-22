@@ -37,6 +37,7 @@ com\gb1w20\book_store_project\jpa_controllers\AuthorsJpaController.class
 com\gb1w20\book_store_project\jpa_controllers\BookFormatJpaController.class
 com\gb1w20\book_store_project\entities\News.class
 com\gb1w20\book_store_project\backing\AdBackingBean.class
+com\gb1w20\book_store_project\beans\ReviewBean.class
 com\gb1w20\book_store_project\jpa_controllers\SurveyDataJpaController.class
 com\gb1w20\book_store_project\entities\News_.class
 com\gb1w20\book_store_project\backing\OrderItemBackingBean.class

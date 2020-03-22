@@ -194,7 +194,7 @@ public class BookJpaController implements Serializable {
     
     public List<Book> getRecentlyAdded(){
          TypedQuery<Book> query = em.createQuery("SELECT b FROM Book b ORDER BY b.dateEntered ASC", Book.class);
-        query.setMaxResults(8);
+        query.setMaxResults(3);
         List<Book> books = query.getResultList();
         return books; 
     }

@@ -1,5 +1,6 @@
 package com.gb1w20.book_store_project.jpa_controllers;
 
+import com.gb1w20.book_store_project.entities.Book;
 import com.gb1w20.book_store_project.entities.CustomerReviews;
 import com.gb1w20.book_store_project.jpa_controllers.exceptions.NonexistentEntityException;
 import java.io.Serializable;
@@ -10,7 +11,9 @@ import javax.inject.Named;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
 import javax.persistence.EntityNotFoundException;
+import javax.persistence.NonUniqueResultException;
 import javax.persistence.PersistenceContext;
+import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 import javax.transaction.SystemException;
@@ -23,29 +26,30 @@ import javax.transaction.UserTransaction;
 @Named
 @RequestScoped
 public class CustomerReviewsJpaController implements Serializable {
-    
+
     @Resource
     private UserTransaction utx;
 
     @PersistenceContext
     private EntityManager em;
 
-    public CustomerReviewsJpaController() {}
+    public CustomerReviewsJpaController() {
+    }
 
     public void create(CustomerReviews customerReviews) throws Exception {
-    try {
-        utx.begin();
-        em.persist(customerReviews);
-        utx.commit();
-    } catch (Exception ex) {
         try {
-            utx.rollback();
-        } catch (Exception re) {
-            throw new Exception("An error occurred attempting to roll back the transaction.", re);
+            utx.begin();
+            em.persist(customerReviews);
+            utx.commit();
+        } catch (Exception ex) {
+            try {
+                utx.rollback();
+            } catch (Exception re) {
+                throw new Exception("An error occurred attempting to roll back the transaction.", re);
+            }
+            throw ex;
         }
-        throw ex;
     }
-}
 
     public void edit(CustomerReviews customerReviews) throws NonexistentEntityException, Exception {
         try {
@@ -111,16 +115,33 @@ public class CustomerReviewsJpaController implements Serializable {
     }
 
     public CustomerReviews findCustomerReviews(Integer id) {
-            return em.find(CustomerReviews.class, id);
+        return em.find(CustomerReviews.class, id);
+    }
+
+    public Integer getAverageRating(String isbn) {
+        TypedQuery<Object> query = em.createQuery("SELECT (c.rating) FROM CustomerReviews c group by c.isbn Having c.isbn = :isbn", Object.class);
+        query.setParameter("isbn", isbn);
+        List rating = query.getResultList();
+        if (rating.isEmpty()){
+            return 0;
+        }
+        else if (rating.size() == 1) {
+            for(Object r:rating){
+                return (Integer) r;
+            }
+        }
+        throw new NonUniqueResultException();
+  
+  
     }
 
     public int getCustomerReviewsCount() {
-            CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
-            Root<CustomerReviews> rt = cq.from(CustomerReviews.class);
-            cq.select(em.getCriteriaBuilder().count(rt));
-            Query q = em.createQuery(cq);
-            System.out.println("customerReview count: " + ((Long) q.getSingleResult()).intValue());
-            return ((Long) q.getSingleResult()).intValue();
+        CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
+        Root<CustomerReviews> rt = cq.from(CustomerReviews.class);
+        cq.select(em.getCriteriaBuilder().count(rt));
+        Query q = em.createQuery(cq);
+        System.out.println("customerReview count: " + ((Long) q.getSingleResult()).intValue());
+        return ((Long) q.getSingleResult()).intValue();
     }
-    
+
 }

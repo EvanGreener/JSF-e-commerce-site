@@ -5,7 +5,9 @@
       xmlns:b="http://bootsfaces.net/ui"
       xmlns:f="http://xmlns.jcp.org/jsf/core"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-      xmlns:bookstore="http://java.sun.com/jsf/composite/default_components">
+      xmlns:bookstore="http://java.sun.com/jsf/composite/default_components"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:c="http://java.sun.com/jsp/jstl/core">
     <h:head>
         <ui:repeat value="#{bb.book}" var="book">
             <title>#{book.title}</title>
@@ -46,8 +48,13 @@
                                     <h:commandButton class="bookFormatBtn button" value="PDF" type="button" />
                                     <h:commandButton  class="bookFormatBtn button" value="EPUB" type="button" />
                                     <br></br><br></br>
-                                    <a>### Avg Rating 435 Reviews</a>
-                                    <br></br>
+                                    <ui:repeat value="#{reviewBean.getRating(reviewBean.getAverageRating(book.isbn))}" var="avgRating">
+                                         <h:graphicImage class="image" height="20px" width="20px" library="images" name="ratestar.png"  />
+                                    </ui:repeat>
+                                    <ui:repeat value="#{reviewBean.getRating(5-reviewBean.getAverageRating(book.isbn))}" var="avgRating">
+                                         <h:graphicImage class="image" height="20px" width="20px" library="images" name="star.png"  />
+                                    </ui:repeat>
+                                    <br/><br/>
                                     #{book.description}
                                     ing with guitar and hanging with guitar and hanging with guitar <span id="dots">...</span><span id="more">and hanging with guitar and hanging with guitar and hanging with guitar and hanging with guitar and hanging with guitar and hanging with guitar and hanging with guitar and hanging with guitar and hanging with guitar and hanging with guitar and hanging with guitar and hanging with guitar and hanging with guitar and hanging with guitar and hanging with guitar and hanging with guitar and hanging with guitar and hanging with guitar and hanging with guitar and hanging with guitar and hanging with guitar and hanging with guitar and hanging with guitar and hanging with guitar and hanging with guitar and hanging with guitar and hanging with guitar and hanging with guitar and hanging with guitar and hanging with guitar and hanging with guitar and hanging with guitar and hanging with guitar and hanging with guitar and hanging with guitar and hanging with guitar and hanging with guitar and hanging with guitar and hanging with guitar and hanging with guitar and hanging with guitar and hanging with guitar and hanging with guitar and hanging with guitar and hanging with guitar and hanging with guitar and hanging with guitar and hanging with guitar and hanging with guitar and hanging with guitar and hanging with guitar and hanging with guitar and hanging with guitar and hanging with guitar and hanging with guitar and hanging with guitar and hanging with guitar and hanging with guitar and hanging with guitar and hanging with guitar and hanging with guitar and hanging with guitar and hanging with guitar and hanging with guitar and hanging with guitar and hanging with guitar and hanging with guitar and hanging with guitar and hanging with guitar and hanging with guitar and hanging with guitar and hanging with guitar and hanging with guitar and hanging with guitar and hanging with </span>
                                     <a  onclick="showMore()" id="moreBtn">Read more</a>
@@ -79,137 +86,54 @@
 
 
             <table class="ui padded table">
-                <tr><td  colspan="5" class="right aligned single line">    
+                <tr>
+                    <td  style="vertical-align: middle; text-align: center">
+                        <p style="font-size: 1.7em">Reviews</p>
+                    </td>
+                    <td  colspan="5" class="right aligned single line">    
                         <h:commandButton onclick="addReview()" id="reviewBtn" class="button addReviewBtn" value="+" type="button" />
                     </td>
 
                 </tr>
                 <tbody>
 
+                    <tr><td>
+                            <div class="flex-container">
 
-                    <ui:repeat value="#{bb.book.reviews}" var="book">
-                        <tr>
-                            <td>
+                                <!--Review section-->
+                                <ui:repeat value="#{bb.book.reviews}" var="book">
+                                    <div>
+                                        <p class="reviewTitle">#{book.reviewTitle}</p>
 
+                                        <p class="reviewName">#{book.clients.firstName} #{book.clients.lastName}</p>
 
-                                <div class="ui items">
-                                    <div class="item">
-                                        <div class="content">
-                                            <a class="header">#{book.reviewTitle}</a>
-                                            <div class="meta">
-                                                <span>#{book.clientID}</span>
+                                        <p>#{book.reviewBody} </p>
+                                        <div class="flex-container" style="padding:0px">
+                                            <div style="padding:0px">
+                                                <ui:repeat value="#{reviewBean.getRating(book.rating)}" var="rate">
+                                                    <h:graphicImage class="image" height="20px" width="20px" library="images" name="ratestar.png"  />
+                                                </ui:repeat>
+                                                <ui:repeat value="#{reviewBean.getRating(5-book.rating)}" var="rate">
+                                                    <h:graphicImage class="image" height="20px" width="20px" library="images" name="star.png"  />
+                                                </ui:repeat>
                                             </div>
-                                            <div class="description">
-                                                <p>#{book.reviewBody} </p>
-                                            </div>
-                                            <div class="extra">
-
-
-                                                <div align="right" class="ui">
-                                                    #{book.dateEntered}
-                                                </div>
-
-
+                                            <div style="padding:0px" class="reviewDate">
+                                                <h:outputText value="#{book.dateEntered}">
+                                                    <f:convertDateTime type="date" dateStyle="medium"/>
+                                                </h:outputText>
                                             </div>
                                         </div>
+                                        <hr style="border-top-color:grey"/>
                                     </div>
-                                </div> 
+                                </ui:repeat>
 
-                            </td>
-                        </tr>
-                    </ui:repeat>
-                    <tr>
-                        <td class="single line">
-
-
-
-
-
-                            <div class="ui items">
-                                <div class="item">
-                                    <div class="content">
-                                        <a class="header">Of Mice and Men</a>
-                                        <div class="meta">
-                                            <span>Firstname Lastname</span>
-                                        </div>
-                                        <div class="description">
-                                            <p> nkjdsfkjd fkdjhgkjhsdgkjfhd fkd hgksjfhdgkjfsdhgkjfdhg d gfdjskhg fdsgjhsdf fdghdkjgsd </p>
-                                        </div>
-                                        <div class="extra">
-
-
-                                            <div align="right" class="ui">
-                                                Jan 1st 2019
-                                            </div>
-
-
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-
-
-
-
-
-
-
-
-
-
+                                <h:panelGroup rendered="#{empty bb.book.reviews}">
+                                    <h4> No Reviews</h4>
+                                </h:panelGroup>
+                            </div> 
                         </td>
                     </tr>
-                    <tr>
-                        <td>
-                            <div class="ui items">
-                                <div class="item">
-                                    <div class="content">
-                                        <a class="header">Of Mice and Men</a>
-                                        <div class="meta">
-                                            <span>Firstname Lastname</span>
-                                        </div>
-                                        <div class="description">
-                                            <p> nkjdsfkjd fkdjhgkjhsdgkjfhd fkd hgksjfhdgkjfsdhgkjfdhg d gfdjskhg fdsgjhsdf fdghdkjgsd </p>
-                                        </div>
-                                        <div class="extra">
 
-
-                                            <div align="right" class="ui">
-                                                Jan 1st 2019
-                                            </div>
-
-
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </td>
-                        <td class="single line">
-                            <div class="ui items">
-                                <div class="item">
-                                    <div class="content">
-                                        <a class="header">Of Mice and Men</a>
-                                        <div class="meta">
-                                            <span>Firstname Lastname</span>
-                                        </div>
-                                        <div class="description">
-                                            <p> nkjdsfkjd fkdjhgkjhsdgkjfhd fkd hgksjfhdgkjfsdhgkjfdhg d gfdjskhg fdsgjhsdf fdghdkjgsd </p>
-                                        </div>
-                                        <div class="extra">
-
-
-                                            <div align="right" class="ui">
-                                                Jan 1st 2019
-                                            </div>
-
-
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </td>
-                    </tr>
                 </tbody>
 
 
@@ -276,27 +200,27 @@
                             <h:graphicImage class="img" height="250" width="156.25" library="images" name="#{bo.isbn}.jpg"  />
                         </div>
                         <div class="content">
-                              <h:commandLink action = "#{bb.viewBook(bo)}" type="submit" value = "">
-                                        <div class="header">
+                            <h:commandLink action = "#{bb.viewBook(bo)}" type="submit" value = "">
+                                <div class="header">
 
-                                            #{bo.title}</div>
-                                        <div class="meta">
+                                    #{bo.title}</div>
+                                <div class="meta">
 
-                                            <ui:repeat value="#{bo.authorsCollection}" var="author">
-                                                #{author.name}
-                                            </ui:repeat>
+                                    <ui:repeat value="#{bo.authorsCollection}" var="author">
+                                        #{author.name}
+                                    </ui:repeat>
 
-                                        </div>
+                                </div>
 
-                                        <div class="description">
-                                            <div class="ui tag labels">
-                                                <a class="ui label">
-                                                    $#{bo.listPrice}
-                                                </a>
-                                            </div>
+                                <div class="description">
+                                    <div class="ui tag labels">
+                                        <a class="ui label">
+                                            $#{bo.listPrice}
+                                        </a>
+                                    </div>
 
-                                        </div>
-                                    </h:commandLink>
+                                </div>
+                            </h:commandLink>
                         </div>
                         <div class="ui bottom attached button">
                             + Add to Cart
