@@ -56,6 +56,7 @@ public class BookBean implements Serializable {
         }
         return bookSlideColor;
     }
+    
     public List<Book> getBestSeller() {
         LOG.debug("getBestSeller");
         bestSeller = bookCtrlr.getBestSeller();

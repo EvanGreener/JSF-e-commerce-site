@@ -21,22 +21,29 @@ and open the template in the editor.
             <div class="ui fluid ">
                 <!--TODO list actual books owned by user from database -->
                 <div class="itemContainer">
-                    <div class="ui divided items list">
-
-                        <ui:repeat value="#{bb.bestSeller}" var="book">
-
-                            <div class="item">
-                                <div class="ui tiny image">
-                                    <h:graphicImage library="images" name="#{book.isbn}.jpg"  />
+                    <div class="ui  divided items very relaxed list">
+                        <div class="ui huge header">My Cart</div>
+                        <h:panelGroup layout="block" rendered="#{cbb.isCartEmpty()}">
+                            <h4> Cart is currently Empty  </h4>
+                        </h:panelGroup>
+                        <ui:repeat value="#{cbb.getCartItems()}" var="book">
+                            <h:form>
+                                <div class="item" style="border-bottom: 1px solid #8080805c; margin-bottom: 5%;padding-bottom: 1%">
+                                    <div class="content" style="float:right">
+                                        <h:commandButton action="#{cbb.removeBookFromCart(book)}" type="submit" value = "Remove" class="ui button"/>
+                                    </div>
+                                    <div class="ui tiny image">
+                                        <h:graphicImage library="images" name="#{book.isbn}.jpg"  />
+                                    </div>
+                                    <div class="middle aligned content">
+                                        <h:commandLink action = "#{bb.viewBook(book)}" type="submit" value = "">
+                                            <div class="header">#{book.title}</div>
+                                        </h:commandLink>
+                                        <div class="description">$ #{book.listPrice}</div>
+                                    </div>
                                 </div>
-                                <div class="middle aligned content">
-                                    #{book.title}
-                                    <br/>
-                                    ePub
-                                </div>
-                            </div>
+                            </h:form>
                         </ui:repeat>
-
                     </div>
                 </div>
             </div>

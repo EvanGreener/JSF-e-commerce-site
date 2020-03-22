@@ -75,11 +75,7 @@ function removeCardHoverButton()
     var btn = document.getElementsByClassName("cardHoverBtn");
     btn[0].remove();
 }
-function addToCart()
-{
-  event.stopPropagation();
-    alert("Successfuly added to cart");
-}
+
 function showMore() {
     
     var dots = document.getElementById("dots");

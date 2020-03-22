@@ -104,20 +104,6 @@ function removeCardHoverButton(){
     btn[0].remove();
 }
 
-function addToCart(isbn, format){
-    var bookItem = {
-        ISBN: isbn,
-        bookFormat:format
-    };
-    var cartItems = localStorage.getItem("BOOK_STORE_CART") ? JSON.parse(localStorage.getItem("BOOK_STORE_CART")) : [] ;
-    var duplicateFound = cartItems.find(item => item.ISBN === bookItem.ISBN);
-    if(!duplicateFound){
-        cartItems.push(bookItem);
-        localStorage.setItem("BOOK_STORE_CART",JSON.stringify(cartItems));
-    }
-     event.stopPropagation();
-}
-
 function removeFromCart(isbn){
     var cartItems = JSON.parse(localStorage.getItem("BOOK_STORE_CART"));
     var updatedCart = cartItems.filter(item=>item.ISBN !== isbn);

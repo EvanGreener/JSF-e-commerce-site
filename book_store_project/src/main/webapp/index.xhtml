@@ -116,10 +116,7 @@
 
 
                                 <div class="ui two bottom attached buttons ">
-                                    <div onclick="addToCart(#{books.isbn}, 'pdf')" class="ui button">+ Add to Cart</div>
-
-
-
+                                    <h:commandButton action="#{cbb.addBookToCart(books)}" type="submit" value = "+ Add to Cart" class="ui button"/>
                                 </div>
                             </div>
                         </ui:repeat>
@@ -174,7 +171,7 @@
                                         <f:facet name="error">
                                             Something went wrong.
                                         </f:facet>
-                                    </p:feedReader>  
+                                    </p:feedReader>
                                 </p:scrollPanel>
 
                             </div></td>

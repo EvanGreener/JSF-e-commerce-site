@@ -209,10 +209,10 @@ body {
      margin: 20px 40px; 
   box-shadow: 5px 10px 8px black;
 }
+
 h2{
      text-align: center ;
 }
-
 
 .shopBtn{
      height:50px; 
@@ -224,8 +224,6 @@ h2{
      color: white;
 
 }
-
-
 
 .cardHoverBtn{
      position: absolute;
@@ -390,7 +388,8 @@ p.small {
 }
 
 .purpleContainer{
-    color: #DBD3DB;
+    background-color: #DBD3DB;
+    height:75%;
 }
 .centerItems{
    justify-content: center;
@@ -404,14 +403,13 @@ p.small {
       padding:40px !important;
        overflow: auto;
 }
-.cartContainer{
-    color:#EFF1F3;
-}
 
 .itemContainer{
-    margin-left: 50px;
-    margin-top: 50px;
-    height: 400px;
-    width: 600px;
-    overflow-y: scroll;
+    background-color: white;
+    padding:5%;
+    margin-left: 10px;
+    margin-top: 5%;
+    height: 800px;
+    overflow-y: auto;
+    border-radius: 5px;
 }

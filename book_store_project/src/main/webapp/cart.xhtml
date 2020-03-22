@@ -34,45 +34,44 @@ and open the template in the editor.
 
         <!--composite component that comes from the navbar.xhtml file to avoid coding nav bar in all web pages-->
         <bookstore:navbar/>
-        <div class="purpleContainer ui two column very relaxed grid">
-            <div class="column">
-                <div class="cartContainer">
-                    <bookstore:cartItems/>
-                </div>
-            </div>
-            <div class="middle aligned column">
-                <div class="ui card">
-                    <div class="content">
-                        <div class="header">Order Summary</div>
+        <div class="purpleContainer">
+            <div class="ui very relaxed grid">
+                <div class="twelve wide column">
+                    <div class="cartContainer">
+                        <bookstore:cartItems/>
                     </div>
-                    <div class="content">
-                        <h4 class="ui sub header">Items</h4>
-                        <div class="ui small feed">
-                            <div class="event">
-                                <div class="content">
-                                    <div class="summary">
-                                        Book 1
+                </div>
+                <div class="four wide column">
+                    <div class="ui card" style="margin-top: 30%">
+                        <div class="content">
+                            <div class="header">Order Summary</div>
+                        </div>
+
+                        <div class="content">
+                            <h4 class="ui sub header">Items</h4>
+                            <div class="middle aligned divided list">
+                                <ui:repeat value="#{cbb.getCartItems()}" var="book">
+                                    <div class="item">
+                                        <div class="right floated content">
+                                            $ #{book.listPrice}
+                                        </div>
+                                        <div class="content">
+                                            #{book.title}
+                                        </div>
                                     </div>
-                                </div>
-                            </div>
-                            <div class="event">
-                                <div class="content">
-                                    <div class="summary">
-                                        Book 2
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="event">
-                                <div class="content">
-                                    <div class="summary">
-                                        Book 3
-                                    </div>
+                                </ui:repeat>
+                                <hr/>
+                                <strong>Sub-Total</strong>
+                                <div class="right floated content">
+                                    <strong>#{cbb.getCartTotal()}</strong>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="extra content">
-                        <button class="ui button">Finalize</button>
+                        <div class="extra content">
+                            <h:form>
+                                <h:commandButton disabled="#{cbb.isCartEmpty()}" action="#{cbb.redirectToFinalizePage(UserLoginBean.getIfSignedIn())}" type="submit" value = "Finalize" class="ui button"/>
+                            </h:form>
+                        </div>
                     </div>
                 </div>
             </div>
