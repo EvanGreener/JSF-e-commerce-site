@@ -2,8 +2,6 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:b="http://bootsfaces.net/ui"
-      xmlns:f="http://xmlns.jcp.org/jsf/core"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:bookstore="http://java.sun.com/jsf/composite/default_components">
     <h:head>
@@ -80,7 +78,18 @@
                 </div>
             </div>
         </div>
-
+        <div class='lightGreyDivLessSpacing'>
+              <div class="ui top attached tabular menu" id="tabs">
+                  <a class="active item" data-tab="download">Download Books</a>
+              </div>
+              <div class="ui bottom attached active tab segment" data-tab="download">
+                  Any books which the user has previously bought, and for which the purchase has
+                  been finalized, will be listed on this page, along with the format in which they
+                  have been purchased and a button next to each book which will allow the user to 
+                  download a copy of the book, in the aforementioned specified format, to their 
+                  computer, where they can finally start reading the actual book in digital form.
+              </div>
+          </div>
 
 
 

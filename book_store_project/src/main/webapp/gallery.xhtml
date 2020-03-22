@@ -5,7 +5,6 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:f="http://xmlns.jcp.org/jsf/core"
-      xmlns:b="http://bootsfaces.net/ui"
       xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:p="http://primefaces.org/ui"
@@ -312,41 +311,30 @@
                <div class="swiper-pagination"></div>
                
           </h:form>
-          
-          <div class="ui top attached tabular menu" id="tabs">
-              <a class="active item" data-tab="search">How to search</a>
-              <a class="item" data-tab="second">Second</a>
-              <a class="item" data-tab="third">Third</a>
+          <div class='lightGreyDivLessSpacing'>
+              <div class="ui top attached tabular menu" id="tabs">
+                  <a class="active item" data-tab="search">How to Search</a>
+                  <a class="item" data-tab="view">Book Information</a>
+              </div>
+              <div class="ui bottom attached active tab segment" data-tab="search">
+                  To search for specific books, use the search bar at the top of the page. By default,
+                  the search will be by title, however you may search either by this, author, or book
+                  ISBN using the radio buttons on the left-hand side of the screen top. You may
+                  also filter by one or more genres indicated by the check boxes atop the aforementioned
+                  radio buttons. The search updates as you type letter by letter.
+              </div>
+              <div class="ui bottom attached tab segment" data-tab="view">
+                  To view information about a book, simply click on the title and it will redirect you
+                  to said book's information page, including a higher-resolution image of the cover,
+                  purchasing options, book reviews, and related books.
+              </div>
           </div>
-          <div class="ui bottom attached active tab segment" data-tab="search">
-              To search for specific books, use the search bar at the top of the page. By default,
-              the search will be by title, however you may search either by this, author, or book
-              ISBN using the radio buttons on the left-hand side of the screen top. You may
-              also filter by one or more genres indicated by the check boxes atop the aforementioned
-              radio buttons. The search updates as you type letter by letter.
-          </div>
-          <div class="ui bottom attached tab segment" data-tab="second">
-              Second
-          </div>
-          <div class="ui bottom attached tab segment" data-tab="third">
-              Third
-          </div>
-
           <!--composite component that comes from the footer.xhtml file to avoid coding the website footer in all web pages-->
           <bookstore:footer/>
 
           <!-- Initialize Swiper -->
           <script>
               
-            $(document).ready(function(){
-                $('.ui .item').on('click', function() {
-                    $('.ui .item').removeClass('active');
-                    $('.tab .segment').removeClass('active');
-                    var currentTab = $(this).attr("data-tab");
-                    $("[data-tab='" + currentTab + "']").addClass('active');
-                    $(this).addClass('active');
-                });             
-            });
                var swiper = new Swiper('.swiper-container', {
                     slidesPerView: 4,
                     spaceBetween: 0,

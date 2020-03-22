@@ -261,6 +261,65 @@
                 </ui:repeat>
             </div>
         </div>
+        
+        <div class='lightGreyDivLessSpacing'>
+          <div class="ui top attached tabular menu" id="tabs">
+              <a class="active item" data-tab="hello">Welcome</a>
+              <a class="item" data-tab="featured">Featured Books</a>
+              <a class="item" data-tab="best">Best Sellers</a>
+              <a class="item" data-tab="news">News Feeds</a>
+              <a class="item" data-tab="ads">Advertisements</a>
+              <a class="item" data-tab="surveys">Surveys</a>
+              <a class="item" data-tab="genres">Book Genres</a>
+          </div>
+          <div class="ui bottom attached active tab segment" data-tab="hello">
+              Welcome to TheBooksStore. We hope you enjoy your experience. Help sections can
+              be found near the bottom of every page, atop the footer. So in case you are
+              wondering how a certain page works or what there is to do, don't hesitate to scroll
+              near the bottom and refer to the help sections so you can make the most of your
+              experience!
+          </div>
+          <div class="ui bottom attached tab segment" data-tab="featured">
+              A carousel of featured books will be displayed on top of the page, right below the
+              navigation bar. Rotation is automatic, but clicking the arrows on either side will
+              display the next or previous book in the carousel. Clicking "Shop Now" below a book 
+              will redirect you to its information page, where you can read a plot summary, add it 
+              to your cart, and, for registered users only, leave a review.
+          </div>
+          <div class="ui bottom attached tab segment" data-tab="best">
+              The best selling books as of the time the user accesses the page will be displayed
+              below the carousel of featured books. You can click on the titles of these books
+              to access their respective information pages, where you can read a plot summary,
+              add them to your cart, and, for registered users only, leave a review. You can also
+              search for books by title directly on the index page, using the search bar below the
+              best selling books, in which case clicking "Search" will redirect you to the gallery 
+              page with the search query intact.
+          </div>
+          <div class="ui bottom attached tab segment" data-tab="news">
+              A randomly selected news feed will be displayed on the home page every time you access
+              it. You may click on certain interactive links to access relevant pages as you would
+              on the actual site where the news originates from, or you even have the option of reading
+              the article on said origin site by clicking "Read article ...".
+          </div>
+          <div class="ui bottom attached tab segment" data-tab="ads">
+              Two randomly selected ads will be displayed on the home page every time you access it.
+              Clicking on these ads will redirect the user to another page centered around the object
+              or service which they are advertising.
+          </div>
+          <div class="ui bottom attached tab segment" data-tab="surveys">
+              The user has the option of participating in a randomly generated survey every time they
+              access the home page. Upon selecting an option, their choice will be accounted for and
+              the total number of people who selected each choice will be displayed. If the user wishes
+              to participate in another survey, they must refresh the page.
+          </div>
+          <div class="ui bottom attached tab segment" data-tab="genres">
+              To view all books of a certain genre, click on one of the 4 genre selectors near the bottom
+              of the page, just above the bottommost ad. There are 4 book genres to choose from: Mystery,
+              Horror, Science Fiction, and Fantasy. Clicking on either of these selectors will redirect
+              the user to the gallery page with a search query for said genre intact, and they will be
+              able to view all books of their requested genre.
+          </div>
+        </div>
 
         <!--composite component that comes from the footer.xhtml file to avoid coding the website footer in all web pages-->
         <bookstore:footer/>

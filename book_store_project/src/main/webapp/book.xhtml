@@ -2,8 +2,6 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:b="http://bootsfaces.net/ui"
-      xmlns:f="http://xmlns.jcp.org/jsf/core"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:bookstore="http://java.sun.com/jsf/composite/default_components">
     <h:head>
@@ -19,6 +17,7 @@
         <h:outputStylesheet library="css" name="homepage.css" />
         <h:outputStylesheet library="book_css" name="bookpage.css" />
         <h:outputScript library="js" name="book.js" />
+        <h:outputScript library="js" name="homepage.js" />
         <h:outputStylesheet library="webjars" name="font-awesome/4.7.0/css/font-awesome.min-jsf.css" />
         <!-- Swiper JS -->
         <script src="https://unpkg.com/swiper/js/swiper.min.js"></script>
@@ -307,7 +306,30 @@
                 </ui:repeat>
             </div> 
         </div>
-
+        <div class='lightGreyDivLessSpacing'>
+          <div class="ui top attached tabular menu" id="tabs">
+              <a class="active item" data-tab="view">Book Information</a>
+              <a class="item" data-tab="review">Leaving a Review</a>
+          </div>
+          <div class="ui bottom attached active tab segment" data-tab="view">
+              To view information about a book, simply click on the title and it will redirect you
+              to another page containing a higher-resolution image of the book cover and a brief
+              explanation of the book's plot. When adding a book to your cart, you have the option
+              of either adding a PDF or e-pub format of the book by clicking on either of the two
+              buttons located above the title and the average rating. You have the option of adding
+              any number of books, so long as we have the specified quantity of said books in stock.
+              You can also view other books of the same genre of the current book you are viewing,
+              which will be displayed below the review pane (see "Leaving a Review" for more information
+              on how to submit a book review).
+          </div>
+          <div class="ui bottom attached tab segment" data-tab="review">
+              You can also leave a review by clicking on the + button on the upper right-hand
+              corner of the review pane, where you can view approved reviews left by other users.
+              When leaving a review, you must specify a title, a numerical rating out of 5,
+              and an explanation for your review. Upon submission, it will be subject to approval,
+              and after it is approved, it will be publicly displayed alongside the other review.
+          </div>
+        </div>
         <!--composite component that comes from the footer.xhtml file to avoid coding the website footer in all web pages-->
         <bookstore:footer/>
 
