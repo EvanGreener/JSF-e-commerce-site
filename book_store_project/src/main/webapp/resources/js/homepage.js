@@ -1,3 +1,14 @@
+            $(document).ready(function(){
+                $('.ui .item').on('click', function() {
+                    var id = $(this).parent().attr('id');
+                    $('.ui .' + id + '.item').removeClass('active');
+                    $('.' + id + '.segment').removeClass('active');
+                    var currentTab = $(this).attr("data-tab");
+                    $("[data-tab='" + currentTab + "']").addClass('active');
+                    $(this).addClass('active');
+                });             
+            });
+
 document.addEventListener('DOMContentLoaded', function (event) {// Get the modal
 
 if (sessionStorage.surveydone) {

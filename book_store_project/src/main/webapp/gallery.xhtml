@@ -5,7 +5,6 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:f="http://xmlns.jcp.org/jsf/core"
-      xmlns:b="http://bootsfaces.net/ui"
       xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:p="http://primefaces.org/ui"
@@ -21,6 +20,7 @@
           <h:outputStylesheet library="webjars" name="swiper/4.5.1/dist/css/swiper.min.css" />
           <h:outputStylesheet library="galleryCss" name="gallery.css" />
           <h:outputStylesheet library="css" name="homepage.css" />
+          <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 
           <h:outputScript library="js" name="homepage.js" />
 
@@ -311,12 +311,13 @@
                <div class="swiper-pagination"></div>
                
           </h:form>
-
+          
           <!--composite component that comes from the footer.xhtml file to avoid coding the website footer in all web pages-->
           <bookstore:footer/>
 
           <!-- Initialize Swiper -->
           <script>
+              
                var swiper = new Swiper('.swiper-container', {
                     slidesPerView: 4,
                     spaceBetween: 0,

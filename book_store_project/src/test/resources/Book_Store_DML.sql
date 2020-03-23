@@ -1799,6 +1799,23 @@ insert into Authors
 values ("Benedict Jacka", true, "2019-04-11 13:34:51", "2021-01-08 19:40:42");
 
 ## Clients
+
+##DawsonConsumer, Ken client account
+insert into clients
+(Hashed_Password, Is_Manager, First_Name, Last_Name, Company_Name, Address_1, Address_2, City, Province_Abbreviation, Country,
+ Postal_Code, Home_Telephone, Cell_Telephone, Email, Date_Entered, Last_Modified, Is_Removed)
+values ("e839ce0de10e513e90272e7d9dc5c00439cd12363ac2a48e307cb9eabbcaed13",false, "DawsonConsumer", "Fogel", "Dawson College", "3040 Sherbrooke St. W", null, "Montreal", "QC",
+        "Canada", "H3Z1A4", "5149318731", null, "cst.send@gmail.com", "2019-01-30 00:00:00",
+        "2019-06-18 21:37:30", false);
+
+##DawsonManager, Ken manager account
+insert into clients
+(Hashed_Password, Is_Manager, First_Name, Last_Name, Company_Name, Address_1, Address_2, City, Province_Abbreviation, Country,
+ Postal_Code, Home_Telephone, Cell_Telephone, Email, Date_Entered, Last_Modified, Is_Removed)
+values ("c9db19c70e9b1e45a346c453f7446fd4a124bee7983f43e4c0a49731547070fd",true, "DawsonManager", "Fogel", "Dawson College", "3040 Sherbrooke St. W", null, "Montreal", "QC",
+        "Canada", "H3Z1A4", "5149318731", null, "cst.receive@gmail.com", "2019-01-30 00:00:00",
+        "2019-06-18 21:37:30", false);
+
 insert into clients
 (Hashed_Password, Is_Manager, First_Name, Last_Name, Company_Name, Address_1, Address_2, City, Province_Abbreviation, Country,
  Postal_Code, Home_Telephone, Cell_Telephone, Email, Date_Entered, Last_Modified, Is_Removed)
