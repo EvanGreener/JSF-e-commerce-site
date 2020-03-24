@@ -5,11 +5,13 @@ import com.gb1w20.book_store_project.jpa_controllers.BookJpaController;
 import java.io.Serializable;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 import javax.annotation.PostConstruct;
 
 import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
+import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -34,6 +36,11 @@ public class SearchBean implements Serializable {
     @PostConstruct
     public void init() {
         LOG.debug("Init called!");
+        Map<String, String> params =FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap();
+        String genre = params.get("genre");
+        //String query = params.get("query");
+        setGenreFilters(genre);
+        //setQuery(query);
         updateSearchBean();
     }
 

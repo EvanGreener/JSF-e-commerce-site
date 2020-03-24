@@ -1,48 +1,13 @@
 /*
-To change this license header, choose License Headers in Project Properties.
-To change this template file, choose Tools | Templates
-and open the template in the editor.
+    Defines styling for the some of the book page components
 */
 /* 
     Created on : Feb. 4, 2020, 9:28:27 p.m.
-    Author     : Saad,Shruti
+    Author     : Shruti
 */
-*{
-    font-family: 'Roboto', sans-serif !important;
-}
-html, body {
-    position: relative;
-    height: 100%;
-}
-body {
-    background: #eee;
-    font-size: 14px;
-    color:#000;
-    margin: 0;
-    padding: 0;
-}
-.nav {
-    margin: 0 auto 0 10px;
 
-}
-
-.headMenu{
-    margin-bottom: 0px !important;
-}
-.lightOrangeDiv{
-    padding:5%;
-    background-color: #EBD9CF;
-}
-.thingy2{
-    padding:5%;
-    background-color: #EFF1F3;
-}
-.lightPurpleDiv{
-    padding:5%;
-    background-color: #DBD3DB;
-}
-
-
+/* ------------------Styling for book Description section components----------------------*/
+/* Book format button in book description section*/
 .bookFormatBtn{
     background-color: white;
     cursor: pointer;
@@ -52,57 +17,16 @@ body {
     border-radius: 4px;
     border: 2px solid #D77A61;
 }
-#more {
-    display: none;
-}
-input[type=number]{
-    width: 4%;
-    height: 30px;
-} 
-
+/* Book format button on hover*/
 .bookFormatBtn:hover {
     background-color: #D77A61;
     color: white;
 }
-.mainBtn{
-    width: 15% !important;
-    background-color: white !important;
+/* Read More link in book description*/
+#more {
+    display: none; /* By default extra text in book description is not shown*/
 }
-.darker:hover {
-    -webkit-filter:brightness(50%);
-    -moz-filter:brightness(50%);
-    filter: url(#brightness); 
-    filter:brightness(70%);
-}
-.sliderTextContent{
-    text-align: left;
-    margin: 40px 200px; 
-
-}
-.sliderImageContent{
-    text-align: center;
-}
-h2{
-    text-align: center ;
-}
-.cardHoverBtn{
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    -ms-transform: translate(-50%, -50%);
-    display:block;
-    background-color: white;
-    color: black;
-    opacity:0.5;
-    font-size: 16px;
-    padding: 12px 24px;
-    border: none;
-    cursor: pointer;
-    border-radius: 5px;
-    text-align: center;
-}
-
+/* Add to cart Button*/
 .addToCartBtn{
     width:120px; 
     position:relative;
@@ -113,120 +37,107 @@ h2{
     border-radius: 10px;
     padding: 7px 13px;
     border: 2px solid #223843;
-    
 }
-.bookInfo{
-      width: 100%;
-  padding: 10px;
-  display: flex;
-}
-.bookCover{
-      width: 40%;
-     text-align: right;
-     vertical-align: middle;  
-}
-.bookTextInfo{
-    width: 60%;
-  float: left;
-  font-size: 20px;
-}
+/* Add to cart Button on hover*/
 .addToCartBtn:hover{
     background-color: white;
     color: black;
-    
-    
 }
+/* Section tag that contains the books information*/
+.bookInfoSection{
+    width: 100%;
+    padding: 10px;
+    display: flex;
+}
+/* bookInfoSection section tag that contains bookTextInfo div*/
+.bookInfoSection{
+    background-color:white !important;
+    padding: 20px;
+    padding-bottom: 40px !important;
+    height:20% !important;
+    text-align:left;
+}
+/* Div containing book description text*/
+.bookTextInfo{
+    width: 60%;
+    float: left;
+    font-size: 20px;
+}
+/* text styling*/
+.textColor{
+    color:black !important;   
+    font-family: georgia !important;
+    font-size: 20px;
+}
+/* Image of the book cover*/
+.bookCover{
+    width: 40%;
+    text-align: right;
+    vertical-align: middle;  
+}
+
+
+/* ------------------Styling for review section components----------------------*/
+/* the + add review button*/
 .addReviewBtn{
     background-color: white;
-     border: none;
+    border: none;
     font-size: 30px;
 }
-h4{
-    text-align: center ;
-}
-
-/* The Modal (background) */
-.modal {
-  display: none; /* Hidden by default */
-  position: fixed; /* Stay in place */
-  z-index: 1; /* Sit on top */
-  padding-top: 100px; /* Location of the box */
-  left: 0;
-  top: 0;
-  width: 100%; /* Full width */
-  height: 100%; /* Full height */
-  overflow: auto; /* Enable scroll if needed */
-  background-color: rgb(0,0,0); /* Fallback color */
-  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
-}
-
-/* Modal Content */
-.modal-content {
-  background-color: #fefefe;
-  margin: auto;
-  padding: 20px;
-  border: 1px solid #888;
-  width: 40%;
-}
-
-/* The Close Button */
-.close {
-  color: #aaaaaa;
-  float: right;
-  font-size: 28px;
-  font-weight: bold;
-}
-
-.close:hover,
-.close:focus {
-  color: #000;
-  text-decoration: none;
-  cursor: pointer;
-}
-.flex-container {
-  display: flex;
-  padding: 20px;
-  flex-wrap: wrap;
-}
-p.small {
-     font-variant: small-caps;
-     font-size: 2vw;
-     text-align: center;
-     font-weight: bold;
-}
-.textColor{
- color:black !important;   
- font-family: georgia !important;
- font-size: 20px;
-}
-.bookpageCard{
-       box-shadow: 5px 10px 8px black !important; 
-    
-}
-.flex-container > div {
-  width: 50%;
-  padding-top: 20px;
-  padding-right:20px;
-  padding-left: 20px;
-}
-p.thicker {
-  font-weight: 900;
-}
+/*Each review's title*/
 .reviewTitle{
     font-size: 1.3em;
 }
+/*Each review's author*/
 .reviewName{
-     font-style: italic;
+    font-style: italic;
 }
+/*Each review's date*/
 .reviewDate{
     text-align: right;
     color: #707070;
 }
-
-.bookInfo{
-     background-color:white !important;
-     padding: 20px;
-     padding-bottom: 40px !important;
-     height:20% !important;
-     text-align:left;
+/* Div used to put other divs it contains, side by side*/
+.flex-container {
+    display: flex;
+    padding: 20px;
+    flex-wrap: wrap;
 }
+/* Divs inside flex-container divs*/
+.flex-container > div {
+    width: 50%;
+    padding-top: 20px;
+    padding-right:20px;
+    padding-left: 20px;
+}
+
+
+/* ------------------Styling for modal and its components----------------------*/
+/* reference: https://www.w3schools.com/howto/howto_css_modals.asp*/
+/* The actual Review Modal */
+.reviewModalContent {
+    background-color: #fefefe; /* Background color of the actual Modal */
+    margin: auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 30%;
+}
+/* The Close Button for Review Modal */
+.closeReview {
+    color: black;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+/* The Close Button for Review Modal on Hover */
+.closeReview:hover,
+.closeReview:focus {
+    color: #000;
+    text-decoration: none;
+    cursor: pointer;
+}
+/*makes text bold*/
+p.thicker {
+    font-weight: 900;
+}
+
