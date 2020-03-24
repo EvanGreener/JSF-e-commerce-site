@@ -26,29 +26,30 @@ import javax.transaction.UserTransaction;
 @Named
 @RequestScoped
 public class NewsJpaController implements Serializable {
-    
+
     @Resource
     private UserTransaction utx;
 
     @PersistenceContext
     private EntityManager em;
 
-    public NewsJpaController() {}
+    public NewsJpaController() {
+    }
 
     public void create(News news) throws Exception {
-    try {
-        utx.begin();
-        em.persist(news);
-        utx.commit();
-    } catch (Exception ex) {
         try {
-            utx.rollback();
-        } catch (Exception re) {
-            throw new Exception("An error occurred attempting to roll back the transaction.", re);
+            utx.begin();
+            em.persist(news);
+            utx.commit();
+        } catch (Exception ex) {
+            try {
+                utx.rollback();
+            } catch (Exception re) {
+                throw new Exception("An error occurred attempting to roll back the transaction.", re);
+            }
+            throw ex;
         }
-        throw ex;
     }
-}
 
     public void edit(News news) throws NonexistentEntityException, Exception {
         try {
@@ -114,24 +115,24 @@ public class NewsJpaController implements Serializable {
     }
 
     public News findNews(Integer id) {
-            return em.find(News.class, id);
+        return em.find(News.class, id);
     }
 
     public int getNewsCount() {
-              TypedQuery<News> query = em.createQuery("SELECT n FROM News n WHERE n.isRemoved = :removed", News.class);
-           query.setParameter("removed",false);
+        TypedQuery<News> query = em.createQuery("SELECT n FROM News n WHERE n.isRemoved = :removed", News.class);
+        query.setParameter("removed", false);
         List<News> news = query.getResultList();
         return news.size();
     }
-    
-        public News getRandomNews(){
+
+    public News getRandomNews() {
         TypedQuery<News> query = em.createQuery("SELECT n FROM News n WHERE n.isRemoved = :removed", News.class);
-         query.setParameter("removed",false);
-         Random r = new Random();
-         query.setFirstResult((r.nextInt(getNewsCount())));
-         query.setMaxResults(1);
+        query.setParameter("removed", false);
+        Random r = new Random();
+        query.setFirstResult((r.nextInt(getNewsCount())));
+        query.setMaxResults(1);
         News n = query.getSingleResult();
         return n;
     }
-    
+
 }

@@ -1,5 +1,6 @@
 package com.gb1w20.book_store_project.beans;
 
+import com.gb1w20.book_store_project.entities.Authors;
 import com.gb1w20.book_store_project.entities.Book;
 import com.gb1w20.book_store_project.entities.OrderItem;
 import com.gb1w20.book_store_project.jpa_controllers.BookJpaController;
@@ -32,6 +33,7 @@ public class BookBean implements Serializable {
     private List<Book> recentlyAdded;
     private Book book;
     private List<Book> similarGenreBooks;
+    private List<Book> similarAuthorBooks;
     private String genre;
     private int bookSlideColor=0;
 
@@ -90,10 +92,37 @@ public class BookBean implements Serializable {
      * @param book
      * @return similarGenreBooks
      */
-    public List<Book> getSimilarGenreBooks(Book book) {
+    public List<Book> getSimilarGenreBooks(Book book,List<Authors> author) {
         LOG.debug("getSimilarGenreBooks");
-        similarGenreBooks = bookCtrlr.getSimilarGenres(book);
+        similarGenreBooks = bookCtrlr.getSimilarGenres(book,author.get(0).getAuthorID());
         return similarGenreBooks;
+    }
+   
+    /**
+     * Returns only a part of book description
+     * @param book
+     * @return description - 300 characters
+     */
+    public String getDisplayBookDescription(String description){
+        if(description.length()>(300+2)){
+             return  description.substring(0, 300-1);
+        }
+        return  description;
+    }
+    
+     public String getHiddenBookDescription(String description){
+        
+             return  description.substring(300-1, description.length());
+    }
+     /**
+     * Get books with similar author that user is currently viewing
+     * @param book
+     * @return getSimilarAuthorBooks
+     */
+    public List<Book> getSimilarAuthorBooks(List<Authors> author,String isbn) {
+        LOG.debug("getSimilarAuthorBooks");
+        similarAuthorBooks = bookCtrlr.getSimilarAuthors(author.get(0).getAuthorID(),isbn);
+        return similarAuthorBooks;
     }
 
     public void setGenre(String genre) {

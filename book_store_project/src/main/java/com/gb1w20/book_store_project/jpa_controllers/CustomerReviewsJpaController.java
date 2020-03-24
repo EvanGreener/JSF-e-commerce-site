@@ -118,23 +118,40 @@ public class CustomerReviewsJpaController implements Serializable {
         return em.find(CustomerReviews.class, id);
     }
 
-    public Integer getAverageRating(String isbn) {
-        TypedQuery<Object> query = em.createQuery("SELECT (c.rating) FROM CustomerReviews c group by c.isbn Having c.isbn = :isbn", Object.class);
+    public Double getAverageRating(String isbn) {
+        TypedQuery<Object> query = em.createQuery("SELECT AVG(c.rating) FROM CustomerReviews c where c.isRemoved = :removed group by c.isbn Having c.isbn = :isbn", Object.class);
         query.setParameter("isbn", isbn);
+        query.setParameter("removed", false);
         List rating = query.getResultList();
         if (rating.isEmpty()){
-            return 0;
+            return 0.0;
         }
         else if (rating.size() == 1) {
             for(Object r:rating){
-                return (Integer) r;
+                return (Double) r;
             }
         }
         throw new NonUniqueResultException();
   
   
     }
-
+    
+    public List<CustomerReviews> getReviews(String isbn){
+        TypedQuery<CustomerReviews> query = em.createQuery("SELECT c FROM CustomerReviews c WHERE c.isRemoved = :removed AND c.isbn = :isbn", CustomerReviews.class);
+        query.setParameter("removed", false);
+        query.setParameter("isbn", isbn);
+        List<CustomerReviews> customerReviews = query.getResultList();
+        return customerReviews;
+    }
+    
+     public int getCustomerReviewsCount(String isbn){
+        TypedQuery<CustomerReviews> query = em.createQuery("SELECT count(c) FROM CustomerReviews c WHERE c.isRemoved = :removed group by c.isbn Having c.isbn = :isbn", CustomerReviews.class);
+        query.setParameter("removed", false);
+        query.setParameter("isbn", isbn);
+        List<CustomerReviews> customerReviews = query.getResultList();
+        return customerReviews.size();
+    }
+   
     public int getCustomerReviewsCount() {
         CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
         Root<CustomerReviews> rt = cq.from(CustomerReviews.class);

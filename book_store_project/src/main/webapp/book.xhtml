@@ -35,13 +35,13 @@
         <!--Book description section-->
         <div class="lightGreyDiv">
             <div class="ui stackable cards">
-                <div class="ui fluid card">
+                <div class="ui fluid card" style="padding:40px">
                     <div class="content">
                         <ui:repeat value="#{bb.book}" var="book">
-                            <h1>#{book.title}</h1>
+                            <p class="textColor" style="font-size: 40px;line-height: 0.3em;letter-spacing: 0.081em;font-weight: 100;">#{book.title}</p>
                             <section class="bookInfo">
                                 <div class="bookTextInfo">
-                                    <p>- <ui:repeat value="#{book.authorsCollection}" var="author">
+                                    <p style="font-size: 23px;line-height: 1.3em;letter-spacing: 0.017em;font-weight: 500;font-style: italic;">- <ui:repeat value="#{book.authorsCollection}" var="author">
                                             #{author.name}
                                         </ui:repeat>
                                     </p><br></br>
@@ -49,33 +49,48 @@
                                     <h:commandButton  class="bookFormatBtn button" value="EPUB" type="button" />
                                     <br></br><br></br>
                                     <ui:repeat value="#{reviewBean.getRating(reviewBean.getAverageRating(book.isbn))}" var="avgRating">
-                                         <h:graphicImage class="image" height="20px" width="20px" library="images" name="ratestar.png"  />
+                                        <h:graphicImage class="image" height="20px" width="20px" library="images" name="ratestar.png"  />
                                     </ui:repeat>
                                     <ui:repeat value="#{reviewBean.getRating(5-reviewBean.getAverageRating(book.isbn))}" var="avgRating">
-                                         <h:graphicImage class="image" height="20px" width="20px" library="images" name="star.png"  />
+                                        <h:graphicImage class="image" height="20px" width="20px" library="images" name="star.png"  />
                                     </ui:repeat>
-                                    <br/><br/>
-                                    #{book.description}
-                                    ing with guitar and hanging with guitar and hanging with guitar <span id="dots">...</span><span id="more">and hanging with guitar and hanging with guitar and hanging with guitar and hanging with guitar and hanging with guitar and hanging with guitar and hanging with guitar and hanging with guitar and hanging with guitar and hanging with guitar and hanging with guitar and hanging with guitar and hanging with guitar and hanging with guitar and hanging with guitar and hanging with guitar and hanging with guitar and hanging with guitar and hanging with guitar and hanging with guitar and hanging with guitar and hanging with guitar and hanging with guitar and hanging with guitar and hanging with guitar and hanging with guitar and hanging with guitar and hanging with guitar and hanging with guitar and hanging with guitar and hanging with guitar and hanging with guitar and hanging with guitar and hanging with guitar and hanging with guitar and hanging with guitar and hanging with guitar and hanging with guitar and hanging with guitar and hanging with guitar and hanging with guitar and hanging with guitar and hanging with guitar and hanging with guitar and hanging with guitar and hanging with guitar and hanging with guitar and hanging with guitar and hanging with guitar and hanging with guitar and hanging with guitar and hanging with guitar and hanging with guitar and hanging with guitar and hanging with guitar and hanging with guitar and hanging with guitar and hanging with guitar and hanging with guitar and hanging with guitar and hanging with guitar and hanging with guitar and hanging with guitar and hanging with guitar and hanging with guitar and hanging with guitar and hanging with guitar and hanging with guitar and hanging with guitar and hanging with guitar and hanging with guitar and hanging with guitar and hanging with guitar and hanging with guitar and hanging with </span>
-                                    <a  onclick="showMore()" id="moreBtn">Read more</a>
+
+                                    <p> #{reviewBean.getReviewCount(book.isbn)} <h:panelGroup rendered="#{reviewBean.getReviewCount(book.isbn)==1}">
+                                            review
+                                        </h:panelGroup>
+                                        <h:panelGroup rendered="#{reviewBean.getReviewCount(book.isbn)!=1}">
+                                            reviews
+                                        </h:panelGroup>
+                                    </p>
+                                    <br/>
+                                    <p class="thicker"> Genre: #{book.genre}</p>
+                                    <br/>
+
+                                    #{bb.getDisplayBookDescription(book.description)}<h:panelGroup rendered="#{! bb.getDisplayBookDescription(book.description).equals(book.description)}"><span id="dots">...</span><span id="more">#{bb.getHiddenBookDescription(book.description)}</span>
+                                        <a  onclick="showMore()" id="moreBtn">Read more</a>
+                                    </h:panelGroup>
 
                                 </div>
                                 <div class="bookCover">
-                                    <h:graphicImage class="image" height="350px" width="300px" library="images" name="#{book.isbn}.jpg"  />
-                                    <br/>
-                                    <h1>$#{book.listPrice}</h1>   
+                                    <h:graphicImage class="image" height="400px" width="350px" library="images" name="#{book.isbn}.jpg"  />
 
+                                    <br/>
                                 </div>
 
                             </section>   
                         </ui:repeat>
-
-                        <input type="number" value="1" id="quantity" name="quantity" min="1" max="5"></input>
-                        <h:commandButton  class="addToCartBtn button" value="Add to cart" type="button" />
-
+                        <div class="flex-container" style="padding: 0px">
+                            <div style="width:70%; padding-top: 0px">
+                                <h:commandButton  class="addToCartBtn button" value="Add to cart" type="button" />
+                            </div>
+                            <div style="width:30%;text-align: center;padding-top: 0px;">
+                                <h1>$#{bb.book.listPrice}</h1>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
+
         </div>
 
         <!--Reviews section-->
@@ -101,7 +116,7 @@
                             <div class="flex-container">
 
                                 <!--Review section-->
-                                <ui:repeat value="#{bb.book.reviews}" var="book">
+                                <ui:repeat value="#{reviewBean.getReviews(bb.book.isbn)}" var="book">
                                     <div>
                                         <p class="reviewTitle">#{book.reviewTitle}</p>
 
@@ -128,7 +143,7 @@
                                 </ui:repeat>
 
                                 <h:panelGroup rendered="#{empty bb.book.reviews}">
-                                    <h4> No Reviews</h4>
+                                    <h4> No Reviews yet.</h4>
                                 </h:panelGroup>
                             </div> 
                         </td>
@@ -165,20 +180,34 @@
             <!-- Modal content -->
             <div class="modal-content">
                 <span class="close">x</span>
-                <h4>Create Review</h4>
+                <form>
+                <p style="font-size: 25px; text-align: center;">Create Review</p>
                 <br></br>
-                <h5>Of Mice and Men</h5>
+                <p style="font-size: 20px; font-family: georgia !important;">#{bb.book.title}</p>
                 <hr></hr>
-                <p>Add a Title</p>
-                <input type="text"></input>
-                <p>Overall Rating</p>
-                <input type="text"></input>
-                <p>/5</p>
-                <p>Add a Review</p>
-                <textarea id="w3mission" rows="4" cols="50">
-                </textarea>
-                <br></br>
-                <input type="submit"></input>
+
+                <h:outputLabel for="title" value="Add a Title"/>
+                <br/>
+                <h:inputText id="title" label="Add a Title" value="#{reviewBean.title}" required="true" requiredMessage="Please enter a title" validator="#{clientBacking.validateHomePhone}">
+                    <f:ajax event="change" render="address2Error"/>
+                </h:inputText>
+                 <br/>
+                 <br/>
+                <h:outputLabel for="rating" value="Overall Rating"/>
+                <br/>
+                <h:selectOneMenu id="rating" label="Overall Rating" value="#{reviewBean.ratings}" required="true" requiredMessage="Please a rating">
+                    <f:selectItems value="#{reviewBean.ratings}" />
+                </h:selectOneMenu>
+                <h:outputLabel for="rating" value="/5"/>
+                <br/><br/>
+                 <h:outputLabel for="review" value="Add a Review"/>
+                 <br/>
+                 <h:inputTextarea value="#{reviewBean.reviewBody}" id="review" cols="50" rows="4" />
+                <br/><br/>
+                <div>
+                    <h:commandButton value="Submit" class="addToCartBtn" action="#{reviewBean.setCustomerReview(bb.book.isbn)}"></h:commandButton>
+                </div>
+                </form>
             </div>
 
         </div>
@@ -186,22 +215,20 @@
 
         <!--Suggestions section-->
         <div class="lightOrangeDiv">
-
-
-            <br></br>
-            <h4>Similar Genre</h4><br></br>
-
+            <h:panelGroup rendered="#{!empty bb.getSimilarGenreBooks(bb.book,bb.book.authorsCollection)}">
+                <p class="small">Similar Genre</p>
+            </h:panelGroup>
             <div class="ui four doubling stackable cards">
-                <ui:repeat value="#{bb.getSimilarGenreBooks(bb.book)}" var="bo">
+                <ui:repeat value="#{bb.getSimilarGenreBooks(bb.book,bb.book.authorsCollection)}" var="bo">
 
 
-                    <div class="ui fluid card darker">
+                    <div class="ui fluid card darker bookpageCard">
                         <div class="homepageImg">
                             <h:graphicImage class="img" height="250" width="156.25" library="images" name="#{bo.isbn}.jpg"  />
                         </div>
                         <div class="content">
                             <h:commandLink action = "#{bb.viewBook(bo)}" type="submit" value = "">
-                                <div class="header">
+                                <div class="header textColor">
 
                                     #{bo.title}</div>
                                 <div class="meta">
@@ -229,6 +256,53 @@
                     </div>
 
                 </ui:repeat>
+            </div> 
+            <h:panelGroup rendered="#{!empty bb.getSimilarAuthorBooks(bb.book.authorsCollection,bb.book.isbn)}">
+                <br/><br/><br/>
+                <ui:repeat value="#{bb.book.authorsCollection}" var="author" >
+                    <p class="small">Books by #{author.name}</p>
+                </ui:repeat>
+            </h:panelGroup>
+
+            <div class="ui four doubling stackable cards">
+
+
+                <ui:repeat value="#{bb.getSimilarAuthorBooks(bb.book.authorsCollection,bb.book.isbn)}" var="bo">
+                    <div class="ui fluid card darker bookpageCard">
+                        <div class="homepageImg">
+                            <h:graphicImage class="img" height="250" width="156.25" library="images" name="#{bo.isbn}.jpg"  />
+                        </div>
+                        <div class="content">
+                            <h:commandLink action = "#{bb.viewBook(bo)}" type="submit" value = "">
+                                <div class="header textColor">
+
+                                    #{bo.title}</div>
+                                <div class="meta">
+
+                                    <ui:repeat value="#{bo.authorsCollection}" var="au">
+                                        #{au.name}
+                                    </ui:repeat>
+
+                                </div>
+
+                                <div class="description">
+                                    <div class="ui tag labels">
+                                        <a class="ui label">
+                                            $#{bo.listPrice}
+                                        </a>
+                                    </div>
+
+                                </div>
+                            </h:commandLink>
+                        </div>
+                        <div class="ui bottom attached button">
+                            + Add to Cart
+                        </div>
+
+                    </div>
+
+                </ui:repeat>
+
             </div> 
         </div>
 

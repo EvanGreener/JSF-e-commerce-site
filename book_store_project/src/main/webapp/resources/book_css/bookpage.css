@@ -103,19 +103,15 @@ h2{
     text-align: center;
 }
 
-.cardHoverBtn:hover {
-    background-color: grey;
-}
-
 .addToCartBtn{
-    width:10%; 
+    width:120px; 
     position:relative;
     background-color: #223843;
     color: white;
     cursor: pointer;
     font-size: 16px;
     border-radius: 10px;
-    padding: 0.5% 2%;
+    padding: 7px 13px;
     border: 2px solid #223843;
     
 }
@@ -125,13 +121,14 @@ h2{
   display: flex;
 }
 .bookCover{
-      width: 50%;
-     text-align: center;
+      width: 40%;
+     text-align: right;
      vertical-align: middle;  
 }
 .bookTextInfo{
-    width: 50%;
+    width: 60%;
   float: left;
+  font-size: 20px;
 }
 .addToCartBtn:hover{
     background-color: white;
@@ -191,12 +188,29 @@ h4{
   padding: 20px;
   flex-wrap: wrap;
 }
-
+p.small {
+     font-variant: small-caps;
+     font-size: 2vw;
+     text-align: center;
+     font-weight: bold;
+}
+.textColor{
+ color:black !important;   
+ font-family: georgia !important;
+ font-size: 20px;
+}
+.bookpageCard{
+       box-shadow: 5px 10px 8px black !important; 
+    
+}
 .flex-container > div {
   width: 50%;
   padding-top: 20px;
   padding-right:20px;
   padding-left: 20px;
+}
+p.thicker {
+  font-weight: 900;
 }
 .reviewTitle{
     font-size: 1.3em;
@@ -207,4 +221,12 @@ h4{
 .reviewDate{
     text-align: right;
     color: #707070;
+}
+
+.bookInfo{
+     background-color:white !important;
+     padding: 20px;
+     padding-bottom: 40px !important;
+     height:20% !important;
+     text-align:left;
 }
