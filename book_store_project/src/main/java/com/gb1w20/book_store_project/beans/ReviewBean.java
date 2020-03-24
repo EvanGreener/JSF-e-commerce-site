@@ -28,7 +28,7 @@ public class ReviewBean implements Serializable {
 
     @Inject
     private CustomerReviewsJpaController customerReviewCtlr;
-    private Double averageRating;
+    private int averageRating;
     private int reviewCount;
     private List<CustomerReviews> reviews;
     private List<SelectItem> ratings = new ArrayList<SelectItem>();
@@ -124,9 +124,9 @@ public class ReviewBean implements Serializable {
         return new Object[size];
     }
 
-    public Double getAverageRating(String isbn) {
+    public int getAverageRating(String isbn) {
         LOG.debug("getAverageRating");
-        this.averageRating = customerReviewCtlr.getAverageRating(isbn);
+        this.averageRating = (int)customerReviewCtlr.getAverageRating(isbn);
         return this.averageRating;
     }
 

@@ -118,7 +118,7 @@ public class CustomerReviewsJpaController implements Serializable {
         return em.find(CustomerReviews.class, id);
     }
 
-    public Double getAverageRating(String isbn) {
+    public double getAverageRating(String isbn) {
         TypedQuery<Object> query = em.createQuery("SELECT AVG(c.rating) FROM CustomerReviews c where c.isRemoved = :removed group by c.isbn Having c.isbn = :isbn", Object.class);
         query.setParameter("isbn", isbn);
         query.setParameter("removed", false);
@@ -128,7 +128,7 @@ public class CustomerReviewsJpaController implements Serializable {
         }
         else if (rating.size() == 1) {
             for(Object r:rating){
-                return (Double) r;
+                return (double) r;
             }
         }
         throw new NonUniqueResultException();
@@ -145,7 +145,7 @@ public class CustomerReviewsJpaController implements Serializable {
     }
     
      public int getCustomerReviewsCount(String isbn){
-        TypedQuery<CustomerReviews> query = em.createQuery("SELECT count(c) FROM CustomerReviews c WHERE c.isRemoved = :removed group by c.isbn Having c.isbn = :isbn", CustomerReviews.class);
+        TypedQuery<CustomerReviews> query = em.createQuery("SELECT c FROM CustomerReviews c WHERE c.isRemoved = :removed AND c.isbn = :isbn", CustomerReviews.class);
         query.setParameter("removed", false);
         query.setParameter("isbn", isbn);
         List<CustomerReviews> customerReviews = query.getResultList();

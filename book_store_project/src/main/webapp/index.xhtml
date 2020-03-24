@@ -45,7 +45,9 @@
                             <p> #{book.description}</p>
                             <!--Button directs you to the book page for the current book being displayed in the carousel-->
                             <h:form>
-                                <h:commandButton type="submit" value="Shop Now" action="#{bb.viewBook(book)}" />
+                                <h:button  value="Shop Now" outcome="book" >
+                                    <f:param  name="isbn" value="#{book.isbn}" /> 
+                                </h:button>
                             </h:form>
                         </div>
                         <div  class="sliderImageContent">
@@ -54,6 +56,9 @@
                     </div>
                 </ui:repeat>
             </div>
+
+
+
 
             <!-- Add Pagination -->
             <div class="swiper-pagination"></div>
@@ -78,9 +83,11 @@
                                     <div class="cardHoverBtn"> View Cover</div>
                                 </div>
 
+
                                 <div class="content">
 
-                                    <h:commandLink action = "#{bb.viewBook(books)}" type="submit" value = "">
+                                    <h:link outcome="book" value = "">
+                                        <f:param  name="isbn" value="#{books.isbn}" /> 
                                         <div class="header textColor">
 
                                             #{books.title}</div>
@@ -100,7 +107,9 @@
                                             </div>
 
                                         </div>
-                                    </h:commandLink>
+                                    </h:link>
+
+
 
                                 </div>
 
@@ -120,12 +129,12 @@
             <br/><br/>
 
             <!--Search bar used searching for books that will display results in gallery page-->
-            <h:form>
+            <form action="gallery.xhtml" method="get">
                 <div class=" searchBarDiv">
-                    <h:inputText a:placeholder="Search books..." value="#{search.query}" style=" float: center; margin-top: -30px;" class="searchBar"/>
-                    <h:commandButton class="searchButton" action="#{search.showSearch()}" type="submit" value = "Search"/>
+                    <input placeholder="Search books..." type="text" name="query" style=" float: center; margin-top: -30px;" class="searchBar"/>
+                    <input class="searchButton" type="submit" value = "Search"/>
                 </div>
-            </h:form>
+            </form>
 
 
 
@@ -243,7 +252,7 @@
                         <ui:repeat value="#{bb.popularGenres}" var="genres">
 
                             <div class="ui fluid card darker">
-                               <h:link outcome="gallery" value="">
+                                <h:link outcome="gallery" value="">
                                     <f:param  name="genre" value="#{genres}" /> 
                                     <div class="homepageImg">
                                         <h:graphicImage class="img" height="200" width="320" library="images" name="#{genres}.jpg"/>
