@@ -36,7 +36,7 @@ CREATE TABLE `Customer_Reviews` (
   `Review_ID` INT AUTO_INCREMENT,
   `Client_ID` INT,
   `ISBN` VARCHAR(13),
-  `Rating` Double(5,4),
+  `Rating` INT,
   `Review_Body` VARCHAR(10000),
   `Review_Title` VARCHAR(100),
   `Upvotes` INT,

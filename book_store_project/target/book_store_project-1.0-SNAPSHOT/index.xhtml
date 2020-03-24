@@ -24,7 +24,6 @@
         <script  src="https://www.gstatic.com/charts/loader.js"></script>
         <script src="https://unpkg.com/swiper/js/swiper.min.js"></script>
     </h:head>
-
     <h:body>
 
         <!--<b:alert severity="info">{clientBacking.message}</b:alert>-->
@@ -46,7 +45,9 @@
                             <p> #{book.description}</p>
                             <!--Button directs you to the book page for the current book being displayed in the carousel-->
                             <h:form>
-                                <h:commandButton type="submit" value="Shop Now" action="#{bb.viewBook(book)}" />
+                                <h:button  value="Shop Now" outcome="book" >
+                                    <f:param  name="isbn" value="#{book.isbn}" /> 
+                                </h:button>
                             </h:form>
                         </div>
                         <div  class="sliderImageContent">
@@ -55,6 +56,9 @@
                     </div>
                 </ui:repeat>
             </div>
+
+
+
 
             <!-- Add Pagination -->
             <div class="swiper-pagination"></div>
@@ -79,9 +83,11 @@
                                     <div class="cardHoverBtn"> View Cover</div>
                                 </div>
 
+
                                 <div class="content">
 
-                                    <h:commandLink action = "#{bb.viewBook(books)}" type="submit" value = "">
+                                    <h:link outcome="book" value = "">
+                                        <f:param  name="isbn" value="#{books.isbn}" /> 
                                         <div class="header textColor">
 
                                             #{books.title}</div>
@@ -101,7 +107,9 @@
                                             </div>
 
                                         </div>
-                                    </h:commandLink>
+                                    </h:link>
+
+
 
                                 </div>
 
@@ -121,26 +129,28 @@
             <br/><br/>
 
             <!--Search bar used searching for books that will display results in gallery page-->
-            <h:form>
+            <form action="gallery.xhtml" method="get">
                 <div class=" searchBarDiv">
-                    <h:inputText a:placeholder="Search books..." value="#{search.query}" style=" float: center; margin-top: -30px;" class="searchBar"/>
-                    <h:commandButton class="searchButton" action="#{search.showSearch()}" type="submit" value = "Search"/>
+                    <input placeholder="Search books..." type="text" name="query" style=" float: center; margin-top: -30px;" class="searchBar"/>
+                    <input class="searchButton" type="submit" value = "Search"/>
                 </div>
-            </h:form>
+            </form>
 
 
-            <!-- The Modal -->
+
+
+
+
+            <!-- The Modal for view book cover -->
             <div id="myModal" class="modal">
-
-                <!-- The Close Button -->
-                <span class="close">x</span>
-
-                <!-- Modal Content (The Image) -->
-                <h:graphicImage height="100%" width="50%" class="modal-content" id="img01" library="images" name="colorScheme.PNG"  />
-
-                <!-- Modal Caption (Image Text) -->
-                <div id="caption"></div>
+                <!-- Modal content -->
+                <div class="modal-content">
+                    <span class="close">x</span>
+                    <h:graphicImage class="image" id="img01" height="650px" width="520px" library="images" name="#{bb.book.isbn}.jpg"  />
+                </div>
             </div>
+
+
 
         </div>
 
@@ -157,7 +167,7 @@
                             <div style="background-color:#d77a61;" class="ui half page test ad left" data-text="">
                                 <h3 style="color:white;padding-top: 10px;" >News</h3>
                                 <p:scrollPanel style="overflow-y: auto;height: 100%;">
-                                
+
                                     <p:feedReader size="10" value="#{newsBean.randomNews.RSSFeed}" var="feed">
                                         <h:outputText value="#{feed.title}" style="font-weight: bold"/>
                                         <h:outputText value="#{feed.description.value}" escape="false"/>
@@ -166,7 +176,7 @@
                                             Something went wrong.
                                         </f:facet>
                                     </p:feedReader>  
-                                                   
+
                                 </p:scrollPanel>
 
                             </div></td>
@@ -180,7 +190,7 @@
                                         <!-- Shows the survey results once survey completed-->
                                         <p id="surveyId" class="invisible">#{s.surveyID}</p>
                                         <div id="results" class="invisible">
-                                       
+
                                             <hr/>
                                             <p:chart id="barchart" type="bar"  model="#{surveyDataBacking.getBarChart(s.surveyID)}"  style="width:530px"/>
                                             <div class="ui horizontal statistics">
@@ -206,7 +216,7 @@
                                             <p:selectOneRadio style="font-size:20px" required="true" layout="pageDirection" value="#{surveyDataBacking.surveyDataChoice}" >
                                                 <f:selectItems value="#{s.surveyData}" var="sd" itemValue="#{sd.dataID}" itemLabel = " #{sd.choice}" />
                                             </p:selectOneRadio>
-                           
+
                                             <p:commandButton  update="other barchart" class="bookFormatBtn"  value="Submit" oncomplete="showResults(#{s.surveyID})"/>
 
                                         </div>
@@ -214,11 +224,11 @@
                                 </h:form>
                             </div></td>
 
-                        
-                        
-               
-                        
-                        
+
+
+
+
+
                         <!-- First Ad location -->
                         <td align="center"><div class="ui wide skyscraper test ad right homepageCard" data-text="">
                                 <ui:repeat value="#{adsBean.randomAd}" var="ad">
@@ -233,20 +243,24 @@
 
         <!-- Shows the most popular book genres -->
         <div class="lightPurpleDiv">
+
+
             <p class="small">Popular Genres</p><br/>
             <h:form>
                 <h:panelGroup>
                     <div class="ui four doubling stackable cards">
                         <ui:repeat value="#{bb.popularGenres}" var="genres">
+
                             <div class="ui fluid card darker">
-                                <h:commandLink action = "#{search.showGenreBooks(genres)}" type="submit" value = "">
+                                <h:link outcome="gallery" value="">
+                                    <f:param  name="genre" value="#{genres}" /> 
                                     <div class="homepageImg">
                                         <h:graphicImage class="img" height="200" width="320" library="images" name="#{genres}.jpg"/>
                                     </div>
                                     <div class="content">
                                         <div class="header"><h3 class="genre">#{genres}</h3></div>
                                     </div>
-                                </h:commandLink>
+                                </h:link>
                             </div>
                         </ui:repeat>
                     </div>
