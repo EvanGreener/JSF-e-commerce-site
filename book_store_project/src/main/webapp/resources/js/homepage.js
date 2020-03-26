@@ -1,22 +1,24 @@
-            $(document).ready(function(){
-                $('.ui .item').on('click', function() {
-                    var id = $(this).parent().attr('id');
-                    $('.ui .' + id + '.item').removeClass('active');
-                    $('.' + id + '.segment').removeClass('active');
-                    var currentTab = $(this).attr("data-tab");
-                    $("[data-tab='" + currentTab + "']").addClass('active');
-                    $(this).addClass('active');
-                });             
-            });
+$(document).ready(function () {
+    $('.ui .item').on('click', function () {
+        var id = $(this).parent().attr('id');
+        $('.ui .' + id + '.item').removeClass('active');
+        $('.' + id + '.segment').removeClass('active');
+        var currentTab = $(this).attr("data-tab");
+        $("[data-tab='" + currentTab + "']").addClass('active');
+        $(this).addClass('active');
+    });
+});
 
 document.addEventListener('DOMContentLoaded', function (event) {// Get the modal
 
-if (sessionStorage.surveydone) {
+    if (sessionStorage.surveydone) {
         for (i = 0; i < sessionStorage.surveydone.length; i++) {
-            if (sessionStorage.surveydone.charAt(i) == document.getElementById("surveyId").innerHTML) {
-                document.getElementById("survey").remove();
-                document.getElementById("surveyStatus").innerHTML="No new survey at the moment";
-                break;
+            if (document.getElementById("surveyId")) {
+                if (sessionStorage.surveydone.charAt(i) == document.getElementById("surveyId").innerHTML) {
+                    document.getElementById("survey").remove();
+                    document.getElementById("surveyStatus").innerHTML = "No new survey at the moment";
+                    break;
+                }
             }
         }
 
@@ -39,7 +41,6 @@ if (sessionStorage.surveydone) {
     var imgBtn = document.getElementsByClassName('cardHoverBtn');
     for (index = 0; index < imgBtn.length; index++) {
         imgBtn[index].onclick = function () {
-
             // Get the modal
             var bookCoverModal = document.getElementById("myModal");
 // Get the image and insert it inside the modal - use its "alt" text as a caption
@@ -56,14 +57,14 @@ if (sessionStorage.surveydone) {
     close.onclick = function () {
         bookCoverModal.style.display = "none";
     }
-       // When the user clicks anywhere outside of the modal, close it
-        // When the user clicks anywhere outside of the modal, close it
-     window.addEventListener("click",function (event) {
-     if (event.target == bookCoverModal) {
-     bookCoverModal.style.display = "none";
-     }
-     });
-   
+    // When the user clicks anywhere outside of the modal, close it
+    // When the user clicks anywhere outside of the modal, close it
+    window.addEventListener("click", function (event) {
+        if (event.target == bookCoverModal) {
+            bookCoverModal.style.display = "none";
+        }
+    });
+
 
 });
 
@@ -80,12 +81,12 @@ function displayCardHoverButton()
 function viewAd(url) {
     window.open(url);
 }
-function removeCardHoverButton(){
+function removeCardHoverButton() {
     var btn = document.getElementsByClassName("cardHoverBtn");
     btn[0].remove();
 }
 
-function addToCart(isbn, format){
+function addToCart(isbn, format) {
     var bookItem = {
         ISBN: isbn,
         bookFormat: format
@@ -120,12 +121,11 @@ function signOut() {
 
 
 function showResults(surveyId) {
-     if (sessionStorage.surveydone) {
-         sessionStorage.surveydone = sessionStorage.surveydone + surveyId + ",";
-     }
-     else{
-         sessionStorage.surveydone=""+surveyId + ",";
-     }
+    if (sessionStorage.surveydone) {
+        sessionStorage.surveydone = sessionStorage.surveydone + surveyId + ",";
+    } else {
+        sessionStorage.surveydone = "" + surveyId + ",";
+    }
     document.getElementById("survey").remove();
     document.getElementById("results").setAttribute("class", "visible");
 }

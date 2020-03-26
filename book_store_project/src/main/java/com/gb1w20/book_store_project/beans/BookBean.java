@@ -39,6 +39,7 @@ public class BookBean implements Serializable {
     private String genre;
     private int bookSlideColor = 0;
     private Book currentBook;
+    private String isbn;
 
     @PostConstruct
     public void init() {
@@ -160,13 +161,17 @@ public class BookBean implements Serializable {
     public Book getBook() throws IOException {
         LOG.debug("getBook");
         Map<String, String> params = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap();
+        
 
         String isbn = params.get("isbn");
-        LOG.debug("getBook" +isbn);
+        
 
         if (isbn != null) {
+            LOG.debug("getBook" +isbn);
+            this.isbn=isbn;
             findBook(isbn);
         }
+
         return this.book;
     }
 }

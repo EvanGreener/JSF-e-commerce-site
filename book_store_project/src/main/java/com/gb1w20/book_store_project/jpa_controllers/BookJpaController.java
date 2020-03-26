@@ -208,7 +208,7 @@ public class BookJpaController implements Serializable {
         query.setParameter("removed", false);
         query.setParameter("author", a);
         Random r = new Random();
-        query.setFirstResult((r.nextInt(getSimilarGenresBookCount(b) - 4)));
+        query.setFirstResult((r.nextInt((getSimilarGenresBookCount(b) - 4))));
         query.setMaxResults(4);
         List<Book> books = query.getResultList();
         return books;

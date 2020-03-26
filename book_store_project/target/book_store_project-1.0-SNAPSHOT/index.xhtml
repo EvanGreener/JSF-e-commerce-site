@@ -23,6 +23,8 @@
 
         <script  src="https://www.gstatic.com/charts/loader.js"></script>
         <script src="https://unpkg.com/swiper/js/swiper.min.js"></script>
+
+
     </h:head>
     <h:body>
 
@@ -158,86 +160,103 @@
         <!-- Survey/Ad/News Section -->
 
         <div   class="lightGreyDiv">
-            <table class="ui table lightGreyDiv" >
-
-                <!-- Shows the News -->
-                <tbody>
-                    <tr align="center">
-                        <td align="center">
-                            <div style="background-color:#d77a61;" class="ui half page test ad left" data-text="">
-                                <h3 style="color:white;padding-top: 10px;" >News</h3>
-                                <p:scrollPanel style="overflow-y: auto;height: 100%;">
-
-                                    <p:feedReader size="10" value="#{newsBean.randomNews.RSSFeed}" var="feed">
-                                        <h:outputText value="#{feed.title}" style="font-weight: bold"/>
-                                        <h:outputText value="#{feed.description.value}" escape="false"/>
-                                        <p:separator />
-                                        <f:facet name="error">
-                                            Something went wrong.
-                                        </f:facet>
-                                    </p:feedReader>  
-
-                                </p:scrollPanel>
-
-                            </div></td>
-                        <td align="center"> <div id="surveyDiv" class="ui netboard test ad survey" data-text="" >
-
-                                <!-- Survey Section -->
-                                <h:form >
-                                    <p>#{ss.setSurvey()}</p>
-                                    <ui:repeat value="#{ss.survey}" var="s">
-                                        <h1 id="surveyStatus" style="text-align:center">  #{s.surveyName}</h1>
-                                        <!-- Shows the survey results once survey completed-->
-                                        <p id="surveyId" class="invisible">#{s.surveyID}</p>
-                                        <div id="results" class="invisible">
-
-                                            <hr/>
-                                            <p:chart id="barchart" type="bar"  model="#{surveyDataBacking.getBarChart(s.surveyID)}"  style="width:530px"/>
-                                            <div class="ui horizontal statistics">
-                                                <h:panelGroup id="other" >
-                                                    <ui:repeat  value="#{surveyDataBacking.getSurveyChoices(s.surveyID)}" var="sd">
-                                                        <div class="ui statistic">
-                                                            <div class="value">#{sd.votes}</div>
-                                                            <div class="label">#{sd.choice}</div>
-                                                        </div>
-                                                        <br/>
-                                                    </ui:repeat>
-                                                </h:panelGroup>
-                                            </div>
-                                            <hr/>
-                                            <h2>Thank you for answering!</h2>
-                                        </div>
 
 
-                                        <!-- Shows the actual survey-->
-                                        <div id="survey">
-                                            <p style="font-size:20px;padding:2%">#{s.surveyDescription}</p>
-
-                                            <p:selectOneRadio style="font-size:20px" required="true" layout="pageDirection" value="#{surveyDataBacking.surveyDataChoice}" >
-                                                <f:selectItems value="#{s.surveyData}" var="sd" itemValue="#{sd.dataID}" itemLabel = " #{sd.choice}" />
-                                            </p:selectOneRadio>
-
-                                            <p:commandButton  update="other barchart" class="bookFormatBtn"  value="Submit" oncomplete="showResults(#{s.surveyID})"/>
-
-                                        </div>
-                                    </ui:repeat>
-                                </h:form>
-                            </div></td>
+            <!-- Shows the News -->
 
 
+            <div class="ui three doubling stackable cards parentDiv">
+                <div class="ui card" style="width:25%">
+                    <div class="image">
+
+                        <div style="background-color:#d77a61;" class="ui half page test ad left" data-text="">
+                            <h3 style="color:white;padding-top: 10px;" >News</h3>
+                            <p:scrollPanel style="overflow-y: scroll;height: 100%;">
+
+                                <p:feedReader size="10" value="#{newsBean.randomNews.RSSFeed}" var="feed">
+                                    <h:outputText value="#{feed.title}" style="font-weight: bold"/>
+                                    <h:outputText value="#{feed.description.value}" escape="false"/>
+                                    <p:separator />
+                                    <f:facet name="error">
+                                        Something went wrong.
+                                    </f:facet>
+                                </p:feedReader>  
+
+                            </p:scrollPanel>
+
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="ui card" style="width:50%">
+                    <div id="surveyDiv" class="content survey">
+
+
+                        <!-- Survey Section -->
+                        <h:form >
+                            <p>#{ss.setSurvey()}</p>
+                            <ui:repeat value="#{ss.survey}" var="s">
+                                <h1 id="surveyStatus" style="text-align:center">  #{s.surveyName}</h1>
+                                <!-- Shows the survey results once survey completed-->
+                                <p id="surveyId" class="invisible">#{s.surveyID}</p>
+                                <div id="results" class="invisible">
+
+                                    <hr/>
+                                   
+                                    <p:chart responsive="true" id="barchart" type="bar"  model="#{surveyDataBacking.getBarChart(s.surveyID)}"  style="width:90%; height:90%;"/>
+           
+                                    <div class="ui horizontal statistics">
+                                        <h:panelGroup id="other" >
+                                            <ui:repeat  value="#{surveyDataBacking.getSurveyChoices(s.surveyID)}" var="sd">
+                                                <div class="ui statistic">
+                                                    <div class="value">#{sd.votes}</div>
+                                                    <div class="label">#{sd.choice}</div>
+                                                </div>
+                                                <br/>
+                                            </ui:repeat>
+                                        </h:panelGroup>
+                                    </div>
+                                    <hr/>
+                                    <h2>Thank you for answering!</h2>
+                                </div>
+
+
+                                <!-- Shows the actual survey-->
+                                <div id="survey">
+                                    <p style="font-size:20px;padding:2%">#{s.surveyDescription}</p>
+
+                                    <p:selectOneRadio style="font-size:20px" required="true" layout="pageDirection" value="#{surveyDataBacking.surveyDataChoice}" >
+                                        <f:selectItems value="#{s.surveyData}" var="sd" itemValue="#{sd.dataID}" itemLabel = " #{sd.choice}" />
+                                    </p:selectOneRadio>
+                                    <br/>
+                                    <p:commandButton  update="other barchart" class="bookFormatBtn"  value="Submit" oncomplete="showResults(#{s.surveyID})"/>
+
+                                </div>
+                            </ui:repeat>
+                        </h:form>
+
+                    </div>  
+
+                </div>
 
 
 
+                <div class="ui card" style="width:10%">
 
-                        <!-- First Ad location -->
-                        <td align="center"><div class="ui wide skyscraper test ad right homepageCard" data-text="">
-                                <ui:repeat value="#{adsBean.randomAd}" var="ad">
-                                    <h:graphicImage height="100%" width="100%" library="images" name="#{ad.imageName}1.png"  onclick="viewAd('#{ad.adUrl}')"/>
-                                </ui:repeat>
-                            </div></td>
-                    </tr>
-                </tbody>
-            </table>
+                    <!-- First Ad location -->
+                    <div class="image homepageCard">
+
+                        <ui:repeat value="#{adsBean.randomAd}" var="ad">
+                            <h:graphicImage height="100%" width="100%" library="images" name="#{ad.imageName}1.png"  onclick="viewAd('#{ad.adUrl}')"/>
+                        </ui:repeat>
+
+
+                    </div>
+                </div>
+            </div>
+
+
 
         </div>
 
@@ -255,7 +274,7 @@
                                 <h:link outcome="gallery" value="">
                                     <f:param  name="genre" value="#{genres}" /> 
                                     <div class="homepageImg">
-                                        <h:graphicImage class="img" height="200" width="320" library="images" name="#{genres}.jpg"/>
+                                        <h:graphicImage class="img" height="100%" width="100%" library="images" name="#{genres}.jpg"/>
                                     </div>
                                     <div class="content">
                                         <div class="header"><h3 class="genre">#{genres}</h3></div>
@@ -269,11 +288,16 @@
             <br/><br/>
 
             <!-- Second Ad location -->
-            <div class="ui centered leaderboard test ad" data-text="">
-                <ui:repeat value="#{adsBean.randomAd}" var="ad">
-                    <h:graphicImage height="100%" width="100%" library="images" name="#{ad.imageName}2.png" onclick="viewAd('#{ad.adUrl}')" />
-                </ui:repeat>
-            </div>
+            <div class="ui one doubling stackable cards parentDiv">
+                <div class="ui card" style="width:40%">
+                    <div class="image">
+                        <ui:repeat value="#{adsBean.randomAd}" var="ad">
+                            <h:graphicImage height="100%" width="100%" library="images" name="#{ad.imageName}2.png" onclick="viewAd('#{ad.adUrl}')" />
+                        </ui:repeat>
+                    </div>
+
+                </div>
+            </div> 
         </div>
 
         <!--composite component that comes from the footer.xhtml file to avoid coding the website footer in all web pages-->
