@@ -251,10 +251,14 @@ h2{
      background-color: grey;
      cursor: pointer;
 }
-
+.parentDiv{
+    display:flex;
+    justify-content: center;
+    align-items: center;
+}
 p.small {
      font-variant: small-caps;
-     font-size: 2vw;
+     font-size: 24px;
      text-align: center;
      font-weight: bold;
 }

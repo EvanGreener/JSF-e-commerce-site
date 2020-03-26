@@ -85,6 +85,24 @@ values ("20", "9780141439471", 3, "Gastrointestinal stromal tumor of rectum",
 insert into Customer_Reviews
 (Client_ID, ISBN, Rating, Review_Body, Review_Title, Upvotes, Downvotes, Is_Removed, Pending, Last_Modified,
  Date_Entered, Date_Removed)
+values ("9", "9780141439471", 3, "Gastrointestinal stromal tumor of rectum",
+        "Gastrointestinal stromal tumor of rectum", 34, 66, false, false, "2019-08-30 21:23:27", "2019-01-14 22:11:32",
+        "2020-03-06 06:44:35");
+insert into Customer_Reviews
+(Client_ID, ISBN, Rating, Review_Body, Review_Title, Upvotes, Downvotes, Is_Removed, Pending, Last_Modified,
+ Date_Entered, Date_Removed)
+values ("2", "9780141439471", 5, "Gastrointestinal stromal tumor of rectum",
+        "Gastrointestinal stromal tumor of rectum", 34, 66, false, false, "2019-08-30 21:23:27", "2019-01-14 22:11:32",
+        "2020-03-06 06:44:35");
+insert into Customer_Reviews
+(Client_ID, ISBN, Rating, Review_Body, Review_Title, Upvotes, Downvotes, Is_Removed, Pending, Last_Modified,
+ Date_Entered, Date_Removed)
+values ("1", "9780141439471", 1, "Gastrointestinal stromal tumor of rectum",
+        "Gastrointestinal stromal tumor of rectum", 34, 66, false, false, "2019-08-30 21:23:27", "2019-01-14 22:11:32",
+        "2020-03-06 06:44:35");
+insert into Customer_Reviews
+(Client_ID, ISBN, Rating, Review_Body, Review_Title, Upvotes, Downvotes, Is_Removed, Pending, Last_Modified,
+ Date_Entered, Date_Removed)
 values ("30", "9780770430078", 4, "Displacement of internal fixation device of vertebrae, initial encounter",
         "Displacement of internal fixation device of vertebrae, init", 55, 1, false, true, "2019-03-22 18:56:14",
         "2019-10-07 02:08:47", "2020-03-15 02:23:18");
@@ -992,7 +1010,7 @@ INSERT INTO Book
 VALUES ("9780141439471", "Frankenstein", "Horror", 335,
         "Mary Shelley began writing Frankenstein when she was only eighteen. At once a Gothic thriller, a passionate romance, and a cautionary tale about the dangers of science, Frankenstein tells the story of committed science student Victor Frankenstein. Obsessed with discovering the cause of generation and life and bestowing animation upon lifeless matter, Frankenstein assembles a human being from stolen body parts but; upon bringing it to life, he recoils in horror at the creature\'s hideousness. Tormented by isolation and loneliness, the once-innocent creature turns to evil and unleashes a campaign of murderous revenge against his creator, Frankenstein.Frankenstein, an instant bestseller and an important ancestor of both the horror and science fiction genres, not only tells a terrifying story, but also raises profound, disturbing questions about the very nature of life and the place of humankind within the cosmos: What does it mean to be human? What responsibilities do we have to each other? How far can we go in tampering with Nature? In our age, filled with news of organ donation genetic engineering, and bio-terrorism, these questions are more relevant than ever.",
         STR_TO_DATE("6/25/2005", "%m/%d/%Y"), 1, STR_TO_DATE("6/25/2017", "%m/%d/%Y"),
-        STR_TO_DATE("7/25/2017", "%m/%d/%Y"), TRUE, 17, 15, 9);
+        STR_TO_DATE("7/25/2017", "%m/%d/%Y"), False, 17, 15, 9);
 INSERT INTO Book
 (ISBN, Title, Genre, Num_Of_Pages, Description, Date_Of_Publication, Publisher_ID, Date_Entered, Last_Modified,
  Is_Removed, List_Price, Sale_Price, Wholesale_Price)
@@ -1634,7 +1652,7 @@ insert into Authors
 values ("Bram Stoker, Nina Auerbach", false, "2019-04-30 01:30:02", "2019-07-18 00:24:20");
 insert into Authors
     (Name, Is_Removed, Date_Entered, Last_Modified)
-values ("Mary Wollstonecraft Shelley, Percy Bysshe Shelley", true, "2019-03-21 16:12:38", "2021-04-12 04:02:59");
+values ("Mary Wollstonecraft Shelley, Percy Bysshe Shelley", false, "2019-03-21 16:12:38", "2021-04-12 04:02:59");
 insert into Authors
     (Name, Is_Removed, Date_Entered, Last_Modified)
 values ("Mark Z. Danielewski", false, "2019-12-19 00:43:13", "2020-10-16 18:44:26");

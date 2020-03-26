@@ -19,8 +19,9 @@
         <h:outputStylesheet library="webjars" name="Semantic-UI/2.4.1/semantic.min.css" />
         <h:outputStylesheet library="css" name="homepage.css" />
         <h:outputStylesheet library="book_css" name="bookpage.css" />
+          <h:outputScript library="js" name="homepage.js" />
         <h:outputScript library="js" name="book.js" />
-        <h:outputScript library="js" name="homepage.js" />
+      
         <h:outputStylesheet library="webjars" name="font-awesome/4.7.0/css/font-awesome.min-jsf.css" />
         <!-- Swiper JS -->
         <script src="https://unpkg.com/swiper/js/swiper.min.js"></script>
@@ -91,10 +92,10 @@
                         </ui:repeat>
                         <div class="flex-container" style="padding: 0px">
                             <div style="width:70%; padding-top: 0px">
-                                
-                                 <!--Button to add to shopping cart-->
-                                  <div onclick="addToCart(#{book.isbn}, 'pdf')" class="button addToCartBtn">Add to Cart</div>
-                               
+
+                                <!--Button to add to shopping cart-->
+                                <div onclick="addToCart(#{book.isbn}, 'pdf')" class="button addToCartBtn">Add to Cart</div>
+
                             </div>
                             <div style="width:30%;text-align: center;padding-top: 0px;">
                                 <h1>$#{bb.book.listPrice}</h1>
@@ -123,68 +124,121 @@
                     </td>
 
                 </tr>
-                <tbody>
 
-                    <tr><td>
-                            <div class="flex-container">
+                <h:form>
+                    <tbody>
 
-                                <!--Review section-->
-                                <ui:repeat value="#{reviewBean.getReviews(bb.book.isbn)}" var="book">
-                                    <div>
-                                        <p class="reviewTitle">#{book.reviewTitle}</p>
+                        <tr><td>
+                                
+                                    <h:panelGroup id="gallery" class="flex-container">
+                                    <ui:param name="limit" value="4"/>
+                                    <!--Review section-->
+                                    <ui:repeat offset="#{(reviewBean.page - 1) * 4}" value="#{reviewBean.getReviews(bb.book.isbn)}" var="book" varStatus="status">
+                                        <ui:fragment  rendered="#{status.index lt limit * reviewBean.page}">
+                                            <div>
+                                                <p class="reviewTitle">#{book.reviewTitle}</p>
 
-                                        <p class="reviewName">#{book.clients.firstName} #{book.clients.lastName}</p>
+                                                <p class="reviewName">#{book.clients.firstName} #{book.clients.lastName}</p>
 
-                                        <p>#{book.reviewBody} </p>
-                                        <div class="flex-container" style="padding:0px">
-                                            <div style="padding:0px">
-                                                <ui:repeat value="#{reviewBean.getRating(book.rating)}" var="rate">
-                                                    <h:graphicImage class="image" height="20px" width="20px" library="images" name="ratestar.png"  />
-                                                </ui:repeat>
-                                                <ui:repeat value="#{reviewBean.getRating(5-book.rating)}" var="rate">
-                                                    <h:graphicImage class="image" height="20px" width="20px" library="images" name="star.png"  />
-                                                </ui:repeat>
+                                                <p>#{book.reviewBody} </p>
+                                                <div class="flex-container" style="padding:0px">
+                                                    <div style="padding:0px">
+                                                        <ui:repeat value="#{reviewBean.getRating(book.rating)}" var="rate">
+                                                            <h:graphicImage class="image" height="20px" width="20px" library="images" name="ratestar.png"  />
+                                                        </ui:repeat>
+                                                        <ui:repeat value="#{reviewBean.getRating(5-book.rating)}" var="rate">
+                                                            <h:graphicImage class="image" height="20px" width="20px" library="images" name="star.png"  />
+                                                        </ui:repeat>
+                                                    </div>
+                                                    <div style="padding:0px" class="reviewDate">
+                                                        <h:outputText value="#{book.dateEntered}">
+                                                            <f:convertDateTime type="date" dateStyle="medium"/>
+                                                        </h:outputText>
+                                                    </div>
+                                                </div>
+                                                <hr style="border-top-color:grey"/>
                                             </div>
-                                            <div style="padding:0px" class="reviewDate">
-                                                <h:outputText value="#{book.dateEntered}">
-                                                    <f:convertDateTime type="date" dateStyle="medium"/>
-                                                </h:outputText>
-                                            </div>
-                                        </div>
-                                        <hr style="border-top-color:grey"/>
+                                        </ui:fragment>
+                                    </ui:repeat>
+                                    </h:panelGroup>
+                                    <h:panelGroup rendered="#{reviewBean.getReviewCount(bb.book.isbn) ==0}">
+                                        <h4> No Reviews yet.</h4>
+                                    </h:panelGroup>
+                            </td>
+                        </tr>
+
+                    </tbody>
+
+
+                    <tfoot>
+                        <tr>
+                            <th colspan="5">
+                                <h:panelGroup rendered="#{reviewBean.getReviewCount(bb.book.isbn)>4}">
+                                    <div class="ui right floated pagination menu">
+<!--                                       <a class="item">
+                                            Previous
+                                        </a>
+                                        <a class="item">1</a>
+                                        <a class="item">2</a>
+                                        <a class="item">3</a>
+                                        <a class="item">4</a>
+                                        <a class="item">
+                                            Next
+                                        </a>
+                                        -->
+                                        
+                                        
+                                        
+                                        <!-- Pagination -->
+                                   <h:panelGroup id="pagination">
+                                        <!--Previous-->
+                                        <c:choose>
+                                             <c:when test="#{reviewBean.page == 1}">
+                                                  <button disabled="true"  class="ui button"> Prev. </button>
+                                             </c:when>
+                                             <c:otherwise>
+                                                  <h:commandButton value="Prev." class="ui button">
+                                                       <p:ajax update="gallery pagination" listener="#{reviewBean.onPrevious}" />
+                                                  </h:commandButton>
+                                             </c:otherwise>
+                                        </c:choose>
+
+
+                                        <!--Page numbers-->
+                                        <c:forEach begin="1" end="#{reviewBean.numPages}" varStatus="status">
+                                             <c:choose>
+                                                  <c:when test="#{status.index == reviewBean.page}">
+                                                       <h:commandButton value="#{status.index} " class="ui active button">
+                                                            <p:ajax event="click" update="gallery pagination" listener="#{reviewBean.onPageSelect(status.index)}" />
+                                                       </h:commandButton>
+                                                  </c:when>
+                                                  <c:otherwise>
+                                                       <h:commandButton value="#{status.index} " class="ui button">
+                                                            <p:ajax event="click" update="gallery pagination" listener="#{reviewBean.onPageSelect(status.index)}" />
+                                                       </h:commandButton>
+                                                  </c:otherwise>
+                                             </c:choose>
+                                        </c:forEach>
+
+                                        <!--Next-->
+                                        <c:choose>
+                                             <c:when test="#{reviewBean.page == reviewBean.numPages}">
+                                                  <button disabled="true"  class="ui button"> Next </button>
+                                             </c:when>
+                                             <c:otherwise>
+                                                  <h:commandButton value="Next" class="ui button">
+                                                       <p:ajax update="gallery pagination" listener="#{reviewBean.onNext}" />
+                                                  </h:commandButton>
+                                             </c:otherwise>
+                                        </c:choose>
+                                   </h:panelGroup>
                                     </div>
-                                </ui:repeat>
-
-                                <h:panelGroup rendered="#{empty bb.book.reviews}">
-                                    <h4> No Reviews yet.</h4>
                                 </h:panelGroup>
-                            </div> 
-                        </td>
-                    </tr>
+                            </th>
+                        </tr>
+                    </tfoot>
 
-                </tbody>
-
-
-                <tfoot>
-                    <tr>
-                        <th colspan="5">
-                            <h:panelGroup rendered="#{reviewBean.getReviewCount(book.isbn)>4}">
-                                <div class="ui right floated pagination menu">
-                                    <a class="item">
-                                        Previous
-                                    </a>
-                                    <a class="item">1</a>
-                                    <a class="item">2</a>
-                                    <a class="item">3</a>
-                                    <a class="item">4</a>
-                                    <a class="item">
-                                        Next
-                                    </a>
-                                </div>
-                            </h:panelGroup>
-                        </th>
-                    </tr>
-                </tfoot>
+                </h:form>
             </table>                     
 
 
@@ -275,8 +329,8 @@
 
                 </ui:repeat>
             </div> 
-            
-            
+
+
             <h:panelGroup rendered="#{!empty bb.getSimilarAuthorBooks(bb.book.authorsCollection,bb.book.isbn)}">
                 <br/><br/><br/>
                 <ui:repeat value="#{bb.book.authorsCollection}" var="author" >

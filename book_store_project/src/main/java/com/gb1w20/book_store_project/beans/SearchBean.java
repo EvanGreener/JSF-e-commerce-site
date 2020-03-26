@@ -38,16 +38,16 @@ public class SearchBean implements Serializable {
     @PostConstruct
     public void init() {
         LOG.debug("Init called!");
-        Map<String, String> params =FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap();
-        
+        Map<String, String> params = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap();
+
         String genre = params.get("genre");
-        String query= params.get("query");
-        
-        if(genre!=null){
+        String query = params.get("query");
+
+        if (genre != null) {
             setGenreFilters(genre);
         }
-        if(query!=null){
-            setQuery(query); 
+        if (query != null) {
+            setQuery(query);
         }
         try {
             updateSearchBean();
@@ -60,15 +60,18 @@ public class SearchBean implements Serializable {
         return genreFilters;
     }
 
-    public void resetGenreFilters() {
+    private void resetGenreFilters() {
         this.genreFilters = null;
     }
-    public void resetQuery(){
+
+    private void resetQuery() {
         setQuery("");
     }
-    public void resetSearchBy(){
+
+    private void resetSearchBy() {
         setSearchBy("title");
     }
+
     public String viewBook(String choice) {
         this.surveyChoice = choice;
         LOG.debug(choice + "ghdhg");
@@ -122,7 +125,7 @@ public class SearchBean implements Serializable {
         return results;
     }
 
-    private void updateSearchBean() throws IOException{
+    private void updateSearchBean() throws IOException {
 
         List<Book> res = searchBy != null && !query.isBlank() ? bookCtrlr.search(searchBy, query, page) : bookCtrlr.findBookEntities();
 
@@ -132,12 +135,24 @@ public class SearchBean implements Serializable {
         results = genreFilters == null || genreFilters.length == 0 ? res : res.stream()
                 .filter(book -> Arrays.asList(genreFilters).contains(book.getGenre()))
                 .collect(Collectors.toList());
-
+        
+        //reinitializing query,genrefilters,and search by so it does not affect the next search
+        //ideally code should be here once button is added near search bar
+        /*
+            resetQuery();
+            resetGenreFilters();
+            resetSearchBy();
+        
+        */
         numPages = (int) Math.ceil(results.size() / 8.0);
-        if(results.size()==1){
-            
-                   FacesContext context = FacesContext.getCurrentInstance();
-    context.getExternalContext().redirect("book.xhtml?isbn="+results.get(0).getIsbn());
+        
+        if (results.size() == 1) {
+            FacesContext context = FacesContext.getCurrentInstance();
+            context.getExternalContext().redirect("book.xhtml?isbn=" + results.get(0).getIsbn());
+            //reinitializing query,genrefilters,and search by so it does not affect the next search
+            resetQuery();
+            resetGenreFilters();
+            resetSearchBy();
         }
 
     }
