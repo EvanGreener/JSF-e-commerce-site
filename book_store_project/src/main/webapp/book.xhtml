@@ -14,11 +14,12 @@
 
 
         <link href="https://fonts.googleapis.com/css?family=Montserrat|Roboto&amp;display=swap" rel="stylesheet"/>
-
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
         <h:outputStylesheet library="webjars" name="Semantic-UI/2.4.1/semantic.min.css" />
         <h:outputStylesheet library="css" name="homepage.css" />
         <h:outputStylesheet library="book_css" name="bookpage.css" />
         <h:outputScript library="js" name="book.js" />
+        <h:outputScript library="webjars" name="Semantic-UI/2.4.1/semantic.min.js"/>
         <h:outputStylesheet library="webjars" name="font-awesome/4.7.0/css/font-awesome.min-jsf.css" />
         <!-- Swiper JS -->
         <script src="https://unpkg.com/swiper/js/swiper.min.js"></script>
@@ -29,6 +30,13 @@
 
         <!--composite component that comes from the navbar.xhtml file to avoid coding nav bar in all web pages-->
         <bookstore:navbar/>
+        
+        <div id="editFormGrowl" class="ui floating positive message" >
+            <!--<i class="close icon"></i>-->
+            <div class="header">
+                Added to cart!
+            </div>
+        </div>
 
         <!--Book description section-->
         <div class="lightGreyDiv">
@@ -61,11 +69,12 @@
                                 </div>
 
                             </section>   
-                        </ui:repeat>
 
                         <input type="number" value="1" id="quantity" name="quantity" min="1" max="5"></input>
-                        <h:commandButton  class="addToCartBtn button" value="Add to cart" type="button" />
-
+                        <h:commandButton class="addToCartBtn button" value="Add to cart" type="button" onclick="$('#editFormGrowl').show('slow')">
+                            <f:ajax event="click" listener="#{cbb.addBookToCart(book)}" />
+                        </h:commandButton>
+                    </ui:repeat>
                     </div>
                 </div>
             </div>
@@ -316,6 +325,10 @@
 
         <!-- Initialize Swiper -->
         <script>
+            function hideGrowl() {
+                $('#editFormGrowl').hide('slow');
+            }
+            
             var swiper = new Swiper('.swiper-container', {
                 loop: true,
                 centeredSlides: true,

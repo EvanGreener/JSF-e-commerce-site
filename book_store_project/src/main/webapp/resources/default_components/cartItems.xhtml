@@ -30,14 +30,16 @@ and open the template in the editor.
                             <h:form>
                                 <div class="item" style="border-bottom: 1px solid #8080805c; margin-bottom: 5%;padding-bottom: 1%">
                                     <div class="content" style="float:right">
-                                        <h:commandButton action="#{cbb.removeBookFromCart(book)}" type="submit" value = "Remove" class="ui button"/>
+                                        <h:commandButton type="button" value = "Remove" class="ui button">
+                                            <f:ajax event="click" listener="#{cbb.removeBookFromCart(book)}" />
+                                        </h:commandButton>
                                     </div>
                                     <div class="ui tiny image">
                                         <h:graphicImage library="images" name="#{book.isbn}.jpg"  />
                                     </div>
                                     <div class="content">
-                                        <h:commandLink action = "#{bb.viewBook(book)}" type="submit" value = "">
-                                            <div class="header">#{book.title}</div>
+                                        <h:commandLink value="#{book.title}">
+                                            <f:ajax event="click" listener="#{bb.viewBook(book)}" />
                                         </h:commandLink>
                                         <div class="description">$ #{book.listPrice}</div>
                                     </div>

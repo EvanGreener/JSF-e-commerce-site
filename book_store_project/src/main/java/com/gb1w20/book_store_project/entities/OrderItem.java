@@ -76,6 +76,10 @@ public class OrderItem implements Serializable {
     public Book getBook(){
         return book;
     }
+    
+    public void setBook(Book newValue){
+        book = newValue;
+    }
     public OrderItem(Integer itemID) {
         this.itemID = itemID;
     }
