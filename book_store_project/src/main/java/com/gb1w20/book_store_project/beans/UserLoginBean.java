@@ -32,6 +32,7 @@ public class UserLoginBean implements Serializable {
     private Boolean isSignedIn = false;
     private Boolean isManager = false;
     private String FirstName = "";
+    private String email = "";
 
     @PostConstruct
     public void init() {
@@ -52,6 +53,7 @@ public class UserLoginBean implements Serializable {
                     Object[] clientInformation = clientsJpaController.getInfoByEmail(userCookies[i].getValue());
                     isManager = clientInformation[2] != null ? (Boolean) clientInformation[2] : false;
                     FirstName = (String) clientInformation[3];
+                    email = (String)clientInformation[0];
                 }
             }
         }
@@ -126,4 +128,11 @@ public class UserLoginBean implements Serializable {
         this.FirstName = name;
     }
 
+    public String getEmail() {
+        return this.email;
+    }
+
+    public void setEmail(String newValue) {
+        this.email = newValue;
+    }
 }
