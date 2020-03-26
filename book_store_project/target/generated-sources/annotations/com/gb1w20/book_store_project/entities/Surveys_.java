@@ -2,12 +2,12 @@ package com.gb1w20.book_store_project.entities;
 
 import com.gb1w20.book_store_project.entities.SurveyData;
 import java.util.Date;
-import javax.annotation.processing.Generated;
+import javax.annotation.Generated;
 import javax.persistence.metamodel.ListAttribute;
 import javax.persistence.metamodel.SingularAttribute;
 import javax.persistence.metamodel.StaticMetamodel;
 
-@Generated(value="org.eclipse.persistence.internal.jpa.modelgen.CanonicalModelProcessor", date="2020-03-22T18:06:47", comments="EclipseLink-2.7.6.v20200131-rNA")
+@Generated(value="EclipseLink-2.7.6.v20200131-rNA", date="2020-03-26T10:00:11")
 @StaticMetamodel(Surveys.class)
 public class Surveys_ { 
 

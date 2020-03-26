@@ -75,8 +75,8 @@ public class CartBackingBean implements Serializable {
         }
     }
 
-    public void redirectToFinalizePage(Boolean isSignedIn){
+    public String redirectToFinalizePage(Boolean isSignedIn){
         LOG.info("user is " +isSignedIn);
-
+        return isSignedIn ? "index.xhtml" : "signIn.xhtml";
     }
 }

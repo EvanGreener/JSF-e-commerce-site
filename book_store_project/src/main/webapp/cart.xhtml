@@ -7,26 +7,23 @@ and open the template in the editor.
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:b="http://bootsfaces.net/ui"
       xmlns:f="http://xmlns.jcp.org/jsf/core"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-      xmlns:bookstore="http://java.sun.com/jsf/composite/default_components">
+      xmlns:bookstore="http://java.sun.com/jsf/composite/default_components"
+      xmlns:a="http://xmlns.jcp.org/jsf/passthrough">
     <h:head>
-        <ui:repeat value="#{bb.book}" var="book">
-            <title>#{book.title}</title>
-        </ui:repeat>
-        <link rel="stylesheet" href="https://unpkg.com/swiper/css/swiper.min.css"/>
+        <title>Cart</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 
         <link href="https://fonts.googleapis.com/css?family=Montserrat|Roboto&amp;display=swap" rel="stylesheet"/>
-
         <h:outputStylesheet library="webjars" name="Semantic-UI/2.4.1/semantic.min.css" />
         <h:outputStylesheet library="css" name="homepage.css" />
         <h:outputStylesheet library="book_css" name="bookpage.css" />
         <h:outputScript library="js" name="homepage.js" />
         <h:outputStylesheet library="webjars" name="font-awesome/4.7.0/css/font-awesome.min-jsf.css" />
-        <!-- Swiper JS -->
-        <script src="https://unpkg.com/swiper/js/swiper.min.js"></script>
+
     </h:head>
 
     <h:body>
@@ -69,6 +66,11 @@ and open the template in the editor.
                         </div>
                         <div class="extra content">
                             <h:form>
+                                <h:commandButton value="Add Ad" class="big pink ui button" onclick="setTimeout(function () {
+                                            $('#addModal').modal('show', hideGrowl())
+                                        }, 500)">
+                                    <f:ajax event="click" render="editForm" listener="#{adBacking.onCreate()}"/>
+                                </h:commandButton>
                                 <h:commandButton disabled="#{cbb.isCartEmpty()}" action="#{cbb.redirectToFinalizePage(UserLoginBean.getIfSignedIn())}" type="submit" value = "Finalize" class="ui button"/>
                             </h:form>
                         </div>
@@ -79,5 +81,41 @@ and open the template in the editor.
 
         <!--composite component that comes from the footer.xhtml file to avoid coding the website footer in all web pages-->
         <bookstore:footer/>
+        <div id="addModal" class="small ui modal">
+            <div class="header">
+                <h1>Add Ad</h1>
+            </div>
+            <div class="content">
+                <h:form id="addForm">
+                    <div class="ui form field">
+                        <h:outputLabel for="adUrl" value="Ad URL"/>
+                        <h:inputText id="adUrl" label="Ad URL" value="#{adBacking.ad.adUrl}" required="true" requiredMessage="Please enter ad URL" a:placeholder="Enter ad URL" validator="#{adBacking.validateNotNull}">
+                            <f:ajax event="change" render="adUrlError"/>
+                        </h:inputText>
+                        <br/>
+                        <h:message id="adUrlError" class="error" for="adUrl"/>
+                    </div>
+                    <br/>
+                    <div class="ui form field">
+                        <h:outputLabel for="imageName" value="Image Name"/>
+                        <h:inputText id="imageName" label="Image Name" value="#{adBacking.ad.imageName}" required="true" requiredMessage="Please enter image name" a:placeholder="Enter image name" validator="#{adBacking.validateNotNull}">
+                            <f:ajax event="change" render="imageNameError"/>
+                        </h:inputText>
+                        <br/>
+                        <h:message id="imageNameError" class="error" for="imageName"/>
+                    </div>
+                    <br/>
+                    <h:commandButton type="button" class="huge black fluid ui button" id="createAd" value="Create Ad" action="#{adBacking.createAd()}">
+                        <f:ajax event="click" execute="adUrl imageName" render="editForm"/>
+                    </h:commandButton>
+                </h:form>
+            </div>
+        </div>
+        <script>
+            function hideGrowl() {
+                $('#editFormGrowl').hide('slow');
+            }
+
+        </script>
     </h:body>
 </html>
