@@ -48,7 +48,7 @@
                             <!--Button directs you to the book page for the current book being displayed in the carousel-->
                             <h:form>
                                 <h:button  value="Shop Now" outcome="book" >
-                                    <f:param  name="isbn" value="#{book.isbn}" /> 
+                                    <f:param  name="isbn" value="#{book.isbn}" />
                                 </h:button>
                             </h:form>
                         </div>
@@ -89,7 +89,7 @@
                                 <div class="content">
 
                                     <h:link outcome="book" value = "">
-                                        <f:param  name="isbn" value="#{books.isbn}" /> 
+                                        <f:param  name="isbn" value="#{books.isbn}" />
                                         <div class="header textColor">
 
                                             #{books.title}</div>
@@ -117,11 +117,9 @@
 
                                 <!--Button to add to shopping cart-->
                                 <div class="ui two bottom attached buttons ">
-                                    <div onclick="addToCart(#{books.isbn}, 'pdf')" class="ui button">+ Add to Cart</div>
-
-
-
+                                    <h:commandButton action="#{cbb.addBookToCart(books)}" type="submit" value = "+ Add to Cart" class="ui button"/>
                                 </div>
+
                             </div>
                         </ui:repeat>
                     </div>
@@ -180,7 +178,7 @@
                                     <f:facet name="error">
                                         Something went wrong.
                                     </f:facet>
-                                </p:feedReader>  
+                                </p:feedReader>
 
                             </p:scrollPanel>
 
@@ -203,9 +201,9 @@
                                 <div id="results" class="invisible">
 
                                     <hr/>
-                                   
+
                                     <p:chart responsive="true" id="barchart" type="bar"  model="#{surveyDataBacking.getBarChart(s.surveyID)}"  style="width:90%; height:90%;"/>
-           
+
                                     <div class="ui horizontal statistics">
                                         <h:panelGroup id="other" >
                                             <ui:repeat  value="#{surveyDataBacking.getSurveyChoices(s.surveyID)}" var="sd">
@@ -236,7 +234,7 @@
                             </ui:repeat>
                         </h:form>
 
-                    </div>  
+                    </div>
 
                 </div>
 
@@ -272,7 +270,7 @@
 
                             <div class="ui fluid card darker">
                                 <h:link outcome="gallery" value="">
-                                    <f:param  name="genre" value="#{genres}" /> 
+                                    <f:param  name="genre" value="#{genres}" />
                                     <div class="homepageImg">
                                         <h:graphicImage class="img" height="100%" width="100%" library="images" name="#{genres}.jpg"/>
                                     </div>
@@ -297,7 +295,7 @@
                     </div>
 
                 </div>
-            </div> 
+            </div>
         </div>
 
         <!--composite component that comes from the footer.xhtml file to avoid coding the website footer in all web pages-->

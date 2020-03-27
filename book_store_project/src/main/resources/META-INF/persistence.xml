@@ -16,7 +16,6 @@
     <class>com.gb1w20.book_store_project.entities.Tax</class>
     <class>com.gb1w20.book_store_project.entities.SurveyData</class>
     <class>com.gb1w20.book_store_project.entities.Publisher</class>
-    <class>com.gb1w20.book_store_project.beans.UserLoginBean</class>
     <class>com.gb1w20.book_store_project.entities.BookFormat</class>
     <exclude-unlisted-classes>true</exclude-unlisted-classes>
   </persistence-unit>

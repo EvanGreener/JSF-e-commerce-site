@@ -119,8 +119,18 @@ public class Orders implements Serializable {
          return orderItemsCollection;
     }
     
+    public void setOrderItemsCollection(List<OrderItem> newList)
+    {
+        orderItemsCollection = newList;
+    }
+    
     public Clients getClient(){
          return client;
+    }
+    
+    public void setClient(Clients newValue)
+    {
+        client = newValue;
     }
 
     @Override

@@ -28,6 +28,29 @@ document.addEventListener('DOMContentLoaded', function (event) {
     
 });
 
+function displayCardHoverButton()
+{
+    console.log("HERE");
+    var btn = document.createElement("BUTTON");
+    btn.addEventListener('click', displayBookCover);
+    btn.innerHTML = "View Cover";
+    btn.classList.add("cardHoverBtn");
+    this.appendChild(btn);
+}
+
+function viewAd(url){
+    window.open(url);
+}
+
+function addReview() {
+    document.getElementById("reviewModal").style.display = 'block';
+}
+function removeCardHoverButton()
+{
+    var btn = document.getElementsByClassName("cardHoverBtn");
+    btn[0].remove();
+}
+
 function showMore() {
     
     var dots = document.getElementById("dots");
