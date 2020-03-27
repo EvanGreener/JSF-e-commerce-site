@@ -195,8 +195,10 @@ body {
     padding:5%;
     background-color: #223843 !important;
 }
+
 .purpleContainer{
-    color: #DBD3DB;
+    background-color: #DBD3DB;
+    height:100%;
 }
 
 .thingy5{
@@ -469,7 +471,7 @@ p.small {
 
 .purpleContainer{
     background-color: #DBD3DB;
-    height:100%;
+    height:90%;
 }
 
 .centerItems{
@@ -492,6 +494,7 @@ p.small {
     margin-top: 5%;
     overflow-y: auto;
     border-radius: 5px;
+    height:800px;
 }
 
 .tabular.menu, .tab.segment{

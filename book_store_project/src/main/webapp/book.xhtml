@@ -120,7 +120,7 @@
                         <p style="font-size: 1.7em">Reviews</p>
                     </td>
                     <td  colspan="5" class="right aligned single line">
-                        <h:commandButton id="reviewBtn" class="button addReviewBtn" value="+" type="button" />
+                        <h:commandButton rendered="#{UserLoginBean.getIfSignedIn()}" id="reviewBtn" class="button addReviewBtn" value="+" type="button" />
                     </td>
 
                 </tr>

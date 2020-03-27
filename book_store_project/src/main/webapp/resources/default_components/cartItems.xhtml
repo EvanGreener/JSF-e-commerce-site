@@ -38,10 +38,8 @@ and open the template in the editor.
                                         <h:graphicImage library="images" name="#{book.isbn}.jpg"  />
                                     </div>
                                     <div class="content">
-                                        <h:commandLink value="#{book.title}">
-                                            <f:ajax event="click" listener="#{bb.viewBook(book)}" />
-                                        </h:commandLink>
-                                        <div class="description">$ #{book.listPrice}</div>
+                                        <div>#{book.title}</div>
+                                        <div>$ #{book.listPrice}</div>
                                     </div>
                                 </div>
                             </h:form>
