@@ -5,7 +5,6 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:f="http://xmlns.jcp.org/jsf/core"
-      xmlns:b="http://bootsfaces.net/ui"
       xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:p="http://primefaces.org/ui"
@@ -21,6 +20,7 @@
         <h:outputStylesheet library="webjars" name="swiper/4.5.1/dist/css/swiper.min.css" />
         <h:outputStylesheet library="galleryCss" name="gallery.css" />
         <h:outputStylesheet library="css" name="homepage.css" />
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 
         <h:outputScript library="js" name="homepage.js" />
 
@@ -32,7 +32,6 @@
         <f:event type="preRenderView" listener="#{search.init}" />
         <!--composite component that comes from the navbar.xhtml file to avoid coding nav bar in all web pages-->
         <bookstore:navbar/>
-
         <h:form>
             <div class="gallery">
                 <div class="ui grid">
@@ -99,7 +98,9 @@
 
                                                 <div class="content">
 
-                                                    <h:commandLink action = "#{bb.viewBook(books)}" type="submit" value = "">
+
+                                                    <h:link outcome = "book" value = "">
+                                                        <f:param  name="isbn" value="#{books.isbn}" />
                                                         <div class="header">
 
                                                             #{books.title}</div>
@@ -119,11 +120,10 @@
                                                             </div>
 
                                                         </div>
-                                                    </h:commandLink>
+                                                    </h:link>
 
                                                 </div>
-
-
+                                                <!--Button to add to shopping cart-->
                                                 <div class="ui two bottom attached buttons ">
                                                     <h:commandButton action="#{cbb.addBookToCart(books)}" type="submit" value = "+ Add to Cart" class="ui button"/>
                                                 </div>
@@ -315,6 +315,7 @@
 
         <!-- Initialize Swiper -->
         <script>
+
             var swiper = new Swiper('.swiper-container', {
                 slidesPerView: 4,
                 spaceBetween: 0,

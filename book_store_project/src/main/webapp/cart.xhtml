@@ -20,66 +20,66 @@ and open the template in the editor.
         <h:outputStylesheet library="webjars" name="Semantic-UI/2.4.1/semantic.min.css" />
         <h:outputStylesheet library="css" name="homepage.css" />
         <h:outputScript library="webjars" name="Semantic-UI/2.4.1/semantic.min.js"/>
-\       <h:outputStylesheet library="webjars" name="font-awesome/4.7.0/css/font-awesome.min-jsf.css" />
+        <h:outputStylesheet library="webjars" name="font-awesome/4.7.0/css/font-awesome.min-jsf.css" />
 
     </h:head>
 
     <h:body>
-        
+
         <h:form id="editForm">
-        <!--composite component that comes from the navbar.xhtml file to avoid coding nav bar in all web pages-->
-        <bookstore:navbar/>
-        
+            <!--composite component that comes from the navbar.xhtml file to avoid coding nav bar in all web pages-->
+            <bookstore:navbar/>
 
-        <div id="editFormGrowl" class="ui floating positive message" >
-            <!--<i class="close icon"></i>-->
-            <div class="header">
-                Changes have been saved!
-            </div>
-        </div>
-        
-        <div class="purpleContainer">
-            <div class="ui very relaxed grid">
-                <div class="twelve wide column">
-                    <bookstore:cartItems/>
+
+            <div id="editFormGrowl" class="ui floating positive message" >
+                <!--<i class="close icon"></i>-->
+                <div class="header">
+                    Changes have been saved!
                 </div>
-                <div class="four wide column">
-                    <div class="ui card" style="margin-top: 30%">
-                        <div class="content">
-                            <div class="header">Order Summary</div>
-                        </div>
+            </div>
 
-                        <div class="content">
-                            <h4 class="ui sub header">Items</h4>
-                            <div class="middle aligned divided list">
-                                <ui:repeat value="#{cbb.getCartItems()}" var="book">
-                                    <div class="item">
-                                        <div class="right floated content">
-                                            #{book.listPrice}
+            <div class="purpleContainer">
+                <div class="ui very relaxed grid">
+                    <div class="twelve wide column">
+                        <bookstore:cartItems/>
+                    </div>
+                    <div class="four wide column">
+                        <div class="ui card" style="margin-top: 30%">
+                            <div class="content">
+                                <div class="header">Order Summary</div>
+                            </div>
+
+                            <div class="content">
+                                <h4 class="ui sub header">Items</h4>
+                                <div class="middle aligned divided list">
+                                    <ui:repeat value="#{cbb.getCartItems()}" var="book">
+                                        <div class="item">
+                                            <div class="right floated content">
+                                                #{book.listPrice}
+                                            </div>
+                                            <div class="content">
+                                                #{book.title}
+                                            </div>
                                         </div>
-                                        <div class="content">
-                                            #{book.title}
-                                        </div>
+                                    </ui:repeat>
+                                    <hr/>
+                                    <strong>Sub-Total</strong>
+                                    <div class="right floated content">
+                                        <strong>$ #{cbb.getCartTotal()}</strong>
                                     </div>
-                                </ui:repeat>
-                                <hr/>
-                                <strong>Sub-Total</strong>
-                                <div class="right floated content">
-                                    <strong>$ #{cbb.getCartTotal()}</strong>
                                 </div>
                             </div>
-                        </div>
-                        <div class="extra content">
+                            <div class="extra content">
                                 <h:commandButton disabled="#{cbb.isCartEmpty()}" value="Finalize" class="ui button" onclick="showCorrectModal(#{UserLoginBean.getIfSignedIn()})">
                                     <f:ajax event="click" render="editForm" listener="#{cbb.checkSignedIn(UserLoginBean.getIfSignedIn())}"/>
                                 </h:commandButton>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-        <!--composite component that comes from the footer.xhtml file to avoid coding the website footer in all web pages-->
-        <bookstore:footer/>
+            <!--composite component that comes from the footer.xhtml file to avoid coding the website footer in all web pages-->
+            <bookstore:footer/>
         </h:form>
         <div id="loginModal" class="small ui modal">
             <div class="header">
@@ -87,32 +87,32 @@ and open the template in the editor.
             </div>
             <div class="content">
                 <h:form id="addForm" class="ui form">
-                            <div class="field">
-                                <h:outputLabel for="email" value="Email"/>
-                                <h:inputText id="email" label="Email" value="#{clientBacking.loginEmail}" required="true" requiredMessage="Please enter email" a:placeholder="Enter email" validator="#{clientBacking.validateEmailExists}">
-                                    <f:ajax event="change" render="emailError"/>
-                                </h:inputText>
-                                <br/>
-                                <h:message id="emailError" class="error" for="email"/>
-                            </div>
-                            <br/>
-                            <div class="field">
-                                <h:outputLabel for="password" value="Password"/>
-                                <h:inputSecret id="password" label="Password" value="#{clientBacking.loginPassword}" required="true" requiredMessage="Please enter password" a:placeholder="Enter password" validator="#{clientBacking.validateCorrectPassword}"/>
-                                <br/>
-                                <h:message class="error" for="password"/>
-                            </div>
-                            <div class="ui checkbox">
-                                <input type="checkbox" name="remember" />
-                                <label>Remember Me</label>
-                            </div>
-                            <h:commandButton class="huge black fluid ui button" id="loginBtn" value="Login" action="#{clientBacking.loginForCart()}" />
-                            <br/>
-                            <a href="signUp.xhtml" class="signUpLink">Register</a>
+                    <div class="field">
+                        <h:outputLabel for="email" value="Email"/>
+                        <h:inputText id="email" label="Email" value="#{clientBacking.loginEmail}" required="true" requiredMessage="Please enter email" a:placeholder="Enter email" validator="#{clientBacking.validateEmailExists}">
+                            <f:ajax event="change" render="emailError"/>
+                        </h:inputText>
+                        <br/>
+                        <h:message id="emailError" class="error" for="email"/>
+                    </div>
+                    <br/>
+                    <div class="field">
+                        <h:outputLabel for="password" value="Password"/>
+                        <h:inputSecret id="password" label="Password" value="#{clientBacking.loginPassword}" required="true" requiredMessage="Please enter password" a:placeholder="Enter password" validator="#{clientBacking.validateCorrectPassword}"/>
+                        <br/>
+                        <h:message class="error" for="password"/>
+                    </div>
+                    <div class="ui checkbox">
+                        <input type="checkbox" name="remember" />
+                        <label>Remember Me</label>
+                    </div>
+                    <h:commandButton class="huge black fluid ui button" id="loginBtn" value="Login" action="#{clientBacking.loginForCart()}" />
+                    <br/>
+                    <a href="signUp.xhtml" class="signUpLink">Register</a>
                 </h:form>
             </div>
         </div>
-        
+
         <div id="finalize" class="small ui modal">
             <div class="header">
                 <h1>Finalize Purchase</h1>
@@ -154,7 +154,7 @@ and open the template in the editor.
                             </h:inputText>
                             <br/>
                             <h:message id="expiryYearError" class="error" for="expiryYear"/>
-                        </div>                            
+                        </div>
                     </div>
                     <div class="field">
                         <h:outputLabel for="cardholder" value="Cardholder Name"/>
@@ -174,11 +174,14 @@ and open the template in the editor.
             {
                 if (!isSignedIn)
                 {
-                    setTimeout(function() {$('#loginModal').modal('show')}, 500);
-                }
-                else
+                    setTimeout(function () {
+                        $('#loginModal').modal('show')
+                    }, 500);
+                } else
                 {
-                    setTimeout(function() {$('#finalize').modal('show')}, 500);
+                    setTimeout(function () {
+                        $('#finalize').modal('show')
+                    }, 500);
                 }
             }
             function hideGrowl() {
