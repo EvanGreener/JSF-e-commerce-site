@@ -6,12 +6,16 @@ import com.gb1w20.book_store_project.entities.OrderItem;
 import com.gb1w20.book_store_project.jpa_controllers.BookJpaController;
 import com.gb1w20.book_store_project.jpa_controllers.OrderItemJpaController;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.io.Serializable;
+import java.net.URL;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
 import javax.annotation.PostConstruct;
 import javax.enterprise.context.SessionScoped;
+import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -131,7 +135,37 @@ public class BookBean implements Serializable {
         LOG.debug("getGenre");
         return this.genre;
     }
+    
+    //https://stackoverflow.com/questions/9391838/how-to-provide-a-file-download-from-a-jsf-backing-bean
+    //https://itqna.net/questions/15083/how-download-pdf-file-jsf
+    public void download() throws IOException {
+    FacesContext fc = FacesContext.getCurrentInstance();
+    ExternalContext ec = fc.getExternalContext();
 
+    ec.responseReset(); // Some JSF component library or some Filter might have set some headers in the buffer beforehand. We want to get rid of them, else it may collide.
+    ec.setResponseContentType("application/pdf"); // Check http://www.iana.org/assignments/media-types for all types. Use if necessary ExternalContext#getMimeType() for auto-detection based on filename.
+    //ec.setResponseContentLength(contentLength); 
+    String filename="Alice_in_Wonderland.pdf";
+// Set it with the file size. This header is optional. It will work if it's omitted, but the download progress will be unknown.
+    ec.setResponseHeader("Content-Disposition", "attachment; filename=\"" + filename + "\""); // The Save As popup magic is done here. You can give it any file name you want, this only won't work in MSIE, it will use current request URL as file name instead.
+
+    OutputStream output = ec.getResponseOutputStream();
+   
+    URL url = new URL("https://www.adobe.com/be_en/active-use/pdf/Alice_in_Wonderland.pdf");
+    InputStream pdfInputStream = url.openStream();
+
+    byte[] bytesBuffer = new byte[2048];
+    int bytesRead;
+    while ((bytesRead = pdfInputStream.read(bytesBuffer)) > 0) {
+        output.write(bytesBuffer, 0, bytesRead);
+    }    
+    output.flush();
+
+    pdfInputStream.close();
+    output.close();         
+
+    fc.responseComplete(); // Important! Otherwise JSF will attempt to render the response which obviously will fail since it's already written with a file and closed.
+}
     public void findBook(String isbn) throws IOException {
         LOG.debug("findBook");
         /*

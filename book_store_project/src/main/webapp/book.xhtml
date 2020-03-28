@@ -282,9 +282,7 @@
                     <h:inputTextarea value="#{reviewBean.reviewBody}" id="review" cols="45" rows="4" />
                     <br/><br/>
                     <div>
-                        <p:commandButton process="@form" value="Submit" update="reviewSection"  action="#{reviewBean.setCustomerReview(bb.book.isbn,UserLoginBean.getClient().clientID)}">
-
-                        </p:commandButton>
+                    <p:commandButton process="@form" value="Submit" update="reviewSection"  action="#{reviewBean.setCustomerReview(bb.book.isbn,UserLoginBean.getClient().clientID)}"/>
                     </div>
                 </h:form>
             </div>

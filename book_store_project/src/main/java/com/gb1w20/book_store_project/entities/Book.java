@@ -21,6 +21,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
@@ -122,11 +123,21 @@ public class Book implements Serializable {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "book")
     private List<CustomerReviews> reviews;
 
+    @JoinColumn(name = "ISBN", referencedColumnName = "ISBN", insertable = false, updatable = false)
+    @ManyToOne(optional = false)
+    private BookFormat bookFormat;
+
+    public BookFormat getBookFormat() {
+        return this.bookFormat;
+    }
+
     public Book() {
     }
-    public List<Clients> getClientsCollection(){
+
+    public List<Clients> getClientsCollection() {
         return this.clientsCollection;
     }
+
     public Book(String isbn) {
         this.isbn = isbn;
     }

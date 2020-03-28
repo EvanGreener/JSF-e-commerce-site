@@ -55,11 +55,15 @@
                                     <div class="middle aligned content">
                                         #{book.title}
                                         <br/>
-                                        ePub
+                                        #{book.bookFormat.format}
                                         <div class="extra">
-                                            <div class="ui right floated button">
-                                                Download
-                                            </div>
+                                          
+                                                <h:form>
+                                                    <h:commandButton class="ui right floated button" value="Download" action="#{bb.download()}"/>
+                                                </h:form>
+                                           
+
+
                                         </div>
                                     </div>
 
