@@ -19,9 +19,9 @@
         <h:outputStylesheet library="webjars" name="Semantic-UI/2.4.1/semantic.min.css" />
         <h:outputStylesheet library="css" name="homepage.css" />
         <h:outputStylesheet library="book_css" name="bookpage.css" />
-          <h:outputScript library="js" name="homepage.js" />
+        <h:outputScript library="js" name="homepage.js" />
         <h:outputScript library="js" name="book.js" />
-      
+
         <h:outputStylesheet library="webjars" name="font-awesome/4.7.0/css/font-awesome.min-jsf.css" />
         <!-- Swiper JS -->
         <script src="https://unpkg.com/swiper/js/swiper.min.js"></script>
@@ -32,7 +32,6 @@
 
         <!--composite component that comes from the navbar.xhtml file to avoid coding nav bar in all web pages-->
         <bookstore:navbar/>
-
         <!-- The Modal for view book cover -->
         <div id="myModal" class="modal">
             <!-- Modal content -->
@@ -119,8 +118,13 @@
                     <td  style="vertical-align: middle; text-align: center">
                         <p style="font-size: 1.7em">Reviews</p>
                     </td>
-                    <td  colspan="5" class="right aligned single line">    
-                        <h:commandButton id="reviewBtn" class="button addReviewBtn" value="+" type="button" />
+                    <td  colspan="5" class="right aligned single line">  
+                        <h:panelGroup id="reviewSection">
+                            <c:if test="#{UserLoginBean.getIfSignedIn() and reviewBean.getUserWrittenReviews(UserLoginBean.getClient().clientID,bb.book.isbn) eq 0}">
+                                <h:commandButton id="reviewBtn" class="button addReviewBtn" value="+" type="button" />
+                            </c:if>
+                        </h:panelGroup>
+
                     </td>
 
                 </tr>
@@ -129,8 +133,8 @@
                     <tbody>
 
                         <tr><td>
-                                
-                                    <h:panelGroup id="gallery" class="flex-container">
+
+                                <h:panelGroup id="reviewDisplay" class="flex-container">
                                     <ui:param name="limit" value="4"/>
                                     <!--Review section-->
                                     <ui:repeat offset="#{(reviewBean.page - 1) * 4}" value="#{reviewBean.getReviews(bb.book.isbn)}" var="book" varStatus="status">
@@ -160,10 +164,10 @@
                                             </div>
                                         </ui:fragment>
                                     </ui:repeat>
-                                    </h:panelGroup>
-                                    <h:panelGroup rendered="#{reviewBean.getReviewCount(bb.book.isbn) ==0}">
-                                        <h4> No Reviews yet.</h4>
-                                    </h:panelGroup>
+                                </h:panelGroup>
+                                <h:panelGroup rendered="#{reviewBean.getReviewCount(bb.book.isbn) ==0}">
+                                    <h4> No Reviews yet.</h4>
+                                </h:panelGroup>
                             </td>
                         </tr>
 
@@ -175,63 +179,63 @@
                             <th colspan="5">
                                 <h:panelGroup rendered="#{reviewBean.getReviewCount(bb.book.isbn)>4}">
                                     <div class="ui right floated pagination menu">
-<!--                                       <a class="item">
-                                            Previous
-                                        </a>
-                                        <a class="item">1</a>
-                                        <a class="item">2</a>
-                                        <a class="item">3</a>
-                                        <a class="item">4</a>
-                                        <a class="item">
-                                            Next
-                                        </a>
+                                        <!--                                       <a class="item">
+                                                                                    Previous
+                                                                                </a>
+                                                                                <a class="item">1</a>
+                                                                                <a class="item">2</a>
+                                                                                <a class="item">3</a>
+                                                                                <a class="item">4</a>
+                                                                                <a class="item">
+                                                                                    Next
+                                                                                </a>
                                         -->
-                                        
-                                        
-                                        
+
+
+
                                         <!-- Pagination -->
-                                   <h:panelGroup id="pagination">
-                                        <!--Previous-->
-                                        <c:choose>
-                                             <c:when test="#{reviewBean.page == 1}">
-                                                  <button disabled="true"  class="ui button"> Prev. </button>
-                                             </c:when>
-                                             <c:otherwise>
-                                                  <h:commandButton value="Prev." class="ui button">
-                                                       <p:ajax update="gallery pagination" listener="#{reviewBean.onPrevious}" />
-                                                  </h:commandButton>
-                                             </c:otherwise>
-                                        </c:choose>
+                                        <h:panelGroup id="pagination">
+                                            <!--Previous-->
+                                            <c:choose>
+                                                <c:when test="#{reviewBean.page == 1}">
+                                                    <button disabled="true"  class="ui button"> Prev. </button>
+                                                </c:when>
+                                                <c:otherwise>
+                                                    <h:commandButton value="Prev." class="ui button">
+                                                        <p:ajax update="reviewDisplay pagination" listener="#{reviewBean.onPrevious}" />
+                                                    </h:commandButton>
+                                                </c:otherwise>
+                                            </c:choose>
 
 
-                                        <!--Page numbers-->
-                                        <c:forEach begin="1" end="#{reviewBean.numPages}" varStatus="status">
-                                             <c:choose>
-                                                  <c:when test="#{status.index == reviewBean.page}">
-                                                       <h:commandButton value="#{status.index} " class="ui active button">
-                                                            <p:ajax event="click" update="gallery pagination" listener="#{reviewBean.onPageSelect(status.index)}" />
-                                                       </h:commandButton>
-                                                  </c:when>
-                                                  <c:otherwise>
-                                                       <h:commandButton value="#{status.index} " class="ui button">
-                                                            <p:ajax event="click" update="gallery pagination" listener="#{reviewBean.onPageSelect(status.index)}" />
-                                                       </h:commandButton>
-                                                  </c:otherwise>
-                                             </c:choose>
-                                        </c:forEach>
+                                            <!--Page numbers-->
+                                            <c:forEach begin="1" end="#{reviewBean.numPages}" varStatus="status">
+                                                <c:choose>
+                                                    <c:when test="#{status.index == reviewBean.page}">
+                                                        <h:commandButton value="#{status.index} " class="ui active button">
+                                                            <p:ajax event="click" update="reviewDisplay pagination" listener="#{reviewBean.onPageSelect(status.index)}" />
+                                                        </h:commandButton>
+                                                    </c:when>
+                                                    <c:otherwise>
+                                                        <h:commandButton value="#{status.index} " class="ui button">
+                                                            <p:ajax event="click" update="reviewDisplay pagination" listener="#{reviewBean.onPageSelect(status.index)}" />
+                                                        </h:commandButton>
+                                                    </c:otherwise>
+                                                </c:choose>
+                                            </c:forEach>
 
-                                        <!--Next-->
-                                        <c:choose>
-                                             <c:when test="#{reviewBean.page == reviewBean.numPages}">
-                                                  <button disabled="true"  class="ui button"> Next </button>
-                                             </c:when>
-                                             <c:otherwise>
-                                                  <h:commandButton value="Next" class="ui button">
-                                                       <p:ajax update="gallery pagination" listener="#{reviewBean.onNext}" />
-                                                  </h:commandButton>
-                                             </c:otherwise>
-                                        </c:choose>
-                                   </h:panelGroup>
+                                            <!--Next-->
+                                            <c:choose>
+                                                <c:when test="#{reviewBean.page == reviewBean.numPages}">
+                                                    <button disabled="true"  class="ui button"> Next </button>
+                                                </c:when>
+                                                <c:otherwise>
+                                                    <h:commandButton value="Next" class="ui button">
+                                                        <p:ajax update="reviewDisplay pagination" listener="#{reviewBean.onNext}" />
+                                                    </h:commandButton>
+                                                </c:otherwise>
+                                            </c:choose>
+                                        </h:panelGroup>
                                     </div>
                                 </h:panelGroup>
                             </th>
@@ -251,7 +255,7 @@
             <!-- Review Modal content -->
             <div class="reviewModalContent">
                 <span class="closeReview">x</span>
-                <form>
+                <h:form>
                     <p style="font-size: 25px; text-align: center;">Create Review</p>
                     <br></br>
                     <p style="font-size: 20px; font-family: georgia !important;">#{bb.book.title}</p>
@@ -259,26 +263,30 @@
 
                     <h:outputLabel for="title" value="Add a Title"/>
                     <br/>
-                    <h:inputText id="title" label="Add a Title" value="#{reviewBean.title}" required="true" requiredMessage="Please enter a title" validator="#{clientBacking.validateHomePhone}">
-                        <f:ajax event="change" render="address2Error"/>
+
+
+                    <h:inputText id="title" label="Add a Title" value="#{reviewBean.title}" required="true" requiredMessage="Please enter a title" >
+
                     </h:inputText>
                     <br/>
                     <br/>
                     <h:outputLabel for="rating" value="Overall Rating"/>
                     <br/>
-                    <h:selectOneMenu id="rating" label="Overall Rating" value="#{reviewBean.ratings}" required="true" requiredMessage="Please a rating">
+                    <h:selectOneMenu id="rating" label="Overall Rating" value="#{reviewBean.ratingChoice}" required="true" requiredMessage="Please a rating">
                         <f:selectItems value="#{reviewBean.ratings}" />
                     </h:selectOneMenu>
-                    <h:outputLabel for="rating" value="/5"/>
+                    <h:outputLabel value="/5"/>
                     <br/><br/>
                     <h:outputLabel for="review" value="Add a Review"/>
                     <br/>
                     <h:inputTextarea value="#{reviewBean.reviewBody}" id="review" cols="45" rows="4" />
                     <br/><br/>
                     <div>
-                        <h:commandButton value="Submit" class="addToCartBtn" action="#{reviewBean.setCustomerReview(bb.book.isbn)}"></h:commandButton>
+                        <p:commandButton process="@form" value="Submit" update="reviewSection"  action="#{reviewBean.setCustomerReview(bb.book.isbn,UserLoginBean.getClient().clientID)}">
+
+                        </p:commandButton>
                     </div>
-                </form>
+                </h:form>
             </div>
 
         </div>

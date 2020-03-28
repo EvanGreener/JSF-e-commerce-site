@@ -14,12 +14,13 @@ import javax.annotation.PostConstruct;
 import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
 import javax.faces.context.FacesContext;
+import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 @Named("search")
-@SessionScoped
+@ViewScoped
 public class SearchBean implements Serializable {
 
     private final static Logger LOG = LoggerFactory.getLogger(SearchBean.class);
@@ -34,6 +35,7 @@ public class SearchBean implements Serializable {
     private int page = 1;
     private int numPages;
     private String surveyChoice;
+    private String isbn;
 
     @PostConstruct
     public void init() {
@@ -72,12 +74,6 @@ public class SearchBean implements Serializable {
         setSearchBy("title");
     }
 
-    public String viewBook(String choice) {
-        this.surveyChoice = choice;
-        LOG.debug(choice + "ghdhg");
-
-        return "gallery.xhtml";
-    }
 
     public void setGenreFilters(String[] newValue) {
         genreFilters = newValue;

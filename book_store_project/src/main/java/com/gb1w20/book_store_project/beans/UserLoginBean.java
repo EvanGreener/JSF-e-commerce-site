@@ -1,5 +1,7 @@
 package com.gb1w20.book_store_project.beans;
 
+import com.gb1w20.book_store_project.entities.Clients;
+import com.gb1w20.book_store_project.entities.CustomerReviews;
 import com.gb1w20.book_store_project.jpa_controllers.ClientsJpaController;
 import java.io.IOException;
 import java.io.Serializable;
@@ -74,6 +76,22 @@ public class UserLoginBean implements Serializable {
                 }
             }
         }
+    }
+
+    public Clients getClient() {
+        if (getIfSignedIn()) {
+            FacesContext facesContext = FacesContext.getCurrentInstance();
+            HttpServletRequest request = (HttpServletRequest) facesContext.getExternalContext().getRequest();
+            Cookie[] userCookies = request.getCookies();
+            for (int i = 0; i < userCookies.length; i++) {
+                if (userCookies[i].getName().equals("BOOK_STORE_LOGIN") && !userCookies[i].getValue().equals("")) {
+                    Object[] clientInformation = clientsJpaController.getInfoByEmail(userCookies[i].getValue());
+                    return clientsJpaController.findClients((Integer)clientInformation[4]);
+                }
+            }
+        }
+        return new Clients();
+
     }
 
     public String signOut() throws IOException {

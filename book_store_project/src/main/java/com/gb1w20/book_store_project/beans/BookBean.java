@@ -38,7 +38,6 @@ public class BookBean implements Serializable {
     private List<Book> similarAuthorBooks;
     private String genre;
     private int bookSlideColor = 0;
-    private Book currentBook;
     private String isbn;
 
     @PostConstruct
@@ -77,18 +76,6 @@ public class BookBean implements Serializable {
         LOG.debug("getRecentlyAdded");
         recentlyAdded = bookCtrlr.getRecentlyAdded();
         return recentlyAdded;
-    }
-
-    public String viewGenreBooks(String genre) {
-        LOG.debug("viewGenreBooks");
-        setGenre(genre);
-        return "gallery";
-    }
-
-    public String viewBook(Book book) {
-        LOG.debug("viewBook");
-        this.book = book;
-        return "book.xhtml";
     }
 
     /**
@@ -149,26 +136,27 @@ public class BookBean implements Serializable {
         LOG.debug("findBook");
         /*
         TODO: redirect to error page because this book does not exist or is removed
-        */
+         */
         if (this.bookCtrlr.findBook(isbn) == null || this.bookCtrlr.findBook(isbn).size() == 0) {
             FacesContext context = FacesContext.getCurrentInstance();
             context.getExternalContext().redirect("index.xhtml");
+           
         }
+        else{
         this.book = this.bookCtrlr.findBook(isbn).get(0);
+        }
 
     }
 
     public Book getBook() throws IOException {
         LOG.debug("getBook");
         Map<String, String> params = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap();
-        
 
         String isbn = params.get("isbn");
-        
 
         if (isbn != null) {
-            LOG.debug("getBook" +isbn);
-            this.isbn=isbn;
+            LOG.debug("getBook" + isbn);
+            this.isbn = isbn;
             findBook(isbn);
         }
 
