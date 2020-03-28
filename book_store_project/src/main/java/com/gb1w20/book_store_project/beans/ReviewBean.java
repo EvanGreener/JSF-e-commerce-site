@@ -14,7 +14,12 @@ import java.util.Date;
 import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.enterprise.context.SessionScoped;
+import javax.faces.application.FacesMessage;
+import javax.faces.component.UIComponent;
+import javax.faces.context.FacesContext;
 import javax.faces.model.SelectItem;
+import javax.faces.validator.ValidatorException;
+import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 import org.slf4j.Logger;
@@ -25,7 +30,7 @@ import org.slf4j.LoggerFactory;
  * @author 06spa
  */
 @Named("reviewBean")
-@SessionScoped
+@ViewScoped
 public class ReviewBean implements Serializable {
 
     @Inject
@@ -68,6 +73,36 @@ public class ReviewBean implements Serializable {
         int size=customerReviewCtlr.findCustomerReviewsByClientId(clientId, isbn).size();
         LOG.debug("client "+ clientId+ " has "+size+ " amount of reviews");
         return size;
+    }
+    
+    
+     public void validateReviewBody(FacesContext context, UIComponent component, Object value) throws Exception {
+        String review = (String)value;
+        if (review == null|| review.isBlank()) {
+            String message = context.getApplication().evaluateExpressionGet(context, "Please enter a review", String.class);
+            FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR, message, message);
+            throw new ValidatorException(msg);
+        }
+        if (review.length()>750) {
+            String message = context.getApplication().evaluateExpressionGet(context, "Reviews are limited to 750 characters", String.class);
+            FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR, message, message);
+            throw new ValidatorException(msg);
+        }
+        
+    }
+     public void validateReviewTitle(FacesContext context, UIComponent component, Object value) throws Exception {
+        String review = (String)value;
+        if (review == null || review.isBlank()) {
+            String message = context.getApplication().evaluateExpressionGet(context, "Please enter a review", String.class);
+            FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR, message, message);
+            throw new ValidatorException(msg);
+        }
+        if (review.length()>150) {
+            String message = context.getApplication().evaluateExpressionGet(context, "Reviews are limited to 150 characters", String.class);
+            FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR, message, message);
+            throw new ValidatorException(msg);
+        }
+        
     }
 
     /**

@@ -44,6 +44,7 @@ com\gb1w20\book_store_project\backing\OrderItemBackingBean.class
 com\gb1w20\book_store_project\jpa_controllers\PublisherJpaController.class
 com\gb1w20\book_store_project\jpa_controllers\exceptions\NonexistentEntityException.class
 com\gb1w20\book_store_project\beans\ClientManagementBean.class
+com\gb1w20\book_store_project\backing\CartBackingBean.class
 com\gb1w20\book_store_project\CacheControlPhaseListener.class
 com\gb1w20\book_store_project\entities\Tax_.class
 com\gb1w20\book_store_project\backing\AuthorBackingBean.class
@@ -67,4 +68,3 @@ com\gb1w20\book_store_project\entities\SurveyData_.class
 com\gb1w20\book_store_project\entities\Authors_.class
 com\gb1w20\book_store_project\entities\BookFormat_.class
 com\gb1w20\book_store_project\entities\Surveys_.class
-com\gb1w20\book_store_project\beans\CartBean.class

@@ -87,7 +87,7 @@
                                     <br/>
                                 </div>
 
-                            </section>   
+                            </section>
                         </ui:repeat>
                         <div class="flex-container" style="padding: 0px">
                             <div style="width:70%; padding-top: 0px">
@@ -109,10 +109,6 @@
         <!--Reviews section-->
 
         <div class="lightPurpleDiv">
-
-
-
-
             <table class="ui padded table">
                 <tr>
                     <td  style="vertical-align: middle; text-align: center">
@@ -124,7 +120,6 @@
                                 <h:commandButton id="reviewBtn" class="button addReviewBtn" value="+" type="button" />
                             </c:if>
                         </h:panelGroup>
-
                     </td>
 
                 </tr>
@@ -133,8 +128,8 @@
                     <tbody>
 
                         <tr><td>
-
                                 <h:panelGroup id="reviewDisplay" class="flex-container">
+
                                     <ui:param name="limit" value="4"/>
                                     <!--Review section-->
                                     <ui:repeat offset="#{(reviewBean.page - 1) * 4}" value="#{reviewBean.getReviews(bb.book.isbn)}" var="book" varStatus="status">
@@ -203,6 +198,7 @@
                                                 <c:otherwise>
                                                     <h:commandButton value="Prev." class="ui button">
                                                         <p:ajax update="reviewDisplay pagination" listener="#{reviewBean.onPrevious}" />
+
                                                     </h:commandButton>
                                                 </c:otherwise>
                                             </c:choose>
@@ -243,7 +239,7 @@
                     </tfoot>
 
                 </h:form>
-            </table>                     
+            </table>
 
 
         </div>
@@ -263,33 +259,43 @@
 
                     <h:outputLabel for="title" value="Add a Title"/>
                     <br/>
-
-
-                    <h:inputText id="title" label="Add a Title" value="#{reviewBean.title}" required="true" requiredMessage="Please enter a title" >
-
+                    <h:inputText id="title" label="Add a Title" value="#{reviewBean.title}" required="true" requiredMessage="Please enter a title" validator="#{reviewBean.validateReviewTitle}">
+                        <f:ajax event="blur" render="titleError"/>
                     </h:inputText>
+                    <br/>
+                    <h:message id="titleError" class="error" for="title"/>
                     <br/>
                     <br/>
                     <h:outputLabel for="rating" value="Overall Rating"/>
                     <br/>
-                    <h:selectOneMenu id="rating" label="Overall Rating" value="#{reviewBean.ratingChoice}" required="true" requiredMessage="Please a rating">
+                    <h:selectOneMenu id="rating" label="Overall Rating" value="#{reviewBean.ratingChoice}" required="true" >
                         <f:selectItems value="#{reviewBean.ratings}" />
                     </h:selectOneMenu>
                     <h:outputLabel value="/5"/>
                     <br/><br/>
                     <h:outputLabel for="review" value="Add a Review"/>
                     <br/>
-                    <h:inputTextarea value="#{reviewBean.reviewBody}" id="review" cols="45" rows="4" />
+                    <h:inputTextarea value="#{reviewBean.reviewBody}" id="review" cols="30" rows="4" validator="#{reviewBean.validateReviewBody}" required="true" requiredMessage="Please enter a review">
+                        <f:ajax event="blur" render="reviewError"/>
+                    </h:inputTextarea>
+                    <br/>
+                    <h:message id="reviewError" class="error" for="review"/>
                     <br/><br/>
                     <div>
-                    <p:commandButton process="@form" value="Submit" update="reviewSection"  action="#{reviewBean.setCustomerReview(bb.book.isbn,UserLoginBean.getClient().clientID)}"/>
+
+
+
+                        <h:commandButton  value="Submit"  rendered="#{reviewBean.getUserWrittenReviews(UserLoginBean.getClient().clientID,bb.book.isbn) eq 0}" action="#{reviewBean.setCustomerReview(bb.book.isbn,UserLoginBean.getClient().clientID)}">
+                            <f:ajax execute="@form" render="@form reviewSection successMsg"/>
+                        </h:commandButton>
+                        <!--Message shows up after successful review submission-->
+                        <h:outputLabel id="successMsg" value="Review Submitted!"  rendered="#{reviewBean.getUserWrittenReviews(UserLoginBean.getClient().clientID,bb.book.isbn) != 0}"/>
+
                     </div>
                 </h:form>
             </div>
 
         </div>
-
-
         <!--Suggestions section-->
         <div class="lightOrangeDiv">
             <h:panelGroup rendered="#{!empty bb.getSimilarGenreBooks(bb.book,bb.book.authorsCollection)}">
@@ -304,7 +310,7 @@
                         </div>
                         <div class="content">
                             <h:link outcome = "book"  value = "">
-                                <f:param  name="isbn" value="#{bo.isbn}" /> 
+                                <f:param  name="isbn" value="#{bo.isbn}" />
                                 <div class="header textColor">
 
                                     #{bo.title}</div>
@@ -334,7 +340,7 @@
                     </div>
 
                 </ui:repeat>
-            </div> 
+            </div>
 
 
             <h:panelGroup rendered="#{!empty bb.getSimilarAuthorBooks(bb.book.authorsCollection,bb.book.isbn)}">
@@ -354,14 +360,15 @@
                             <div class="cardHoverBtn"> View Cover</div>
                         </div>
                         <div class="content">
-                            <h:commandLink action = "#{bb.viewBook(bo)}"  value = "">
+                            <h:link outcome = "book"  value = "">
+                                <f:param  name="isbn" value="#{bo.isbn}" />
                                 <div class="header textColor">
 
                                     #{bo.title}</div>
                                 <div class="meta">
 
-                                    <ui:repeat value="#{bo.authorsCollection}" var="au">
-                                        #{au.name}
+                                    <ui:repeat value="#{bo.authorsCollection}" var="author">
+                                        #{author.name}
                                     </ui:repeat>
 
                                 </div>
@@ -374,7 +381,7 @@
                                     </div>
 
                                 </div>
-                            </h:commandLink>
+                            </h:link>
                         </div>
                         <!--Button to add to shopping cart-->
                         <div class="ui two bottom attached buttons ">
@@ -385,7 +392,7 @@
 
                 </ui:repeat>
 
-            </div> 
+            </div>
         </div>
 
         <!--composite component that comes from the footer.xhtml file to avoid coding the website footer in all web pages-->
