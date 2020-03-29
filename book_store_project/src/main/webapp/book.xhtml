@@ -8,6 +8,7 @@
       xmlns:c="http://java.sun.com/jsp/jstl/core"
       xmlns:f="http://xmlns.jcp.org/jsf/core">
     <h:head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
         <ui:repeat value="#{bb.book}" var="book">
             <title>#{book.title}</title>
         </ui:repeat>
@@ -47,7 +48,7 @@
                 <div class="ui fluid card" style="padding:40px">
                     <div class="content">
                         <ui:repeat value="#{bb.book}" var="book">
-                            <p class="textColor" style="font-size: 40px;line-height: 0.3em;letter-spacing: 0.081em;font-weight: 100;">#{book.title}</p>
+                            <p class="textColor" style="font-size: 40px;line-height:0.8em;letter-spacing: 0.081em;font-weight: 100;">#{book.title}</p>
                             <section class="bookInfoSection">
                                 <div class="bookTextInfo">
                                     <p style="font-size: 23px;line-height: 1.3em;letter-spacing: 0.017em;font-weight: 500;font-style: italic;">- <ui:repeat value="#{book.authorsCollection}" var="author">

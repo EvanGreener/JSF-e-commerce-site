@@ -23,6 +23,17 @@ document.addEventListener('DOMContentLoaded', function (event) {// Get the modal
         }
 
     }
+  
+    //change size of news panel on resize of window
+    window.onresize = function(){ 
+       var panel= document.getElementsByClassName("ui-scrollpanel");
+       if(panel){
+           if(panel[0]){
+               panel[0].style.width="inherit";
+           }
+       }
+   };
+
 
     // Get the modal
     var bookCoverModal = document.getElementById("myModal");
@@ -68,22 +79,11 @@ document.addEventListener('DOMContentLoaded', function (event) {// Get the modal
 
 });
 
-function displayCardHoverButton()
-{
-    var btn = document.createElement("BUTTON");
-    btn.addEventListener('click', displayBookCover);
-    btn.innerHTML = "View Cover";
-    btn.classList.add("cardHoverBtn");
-    this.appendChild(btn);
-}
+
 
 
 function viewAd(url) {
     window.open(url);
-}
-function removeCardHoverButton() {
-    var btn = document.getElementsByClassName("cardHoverBtn");
-    btn[0].remove();
 }
 
 function checkIfLoggedIn() {
