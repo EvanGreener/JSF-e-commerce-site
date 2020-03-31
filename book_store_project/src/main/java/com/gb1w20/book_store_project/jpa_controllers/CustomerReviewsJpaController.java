@@ -117,11 +117,20 @@ public class CustomerReviewsJpaController implements Serializable {
     public CustomerReviews findCustomerReviews(Integer id) {
         return em.find(CustomerReviews.class, id);
     }
-
+    
+    public List<CustomerReviews> findCustomerReviewsByClientId(Integer id,String isbn) {
+        TypedQuery<CustomerReviews> query = em.createQuery("SELECT c FROM CustomerReviews c WHERE c.isRemoved = :removed AND c.isbn = :isbn AND c.clientID = :id", CustomerReviews.class);
+        query.setParameter("removed", false);
+        query.setParameter("isbn", isbn);
+        query.setParameter("id", id);
+        List<CustomerReviews> customerReviews = query.getResultList();
+        return customerReviews;
+    }
     public double getAverageRating(String isbn) {
-        TypedQuery<Object> query = em.createQuery("SELECT AVG(c.rating) FROM CustomerReviews c where c.isRemoved = :removed group by c.isbn Having c.isbn = :isbn", Object.class);
+        TypedQuery<Object> query = em.createQuery("SELECT AVG(c.rating) FROM CustomerReviews c where c.isRemoved = :removed AND  c.pending = :pending group by c.isbn Having c.isbn = :isbn", Object.class);
         query.setParameter("isbn", isbn);
         query.setParameter("removed", false);
+        query.setParameter("pending", false);
         List rating = query.getResultList();
         if (rating.isEmpty()){
             return 0.0;
@@ -137,17 +146,19 @@ public class CustomerReviewsJpaController implements Serializable {
     }
     
     public List<CustomerReviews> getReviews(String isbn){
-        TypedQuery<CustomerReviews> query = em.createQuery("SELECT c FROM CustomerReviews c WHERE c.isRemoved = :removed AND c.isbn = :isbn", CustomerReviews.class);
+        TypedQuery<CustomerReviews> query = em.createQuery("SELECT c FROM CustomerReviews c WHERE c.isRemoved = :removed AND c.isbn = :isbn AND c.pending = :pending", CustomerReviews.class);
         query.setParameter("removed", false);
         query.setParameter("isbn", isbn);
+        query.setParameter("pending", false);
         List<CustomerReviews> customerReviews = query.getResultList();
         return customerReviews;
     }
     
      public int getCustomerReviewsCount(String isbn){
-        TypedQuery<CustomerReviews> query = em.createQuery("SELECT c FROM CustomerReviews c WHERE c.isRemoved = :removed AND c.isbn = :isbn", CustomerReviews.class);
+        TypedQuery<CustomerReviews> query = em.createQuery("SELECT c FROM CustomerReviews c WHERE c.isRemoved = :removed AND c.isbn = :isbn AND c.pending = :pending", CustomerReviews.class);
         query.setParameter("removed", false);
         query.setParameter("isbn", isbn);
+        query.setParameter("pending", false);
         List<CustomerReviews> customerReviews = query.getResultList();
         return customerReviews.size();
     }

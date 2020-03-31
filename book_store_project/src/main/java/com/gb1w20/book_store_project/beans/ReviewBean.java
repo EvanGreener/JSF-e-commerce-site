@@ -5,27 +5,23 @@
  */
 package com.gb1w20.book_store_project.beans;
 
-import com.gb1w20.book_store_project.entities.Book;
 import com.gb1w20.book_store_project.entities.CustomerReviews;
 import com.gb1w20.book_store_project.jpa_controllers.CustomerReviewsJpaController;
 import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Arrays;
+import java.util.Date;
 import java.util.List;
-import java.util.stream.Collectors;
 import javax.annotation.PostConstruct;
 import javax.enterprise.context.SessionScoped;
+import javax.faces.application.FacesMessage;
+import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.model.SelectItem;
+import javax.faces.validator.ValidatorException;
 import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
-import javax.servlet.FilterChain;
-import javax.servlet.ServletException;
-import javax.servlet.ServletRequest;
-import javax.servlet.ServletResponse;
-import javax.servlet.http.HttpServletResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -50,6 +46,7 @@ public class ReviewBean implements Serializable {
     private int numPages;
     private String isbn;
     private List<CustomerReviews> results;
+    private Integer ratingChoice = 0;
     private final static Logger LOG = LoggerFactory.getLogger(ReviewBean.class);
 
     @PostConstruct
@@ -57,7 +54,6 @@ public class ReviewBean implements Serializable {
         LOG.debug("Init called!");
 
     }
-
 
     /**
      * CustomerReviews created if it does not exist.
@@ -72,6 +68,43 @@ public class ReviewBean implements Serializable {
         return customerReview;
     }
 
+    public int getUserWrittenReviews(Integer clientId, String isbn) {
+        LOG.debug("getUserWrittenReviews");
+        int size=customerReviewCtlr.findCustomerReviewsByClientId(clientId, isbn).size();
+        LOG.debug("client "+ clientId+ " has "+size+ " amount of reviews");
+        return size;
+    }
+    
+    
+     public void validateReviewBody(FacesContext context, UIComponent component, Object value) throws Exception {
+        String review = (String)value;
+        if (review == null|| review.isBlank()) {
+            String message = context.getApplication().evaluateExpressionGet(context, "Please enter a review", String.class);
+            FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR, message, message);
+            throw new ValidatorException(msg);
+        }
+        if (review.length()>750) {
+            String message = context.getApplication().evaluateExpressionGet(context, "Reviews are limited to 750 characters", String.class);
+            FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR, message, message);
+            throw new ValidatorException(msg);
+        }
+        
+    }
+     public void validateReviewTitle(FacesContext context, UIComponent component, Object value) throws Exception {
+        String review = (String)value;
+        if (review == null || review.isBlank()) {
+            String message = context.getApplication().evaluateExpressionGet(context, "Please enter a review", String.class);
+            FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR, message, message);
+            throw new ValidatorException(msg);
+        }
+        if (review.length()>150) {
+            String message = context.getApplication().evaluateExpressionGet(context, "Reviews are limited to 150 characters", String.class);
+            FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR, message, message);
+            throw new ValidatorException(msg);
+        }
+        
+    }
+
     /**
      * Save the current customerReview to the db
      *
@@ -84,18 +117,50 @@ public class ReviewBean implements Serializable {
         return null;
     }
 
-    public void setCustomerReview(String isbn) throws Exception {
+    public Integer getRatingChoice() {
+        LOG.debug("getRatingChoice");
+        return this.ratingChoice;
+    }
+
+    public void setRatingChoice(Integer choice) {
+        LOG.debug("setRatingChoice");
+        this.ratingChoice = choice;
+    }
+
+//    public String getIsbn() {
+//        LOG.debug("happened");
+//        return this.isbn;
+//    }
+//
+//    public void setIsbn(String isbn) {
+//        LOG.debug("happened set " + isbn);
+//    }
+    private Date getCurrentDateTime() {
+        Date d = new Date();
+        return d;
+    }
+
+    public void setCustomerReview(String isbn, Integer clientId) throws Exception {
         LOG.debug("setCustomerReview");
-        this.isbn=isbn;
+        customerReview = getCustomerReview();
+        customerReview.setClientID(clientId);
+
+        //to be removed after
+        customerReview.setUpvotes(2);
+        customerReview.setDownvotes(2);
+
+        customerReview.setIsRemoved(Boolean.FALSE);
+        customerReview.setPending(Boolean.TRUE);
         customerReview.setReviewBody(reviewBody);
         customerReview.setReviewTitle(title);
-        customerReview.setRating(5);
+        customerReview.setRating(ratingChoice);
         customerReview.setIsbn(isbn);
+
+        customerReview.setDateEntered(getCurrentDateTime());
+        customerReview.setLastModified(getCurrentDateTime());
         createCustomerReview();
     }
-    public List<CustomerReviews> getResults() {
-        return results;
-    }
+
     public int getPage() {
         return page;
     }
@@ -107,7 +172,7 @@ public class ReviewBean implements Serializable {
     public void onPrevious() throws IOException {
         page--;
 
-          updateReviewBean(this.isbn);
+        updateReviewBean(this.isbn);
     }
 
     public int getNumPages() {
@@ -142,7 +207,7 @@ public class ReviewBean implements Serializable {
         LOG.debug("getRatings");
         if (ratings.isEmpty()) {
             for (int i = 0; i < 6; i++) {
-                ratings.add(new SelectItem("" + i, "" + i));
+                ratings.add(new SelectItem(i, "" + i));
             }
         }
         return ratings;
@@ -155,7 +220,6 @@ public class ReviewBean implements Serializable {
 
     public List<CustomerReviews> getReviews(String isbn) {
         LOG.debug("getReviews");
-        this.isbn=isbn;
         this.reviews = customerReviewCtlr.getReviews(isbn);
         return this.reviews;
     }
@@ -166,37 +230,39 @@ public class ReviewBean implements Serializable {
     }
 
     public void onPageSelect(int newPage) throws IOException {
+        LOG.debug("onPageSelect");
         page = newPage;
-          updateReviewBean(this.isbn);
+        updateReviewBean(this.isbn);
     }
+
     public void onNext() throws IOException {
+        LOG.debug("onNext");
         page++;
 
         updateReviewBean(this.isbn);
     }
+
     public int getAverageRating(String isbn) {
         LOG.debug("getAverageRating");
-        this.isbn=isbn;
+        this.isbn = isbn;
         this.averageRating = (int) customerReviewCtlr.getAverageRating(isbn);
         return this.averageRating;
     }
 
     public int getReviewCount(String isbn) {
         LOG.debug("getReviewCount");
-        
-        this.isbn=isbn;
+        this.isbn = isbn;
         this.reviewCount = customerReviewCtlr.getCustomerReviewsCount(isbn);
-        LOG.debug(this.reviewCount + "amount of reviews");
         return this.reviewCount;
-        
-    }
-    
-    public List<CustomerReviews> updateReviewBean(String isbn) throws IOException {
 
+    }
+
+    public List<CustomerReviews> updateReviewBean(String isbn) throws IOException {
+        LOG.debug("updateReviewBean");
         results = getReviews(isbn);
         numPages = (int) Math.ceil(results.size() / 4.0);
         return results;
-       
+
     }
-    
+
 }

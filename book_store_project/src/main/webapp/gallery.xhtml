@@ -11,7 +11,6 @@
       xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
       xmlns:bookstore="http://java.sun.com/jsf/composite/default_components">
 
-
     <h:head>
         <title> Gallery Page </title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
@@ -29,7 +28,6 @@
 
     </h:head>
     <h:body>
-        <f:event type="preRenderView" listener="#{search.init}" />
         <!--composite component that comes from the navbar.xhtml file to avoid coding nav bar in all web pages-->
         <bookstore:navbar/>
         <h:form>
@@ -100,7 +98,7 @@
 
 
                                                     <h:link outcome = "book" value = "">
-                                                        <f:param  name="isbn" value="#{books.isbn}" />
+                                                        <f:param  name="isbn" value="#{books.isbn}" /> 
                                                         <div class="header">
 
                                                             #{books.title}</div>
@@ -121,6 +119,7 @@
 
                                                         </div>
                                                     </h:link>
+
 
                                                 </div>
                                                 <!--Button to add to shopping cart-->

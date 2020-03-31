@@ -1,4 +1,11 @@
 $(document).ready(function () {
+    
+      $('.cardHoverBtn').click(function(){
+          var src = $(this).prev().attr('src');
+          $("#img01").attr("src",src);
+          $('.ui.modal.tiny').modal('show');
+  });
+
     $('.ui .item').on('click', function () {
         var id = $(this).parent().attr('id');
         $('.ui .' + id + '.item').removeClass('active');
@@ -7,6 +14,8 @@ $(document).ready(function () {
         $("[data-tab='" + currentTab + "']").addClass('active');
         $(this).addClass('active');
     });
+    
+    
 });
 
 document.addEventListener('DOMContentLoaded', function (event) {// Get the modal
@@ -23,6 +32,17 @@ document.addEventListener('DOMContentLoaded', function (event) {// Get the modal
         }
 
     }
+  
+    //change size of news panel on resize of window
+    window.onresize = function(){ 
+       var panel= document.getElementsByClassName("ui-scrollpanel");
+       if(panel){
+           if(panel[0]){
+               panel[0].style.width="inherit";
+           }
+       }
+   };
+
 
     // Get the modal
     var bookCoverModal = document.getElementById("myModal");
@@ -44,9 +64,9 @@ document.addEventListener('DOMContentLoaded', function (event) {// Get the modal
             // Get the modal
             var bookCoverModal = document.getElementById("myModal");
 // Get the image and insert it inside the modal - use its "alt" text as a caption
-            var img1 = document.getElementById("img01");
-            bookCoverModal.style.display = "block";
-            img1.src = this.parentElement.getElementsByTagName('img')[0].src;
+           // var img1 = document.getElementById("img01");
+            //bookCoverModal.style.display = "block";
+            //img1.src = this.parentElement.getElementsByTagName('img')[0].src;
 
         }
     }
@@ -57,33 +77,14 @@ document.addEventListener('DOMContentLoaded', function (event) {// Get the modal
     close.onclick = function () {
         bookCoverModal.style.display = "none";
     }
-    // When the user clicks anywhere outside of the modal, close it
-    // When the user clicks anywhere outside of the modal, close it
-    window.addEventListener("click", function (event) {
-        if (event.target == bookCoverModal) {
-            bookCoverModal.style.display = "none";
-        }
-    });
-
 
 });
 
-function displayCardHoverButton()
-{
-    var btn = document.createElement("BUTTON");
-    btn.addEventListener('click', displayBookCover);
-    btn.innerHTML = "View Cover";
-    btn.classList.add("cardHoverBtn");
-    this.appendChild(btn);
-}
+
 
 
 function viewAd(url) {
     window.open(url);
-}
-function removeCardHoverButton() {
-    var btn = document.getElementsByClassName("cardHoverBtn");
-    btn[0].remove();
 }
 
 function checkIfLoggedIn() {
