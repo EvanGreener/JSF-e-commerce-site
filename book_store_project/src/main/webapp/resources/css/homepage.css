@@ -503,6 +503,7 @@ p.small {
     font-weight: 0px;
     transition: 0.3s;
     opacity: 1 !important;
+   
 }
 
 .close:hover,
@@ -518,6 +519,26 @@ p.small {
 
     .modal-content {
         width: 100%;
+    }
+}
+@media only screen and (min-width: 992px){
+    .ui.tiny.modal {
+        position: fixed;
+        top: 20%;
+    }
+}
+
+@media only screen and (min-width: 768px){
+    .ui.tiny.modal {
+        position: fixed;
+        top: 20%;
+    }
+}
+
+@media only screen and (max-width: 767px){
+    .ui.tiny.modal {
+        position: fixed;
+        top: 5%;
     }
 }
 

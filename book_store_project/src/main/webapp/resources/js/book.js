@@ -1,5 +1,25 @@
-document.addEventListener('DOMContentLoaded', function (event) {
+$(document).ready(function () {
+    
+      $('#reviewBtn').click(function(){
+          $('.ui.modal.small').modal('show');
+  });
 
+    $('.ui .item').on('click', function () {
+        var id = $(this).parent().attr('id');
+        $('.ui .' + id + '.item').removeClass('active');
+        $('.' + id + '.segment').removeClass('active');
+        var currentTab = $(this).attr("data-tab");
+        $("[data-tab='" + currentTab + "']").addClass('active');
+        $(this).addClass('active');
+    });
+    
+    
+});
+
+
+
+document.addEventListener('DOMContentLoaded', function (event) {
+/*
      //Get the review modal
      var myReview = document.getElementById("myReview");
      
@@ -25,6 +45,9 @@ document.addEventListener('DOMContentLoaded', function (event) {
      myReview.style.display = "none";
      }
      });
+     */
+     
+     
     
 });
 

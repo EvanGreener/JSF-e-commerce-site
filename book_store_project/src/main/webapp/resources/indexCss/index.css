@@ -15,11 +15,11 @@ html, body {
 .ui-scrollpanel-content{
     width:inherit !important;
     position: relative !important;
-  
+
 }
 .ui-scrollpanel-content p{
     padding: 20px !important;
-  
+
 }
 .ui-scrollpanel-content img{
     width:inherit !important;
@@ -29,19 +29,8 @@ html, body {
     height:inherit!important;
 }
 .ui-scrollpanel-container{
-     width:inherit !important;
-  
-}
-.w{
-     display: flex;  
-  flex-wrap: wrap;
-}
-.modal{
-    position: fixed;
-    padding-top: 0px;
-    height: fit-content;
-    text-align: center;
-    font-size: 18px;
+    width:inherit !important;
+
 }
 
 .middle h1 {
@@ -72,10 +61,6 @@ html, body {
 .header h1 {
     text-align: center !important;
 }
-
-/*               .content h3 {
-                    
-               }*/
 
 .form-field{
     font-size: 18px;
@@ -330,9 +315,7 @@ Hidden button that appears when screen becomes smaller
     box-shadow: 5px 10px 8px black;
 }
 
-h2{
-    text-align: center ;
-}
+
 
 .shopBtn{
     height:50px; 
@@ -422,74 +405,6 @@ p.small {
     transition: 0.3s;
 }
 
-/* The Modal (background) */
-.modal {
-    display: none; /* Hidden by default */
-    position: fixed; /* Stay in place */
-    z-index: 1; /* Sit on top */
-    padding-top: 100px; /* Location of the box */
-    left: 0;
-    top: 0;
-    width: 100%; /* Full width */
-    height: 100%; /* Full height */
-    overflow: auto; /* Enable scroll if needed */
-    background-color: rgb(0,0,0); /* Fallback color */
-    background-color: rgba(0,0,0,0.9); /* Black w/ opacity */
-}
-
-/* Modal Content (Image) */
-.modal-content {
-
-    margin: auto;
-    display: block;
-    width: 80%;
-    max-width: 700px;
-}
-
-/* Caption of Modal Image (Image Text) - Same Width as the Image */
-#caption {
-
-    margin: auto;
-    display: block;
-    width: 80%;
-    max-width: 700px;
-    text-align: center;
-    color: #ccc;
-    padding: 10px 0;
-    height: 150px;
-}
-
-/* Add Animation - Zoom in the Modal */
-.modal-content, #caption {
-
-    animation-name: zoom;
-    animation-duration: 0.6s;
-}
-
-@keyframes zoom {
-    from {transform:scale(0)}
-    to {transform:scale(1)}
-    display: none; /* Hidden by default */
-    position: fixed; /* Stay in place */
-    z-index: 1; /* Sit on top */
-    padding-top: 30px; /* Location of the box */
-    left: 0;
-    top: 0;
-    width: 100%; /* Full width */
-    height: 100%; /* Full height */
-    overflow: auto; /* Enable scroll if needed */
-    background-color: rgb(0,0,0); /* Fallback color */
-    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
-}
-
-/* Modal Content */
-.modal-content {
-    background-color: #fefefe;
-    margin: auto;
-    padding: 20px;
-    border: 1px solid #888;
-    width: 560px;
-}
 
 /* The Close Button */
 .close {
@@ -503,7 +418,7 @@ p.small {
     font-weight: 0px;
     transition: 0.3s;
     opacity: 1 !important;
-   
+    color: rgba(0,0,0,.87) !important;
 }
 
 .close:hover,
@@ -522,26 +437,54 @@ p.small {
     }
 }
 @media only screen and (min-width: 992px){
-    .ui.tiny.modal {
+    .ui.longer.modal {
         position: fixed;
         top: 20%;
     }
 }
 
 @media only screen and (min-width: 768px){
-    .ui.tiny.modal {
+    .ui.longer.modal {
         position: fixed;
         top: 20%;
     }
 }
 
 @media only screen and (max-width: 767px){
-    .ui.tiny.modal {
-        position: fixed;
-        top: 5%;
+    .ui.modal {
+        width: 95%;
+        margin: 0;
+
     }
 }
 
+.modal {
+
+    display: none;
+    overflow: auto !important;
+    position: fixed;
+    top: auto !important;
+    right: auto !important;
+    bottom: auto !important;
+    left: auto !important;
+    z-index: 1050;
+    -webkit-overflow-scrolling: touch;
+    outline: 0;
+
+}
+
+.ui.page.dimmer {
+    position: fixed;
+    -webkit-transform-style: '';
+    transform-style: '';
+    -webkit-perspective: 2000px;
+    perspective: 2000px;
+    -webkit-transform-origin: center center;
+    transform-origin: center center;
+}
+.ui.dimmer{
+  background-color: rgba(0,0,0,0.2);
+}
 
 .survey{
     background-color:white !important;
@@ -569,16 +512,47 @@ p.small {
     overflow: auto;
 }
 
-.itemContainer{
-    background-color: white;
-    padding:5%;
-    margin-left: 10px;
-    margin-top: 5%;
-    overflow-y: auto;
-    border-radius: 5px;
-    height:800px;
-}
 
-.tabular.menu, .tab.segment{
-    font-size:16px;
+.reviewModal{
+    position: fixed;
+    padding-top: 0px;
+    height: fit-content;
+    text-align: center;
+    font-size: 18px;
+}
+/* The Modal (background) */
+.reviewModal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    padding-top: 100px; /* Location of the box */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.9); /* Black w/ opacity */
+}
+/* Modal Content (Image) */
+.modal-content {
+
+    margin: auto;
+    display: block;
+    width: 80%;
+    max-width: 700px;
+}
+/* Add Animation - Zoom in the Modal */
+.modal-content, #caption {
+
+    animation-name: zoom;
+    animation-duration: 0.6s;
+}
+/* Modal Content */
+.modal-content {
+    background-color: #fefefe;
+    margin: auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 560px;
 }
