@@ -51,324 +51,324 @@ insert into Client_Inventory
 values (5, "9781416524793", "2019-03-23 03:03:35", "2020-01-28 15:29:58", true);
 
 insert into Customer_Reviews
-(Client_ID, ISBN, Rating, Review_Body, Review_Title, Upvotes, Downvotes, Is_Removed, Pending, Last_Modified,
+(Client_ID, ISBN, Rating, Review_Body, Review_Title,Is_Removed, Pending, Last_Modified,
  Date_Entered, Date_Removed)
 values ("1", "9780142000670", 2, "Poisoning by antiviral drugs, intentional self-harm",
-        "Poisoning by antiviral drugs, intentional self-harm", 52, 2, false, false, "2019-03-15 12:51:02",
+        "Poisoning by antiviral drugs, intentional self-harm",  false, false, "2019-03-15 12:51:02",
         "2019-09-22 14:47:10", "2020-03-11 08:39:40");
 insert into Customer_Reviews
-(Client_ID, ISBN, Rating, Review_Body, Review_Title, Upvotes, Downvotes, Is_Removed, Pending, Last_Modified,
+(Client_ID, ISBN, Rating, Review_Body, Review_Title, Is_Removed, Pending, Last_Modified,
  Date_Entered, Date_Removed)
 values ("3", "9780061120084", 2, "Puncture wound with foreign body, unspecified thigh, sequela",
-        "Puncture wound with foreign body, unspecified thigh, sequela", 82, 65, false, false, "2019-04-20 15:59:37",
+        "Puncture wound with foreign body, unspecified thigh, sequela",  false, false, "2019-04-20 15:59:37",
         "2019-01-20 09:07:35", "2020-03-03 08:53:49");
 insert into Customer_Reviews
-(Client_ID, ISBN, Rating, Review_Body, Review_Title, Upvotes, Downvotes, Is_Removed, Pending, Last_Modified,
+(Client_ID, ISBN, Rating, Review_Body, Review_Title,Is_Removed, Pending, Last_Modified,
  Date_Entered, Date_Removed)
 values ("7", "9780439023481", 3,
         "Nondisplaced oblique fracture of shaft of humerus, right arm, subsequent encounter for fracture with nonunion",
-        "Nondisp oblique fx shaft of humer, r arm, 7thK", 90, 18, false, false, "2019-04-30 19:00:59",
+        "Nondisp oblique fx shaft of humer, r arm, 7thK",  false, false, "2019-04-30 19:00:59",
         "2019-07-26 12:04:33", "2020-03-15 13:13:46");
 insert into Customer_Reviews
-(Client_ID, ISBN, Rating, Review_Body, Review_Title, Upvotes, Downvotes, Is_Removed, Pending, Last_Modified,
+(Client_ID, ISBN, Rating, Review_Body, Review_Title, Is_Removed, Pending, Last_Modified,
  Date_Entered, Date_Removed)
 values ("4", "9780375831003", 1,
         "Displaced fracture of medial phalanx of left ring finger, subsequent encounter for fracture with nonunion",
-        "Disp fx of med phalanx of l rng fngr, subs for fx w nonunion", 70, 30, true, false, "2019-04-27 06:32:32",
+        "Disp fx of med phalanx of l rng fngr, subs for fx w nonunion",  true, false, "2019-04-27 06:32:32",
         "2019-02-15 04:28:26", "2020-03-13 21:02:12");
 insert into Customer_Reviews
-(Client_ID, ISBN, Rating, Review_Body, Review_Title, Upvotes, Downvotes, Is_Removed, Pending, Last_Modified,
+(Client_ID, ISBN, Rating, Review_Body, Review_Title, Is_Removed, Pending, Last_Modified,
  Date_Entered, Date_Removed)
 values ("20", "9780141439471", 3, "Gastrointestinal stromal tumor of rectum",
-        "Gastrointestinal stromal tumor of rectum", 34, 66, false, false, "2019-08-30 21:23:27", "2019-01-14 22:11:32",
+        "Gastrointestinal stromal tumor of rectum",  false, false, "2019-08-30 21:23:27", "2019-01-14 22:11:32",
         "2020-03-06 06:44:35");
 insert into Customer_Reviews
-(Client_ID, ISBN, Rating, Review_Body, Review_Title, Upvotes, Downvotes, Is_Removed, Pending, Last_Modified,
+(Client_ID, ISBN, Rating, Review_Body, Review_Title, Is_Removed, Pending, Last_Modified,
  Date_Entered, Date_Removed)
 values ("9", "9780141439471", 3, "Gastrointestinal stromal tumor of rectum",
-        "Gastrointestinal stromal tumor of rectum", 34, 66, false, false, "2019-08-30 21:23:27", "2019-01-14 22:11:32",
+        "Gastrointestinal stromal tumor of rectum",  false, false, "2019-08-30 21:23:27", "2019-01-14 22:11:32",
         "2020-03-06 06:44:35");
 insert into Customer_Reviews
-(Client_ID, ISBN, Rating, Review_Body, Review_Title, Upvotes, Downvotes, Is_Removed, Pending, Last_Modified,
+(Client_ID, ISBN, Rating, Review_Body, Review_Title,Is_Removed, Pending, Last_Modified,
  Date_Entered, Date_Removed)
 values ("2", "9780141439471", 5, "Gastrointestinal stromal tumor of rectum",
-        "Gastrointestinal stromal tumor of rectum", 34, 66, false, false, "2019-08-30 21:23:27", "2019-01-14 22:11:32",
+        "Gastrointestinal stromal tumor of rectum", false, false, "2019-08-30 21:23:27", "2019-01-14 22:11:32",
         "2020-03-06 06:44:35");
 insert into Customer_Reviews
-(Client_ID, ISBN, Rating, Review_Body, Review_Title, Upvotes, Downvotes, Is_Removed, Pending, Last_Modified,
+(Client_ID, ISBN, Rating, Review_Body, Review_Title, Is_Removed, Pending, Last_Modified,
  Date_Entered, Date_Removed)
 values ("1", "9780141439471", 1, "Gastrointestinal stromal tumor of rectum",
-        "Gastrointestinal stromal tumor of rectum", 34, 66, false, false, "2019-08-30 21:23:27", "2019-01-14 22:11:32",
+        "Gastrointestinal stromal tumor of rectum", false, false, "2019-08-30 21:23:27", "2019-01-14 22:11:32",
         "2020-03-06 06:44:35");
 insert into Customer_Reviews
-(Client_ID, ISBN, Rating, Review_Body, Review_Title, Upvotes, Downvotes, Is_Removed, Pending, Last_Modified,
+(Client_ID, ISBN, Rating, Review_Body, Review_Title, Is_Removed, Pending, Last_Modified,
  Date_Entered, Date_Removed)
 values ("30", "9780770430078", 4, "Displacement of internal fixation device of vertebrae, initial encounter",
-        "Displacement of internal fixation device of vertebrae, init", 55, 1, false, true, "2019-03-22 18:56:14",
+        "Displacement of internal fixation device of vertebrae, init",  false, true, "2019-03-22 18:56:14",
         "2019-10-07 02:08:47", "2020-03-15 02:23:18");
 insert into Customer_Reviews
-(Client_ID, ISBN, Rating, Review_Body, Review_Title, Upvotes, Downvotes, Is_Removed, Pending, Last_Modified,
+(Client_ID, ISBN, Rating, Review_Body, Review_Title, Is_Removed, Pending, Last_Modified,
  Date_Entered, Date_Removed)
 values ("29", "9780143039983", 2, "Laceration with foreign body of left index finger with damage to nail, sequela",
-        "Laceration w fb of l idx fngr w damage to nail, sequela", 53, 6, false, true, "2019-12-25 12:30:36",
+        "Laceration w fb of l idx fngr w damage to nail, sequela",  false, true, "2019-12-25 12:30:36",
         "2019-06-24 13:25:19", "2020-03-18 14:28:08");
 insert into Customer_Reviews
-(Client_ID, ISBN, Rating, Review_Body, Review_Title, Upvotes, Downvotes, Is_Removed, Pending, Last_Modified,
+(Client_ID, ISBN, Rating, Review_Body, Review_Title, Is_Removed, Pending, Last_Modified,
  Date_Entered, Date_Removed)
 values ("7", "9780062200570", 1, "Follicular cyst of ovary, unspecified side",
-        "Follicular cyst of ovary, unspecified side", 53, 59, true, true, "2019-07-31 03:14:33", "2019-11-13 16:50:05",
+        "Follicular cyst of ovary, unspecified side",  true, true, "2019-07-31 03:14:33", "2019-11-13 16:50:05",
         "2020-03-04 17:08:07");
 insert into Customer_Reviews
-(Client_ID, ISBN, Rating, Review_Body, Review_Title, Upvotes, Downvotes, Is_Removed, Pending, Last_Modified,
+(Client_ID, ISBN, Rating, Review_Body, Review_Title, Is_Removed, Pending, Last_Modified,
  Date_Entered, Date_Removed)
 values ("28", "9780345504968", 3, "Myelodysplastic disease, not classified", "Myelodysplastic disease, not classified",
-        32, 38, true, false, "2020-01-19 21:47:58", "2019-04-27 02:05:48", "2020-03-02 05:31:05");
+         true, false, "2020-01-19 21:47:58", "2019-04-27 02:05:48", "2020-03-02 05:31:05");
 insert into Customer_Reviews
-(Client_ID, ISBN, Rating, Review_Body, Review_Title, Upvotes, Downvotes, Is_Removed, Pending, Last_Modified,
+(Client_ID, ISBN, Rating, Review_Body, Review_Title,Is_Removed, Pending, Last_Modified,
  Date_Entered, Date_Removed)
-values ("5", "9780062259660", 2, "Borderline leprosy", "Borderline leprosy", 10, 80, true, false,
+values ("5", "9780062259660", 2, "Borderline leprosy", "Borderline leprosy", true, false,
         "2019-07-14 23:31:46", "2019-05-11 22:48:31", "2020-03-18 07:11:38");
 insert into Customer_Reviews
-(Client_ID, ISBN, Rating, Review_Body, Review_Title, Upvotes, Downvotes, Is_Removed, Pending, Last_Modified,
+(Client_ID, ISBN, Rating, Review_Body, Review_Title,  Is_Removed, Pending, Last_Modified,
  Date_Entered, Date_Removed)
 values ("9", "9780141439471", 2, "Osteochondritis dissecans, unspecified knee",
-        "Osteochondritis dissecans, unspecified knee", 69, 68, false, false, "2019-04-11 09:00:48",
+        "Osteochondritis dissecans, unspecified knee",  false, false, "2019-04-11 09:00:48",
         "2019-01-27 11:39:26", "2020-03-23 08:22:43");
 insert into Customer_Reviews
-(Client_ID, ISBN, Rating, Review_Body, Review_Title, Upvotes, Downvotes, Is_Removed, Pending, Last_Modified,
+(Client_ID, ISBN, Rating, Review_Body, Review_Title, Is_Removed, Pending, Last_Modified,
  Date_Entered, Date_Removed)
 values ("20", "9781982110567", 1, "Other mucopurulent conjunctivitis, left eye",
-        "Other mucopurulent conjunctivitis, left eye", 12, 30, false, false, "2019-09-25 02:03:04",
+        "Other mucopurulent conjunctivitis, left eye", false, false, "2019-09-25 02:03:04",
         "2019-05-12 08:28:28", "2020-03-29 01:44:51");
 insert into Customer_Reviews
-(Client_ID, ISBN, Rating, Review_Body, Review_Title, Upvotes, Downvotes, Is_Removed, Pending, Last_Modified,
+(Client_ID, ISBN, Rating, Review_Body, Review_Title,  Is_Removed, Pending, Last_Modified,
  Date_Entered, Date_Removed)
 values ("3", "9780316323703", 1, "Encounter for routine child health examination without abnormal findings",
-        "Encntr for routine child health exam w/o abnormal findings", 76, 41, false, false, "2019-08-02 12:21:11",
+        "Encntr for routine child health exam w/o abnormal findings",  false, false, "2019-08-02 12:21:11",
         "2019-05-23 01:41:02", "2020-03-15 13:10:32");
 insert into Customer_Reviews
-(Client_ID, ISBN, Rating, Review_Body, Review_Title, Upvotes, Downvotes, Is_Removed, Pending, Last_Modified,
+(Client_ID, ISBN, Rating, Review_Body, Review_Title,Is_Removed, Pending, Last_Modified,
  Date_Entered, Date_Removed)
 values ("16", "9780316166683", 1, "Obstructed labor due to breech presentation, fetus 3",
-        "Obstructed labor due to breech presentation, fetus 3", 17, 27, false, true, "2019-12-23 23:13:05",
+        "Obstructed labor due to breech presentation, fetus 3", false, true, "2019-12-23 23:13:05",
         "2019-09-11 16:27:55", "2020-03-11 01:42:57");
 insert into Customer_Reviews
-(Client_ID, ISBN, Rating, Review_Body, Review_Title, Upvotes, Downvotes, Is_Removed, Pending, Last_Modified,
+(Client_ID, ISBN, Rating, Review_Body, Review_Title, Is_Removed, Pending, Last_Modified,
  Date_Entered, Date_Removed)
 values ("13", "9780060584757", 4, "Malignant neoplasm of left olfactory nerve",
-        "Malignant neoplasm of left olfactory nerve", 83, 81, false, false, "2019-03-16 23:10:54",
+        "Malignant neoplasm of left olfactory nerve", false, false, "2019-03-16 23:10:54",
         "2019-07-03 22:50:15", "2020-03-01 03:28:59");
 insert into Customer_Reviews
-(Client_ID, ISBN, Rating, Review_Body, Review_Title, Upvotes, Downvotes, Is_Removed, Pending, Last_Modified,
+(Client_ID, ISBN, Rating, Review_Body, Review_Title,Is_Removed, Pending, Last_Modified,
  Date_Entered, Date_Removed)
 values ("3", "9780307346605", 4, "Poisoning by inhaled anesthetics, intentional self-harm",
-        "Poisoning by inhaled anesthetics, intentional self-harm", 46, 33, true, true, "2019-05-01 13:41:19",
+        "Poisoning by inhaled anesthetics, intentional self-harm", true, true, "2019-05-01 13:41:19",
         "2019-02-09 01:47:56", "2020-03-17 05:58:14");
 insert into Customer_Reviews
-(Client_ID, ISBN, Rating, Review_Body, Review_Title, Upvotes, Downvotes, Is_Removed, Pending, Last_Modified,
+(Client_ID, ISBN, Rating, Review_Body, Review_Title, Is_Removed, Pending, Last_Modified,
  Date_Entered, Date_Removed)
 values ("18", "9780593099322", 2, "Periradicular pathology associated with previous endodontic treatment",
-        "Periradicular pathology assoc w previous endodontic trtmt", 87, 70, true, true, "2019-04-22 20:25:04",
+        "Periradicular pathology assoc w previous endodontic trtmt",  true, true, "2019-04-22 20:25:04",
         "2019-08-23 16:32:37", "2020-03-24 09:03:43");
 insert into Customer_Reviews
-(Client_ID, ISBN, Rating, Review_Body, Review_Title, Upvotes, Downvotes, Is_Removed, Pending, Last_Modified,
+(Client_ID, ISBN, Rating, Review_Body, Review_Title, Is_Removed, Pending, Last_Modified,
  Date_Entered, Date_Removed)
 values ("21", "9780553803716", 5, "Injury of peroneal nerve at lower leg level, right leg",
-        "Injury of peroneal nerve at lower leg level, right leg", 31, 68, false, true, "2019-08-24 19:54:29",
+        "Injury of peroneal nerve at lower leg level, right leg", false, true, "2019-08-24 19:54:29",
         "2019-08-31 02:56:22", "2020-03-21 01:47:39");
 insert into Customer_Reviews
-(Client_ID, ISBN, Rating, Review_Body, Review_Title, Upvotes, Downvotes, Is_Removed, Pending, Last_Modified,
+(Client_ID, ISBN, Rating, Review_Body, Review_Title, Is_Removed, Pending, Last_Modified,
  Date_Entered, Date_Removed)
 values ("8", "9780062024039", 4,
         "Monoplegia of lower limb following nontraumatic intracerebral hemorrhage affecting left dominant side",
-        "Monoplg low lmb fol ntrm intcrbl hemor aff left dom side", 16, 94, false, true, "2019-11-17 07:41:05",
+        "Monoplg low lmb fol ntrm intcrbl hemor aff left dom side",  false, true, "2019-11-17 07:41:05",
         "2019-10-10 07:31:46", "2020-03-25 15:43:58");
 insert into Customer_Reviews
-(Client_ID, ISBN, Rating, Review_Body, Review_Title, Upvotes, Downvotes, Is_Removed, Pending, Last_Modified,
+(Client_ID, ISBN, Rating, Review_Body, Review_Title,Is_Removed, Pending, Last_Modified,
  Date_Entered, Date_Removed)
 values ("17", "9781451673319", 3,
         "Displaced fracture of hook process of hamate [unciform] bone, right wrist, subsequent encounter for fracture with routine healing",
-        "Disp fx of hook pro of hamate bone, r wrs, 7thD", 93, 27, true, true, "2019-11-10 01:18:58",
+        "Disp fx of hook pro of hamate bone, r wrs, 7thD",  true, true, "2019-11-10 01:18:58",
         "2019-04-14 04:34:10", "2020-03-16 13:12:58");
 insert into Customer_Reviews
-(Client_ID, ISBN, Rating, Review_Body, Review_Title, Upvotes, Downvotes, Is_Removed, Pending, Last_Modified,
+(Client_ID, ISBN, Rating, Review_Body, Review_Title, Is_Removed, Pending, Last_Modified,
  Date_Entered, Date_Removed)
 values ("21", "9780553803709", 1,
         "Burn of unspecified degree of single right finger (nail) except thumb, initial encounter",
-        "Burn unsp degree of single r finger except thumb, init", 86, 2, true, true, "2019-02-06 03:54:46",
+        "Burn unsp degree of single r finger except thumb, init",  true, true, "2019-02-06 03:54:46",
         "2019-05-12 22:36:42", "2020-03-03 05:23:36");
 insert into Customer_Reviews
-(Client_ID, ISBN, Rating, Review_Body, Review_Title, Upvotes, Downvotes, Is_Removed, Pending, Last_Modified,
+(Client_ID, ISBN, Rating, Review_Body, Review_Title,Is_Removed, Pending, Last_Modified,
  Date_Entered, Date_Removed)
 values ("11", "9780999851135", 1, "Other and unspecified edema specific to newborn",
-        "Other and unspecified edema specific to newborn", 91, 7, false, true, "2019-09-01 04:17:26",
+        "Other and unspecified edema specific to newborn",  false, true, "2019-09-01 04:17:26",
         "2019-01-14 11:18:01", "2020-03-26 22:14:41");
 insert into Customer_Reviews
-(Client_ID, ISBN, Rating, Review_Body, Review_Title, Upvotes, Downvotes, Is_Removed, Pending, Last_Modified,
+(Client_ID, ISBN, Rating, Review_Body, Review_Title, Is_Removed, Pending, Last_Modified,
  Date_Entered, Date_Removed)
 values ("15", "9780765311788", 5,
         "Other fracture of upper and lower end of unspecified fibula, subsequent encounter for open fracture type I or II with nonunion",
-        "Oth fx upr & low end unsp fibula, 7thM", 94, 85, true, false, "2019-04-20 23:31:04", "2019-03-14 15:19:14",
+        "Oth fx upr & low end unsp fibula, 7thM",  true, false, "2019-04-20 23:31:04", "2019-03-14 15:19:14",
         "2020-03-26 11:08:32");
 insert into Customer_Reviews
-(Client_ID, ISBN, Rating, Review_Body, Review_Title, Upvotes, Downvotes, Is_Removed, Pending, Last_Modified,
+(Client_ID, ISBN, Rating, Review_Body, Review_Title,Is_Removed, Pending, Last_Modified,
  Date_Entered, Date_Removed)
 values ("23", "9780698165083", 1, "Corrosion of first degree of unspecified forearm, subsequent encounter",
-        "Corrosion of first degree of unsp forearm, subs encntr", 62, 57, false, false, "2019-04-24 21:21:51",
+        "Corrosion of first degree of unsp forearm, subs encntr",  false, false, "2019-04-24 21:21:51",
         "2019-11-27 08:52:45", "2020-03-20 03:47:15");
 insert into Customer_Reviews
-(Client_ID, ISBN, Rating, Review_Body, Review_Title, Upvotes, Downvotes, Is_Removed, Pending, Last_Modified,
+(Client_ID, ISBN, Rating, Review_Body, Review_Title, Is_Removed, Pending, Last_Modified,
  Date_Entered, Date_Removed)
 values ("25", "9780356507217", 5, "Trigger finger, unspecified ring finger", "Trigger finger, unspecified ring finger",
-        64, 53, false, true, "2019-04-07 14:42:10", "2019-10-16 05:36:17", "2020-03-09 05:49:49");
+         false, true, "2019-04-07 14:42:10", "2019-10-16 05:36:17", "2020-03-09 05:49:49");
 insert into Customer_Reviews
-(Client_ID, ISBN, Rating, Review_Body, Review_Title, Upvotes, Downvotes, Is_Removed, Pending, Last_Modified,
+(Client_ID, ISBN, Rating, Review_Body, Review_Title, Is_Removed, Pending, Last_Modified,
  Date_Entered, Date_Removed)
 values ("14", "9780440000587", 2, "Problems related to housing and economic circumstances",
-        "Problems related to housing and economic circumstances", 33, 31, true, true, "2019-07-27 05:39:31",
+        "Problems related to housing and economic circumstances",  true, true, "2019-07-27 05:39:31",
         "2019-03-20 05:01:56", "2020-03-20 01:51:11");
 insert into Customer_Reviews
-(Client_ID, ISBN, Rating, Review_Body, Review_Title, Upvotes, Downvotes, Is_Removed, Pending, Last_Modified,
+(Client_ID, ISBN, Rating, Review_Body, Review_Title,Is_Removed, Pending, Last_Modified,
  Date_Entered, Date_Removed)
 values ("24", "9780143039983", 3,
         "Adverse effect of centrally-acting and adrenergic-neuron-blocking agents, initial encounter",
-        "Adverse effect of centr-acting/adren-neurn-block agnt, init", 9, 82, false, false, "2019-02-24 06:43:41",
+        "Adverse effect of centr-acting/adren-neurn-block agnt, init",  false, false, "2019-02-24 06:43:41",
         "2020-01-03 12:47:04", "2020-03-07 11:05:29");
 insert into Customer_Reviews
-(Client_ID, ISBN, Rating, Review_Body, Review_Title, Upvotes, Downvotes, Is_Removed, Pending, Last_Modified,
+(Client_ID, ISBN, Rating, Review_Body, Review_Title, Is_Removed, Pending, Last_Modified,
  Date_Entered, Date_Removed)
 values ("25", "9780679745587", 5,
         "Displaced fracture of left tibial tuberosity, subsequent encounter for open fracture type IIIA, IIIB, or IIIC with malunion",
-        "Disp fx of l tibial tuberosity, 7thR", 68, 37, true, false, "2019-12-17 09:37:13", "2019-04-11 10:34:18",
+        "Disp fx of l tibial tuberosity, 7thR", true, false, "2019-12-17 09:37:13", "2019-04-11 10:34:18",
         "2020-03-09 17:20:12");
 insert into Customer_Reviews
-(Client_ID, ISBN, Rating, Review_Body, Review_Title, Upvotes, Downvotes, Is_Removed, Pending, Last_Modified,
+(Client_ID, ISBN, Rating, Review_Body, Review_Title, Is_Removed, Pending, Last_Modified,
  Date_Entered, Date_Removed)
 values ("2", "9780143034902", 3, "Toxic effect of homologues of benzene, accidental (unintentional), initial encounter",
-        "Toxic effect of homologues of benzene, accidental, init", 69, 4, true, true, "2019-07-07 15:48:24",
+        "Toxic effect of homologues of benzene, accidental, init",  true, true, "2019-07-07 15:48:24",
         "2019-10-24 23:48:02", "2020-03-09 08:03:26");
 insert into Customer_Reviews
-(Client_ID, ISBN, Rating, Review_Body, Review_Title, Upvotes, Downvotes, Is_Removed, Pending, Last_Modified,
+(Client_ID, ISBN, Rating, Review_Body, Review_Title, Is_Removed, Pending, Last_Modified,
  Date_Entered, Date_Removed)
-values ("22", "9780752865331", 1, "Transection (partial) of abdomen", "Transection (partial) of abdomen", 61, 88, true,
+values ("22", "9780752865331", 1, "Transection (partial) of abdomen", "Transection (partial) of abdomen",  true,
         true, "2020-01-30 15:00:30", "2020-01-17 19:31:32", "2020-03-28 21:15:52");
 insert into Customer_Reviews
-(Client_ID, ISBN, Rating, Review_Body, Review_Title, Upvotes, Downvotes, Is_Removed, Pending, Last_Modified,
+(Client_ID, ISBN, Rating, Review_Body, Review_Title, Is_Removed, Pending, Last_Modified,
  Date_Entered, Date_Removed)
-values ("5", "9780375831003", 5, "Assault by unspecified means", "Assault by unspecified means", 81, 64, false, false,
+values ("5", "9780375831003", 5, "Assault by unspecified means", "Assault by unspecified means",  false, false,
         "2019-03-23 14:31:32", "2019-02-27 03:43:16", "2020-03-21 22:10:25");
 insert into Customer_Reviews
-(Client_ID, ISBN, Rating, Review_Body, Review_Title, Upvotes, Downvotes, Is_Removed, Pending, Last_Modified,
+(Client_ID, ISBN, Rating, Review_Body, Review_Title, Is_Removed, Pending, Last_Modified,
  Date_Entered, Date_Removed)
 values ("10", "9780770430078", 4, "Toxic effect of unspecified snake venom, intentional self-harm, initial encounter",
-        "Toxic effect of unsp snake venom, self-harm, init", 64, 18, true, true, "2019-07-19 04:12:28",
+        "Toxic effect of unsp snake venom, self-harm, init",  true, true, "2019-07-19 04:12:28",
         "2019-05-15 19:24:54", "2020-03-13 23:34:26");
 insert into Customer_Reviews
-(Client_ID, ISBN, Rating, Review_Body, Review_Title, Upvotes, Downvotes, Is_Removed, Pending, Last_Modified,
+(Client_ID, ISBN, Rating, Review_Body, Review_Title,Is_Removed, Pending, Last_Modified,
  Date_Entered, Date_Removed)
 values ("13", "9780770430078", 4,
         "Unspecified open wound of left back wall of thorax without penetration into thoracic cavity, initial encounter",
-        "Unsp opn wnd l bk wl of thorax w/o penet thor cavity, init", 44, 18, true, false, "2019-03-04 02:43:45",
+        "Unsp opn wnd l bk wl of thorax w/o penet thor cavity, init",  true, false, "2019-03-04 02:43:45",
         "2019-07-05 16:01:31", "2020-03-17 00:25:43");
 insert into Customer_Reviews
-(Client_ID, ISBN, Rating, Review_Body, Review_Title, Upvotes, Downvotes, Is_Removed, Pending, Last_Modified,
+(Client_ID, ISBN, Rating, Review_Body, Review_Title, Is_Removed, Pending, Last_Modified,
  Date_Entered, Date_Removed)
 values ("17", "9780727860996", 5, "Breakdown (mechanical) of artificial skin graft and decellularized allodermis",
-        "Breakdown of artificial skin grft /decellular alloderm", 53, 86, true, true, "2020-01-19 19:52:48",
+        "Breakdown of artificial skin grft /decellular alloderm", true, true, "2020-01-19 19:52:48",
         "2019-01-19 15:49:30", "2020-03-03 15:23:06");
 insert into Customer_Reviews
-(Client_ID, ISBN, Rating, Review_Body, Review_Title, Upvotes, Downvotes, Is_Removed, Pending, Last_Modified,
+(Client_ID, ISBN, Rating, Review_Body, Review_Title, Is_Removed, Pending, Last_Modified,
  Date_Entered, Date_Removed)
 values ("16", "9780316323703", 5,
         "Poisoning by unspecified agents primarily affecting the gastrointestinal system, assault, subsequent encounter",
-        "Poisoning by unsp agents aff the GI sys, assault, subs", 42, 9, false, true, "2019-06-25 14:36:54",
+        "Poisoning by unsp agents aff the GI sys, assault, subs",  false, true, "2019-06-25 14:36:54",
         "2019-08-05 23:33:15", "2020-03-17 23:41:01");
 insert into Customer_Reviews
-(Client_ID, ISBN, Rating, Review_Body, Review_Title, Upvotes, Downvotes, Is_Removed, Pending, Last_Modified,
+(Client_ID, ISBN, Rating, Review_Body, Review_Title, Is_Removed, Pending, Last_Modified,
  Date_Entered, Date_Removed)
 values ("13", "9780582418271", 2, "Leakage of vascular dialysis catheter, sequela",
-        "Leakage of vascular dialysis catheter, sequela", 44, 83, true, false, "2019-09-06 16:22:47",
+        "Leakage of vascular dialysis catheter, sequela",  true, false, "2019-09-06 16:22:47",
         "2019-11-14 05:32:32", "2020-03-06 08:06:17");
 insert into Customer_Reviews
-(Client_ID, ISBN, Rating, Review_Body, Review_Title, Upvotes, Downvotes, Is_Removed, Pending, Last_Modified,
+(Client_ID, ISBN, Rating, Review_Body, Review_Title, Is_Removed, Pending, Last_Modified,
  Date_Entered, Date_Removed)
 values ("19", "9780525945567", 4,
         "Person on outside of car injured in collision with sport utility vehicle in traffic accident",
-        "Person on outside of car injured in collision w SUV in traf", 41, 57, false, true, "2019-04-19 12:10:08",
+        "Person on outside of car injured in collision w SUV in traf", false, true, "2019-04-19 12:10:08",
         "2019-05-23 17:03:30", "2020-03-28 07:28:10");
 insert into Customer_Reviews
-(Client_ID, ISBN, Rating, Review_Body, Review_Title, Upvotes, Downvotes, Is_Removed, Pending, Last_Modified,
+(Client_ID, ISBN, Rating, Review_Body, Review_Title, Is_Removed, Pending, Last_Modified,
  Date_Entered, Date_Removed)
 values ("10", "9780593099322", 3, "Salter-Harris Type II physeal fracture of lower end of ulna, unspecified arm",
-        "Sltr-haris Type II physeal fx lower end of ulna, unsp arm", 9, 11, true, false, "2019-11-25 19:02:33",
+        "Sltr-haris Type II physeal fx lower end of ulna, unsp arm", true, false, "2019-11-25 19:02:33",
         "2020-01-07 01:26:34", "2020-03-19 12:04:14");
 insert into Customer_Reviews
-(Client_ID, ISBN, Rating, Review_Body, Review_Title, Upvotes, Downvotes, Is_Removed, Pending, Last_Modified,
+(Client_ID, ISBN, Rating, Review_Body, Review_Title,Is_Removed, Pending, Last_Modified,
  Date_Entered, Date_Removed)
 values ("12", "9780061007224", 1,
         "Laceration with foreign body of left little finger with damage to nail, subsequent encounter",
-        "Laceration w fb of l little finger w damage to nail, subs", 29, 83, false, false, "2019-02-23 16:21:40",
+        "Laceration w fb of l little finger w damage to nail, subs",  false, false, "2019-02-23 16:21:40",
         "2019-05-12 15:35:05", "2020-03-10 02:28:55");
 insert into Customer_Reviews
-(Client_ID, ISBN, Rating, Review_Body, Review_Title, Upvotes, Downvotes, Is_Removed, Pending, Last_Modified,
+(Client_ID, ISBN, Rating, Review_Body, Review_Title, Is_Removed, Pending, Last_Modified,
  Date_Entered, Date_Removed)
 values ("6", "9780061139376", 1,
         "Displaced fracture of medial phalanx of right ring finger, subsequent encounter for fracture with malunion",
-        "Disp fx of med phalanx of r rng fngr, subs for fx w malunion", 37, 75, false, true, "2019-08-23 14:50:34",
+        "Disp fx of med phalanx of r rng fngr, subs for fx w malunion", false, true, "2019-08-23 14:50:34",
         "2019-08-22 02:26:26", "2020-03-08 07:16:30");
 insert into Customer_Reviews
-(Client_ID, ISBN, Rating, Review_Body, Review_Title, Upvotes, Downvotes, Is_Removed, Pending, Last_Modified,
+(Client_ID, ISBN, Rating, Review_Body, Review_Title, Is_Removed, Pending, Last_Modified,
  Date_Entered, Date_Removed)
 values ("4", "9780141439471", 4, "Breakdown (mechanical) of prosthetic orbit of right eye",
-        "Breakdown (mechanical) of prosthetic orbit of right eye", 65, 9, false, false, "2019-05-05 04:48:29",
+        "Breakdown (mechanical) of prosthetic orbit of right eye",  false, false, "2019-05-05 04:48:29",
         "2019-07-18 20:31:06", "2020-03-04 21:56:12");
 insert into Customer_Reviews
-(Client_ID, ISBN, Rating, Review_Body, Review_Title, Upvotes, Downvotes, Is_Removed, Pending, Last_Modified,
+(Client_ID, ISBN, Rating, Review_Body, Review_Title,Is_Removed, Pending, Last_Modified,
  Date_Entered, Date_Removed)
 values ("10", "9780812976144", 1, "Other complications of other transplanted tissue",
-        "Other complications of other transplanted tissue", 52, 37, false, true, "2019-08-21 17:38:41",
+        "Other complications of other transplanted tissue",  false, true, "2019-08-21 17:38:41",
         "2020-01-08 07:48:01", "2020-03-23 23:28:12");
 insert into Customer_Reviews
-(Client_ID, ISBN, Rating, Review_Body, Review_Title, Upvotes, Downvotes, Is_Removed, Pending, Last_Modified,
+(Client_ID, ISBN, Rating, Review_Body, Review_Title,  Is_Removed, Pending, Last_Modified,
  Date_Entered, Date_Removed)
 values ("18", "9780553803716", 3,
         "Dislocation of metacarpophalangeal joint of right index finger, initial encounter",
-        "Dislocation of MCP joint of right index finger, init", 44, 92, false, false, "2019-10-29 01:25:12",
+        "Dislocation of MCP joint of right index finger, init",  false, false, "2019-10-29 01:25:12",
         "2019-12-22 05:19:52", "2020-03-09 00:11:40");
 insert into Customer_Reviews
-(Client_ID, ISBN, Rating, Review_Body, Review_Title, Upvotes, Downvotes, Is_Removed, Pending, Last_Modified,
+(Client_ID, ISBN, Rating, Review_Body, Review_Title, Is_Removed, Pending, Last_Modified,
  Date_Entered, Date_Removed)
 values ("16", "9780999851104", 4, "Toxic effect of fiberglass, accidental (unintentional), sequela",
-        "Toxic effect of fiberglass, accidental, sequela", 67, 4, false, true, "2019-10-07 21:16:03",
+        "Toxic effect of fiberglass, accidental, sequela",  false, true, "2019-10-07 21:16:03",
         "2019-10-12 01:56:44", "2020-03-23 10:04:50");
 insert into Customer_Reviews
-(Client_ID, ISBN, Rating, Review_Body, Review_Title, Upvotes, Downvotes, Is_Removed, Pending, Last_Modified,
+(Client_ID, ISBN, Rating, Review_Body, Review_Title, Is_Removed, Pending, Last_Modified,
  Date_Entered, Date_Removed)
 values ("8", "9780999851135", 1, "Asphyxiation due to smothering in furniture, assault, sequela",
-        "Asphyx due to smothering in furniture, assault, sequela", 70, 74, false, true, "2019-10-03 17:15:50",
+        "Asphyx due to smothering in furniture, assault, sequela",  false, true, "2019-10-03 17:15:50",
         "2019-12-27 18:29:03", "2020-03-11 07:48:56");
 insert into Customer_Reviews
-(Client_ID, ISBN, Rating, Review_Body, Review_Title, Upvotes, Downvotes, Is_Removed, Pending, Last_Modified,
+(Client_ID, ISBN, Rating, Review_Body, Review_Title, Is_Removed, Pending, Last_Modified,
  Date_Entered, Date_Removed)
-values ("6", "9781937007720", 1, "Other chondrocalcinosis, right hand", "Other chondrocalcinosis, right hand", 74, 45,
+values ("6", "9781937007720", 1, "Other chondrocalcinosis, right hand", "Other chondrocalcinosis, right hand",
         false, true, "2019-07-26 08:36:05", "2019-09-16 08:16:07", "2020-03-01 23:52:31");
 insert into Customer_Reviews
-(Client_ID, ISBN, Rating, Review_Body, Review_Title, Upvotes, Downvotes, Is_Removed, Pending, Last_Modified,
+(Client_ID, ISBN, Rating, Review_Body, Review_Title, Is_Removed, Pending, Last_Modified,
  Date_Entered, Date_Removed)
-values ("1", "9780425275757", 2, "Struck by other mammals", "Struck by other mammals", 99, 3, false, true,
+values ("1", "9780425275757", 2, "Struck by other mammals", "Struck by other mammals", false, true,
         "2019-04-23 18:31:08", "2019-09-12 08:28:34", "2020-03-26 13:02:31");
 insert into Customer_Reviews
-(Client_ID, ISBN, Rating, Review_Body, Review_Title, Upvotes, Downvotes, Is_Removed, Pending, Last_Modified,
+(Client_ID, ISBN, Rating, Review_Body, Review_Title, Is_Removed, Pending, Last_Modified,
  Date_Entered, Date_Removed)
 values ("9", "9780743298025", 4,
         "Maternal care for known or suspected placental insufficiency, second trimester, other fetus",
-        "Matern care for known or susp placntl insuff, 2nd tri, oth", 11, 7, false, false, "2019-05-26 15:23:53",
+        "Matern care for known or susp placntl insuff, 2nd tri, oth", false, false, "2019-05-26 15:23:53",
         "2019-10-24 14:00:53", "2020-03-09 08:49:18");
 insert into Customer_Reviews
-(Client_ID, ISBN, Rating, Review_Body, Review_Title, Upvotes, Downvotes, Is_Removed, Pending, Last_Modified,
+(Client_ID, ISBN, Rating, Review_Body, Review_Title, Is_Removed, Pending, Last_Modified,
  Date_Entered, Date_Removed)
 values ("12", "9780743298025", 3, "Salter-Harris Type IV physeal fracture of upper end of radius, unspecified arm",
-        "Sltr-haris Type IV physeal fx upper end radius, unsp arm", 56, 71, false, false, "2019-04-04 13:59:42",
+        "Sltr-haris Type IV physeal fx upper end radius, unsp arm", false, false, "2019-04-04 13:59:42",
         "2019-04-23 12:34:30", "2020-03-04 09:08:14");
 
 insert into publisher

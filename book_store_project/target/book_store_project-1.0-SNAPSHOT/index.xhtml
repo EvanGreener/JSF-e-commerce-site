@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE html>
 <!--
-Front door that displays recently added book, 
+Client website Front door that displays recently added book, 
 displays books with the most purchases,
 ,allows user to do a basic search that will lead to gallery page for an advanced search if needed
 displays popular genres that when clicked direct to page containing books of that genre only
@@ -218,10 +218,10 @@ compatible with different screen sizes
                                 <p id="surveyId" class="invisible">#{s.surveyID}</p>
                                 <div id="results" class="invisible">
                                     <hr/>
-                                    <p:chart responsive="true" id="barchart" type="bar"  model="#{surveyDataBacking.getBarChart(s.surveyID)}"  style=""/>
                                     <div class="ui horizontal statistics">
-                                        <h:panelGroup id="other" >
-                                            <ui:repeat  value="#{surveyDataBacking.getSurveyChoices(s.surveyID)}" var="sd">
+                                        <p>Votes | Choices</p>
+                                        <h:panelGroup id="surveyResults" >
+                                            <ui:repeat  value="#{surveyDataBean.getSurveyChoices(s.surveyID)}" var="sd">
                                                 <div class="ui statistic">
                                                     <div class="value">#{sd.votes}</div>
                                                     <div class="label" style="white-space:normal">#{sd.choice}</div>
@@ -238,11 +238,11 @@ compatible with different screen sizes
                                 <!-- Shows the actual survey-->
                                 <div id="survey">
                                     <p style="font-size:20px;padding:2%">#{s.surveyDescription}</p>
-                                    <p:selectOneRadio style="font-size:20px" required="true" layout="pageDirection" value="#{surveyDataBacking.surveyDataChoice}" >
+                                    <p:selectOneRadio style="font-size:20px" required="true" layout="pageDirection" value="#{surveyDataBean.surveyDataChoice}" >
                                         <f:selectItems value="#{s.surveyData}" var="sd" itemValue="#{sd.dataID}" itemLabel = " #{sd.choice}" />
                                     </p:selectOneRadio>
                                     <br/>
-                                    <p:commandButton  update="other barchart" class="bookFormatBtn"  value="Submit" oncomplete="showResults(#{s.surveyID})"/>
+                                    <p:commandButton  update="surveyResults" class="bookFormatBtn"  value="Submit" oncomplete="showResults(#{s.surveyID})"/>
                                 </div>
                             </ui:repeat>
                         </h:form>
