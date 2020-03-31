@@ -5,6 +5,7 @@ com\gb1w20\book_store_project\beans\SurveyBean.class
 com\gb1w20\book_store_project\entities\Orders.class
 com\gb1w20\book_store_project\jpa_controllers\ClientsJpaController.class
 com\gb1w20\book_store_project\entities\Surveys.class
+com\gb1w20\book_store_project\beans\ReviewManagementBean.class
 com\gb1w20\book_store_project\entities\Ads_.class
 com\gb1w20\book_store_project\backing\BookBackingBean.class
 com\gb1w20\book_store_project\jpa_controllers\exceptions\IllegalOrphanException.class
