@@ -5,19 +5,10 @@ package com.gb1w20.book_store_project.beans;
 
 import com.gb1w20.book_store_project.entities.CustomerReviews;
 import com.gb1w20.book_store_project.jpa_controllers.CustomerReviewsJpaController;
-import java.io.IOException;
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.enterprise.context.SessionScoped;
-import javax.faces.application.FacesMessage;
-import javax.faces.component.UIComponent;
-import javax.faces.context.FacesContext;
-import javax.faces.model.SelectItem;
-import javax.faces.validator.ValidatorException;
-import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 import org.slf4j.Logger;
@@ -72,11 +63,7 @@ public class ReviewManagementBean implements Serializable {
      */
     private boolean getOpposite(Boolean isRemoved) {
         LOG.debug("getOpposite");
-        if (isRemoved) {
-            isRemoved = false;
-        } else {
-            isRemoved = true;
-        }
+        isRemoved = !isRemoved;
         return isRemoved;
     }
 
@@ -122,7 +109,10 @@ public class ReviewManagementBean implements Serializable {
      * called when approve or unapprove button is clicked edits review and
      *
      *
-     * @return void
+     * @param isRemoved
+     * @param reviewId
+     * @param pending
+     * @throws java.lang.Exception
      */
     public void manageApproval(boolean isRemoved, Integer reviewId, boolean pending) throws Exception {
 
@@ -137,6 +127,7 @@ public class ReviewManagementBean implements Serializable {
     /**
      * returns string pending if pending true and reviewed if false
      *
+     * @param pending
      * @return String
      */
     public String getPendingStatus(boolean pending) {
@@ -151,6 +142,7 @@ public class ReviewManagementBean implements Serializable {
     /**
      * returns string approve is isRemoved true and unapprove if false
      *
+     * @param isRemoved
      * @return String
      */
     public String getRemovalStatus(boolean isRemoved) {
