@@ -1,7 +1,5 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * This package stores all beans used to access controller classses
  */
 package com.gb1w20.book_store_project.beans;
 
@@ -14,6 +12,12 @@ import javax.inject.Named;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+/**
+ * bean that get randomly generated news that is used in index/client frontdoor
+ * page
+ *
+ * @author Shruti Pareek
+ */
 @Named("newsBean")
 @RequestScoped
 public class NewsBean implements Serializable {
@@ -23,12 +27,25 @@ public class NewsBean implements Serializable {
     @Inject
     private NewsJpaController newsJpaController;
     private News randomNews;
-    
-     public News getRandomNews(){
-        this.randomNews=newsJpaController.getRandomNews();
+
+    /**
+     * method that get random news
+     *
+     * @return News
+     */
+    public News getRandomNews() {
+        LOG.debug("getRandomNews");
+        this.randomNews = newsJpaController.getRandomNews();
         return this.randomNews;
     }
-    public void setRandomNews(News news){
-        this.randomNews=news;
+
+    /**
+     * method that set the news
+     *
+     * @param news
+     */
+    public void setRandomNews(News news) {
+        LOG.debug("setRandomNews");
+        this.randomNews = news;
     }
 }

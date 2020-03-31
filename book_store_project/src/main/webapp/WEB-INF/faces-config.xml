@@ -13,6 +13,9 @@
         </navigation-case>
 
     </navigation-rule>
+    <lifecycle>
+    <phase-listener id="nocache">com.gb1w20.book_store_project.CacheControlPhaseListener</phase-listener>
+</lifecycle>
 </faces-config>
 
 

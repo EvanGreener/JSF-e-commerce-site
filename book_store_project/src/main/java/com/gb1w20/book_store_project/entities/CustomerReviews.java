@@ -36,14 +36,22 @@ import javax.validation.constraints.Size;
     @NamedQuery(name = "CustomerReviews.findByRating", query = "SELECT c FROM CustomerReviews c WHERE c.rating = :rating"),
     @NamedQuery(name = "CustomerReviews.findByReviewBody", query = "SELECT c FROM CustomerReviews c WHERE c.reviewBody = :reviewBody"),
     @NamedQuery(name = "CustomerReviews.findByReviewTitle", query = "SELECT c FROM CustomerReviews c WHERE c.reviewTitle = :reviewTitle"),
-    @NamedQuery(name = "CustomerReviews.findByUpvotes", query = "SELECT c FROM CustomerReviews c WHERE c.upvotes = :upvotes"),
-    @NamedQuery(name = "CustomerReviews.findByDownvotes", query = "SELECT c FROM CustomerReviews c WHERE c.downvotes = :downvotes"),
     @NamedQuery(name = "CustomerReviews.findByIsRemoved", query = "SELECT c FROM CustomerReviews c WHERE c.isRemoved = :isRemoved"),
     @NamedQuery(name = "CustomerReviews.findByPending", query = "SELECT c FROM CustomerReviews c WHERE c.pending = :pending"),
     @NamedQuery(name = "CustomerReviews.findByLastModified", query = "SELECT c FROM CustomerReviews c WHERE c.lastModified = :lastModified"),
     @NamedQuery(name = "CustomerReviews.findByDateEntered", query = "SELECT c FROM CustomerReviews c WHERE c.dateEntered = :dateEntered"),
     @NamedQuery(name = "CustomerReviews.findByDateRemoved", query = "SELECT c FROM CustomerReviews c WHERE c.dateRemoved = :dateRemoved")})
 public class CustomerReviews implements Serializable {
+
+    @Size(max = 13)
+    @Column(name = "ISBN")
+    private String isbn;
+    @Size(max = 10000)
+    @Column(name = "Review_Body")
+    private String reviewBody;
+    @Size(max = 100)
+    @Column(name = "Review_Title")
+    private String reviewTitle;
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -53,22 +61,9 @@ public class CustomerReviews implements Serializable {
     private Integer reviewID;
     @Column(name = "Client_ID")
     private Integer clientID;
-    @Size(max = 13)
-    @Column(name = "ISBN")
-    private String isbn;
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
     @Column(name = "Rating")
-    private Double rating;
-    @Size(max = 10000)
-    @Column(name = "Review_Body")
-    private String reviewBody;
-    @Size(max = 100)
-    @Column(name = "Review_Title")
-    private String reviewTitle;
-    @Column(name = "Upvotes")
-    private Integer upvotes;
-    @Column(name = "Downvotes")
-    private Integer downvotes;
+    private Integer rating;
     @Column(name = "Is_Removed")
     private Boolean isRemoved;
     @Column(name = "Pending")
@@ -83,14 +78,22 @@ public class CustomerReviews implements Serializable {
     @Temporal(TemporalType.TIMESTAMP)
     private Date dateRemoved;
 
-      @JoinColumn(name = "ISBN", referencedColumnName = "ISBN", insertable = false, updatable = false)
+    @JoinColumn(name = "ISBN", referencedColumnName = "ISBN", insertable = false, updatable = false)
     @ManyToOne(optional = false)
     private Book book;
-      
-    public Book getBook(){
+
+    @JoinColumn(name = "Client_ID", referencedColumnName = "Client_ID", insertable = false, updatable = false)
+    @ManyToOne(optional = false)
+    private Clients clients;
+
+    public Clients getClients() {
+        return clients;
+    }
+
+    public Book getBook() {
         return book;
     }
-    
+
     public CustomerReviews() {
     }
 
@@ -114,19 +117,12 @@ public class CustomerReviews implements Serializable {
         this.clientID = clientID;
     }
 
-    public String getIsbn() {
-        return isbn;
-    }
 
-    public void setIsbn(String isbn) {
-        this.isbn = isbn;
-    }
-
-    public Double getRating() {
+    public Integer getRating() {
         return rating;
     }
 
-    public void setRating(Double rating) {
+    public void setRating(Integer rating) {
         this.rating = rating;
     }
 
@@ -146,21 +142,6 @@ public class CustomerReviews implements Serializable {
         this.reviewTitle = reviewTitle;
     }
 
-    public Integer getUpvotes() {
-        return upvotes;
-    }
-
-    public void setUpvotes(Integer upvotes) {
-        this.upvotes = upvotes;
-    }
-
-    public Integer getDownvotes() {
-        return downvotes;
-    }
-
-    public void setDownvotes(Integer downvotes) {
-        this.downvotes = downvotes;
-    }
 
     public Boolean getIsRemoved() {
         return isRemoved;
@@ -226,5 +207,14 @@ public class CustomerReviews implements Serializable {
     public String toString() {
         return "com.gb1w20.book_store_project.entities.CustomerReviews[ reviewID=" + reviewID + " ]";
     }
-    
+
+    public String getIsbn() {
+        return isbn;
+    }
+
+    public void setIsbn(String isbn) {
+        this.isbn = isbn;
+    }
+
+
 }

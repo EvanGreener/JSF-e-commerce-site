@@ -1,5 +1,7 @@
 package com.gb1w20.book_store_project.beans;
 
+import com.gb1w20.book_store_project.entities.Clients;
+import com.gb1w20.book_store_project.entities.CustomerReviews;
 import com.gb1w20.book_store_project.jpa_controllers.ClientsJpaController;
 import java.io.IOException;
 import java.io.Serializable;
@@ -32,6 +34,7 @@ public class UserLoginBean implements Serializable {
     private Boolean isSignedIn = false;
     private Boolean isManager = false;
     private String FirstName = "";
+    private String email = "";
 
     @PostConstruct
     public void init() {
@@ -52,6 +55,7 @@ public class UserLoginBean implements Serializable {
                     Object[] clientInformation = clientsJpaController.getInfoByEmail(userCookies[i].getValue());
                     isManager = clientInformation[2] != null ? (Boolean) clientInformation[2] : false;
                     FirstName = (String) clientInformation[3];
+                    email = (String)clientInformation[0];
                 }
             }
         }
@@ -74,6 +78,22 @@ public class UserLoginBean implements Serializable {
                 }
             }
         }
+    }
+
+    public Clients getClient() {
+        if (getIfSignedIn()) {
+            FacesContext facesContext = FacesContext.getCurrentInstance();
+            HttpServletRequest request = (HttpServletRequest) facesContext.getExternalContext().getRequest();
+            Cookie[] userCookies = request.getCookies();
+            for (int i = 0; i < userCookies.length; i++) {
+                if (userCookies[i].getName().equals("BOOK_STORE_LOGIN") && !userCookies[i].getValue().equals("")) {
+                    Object[] clientInformation = clientsJpaController.getInfoByEmail(userCookies[i].getValue());
+                    return clientsJpaController.findClients((Integer)clientInformation[4]);
+                }
+            }
+        }
+        return new Clients();
+
     }
 
     public String signOut() throws IOException {
@@ -126,4 +146,11 @@ public class UserLoginBean implements Serializable {
         this.FirstName = name;
     }
 
+    public String getEmail() {
+        return this.email;
+    }
+
+    public void setEmail(String newValue) {
+        this.email = newValue;
+    }
 }
