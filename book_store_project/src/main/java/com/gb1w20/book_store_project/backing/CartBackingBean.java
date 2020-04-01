@@ -272,7 +272,7 @@ public class CartBackingBean implements Serializable {
 
     private void sendEmail(String receiver, Integer orderID) {
         MailSender sender = new MailSender();
-        mailBean.setSendTo("saaadkhan23@yahoo.ca");
+        mailBean.setSendTo(receiver);
         mailBean.setSubject("ORDER CONFIRMATION #" + orderID);
         mailBean.setPlainOrderTextMsg();
         mailBean.setHtmlOrderTextMsg();
