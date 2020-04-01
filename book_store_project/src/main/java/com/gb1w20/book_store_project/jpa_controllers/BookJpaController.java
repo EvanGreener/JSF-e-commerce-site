@@ -4,11 +4,13 @@ import com.gb1w20.book_store_project.entities.Authors;
 import com.gb1w20.book_store_project.entities.Authors_;
 import com.gb1w20.book_store_project.entities.Book;
 import com.gb1w20.book_store_project.entities.Book_;
+import com.gb1w20.book_store_project.entities.News;
 import com.gb1w20.book_store_project.entities.OrderItem;
 import com.gb1w20.book_store_project.entities.OrderItem_;
 import com.gb1w20.book_store_project.jpa_controllers.exceptions.NonexistentEntityException;
 import java.io.Serializable;
 import java.util.List;
+import java.util.Random;
 import javax.annotation.Resource;
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Named;
@@ -28,12 +30,11 @@ import org.slf4j.LoggerFactory;
 
 /**
  *
- * @author Saad
+ * @author 
  */
 @Named
 @RequestScoped
 public class BookJpaController implements Serializable {
-
 
     private final static Logger LOG = LoggerFactory.getLogger(BookJpaController.class);
 
@@ -116,7 +117,7 @@ public class BookJpaController implements Serializable {
     private List<Book> findBookEntities(boolean all, int maxResults, int firstResult) {
         CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
         cq.select(cq.from(Book.class));
-    
+
         Query q = em.createQuery(cq);
         if (!all) {
             q.setMaxResults(maxResults);
@@ -128,14 +129,34 @@ public class BookJpaController implements Serializable {
     public Book findBook(Integer id) {
         return em.find(Book.class, id);
     }
+    
+    public Book findSingleBook(String id){
+        TypedQuery<Book> query = em.createQuery("SELECT b FROM Book b WHERE b.isRemoved = :removed AND b.isbn=:isbn", Book.class);
+        query.setParameter("removed", false);
+        query.setParameter("isbn", id);
+        Book book = query.getSingleResult();
+        return book;
+    }
+    
+    public List<Book> findBook(String id){
+        TypedQuery<Book> query = em.createQuery("SELECT b FROM Book b WHERE b.isRemoved = :removed AND b.isbn=:isbn", Book.class);
+        query.setParameter("removed", false);
+        query.setParameter("isbn", id);
+        List<Book> books = query.getResultList();
+        return books;
+    }
+    public List<Book> findBookAll(String id){
+        TypedQuery<Book> query = em.createQuery("SELECT b FROM Book b WHERE b.isbn=:isbn", Book.class);
+        query.setParameter("isbn", id);
+        List<Book> books = query.getResultList();
+        return books;
+    }
 
     public int getBookCount() {
-        CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
-        Root<Book> rt = cq.from(Book.class);
-        cq.select(em.getCriteriaBuilder().count(rt));
-        Query q = em.createQuery(cq);
-        System.out.println("book count: " + ((Long) q.getSingleResult()).intValue());
-        return ((Long) q.getSingleResult()).intValue();
+        TypedQuery<Book> query = em.createQuery("SELECT b FROM Book b WHERE b.isRemoved = :removed", Book.class);
+        query.setParameter("removed", false);
+        List<Book> books = query.getResultList();
+        return books.size();
     }
 
     public List<Book> search(String searchBy, String q, int page) {
@@ -163,42 +184,69 @@ public class BookJpaController implements Serializable {
         return query.getResultList();
 
     }
+
+
     public List<Book> getBestSeller() {
 
-        TypedQuery<Book> query = em.createQuery("SELECT b FROM Book b INNER JOIN b.orders o GROUP BY o.isbn ORDER BY count(o.isbn) DESC", Book.class);
+        TypedQuery<Book> query = em.createQuery("SELECT b FROM Book b INNER JOIN b.orders o where b.isRemoved = :removed GROUP BY o.isbn ORDER BY count(o.isbn) DESC", Book.class);
         query.setMaxResults(8);
+        query.setParameter("removed", false);
         List<Book> books = query.getResultList();
         return books;
     }
 
-    public List<Object> getPopularGenres(){
-        
-        TypedQuery<Object> query = em.createQuery("SELECT b.genre FROM Book b WHERE b.genre <> :genre GROUP BY b.genre", Object.class);
-        
+    public List<Object> getPopularGenres() {
+
+        TypedQuery<Object> query = em.createQuery("SELECT b.genre FROM Book b WHERE b.genre <> :genre AND b.isRemoved = :removed GROUP BY b.genre", Object.class);
+
         query.setParameter("genre", "Fiction");
+        query.setParameter("removed", false);
         query.setMaxResults(4);
         List<Object> genres = query.getResultList();
         return genres;
-        
+
     }
-    
-   //TODO books that user does not already contain
-    public List<Book> getSimilarGenres(Book b){
-         TypedQuery<Book> query = em.createQuery("SELECT b FROM Book b WHERE b.genre = :genre AND b.isbn <> :isbn", Book.class);
-         query.setParameter("genre", b.getGenre());
-           query.setParameter("isbn", b.getIsbn());
-         query.setMaxResults(4);
+
+    public int getSimilarGenresBookCount(Book b) {
+        TypedQuery<Book> query = em.createQuery("SELECT b FROM Book b WHERE b.genre = :genre AND b.isbn <> :isbn AND b.isRemoved = :removed", Book.class);
+        query.setParameter("genre", b.getGenre());
+        query.setParameter("isbn", b.getIsbn());
+        query.setParameter("removed", false);
         List<Book> books = query.getResultList();
-        return books; 
+        return books.size();
     }
-    
-    public List<Book> getRecentlyAdded(){
-         TypedQuery<Book> query = em.createQuery("SELECT b FROM Book b ORDER BY b.dateEntered ASC", Book.class);
-        query.setMaxResults(8);
+
+    public List<Book> getSimilarGenres(Book b, Integer a) {
+        TypedQuery<Book> query = em.createQuery("SELECT b FROM Book b inner join b.authorsCollection a WHERE b.genre = :genre AND b.isbn <> :isbn AND a.authorID <> :author AND b.isRemoved = :removed", Book.class);
+        query.setParameter("genre", b.getGenre());
+        query.setParameter("isbn", b.getIsbn());
+        query.setParameter("removed", false);
+        query.setParameter("author", a);
+        Random r = new Random();
+        query.setFirstResult((r.nextInt((getSimilarGenresBookCount(b) - 4))));
+        query.setMaxResults(4);
         List<Book> books = query.getResultList();
-        return books; 
+        return books;
     }
-    
+
+    public List<Book> getSimilarAuthors(Integer a, String b) {
+        TypedQuery<Book> query = em.createQuery("SELECT b FROM Book b inner join b.authorsCollection a WHERE a.authorID = :author AND b.isRemoved = :removed AND b.isbn <> :isbn ", Book.class);
+        query.setParameter("author", a);
+        query.setParameter("isbn", b);
+        query.setParameter("removed", false);
+        query.setMaxResults(4);
+        List<Book> books = query.getResultList();
+        return books;
+    }
+
+    public List<Book> getRecentlyAdded() {
+        TypedQuery<Book> query = em.createQuery("SELECT b FROM Book b where b.isRemoved = :removed ORDER BY b.dateEntered ASC", Book.class);
+        query.setMaxResults(3);
+        query.setParameter("removed", false);
+        List<Book> books = query.getResultList();
+        return books;
+    }
+
     public List<Book> getRecommended() {
 
         return null;

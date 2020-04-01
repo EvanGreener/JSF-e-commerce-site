@@ -13,10 +13,12 @@ import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
@@ -110,8 +112,13 @@ public class Clients implements Serializable {
     private Boolean isRemoved;
     
     @OneToMany( cascade = CascadeType.ALL)
-    @JoinColumn(name = "Client_ID")
     private List<Orders> ordersCollection;
+    
+    @OneToMany(cascade = CascadeType.ALL,mappedBy="clients")
+    private List<CustomerReviews> reviews;
+    
+    @ManyToMany(mappedBy = "clientsCollection", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+     private List<Book> booksCollection;
 
     public Clients() {
     }
@@ -119,7 +126,12 @@ public class Clients implements Serializable {
     public Clients(Integer clientID) {
         this.clientID = clientID;
     }
-
+    public List<Book> getBooksCollection(){
+        return this.booksCollection;
+    }
+    public List<CustomerReviews> getReviews(){
+        return this.reviews;
+    }
     public Integer getClientID() {
         return clientID;
     }
