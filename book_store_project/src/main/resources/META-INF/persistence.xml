@@ -17,6 +17,8 @@
     <class>com.gb1w20.book_store_project.entities.SurveyData</class>
     <class>com.gb1w20.book_store_project.entities.Publisher</class>
     <class>com.gb1w20.book_store_project.entities.BookFormat</class>
+    <class>com.gb1w20.book_store_project.beans.MailBean</class>
+    <class>com.gb1w20.book_store_project.backing.OrderPageBackingBean</class>
     <exclude-unlisted-classes>true</exclude-unlisted-classes>
   </persistence-unit>
 </persistence>

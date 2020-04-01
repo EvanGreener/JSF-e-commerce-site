@@ -5,6 +5,7 @@ package com.gb1w20.book_store_project.beans;
 
 import com.gb1w20.book_store_project.entities.Authors;
 import com.gb1w20.book_store_project.entities.Book;
+import com.gb1w20.book_store_project.entities.OrderItem;
 import com.gb1w20.book_store_project.jpa_controllers.BookJpaController;
 import java.io.IOException;
 import java.io.InputStream;
@@ -177,6 +178,10 @@ public class BookBean implements Serializable {
     public String getGenre() {
         LOG.debug("getGenre");
         return this.genre;
+    }
+
+    public Book findOrderBook(OrderItem orderItem) {
+        return bookCtrlr.findSingleBook(orderItem.getIsbn());
     }
 
     /**

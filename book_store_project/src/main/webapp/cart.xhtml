@@ -39,7 +39,7 @@ and open the template in the editor.
             </div>
 
             <div class="purpleContainer">
-                <div class="ui very relaxed grid">
+                <div class="ui very relaxed stackable grid">
                     <div class="twelve wide column">
                         <bookstore:cartItems/>
                     </div>
@@ -51,22 +51,51 @@ and open the template in the editor.
 
                             <div class="content">
                                 <h4 class="ui sub header">Items</h4>
-                                <div class="middle aligned divided list">
-                                    <ui:repeat value="#{cbb.getCartItems()}" var="book">
-                                        <div class="item">
-                                            <div class="right floated content">
-                                                #{book.listPrice}
+                                <div class="aligned divided list">
+                                    <div style="height:270px; overflow-y: auto;">
+                                        <ui:repeat value="#{cbb.getCartItems()}" var="book">
+                                            <div class="item">
+                                                <div class="right floated content">
+                                                    #{book.listPrice}
+                                                </div>
+                                                <div class="content">
+                                                    #{book.title}
+                                                </div>
                                             </div>
-                                            <div class="content">
-                                                #{book.title}
+                                        </ui:repeat>
+                                    </div>
+                                    <hr/>
+                                    <ui:fragment rendered="#{UserLoginBean.getIfSignedIn()}">
+                                        <div>
+                                            <strong>Sub-Total</strong>
+                                            <div class="right floated content">
+                                                <strong>$ #{cbb.getCartTotal()}</strong>
+                                            </div>
+                                            <div style="display:block ruby;">
+                                                <div style="float:left">GST (#{taxBacking.getTaxByProvince().getGst()})</div>
+                                                <div style="float:right">$ #{taxBacking.getTotalwithGST(cbb.getCartTotal())}</div>
+                                            </div>
+                                            <div style="display:block ruby;">
+                                                <div style="float:left">PST (#{taxBacking.getTaxByProvince().getPst()})</div>
+                                                <div style="float:right">$ #{taxBacking.getTotalwithPST(cbb.getCartTotal())}</div>
+                                            </div>
+                                            <div style="display:block ruby;">
+                                                <div style="float:left">HST (#{taxBacking.getTaxByProvince().getHst()})</div>
+                                                <div style="float:right">$ #{taxBacking.getTotalwithHST(cbb.getCartTotal())}</div>
+                                            </div>
+                                            <strong>Total</strong>
+                                            <div class="right floated content">
+                                                <strong>$ #{taxBacking.getTotalWithTaxByProvince(cbb.getCartTotal())}</strong>
                                             </div>
                                         </div>
-                                    </ui:repeat>
-                                    <hr/>
-                                    <strong>Sub-Total</strong>
-                                    <div class="right floated content">
-                                        <strong>$ #{cbb.getCartTotal()}</strong>
-                                    </div>
+                                    </ui:fragment>
+
+                                    <ui:fragment rendered="#{!UserLoginBean.getIfSignedIn()}">
+                                        <strong>Sub-Total</strong>
+                                        <div class="right floated content">
+                                            <strong>$ #{cbb.getCartTotal()}</strong>
+                                        </div>
+                                    </ui:fragment>
                                 </div>
                             </div>
                             <div class="extra content">
@@ -117,7 +146,7 @@ and open the template in the editor.
             <div class="header">
                 <h1>Finalize Purchase</h1>
                 <br/>
-                <p style="text-align: center;">Total order cost: $ #{cbb.cartTotal}</p>
+                <p style="text-align: center;">Total order cost: $ #{taxBacking.getTotalWithTaxByProvince(cbb.getCartTotal())}</p>
             </div>
             <div class="content">
                 <h:form id="finalizeForm" class="ui form">

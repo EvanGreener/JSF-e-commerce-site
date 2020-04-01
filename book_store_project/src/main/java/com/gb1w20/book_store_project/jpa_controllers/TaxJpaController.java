@@ -1,6 +1,7 @@
 package com.gb1w20.book_store_project.jpa_controllers;
 
 import com.gb1w20.book_store_project.entities.Tax;
+import com.gb1w20.book_store_project.entities.Tax_;
 import com.gb1w20.book_store_project.jpa_controllers.exceptions.NonexistentEntityException;
 import java.io.Serializable;
 import java.util.List;
@@ -11,6 +12,8 @@ import javax.persistence.EntityManager;
 import javax.persistence.Query;
 import javax.persistence.EntityNotFoundException;
 import javax.persistence.PersistenceContext;
+import javax.persistence.TypedQuery;
+import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 import javax.transaction.SystemException;
@@ -112,6 +115,16 @@ public class TaxJpaController implements Serializable {
 
     public Tax findTax(String id) {
             return em.find(Tax.class, id);
+    }
+  
+    
+    public Tax getTaxByProvince(String province){
+        CriteriaBuilder cb = em.getCriteriaBuilder();
+        CriteriaQuery cq = cb.createQuery();
+        Root<Tax> tax = cq.from(Tax.class);
+        cq.where(cb.equal(tax.get(Tax_.provinceAbbreviation), province));
+        TypedQuery<Tax> query = em.createQuery(cq);
+        return query.getSingleResult();
     }
 
     public int getTaxCount() {
