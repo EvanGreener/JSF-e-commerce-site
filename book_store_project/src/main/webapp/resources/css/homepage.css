@@ -471,7 +471,7 @@ p.small {
 
 .purpleContainer{
     background-color: #DBD3DB;
-    height:90%;
+    height:80%;
 }
 
 .centerItems{
@@ -494,7 +494,7 @@ p.small {
     margin-top: 5%;
     overflow-y: auto;
     border-radius: 5px;
-    height:800px;
+    max-height: 630px;
 }
 
 .tabular.menu, .tab.segment{

@@ -145,6 +145,12 @@ public class BookBean implements Serializable {
         return this.genre;
     }
 
+    public Book findOrderBook(OrderItem orderItem){
+        LOG.error("yo---------------"+orderItem.getBook().getTitle());
+        LOG.error("yo---------------"+orderItem.getBook().getIsbn());
+        return bookCtrlr.findSingleBook(orderItem.getIsbn());
+    }
+    
     public void findBook(String isbn) throws IOException {
         LOG.debug("findBook");
         /*

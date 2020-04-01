@@ -33,30 +33,12 @@ public class UserLoginBean implements Serializable {
     private Boolean isManager = false;
     private String FirstName = "";
     private String email = "";
-
+    private String province = "AB";
+            
     @PostConstruct
     public void init() {
         LOG.debug("Init called!");
         getSignInStatus();
-    }
-
-    public void checkIsManager() {
-        FacesContext facesContext = FacesContext.getCurrentInstance();
-        HttpServletRequest request = (HttpServletRequest) facesContext.getExternalContext().getRequest();
-        Cookie[] userCookies = request.getCookies();
-        LOG.info("checking if manager");
-
-        if (userCookies != null && userCookies.length > 0) {
-            for (int i = 0; i < userCookies.length; i++) {
-                if (userCookies[i].getName().equals("BOOK_STORE_LOGIN") && !userCookies[i].getValue().equals("")) {
-                    LOG.info("cookie info " + userCookies[i].getName() + " : " + userCookies[i].getValue());
-                    Object[] clientInformation = clientsJpaController.getInfoByEmail(userCookies[i].getValue());
-                    isManager = clientInformation[2] != null ? (Boolean) clientInformation[2] : false;
-                    FirstName = (String) clientInformation[3];
-                    email = (String)clientInformation[0];
-                }
-            }
-        }
     }
 
     public void getSignInStatus() {
@@ -68,8 +50,13 @@ public class UserLoginBean implements Serializable {
         if (userCookies != null && userCookies.length > 0) {
             for (int i = 0; i < userCookies.length; i++) {
                 if (userCookies[i].getName().equals("BOOK_STORE_LOGIN") && !userCookies[i].getValue().equals("")) {
+                    LOG.info("cookie info " + userCookies[i].getName() + " : " + userCookies[i].getValue());
+                    Object[] clientInformation = clientsJpaController.getInfoByEmail(userCookies[i].getValue());
+                    email = (String)clientInformation[0];     
+                    isManager = clientInformation[2] != null ? (Boolean) clientInformation[2] : false;
+                    FirstName = (String) clientInformation[3];
+                    province = (String) clientInformation[4];
                     isSignedIn = true;
-                    checkIsManager();
                     break;
                 } else {
                     isSignedIn = false;
@@ -79,6 +66,8 @@ public class UserLoginBean implements Serializable {
     }
 
     public String signOut() throws IOException {
+        LOG.debug("redirecting to index i think _____________________________________________________ ");
+
         FacesContext facesContext = FacesContext.getCurrentInstance();
         HttpServletRequest request = (HttpServletRequest) facesContext.getExternalContext().getRequest();
         HttpServletResponse response = (HttpServletResponse) FacesContext.getCurrentInstance().getExternalContext().getResponse();
@@ -134,5 +123,10 @@ public class UserLoginBean implements Serializable {
 
     public void setEmail(String newValue) {
         this.email = newValue;
+    }
+    
+    public String getProvince(){
+        LOG.info(this.province);
+        return this.province;
     }
 }
