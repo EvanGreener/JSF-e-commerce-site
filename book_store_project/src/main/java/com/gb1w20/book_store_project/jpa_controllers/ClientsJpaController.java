@@ -141,7 +141,7 @@ public class ClientsJpaController implements Serializable {
         CriteriaQuery cq = cb.createQuery();
         Root<Clients> client = cq.from(Clients.class);
         cq.where(cb.equal(client.get(Clients_.email), email));
-        cq.multiselect(client.get(Clients_.email), client.get(Clients_.hashedPassword),client.get(Clients_.isManager), client.get(Clients_.firstName), client.get(Clients_.provinceAbbreviation));
+        cq.multiselect(client.get(Clients_.email), client.get(Clients_.hashedPassword),client.get(Clients_.isManager), client.get(Clients_.firstName),client.get(Clients_.clientID),client.get(Clients_.provinceAbbreviation));
         TypedQuery<Object[]> query = em.createQuery(cq);
         return query.getSingleResult();
     }
