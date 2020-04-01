@@ -1,5 +1,7 @@
 package com.gb1w20.arquillian.test;
 
+import com.gb1w20.book_store_project.backing.BookFormatBackingBean;
+import com.gb1w20.book_store_project.beans.NewsBean;
 import com.gb1w20.book_store_project.jpa_controllers.BookFormatJpaController;
 import com.gb1w20.book_store_project.entities.BookFormat;
 import com.gb1w20.book_store_project.jpa_controllers.exceptions.IllegalOrphanException;
@@ -66,6 +68,8 @@ public class ArquillianUnitTest {
                 .addPackage(BookFormatJpaController.class.getPackage())
                 .addPackage(IllegalOrphanException.class.getPackage())
                 .addPackage(BookFormat.class.getPackage())
+                .addPackage(BookFormatBackingBean.class.getPackage())
+                .addPackage(NewsBean.class.getPackage())
                 .addAsWebInfResource(EmptyAsset.INSTANCE, "beans.xml")
                 .addAsWebInfResource(new File("src/main/webapp/WEB-INF/payara-resources.xml"), "payara-resources.xml")
                 .addAsResource(new File("src/main/resources/META-INF/persistence.xml"), "META-INF/persistence.xml")

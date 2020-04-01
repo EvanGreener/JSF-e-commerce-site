@@ -1,6 +1,9 @@
 package com.gb1w20.book_store_project.backing;
 
+import com.gb1w20.book_store_project.beans.BookBean;
+import com.gb1w20.book_store_project.entities.Book;
 import com.gb1w20.book_store_project.entities.OrderItem;
+import com.gb1w20.book_store_project.jpa_controllers.BookJpaController;
 import com.gb1w20.book_store_project.jpa_controllers.OrderItemJpaController;
 import java.io.Serializable;
 import java.util.Date;
@@ -19,6 +22,9 @@ public class OrderItemBackingBean implements Serializable {
 
     @Inject
     private OrderItemJpaController orderItemJpaController;
+    
+    @Inject
+    private BookBean bb;
 
     private OrderItem orderItem;
 
@@ -76,4 +82,5 @@ public class OrderItemBackingBean implements Serializable {
         FacesContext.getCurrentInstance().getExternalContext().redirect("managerOrders.xhtml");
         return null;
     }
+ 
 }
