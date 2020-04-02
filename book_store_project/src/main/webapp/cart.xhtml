@@ -164,6 +164,61 @@ and open the template in the editor.
                         <br/>
                         <h:message id="cardholderError" class="error" for="cardholder"/>
                     </div>
+                    <br/>
+                    <strong>Shipping Address</strong>
+                    <p>Your Billing Address must be the same as your shipping address</p>
+                    <hl/>
+                    <div class="field">
+                        <h:outputLabel for="address1" value="Address 1"/>
+                        <h:inputText id="address1" label="Address 1" value="#{clientBacking.client.address1}" required="true" requiredMessage="Please enter address 1" a:placeholder="Enter address 1">
+                            <f:ajax event="change" render="address1Error"/>
+                        </h:inputText>
+                        <br/>
+                        <h:message id="address1Error" class="error" for="address1"/>
+                    </div>
+                    <div class="field">
+                        <h:outputLabel for="address2" value="Address 2"/>
+                        <h:inputText id="address2" label="Address 2" value="#{clientBacking.client.address2}" required="true" requiredMessage="Please enter address 2" a:placeholder="Enter address 2">
+                            <f:ajax event="change" render="address2Error"/>
+                        </h:inputText>
+                        <br/>
+                        <h:message id="address2Error" class="error" for="address2"/>
+                    </div>
+                    <div class="fields">
+                        <div class="twelve wide field">
+                            <h:outputLabel for="country" value="Country"/>
+                            <h:selectOneMenu id="country" label="Country" required="true" value="#{clientBacking.client.country}" requiredMessage="Please enter country" a:placeholder="Enter country">
+                                <f:selectItem itemValue="Canada" itemLabel="Canada" />
+                            </h:selectOneMenu>
+                            <h:message id="countryError" class="error" for="country"/>
+                        </div>
+                        <div class="four wide field">
+                            <h:outputLabel for="provOrState" value="Province/State"/>
+                            <h:selectOneMenu id="provOrState" label="Province/State" value="#{clientBacking.client.provinceAbbreviation}" required="true" requiredMessage="Please enter province or state" a:placeholder="Enter province or state">
+                                <f:selectItems value="#{clientBacking.provinces}" />
+                            </h:selectOneMenu>
+                            <br/>
+                            <h:message id="provStateError" class="error" for="provOrState"/>
+                        </div>
+                    </div>
+                    <div class="fields">
+                        <div class="twelve wide field">
+                            <h:outputLabel for="city" value="City"/>
+                            <h:inputText id="city" label="City" value="#{clientBacking.client.city}" required="true" requiredMessage="Please enter city" a:placeholder="Enter city">
+                                <f:ajax event="change" render="cityError"/>
+                            </h:inputText>
+                            <br/>
+                            <h:message id="cityError" class="error" for="city"/>
+                        </div>
+                        <div class="four wide field">
+                            <h:outputLabel for="postalCode" value="Postal Code"/>
+                            <h:inputText id="postalCode" label="Postal Code" value="#{clientBacking.client.postalCode}" required="true" requiredMessage="Please enter postal code" a:placeholder="Enter postal code">
+                                <f:ajax event="change" render="postalCodeError"/>
+                            </h:inputText>
+                            <br/>
+                            <h:message id="postalCodeError" class="error" for="postalCode"/>
+                        </div>
+                    </div>
                     <h:commandButton class="huge black fluid ui button" id="finalizeBtn" value="Finalize Purchase" action="#{cbb.finalizePurchase(UserLoginBean.email)}" />
                     <br/>
                 </h:form>

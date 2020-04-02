@@ -14,19 +14,19 @@ import com.gb1w20.book_store_project.jpa_controllers.ClientsJpaController;
 import com.gb1w20.book_store_project.jpa_controllers.OrderItemJpaController;
 import com.gb1w20.book_store_project.jpa_controllers.OrdersJpaController;
 import java.io.Serializable;
-import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.regex.Pattern;
 import javax.enterprise.context.SessionScoped;
 import javax.faces.application.FacesMessage;
 import javax.faces.component.UIComponent;
-import javax.faces.component.UIInput;
 import javax.faces.context.FacesContext;
 import javax.faces.validator.ValidatorException;
 import javax.inject.Inject;
 import javax.inject.Named;
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -115,6 +115,7 @@ public class CartBackingBean implements Serializable {
         List<Book> cartList = this.getCartItems();
         if (!cartList.contains(addingBook)) {
             cartList.add(addingBook);
+            saveLastGenre(addingBook);
             LOG.info("cart has " + cartList.size());
             this.setCartItems(cartList);
         }
@@ -268,5 +269,52 @@ public class CartBackingBean implements Serializable {
         CartItems.clear();
         FacesContext.getCurrentInstance().getExternalContext().redirect("index.xhtml");
         return "index.xhtml";
+    }
+
+    private void saveLastGenre(Book addingBook) {
+        FacesContext facesContext = FacesContext.getCurrentInstance();
+        HttpServletRequest request = (HttpServletRequest) facesContext.getExternalContext().getRequest();
+        Cookie cookie = null;
+        
+        LOG.info("saving genre");
+        
+        Cookie[] userCookies = request.getCookies();
+        if (userCookies != null && userCookies.length > 0 ) {
+            for (int i = 0; i < userCookies.length; i++) {
+                if (userCookies[i].getName().equals("BOOK_STORE_LAST_GENRE")) {
+                    cookie = userCookies[i];
+                    break;
+                }
+            }
+        }
+
+        if (cookie != null) {
+            cookie.setValue(addingBook.getGenre());
+        } else {
+            cookie = new Cookie("BOOK_STORE_LAST_GENRE", addingBook.getGenre());
+            cookie.setPath(request.getContextPath());
+        }
+        
+        HttpServletResponse response = (HttpServletResponse) facesContext.getExternalContext().getResponse();
+        response.addCookie(cookie);        
+    }
+    
+    public String getLastGenre(){
+        FacesContext facesContext = FacesContext.getCurrentInstance();
+        HttpServletRequest request = (HttpServletRequest) facesContext.getExternalContext().getRequest();
+        Cookie[] userCookies = request.getCookies();
+        LOG.info("checking genre");
+
+        String lastGenre = "Fiction";
+        
+        if (userCookies != null && userCookies.length > 0) {
+            for (int i = 0; i < userCookies.length; i++) {
+                if (userCookies[i].getName().equals("BOOK_STORE_LAST_GENRE") && !userCookies[i].getValue().equals("")) {
+                    lastGenre = userCookies[i].getValue();
+                    break;
+                } 
+            }
+        }
+        return lastGenre;
     }
 }
