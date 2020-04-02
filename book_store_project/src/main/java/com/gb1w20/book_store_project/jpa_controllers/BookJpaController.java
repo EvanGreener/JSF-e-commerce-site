@@ -30,7 +30,7 @@ import org.slf4j.LoggerFactory;
 
 /**
  *
- * @author Saad
+ * @author 
  */
 @Named
 @RequestScoped
@@ -129,9 +129,31 @@ public class BookJpaController implements Serializable {
     public Book findBook(Integer id) {
         return em.find(Book.class, id);
     }
+    
+    public Book findSingleBook(String id){
+        TypedQuery<Book> query = em.createQuery("SELECT b FROM Book b WHERE b.isRemoved = :removed AND b.isbn=:isbn", Book.class);
+        query.setParameter("removed", false);
+        query.setParameter("isbn", id);
+        Book book = query.getSingleResult();
+        return book;
+    }
+    
+    public Book findAnySingleBook(String id){
+        TypedQuery<Book> query = em.createQuery("SELECT b FROM Book b WHERE b.isbn=:isbn", Book.class);
+        query.setParameter("isbn", id);
+        Book book = query.getSingleResult();
+        return book;
+    }
+    
     public List<Book> findBook(String id){
         TypedQuery<Book> query = em.createQuery("SELECT b FROM Book b WHERE b.isRemoved = :removed AND b.isbn=:isbn", Book.class);
         query.setParameter("removed", false);
+        query.setParameter("isbn", id);
+        List<Book> books = query.getResultList();
+        return books;
+    }
+    public List<Book> findBookAll(String id){
+        TypedQuery<Book> query = em.createQuery("SELECT b FROM Book b WHERE b.isbn=:isbn", Book.class);
         query.setParameter("isbn", id);
         List<Book> books = query.getResultList();
         return books;

@@ -39,8 +39,6 @@ CREATE TABLE `Customer_Reviews` (
   `Rating` INT,
   `Review_Body` VARCHAR(10000),
   `Review_Title` VARCHAR(100),
-  `Upvotes` INT,
-  `Downvotes` INT,
   `Is_Removed` BOOL,
   `Pending` BOOL,
   `Last_Modified` DATETIME,

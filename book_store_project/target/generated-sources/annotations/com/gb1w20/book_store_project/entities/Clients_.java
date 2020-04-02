@@ -1,5 +1,6 @@
 package com.gb1w20.book_store_project.entities;
 
+import com.gb1w20.book_store_project.entities.Book;
 import com.gb1w20.book_store_project.entities.CustomerReviews;
 import com.gb1w20.book_store_project.entities.Orders;
 import java.util.Date;
@@ -8,7 +9,7 @@ import javax.persistence.metamodel.ListAttribute;
 import javax.persistence.metamodel.SingularAttribute;
 import javax.persistence.metamodel.StaticMetamodel;
 
-@Generated(value="EclipseLink-2.7.6.v20200131-rNA", date="2020-04-02T11:42:36")
+@Generated(value="EclipseLink-2.7.6.v20200131-rNA", date="2020-04-02T12:29:11")
 @StaticMetamodel(Clients.class)
 public class Clients_ { 
 
@@ -27,6 +28,7 @@ public class Clients_ {
     public static volatile SingularAttribute<Clients, Date> dateEntered;
     public static volatile SingularAttribute<Clients, Boolean> isRemoved;
     public static volatile ListAttribute<Clients, CustomerReviews> reviews;
+    public static volatile ListAttribute<Clients, Book> booksCollection;
     public static volatile SingularAttribute<Clients, Boolean> isManager;
     public static volatile SingularAttribute<Clients, String> cellTelephone;
     public static volatile SingularAttribute<Clients, Date> lastModified;

@@ -1,5 +1,12 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE html>
+<!--
+My books page displays all books that logged in user has purchased and allows them to download whenever they want
+Note does not actually download the ebook but downloads a alice in wonderland pdf
+compatible with different screen sizes
+
+@author Shruti Pareek
+-->
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
@@ -25,26 +32,18 @@
 
         <!--composite component that comes from the navbar.xhtml file to avoid coding nav bar in all web pages-->
         <bookstore:navbar/>
-
-
         <div class="lightGreyDiv">
 
             <!-- lists all books already bought by user for them to download -->
             <div class="ui">
                 <div class="ui fluid">
-
                     <br/>
                     <h3 style="text-align: center;font-variant: small-caps;">Download MyBooks</h3>
                     <br/>
                     <div class="centerItems">
-                        <!--TODO list actual books owned by user from database -->
+                        <!--lists actual books owned by user from database -->
                         <div class="ui divided items downloadDiv">
-
-
-
-
-
-                            <ui:repeat value="#{bb.bestSeller}" var="book">
+                            <ui:repeat value="#{UserLoginBean.getClient().booksCollection}" var="book">
 
                                 <div class="item">
                                     <div class="ui tiny image">
@@ -55,24 +54,18 @@
                                     <div class="middle aligned content">
                                         #{book.title}
                                         <br/>
-                                        ePub
+                                        #{book.bookFormat.format}
                                         <div class="extra">
-                                            <div class="ui right floated button">
-                                                Download
-                                            </div>
+                                          
+                                            <!--Download button that downloads a alice in wonderland pdf -->
+                                                <h:form>
+                                                    <h:commandButton class="ui right floated button" value="Download" action="#{bb.download()}"/>
+                                                </h:form>
+                                          
                                         </div>
                                     </div>
-
                                 </div>
-
                             </ui:repeat>
-
-
-
-
-
-
-
                         </div>
                     </div>
                 </div>
@@ -81,6 +74,5 @@
 
         <!--composite component that comes from the footer.xhtml file to avoid coding the website footer in all web pages-->
         <bookstore:footer/>
-
     </h:body>
 </html>

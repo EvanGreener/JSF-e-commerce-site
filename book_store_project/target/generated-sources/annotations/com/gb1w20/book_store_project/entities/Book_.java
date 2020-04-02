@@ -1,6 +1,8 @@
 package com.gb1w20.book_store_project.entities;
 
 import com.gb1w20.book_store_project.entities.Authors;
+import com.gb1w20.book_store_project.entities.BookFormat;
+import com.gb1w20.book_store_project.entities.Clients;
 import com.gb1w20.book_store_project.entities.CustomerReviews;
 import com.gb1w20.book_store_project.entities.OrderItem;
 import java.math.BigDecimal;
@@ -10,7 +12,7 @@ import javax.persistence.metamodel.ListAttribute;
 import javax.persistence.metamodel.SingularAttribute;
 import javax.persistence.metamodel.StaticMetamodel;
 
-@Generated(value="EclipseLink-2.7.6.v20200131-rNA", date="2020-04-02T11:42:36")
+@Generated(value="EclipseLink-2.7.6.v20200131-rNA", date="2020-04-02T12:29:11")
 @StaticMetamodel(Book.class)
 public class Book_ { 
 
@@ -18,8 +20,10 @@ public class Book_ {
     public static volatile SingularAttribute<Book, BigDecimal> salePrice;
     public static volatile SingularAttribute<Book, String> isbn;
     public static volatile SingularAttribute<Book, String> description;
+    public static volatile SingularAttribute<Book, BookFormat> bookFormat;
     public static volatile SingularAttribute<Book, String> title;
     public static volatile SingularAttribute<Book, Date> dateOfPublication;
+    public static volatile ListAttribute<Book, Clients> clientsCollection;
     public static volatile SingularAttribute<Book, Date> dateEntered;
     public static volatile SingularAttribute<Book, Integer> publisherID;
     public static volatile SingularAttribute<Book, Boolean> isRemoved;
