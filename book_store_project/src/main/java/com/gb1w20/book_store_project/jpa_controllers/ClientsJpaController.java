@@ -5,7 +5,6 @@ import com.gb1w20.book_store_project.entities.Clients_;
 import com.gb1w20.book_store_project.entities.OrderItem_;
 import com.gb1w20.book_store_project.jpa_controllers.exceptions.NonexistentEntityException;
 import java.io.Serializable;
-import java.util.Collection;
 import java.util.List;
 import javax.annotation.Resource;
 import javax.enterprise.context.RequestScoped;
@@ -13,6 +12,7 @@ import javax.inject.Named;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
 import javax.persistence.EntityNotFoundException;
+import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaBuilder;
@@ -33,121 +33,119 @@ import org.slf4j.LoggerFactory;
 @RequestScoped
 public class ClientsJpaController implements Serializable {
 
-     private final static Logger LOG = LoggerFactory.getLogger(ClientsJpaController.class);
+    private final static Logger LOG = LoggerFactory.getLogger(ClientsJpaController.class);
 
-     @Resource
-     private UserTransaction utx;
+    @Resource
+    private UserTransaction utx;
 
-     @PersistenceContext
-     private EntityManager em;
+    @PersistenceContext
+    private EntityManager em;
 
-     public ClientsJpaController() {
-     }
+    public ClientsJpaController() {
+    }
 
-     public void create(Clients clients) throws Exception {
-          try {
-               utx.begin();
-               em.persist(clients);
-               utx.commit();
-          } catch (Exception ex) {
-               try {
-                    utx.rollback();
-               } catch (Exception re) {
-                    throw new Exception("An error occurred attempting to roll back the transaction.", re);
-               }
-               throw ex;
-          }
-     }
+    public void create(Clients clients) throws Exception {
+        try {
+            utx.begin();
+            em.persist(clients);
+            utx.commit();
+        } catch (Exception ex) {
+            try {
+                utx.rollback();
+            } catch (Exception re) {
+                throw new Exception("An error occurred attempting to roll back the transaction.", re);
+            }
+            throw ex;
+        }
+    }
 
-     public void edit(Clients clients) throws NonexistentEntityException, Exception {
-          try {
-               utx.begin();
-               clients = em.merge(clients);
-               utx.commit();
-          } catch (Exception ex) {
-               try {
-                    utx.rollback();
-               } catch (IllegalStateException | SecurityException | SystemException re) {
-                    throw new Exception("An error occurred attempting to roll back the transaction.", re);
-               }
-               String msg = ex.getLocalizedMessage();
-               if (msg == null || msg.length() == 0) {
-                    Integer id = clients.getClientID();
-                    if (findClients(id) == null) {
-                         throw new NonexistentEntityException("The client with id " + id + " no longer exists.");
-                    }
-               }
-               throw ex;
-          }
-     }
+    public void edit(Clients clients) throws NonexistentEntityException, Exception {
+        try {
+            utx.begin();
+            clients = em.merge(clients);
+            utx.commit();
+        } catch (Exception ex) {
+            try {
+                utx.rollback();
+            } catch (IllegalStateException | SecurityException | SystemException re) {
+                throw new Exception("An error occurred attempting to roll back the transaction.", re);
+            }
+            String msg = ex.getLocalizedMessage();
+            if (msg == null || msg.length() == 0) {
+                Integer id = clients.getClientID();
+                if (findClients(id) == null) {
+                    throw new NonexistentEntityException("The client with id " + id + " no longer exists.");
+                }
+            }
+            throw ex;
+        }
+    }
 
-     public void destroy(Integer id) throws NonexistentEntityException, Exception {
-          try {
-               utx.begin();
-               Clients clients;
-               try {
-                    clients = em.getReference(Clients.class, id);
-                    clients.getClientID();
-               } catch (EntityNotFoundException enfe) {
-                    throw new NonexistentEntityException("The client with id " + id + " no longer exists.", enfe);
-               }
-               em.remove(clients);
-               utx.commit();
-          } catch (Exception ex) {
-               try {
-                    utx.rollback();
-               } catch (IllegalStateException | SecurityException | SystemException re) {
-                    throw new Exception("An error occurred attempting to roll back the transaction.", re);
-               }
-               throw ex;
-          }
-     }
+    public void destroy(Integer id) throws NonexistentEntityException, Exception {
+        try {
+            utx.begin();
+            Clients clients;
+            try {
+                clients = em.getReference(Clients.class, id);
+                clients.getClientID();
+            } catch (EntityNotFoundException enfe) {
+                throw new NonexistentEntityException("The client with id " + id + " no longer exists.", enfe);
+            }
+            em.remove(clients);
+            utx.commit();
+        } catch (Exception ex) {
+            try {
+                utx.rollback();
+            } catch (IllegalStateException | SecurityException | SystemException re) {
+                throw new Exception("An error occurred attempting to roll back the transaction.", re);
+            }
+            throw ex;
+        }
+    }
 
-     public List<Clients> findClientsEntities() {
-          return findClientsEntities(true, -1, -1);
-     }
+    public List<Clients> findClientsEntities() {
+        return findClientsEntities(true, -1, -1);
+    }
 
-     public List<Clients> findClientsEntities(int maxResults, int firstResult) {
-          return findClientsEntities(false, maxResults, firstResult);
-     }
+    public List<Clients> findClientsEntities(int maxResults, int firstResult) {
+        return findClientsEntities(false, maxResults, firstResult);
+    }
 
-     private List<Clients> findClientsEntities(boolean all, int maxResults, int firstResult) {
-          CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
-          cq.select(cq.from(Clients.class));
-          Query q = em.createQuery(cq);
-          if (!all) {
-               q.setMaxResults(maxResults);
-               q.setFirstResult(firstResult);
-          }
-          return q.getResultList();
-     }
+    private List<Clients> findClientsEntities(boolean all, int maxResults, int firstResult) {
+        CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
+        cq.select(cq.from(Clients.class));
+        Query q = em.createQuery(cq);
+        if (!all) {
+            q.setMaxResults(maxResults);
+            q.setFirstResult(firstResult);
+        }
+        return q.getResultList();
+    }
 
-     public Clients findClients(Integer id) {
-          return em.find(Clients.class, id);
-     }
+    public Clients findClients(Integer id) {
+        return em.find(Clients.class, id);
+    }
 
-     public int getClientsCount() {
-          CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
-          Root<Clients> rt = cq.from(Clients.class);
-          cq.select(em.getCriteriaBuilder().count(rt));
-          Query q = em.createQuery(cq);
-          System.out.println("client count: " + ((Long) q.getSingleResult()).intValue());
-          return ((Long) q.getSingleResult()).intValue();
-     }
+    public int getClientsCount() {
+        CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
+        Root<Clients> rt = cq.from(Clients.class);
+        cq.select(em.getCriteriaBuilder().count(rt));
+        Query q = em.createQuery(cq);
+        System.out.println("client count: " + ((Long) q.getSingleResult()).intValue());
+        return ((Long) q.getSingleResult()).intValue();
+    }
 
-     public Object[] getInfoByEmail(String email)
-    {
+    public Object[] getInfoByEmail(String email) throws NoResultException{
         CriteriaBuilder cb = em.getCriteriaBuilder();
         CriteriaQuery cq = cb.createQuery();
         Root<Clients> client = cq.from(Clients.class);
         cq.where(cb.equal(client.get(Clients_.email), email));
-        cq.multiselect(client.get(Clients_.email), client.get(Clients_.hashedPassword),client.get(Clients_.isManager), client.get(Clients_.firstName),client.get(Clients_.clientID),client.get(Clients_.provinceAbbreviation));
+        cq.multiselect(client.get(Clients_.email), client.get(Clients_.hashedPassword), client.get(Clients_.isManager), client.get(Clients_.firstName), client.get(Clients_.clientID), client.get(Clients_.provinceAbbreviation));
         TypedQuery<Object[]> query = em.createQuery(cq);
         return query.getSingleResult();
     }
-    
-    public List<String> getEmailsByEmail(String email)
-    {
+
+    public List<String> getEmailsByEmail(String email) {
         CriteriaBuilder cb = em.getCriteriaBuilder();
         CriteriaQuery cq = cb.createQuery();
         Root<Clients> client = cq.from(Clients.class);
@@ -156,9 +154,8 @@ public class ClientsJpaController implements Serializable {
         TypedQuery<String> query = em.createQuery(cq);
         return query.getResultList();
     }
-    
-    public Clients findClientByEmail(String email)
-    {
+
+    public Clients findClientByEmail(String email) {
         CriteriaBuilder cb = em.getCriteriaBuilder();
         CriteriaQuery cq = cb.createQuery();
         Root<Clients> client = cq.from(Clients.class);
@@ -168,63 +165,60 @@ public class ClientsJpaController implements Serializable {
         return query.getSingleResult();
     }
 
-     
-     /**
-      * SELECT c.email, c.fname, c.lname, SUM(price_sold) FROM clients c 
-      * LEFT JOIN orders o ON c.client_id = o.client_id 
-      * LEFT JOIN orderItems oi oN o.order_id = oi.order_id 
-      * WHERE c.email LIKE :query AND c.is_manager = false
-      * GROUP BY c.client_id, c.fname, c.lname;
-      *
-      * @param query
-      * @return
-      */
-     public List<Object[]> searchClients(String query) {
-          String expression = "%" + query + "%";
+    /**
+     * SELECT c.email, c.fname, c.lname, SUM(price_sold) FROM clients c LEFT
+     * JOIN orders o ON c.client_id = o.client_id LEFT JOIN orderItems oi oN
+     * o.order_id = oi.order_id WHERE c.email LIKE :query AND c.is_manager =
+     * false GROUP BY c.client_id, c.fname, c.lname;
+     *
+     * @param query
+     * @return
+     */
+    public List<Object[]> searchClients(String query) {
+        String expression = "%" + query + "%";
 
-          CriteriaBuilder cb = em.getCriteriaBuilder();
-          CriteriaQuery<Object[]> cq = cb.createQuery(Object[].class);
-          Root<Clients> client = cq.from(Clients.class);
-          Join clientOrders = client.join("ordersCollection", JoinType.LEFT);
-          Join orderOrderItems = clientOrders.join("orderItemsCollection", JoinType.LEFT);
-          cq.where( cb.and( cb.isFalse(client.get(Clients_.isManager)), cb.like(client.get(Clients_.email), expression)) );
-          cq.groupBy(client.get(Clients_.clientID));
-          cq.multiselect(
-                  client.get(Clients_.clientID), 
-                  client.get(Clients_.email), 
-                  client.get(Clients_.firstName), 
-                  client.get(Clients_.lastName), 
-                  client.get(Clients_.address1),
-                  client.get(Clients_.address2),
-                  client.get(Clients_.companyName),
-                  client.get(Clients_.cellTelephone),
-                  cb.sum(orderOrderItems.get(OrderItem_.priceSold)));
-          TypedQuery<Object[]> q = em.createQuery(cq);
-          return q.getResultList();
+        CriteriaBuilder cb = em.getCriteriaBuilder();
+        CriteriaQuery<Object[]> cq = cb.createQuery(Object[].class);
+        Root<Clients> client = cq.from(Clients.class);
+        Join clientOrders = client.join("ordersCollection", JoinType.LEFT);
+        Join orderOrderItems = clientOrders.join("orderItemsCollection", JoinType.LEFT);
+        cq.where(cb.and(cb.isFalse(client.get(Clients_.isManager)), cb.like(client.get(Clients_.email), expression)));
+        cq.groupBy(client.get(Clients_.clientID));
+        cq.multiselect(
+                client.get(Clients_.clientID),
+                client.get(Clients_.email),
+                client.get(Clients_.firstName),
+                client.get(Clients_.lastName),
+                client.get(Clients_.address1),
+                client.get(Clients_.address2),
+                client.get(Clients_.companyName),
+                client.get(Clients_.cellTelephone),
+                cb.sum(orderOrderItems.get(OrderItem_.priceSold)));
+        TypedQuery<Object[]> q = em.createQuery(cq);
+        return q.getResultList();
 
-     }
-     
-     public List<Object[]> searchClientsNoSum(String query) {
-          String expression = "%" + query + "%";
+    }
 
-          CriteriaBuilder cb = em.getCriteriaBuilder();
-          CriteriaQuery<Object[]> cq = cb.createQuery(Object[].class);
-          Root<Clients> client = cq.from(Clients.class);
-          cq.where( cb.and( cb.isFalse(client.get(Clients_.isManager)), cb.like(client.get(Clients_.email), expression)) );
-          cq.groupBy(client.get(Clients_.clientID));
-          cq.multiselect(
-                  client.get(Clients_.clientID), 
-                  client.get(Clients_.email), 
-                  client.get(Clients_.firstName), 
-                  client.get(Clients_.lastName), 
-                  client.get(Clients_.address1),
-                  client.get(Clients_.address2),
-                  client.get(Clients_.companyName),
-                  client.get(Clients_.cellTelephone));
-          TypedQuery<Object[]> q = em.createQuery(cq);
-          return q.getResultList();
+    public List<Object[]> searchClientsNoSum(String query) {
+        String expression = "%" + query + "%";
 
-     }
+        CriteriaBuilder cb = em.getCriteriaBuilder();
+        CriteriaQuery<Object[]> cq = cb.createQuery(Object[].class);
+        Root<Clients> client = cq.from(Clients.class);
+        cq.where(cb.and(cb.isFalse(client.get(Clients_.isManager)), cb.like(client.get(Clients_.email), expression)));
+        cq.groupBy(client.get(Clients_.clientID));
+        cq.multiselect(
+                client.get(Clients_.clientID),
+                client.get(Clients_.email),
+                client.get(Clients_.firstName),
+                client.get(Clients_.lastName),
+                client.get(Clients_.address1),
+                client.get(Clients_.address2),
+                client.get(Clients_.companyName),
+                client.get(Clients_.cellTelephone));
+        TypedQuery<Object[]> q = em.createQuery(cq);
+        return q.getResultList();
 
-   
+    }
+
 }

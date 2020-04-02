@@ -84,7 +84,7 @@ public class BookJpaController implements Serializable {
         }
     }
 
-    public void destroy(String id) throws NonexistentEntityException, Exception {
+    public void destroy(Integer id) throws NonexistentEntityException, Exception {
         try {
             utx.begin();
             Book books;

@@ -12,6 +12,7 @@ import javax.faces.context.FacesContext;
 import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
+import javax.persistence.NoResultException;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -35,8 +36,8 @@ public class UserLoginBean implements Serializable {
     private Boolean isManager = false;
     private String FirstName = "";
     private String email = "";
-    private String province = "AB";
-            
+    private String province = "QC";
+
     @PostConstruct
     public void init() {
         LOG.debug("Init called!");
@@ -51,16 +52,20 @@ public class UserLoginBean implements Serializable {
 
         if (userCookies != null && userCookies.length > 0) {
             for (int i = 0; i < userCookies.length; i++) {
-                if (userCookies[i].getName().equals("BOOK_STORE_LOGIN") && !userCookies[i].getValue().equals("")) {
-                    LOG.info("cookie info " + userCookies[i].getName() + " : " + userCookies[i].getValue());
-                    Object[] clientInformation = clientsJpaController.getInfoByEmail(userCookies[i].getValue());
-                    email = (String)clientInformation[0];     
-                    isManager = clientInformation[2] != null ? (Boolean) clientInformation[2] : false;
-                    FirstName = (String) clientInformation[3];
-                    province = (String) clientInformation[5];
-                    isSignedIn = true;
-                    break;
-                } else {
+                try {
+                    if (userCookies[i].getName().equals("BOOK_STORE_LOGIN") && !userCookies[i].getValue().equals("")) {
+                        LOG.info("cookie info " + userCookies[i].getName() + " : " + userCookies[i].getValue());
+                        Object[] clientInformation = clientsJpaController.getInfoByEmail(userCookies[i].getValue());
+                        email = (String) clientInformation[0];
+                        isManager = clientInformation[2] != null ? (Boolean) clientInformation[2] : false;
+                        FirstName = (String) clientInformation[3];
+                        province = (String) clientInformation[5];
+                        isSignedIn = true;
+                        break;
+                    } else {
+                        isSignedIn = false;
+                    }
+                } catch (NoResultException ex) {
                     isSignedIn = false;
                 }
             }
@@ -75,7 +80,7 @@ public class UserLoginBean implements Serializable {
             for (int i = 0; i < userCookies.length; i++) {
                 if (userCookies[i].getName().equals("BOOK_STORE_LOGIN") && !userCookies[i].getValue().equals("")) {
                     Object[] clientInformation = clientsJpaController.getInfoByEmail(userCookies[i].getValue());
-                    return clientsJpaController.findClients((Integer)clientInformation[4]);
+                    return clientsJpaController.findClients((Integer) clientInformation[4]);
                 }
             }
         }
@@ -142,8 +147,8 @@ public class UserLoginBean implements Serializable {
     public void setEmail(String newValue) {
         this.email = newValue;
     }
-    
-    public String getProvince(){
+
+    public String getProvince() {
         LOG.info(this.province);
         return this.province;
     }
