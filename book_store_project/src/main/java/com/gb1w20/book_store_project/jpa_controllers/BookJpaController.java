@@ -84,7 +84,7 @@ public class BookJpaController implements Serializable {
         }
     }
 
-    public void destroy(Integer id) throws NonexistentEntityException, Exception {
+    public void destroy(String id) throws NonexistentEntityException, Exception {
         try {
             utx.begin();
             Book books;
@@ -133,6 +133,13 @@ public class BookJpaController implements Serializable {
     public Book findSingleBook(String id){
         TypedQuery<Book> query = em.createQuery("SELECT b FROM Book b WHERE b.isRemoved = :removed AND b.isbn=:isbn", Book.class);
         query.setParameter("removed", false);
+        query.setParameter("isbn", id);
+        Book book = query.getSingleResult();
+        return book;
+    }
+    
+    public Book findAnySingleBook(String id){
+        TypedQuery<Book> query = em.createQuery("SELECT b FROM Book b WHERE b.isbn=:isbn", Book.class);
         query.setParameter("isbn", id);
         Book book = query.getSingleResult();
         return book;

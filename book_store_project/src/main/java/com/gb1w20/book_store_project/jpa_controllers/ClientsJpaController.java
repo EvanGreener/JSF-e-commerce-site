@@ -203,6 +203,28 @@ public class ClientsJpaController implements Serializable {
           return q.getResultList();
 
      }
+     
+     public List<Object[]> searchClientsNoSum(String query) {
+          String expression = "%" + query + "%";
+
+          CriteriaBuilder cb = em.getCriteriaBuilder();
+          CriteriaQuery<Object[]> cq = cb.createQuery(Object[].class);
+          Root<Clients> client = cq.from(Clients.class);
+          cq.where( cb.and( cb.isFalse(client.get(Clients_.isManager)), cb.like(client.get(Clients_.email), expression)) );
+          cq.groupBy(client.get(Clients_.clientID));
+          cq.multiselect(
+                  client.get(Clients_.clientID), 
+                  client.get(Clients_.email), 
+                  client.get(Clients_.firstName), 
+                  client.get(Clients_.lastName), 
+                  client.get(Clients_.address1),
+                  client.get(Clients_.address2),
+                  client.get(Clients_.companyName),
+                  client.get(Clients_.cellTelephone));
+          TypedQuery<Object[]> q = em.createQuery(cq);
+          return q.getResultList();
+
+     }
 
    
 }
