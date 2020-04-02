@@ -140,7 +140,9 @@ compatible with different screen sizes
 
                                 <!--Button to add to shopping cart-->
                                 <div class="ui two bottom attached buttons ">
-                                    <h:commandButton action="#{cbb.addBookToCart(books)}" type="submit" value = "+ Add to Cart" class="ui button"/>
+                                    <h:commandButton action="#{cbb.addBookToCart(books)}"  value = "+ Add to Cart" class="ui button">
+                                         <f:ajax event="click" ></f:ajax>
+                                        </h:commandButton>
                                 </div>
                                 
                             </div>

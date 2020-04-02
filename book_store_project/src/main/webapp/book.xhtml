@@ -117,7 +117,9 @@ compatible with different screen sizes
                                 <br/>
                                 <h:form>
                                     <!--Button to add to shopping cart-->
-                                    <h:commandButton action="#{cbb.addBookToCart(bb.book)}" type="submit" value = "Add to Cart" class="addToCartBtn button"/>
+                                    <h:commandButton action="#{cbb.addBookToCart(bb.book)}" value = "Add to Cart" class="addToCartBtn button">
+                                        <f:ajax event="click" ></f:ajax>
+                                    </h:commandButton>
                                 </h:form>
                             </div>
                         </ui:repeat>
@@ -159,11 +161,11 @@ compatible with different screen sizes
                                 <h:panelGroup id="reviewDisplay" class="flex-review scrollReviews">
                                     <ui:repeat value="#{reviewBean.getReviews(bb.book.isbn)}"  var="book">
                                         <div>
-                                             <!-- review Title-->
+                                            <!-- review Title-->
                                             <p class="reviewTitle">#{book.reviewTitle}</p>
-                                              <!-- author of review-->
+                                            <!-- author of review-->
                                             <p class="reviewName">#{book.clients.firstName} #{book.clients.lastName}</p>
-                                              
+
                                             <!-- review body-->
                                             <p>#{book.reviewBody} </p>
                                             <div class="flex-review" style="padding:0px">
@@ -175,7 +177,7 @@ compatible with different screen sizes
                                                         <h:graphicImage class="image" height="20px" width="20px" library="images" name="star.png"  />
                                                     </ui:repeat>
                                                 </div>
-                                                  <!-- converting sql date to normal human readable format-->
+                                                <!-- converting sql date to normal human readable format-->
                                                 <div style="padding:0px" class="reviewDate">
                                                     <h:outputText value="#{book.dateEntered}">
                                                         <f:convertDateTime type="date" dateStyle="medium"/>
@@ -301,7 +303,9 @@ compatible with different screen sizes
                         <h:form>
                             <!--Button to add to shopping cart-->
                             <div class="ui two bottom attached buttons ">
-                                <h:commandButton action="#{cbb.addBookToCart(bo)}" type="submit" value = "+ Add to Cart" class="ui button"/>
+                                <h:commandButton action="#{cbb.addBookToCart(bo)}" value = "+ Add to Cart" class="ui button">
+                                    <f:ajax event="click" ></f:ajax>
+                                </h:commandButton>
                             </div>
                         </h:form>
                     </div>
@@ -347,7 +351,9 @@ compatible with different screen sizes
 
                             <!--Button to add to shopping cart-->
                             <div class="ui two bottom attached buttons ">
-                                <h:commandButton action="#{cbb.addBookToCart(bo)}" type="submit" value = "+ Add to Cart" class="ui button"/>
+                                <h:commandButton action="#{cbb.addBookToCart(bo)}" value = "+ Add to Cart" class="ui button">
+                                    <f:ajax event="click" ></f:ajax>
+                                </h:commandButton>
                             </div>
                         </h:form>
                     </div>
