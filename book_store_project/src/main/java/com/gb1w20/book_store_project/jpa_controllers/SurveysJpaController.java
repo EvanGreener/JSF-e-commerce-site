@@ -1,10 +1,12 @@
 package com.gb1w20.book_store_project.jpa_controllers;
 
 import com.gb1w20.book_store_project.entities.Book;
+import com.gb1w20.book_store_project.entities.News;
 import com.gb1w20.book_store_project.entities.Surveys;
 import com.gb1w20.book_store_project.jpa_controllers.exceptions.NonexistentEntityException;
 import java.io.Serializable;
 import java.util.List;
+import java.util.Random;
 import javax.annotation.Resource;
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Named;
@@ -25,29 +27,30 @@ import javax.transaction.UserTransaction;
 @Named
 @RequestScoped
 public class SurveysJpaController implements Serializable {
-    
+
     @Resource
     private UserTransaction utx;
 
     @PersistenceContext
     private EntityManager em;
 
-    public SurveysJpaController() {}
+    public SurveysJpaController() {
+    }
 
     public void create(Surveys survey) throws Exception {
-    try {
-        utx.begin();
-        em.persist(survey);
-        utx.commit();
-    } catch (Exception ex) {
         try {
-            utx.rollback();
-        } catch (Exception re) {
-            throw new Exception("An error occurred attempting to roll back the transaction.", re);
+            utx.begin();
+            em.persist(survey);
+            utx.commit();
+        } catch (Exception ex) {
+            try {
+                utx.rollback();
+            } catch (Exception re) {
+                throw new Exception("An error occurred attempting to roll back the transaction.", re);
+            }
+            throw ex;
         }
-        throw ex;
     }
-}
 
     public void edit(Surveys survey) throws NonexistentEntityException, Exception {
         try {
@@ -111,34 +114,41 @@ public class SurveysJpaController implements Serializable {
         }
         return q.getResultList();
     }
-    
-    public List<Surveys> getfirstSurvey(){
+
+    public List<Surveys> getfirstSurvey() {
         TypedQuery<Surveys> query = em.createQuery("SELECT s FROM Surveys s", Surveys.class);
         query.setMaxResults(1);
         List<Surveys> survey = query.getResultList();
-        
-        return survey; 
+
+        return survey;
     }
-    
-        public  List<Integer> getTotalVotes(int id){
+
+    public List<Integer> getTotalVotes(int id) {
         TypedQuery<Integer> query = em.createQuery("SELECT sum(sd.votes) FROM Surveys s inner join Survey_Data sd on s.survey_ID=sd.survey_ID", Integer.class);
         // query.setParameter("id", id);
         List<Integer> sum = query.getResultList();
         return sum;
-    } 
-    
+    }
 
     public Surveys findSurveys(Integer id) {
-            return em.find(Surveys.class, id);
+        return em.find(Surveys.class, id);
+    }
+
+    public Surveys getRandomSurvey() {
+        TypedQuery<Surveys> query = em.createQuery("SELECT s FROM Surveys s WHERE s.isRemoved = :removed", Surveys.class);
+        query.setParameter("removed", false);
+        Random r = new Random();
+        query.setFirstResult((r.nextInt(getSurveysCount())));
+        query.setMaxResults(1);
+        Surveys s = query.getSingleResult();
+        return s;
     }
 
     public int getSurveysCount() {
-            CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
-            Root<Surveys> rt = cq.from(Surveys.class);
-            cq.select(em.getCriteriaBuilder().count(rt));
-            Query q = em.createQuery(cq);
-            System.out.println("survey count: " + ((Long) q.getSingleResult()).intValue());
-            return ((Long) q.getSingleResult()).intValue();
+        TypedQuery<Surveys> query = em.createQuery("SELECT s FROM Surveys s WHERE s.isRemoved = :removed", Surveys.class);
+        query.setParameter("removed", false);
+        List<Surveys> survey = query.getResultList();
+        return survey.size();
     }
-    
+
 }

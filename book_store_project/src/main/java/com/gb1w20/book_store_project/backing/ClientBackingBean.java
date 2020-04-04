@@ -271,6 +271,41 @@ public class ClientBackingBean implements Serializable {
         }
     }
     
+    public String loginForCart() throws Exception
+    {
+        Object[] info = clientsJpaController.getInfoByEmail(loginEmail);
+        String email = (String)info[0];
+        String dbPasswordHash = (String)info[1];
+        Boolean isManager = (Boolean)info[2];
+        
+        MessageDigest md = MessageDigest.getInstance("SHA-256");
+        byte[] hashEmail = md.digest(email.getBytes(StandardCharsets.UTF_8));
+        byte[] salt = new byte[20];
+        for (int i = 0;i < 20;i++)
+        {
+            salt[i] = hashEmail[i];
+        }
+        md.update(salt);
+        byte[] hashedPassword = md.digest(loginPassword.getBytes(StandardCharsets.UTF_8));
+        StringBuilder sb = new StringBuilder();
+        for (byte b : hashedPassword) {
+            sb.append(String.format("%02x", b));
+        }
+        String loginPasswordHash = sb.toString();
+
+        if (dbPasswordHash.equals(loginPasswordHash))
+        {
+            createLoginCookie(email);
+
+            this.message = "You are logged in, " + email;
+            return isManager ? "managerFront.xhtml?faces-redirect=true" : "cart.xhtml?faces-redirect=true";
+        }
+        else
+        {
+            return "cart.xhtml";
+        }
+    }
+    
     public void validateHomePhone(FacesContext context, UIComponent component, Object value)
     {
         String number = (String)value;

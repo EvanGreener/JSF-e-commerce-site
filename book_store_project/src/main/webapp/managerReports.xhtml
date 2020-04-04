@@ -19,7 +19,8 @@
         <h:outputStylesheet library="webjars" name="Semantic-UI/2.4.1/semantic.min.css" />
         <h:outputStylesheet library="css" name="homepage.css" />
         <h:outputStylesheet library="book_css" name="bookpage.css" />
-        <h:outputStylesheet library="managercss" name="manager.css" />
+        <h:outputStylesheet library="managercss" name="managerReports.css" />
+        <h:outputStylesheet library="managerReportsCss" name="manager.css" />
         <h:outputStylesheet library="webjars" name="font-awesome/4.7.0/css/font-awesome.min-jsf.css" />
         
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
@@ -28,6 +29,7 @@
 
         <!-- Swiper JS -->
         <script src="https://unpkg.com/swiper/js/swiper.min.js"></script>
+        
     </h:head>
 
     <h:body>
@@ -103,6 +105,13 @@
 
         </h:panelGroup>
         </div>
+        <div id="topSellers" class="reportsModal">
+                <!-- Modal content -->
+                <div class="modal-content">
+                    <span class="close">x</span>
+                    <h:graphicImage class="image" id="img01" height="650px" width="520px" library="images" name="9780061120084.jpg"  />
+                </div>
+            </div>
         <bookstore:footer/>
 
 

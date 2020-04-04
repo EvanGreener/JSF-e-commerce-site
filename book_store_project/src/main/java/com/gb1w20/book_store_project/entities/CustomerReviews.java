@@ -58,7 +58,7 @@ public class CustomerReviews implements Serializable {
     private String isbn;
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
     @Column(name = "Rating")
-    private Double rating;
+    private Integer rating;
     @Size(max = 10000)
     @Column(name = "Review_Body")
     private String reviewBody;
@@ -83,14 +83,22 @@ public class CustomerReviews implements Serializable {
     @Temporal(TemporalType.TIMESTAMP)
     private Date dateRemoved;
 
-      @JoinColumn(name = "ISBN", referencedColumnName = "ISBN", insertable = false, updatable = false)
+    @JoinColumn(name = "ISBN", referencedColumnName = "ISBN", insertable = false, updatable = false)
     @ManyToOne(optional = false)
     private Book book;
-      
-    public Book getBook(){
+
+    @JoinColumn(name = "Client_ID", referencedColumnName = "Client_ID", insertable = false, updatable = false)
+    @ManyToOne(optional = false)
+    private Clients clients;
+
+    public Clients getClients() {
+        return clients;
+    }
+
+    public Book getBook() {
         return book;
     }
-    
+
     public CustomerReviews() {
     }
 
@@ -122,11 +130,11 @@ public class CustomerReviews implements Serializable {
         this.isbn = isbn;
     }
 
-    public Double getRating() {
+    public Integer getRating() {
         return rating;
     }
 
-    public void setRating(Double rating) {
+    public void setRating(Integer rating) {
         this.rating = rating;
     }
 
@@ -226,5 +234,5 @@ public class CustomerReviews implements Serializable {
     public String toString() {
         return "com.gb1w20.book_store_project.entities.CustomerReviews[ reviewID=" + reviewID + " ]";
     }
-    
+
 }

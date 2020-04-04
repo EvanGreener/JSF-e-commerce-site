@@ -27,8 +27,11 @@ C:\Dawson\assignments\bookstore\book_store_project\src\main\java\com\gb1w20\book
 C:\Dawson\assignments\bookstore\book_store_project\src\main\java\com\gb1w20\book_store_project\entities\Orders.java
 C:\Dawson\assignments\bookstore\book_store_project\src\main\java\com\gb1w20\book_store_project\entities\Publisher.java
 C:\Dawson\assignments\bookstore\book_store_project\src\main\java\com\gb1w20\book_store_project\entities\Tax.java
+C:\Dawson\assignments\bookstore\book_store_project\src\main\java\com\gb1w20\book_store_project\beans\ReviewBean.java
+C:\Dawson\assignments\bookstore\book_store_project\src\main\java\com\gb1w20\book_store_project\CacheControlPhaseListener.java
 C:\Dawson\assignments\bookstore\book_store_project\src\main\java\com\gb1w20\book_store_project\entities\BookFormat.java
 C:\Dawson\assignments\bookstore\book_store_project\src\main\java\com\gb1w20\book_store_project\entities\Surveys.java
+C:\Dawson\assignments\bookstore\book_store_project\src\main\java\com\gb1w20\book_store_project\beans\NewsBean.java
 C:\Dawson\assignments\bookstore\book_store_project\src\main\java\com\gb1w20\book_store_project\jpa_controllers\NewsJpaController.java
 C:\Dawson\assignments\bookstore\book_store_project\src\main\java\com\gb1w20\book_store_project\beans\BookBean.java
 C:\Dawson\assignments\bookstore\book_store_project\src\main\java\com\gb1w20\book_store_project\beans\SearchBean.java
@@ -44,12 +47,13 @@ C:\Dawson\assignments\bookstore\book_store_project\src\main\java\com\gb1w20\book
 C:\Dawson\assignments\bookstore\book_store_project\src\main\java\com\gb1w20\book_store_project\jpa_controllers\AdsJpaController.java
 C:\Dawson\assignments\bookstore\book_store_project\src\main\java\com\gb1w20\book_store_project\backing\OrderItemBackingBean.java
 C:\Dawson\assignments\bookstore\book_store_project\src\main\java\com\gb1w20\book_store_project\jpa_controllers\SurveyDataJpaController.java
+C:\Dawson\assignments\bookstore\book_store_project\src\main\java\com\gb1w20\book_store_project\beans\AdsBean.java
 C:\Dawson\assignments\bookstore\book_store_project\src\main\java\com\gb1w20\book_store_project\entities\News.java
 C:\Dawson\assignments\bookstore\book_store_project\src\main\java\com\gb1w20\book_store_project\JAXRSConfiguration.java
 C:\Dawson\assignments\bookstore\book_store_project\src\main\java\com\gb1w20\book_store_project\backing\AdBackingBean.java
 C:\Dawson\assignments\bookstore\book_store_project\src\main\java\com\gb1w20\book_store_project\backing\NewsBackingBean.java
 C:\Dawson\assignments\bookstore\book_store_project\src\main\java\com\gb1w20\book_store_project\jpa_controllers\ClientsJpaController.java
+C:\Dawson\assignments\bookstore\book_store_project\src\main\java\com\gb1w20\book_store_project\backing\CartBackingBean.java
 C:\Dawson\assignments\bookstore\book_store_project\src\main\java\com\gb1w20\book_store_project\beans\EditAdBean.java
-C:\Dawson\assignments\bookstore\book_store_project\src\main\java\com\gb1w20\book_store_project\beans\CartBean.java
 C:\Dawson\assignments\bookstore\book_store_project\src\main\java\com\gb1w20\book_store_project\jpa_controllers\SurveysJpaController.java
 C:\Dawson\assignments\bookstore\book_store_project\src\main\java\com\gb1w20\book_store_project\entities\Authors.java

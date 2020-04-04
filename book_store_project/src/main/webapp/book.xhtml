@@ -2,10 +2,11 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:b="http://bootsfaces.net/ui"
-      xmlns:f="http://xmlns.jcp.org/jsf/core"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-      xmlns:bookstore="http://java.sun.com/jsf/composite/default_components">
+      xmlns:bookstore="http://java.sun.com/jsf/composite/default_components"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:c="http://java.sun.com/jsp/jstl/core"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
     <h:head>
         <ui:repeat value="#{bb.book}" var="book">
             <title>#{book.title}</title>
@@ -18,7 +19,9 @@
         <h:outputStylesheet library="webjars" name="Semantic-UI/2.4.1/semantic.min.css" />
         <h:outputStylesheet library="css" name="homepage.css" />
         <h:outputStylesheet library="book_css" name="bookpage.css" />
+        <h:outputScript library="js" name="homepage.js" />
         <h:outputScript library="js" name="book.js" />
+
         <h:outputStylesheet library="webjars" name="font-awesome/4.7.0/css/font-awesome.min-jsf.css" />
         <!-- Swiper JS -->
         <script src="https://unpkg.com/swiper/js/swiper.min.js"></script>
@@ -30,45 +33,78 @@
         <!--composite component that comes from the navbar.xhtml file to avoid coding nav bar in all web pages-->
         <bookstore:navbar/>
 
+        <!-- The Modal for view book cover -->
+        <div id="myModal" class="modal">
+            <!-- Modal content -->
+            <div class="modal-content">
+                <span class="close">x</span>
+                <h:graphicImage class="image" id="img01" height="650px" width="520px" library="images" name="#{bb.book.isbn}.jpg"  />
+            </div>
+        </div>
+
         <!--Book description section-->
         <div class="lightGreyDiv">
             <div class="ui stackable cards">
-                <div class="ui fluid card">
+                <div class="ui fluid card" style="padding:40px">
                     <div class="content">
                         <ui:repeat value="#{bb.book}" var="book">
-                            <h1>#{book.title}</h1>
-                            <section class="bookInfo">
+                            <p class="textColor" style="font-size: 40px;line-height: 0.3em;letter-spacing: 0.081em;font-weight: 100;">#{book.title}</p>
+                            <section class="bookInfoSection">
                                 <div class="bookTextInfo">
-                                    <p>- <ui:repeat value="#{book.authorsCollection}" var="author">
+                                    <p style="font-size: 23px;line-height: 1.3em;letter-spacing: 0.017em;font-weight: 500;font-style: italic;">- <ui:repeat value="#{book.authorsCollection}" var="author">
                                             #{author.name}
                                         </ui:repeat>
                                     </p><br></br>
                                     <h:commandButton class="bookFormatBtn button" value="PDF" type="button" />
                                     <h:commandButton  class="bookFormatBtn button" value="EPUB" type="button" />
                                     <br></br><br></br>
-                                    <a>### Avg Rating 435 Reviews</a>
-                                    <br></br>
-                                    #{book.description}
-                                    ing with guitar and hanging with guitar and hanging with guitar <span id="dots">...</span><span id="more">and hanging with guitar and hanging with guitar and hanging with guitar and hanging with guitar and hanging with guitar and hanging with guitar and hanging with guitar and hanging with guitar and hanging with guitar and hanging with guitar and hanging with guitar and hanging with guitar and hanging with guitar and hanging with guitar and hanging with guitar and hanging with guitar and hanging with guitar and hanging with guitar and hanging with guitar and hanging with guitar and hanging with guitar and hanging with guitar and hanging with guitar and hanging with guitar and hanging with guitar and hanging with guitar and hanging with guitar and hanging with guitar and hanging with guitar and hanging with guitar and hanging with guitar and hanging with guitar and hanging with guitar and hanging with guitar and hanging with guitar and hanging with guitar and hanging with guitar and hanging with guitar and hanging with guitar and hanging with guitar and hanging with guitar and hanging with guitar and hanging with guitar and hanging with guitar and hanging with guitar and hanging with guitar and hanging with guitar and hanging with guitar and hanging with guitar and hanging with guitar and hanging with guitar and hanging with guitar and hanging with guitar and hanging with guitar and hanging with guitar and hanging with guitar and hanging with guitar and hanging with guitar and hanging with guitar and hanging with guitar and hanging with guitar and hanging with guitar and hanging with guitar and hanging with guitar and hanging with guitar and hanging with guitar and hanging with guitar and hanging with guitar and hanging with guitar and hanging with guitar and hanging with guitar and hanging with guitar and hanging with guitar and hanging with guitar and hanging with </span>
-                                    <a  onclick="showMore()" id="moreBtn">Read more</a>
+                                    <ui:repeat value="#{reviewBean.getRating(reviewBean.getAverageRating(book.isbn))}" var="avgRating">
+                                        <h:graphicImage class="image" height="20px" width="20px" library="images" name="ratestar.png"  />
+                                    </ui:repeat>
+                                    <ui:repeat value="#{reviewBean.getRating(5-reviewBean.getAverageRating(book.isbn))}" var="avgRating">
+                                        <h:graphicImage class="image" height="20px" width="20px" library="images" name="star.png"  />
+                                    </ui:repeat>
 
-                                </div>
-                                <div class="bookCover">
-                                    <h:graphicImage class="image" height="350px" width="300px" library="images" name="#{book.isbn}.jpg"  />
+                                    <p> #{reviewBean.getReviewCount(book.isbn)} <h:panelGroup rendered="#{reviewBean.getReviewCount(book.isbn)==1}">
+                                            review
+                                        </h:panelGroup>
+                                        <h:panelGroup rendered="#{reviewBean.getReviewCount(book.isbn)!=1}">
+                                            reviews
+                                        </h:panelGroup>
+                                    </p>
                                     <br/>
-                                    <h1>$#{book.listPrice}</h1>   
+                                    <p class="thicker"> Genre: #{book.genre}</p>
+                                    <br/>
+
+                                    #{bb.getDisplayBookDescription(book.description)}<h:panelGroup rendered="#{! bb.getDisplayBookDescription(book.description).equals(book.description)}"><span id="dots">...</span><span id="more">#{bb.getHiddenBookDescription(book.description)}</span>
+                                        <a  onclick="showMore()" id="moreBtn">Read more</a>
+                                    </h:panelGroup>
 
                                 </div>
+                                <div class="bookCover homepageImg" style="background-color: white">
 
-                            </section>   
+                                    <h:graphicImage class="image darker" height="400px" width="350px" library="images" name="#{book.isbn}.jpg"  />
+                                    <div class="cardHoverBtn" style="top: 50%;left: 82%;"> View Cover</div>
+                                    <br/>
+                                </div>
+
+                            </section>
                         </ui:repeat>
+                        <div class="flex-container" style="padding: 0px">
+                            <div style="width:70%; padding-top: 0px">
 
-                        <input type="number" value="1" id="quantity" name="quantity" min="1" max="5"></input>
-                        <h:commandButton  class="addToCartBtn button" value="Add to cart" type="button" />
+                                <!--Button to add to shopping cart-->
+                                <div onclick="addToCart(#{book.isbn}, 'pdf')" class="button addToCartBtn">Add to Cart</div>
 
+                            </div>
+                            <div style="width:30%;text-align: center;padding-top: 0px;">
+                                <h1>$#{bb.book.listPrice}</h1>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
+
         </div>
 
         <!--Reviews section-->
@@ -79,182 +115,170 @@
 
 
             <table class="ui padded table">
-                <tr><td  colspan="5" class="right aligned single line">    
-                        <h:commandButton onclick="addReview()" id="reviewBtn" class="button addReviewBtn" value="+" type="button" />
+                <tr>
+                    <td  style="vertical-align: middle; text-align: center">
+                        <p style="font-size: 1.7em">Reviews</p>
+                    </td>
+                    <td  colspan="5" class="right aligned single line">
+                        <h:commandButton rendered="#{UserLoginBean.getIfSignedIn()}" id="reviewBtn" class="button addReviewBtn" value="+" type="button" />
                     </td>
 
                 </tr>
-                <tbody>
 
+                <h:form>
+                    <tbody>
 
-                    <ui:repeat value="#{bb.book.reviews}" var="book">
-                        <tr>
-                            <td>
+                        <tr><td>
 
+                                <h:panelGroup id="gallery" class="flex-container">
+                                    <ui:param name="limit" value="4"/>
+                                    <!--Review section-->
+                                    <ui:repeat offset="#{(reviewBean.page - 1) * 4}" value="#{reviewBean.getReviews(bb.book.isbn)}" var="book" varStatus="status">
+                                        <ui:fragment  rendered="#{status.index lt limit * reviewBean.page}">
+                                            <div>
+                                                <p class="reviewTitle">#{book.reviewTitle}</p>
 
-                                <div class="ui items">
-                                    <div class="item">
-                                        <div class="content">
-                                            <a class="header">#{book.reviewTitle}</a>
-                                            <div class="meta">
-                                                <span>#{book.clientID}</span>
-                                            </div>
-                                            <div class="description">
+                                                <p class="reviewName">#{book.clients.firstName} #{book.clients.lastName}</p>
+
                                                 <p>#{book.reviewBody} </p>
-                                            </div>
-                                            <div class="extra">
-
-
-                                                <div align="right" class="ui">
-                                                    #{book.dateEntered}
+                                                <div class="flex-container" style="padding:0px">
+                                                    <div style="padding:0px">
+                                                        <ui:repeat value="#{reviewBean.getRating(book.rating)}" var="rate">
+                                                            <h:graphicImage class="image" height="20px" width="20px" library="images" name="ratestar.png"  />
+                                                        </ui:repeat>
+                                                        <ui:repeat value="#{reviewBean.getRating(5-book.rating)}" var="rate">
+                                                            <h:graphicImage class="image" height="20px" width="20px" library="images" name="star.png"  />
+                                                        </ui:repeat>
+                                                    </div>
+                                                    <div style="padding:0px" class="reviewDate">
+                                                        <h:outputText value="#{book.dateEntered}">
+                                                            <f:convertDateTime type="date" dateStyle="medium"/>
+                                                        </h:outputText>
+                                                    </div>
                                                 </div>
-
-
+                                                <hr style="border-top-color:grey"/>
                                             </div>
-                                        </div>
-                                    </div>
-                                </div> 
-
+                                        </ui:fragment>
+                                    </ui:repeat>
+                                </h:panelGroup>
+                                <h:panelGroup rendered="#{reviewBean.getReviewCount(bb.book.isbn) ==0}">
+                                    <h4> No Reviews yet.</h4>
+                                </h:panelGroup>
                             </td>
                         </tr>
-                    </ui:repeat>
-                    <tr>
-                        <td class="single line">
+
+                    </tbody>
+
+
+                    <tfoot>
+                        <tr>
+                            <th colspan="5">
+                                <h:panelGroup rendered="#{reviewBean.getReviewCount(bb.book.isbn)>4}">
+                                    <div class="ui right floated pagination menu">
+                                        <!--                                       <a class="item">
+                                                                                    Previous
+                                                                                </a>
+                                                                                <a class="item">1</a>
+                                                                                <a class="item">2</a>
+                                                                                <a class="item">3</a>
+                                                                                <a class="item">4</a>
+                                                                                <a class="item">
+                                                                                    Next
+                                                                                </a>
+                                        -->
 
 
 
+                                        <!-- Pagination -->
+                                        <h:panelGroup id="pagination">
+                                            <!--Previous-->
+                                            <c:choose>
+                                                <c:when test="#{reviewBean.page == 1}">
+                                                    <button disabled="true"  class="ui button"> Prev. </button>
+                                                </c:when>
+                                                <c:otherwise>
+                                                    <h:commandButton value="Prev." class="ui button">
+                                                        <p:ajax update="gallery pagination" listener="#{reviewBean.onPrevious}" />
+                                                    </h:commandButton>
+                                                </c:otherwise>
+                                            </c:choose>
 
 
-                            <div class="ui items">
-                                <div class="item">
-                                    <div class="content">
-                                        <a class="header">Of Mice and Men</a>
-                                        <div class="meta">
-                                            <span>Firstname Lastname</span>
-                                        </div>
-                                        <div class="description">
-                                            <p> nkjdsfkjd fkdjhgkjhsdgkjfhd fkd hgksjfhdgkjfsdhgkjfdhg d gfdjskhg fdsgjhsdf fdghdkjgsd </p>
-                                        </div>
-                                        <div class="extra">
+                                            <!--Page numbers-->
+                                            <c:forEach begin="1" end="#{reviewBean.numPages}" varStatus="status">
+                                                <c:choose>
+                                                    <c:when test="#{status.index == reviewBean.page}">
+                                                        <h:commandButton value="#{status.index} " class="ui active button">
+                                                            <p:ajax event="click" update="gallery pagination" listener="#{reviewBean.onPageSelect(status.index)}" />
+                                                        </h:commandButton>
+                                                    </c:when>
+                                                    <c:otherwise>
+                                                        <h:commandButton value="#{status.index} " class="ui button">
+                                                            <p:ajax event="click" update="gallery pagination" listener="#{reviewBean.onPageSelect(status.index)}" />
+                                                        </h:commandButton>
+                                                    </c:otherwise>
+                                                </c:choose>
+                                            </c:forEach>
 
-
-                                            <div align="right" class="ui">
-                                                Jan 1st 2019
-                                            </div>
-
-
-                                        </div>
+                                            <!--Next-->
+                                            <c:choose>
+                                                <c:when test="#{reviewBean.page == reviewBean.numPages}">
+                                                    <button disabled="true"  class="ui button"> Next </button>
+                                                </c:when>
+                                                <c:otherwise>
+                                                    <h:commandButton value="Next" class="ui button">
+                                                        <p:ajax update="gallery pagination" listener="#{reviewBean.onNext}" />
+                                                    </h:commandButton>
+                                                </c:otherwise>
+                                            </c:choose>
+                                        </h:panelGroup>
                                     </div>
-                                </div>
-                            </div>
+                                </h:panelGroup>
+                            </th>
+                        </tr>
+                    </tfoot>
 
-
-
-
-
-
-
-
-
-
-
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <div class="ui items">
-                                <div class="item">
-                                    <div class="content">
-                                        <a class="header">Of Mice and Men</a>
-                                        <div class="meta">
-                                            <span>Firstname Lastname</span>
-                                        </div>
-                                        <div class="description">
-                                            <p> nkjdsfkjd fkdjhgkjhsdgkjfhd fkd hgksjfhdgkjfsdhgkjfdhg d gfdjskhg fdsgjhsdf fdghdkjgsd </p>
-                                        </div>
-                                        <div class="extra">
-
-
-                                            <div align="right" class="ui">
-                                                Jan 1st 2019
-                                            </div>
-
-
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </td>
-                        <td class="single line">
-                            <div class="ui items">
-                                <div class="item">
-                                    <div class="content">
-                                        <a class="header">Of Mice and Men</a>
-                                        <div class="meta">
-                                            <span>Firstname Lastname</span>
-                                        </div>
-                                        <div class="description">
-                                            <p> nkjdsfkjd fkdjhgkjhsdgkjfhd fkd hgksjfhdgkjfsdhgkjfdhg d gfdjskhg fdsgjhsdf fdghdkjgsd </p>
-                                        </div>
-                                        <div class="extra">
-
-
-                                            <div align="right" class="ui">
-                                                Jan 1st 2019
-                                            </div>
-
-
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </td>
-                    </tr>
-                </tbody>
-
-
-                <tfoot>
-                    <tr><th colspan="5">
-                            <div class="ui right floated pagination menu">
-                                <a class="icon item">
-                                    <i class="left chevron icon"></i>
-                                </a>
-                                <a class="item">1</a>
-                                <a class="item">2</a>
-                                <a class="item">3</a>
-                                <a class="item">4</a>
-                                <a class="icon item">
-                                    <i class="right chevron icon"></i>
-                                </a>
-                            </div>
-                        </th>
-                    </tr></tfoot>
-            </table>                     
+                </h:form>
+            </table>
 
 
         </div>
 
 
-        <!-- The Modal -->
-        <div id="myModal" class="modal">
+        <!-- The Modal for creating a review-->
+        <div id="myReview" class="modal" style="padding-top: 90px;">
 
-            <!-- Modal content -->
-            <div class="modal-content">
-                <span class="close">x</span>
-                <h4>Create Review</h4>
-                <br></br>
-                <h5>Of Mice and Men</h5>
-                <hr></hr>
-                <p>Add a Title</p>
-                <input type="text"></input>
-                <p>Overall Rating</p>
-                <input type="text"></input>
-                <p>/5</p>
-                <p>Add a Review</p>
-                <textarea id="w3mission" rows="4" cols="50">
-                </textarea>
-                <br></br>
-                <input type="submit"></input>
+            <!-- Review Modal content -->
+            <div class="reviewModalContent">
+                <span class="closeReview">x</span>
+                <form>
+                    <p style="font-size: 25px; text-align: center;">Create Review</p>
+                    <br></br>
+                    <p style="font-size: 20px; font-family: georgia !important;">#{bb.book.title}</p>
+                    <hr></hr>
+
+                    <h:outputLabel for="title" value="Add a Title"/>
+                    <br/>
+                    <h:inputText id="title" label="Add a Title" value="#{reviewBean.title}" required="true" requiredMessage="Please enter a title" validator="#{clientBacking.validateHomePhone}">
+                        <f:ajax event="change" render="address2Error"/>
+                    </h:inputText>
+                    <br/>
+                    <br/>
+                    <h:outputLabel for="rating" value="Overall Rating"/>
+                    <br/>
+                    <h:selectOneMenu id="rating" label="Overall Rating" value="#{reviewBean.ratings}" required="true" requiredMessage="Please a rating">
+                        <f:selectItems value="#{reviewBean.ratings}" />
+                    </h:selectOneMenu>
+                    <h:outputLabel for="rating" value="/5"/>
+                    <br/><br/>
+                    <h:outputLabel for="review" value="Add a Review"/>
+                    <br/>
+                    <h:inputTextarea value="#{reviewBean.reviewBody}" id="review" cols="45" rows="4" />
+                    <br/><br/>
+                    <div>
+                        <h:commandButton value="Submit" class="addToCartBtn" action="#{reviewBean.setCustomerReview(bb.book.isbn)}"></h:commandButton>
+                    </div>
+                </form>
             </div>
 
         </div>
@@ -262,50 +286,100 @@
 
         <!--Suggestions section-->
         <div class="lightOrangeDiv">
-
-
-            <br></br>
-            <h4>Similar Genre</h4><br></br>
-
+            <h:panelGroup rendered="#{!empty bb.getSimilarGenreBooks(bb.book,bb.book.authorsCollection)}">
+                <p class="small">Similar Genre</p>
+            </h:panelGroup>
             <div class="ui four doubling stackable cards">
-                <ui:repeat value="#{bb.getSimilarGenreBooks(bb.book)}" var="bo">
-
-
-                    <div class="ui fluid card darker">
+                <ui:repeat value="#{bb.getSimilarGenreBooks(bb.book,bb.book.authorsCollection)}" var="bo">
+                    <div class="ui fluid card darker homepageCard">
                         <div class="homepageImg">
-                            <h:graphicImage class="img" height="250" width="156.25" library="images" name="#{bo.isbn}.jpg"  />
+                            <h:graphicImage class="img" height="250" width="200" library="images" name="#{bo.isbn}.jpg"  />
+                            <div class="cardHoverBtn"> View Cover</div>
                         </div>
                         <div class="content">
-                              <h:commandLink action = "#{bb.viewBook(bo)}" type="submit" value = "">
-                                        <div class="header">
+                            <h:link outcome = "book"  value = "">
+                                <f:param  name="isbn" value="#{bo.isbn}" />
+                                <div class="header textColor">
 
-                                            #{bo.title}</div>
-                                        <div class="meta">
+                                    #{bo.title}</div>
+                                <div class="meta">
 
-                                            <ui:repeat value="#{bo.authorsCollection}" var="author">
-                                                #{author.name}
-                                            </ui:repeat>
+                                    <ui:repeat value="#{bo.authorsCollection}" var="author">
+                                        #{author.name}
+                                    </ui:repeat>
 
-                                        </div>
+                                </div>
 
-                                        <div class="description">
-                                            <div class="ui tag labels">
-                                                <a class="ui label">
-                                                    $#{bo.listPrice}
-                                                </a>
-                                            </div>
+                                <div class="description">
+                                    <div class="ui tag labels">
+                                        <a class="ui label">
+                                            $#{bo.listPrice}
+                                        </a>
+                                    </div>
 
-                                        </div>
-                                    </h:commandLink>
+                                </div>
+                            </h:link>
                         </div>
-                        <div class="ui bottom attached button">
-                            + Add to Cart
+                        <!--Button to add to shopping cart-->
+                        <div class="ui two bottom attached buttons ">
+                            <div onclick="addToCart(#{bo.isbn}, 'pdf')" class="ui button">+ Add to Cart</div>
                         </div>
 
                     </div>
 
                 </ui:repeat>
-            </div> 
+            </div>
+
+
+            <h:panelGroup rendered="#{!empty bb.getSimilarAuthorBooks(bb.book.authorsCollection,bb.book.isbn)}">
+                <br/><br/><br/>
+                <ui:repeat value="#{bb.book.authorsCollection}" var="author" >
+                    <p class="small">Books by #{author.name}</p>
+                </ui:repeat>
+            </h:panelGroup>
+
+            <div class="ui four doubling stackable cards">
+
+
+                <ui:repeat value="#{bb.getSimilarAuthorBooks(bb.book.authorsCollection,bb.book.isbn)}" var="bo">
+                    <div class="ui fluid card darker homepageCard">
+                        <div class="homepageImg">
+                            <h:graphicImage class="img" height="250" width="200" library="images" name="#{bo.isbn}.jpg"  />
+                            <div class="cardHoverBtn"> View Cover</div>
+                        </div>
+                        <div class="content">
+                            <h:commandLink action = "#{bb.viewBook(bo)}"  value = "">
+                                <div class="header textColor">
+
+                                    #{bo.title}</div>
+                                <div class="meta">
+
+                                    <ui:repeat value="#{bo.authorsCollection}" var="au">
+                                        #{au.name}
+                                    </ui:repeat>
+
+                                </div>
+
+                                <div class="description">
+                                    <div class="ui tag labels">
+                                        <a class="ui label">
+                                            $#{bo.listPrice}
+                                        </a>
+                                    </div>
+
+                                </div>
+                            </h:commandLink>
+                        </div>
+                        <!--Button to add to shopping cart-->
+                        <div class="ui two bottom attached buttons ">
+                            <div onclick="addToCart(#{bo.isbn}, 'pdf')" class="ui button">+ Add to Cart</div>
+                        </div>
+
+                    </div>
+
+                </ui:repeat>
+
+            </div>
         </div>
 
         <!--composite component that comes from the footer.xhtml file to avoid coding the website footer in all web pages-->

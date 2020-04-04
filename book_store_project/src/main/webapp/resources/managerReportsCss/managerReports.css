@@ -1,0 +1,14 @@
+
+/* 
+    Created on : Apr. 3, 2020, 8:33:27 a.m.
+    Author     : cawri
+*/
+
+.reportsModal{
+    position: fixed;
+    padding-top: 0px;
+    height: fit-content;
+    text-align: center;
+    font-size: 18px;
+    visibility:visible;
+}
