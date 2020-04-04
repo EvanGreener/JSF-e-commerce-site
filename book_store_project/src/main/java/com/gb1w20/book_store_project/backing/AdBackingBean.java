@@ -4,6 +4,7 @@ import com.gb1w20.book_store_project.entities.Ads;
 import com.gb1w20.book_store_project.jpa_controllers.AdsJpaController;
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 import javax.enterprise.context.RequestScoped;
 import javax.faces.application.FacesMessage;
 import javax.faces.component.UIComponent;
@@ -76,6 +77,28 @@ public class AdBackingBean implements Serializable {
         adsJpaController.edit(ad);
         LOG.debug("Reached the edit method");
         return null;
+    }
+    
+    public boolean decideDisabled(Ads ad)
+    {   
+        List<Ads> allEnabled = adsJpaController.getAllEnabledAds();
+        LOG.debug(allEnabled.size() + "");
+        boolean result = true;
+        if (ad.getIsRemoved())
+        {
+            if (allEnabled.size() < 2)
+            {
+                result = false;
+            }
+        }
+        else
+        {
+            if (allEnabled.size() != 1)
+            {
+                result = false;
+            }
+        }
+        return result;
     }
     
     public String addOrRemoveAd(Ads ad) throws Exception

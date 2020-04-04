@@ -19,11 +19,11 @@ import javax.inject.Inject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-@Named("search")
+@Named("managerSearch")
 @ViewScoped
-public class SearchBean implements Serializable {
+public class ManagerBookSearchBean implements Serializable {
 
-    private final static Logger LOG = LoggerFactory.getLogger(SearchBean.class);
+    private final static Logger LOG = LoggerFactory.getLogger(ManagerBookSearchBean.class);
 
     @Inject
     private BookJpaController bookCtrlr;
@@ -123,7 +123,7 @@ public class SearchBean implements Serializable {
 
     private void updateSearchBean() throws IOException {
 
-        List<Book> res = searchBy != null && !query.isBlank() ? bookCtrlr.search(searchBy, query, page) : bookCtrlr.findNonRemovedBooks();
+        List<Book> res = searchBy != null && !query.isBlank() ? bookCtrlr.search(searchBy, query, page) : bookCtrlr.findBookEntities();
 
         LOG.debug(query);
         LOG.debug(searchBy);

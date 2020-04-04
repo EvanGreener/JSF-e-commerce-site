@@ -67,7 +67,7 @@
                             #{adsJpaController.getStatusByAdId(ads.adID)}
                     </h:column>
                     <h:column>
-                        <h:commandLink value="#{adBacking.getRemovalStatus(ads.isRemoved)}">
+                        <h:commandLink value="#{adBacking.getRemovalStatus(ads.isRemoved)}" disabled="#{adBacking.decideDisabled(ads)}">
                             <f:ajax event="click" listener="#{adBacking.addOrRemoveAd(ads)}" />
                         </h:commandLink>
                     </h:column>

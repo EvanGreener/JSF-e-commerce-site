@@ -1,12 +1,8 @@
 package com.gb1w20.book_store_project.jpa_controllers;
 
-import com.gb1w20.book_store_project.entities.Authors;
 import com.gb1w20.book_store_project.entities.Authors_;
 import com.gb1w20.book_store_project.entities.Book;
 import com.gb1w20.book_store_project.entities.Book_;
-import com.gb1w20.book_store_project.entities.News;
-import com.gb1w20.book_store_project.entities.OrderItem;
-import com.gb1w20.book_store_project.entities.OrderItem_;
 import com.gb1w20.book_store_project.jpa_controllers.exceptions.NonexistentEntityException;
 import java.io.Serializable;
 import java.util.List;
@@ -17,6 +13,7 @@ import javax.inject.Named;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
 import javax.persistence.EntityNotFoundException;
+import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaBuilder;
@@ -124,6 +121,16 @@ public class BookJpaController implements Serializable {
             q.setFirstResult(firstResult);
         }
         return q.getResultList();
+    }
+    
+    public List<Book> findNonRemovedBooks()
+    {
+        CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
+        Root<Book> book = cq.from(Book.class);
+        cq.where(em.getCriteriaBuilder().isFalse(book.get(Book_.isRemoved)));
+        cq.select(book);
+        TypedQuery<Book> query = em.createQuery(cq);
+        return query.getResultList();
     }
 
     public Book findBook(Integer id) {
@@ -253,10 +260,36 @@ public class BookJpaController implements Serializable {
         List<Book> books = query.getResultList();
         return books;
     }
+    
+    public List<String> getAllISBN() {
+        CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
+        Root<Book> book = cq.from(Book.class);
+        cq.select(book.get(Book_.isbn));
+        TypedQuery<String> query = em.createQuery(cq);
+        return query.getResultList();
+    }
 
     public List<Book> getRecommended() {
 
         return null;
     }
-
+    
+    public String getStatusByIsbn(String isbn)
+    {
+        CriteriaBuilder cb = em.getCriteriaBuilder();
+        CriteriaQuery cq = cb.createQuery();
+        Root<Book> order = cq.from(Book.class);
+        cq.where(cb.equal(order.get(Book_.isbn), isbn));
+        cq.select(order.get(Book_.isRemoved));
+        TypedQuery<Boolean> query = em.createQuery(cq);
+        try
+        {
+            query.getSingleResult();
+            return "Not Removed";
+        }
+        catch(NoResultException nre)
+        {
+            return "Removed";
+        }
+    }
 }
