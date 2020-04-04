@@ -1,6 +1,7 @@
 package com.gb1w20.book_store_project.jpa_controllers;
 
 import com.gb1w20.book_store_project.entities.Authors;
+import com.gb1w20.book_store_project.entities.Authors_;
 import com.gb1w20.book_store_project.jpa_controllers.exceptions.NonexistentEntityException;
 import java.io.Serializable;
 import java.util.List;
@@ -11,6 +12,8 @@ import javax.persistence.EntityManager;
 import javax.persistence.Query;
 import javax.persistence.EntityNotFoundException;
 import javax.persistence.PersistenceContext;
+import javax.persistence.TypedQuery;
+import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 import javax.transaction.SystemException;
@@ -121,6 +124,26 @@ public class AuthorsJpaController implements Serializable {
             Query q = em.createQuery(cq);
             System.out.println("author count: " + ((Long) q.getSingleResult()).intValue());
             return ((Long) q.getSingleResult()).intValue();
+    }
+    
+    public List<String> getAuthorNames()
+    {
+        CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
+        Root<Authors> author = cq.from(Authors.class);
+        cq.select(author.get(Authors_.name));
+        TypedQuery<String> query = em.createQuery(cq);
+        return query.getResultList();
+    }
+    
+    public Authors getAuthorByName(String name)
+    {
+        CriteriaBuilder cb = em.getCriteriaBuilder();
+        CriteriaQuery cq = cb.createQuery();
+        Root<Authors> author = cq.from(Authors.class);
+        cq.where(cb.equal(author.get(Authors_.name), name));
+        cq.select(author);
+        TypedQuery<Authors> query = em.createQuery(cq);
+        return query.getSingleResult();
     }
     
 }

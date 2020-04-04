@@ -1,3 +1,6 @@
+CREATE DATABASE IF NOT EXISTS bookstore;
+USE bookstore;
+
 DROP TABLE IF EXISTS `Tax`;
 DROP TABLE IF EXISTS `Clients`;
 DROP TABLE IF EXISTS `Book_Authors`;
@@ -2794,9 +2797,9 @@ INSERT INTO News (RSS_Feed,Date_Created,Date_Ended,Is_Removed,Last_Modified) VAL
 INSERT INTO News (RSS_Feed,Date_Created,Date_Ended,Is_Removed,Last_Modified) VALUES('http://feeds.macrumors.com/MacRumors-All','2020-01-01','2020-01-02',TRUE,'2020-01-02');
 INSERT INTO Ads (Image_Name,Ad_Url,Date_Created,Last_Modified,Is_Removed) VALUES('banana','https://en.wikipedia.org/wiki/Banana','2019-05-01','2019-05-01',FALSE);
 INSERT INTO Ads (Image_Name,Ad_Url,Date_Created,Last_Modified,Is_Removed) VALUES('apple','https://en.wikipedia.org/wiki/Apple','2019-05-01','2019-05-01',FALSE);
-INSERT INTO Ads (Image_Name,Ad_Url,Date_Created,Last_Modified,Is_Removed) VALUES('pineapple','https://en.wikipedia.org/wiki/Pineapple','2019-06-01','2019-07-01',FALSE);
-INSERT INTO Ads (Image_Name,Ad_Url,Date_Created,Last_Modified,Is_Removed) VALUES('watermelon','https://en.wikipedia.org/wiki/Melon','2019-06-01','2019-08-01',FALSE);
-INSERT INTO Ads (Image_Name,Ad_Url,Date_Created,Last_Modified,Is_Removed) VALUES('blueberry','https://en.wikipedia.org/wiki/Blueberry','2019-07-01','2019-09-01',FALSE);
+INSERT INTO Ads (Image_Name,Ad_Url,Date_Created,Last_Modified,Is_Removed) VALUES('pineapple','https://en.wikipedia.org/wiki/Pineapple','2019-06-01','2019-07-01',TRUE);
+INSERT INTO Ads (Image_Name,Ad_Url,Date_Created,Last_Modified,Is_Removed) VALUES('watermelon','https://en.wikipedia.org/wiki/Melon','2019-06-01','2019-08-01',TRUE);
+INSERT INTO Ads (Image_Name,Ad_Url,Date_Created,Last_Modified,Is_Removed) VALUES('blueberry','https://en.wikipedia.org/wiki/Blueberry','2019-07-01','2019-09-01',TRUE);
 INSERT INTO Ads (Image_Name,Ad_Url,Date_Created,Last_Modified,Is_Removed) VALUES('grape','https://en.wikipedia.org/wiki/Grape','2019-08-01','2019-10-01',TRUE);
 INSERT INTO Surveys (Survey_Name,Date_Created,Last_Modified,Is_Removed,Survey_Description)
     VALUES('Do you like to read?','2019-06-01','2019-06-01',FALSE,'Here at TheBookStore we would like to ask our community what their opinion on reading is, positive, negative, or something else');

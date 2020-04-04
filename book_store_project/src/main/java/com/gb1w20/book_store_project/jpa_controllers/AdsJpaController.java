@@ -156,4 +156,14 @@ public class AdsJpaController implements Serializable {
         }
     }
     
+    public List<Ads> getAllEnabledAds(){
+        CriteriaBuilder cb = em.getCriteriaBuilder();
+        CriteriaQuery cq = cb.createQuery();
+        Root<Ads> ads = cq.from(Ads.class);
+        cq.where(cb.isFalse(ads.get(Ads_.isRemoved)));
+        cq.select(ads);
+        TypedQuery<Ads> query = em.createQuery(cq);
+        return query.getResultList();
+    }
+    
 }
