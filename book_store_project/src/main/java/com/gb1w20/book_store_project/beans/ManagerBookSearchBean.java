@@ -33,7 +33,6 @@ public class ManagerBookSearchBean implements Serializable {
     private String searchBy = "title";
     private List<Book> results;
     private int page = 1;
-    private int numPages;
     private String surveyChoice;
     private String isbn;
 
@@ -109,14 +108,6 @@ public class ManagerBookSearchBean implements Serializable {
         page = newValue;
     }
 
-    public int getNumPages() {
-        return numPages;
-    }
-
-    public void setNumPages(int newValue) {
-        numPages = newValue;
-    }
-
     public List<Book> getResults() {
         return results;
     }
@@ -140,17 +131,6 @@ public class ManagerBookSearchBean implements Serializable {
             resetSearchBy();
         
         */
-        numPages = (int) Math.ceil(results.size() / 8.0);
-        
-        if (results.size() == 1) {
-            FacesContext context = FacesContext.getCurrentInstance();
-            context.getExternalContext().redirect("book.xhtml?isbn=" + results.get(0).getIsbn());
-            //reinitializing query,genrefilters,and search by so it does not affect the next search
-            resetQuery();
-            resetGenreFilters();
-            resetSearchBy();
-        }
-
     }
 
     public void onKeyUp() throws IOException {

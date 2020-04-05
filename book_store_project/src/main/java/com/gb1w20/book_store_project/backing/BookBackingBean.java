@@ -176,7 +176,7 @@ public class BookBackingBean implements Serializable {
         book.setDateEntered(new Date());
         book.setLastModified(new Date());
         book.setIsRemoved(false);
-        book.setAuthorsCollection(authors);
+        //book.setAuthorsCollection(authors);
         bookJpaController.create(book);
         FacesContext.getCurrentInstance().getExternalContext().redirect("managerInventory.xhtml");
         return "managerInventory.xhtml";
