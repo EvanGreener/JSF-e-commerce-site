@@ -13,8 +13,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
- *
- * @author 1733408
+ * Bean for updating the order search criteria (search by email) on the managerial order page
+ * @author Giancarlo Biasiucci
+ * @version April 4, 2020
  */
 @Named("orderSearch")
 @SessionScoped
@@ -53,13 +54,16 @@ public class OrderSearchBean implements Serializable {
         return this.currentOrder;
     }
     
-    
+    /**
+     * Updates the bean with the new search query, and performs the search with the new query
+     */
     public void updateBean() {
           LOG.debug("Update called");
-          LOG.debug(query);
+          System.out.println("Query: " + query);
           searchResults = orderCtrl.searchOrders(query);
+          System.out.println(searchResults.toString());
      }
-
+    
      public void onEdit(int id) {
           LOG.debug(id + "");
           currentOrder = orderCtrl.findOrders(id);

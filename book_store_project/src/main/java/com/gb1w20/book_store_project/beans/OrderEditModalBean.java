@@ -18,8 +18,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
- *
- * @author 1733408
+ * Bean for editing an existing order's information
+ * @author Giancarlo Biasiucci
+ * @version April 4, 2020
  */
 
 @Named("orderEdit")
@@ -84,6 +85,11 @@ public class OrderEditModalBean implements Serializable {
         return currentItem;
     }
     
+    /**
+     * Saves the current order information to be displayed in the "Edit Order" modal
+     * when the corresponding button is clicked
+     * @param id 
+     */
     public void onEdit(int id) {
           LOG.debug("Edit called!");
           LOG.debug("ID we searching for: " + id);
@@ -92,6 +98,11 @@ public class OrderEditModalBean implements Serializable {
           LOG.debug("Current order email " + currentOrder.getClient().getEmail());
     }
     
+    /**
+     * Saves the current order item information to be displayed in the "Edit Item" modal
+     * when the corresponding button is clicked
+     * @param id 
+     */
     public void onItemEdit(int id) {
           LOG.debug("Item edit called!");
           LOG.debug("ID we searching for: " + id);
@@ -101,6 +112,12 @@ public class OrderEditModalBean implements Serializable {
           LOG.debug("Current item price " + currentItem.getPriceSold());
     }
     
+    /**
+     * Edits the existing order item information with what is present in the fields in the "Edit Item" modal
+     * and updates the entry in the database
+     * @return
+     * @throws Exception 
+     */
     public String onSubmitEdit() throws Exception {
         LOG.debug("onSubmitEdit called");
         currentItem.setPriceSold(Double.parseDouble(newSalePriceStr));
@@ -111,6 +128,12 @@ public class OrderEditModalBean implements Serializable {
         return null;
     }
     
+    /**
+     * Validates that the data entered in the field is a valid double (for new sale price)
+     * @param context
+     * @param component
+     * @param value 
+     */
     public void validateDouble(FacesContext context, UIComponent component, Object value)
     {
         String doubleStr = (String)value;

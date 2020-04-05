@@ -1,12 +1,8 @@
 package com.gb1w20.book_store_project.jpa_controllers;
 
-import com.gb1w20.book_store_project.entities.Authors;
 import com.gb1w20.book_store_project.entities.Authors_;
 import com.gb1w20.book_store_project.entities.Book;
 import com.gb1w20.book_store_project.entities.Book_;
-import com.gb1w20.book_store_project.entities.News;
-import com.gb1w20.book_store_project.entities.OrderItem;
-import com.gb1w20.book_store_project.entities.OrderItem_;
 import com.gb1w20.book_store_project.jpa_controllers.exceptions.NonexistentEntityException;
 import java.io.Serializable;
 import java.util.List;
@@ -17,6 +13,7 @@ import javax.inject.Named;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
 import javax.persistence.EntityNotFoundException;
+import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaBuilder;
@@ -30,7 +27,7 @@ import org.slf4j.LoggerFactory;
 
 /**
  *
- * @author 
+ * @author
  */
 @Named
 @RequestScoped
@@ -125,34 +122,45 @@ public class BookJpaController implements Serializable {
         }
         return q.getResultList();
     }
+    
+    public List<Book> findNonRemovedBooks()
+    {
+        CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
+        Root<Book> book = cq.from(Book.class);
+        cq.where(em.getCriteriaBuilder().isFalse(book.get(Book_.isRemoved)));
+        cq.select(book);
+        TypedQuery<Book> query = em.createQuery(cq);
+        return query.getResultList();
+    }
 
     public Book findBook(Integer id) {
         return em.find(Book.class, id);
     }
-    
-    public Book findSingleBook(String id){
+
+    public Book findSingleBook(String id) {
         TypedQuery<Book> query = em.createQuery("SELECT b FROM Book b WHERE b.isRemoved = :removed AND b.isbn=:isbn", Book.class);
         query.setParameter("removed", false);
         query.setParameter("isbn", id);
         Book book = query.getSingleResult();
         return book;
     }
-    
-    public Book findAnySingleBook(String id){
+
+    public Book findAnySingleBook(String id) {
         TypedQuery<Book> query = em.createQuery("SELECT b FROM Book b WHERE b.isbn=:isbn", Book.class);
         query.setParameter("isbn", id);
         Book book = query.getSingleResult();
         return book;
     }
-    
-    public List<Book> findBook(String id){
+
+    public List<Book> findBook(String id) {
         TypedQuery<Book> query = em.createQuery("SELECT b FROM Book b WHERE b.isRemoved = :removed AND b.isbn=:isbn", Book.class);
         query.setParameter("removed", false);
         query.setParameter("isbn", id);
         List<Book> books = query.getResultList();
         return books;
     }
-    public List<Book> findBookAll(String id){
+
+    public List<Book> findBookAll(String id) {
         TypedQuery<Book> query = em.createQuery("SELECT b FROM Book b WHERE b.isbn=:isbn", Book.class);
         query.setParameter("isbn", id);
         List<Book> books = query.getResultList();
@@ -192,11 +200,25 @@ public class BookJpaController implements Serializable {
 
     }
 
-
     public List<Book> getBestSeller() {
 
         TypedQuery<Book> query = em.createQuery("SELECT b FROM Book b INNER JOIN b.orders o where b.isRemoved = :removed GROUP BY o.isbn ORDER BY count(o.isbn) DESC", Book.class);
-        query.setMaxResults(8);
+        query.setParameter("removed", false);
+        List<Book> books = query.getResultList();
+        return books;
+    }
+
+    public List<Book> getAllNonRemovedBooks() {
+
+        TypedQuery<Book> query = em.createQuery("SELECT b FROM Book b where b.isRemoved = :removed ", Book.class);
+        query.setParameter("removed", false);
+        List<Book> books = query.getResultList();
+        return books;
+    }
+
+    public List<Book> getSaleBooks() {
+
+        TypedQuery<Book> query = em.createQuery("SELECT b FROM Book b where b.isRemoved = :removed AND b.listPrice  <> b.salePrice", Book.class);
         query.setParameter("removed", false);
         List<Book> books = query.getResultList();
         return books;
@@ -222,6 +244,16 @@ public class BookJpaController implements Serializable {
         List<Book> books = query.getResultList();
         return books.size();
     }
+
+    //used for recommending books
+    public List<Book> getSimilarGenres(String genre) {
+        TypedQuery<Book> query = em.createQuery("SELECT b FROM Book b inner join b.authorsCollection a WHERE b.genre = :genre AND b.isRemoved = :removed", Book.class);
+        query.setParameter("genre", genre);
+        query.setParameter("removed", false);
+        List<Book> books = query.getResultList();
+        return books;
+    }
+//gets books that belong in same genre excluding books written by author
 
     public List<Book> getSimilarGenres(Book b, Integer a) {
         TypedQuery<Book> query = em.createQuery("SELECT b FROM Book b inner join b.authorsCollection a WHERE b.genre = :genre AND b.isbn <> :isbn AND a.authorID <> :author AND b.isRemoved = :removed", Book.class);
@@ -253,10 +285,36 @@ public class BookJpaController implements Serializable {
         List<Book> books = query.getResultList();
         return books;
     }
+    
+    public List<String> getAllISBN() {
+        CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
+        Root<Book> book = cq.from(Book.class);
+        cq.select(book.get(Book_.isbn));
+        TypedQuery<String> query = em.createQuery(cq);
+        return query.getResultList();
+    }
 
     public List<Book> getRecommended() {
 
         return null;
     }
-
+    
+    public String getStatusByIsbn(String isbn)
+    {
+        CriteriaBuilder cb = em.getCriteriaBuilder();
+        CriteriaQuery cq = cb.createQuery();
+        Root<Book> order = cq.from(Book.class);
+        cq.where(cb.equal(order.get(Book_.isbn), isbn));
+        cq.select(order.get(Book_.isRemoved));
+        TypedQuery<Boolean> query = em.createQuery(cq);
+        try
+        {
+            query.getSingleResult();
+            return "Not Removed";
+        }
+        catch(NoResultException nre)
+        {
+            return "Removed";
+        }
+    }
 }
