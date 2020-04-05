@@ -11,7 +11,9 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.net.URL;
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import javax.annotation.PostConstruct;
@@ -41,6 +43,7 @@ public class BookBean implements Serializable {
     private Book book;
     private List<Book> similarGenreBooks;
     private List<Book> similarAuthorBooks;
+    private List<Book> saleBooks;
     private String genre;
     private int bookSlideColor = 0;
 
@@ -109,7 +112,9 @@ public class BookBean implements Serializable {
     }
 
     /**
-     * Get books with similar genre that user is currently viewing
+     * Get books with similar genre that user is currently viewing except for
+     * current one that is being viewed and the ones written by same author as
+     * the one being viewed
      *
      * @param book
      * @param author
@@ -118,6 +123,21 @@ public class BookBean implements Serializable {
     public List<Book> getSimilarGenreBooks(Book book, List<Authors> author) {
         LOG.debug("getSimilarGenreBooks");
         similarGenreBooks = bookCtrlr.getSimilarGenres(book, author.get(0).getAuthorID());
+        return similarGenreBooks;
+    }
+
+    /**
+     * Get books with similar genre that user had previously viewed for
+     * recommendations
+     *
+     * @param book
+     * @return similarGenreBooks
+     */
+    public List<Book> getSimilarGenreBooks(String genre) {
+        LOG.debug("getSimilarGenreBooks");
+        similarGenreBooks = bookCtrlr.getSimilarGenres(genre);
+        Collections.shuffle(similarGenreBooks);
+
         return similarGenreBooks;
     }
 
@@ -182,6 +202,17 @@ public class BookBean implements Serializable {
 
     public Book findOrderBook(OrderItem orderItem) {
         return bookCtrlr.findSingleBook(orderItem.getIsbn());
+    }
+
+    /**
+     * Get all books with sales
+     *
+     * @return books
+     */
+    public List<Book> getSaleBooks() {
+        LOG.debug("getSaleBooks");
+        this.saleBooks = bookCtrlr.getSaleBooks();
+        return this.saleBooks;
     }
 
     /**

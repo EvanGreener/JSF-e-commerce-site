@@ -283,7 +283,7 @@ public class CartBackingBean implements Serializable {
         sender.sendOrderConfirmationEmail(mailBean);
     }
 
-    private void saveLastGenre(Book addingBook) {
+    public void saveLastGenre(Book addingBook) {
         FacesContext facesContext = FacesContext.getCurrentInstance();
         HttpServletRequest request = (HttpServletRequest) facesContext.getExternalContext().getRequest();
         Cookie cookie = null;
@@ -317,7 +317,7 @@ public class CartBackingBean implements Serializable {
         Cookie[] userCookies = request.getCookies();
         LOG.info("checking genre");
 
-        String lastGenre = "Fiction";
+        String lastGenre = "";
         
         if (userCookies != null && userCookies.length > 0) {
             for (int i = 0; i < userCookies.length; i++) {

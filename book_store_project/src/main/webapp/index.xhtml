@@ -21,7 +21,8 @@ compatible with different screen sizes
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:bookstore="http://java.sun.com/jsf/composite/default_components"
       xmlns:p="http://primefaces.org/ui"
-      xmlns:a="http://xmlns.jcp.org/jsf/passthrough">
+      xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
     <h:head>
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 
@@ -99,58 +100,6 @@ compatible with different screen sizes
         </div>
         <div class="lightOrangeDiv">
 
-            <!--Shows top eight books with that have been purchased most-->
-            <!--https://semantic-ui.com/views/card.html-->
-            <p class="small">Best Seller Products</p><br/>
-            <h:form>
-                <h:panelGroup>
-                    <div class="ui four doubling stackable cards">
-                        <ui:repeat value="#{bb.bestSeller}" var="books">
-
-                            <!--book cover -->
-                            <div class="ui fluid card darker homepageCard">
-                                <div class="homepageImg">
-                                    <h:graphicImage class="img" height="250" width="200" library="images" name="#{books.isbn}.jpg"/>
-                                    <div class="cardHoverBtn"> View Cover</div>
-                                </div>
-                                <div class="content">
-
-                                    <!--link to its own book page -->
-                                    <!--link contains title and author -->
-                                    <h:link outcome="book" value = "">
-                                        <f:param  name="isbn" value="#{books.isbn}" />
-                                        <div class="header textColor">
-                                            #{books.title}</div>
-                                        <div class="meta">
-                                            <ui:repeat value="#{books.authorsCollection}" var="author">
-                                                #{author.name}
-                                            </ui:repeat>
-                                        </div>
-
-                                        <!--book description -->
-                                        <div class="description">
-                                            <div class="ui tag labels">
-                                                <a class="ui label">
-                                                    $#{books.listPrice}
-                                                </a>
-                                            </div>
-                                        </div>
-                                    </h:link>
-                                </div>
-
-                                <!--Button to add to shopping cart-->
-                                <div class="ui two bottom attached buttons ">
-                                    <h:commandButton action="#{cbb.addBookToCart(books)}" type="submit" value = "+ Add to Cart" class="ui button"/>
-                                </div>
-
-                            </div>
-                        </ui:repeat>
-                    </div>
-                </h:panelGroup>
-            </h:form>
-
-            <br/><br/>
-
             <!--Search bar used searching for books that will display results in gallery page-->
             <form action="gallery.xhtml" method="get">
                 <div class=" searchBarDiv">
@@ -158,8 +107,58 @@ compatible with different screen sizes
                     <input class="searchButton" type="submit" value = "Search"/>
                 </div>
             </form>
+            <br/><br/>
+
+            <!--Shows books of genre last visited by user to recommend-->
+            <!--https://semantic-ui.com/views/card.html-->
+
+            <!--Only if cookie created-->
+
+            <c:if test="#{not empty cbb.getLastGenre()}">
+                <p class="small">Recommended</p><br/>
+                <h:form>
+                    <h:panelGroup>
+                        <div class="ui four doubling stackable cards">
+                            <ui:repeat size="4" value="#{bb.getSimilarGenreBooks(cbb.getLastGenre())}" var="books">
+                                <!--Used composition to display all book cards-->
+                                <bookstore:bookCard/>
+                            </ui:repeat>
+                        </div>
+                    </h:panelGroup>
+                </h:form>
+                <br/><br/>
+            </c:if>
 
 
+            <!--Shows top eight books with that have been purchased most-->
+            <!--https://semantic-ui.com/views/card.html-->
+            <p class="small">Best Seller Products</p><br/>
+            <h:form>
+                <h:panelGroup>
+                    <div class="ui four doubling stackable cards">
+
+                        <ui:repeat size="8" value="#{bb.bestSeller}" var="books">
+                            <!--Used composition to display all book cards-->
+                            <bookstore:bookCard/>
+                        </ui:repeat>
+                    </div>
+                </h:panelGroup>
+            </h:form>
+
+            <br/><br/>
+
+            <p class="small" id="sales">Sales</p><br/>
+            <h:form>
+                <h:panelGroup>
+                    <div class="ui four doubling stackable cards" style=" overflow: auto; height: 420px;">
+                        <ui:repeat size="#{bb.saleBooks.size()}" value="#{bb.saleBooks}" var="books">
+                            <!--Used composition to display all book cards-->
+                            <bookstore:bookCard/>
+                        </ui:repeat>
+                    </div>
+                </h:panelGroup>
+            </h:form>
+            <br/><br/>
 
 
 
@@ -264,7 +263,7 @@ compatible with different screen sizes
         </div>
 
         <!-- Shows the most popular book genres -->
-        <div class="lightPurpleDiv">
+        <div class="lightPurpleDiv" id="popularGenres">
             <p class="small">Popular Genres</p><br/>
             <h:form>
                 <h:panelGroup>
@@ -307,21 +306,21 @@ compatible with different screen sizes
         <!-- Initialize Swiper  for carousel of recently added books-->
         <script>
             var swiper = new Swiper('.swiper-container', {
-            loop: true,
+                loop: true,
                 centeredSlides: true,
                 autoHeight: true, //enable auto height
                 autoplay: {
                     delay: 5000,
                     disableOnInteraction: false,
                 },
-                    pagination: {
-                el: '.swiper-pagination',
+                pagination: {
+                    el: '.swiper-pagination',
                 },
-                    navigation: {
-                nextEl: '.swiper-button-next',
+                navigation: {
+                    nextEl: '.swiper-button-next',
                     prevEl: '.swiper-button-prev',
                 },
-                    });
+            });
 
         </script>
     </h:body>

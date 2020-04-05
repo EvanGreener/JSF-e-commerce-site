@@ -4,7 +4,8 @@
 Book page that displays information for a single book, 
 allows logged in user to create reviews if they have not already, 
 allows all users to view reviews that have been approved by manager,
-suggests books with similar authors and/or genre
+suggests books with similar authors and/or genre,
+saves the genre in a cookie for suggestions in homepage
 
 compatible with different screen sizes
 
@@ -105,19 +106,36 @@ compatible with different screen sizes
                                 <!--Genre info-->
                                 <br/>
                                 <p class="thicker"> Genre: #{book.genre}</p>
+
+                                <!--Save the genre in a cookie-->
+                                #{cbb.saveLastGenre(book)}
                                 <br/>
 
                                 <!--Book description-->
                                 #{bb.getDisplayBookDescription(book.description)}<h:panelGroup rendered="#{! bb.getDisplayBookDescription(book.description).equals(book.description)}"><span id="dots">...</span><span id="more">#{bb.getHiddenBookDescription(book.description)}</span>
                                     <a  onclick="showMore()" id="moreBtn">Read more</a>
                                 </h:panelGroup>
+                                
+                                
+                                <!--list price displayed if sale price equal list price-->
+                                <h:panelGroup rendered="#{bb.book.listPrice.compareTo(bb.book.salePrice)== 0}">
+                                    <h2>$#{bb.book.listPrice}</h2>
+                                </h:panelGroup>
+                                <!--sale price displayed if sale price  not equal list price-->
+                                <h:panelGroup rendered="#{bb.book.listPrice.compareTo(bb.book.salePrice)!= 0}">
+                                    <h2 class="oldPrice">$#{bb.book.listPrice}</h2>
+                                    <h2 class="salePrice">$#{bb.book.salePrice}</h2>
+                                </h:panelGroup>
 
-                                <!--Book price-->
-                                <h2>$#{bb.book.listPrice}</h2>
+
+
+
                                 <br/>
                                 <h:form>
                                     <!--Button to add to shopping cart-->
-                                    <h:commandButton action="#{cbb.addBookToCart(bb.book)}" type="submit" value = "Add to Cart" class="addToCartBtn button"/>
+                                    <h:commandButton action="#{cbb.addBookToCart(bb.book)}" value = "Add to Cart" class="addToCartBtn button">
+                                        <f:ajax event="click" ></f:ajax>
+                                    </h:commandButton>
                                 </h:form>
                             </div>
                         </ui:repeat>
@@ -159,11 +177,11 @@ compatible with different screen sizes
                                 <h:panelGroup id="reviewDisplay" class="flex-review scrollReviews">
                                     <ui:repeat value="#{reviewBean.getReviews(bb.book.isbn)}"  var="book">
                                         <div>
-                                             <!-- review Title-->
+                                            <!-- review Title-->
                                             <p class="reviewTitle">#{book.reviewTitle}</p>
-                                              <!-- author of review-->
+                                            <!-- author of review-->
                                             <p class="reviewName">#{book.clients.firstName} #{book.clients.lastName}</p>
-                                              
+
                                             <!-- review body-->
                                             <p>#{book.reviewBody} </p>
                                             <div class="flex-review" style="padding:0px">
@@ -175,7 +193,7 @@ compatible with different screen sizes
                                                         <h:graphicImage class="image" height="20px" width="20px" library="images" name="star.png"  />
                                                     </ui:repeat>
                                                 </div>
-                                                  <!-- converting sql date to normal human readable format-->
+                                                <!-- converting sql date to normal human readable format-->
                                                 <div style="padding:0px" class="reviewDate">
                                                     <h:outputText value="#{book.dateEntered}">
                                                         <f:convertDateTime type="date" dateStyle="medium"/>
@@ -273,38 +291,9 @@ compatible with different screen sizes
                 <p class="small">Similar Genre</p>
             </h:panelGroup>
             <div class="ui four doubling stackable cards">
-                <ui:repeat value="#{bb.getSimilarGenreBooks(bb.book,bb.book.authorsCollection)}" var="bo">
-                    <div class="ui fluid card darker homepageCard">
-                        <div class="homepageImg">
-                            <h:graphicImage class="img" height="250" width="200" library="images" name="#{bo.isbn}.jpg"  />
-                            <div class="cardHoverBtn"> View Cover</div>
-                        </div>
-                        <div class="content">
-                            <h:link outcome = "book"  value = "">
-                                <f:param  name="isbn" value="#{bo.isbn}" />
-                                <div class="header textColor">
-                                    #{bo.title}</div>
-                                <div class="meta">
-                                    <ui:repeat value="#{bo.authorsCollection}" var="author">
-                                        #{author.name}
-                                    </ui:repeat>
-                                </div>
-                                <div class="description">
-                                    <div class="ui tag labels">
-                                        <a class="ui label">
-                                            $#{bo.listPrice}
-                                        </a>
-                                    </div>
-                                </div>
-                            </h:link>
-                        </div>
-                        <h:form>
-                            <!--Button to add to shopping cart-->
-                            <div class="ui two bottom attached buttons ">
-                                <h:commandButton action="#{cbb.addBookToCart(bo)}" type="submit" value = "+ Add to Cart" class="ui button"/>
-                            </div>
-                        </h:form>
-                    </div>
+                <ui:repeat value="#{bb.getSimilarGenreBooks(bb.book,bb.book.authorsCollection)}" var="books">
+                    <!--Used composition to display all book cards-->
+                    <bookstore:bookCard/>
                 </ui:repeat>
             </div>
 
@@ -317,40 +306,9 @@ compatible with different screen sizes
             </h:panelGroup>
 
             <div class="ui four doubling stackable cards">
-                <ui:repeat value="#{bb.getSimilarAuthorBooks(bb.book.authorsCollection,bb.book.isbn)}" var="bo">
-                    <div class="ui fluid card darker homepageCard">
-                        <div class="homepageImg">
-                            <h:graphicImage class="img" height="250" width="200" library="images" name="#{bo.isbn}.jpg"  />
-                            <div class="cardHoverBtn"> View Cover</div>
-                        </div>
-                        <div class="content">
-                            <h:link outcome = "book"  value = "">
-                                <f:param  name="isbn" value="#{bo.isbn}" />
-                                <div class="header textColor">
-                                    #{bo.title}</div>
-                                <div class="meta">
-
-                                    <ui:repeat value="#{bo.authorsCollection}" var="author">
-                                        #{author.name}
-                                    </ui:repeat>
-                                </div>
-                                <div class="description">
-                                    <div class="ui tag labels">
-                                        <a class="ui label">
-                                            $#{bo.listPrice}
-                                        </a>
-                                    </div>
-                                </div>
-                            </h:link>
-                        </div>
-                        <h:form>
-
-                            <!--Button to add to shopping cart-->
-                            <div class="ui two bottom attached buttons ">
-                                <h:commandButton action="#{cbb.addBookToCart(bo)}" type="submit" value = "+ Add to Cart" class="ui button"/>
-                            </div>
-                        </h:form>
-                    </div>
+                <ui:repeat value="#{bb.getSimilarAuthorBooks(bb.book.authorsCollection,bb.book.isbn)}" var="books">
+                    <!--Used composition to display all book cards-->
+                    <bookstore:bookCard/>
                 </ui:repeat>
             </div>
         </div>
