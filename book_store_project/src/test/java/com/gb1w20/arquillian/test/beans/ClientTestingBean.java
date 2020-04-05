@@ -28,6 +28,7 @@ public class ClientTestingBean {
     public String clientByEmailFirstName;
     //searchClients
     public String searchEmail;
+    public int managerIndicator;
     public String searchFname;
     public String searchLname;
     public String searchAddress1;
@@ -38,7 +39,7 @@ public class ClientTestingBean {
     
     public ClientTestingBean(String email, String infoEmail, boolean isManager, String firstName,
             String provinceAbbr, String clientByEmail_Email, String emailClientFName,
-            String searchEmail, String searchFname, String searchLname,String searchAddress1,
+            String searchEmail, int managerIndicator, String searchFname, String searchLname,String searchAddress1,
             String searchAddress2, String searchCompanyName, String searchCellPhone)
     {
         this.email = email;
@@ -48,6 +49,7 @@ public class ClientTestingBean {
         this.provinceAbbr = provinceAbbr;
         this.clientByEmail_Email = clientByEmail_Email;
         this.clientByEmailFirstName = emailClientFName;
+        this.managerIndicator = managerIndicator;
         this.searchEmail = searchEmail;
         this.searchFname = searchFname;
         this.searchLname = searchLname;

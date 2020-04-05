@@ -6,8 +6,8 @@
       xmlns:bookstore="http://java.sun.com/jsf/composite/default_components"
       xmlns:p="http://primefaces.org/ui"
       xmlns:a="http://xmlns.jcp.org/jsf/passthrough">
-    <h:head>
-        <title>Manager Orders</title>
+     <h:head>
+          <title>Manager Orders</title>
           <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 
           <link href="https://fonts.googleapis.com/css?family=Montserrat|Roboto&amp;display=swap" rel="stylesheet"/>
@@ -34,18 +34,18 @@
                .middle{
                     padding: 0px 40px 0px 40px;
                }
-               
+
                .actions{
                     height: 80%;
                     text-align: center !important;
                     font-size: 20px;
                     margin: 10px 10px 10px 10px;
                }
-               
+
                .actions .ui.button {
                     margin: 10px 10px 10px 10px;
                }
-               
+
                .footer button{
                     font-size: 20px !important;
                     margin: 0px 10px 0px 10px !important;
@@ -55,9 +55,9 @@
                     text-align: center !important;
                }
 
-/*               .content h3 {
-                    
-               }*/
+               /*               .content h3 {
+                                   
+                              }*/
 
                .form-field{
                     font-size: 18px;
@@ -71,12 +71,12 @@
                     z-index: 777;
                     left: 100%;
                     margin-left: -257.42px;
-                   
+
 
                }
 
           </style>
-    </h:head>
+     </h:head>
 
      <h:body>
 
@@ -91,18 +91,24 @@
                               Changes have been saved!
                          </div>
                     </div>
-                    
+
                     <h1>Order Management</h1>
-                                        
+
+                    <!--Loading modal-->
+                    <p:ajaxStatus onstart="PF('statusDialog').show()" onsuccess="PF('statusDialog').hide()" />
+                    <p:dialog widgetVar="statusDialog" modal="true" draggable="false" closable="false" resizable="false" showHeader="false">
+                         <p:graphicImage style="display: inline;" class="loading" library="images" name="double-ring.svg" />
+                    </p:dialog>   
+                    
                     <!--Search bar-->
                     <div style="display: inline;" class="ui search" >
                          <h:inputText  id="query" value="#{orderSearch.query}"  a:placeholder="Search orders by email..." style="float: right; margin-top: 10px; margin-bottom: 10px; width: 200px; " class="prompt" >
-                              <p:ajax event="keyup" listener="#{orderSearch.updateBean()}" update="ordersTable" />
+                              <p:ajax event="keyup"  listener="#{orderSearch.updateBean()}" update="ordersTable" />
                          </h:inputText>
-                    </div> 
-
-
-
+                    </div>
+                    
+                    
+                    
                     <h:dataTable  id="ordersTable" var="orders" style="margin-bottom: 20px;"  class="ui celled table" value="#{orderSearch.searchResults}" >
                          <h:column>
                               <f:facet name="header">Order ID</f:facet>
@@ -129,14 +135,16 @@
                                    #{ordersJpaController.getStatusByOrderId(orders.orderID)}
                          </h:column>
                          <h:column>
-                              <h:commandButton type="button" onclick="setTimeout(function(){$('#editModal').modal('show', hideGrowl())}, 500)" 
+                              <h:commandButton type="button" onclick="setTimeout(function () {
+                                             $('#editModal').modal('show', hideGrowl())
+                                        }, 500)" 
                                                value="Edit Order" class="big ui primary button edit_btn" disabled="#{orders.isRemoved}">
-                                  <f:ajax event="click"  render="editForm" listener="#{orderEdit.onEdit(orders.orderID)}"/>
+                                   <f:ajax event="click"  render="@all" listener="#{orderEdit.onEdit(orders.orderID)}"/>
                               </h:commandButton>
                          </h:column>
-                        <h:column>
-                            <h:commandLink value="#{orderBacking.getRemovalStatus(orders.isRemoved)}" action="#{orderBacking.addOrRemoveOrder(orders)}" />
-                        </h:column>
+                         <h:column>
+                              <h:commandLink value="#{orderBacking.getRemovalStatus(orders.isRemoved)}" action="#{orderBacking.addOrRemoveOrder(orders)}" />
+                         </h:column>
                     </h:dataTable>
                </div>
 
@@ -144,60 +152,61 @@
 
                <div id="editModal" class="small ui modal">
                     <div class="header">
-                        <h1>Order ID# #{orderEdit.currentOrder.orderID} </h1>
+                         <h1>Order ID# #{orderEdit.currentOrder.orderID} </h1>
                     </div>
-                   <div class="content">
-                        <h:dataTable class="ui celled table" value="#{orderEdit.currentOrder.orderItems}" var="items">
-                            <h:column>
-                                <f:facet name="header">ISBN</f:facet>
-                                #{items.isbn}
-                            </h:column>
-                            <h:column>
-                                <f:facet name="header">Title</f:facet>
-                                #{items.book.title}
-                            </h:column>
-                            <h:column>
-                                <f:facet name="header">Price Sold</f:facet>
-                                #{items.priceSold}
-                            </h:column>
-                            <h:column>
-                                <f:facet name="header">Status</f:facet>
-                                #{orderItemJpaController.getStatusByItemId(items.itemID)}
-                            </h:column>
-                            <h:column>
-                                <h:commandLink value="#{orderItemBacking.getRemovalStatus(items.isRemoved)}" action="#{orderItemBacking.addOrRemoveItem(items)}" />
-                            </h:column>
-                            <h:column>
-                                <h:commandButton type="button" onclick="setTimeout(function(){$('#editItemModal').modal('show', hideGrowl())}, 500)" 
-                                               value="Edit Item" class="big ui primary button edit_btn" disabled="#{items.isRemoved}">
-                                    <f:ajax event="click" render="editForm" listener="#{orderEdit.onItemEdit(items.itemID)}"/>
-                              </h:commandButton>
-                            </h:column>
-                        </h:dataTable>
+                    <div class="content">
+                         <h:dataTable class="ui celled table" value="#{orderEdit.currentOrder.orderItems}" var="items">
+                              <h:column>
+                                   <f:facet name="header">ISBN</f:facet>
+                                        #{items.isbn}
+                              </h:column>
+                              <h:column>
+                                   <f:facet name="header">Title</f:facet>
+                                        #{items.book.title}
+                              </h:column>
+                              <h:column>
+                                   <f:facet name="header">Price Sold</f:facet>
+                                        #{items.priceSold}
+                              </h:column>
+                              <h:column>
+                                   <f:facet name="header">Status</f:facet>
+                                        #{orderItemJpaController.getStatusByItemId(items.itemID)}
+                              </h:column>
+                              <h:column>
+                                   <h:commandLink value="#{orderItemBacking.getRemovalStatus(items.isRemoved)}" action="#{orderItemBacking.addOrRemoveItem(items)}" />
+                              </h:column>
+                              <h:column>
+                                   <h:commandButton type="button" onclick="setTimeout(function () {
+                                               $('#editItemModal').modal('show', hideGrowl())}, 500)" 
+                                                    value="Edit Item" class="big ui primary button edit_btn" disabled="#{items.isRemoved}">
+                                        <f:ajax event="click" render="@all" listener="#{orderEdit.onItemEdit(items.itemID)}"/>
+                                   </h:commandButton>
+                              </h:column>
+                         </h:dataTable>
 
-                    <div class="actions">   
-                         <div style="font-size: 20px;" type="button" class="ui cancel button" >Cancel</div>
+                         <div class="actions">   
+                              <div style="font-size: 20px;" type="button" class="ui cancel button" >Cancel</div>
+                         </div>
+
                     </div>
+               </div>
 
-               </div>
-               </div>
-               
                <div id="editItemModal" class="small ui modal">
                     <div class="header">
-                        <h1>Item ID# #{orderEdit.currentItem.itemID} </h1>
+                         <h1>Item ID# #{orderEdit.currentItem.itemID} </h1>
                     </div>
-                   <div class="content">
-                       <div class="ui form field">
-                           <h:outputLabel for="salePrice" value="New Sale Price" />
-                           <h:inputText id="salePrice" value="#{orderEdit.newSalePriceStr}" a:placeholder="#{orderEdit.currentItem.priceSold}" />
-                       </div>
-                       <div class="actions">
-                         <h:commandButton type="button" action="#{orderEdit.onSubmitEdit()}" style="font-size: 20px;" value="Save Changes" class="huge black ui button">
-                              <f:ajax event="click" execute="salePrice" listener="#{orderEdit.onSubmitEdit()}"/>
-                         </h:commandButton>    
-                         <div style="font-size: 20px;" type="button" class="ui cancel button" >Cancel</div>
-                        </div>
-                   </div>
+                    <div class="content">
+                         <div class="ui form field">
+                              <h:outputLabel for="salePrice" value="New Sale Price" />
+                              <h:inputText id="salePrice" value="#{orderEdit.newSalePriceStr}" a:placeholder="#{orderEdit.currentItem.priceSold}" />
+                         </div>
+                         <div class="actions">
+                              <h:commandButton type="button" action="#{orderEdit.onSubmitEdit()}" style="font-size: 20px;" value="Save Changes" class="huge black ui button">
+                                   <f:ajax event="click" execute="salePrice" listener="#{orderEdit.onSubmitEdit()}"/>
+                              </h:commandButton>    
+                              <div style="font-size: 20px;" type="button" class="ui cancel button" >Cancel</div>
+                         </div>
+                    </div>
                </div>
 
           </h:form>
