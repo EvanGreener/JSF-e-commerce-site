@@ -98,6 +98,49 @@
                         <br/>
                         <h:message id="surveyDescriptionName" class="error" for="surveyDescriptionName"/>
                     </div>
+                    <div class="ui form field">
+                        <h:outputLabel for="newSurveyItem1" value="Survey Item"/>
+                        <h:inputText id="newSurveyItem1" label="Survey Item" value="#{editSurvey.newSurveyDescription}" required="true" requiredMessage="Please enter Survey Item" a:placeholder="Enter Survey Item" validator="#{surveyBacking.validateNotNull}">
+                            <f:ajax event="change" render="newSurveyItem1Error"/>
+                        </h:inputText>
+                        <br/>
+                        <h:message id="newSurveyItem1Error" class="error" for="newSurveyItem1"/>
+                    </div>
+                    <div class="ui form field">
+                        <h:outputLabel for="newSurveyItem2" value="Survey Item"/>
+                        <h:inputText id="newSurveyItem2" label="Survey Item" value="#{editSurvey.newSurveyDescription}" required="true" requiredMessage="Please enter Survey Item" a:placeholder="Enter Survey Item" validator="#{surveyBacking.validateNotNull}">
+                            <f:ajax event="change" render="newSurveyItem2Error"/>
+                        </h:inputText>
+                        <br/>
+                        <h:message id="newSurveyItem2Error" class="error" for="newSurveyItem2"/>
+                    </div>
+                    <div class="ui form field">
+                        <h:outputLabel for="newSurveyItem3" value="Survey Item"/>
+                        <h:inputText id="newSurveyItem3" label="Survey Item" value="#{editSurvey.newSurveyDescription}" required="true" requiredMessage="Please enter Survey Item" a:placeholder="Enter Survey Item" validator="#{surveyBacking.validateNotNull}">
+                            <f:ajax event="change" render="newSurveyItem3Error"/>
+                        </h:inputText>
+                        <br/>
+                        <h:message id="newSurveyItem3Error" class="error" for="newSurveyItem3"/>
+                    </div>
+                    <div class="ui form field">
+                        <h:outputLabel for="newSurveyItem4" value="Survey Item"/>
+                        <h:inputText id="newSurveyItem4" label="Survey Item" value="#{editSurvey.newSurveyDescription}" required="true" requiredMessage="Please enter Survey Item" a:placeholder="Enter Survey Item" validator="#{surveyBacking.validateNotNull}">
+                            <f:ajax event="change" render="newSurveyItem4Error"/>
+                        </h:inputText>
+                        <br/>
+                        <h:message id="newSurveyItem4Error" class="error" for="newSurveyItem4"/>
+                    </div>
+
+                    <div class="ui form field">
+                        <h:outputLabel for="newSurveyItem5" value="Survey Item"/>
+                        <h:inputText id="newSurveyItem5" label="Survey Item" value="#{editSurvey.newSurveyDescription}" required="true" requiredMessage="Please enter Survey Item" a:placeholder="Enter Survey Item" validator="#{surveyBacking.validateNotNull}">
+                            <f:ajax event="change" render="newSurveyItem5Error"/>
+                        </h:inputText>
+                        <br/>
+                        <h:message id="newSurveyItem5Error" class="error" for="newSurveyItem5"/>
+                    </div>
+
+
                     <br/>
                     <h:commandButton type="button" class="huge black fluid ui button" id="createSurvey" value="Create Survey" action="#{surveyBacking.createSurvey()}">
                         <f:ajax event="click" execute="surveyName surveyDescription" render="editForm"/>
