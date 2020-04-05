@@ -56,8 +56,9 @@ public class OrderSearchBean implements Serializable {
     
     public void updateBean() {
           LOG.debug("Update called");
-          LOG.debug(query);
+          System.out.println("Query: " + query);
           searchResults = orderCtrl.searchOrders(query);
+          System.out.println(searchResults.toString());
      }
 
      public void onEdit(int id) {
