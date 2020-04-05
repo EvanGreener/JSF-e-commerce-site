@@ -298,7 +298,7 @@ public class ClientBackingBean implements Serializable {
             createLoginCookie(email);
 
             this.message = "You are logged in, " + email;
-            return isManager ? "managerFront.xhtml?faces-redirect=true" : "cart.xhtml?faces-redirect=true";
+            return "cart.xhtml?faces-redirect=true";
         }
         else
         {

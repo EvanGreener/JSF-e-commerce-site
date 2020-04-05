@@ -6,9 +6,11 @@
 
 .reportsModal{
     position: fixed;
+    top: 10%;
+    left: 10%;
     padding-top: 0px;
     height: fit-content;
     text-align: center;
     font-size: 18px;
-    visibility:visible;
+    visibility:invisible;
 }

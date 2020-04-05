@@ -19,8 +19,8 @@
         <h:outputStylesheet library="webjars" name="Semantic-UI/2.4.1/semantic.min.css" />
         <h:outputStylesheet library="css" name="homepage.css" />
         <h:outputStylesheet library="book_css" name="bookpage.css" />
-        <h:outputStylesheet library="managercss" name="managerReports.css" />
-        <h:outputStylesheet library="managerReportsCss" name="manager.css" />
+        <h:outputStylesheet library="managerReportsCss" name="managerReports.css" />
+        <h:outputStylesheet library="managercss" name="manager.css" />
         <h:outputStylesheet library="webjars" name="font-awesome/4.7.0/css/font-awesome.min-jsf.css" />
         
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
@@ -109,7 +109,82 @@
                 <!-- Modal content -->
                 <div class="modal-content">
                     <span class="close">x</span>
-                    <h:graphicImage class="image" id="img01" height="650px" width="520px" library="images" name="9780061120084.jpg"  />
+                    <h:dataTable  id="ordersTable" var="orders" style="margin-bottom: 20px;"  class="ui celled table" value="#{orderSearch.searchResults}" >
+                         <h:column>
+                              <f:facet name="header">Order ID</f:facet>
+                                   #{orders.orderID}
+                         </h:column>
+                         <h:column>
+                              <f:facet name="header">Client Email</f:facet>
+                                   #{orders.client.email}
+                         </h:column>
+                         <h:column>
+                              <f:facet name="header">Number of Items</f:facet>
+                                   #{orders.orderItems.size()}
+                         </h:column>
+                         <h:column>
+                              <f:facet name="header">Date Created</f:facet>
+                                   #{orders.dateCreated}
+                         </h:column>
+                         <h:column>
+                              <f:facet name="header">Last Modified</f:facet>
+                                   #{orders.lastUpdated}
+                         </h:column>
+                         <h:column>
+                              <f:facet name="header">Status</f:facet>
+                                   #{ordersJpaController.getStatusByOrderId(orders.orderID)}
+                         </h:column>
+                         <h:column>
+                              <h:commandButton type="button" onclick="setTimeout(function(){$('#editModal').modal('show', hideGrowl())}, 500)" 
+                                               value="Edit Order" class="big ui primary button edit_btn" disabled="#{orders.isRemoved}">
+                                  <f:ajax event="click"  render="editForm" listener="#{orderEdit.onEdit(orders.orderID)}"/>
+                              </h:commandButton>
+                         </h:column>
+                        <h:column>
+                            <h:commandLink value="#{orderBacking.getRemovalStatus(orders.isRemoved)}" action="#{orderBacking.addOrRemoveOrder(orders)}" />
+                        </h:column>
+                    </h:dataTable>
+               </div>
+
+               <bookstore:footer />
+
+               <div id="editModal" class="small ui modal">
+                    <div class="header">
+                        <h1>Order ID# #{orderEdit.currentOrder.orderID} </h1>
+                    </div>
+                   <div class="content">
+                        <h:dataTable class="ui celled table" value="#{orderEdit.currentOrder.orderItems}" var="items">
+                            <h:column>
+                                <f:facet name="header">ISBN</f:facet>
+                                #{items.isbn}
+                            </h:column>
+                            <h:column>
+                                <f:facet name="header">Title</f:facet>
+                                #{items.book.title}
+                            </h:column>
+                            <h:column>
+                                <f:facet name="header">Price Sold</f:facet>
+                                #{items.priceSold}
+                            </h:column>
+                            <h:column>
+                                <f:facet name="header">Status</f:facet>
+                                #{orderItemJpaController.getStatusByItemId(items.itemID)}
+                            </h:column>
+                            <h:column>
+                                <h:commandLink value="#{orderItemBacking.getRemovalStatus(items.isRemoved)}" action="#{orderItemBacking.addOrRemoveItem(items)}" />
+                            </h:column>
+                            <h:column>
+                                <h:commandButton type="button" onclick="setTimeout(function(){$('#editItemModal').modal('show', hideGrowl())}, 500)" 
+                                               value="Edit Item" class="big ui primary button edit_btn" disabled="#{items.isRemoved}">
+                                    <f:ajax event="click" render="editForm" listener="#{orderEdit.onItemEdit(items.itemID)}"/>
+                              </h:commandButton>
+                            </h:column>
+                        </h:dataTable>
+                       <div class="actions">   
+                         <div style="font-size: 20px;" type="button" class="ui cancel button" >Cancel</div>
+                    </div>
+
+                </div>
                 </div>
             </div>
         <bookstore:footer/>

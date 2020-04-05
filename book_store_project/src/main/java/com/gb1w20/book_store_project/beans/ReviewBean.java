@@ -1,37 +1,31 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * This package stores all beans used to access controller classses
  */
 package com.gb1w20.book_store_project.beans;
 
-import com.gb1w20.book_store_project.entities.Book;
 import com.gb1w20.book_store_project.entities.CustomerReviews;
 import com.gb1w20.book_store_project.jpa_controllers.CustomerReviewsJpaController;
-import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Arrays;
+import java.util.Date;
 import java.util.List;
-import java.util.stream.Collectors;
 import javax.annotation.PostConstruct;
-import javax.enterprise.context.SessionScoped;
+import javax.faces.application.FacesMessage;
+import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.model.SelectItem;
+import javax.faces.validator.ValidatorException;
 import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
-import javax.servlet.FilterChain;
-import javax.servlet.ServletException;
-import javax.servlet.ServletRequest;
-import javax.servlet.ServletResponse;
-import javax.servlet.http.HttpServletResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
+ * bean used in the book page that gets all the information necessary for a
+ * client review allows creating a new review
  *
- * @author 06spa
+ * @author Shruti Pareek
  */
 @Named("reviewBean")
 @ViewScoped
@@ -42,27 +36,28 @@ public class ReviewBean implements Serializable {
     private int averageRating;
     private int reviewCount;
     private List<CustomerReviews> reviews;
-    private List<SelectItem> ratings = new ArrayList<SelectItem>();
+    private List<SelectItem> ratings = new ArrayList<>();
     private String title;
     private String reviewBody;
     private CustomerReviews customerReview;
-    private int page = 1;
-    private int numPages;
-    private String isbn;
-    private List<CustomerReviews> results;
+    private Integer ratingChoice = 0;
     private final static Logger LOG = LoggerFactory.getLogger(ReviewBean.class);
 
     @PostConstruct
+    /**
+     * method for initializing when bean called
+     *
+     * @return void
+     */
     public void init() {
         LOG.debug("Init called!");
 
     }
 
-
     /**
      * CustomerReviews created if it does not exist.
      *
-     * @return
+     * @return customerReviews
      */
     public CustomerReviews getCustomerReview() {
         LOG.debug("getCustomerReview");
@@ -73,9 +68,72 @@ public class ReviewBean implements Serializable {
     }
 
     /**
+     * Get the number of reviews that a client has written on a book Used to
+     * validate that customer has written only one review for a book
+     *
+     * @param clientId
+     * @param isbn
+     * @return int
+     */
+    public int getUserWrittenReviews(Integer clientId, String isbn) {
+        LOG.debug("getUserWrittenReviews");
+        int size = customerReviewCtlr.findCustomerReviewsByClientId(clientId, isbn).size();
+        LOG.debug("client " + clientId + " has " + size + " amount of reviews");
+        return size;
+    }
+
+    /**
+     * Validate that the review body text is less than 750 characters and not
+     * empty or null
+     *
+     * @param context
+     * @param component
+     * @param value
+     * @throws java.lang.Exception
+     */
+    public void validateReviewBody(FacesContext context, UIComponent component, Object value) throws Exception {
+        String review = (String) value;
+        if (review == null || review.isBlank()) {
+            String message = context.getApplication().evaluateExpressionGet(context, "Please enter a review", String.class);
+            FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR, message, message);
+            throw new ValidatorException(msg);
+        }
+        if (review.length() > 750) {
+            String message = context.getApplication().evaluateExpressionGet(context, "Reviews are limited to 750 characters", String.class);
+            FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR, message, message);
+            throw new ValidatorException(msg);
+        }
+
+    }
+
+    /**
+     * Validate that the review title text is less than 150 characters and not
+     * empty or null
+     *
+     * @param context
+     * @param component
+     * @param value
+     * @throws java.lang.Exception
+     */
+    public void validateReviewTitle(FacesContext context, UIComponent component, Object value) throws Exception {
+        String review = (String) value;
+        if (review == null || review.isBlank()) {
+            String message = context.getApplication().evaluateExpressionGet(context, "Please enter a review", String.class);
+            FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR, message, message);
+            throw new ValidatorException(msg);
+        }
+        if (review.length() > 150) {
+            String message = context.getApplication().evaluateExpressionGet(context, "Reviews are limited to 150 characters", String.class);
+            FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR, message, message);
+            throw new ValidatorException(msg);
+        }
+
+    }
+
+    /**
      * Save the current customerReview to the db
      *
-     * @return
+     * @return String
      * @throws Exception
      */
     public String createCustomerReview() throws Exception {
@@ -84,119 +142,171 @@ public class ReviewBean implements Serializable {
         return null;
     }
 
-    public void setCustomerReview(String isbn) throws Exception {
+    /**
+     * Gets the rating for review default is 0
+     *
+     * @return Integer
+     */
+    public Integer getRatingChoice() {
+        LOG.debug("getRatingChoice");
+        return this.ratingChoice;
+    }
+
+    /**
+     * set the rating for review
+     *
+     * @param choice
+     */
+    public void setRatingChoice(Integer choice) {
+        LOG.debug("setRatingChoice");
+        this.ratingChoice = choice;
+    }
+
+    /**
+     * Gets current date and time
+     *
+     * @return Date
+     */
+    private Date getCurrentDateTime() {
+        Date d = new Date();
+        return d;
+    }
+
+    /**
+     * Creates a customer's review on submission
+     *
+     * @param isbn
+     * @param clientId
+     * @throws java.lang.Exception
+     */
+    public void setCustomerReview(String isbn, Integer clientId) throws Exception {
         LOG.debug("setCustomerReview");
-        this.isbn=isbn;
+        customerReview = getCustomerReview();
+        customerReview.setClientID(clientId);
+
+        customerReview.setIsRemoved(Boolean.FALSE);
+        customerReview.setPending(Boolean.TRUE);
         customerReview.setReviewBody(reviewBody);
         customerReview.setReviewTitle(title);
-        customerReview.setRating(5);
+        customerReview.setRating(ratingChoice);
         customerReview.setIsbn(isbn);
+
+        customerReview.setDateEntered(getCurrentDateTime());
+        customerReview.setLastModified(getCurrentDateTime());
         createCustomerReview();
     }
-    public List<CustomerReviews> getResults() {
-        return results;
-    }
-    public int getPage() {
-        return page;
-    }
 
-    public void setPage(int newValue) {
-        page = newValue;
-    }
-
-    public void onPrevious() throws IOException {
-        page--;
-
-          updateReviewBean(this.isbn);
-    }
-
-    public int getNumPages() {
-        return numPages;
-    }
-
-    public void setNumPages(int newValue) {
-        numPages = newValue;
-    }
-
+    /**
+     * set the review content
+     *
+     * @param review
+     */
     public void setReviewBody(String review) {
         LOG.debug("setReviewBody");
         this.reviewBody = review;
     }
 
+    /**
+     * get the review content
+     *
+     * @return String
+     */
     public String getReviewBody() {
         LOG.debug("getReviewBody");
         return this.reviewBody;
     }
 
+    /**
+     * set the title for review
+     *
+     * @param title
+     */
     public void setTitle(String title) {
         LOG.debug("setTitle");
         this.title = title;
     }
 
+    /**
+     * get the review title
+     *
+     * @return String
+     */
     public String getTitle() {
         LOG.debug("getTitle");
         return this.title;
     }
 
+    /**
+     * get the rating user had selected from select menu
+     *
+     * @return rating
+     */
     public List<SelectItem> getRatings() {
         LOG.debug("getRatings");
         if (ratings.isEmpty()) {
             for (int i = 0; i < 6; i++) {
-                ratings.add(new SelectItem("" + i, "" + i));
+                ratings.add(new SelectItem(i, "" + i));
             }
         }
         return ratings;
     }
 
+    /**
+     * set the default rating in select menu to 0
+     *
+     * @param ratings
+     */
     public void setRatings(List<SelectItem> ratings) {
         LOG.debug("setRatings");
         this.ratings = ratings;
     }
 
+    /**
+     * Get all reviews for a book
+     *
+     * @param isbn
+     * @return
+     */
     public List<CustomerReviews> getReviews(String isbn) {
         LOG.debug("getReviews");
-        this.isbn=isbn;
         this.reviews = customerReviewCtlr.getReviews(isbn);
         return this.reviews;
     }
 
+    /**
+     * Creates an array the same size as rating
+     *
+     * @param size
+     * @return array
+     */
     public Object[] getRating(Integer size) {
         LOG.debug("getRating");
         return new Object[size];
     }
 
-    public void onPageSelect(int newPage) throws IOException {
-        page = newPage;
-          updateReviewBean(this.isbn);
-    }
-    public void onNext() throws IOException {
-        page++;
-
-        updateReviewBean(this.isbn);
-    }
+    /**
+     * Get the average rating for a book
+     *
+     * @param isbn
+     * @return int
+     */
     public int getAverageRating(String isbn) {
         LOG.debug("getAverageRating");
-        this.isbn=isbn;
         this.averageRating = (int) customerReviewCtlr.getAverageRating(isbn);
         return this.averageRating;
     }
 
+    /**
+     * Get the amount of reviews for a book
+     *
+     * @param isbn
+     * @return int
+     */
     public int getReviewCount(String isbn) {
         LOG.debug("getReviewCount");
-        
-        this.isbn=isbn;
         this.reviewCount = customerReviewCtlr.getCustomerReviewsCount(isbn);
-        LOG.debug(this.reviewCount + "amount of reviews");
         return this.reviewCount;
-        
-    }
-    
-    public List<CustomerReviews> updateReviewBean(String isbn) throws IOException {
 
-        results = getReviews(isbn);
-        numPages = (int) Math.ceil(results.size() / 4.0);
-        return results;
-       
     }
-    
+
 }
