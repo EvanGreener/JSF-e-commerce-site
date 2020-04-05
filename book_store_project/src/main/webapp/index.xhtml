@@ -1,12 +1,12 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE html>
 <!--
-Client website Front door that displays recently added book, 
+Client website Front door that displays recently added book,
 displays books with the most purchases,
 ,allows user to do a basic search that will lead to gallery page for an advanced search if needed
 displays popular genres that when clicked direct to page containing books of that genre only
 allows all visitors to answer surveys an displays results right after
-displays the news 
+displays the news
 displays ads that lead to a website when clicked
 
 compatible with different screen sizes
@@ -128,7 +128,7 @@ compatible with different screen sizes
                 </h:form>
                 <br/><br/>
             </c:if>
-            
+
 
             <!--Shows top eight books with that have been purchased most-->
             <!--https://semantic-ui.com/views/card.html-->
@@ -136,6 +136,7 @@ compatible with different screen sizes
             <h:form>
                 <h:panelGroup>
                     <div class="ui four doubling stackable cards">
+
                         <ui:repeat size="8" value="#{bb.bestSeller}" var="books">
                             <!--Used composition to display all book cards-->
                             <bookstore:bookCard/>
@@ -143,21 +144,21 @@ compatible with different screen sizes
                     </div>
                 </h:panelGroup>
             </h:form>
-                
+
             <br/><br/>
-   
-                <p class="small" id="sales">Sales</p><br/>
-                <h:form>
-                    <h:panelGroup>
-                        <div class="ui four doubling stackable cards" style=" overflow: auto; height: 420px;">
-                            <ui:repeat size="#{bb.saleBooks.size()}" value="#{bb.saleBooks}" var="books">
-                                <!--Used composition to display all book cards-->
-                                <bookstore:bookCard/>
-                            </ui:repeat>
-                        </div>
-                    </h:panelGroup>
-                </h:form>
-                <br/><br/>            
+
+            <p class="small" id="sales">Sales</p><br/>
+            <h:form>
+                <h:panelGroup>
+                    <div class="ui four doubling stackable cards" style=" overflow: auto; height: 420px;">
+                        <ui:repeat size="#{bb.saleBooks.size()}" value="#{bb.saleBooks}" var="books">
+                            <!--Used composition to display all book cards-->
+                            <bookstore:bookCard/>
+                        </ui:repeat>
+                    </div>
+                </h:panelGroup>
+            </h:form>
+            <br/><br/>
 
 
 

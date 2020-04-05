@@ -1,5 +1,6 @@
 package com.gb1w20.book_store_project.jpa_controllers;
 
+import com.gb1w20.book_store_project.backing.AdBackingBean;
 import com.gb1w20.book_store_project.entities.Book;
 import com.gb1w20.book_store_project.entities.News;
 import com.gb1w20.book_store_project.entities.Surveys;
@@ -19,6 +20,8 @@ import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 import javax.transaction.SystemException;
 import javax.transaction.UserTransaction;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  *
@@ -28,9 +31,11 @@ import javax.transaction.UserTransaction;
 @RequestScoped
 public class SurveysJpaController implements Serializable {
 
+    private final static Logger LOG = LoggerFactory.getLogger(SurveysJpaController.class);
+    
     @Resource
     private UserTransaction utx;
-
+    
     @PersistenceContext
     private EntityManager em;
 
@@ -112,6 +117,7 @@ public class SurveysJpaController implements Serializable {
             q.setMaxResults(maxResults);
             q.setFirstResult(firstResult);
         }
+        LOG.error("yo this should be hit idk why itwont be thou");
         return q.getResultList();
     }
 
