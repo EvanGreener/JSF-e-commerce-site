@@ -18,7 +18,7 @@ import org.slf4j.LoggerFactory;
  * This bean manages the locale. If you change the locale it sends a message to
  * redraw the page thus changing the language.
  *
- * @author Ken Fogel
+ * @author Ken Fogel, Giancarlo Biasiucci
  */
 @Named("locale")
 @ViewScoped
@@ -41,6 +41,13 @@ public class LocaleBean implements Serializable {
         return locale.getLanguage();
     }
 
+    /**
+     * Updates the current locale, creates or updates a locale cookie containing the set language
+     * @author Ken Fogel, Giancarlo Biasiucci
+     * @param a
+     * @param b
+     * @throws IOException 
+     */
     public void setLanguage(String a, String b) throws IOException {
         locale = new Locale(a, b);
         FacesContext facesContext = FacesContext.getCurrentInstance();
@@ -71,6 +78,9 @@ public class LocaleBean implements Serializable {
         FacesContext.getCurrentInstance().getViewRoot().setLocale(locale);
     }
     
+    /**
+     * Updates the locale cookie with the newly set language.
+     */
     public void updateLocale(){
         FacesContext facesContext = FacesContext.getCurrentInstance();
         HttpServletRequest request = (HttpServletRequest) facesContext.getExternalContext().getRequest();

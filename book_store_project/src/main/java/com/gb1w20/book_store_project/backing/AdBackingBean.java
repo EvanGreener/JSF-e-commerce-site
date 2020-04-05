@@ -15,6 +15,11 @@ import javax.inject.Named;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+/**
+ * Backing bean for the ad entity
+ * @author Giancarlo Biasiucci
+ * @version April 4, 2020
+ */
 @Named("adBacking")
 @RequestScoped
 public class AdBackingBean implements Serializable {
@@ -27,7 +32,7 @@ public class AdBackingBean implements Serializable {
     private Ads ad;
 
     /**
-     * Ads created if it does not exist.
+     * If the ad managed by the bean is null, it will be created from scratch to avoid a NullPointerException.
      *
      * @return
      */
@@ -39,7 +44,7 @@ public class AdBackingBean implements Serializable {
     }
 
     /**
-     * Save the current ad to the db
+     * Creates the ad based on the data entered in the corresponding modal and saves it to the database.
      *
      * @return
      * @throws Exception
@@ -57,6 +62,12 @@ public class AdBackingBean implements Serializable {
         return "managerAds.xhtml";
     }
     
+    /**
+     * Marks an ad as removed (changes removal status to true)
+     * @param order
+     * @return
+     * @throws Exception 
+     */
     public String removeAd(Ads ad) throws Exception {
         LOG.debug("Reached the remove method");
         ad.setIsRemoved(true);
@@ -68,6 +79,12 @@ public class AdBackingBean implements Serializable {
         return null;
     }
     
+    /**
+     * Marks an order as not removed (changes removal status to false)
+     * @param order
+     * @return
+     * @throws Exception 
+     */
     public String addAd(Ads ad) throws Exception {
         LOG.debug("Reached the add method");
         ad.setIsRemoved(false);
@@ -79,6 +96,13 @@ public class AdBackingBean implements Serializable {
         return null;
     }
     
+    /**
+     * If 2 ads are already enabled to display on the front page, all other ads will be disabled and be
+     * unable to be displayed. Ensures that at least one ad is enabled at all times. In short, this method
+     * guarantees that 1 or 2 ads are enabled at all times.
+     * @param ad
+     * @return 
+     */
     public boolean decideDisabled(Ads ad)
     {   
         List<Ads> allEnabled = adsJpaController.getAllEnabledAds();
@@ -101,6 +125,14 @@ public class AdBackingBean implements Serializable {
         return result;
     }
     
+    /**
+     * Determines whether an ad should be added or removed based on its current removal status
+     * whenever the corresponding link in the managerial ad page is clicked
+     * (changed to other state, if true than changed to false and vice versa)
+     * @param ad
+     * @return
+     * @throws Exception 
+     */
     public String addOrRemoveAd(Ads ad) throws Exception
     {
         if (ad.getIsRemoved())
@@ -115,6 +147,13 @@ public class AdBackingBean implements Serializable {
         return null;
     }
     
+    /**
+     * Returns a String indicating what will occur when the corresponding link in the managerial
+     * ad page is clicked
+     * @param isRemoved
+     * @return
+     * @throws Exception 
+     */
     public String getRemovalStatus(boolean isRemoved) throws Exception {
         if (isRemoved)
         {
@@ -126,6 +165,12 @@ public class AdBackingBean implements Serializable {
         }
     }
     
+    /**
+     * Validation method ensuring that the fields in the "Add Ad" modal are not left blank or empty
+     * @param context
+     * @param component
+     * @param value 
+     */
     public void validateNotNull(FacesContext context, UIComponent component, Object value) {
         String input = (String)value;
         if (input.isBlank() || input.isEmpty() || input == null)

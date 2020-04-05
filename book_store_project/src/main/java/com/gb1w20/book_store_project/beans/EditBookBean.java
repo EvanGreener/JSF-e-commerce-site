@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.gb1w20.book_store_project.beans;
 
 import com.gb1w20.book_store_project.entities.Authors;
@@ -24,8 +19,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
- *
- * @author giancarlo
+ * Bean for editing an existing book's information
+ * @author Giancarlo Biasiucci
+ * @version April 4, 2020
  */
 
 @Named("editBook")
@@ -151,6 +147,11 @@ public class EditBookBean implements Serializable {
         newWholesalePrice = newValue;
     }
     
+    /**
+     * Saves the current book information to be displayed in the "Edit Book" modal
+     * when the corresponding button is clicked
+     * @param isbn 
+     */
     public void onEdit(String isbn)
     {
         LOG.debug("onEdit called");
@@ -168,6 +169,12 @@ public class EditBookBean implements Serializable {
         LOG.debug("Current ISBN: " + currentBook.getIsbn());
     }
     
+    /**
+     * Edits the existing book information with what is present in the fields in the "Edit Book" modal
+     * and updates the entry in the database
+     * @return
+     * @throws Exception 
+     */
     public String onSubmitEdit() throws Exception
     {
         LOG.debug("onSubmitEdit called");
