@@ -27,7 +27,7 @@ import org.slf4j.LoggerFactory;
 
 /**
  *
- * @author 
+ * @author
  */
 @Named
 @RequestScoped
@@ -136,30 +136,31 @@ public class BookJpaController implements Serializable {
     public Book findBook(Integer id) {
         return em.find(Book.class, id);
     }
-    
-    public Book findSingleBook(String id){
+
+    public Book findSingleBook(String id) {
         TypedQuery<Book> query = em.createQuery("SELECT b FROM Book b WHERE b.isRemoved = :removed AND b.isbn=:isbn", Book.class);
         query.setParameter("removed", false);
         query.setParameter("isbn", id);
         Book book = query.getSingleResult();
         return book;
     }
-    
-    public Book findAnySingleBook(String id){
+
+    public Book findAnySingleBook(String id) {
         TypedQuery<Book> query = em.createQuery("SELECT b FROM Book b WHERE b.isbn=:isbn", Book.class);
         query.setParameter("isbn", id);
         Book book = query.getSingleResult();
         return book;
     }
-    
-    public List<Book> findBook(String id){
+
+    public List<Book> findBook(String id) {
         TypedQuery<Book> query = em.createQuery("SELECT b FROM Book b WHERE b.isRemoved = :removed AND b.isbn=:isbn", Book.class);
         query.setParameter("removed", false);
         query.setParameter("isbn", id);
         List<Book> books = query.getResultList();
         return books;
     }
-    public List<Book> findBookAll(String id){
+
+    public List<Book> findBookAll(String id) {
         TypedQuery<Book> query = em.createQuery("SELECT b FROM Book b WHERE b.isbn=:isbn", Book.class);
         query.setParameter("isbn", id);
         List<Book> books = query.getResultList();
@@ -199,11 +200,25 @@ public class BookJpaController implements Serializable {
 
     }
 
-
     public List<Book> getBestSeller() {
 
         TypedQuery<Book> query = em.createQuery("SELECT b FROM Book b INNER JOIN b.orders o where b.isRemoved = :removed GROUP BY o.isbn ORDER BY count(o.isbn) DESC", Book.class);
-        query.setMaxResults(8);
+        query.setParameter("removed", false);
+        List<Book> books = query.getResultList();
+        return books;
+    }
+
+    public List<Book> getAllNonRemovedBooks() {
+
+        TypedQuery<Book> query = em.createQuery("SELECT b FROM Book b where b.isRemoved = :removed ", Book.class);
+        query.setParameter("removed", false);
+        List<Book> books = query.getResultList();
+        return books;
+    }
+
+    public List<Book> getSaleBooks() {
+
+        TypedQuery<Book> query = em.createQuery("SELECT b FROM Book b where b.isRemoved = :removed AND b.listPrice  <> b.salePrice", Book.class);
         query.setParameter("removed", false);
         List<Book> books = query.getResultList();
         return books;
@@ -229,6 +244,16 @@ public class BookJpaController implements Serializable {
         List<Book> books = query.getResultList();
         return books.size();
     }
+
+    //used for recommending books
+    public List<Book> getSimilarGenres(String genre) {
+        TypedQuery<Book> query = em.createQuery("SELECT b FROM Book b inner join b.authorsCollection a WHERE b.genre = :genre AND b.isRemoved = :removed", Book.class);
+        query.setParameter("genre", genre);
+        query.setParameter("removed", false);
+        List<Book> books = query.getResultList();
+        return books;
+    }
+//gets books that belong in same genre excluding books written by author
 
     public List<Book> getSimilarGenres(Book b, Integer a) {
         TypedQuery<Book> query = em.createQuery("SELECT b FROM Book b inner join b.authorsCollection a WHERE b.genre = :genre AND b.isbn <> :isbn AND a.authorID <> :author AND b.isRemoved = :removed", Book.class);
