@@ -22,11 +22,18 @@ html, body {
 
 }
 .ui-scrollpanel-content img{
-    width:inherit !important;
+    width:400px !important;
+}
+.ui-scrollpanel img{
+    width:300px !important;
 }
 .ui-scrollpanel-content iframe{
-    width:inherit !important;
-    height:inherit!important;
+    width:300px !important;
+    height:300px !important;
+}
+.ui-scrollpanel iframe{
+    width:300px !important;
+    height:300px !important;
 }
 .ui-scrollpanel-container{
     width:inherit !important;
