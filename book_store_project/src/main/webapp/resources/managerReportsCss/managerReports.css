@@ -9,8 +9,20 @@
     top: 10%;
     left: 10%;
     padding-top: 0px;
-    height: fit-content;
+    height: 80%;
+    width: 80%;
     text-align: center;
     font-size: 18px;
     visibility:invisible;
+    display: flex !important;
+    z-index: 2;
+    display: grid;
+    
+}
+.reportsContent{
+    height: 100%;
+    overflow-y: scroll;
+    margin: 0;
+    width:100%;
+    max-width:100%;
 }

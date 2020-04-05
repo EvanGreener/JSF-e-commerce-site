@@ -105,9 +105,9 @@
 
         </h:panelGroup>
         </div>
-        <div id="topSellers" class="reportsModal">
+        <div id="topSellers" class=" ui modals transition reportsModal">
                 <!-- Modal content -->
-                <div class="modal-content">
+                <div class="modal-content reportsContent">
                     <span class="close">x</span>
                     <h:dataTable  id="ordersTable" var="orders" style="margin-bottom: 20px;"  class="ui celled table" value="#{orderSearch.searchResults}" >
                          <h:column>
@@ -146,9 +146,9 @@
                     </h:dataTable>
                </div>
 
-               <bookstore:footer />
+               
 
-               <div id="editModal" class="small ui modal">
+               <div id="editModal" class="ui dimmer modals transition">
                     <div class="header">
                         <h1>Order ID# #{orderEdit.currentOrder.orderID} </h1>
                     </div>
@@ -180,9 +180,7 @@
                               </h:commandButton>
                             </h:column>
                         </h:dataTable>
-                       <div class="actions">   
-                         <div style="font-size: 20px;" type="button" class="ui cancel button" >Cancel</div>
-                    </div>
+                       
 
                 </div>
                 </div>
