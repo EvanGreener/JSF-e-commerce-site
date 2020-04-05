@@ -1,12 +1,12 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE html>
 <!--
-Client website Front door that displays recently added book, 
+Client website Front door that displays recently added book,
 displays books with the most purchases,
 ,allows user to do a basic search that will lead to gallery page for an advanced search if needed
 displays popular genres that when clicked direct to page containing books of that genre only
 allows all visitors to answer surveys an displays results right after
-displays the news 
+displays the news
 displays ads that lead to a website when clicked
 
 compatible with different screen sizes
@@ -45,13 +45,13 @@ compatible with different screen sizes
 
         <!--composite component that comes from the navbar.xhtml file to avoid coding nav bar in all web pages-->
         <bookstore:navbar/>
-        
+
         <!--Carousel that displays recently added books and their information-->
         <div class="swiper-container">
             <div class="swiper-wrapper">
 
                 <!--Book information information-->
-                  <!--https://framework7.io/docs/swiper.html-->
+                <!--https://framework7.io/docs/swiper.html-->
                 <ui:repeat value="#{bb.recentlyAdded}" var="book">
                     <div class="swiper-slide flex-container item#{bb.bookSlideColor}" >
                         <div class="sliderTextContent">
@@ -114,7 +114,7 @@ compatible with different screen sizes
                                     <div class="cardHoverBtn"> View Cover</div>
                                 </div>
                                 <div class="content">
-                                    
+
                                     <!--link to its own book page -->
                                     <!--link contains title and author -->
                                     <h:link outcome="book" value = "">
@@ -142,7 +142,7 @@ compatible with different screen sizes
                                 <div class="ui two bottom attached buttons ">
                                     <h:commandButton action="#{cbb.addBookToCart(books)}" type="submit" value = "+ Add to Cart" class="ui button"/>
                                 </div>
-                                
+
                             </div>
                         </ui:repeat>
                     </div>
@@ -307,21 +307,21 @@ compatible with different screen sizes
         <!-- Initialize Swiper  for carousel of recently added books-->
         <script>
             var swiper = new Swiper('.swiper-container', {
-                loop: true,
+            loop: true,
                 centeredSlides: true,
                 autoHeight: true, //enable auto height
                 autoplay: {
                     delay: 5000,
                     disableOnInteraction: false,
                 },
-                pagination: {
-                    el: '.swiper-pagination',
+                    pagination: {
+                el: '.swiper-pagination',
                 },
-                navigation: {
-                    nextEl: '.swiper-button-next',
+                    navigation: {
+                nextEl: '.swiper-button-next',
                     prevEl: '.swiper-button-prev',
                 },
-            });
+                    });
 
         </script>
     </h:body>
