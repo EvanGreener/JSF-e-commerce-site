@@ -13,7 +13,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
- * bean that get randomly generated news that is used in index/client frontdoor
+ * Bean that get randomly generated news that is used in index/client front door
  * page
  *
  * @author Shruti Pareek

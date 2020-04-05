@@ -22,11 +22,18 @@ html, body {
 
 }
 .ui-scrollpanel-content img{
-    width:inherit !important;
+    width:400px !important;
+}
+.ui-scrollpanel img{
+    width:300px !important;
 }
 .ui-scrollpanel-content iframe{
-    width:inherit !important;
-    height:inherit!important;
+    width:300px !important;
+    height:300px !important;
+}
+.ui-scrollpanel iframe{
+    width:300px !important;
+    height:300px !important;
 }
 .ui-scrollpanel-container{
     width:inherit !important;
@@ -92,6 +99,11 @@ body {
 .nav {
     margin: 0 auto 0 10px;
 
+}
+.navbar-brand{
+padding: 0 !important;
+padding-left: 20px !important;
+padding-bottom: 10px !important;
 }
 .brand-img-style {
     height: 100%;
@@ -555,4 +567,10 @@ p.small {
     padding: 20px;
     border: 1px solid #888;
     width: 560px;
+}
+.salePrice{
+    color:red !important;
+}
+.oldPrice{
+    text-decoration: line-through;
 }
