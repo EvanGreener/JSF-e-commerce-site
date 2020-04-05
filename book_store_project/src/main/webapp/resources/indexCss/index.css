@@ -93,6 +93,11 @@ body {
     margin: 0 auto 0 10px;
 
 }
+.navbar-brand{
+padding: 0 !important;
+padding-left: 20px !important;
+padding-bottom: 10px !important;
+}
 .brand-img-style {
     height: 100%;
     width: auto;
