@@ -76,7 +76,7 @@ public class ArquillianUnitTest {
                 .addAsWebInfResource(new File("src/main/webapp/WEB-INF/payara-resources.xml"), "payara-resources.xml")
                 .addAsResource(new File("src/main/resources/META-INF/persistence.xml"), "META-INF/persistence.xml")
                 .addAsResource(new File("src/main/resources/log4j2.xml"), "log4j2.xml")
-                .addAsResource("Book_Store_DML.sql")
+                .addAsResource("Test_DML.sql")
                 .addAsLibraries(dependencies);
         
         return webArchive;
@@ -198,7 +198,7 @@ public class ArquillianUnitTest {
      */
     @Before
     public void seedDatabase() {
-        final String seedDataScript = loadAsString("Book_Store_DML.sql");
+        final String seedDataScript = loadAsString("Test_DML.sql");
 
         try (Connection connection = ds.getConnection()) {
             for (String statement : splitStatements(new StringReader(

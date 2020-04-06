@@ -19,9 +19,11 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.regex.Pattern;
 import javax.enterprise.context.SessionScoped;
 import javax.faces.application.FacesMessage;
 import javax.faces.component.UIComponent;
+import javax.faces.component.UIInput;
 import javax.faces.context.FacesContext;
 import javax.faces.validator.ValidatorException;
 import javax.inject.Inject;
@@ -196,15 +198,6 @@ public class CartBackingBean implements Serializable {
         }
     }
 
-    public void validateNotNull(FacesContext context, UIComponent component, Object value) {
-        String input = (String) value;
-        if (input.isBlank() || input.isEmpty() || input == null) {
-            String message = context.getApplication().evaluateExpressionGet(context, "Value must not be left blank", String.class);
-            FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR, message, message);
-            throw new ValidatorException(msg);
-        }
-    }
-
     public void validateCardNumber(FacesContext context, UIComponent component, Object value) {
         String number = (String) value;
         try {
@@ -328,5 +321,44 @@ public class CartBackingBean implements Serializable {
             }
         }
         return lastGenre;
+    }
+    
+    /**
+     * Registration form postal code validation method, verifies that the postal code
+     * entered is of a valid Canadian format.
+     * @author Giancarlo Biasiucci
+     * @param context
+     * @param component
+     * @param value 
+     */
+    public void validatePostalCode(FacesContext context, UIComponent component, Object value)
+    {
+        String postalCode = (String)value;
+        UIInput postalCodeInput = (UIInput)component.findComponent("postalCode");
+        boolean validPostalCode = Pattern.matches("[a-zA-Z][0-9][a-zA-Z][0-9][a-zA-Z][0-9]", postalCode);
+        if (!validPostalCode)
+        {
+            String message = context.getApplication().evaluateExpressionGet(context, "Incorrect postal code format (correct format: A1A1A1)", String.class);
+            FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR, message, message);
+            postalCodeInput.resetValue();
+            throw new ValidatorException(msg);
+        }
+    }
+    
+    /**
+     * General form validation method to ensure that a field is not left empty or blank (not just whitespace)
+     * @author Giancarlo Biasiucci
+     * @param context
+     * @param component
+     * @param value 
+     */
+    public void validateNotNull(FacesContext context, UIComponent component, Object value) {
+        String input = (String)value;
+        if (input.isBlank() || input.isEmpty() || input == null)
+        {
+            String message = context.getApplication().evaluateExpressionGet(context, "Value must not be left blank", String.class);
+            FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR, message, message);
+            throw new ValidatorException(msg);
+        }
     }
 }

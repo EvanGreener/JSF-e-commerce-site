@@ -148,7 +148,7 @@ and open the template in the editor.
                 <br/>
                 <p style="text-align: center;">Total order cost: $ #{taxBacking.getTotalWithTaxByProvince(cbb.getCartTotal())}</p>
             </div>
-            <div class="content">
+            <div class="long-content">
                 <h:form id="finalizeForm" class="ui form">
                     <div class="field">
                         <h:outputLabel for="cardType" value="Card Type"/>
@@ -199,7 +199,7 @@ and open the template in the editor.
                     <hl/>
                     <div class="field">
                         <h:outputLabel for="address1" value="Address 1"/>
-                        <h:inputText id="address1" label="Address 1" value="#{clientBacking.client.address1}" required="true" requiredMessage="Please enter address 1" a:placeholder="Enter address 1">
+                        <h:inputText id="address1" label="Address 1" value="#{clientBacking.client.address1}" required="true" requiredMessage="Please enter address 1" a:placeholder="Enter address 1" validator="#{cbb.validateNotNull}">
                             <f:ajax event="change" render="address1Error"/>
                         </h:inputText>
                         <br/>
@@ -207,7 +207,7 @@ and open the template in the editor.
                     </div>
                     <div class="field">
                         <h:outputLabel for="address2" value="Address 2"/>
-                        <h:inputText id="address2" label="Address 2" value="#{clientBacking.client.address2}" required="true" requiredMessage="Please enter address 2" a:placeholder="Enter address 2">
+                        <h:inputText id="address2" label="Address 2" value="#{clientBacking.client.address2}" required="true" requiredMessage="Please enter address 2" a:placeholder="Enter address 2" validator="#{cbb.validateNotNull}">
                             <f:ajax event="change" render="address2Error"/>
                         </h:inputText>
                         <br/>
@@ -233,7 +233,7 @@ and open the template in the editor.
                     <div class="fields">
                         <div class="twelve wide field">
                             <h:outputLabel for="city" value="City"/>
-                            <h:inputText id="city" label="City" value="#{clientBacking.client.city}" required="true" requiredMessage="Please enter city" a:placeholder="Enter city">
+                            <h:inputText id="city" label="City" value="#{clientBacking.client.city}" required="true" requiredMessage="Please enter city" a:placeholder="Enter city" validator="#{cbb.validateNotNull}">
                                 <f:ajax event="change" render="cityError"/>
                             </h:inputText>
                             <br/>
@@ -241,7 +241,7 @@ and open the template in the editor.
                         </div>
                         <div class="four wide field">
                             <h:outputLabel for="postalCode" value="Postal Code"/>
-                            <h:inputText id="postalCode" label="Postal Code" value="#{clientBacking.client.postalCode}" required="true" requiredMessage="Please enter postal code" a:placeholder="Enter postal code">
+                            <h:inputText id="postalCode" label="Postal Code" value="#{clientBacking.client.postalCode}" required="true" requiredMessage="Please enter postal code" a:placeholder="Enter postal code" validator="#{cbb.validatePostalCode}">
                                 <f:ajax event="change" render="postalCodeError"/>
                             </h:inputText>
                             <br/>
