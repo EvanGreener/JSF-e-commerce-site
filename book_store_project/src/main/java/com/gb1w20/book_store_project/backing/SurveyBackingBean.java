@@ -1,9 +1,11 @@
 package com.gb1w20.book_store_project.backing;
 
+import com.gb1w20.book_store_project.entities.SurveyData;
 import com.gb1w20.book_store_project.entities.Surveys;
 import com.gb1w20.book_store_project.jpa_controllers.SurveysJpaController;
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 import javax.enterprise.context.RequestScoped;
 import javax.faces.application.FacesMessage;
 import javax.faces.component.UIComponent;
@@ -24,7 +26,7 @@ public class SurveyBackingBean implements Serializable {
     private SurveysJpaController surveysJpaController;
 
     private Surveys survey;
-
+    
     /**
      * Survey created if it does not exist.
      *
@@ -49,7 +51,7 @@ public class SurveyBackingBean implements Serializable {
         if (survey != null && !survey.getSurveyDescription().isBlank() && !survey.getSurveyDescription().isEmpty()) {
             survey.setLastModified(new Date());
             survey.setDateCreated(new Date());
-            survey.setIsRemoved(true);
+            survey.setIsRemoved(false);
             surveysJpaController.create(survey);
         }
         FacesContext.getCurrentInstance().getExternalContext().redirect("managerSurveys.xhtml");

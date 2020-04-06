@@ -11,10 +11,12 @@ import com.gb1w20.book_store_project.entities.Book;
 import com.gb1w20.book_store_project.entities.Clients;
 import com.gb1w20.book_store_project.entities.OrderItem;
 import com.gb1w20.book_store_project.entities.Orders;
+import com.gb1w20.book_store_project.entities.ClientInventory;
 import com.gb1w20.book_store_project.jpa_controllers.BookJpaController;
 import com.gb1w20.book_store_project.jpa_controllers.ClientsJpaController;
 import com.gb1w20.book_store_project.jpa_controllers.OrderItemJpaController;
 import com.gb1w20.book_store_project.jpa_controllers.OrdersJpaController;
+import com.gb1w20.book_store_project.jpa_controllers.ClientInventoryJpaController;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
@@ -61,6 +63,9 @@ public class CartBackingBean implements Serializable {
     @Inject
     private ClientsJpaController clientCtrl;
 
+    @Inject
+    private ClientInventoryJpaController clientInventoryCtrl;
+    
     @Inject
     private TaxBackingBean taxbb;
 
@@ -257,6 +262,7 @@ public class CartBackingBean implements Serializable {
             oi.setBook(book);
             orderItemCtrl.create(oi);
             newOrderItems.add(oi);
+            addToClientInventory(client.getClientID(),book.getIsbn());
         }
         newOrder.setOrderItemsCollection(newOrderItems);
         orderCtrl.create(newOrder);
@@ -265,6 +271,17 @@ public class CartBackingBean implements Serializable {
         orderPage.setOrder(newOrder);
         FacesContext.getCurrentInstance().getExternalContext().redirect("myOrder.xhtml");
         return "myOrder.xhtml";
+    }
+    
+    
+    private void addToClientInventory(Integer clientID, String isbn) throws Exception {
+        ClientInventory item = new ClientInventory();
+        item.setClientID(clientID);
+        item.setDatePurchased(new Date());
+        item.setIsRemoved(false);
+        item.setIsbn(isbn);
+        item.setLastModified(new Date());
+        clientInventoryCtrl.create(item);
     }
 
     private void sendEmail(String receiver, Integer orderID) {
