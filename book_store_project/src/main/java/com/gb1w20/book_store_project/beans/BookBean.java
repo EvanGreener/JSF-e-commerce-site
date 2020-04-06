@@ -22,6 +22,7 @@ import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
+import javax.persistence.NoResultException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -61,6 +62,7 @@ public class BookBean implements Serializable {
     /**
      * Responsible for changing background color of each slide in index page
      *
+     * @author Shruti Pareek
      * @return int
      */
     public int getBookSlideColor() {
@@ -80,6 +82,7 @@ public class BookBean implements Serializable {
     /**
      * Gets best seller books based on the amount of purchases for the book
      *
+     * @author Shruti Pareek
      * @return int
      */
     public List<Book> getBestSeller() {
@@ -91,6 +94,7 @@ public class BookBean implements Serializable {
     /**
      * Gets the popular genres
      *
+     * @author Shruti Pareek
      * @return List of object books
      */
     public List<Object> getPopularGenres() {
@@ -103,6 +107,7 @@ public class BookBean implements Serializable {
      * Gets books that have been recently added to database based on date
      * entered
      *
+     * @author Shruti Pareek
      * @return List of object books
      */
     public List<Book> getRecentlyAdded() {
@@ -116,6 +121,7 @@ public class BookBean implements Serializable {
      * current one that is being viewed and the ones written by same author as
      * the one being viewed
      *
+     * @author Shruti Pareek
      * @param book
      * @param author
      * @return similarGenreBooks
@@ -130,6 +136,7 @@ public class BookBean implements Serializable {
      * Get books with similar genre that user had previously viewed for
      * recommendations
      *
+     * @author Shruti Pareek
      * @param book
      * @return similarGenreBooks
      */
@@ -144,6 +151,7 @@ public class BookBean implements Serializable {
     /**
      * Returns only a part of book description that will be visible on book page
      *
+     * @author Shruti Pareek
      * @param description
      * @return description - 300 characters
      */
@@ -158,6 +166,7 @@ public class BookBean implements Serializable {
     /**
      * Returns only a part of book description that is invisible from users
      *
+     * @author Shruti Pareek
      * @param description
      * @return description - 300 characters
      */
@@ -170,6 +179,7 @@ public class BookBean implements Serializable {
     /**
      * Get books with similar author that user is currently viewing
      *
+     * @author Shruti Pareek
      * @param author
      * @param isbn
      * @return getSimilarAuthorBooks
@@ -183,6 +193,7 @@ public class BookBean implements Serializable {
     /**
      * Set the genre of a book
      *
+     * @author Shruti Pareek
      * @param genre
      */
     public void setGenre(String genre) {
@@ -193,6 +204,7 @@ public class BookBean implements Serializable {
     /**
      * Set the genre of a book
      *
+     * @author Shruti Pareek
      * @return
      */
     public String getGenre() {
@@ -201,12 +213,13 @@ public class BookBean implements Serializable {
     }
 
     public Book findOrderBook(OrderItem orderItem) {
-        return bookCtrlr.findSingleBook(orderItem.getIsbn());
+        return bookCtrlr.findBook(orderItem.getIsbn());
     }
 
     /**
      * Get all books with sales
      *
+     * @author Shruti Pareek
      * @return books
      */
     public List<Book> getSaleBooks() {
@@ -218,6 +231,7 @@ public class BookBean implements Serializable {
     /**
      * Downloads an alice in wonderland pdf
      *
+     * @author Shruti Pareek 
      * Sources used
      * https://stackoverflow.com/questions/9391838/how-to-provide-a-file-download-from-a-jsf-backing-bean
      * https://itqna.net/questions/15083/how-download-pdf-file-jsf
@@ -258,23 +272,22 @@ public class BookBean implements Serializable {
     }
 
     /**
-     * Find a book with same isbn
+     * Find a book with same isbn else redirect to error page
      *
-     *
+     * @author Shruti Pareek
      * @param isbn
      * @throws java.io.IOException
      */
     public void findBook(String isbn) throws IOException {
         LOG.debug("findBook");
-        /*
-        TODO: redirect to error page because this book does not exist or is removed once error page is created
-         */
-        if (this.bookCtrlr.findBook(isbn) == null || this.bookCtrlr.findBook(isbn).size() == 0) {
-            FacesContext context = FacesContext.getCurrentInstance();
-            context.getExternalContext().redirect("index.xhtml");
 
-        } else {
-            this.book = this.bookCtrlr.findBook(isbn).get(0);
+        try {
+            this.book = this.bookCtrlr.findBook(isbn);
+        } catch (NoResultException e) {
+            /*
+        TODO: redirect to error page because this book does not exist or is removed once error page is created
+             */
+            FacesContext.getCurrentInstance().getExternalContext().redirect("index.xhtml");
         }
 
     }
@@ -282,7 +295,7 @@ public class BookBean implements Serializable {
     /**
      * Get book to display book page and set url parameters to isbn
      *
-     *
+     * @author Shruti Pareek
      * @return Book
      * @throws java.io.IOException
      */
