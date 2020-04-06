@@ -12,7 +12,7 @@
                           steady-pool-size="8">
         <property name="URL" value="jdbc:mysql://localhost:3306/bookstore?zeroDateTimeBehavior=CONVERT_TO_NULL&amp;serverTimezone=UTC&amp;useSSL=false&amp;allowPublicKeyRetrieval=true"/>
         <property name="User" value="root"/>
-        <property name="Password" value="Spji2000"/>
+        <property name="Password" value="dawson"/>
     </jdbc-connection-pool>
 </resources>
 
