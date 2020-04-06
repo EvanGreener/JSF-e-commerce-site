@@ -1,10 +1,13 @@
 package com.gb1w20.arquillian.test;
 
+import com.gb1w20.arquillian.test.beans.BookTestingBean;
 import com.gb1w20.arquillian.test.beans.ClientTestingBean;
 import com.gb1w20.book_store_project.backing.BookFormatBackingBean;
 import com.gb1w20.book_store_project.beans.NewsBean;
+import com.gb1w20.book_store_project.entities.Book;
 import com.gb1w20.book_store_project.jpa_controllers.BookFormatJpaController;
 import com.gb1w20.book_store_project.entities.BookFormat;
+import com.gb1w20.book_store_project.jpa_controllers.BookJpaController;
 import com.gb1w20.book_store_project.jpa_controllers.ClientsJpaController;
 import com.gb1w20.book_store_project.jpa_controllers.exceptions.IllegalOrphanException;
 
@@ -47,7 +50,7 @@ public class ArquillianUnitTest {
 
     @Deployment
     public static WebArchive deploy() {
-        
+
         // Use an alternative to the JUnit assert library called AssertJ
         // Need to reference MySQL driver as it is not part of either
         // embedded or remote
@@ -61,7 +64,7 @@ public class ArquillianUnitTest {
                         "org.apache.logging.log4j:log4j-web"
                 ).withTransitivity()
                 .asFile();
-        
+
         final WebArchive webArchive;
         webArchive = ShrinkWrap.create(WebArchive.class, "test.war")
                 .setWebXML(new File("src/main/webapp/WEB-INF/web.xml"))
@@ -78,34 +81,20 @@ public class ArquillianUnitTest {
                 .addAsResource(new File("src/main/resources/log4j2.xml"), "log4j2.xml")
                 .addAsResource("Book_Store_DML.sql")
                 .addAsLibraries(dependencies);
-        
+
         return webArchive;
     }
-    
-    /*
-    @Inject
-    private BookFormatJpaController formatControl;
-    
-    @Inject
-    private AdsJpaController adsControl;
-    
-    @Inject
-    private AuthorsJpaController authorsControl;
-    
-    @Inject
-    private BookJpaController bookControl;
-    */
-    
+
     @Inject
     private ClientsJpaController clientControl;
-    
+
     @Rule
     public ParameterRule rule = new ParameterRule("dynamic",
             new ClientTestingBean("dcastaner0@cbslocal.com", "dcastaner0@cbslocal.com", false, "Dosi", "1",
-            "dcastaner0@cbslocal.com", "Dosi", "dcastaner0@cbslocal.com", 
-            "Dosi", "Castaner", "1875 Artisan Lane", "Empty", "Oberbrunner LLC", "Empty")
+                    "dcastaner0@cbslocal.com", "Dosi", "dcastaner0@cbslocal.com",
+                    "Dosi", "Castaner", "1875 Artisan Lane", "Empty", "Oberbrunner LLC", "Empty")
     );
-    
+
     private ClientTestingBean dynamic;
 
     @Resource(lookup = "java:app/jdbc/bookstore")
@@ -116,34 +105,28 @@ public class ArquillianUnitTest {
 
     @Resource
     private UserTransaction utx;
-    
+
     @Test
-    public void testEmailInfo()
-    {
+    public void testEmailInfo() {
         boolean isSuccess = true;
         Object[] testClientInfo = clientControl.getInfoByEmail(dynamic.email);
         if (!(testClientInfo[0].toString().equals(dynamic.infoEmail))
-                || !((Boolean)testClientInfo[2] == dynamic.isManager)
+                || !((Boolean) testClientInfo[2] == dynamic.isManager)
                 || !(testClientInfo[3].toString().equals(dynamic.firstName))
-                || !(testClientInfo[5].toString().equals(dynamic.provinceAbbr)))
-        {
+                || !(testClientInfo[5].toString().equals(dynamic.provinceAbbr))) {
             isSuccess = false;
         }
-        assertTrue("Email info returned inconsistent results",isSuccess);
+        assertTrue("Email info returned inconsistent results", isSuccess);
     }
-    
+
     @Test
-    public void testEmailSearch()
-    {
+    public void testEmailSearch() {
         boolean isSuccess = true;
         List<Object[]> searchResults = clientControl.searchClientsNoSum(dynamic.email);
-        if (searchResults.size() == 1)
-        {
+        if (searchResults.size() == 1) {
             Object[] results = searchResults.get(0);
-            for (int i = 0;i < results.length;i++)
-            {
-                if (results[i] == null)
-                {
+            for (int i = 0; i < results.length; i++) {
+                if (results[i] == null) {
                     results[i] = "Empty";
                 }
             }
@@ -153,19 +136,15 @@ public class ArquillianUnitTest {
                     || !results[4].toString().equals(dynamic.searchAddress1)
                     || !results[5].toString().equals(dynamic.searchAddress2)
                     || !results[6].toString().equals(dynamic.searchCompanyName)
-                    || !results[7].toString().equals(dynamic.searchCellPhone)
-                    )
-            {
+                    || !results[7].toString().equals(dynamic.searchCellPhone)) {
                 isSuccess = false;
             }
-        }
-        else
-        {
+        } else {
             isSuccess = false;
         }
-        assertTrue("Email search returned inconsistent results",isSuccess);
+        assertTrue("Email search returned inconsistent results", isSuccess);
     }
-    
+
     /*
     @Test
     public void testCreateBookFormat() throws IllegalStateException, Exception {
@@ -369,8 +348,7 @@ public class ArquillianUnitTest {
         assertThat(lfd).hasSize(67);
     }
     
-    */
-    
+     */
     /**
      * Restore the database to a known state before testing. This is important
      * if the test is destructive. This routine is courtesy of Bartosz Majsak
@@ -389,8 +367,6 @@ public class ArquillianUnitTest {
             throw new RuntimeException("Failed seeding database", e);
         }
     }
-    
-       
 
     /**
      * The following methods support the seedDatabse method
