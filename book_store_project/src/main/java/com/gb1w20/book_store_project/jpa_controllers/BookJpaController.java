@@ -185,13 +185,13 @@ public class BookJpaController implements Serializable {
 
         switch (searchBy) {
             case "title":
-                cq.where(cb.like(book.get(Book_.title), expression));
+                cq.where(cb.and(cb.isFalse(book.get(Book_.isRemoved))),cb.like(book.get(Book_.title), expression));
                 break;
             case "author":
-                cq.where(cb.like(author.get(Authors_.name), expression));
+                cq.where(cb.and(cb.isFalse(book.get(Book_.isRemoved))),cb.like(author.get(Authors_.name), expression));
                 break;
             default:
-                cq.where(cb.like(book.get(Book_.isbn), expression));
+                cq.where(cb.and(cb.isFalse(book.get(Book_.isRemoved))),cb.like(book.get(Book_.isbn), expression));
                 break;
         }
 
