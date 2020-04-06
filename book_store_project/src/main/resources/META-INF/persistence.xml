@@ -20,6 +20,7 @@
     <class>com.gb1w20.book_store_project.beans.MailBean</class>
     <class>com.gb1w20.book_store_project.backing.OrderPageBackingBean</class>
     <class>com.gb1w20.book_store_project.beans.EditSurveyBean</class>
+    <class>com.gb1w20.book_store_project.backing.SurveyItemBackingBean</class>
     <exclude-unlisted-classes>true</exclude-unlisted-classes>
   </persistence-unit>
 </persistence>

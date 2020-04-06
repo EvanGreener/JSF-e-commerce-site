@@ -62,10 +62,11 @@ public class EditSurveyBean implements Serializable {
         return newSurveyDescription;
     }
     
-    public void setNewUrl(String newValue)
+    public void setNewSurveyDescription(String newValue)
     {
         newSurveyDescription = newValue;
     }
+
     
     public void onEdit(int id)
     {
