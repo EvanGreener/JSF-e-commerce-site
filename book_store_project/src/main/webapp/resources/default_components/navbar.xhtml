@@ -35,8 +35,8 @@ A Composite component created for nav bar to avoid code duplication in all web p
                 <b:navbarLinks pull="right" styleClass="hidden-xs">
 
                     <b:dropMenu value="Site View" rendered="#{UserLoginBean.getIfManager()}" style="color: white">
-                        <b:navLink id="man" value="Man - En" href="managerFront.xhtml"></b:navLink>
-                        <b:navLink id="cli" value="Clinet - Fr" href="index.xhtml"></b:navLink>
+                        <b:navLink id="man" value="Manager View" href="managerFront.xhtml"></b:navLink>
+                        <b:navLink id="cli" value="Clinet View" href="index.xhtml"></b:navLink>
                     </b:dropMenu>
 
                     <b:navLink rendered="#{UserLoginBean.getIfSignedIn()}" style="color: white" class="nav" value="My Books" href="mybooks.xhtml"></b:navLink>
