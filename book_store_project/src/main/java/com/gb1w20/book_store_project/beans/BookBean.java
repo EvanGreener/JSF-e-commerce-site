@@ -231,7 +231,8 @@ public class BookBean implements Serializable {
     /**
      * Downloads an alice in wonderland pdf
      *
-     * @author Shruti Pareek Sources used
+     * @author Shruti Pareek 
+     * Sources used
      * https://stackoverflow.com/questions/9391838/how-to-provide-a-file-download-from-a-jsf-backing-bean
      * https://itqna.net/questions/15083/how-download-pdf-file-jsf
      * http://www.iana.org/assignments/media-types

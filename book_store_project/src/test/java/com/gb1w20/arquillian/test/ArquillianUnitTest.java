@@ -79,7 +79,7 @@ public class ArquillianUnitTest {
                 .addAsWebInfResource(new File("src/main/webapp/WEB-INF/payara-resources.xml"), "payara-resources.xml")
                 .addAsResource(new File("src/main/resources/META-INF/persistence.xml"), "META-INF/persistence.xml")
                 .addAsResource(new File("src/main/resources/log4j2.xml"), "log4j2.xml")
-                .addAsResource("Book_Store_DML.sql")
+                .addAsResource("Test_DML.sql")
                 .addAsLibraries(dependencies);
 
         return webArchive;
@@ -91,8 +91,26 @@ public class ArquillianUnitTest {
     @Rule
     public ParameterRule rule = new ParameterRule("dynamic",
             new ClientTestingBean("dcastaner0@cbslocal.com", "dcastaner0@cbslocal.com", false, "Dosi", "1",
-                    "dcastaner0@cbslocal.com", "Dosi", "dcastaner0@cbslocal.com",
-                    "Dosi", "Castaner", "1875 Artisan Lane", "Empty", "Oberbrunner LLC", "Empty")
+
+            "dcastaner0@cbslocal.com", "Dosi", "dcastaner0@cbslocal.com", 1,
+            "Dosi", "Castaner", "1875 Artisan Lane", "Empty", "Oberbrunner LLC", "Empty"),
+            
+            new ClientTestingBean("jhutcheon1@last.fm", "jhutcheon1@last.fm", true, "Jane", "2",
+            "jhutcheon1@last.fm", "Jane", "jhutcheon1@last.fm", 0,
+            "Jane", "Hutcheon", "27173 International Junction", "Empty", "Rogahn, Barrows and Wehner", "Empty"),
+            
+            new ClientTestingBean("vgrigoli3@github.com", "vgrigoli3@github.com", false, "Vernice", "4",
+            "vgrigoli3@github.com", "Vernice", "vgrigoli3@github.com", 1,
+            "Vernice", "Grigoli", "1161 Loomis Plaza", "Empty", "Rice, Hegmann and Gorczany", "6445467612"),
+            
+            new ClientTestingBean("deastesg@networksolutions.com", "deastesg@networksolutions.com", false, "Denys", "17",
+            "deastesg@networksolutions.com", "Denys", "deastesg@networksolutions.com", 1,
+            "Denys", "Eastes", "67423 Pine View Lane", "0", "Gleichner Inc", "2138184727"), 
+            
+            new ClientTestingBean("ebeavonl@ycombinator.com", "ebeavonl@ycombinator.com", false, "Elaina", "22",
+            "ebeavonl@ycombinator.com", "Elaina", "ebeavonl@ycombinator.com", 1,
+            "Elaina", "Beavon", "6 Nova Circle", "Empty", "Considine-Mayer", "Empty")
+
     );
 
     private ClientTestingBean dynamic;
@@ -123,7 +141,13 @@ public class ArquillianUnitTest {
     public void testEmailSearch() {
         boolean isSuccess = true;
         List<Object[]> searchResults = clientControl.searchClientsNoSum(dynamic.email);
-        if (searchResults.size() == 1) {
+
+        if (!searchResults.isEmpty() && dynamic.managerIndicator == 0)
+        {
+            isSuccess = false;
+        }
+        else if (searchResults.size() == 1)
+        {
             Object[] results = searchResults.get(0);
             for (int i = 0; i < results.length; i++) {
                 if (results[i] == null) {
@@ -139,11 +163,19 @@ public class ArquillianUnitTest {
                     || !results[7].toString().equals(dynamic.searchCellPhone)) {
                 isSuccess = false;
             }
-        } else {
+
+        }
+        else if (searchResults.isEmpty() && dynamic.managerIndicator == 0)
+        {
+            isSuccess = true;
+        }
+        else
+        {
             isSuccess = false;
         }
         assertTrue("Email search returned inconsistent results", isSuccess);
     }
+
 
     /*
     @Test
@@ -349,6 +381,7 @@ public class ArquillianUnitTest {
     }
     
      */
+
     /**
      * Restore the database to a known state before testing. This is important
      * if the test is destructive. This routine is courtesy of Bartosz Majsak
@@ -356,7 +389,7 @@ public class ArquillianUnitTest {
      */
     @Before
     public void seedDatabase() {
-        final String seedDataScript = loadAsString("Book_Store_DML.sql");
+        final String seedDataScript = loadAsString("Test_DML.sql");
 
         try (Connection connection = ds.getConnection()) {
             for (String statement : splitStatements(new StringReader(

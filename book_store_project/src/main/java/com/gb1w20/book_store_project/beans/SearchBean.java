@@ -123,13 +123,14 @@ public class SearchBean implements Serializable {
 
     private void updateSearchBean() throws IOException {
 
-        List<Book> res = searchBy != null && !query.isBlank() ? bookCtrlr.search(searchBy, query, page) : bookCtrlr.findBookEntities();
+        List<Book> res = searchBy != null && !query.isBlank() ? bookCtrlr.search(searchBy, query, page) : bookCtrlr.findNonRemovedBooks();
 
         LOG.debug(query);
         LOG.debug(searchBy);
 
         results = genreFilters == null || genreFilters.length == 0 ? res : res.stream()
                 .filter(book -> Arrays.asList(genreFilters).contains(book.getGenre()))
+                .filter(book -> !book.getIsRemoved())
                 .collect(Collectors.toList());
         
         //reinitializing query,genrefilters,and search by so it does not affect the next search

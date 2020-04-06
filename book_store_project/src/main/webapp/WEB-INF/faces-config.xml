@@ -16,6 +16,17 @@
     <lifecycle>
     <phase-listener id="nocache">com.gb1w20.book_store_project.CacheControlPhaseListener</phase-listener>
 </lifecycle>
+<application>
+        <locale-config>
+            <default-locale>en_CA</default-locale>
+            <supported-locale>en_CA</supported-locale>
+            <supported-locale>fr_CA</supported-locale>
+        </locale-config>
+        <resource-bundle>
+            <base-name>com.gb1w20.bundles.messages</base-name>
+            <var>msgs</var>
+        </resource-bundle>
+    </application>
 </faces-config>
 
 

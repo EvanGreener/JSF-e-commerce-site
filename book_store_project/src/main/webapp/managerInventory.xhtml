@@ -1,0 +1,329 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:bookstore="http://java.sun.com/jsf/composite/default_components"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:a="http://xmlns.jcp.org/jsf/passthrough">
+    <h:head>
+        <title>Manager Inventory</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+        <link href="https://fonts.googleapis.com/css?family=Montserrat|Roboto&amp;display=swap" rel="stylesheet"/>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+        <h:outputStylesheet library="webjars" name="Semantic-UI/2.4.1/semantic.min.css" />
+        <h:outputStylesheet library="webjars" name="swiper/4.5.1/dist/css/swiper.min.css" />
+        <h:outputStylesheet library="css" name="homepage.css" />
+        <h:outputStylesheet library="css" name="gallery.css" />
+        <h:outputScript library="webjars" name="Semantic-UI/2.4.1/semantic.min.js"/>
+    </h:head>
+
+    <h:body>
+
+        <h:form id="editForm">
+            <bookstore:navbar />
+
+            <div class="gallery">
+            <div class="middle">
+
+                <div id="editFormGrowl" class="ui floating positive message" >
+                    <!--<i class="close icon"></i>-->
+                    <div class="header">
+                        Changes have been saved!
+                    </div>
+                </div>
+
+                <h1 class="ui header">Inventory Management</h1>
+                
+                <br/>
+                
+                <div class="ui form">
+                    <div class="three fields">
+                        <div class="field">
+                        <!--Search by & genre filters-->
+                        <p>Filter By Genre</p>
+                        <h:selectManyCheckbox layout="pageDirection" value="#{managerSearch.genreFilters}">
+                            <p:ajax update="bookTable" listener="#{managerSearch.onChecked}" />
+                            <f:selectItem itemValue = "Science Fiction" itemLabel = "Sci-Fi"/>
+                            <f:selectItem itemValue = "Mystery" itemLabel = "Mystery" />
+                            <f:selectItem itemValue = "Fantasy" itemLabel = "Fantasy" />
+                            <f:selectItem itemValue = "Horror" itemLabel = "Horror" />
+                            <f:selectItem itemValue = "Fiction" itemLabel = "Fiction" />
+                        </h:selectManyCheckbox>
+                        </div>
+                        
+                        <div class="field">
+                        <p>Search by</p>
+                        <h:selectOneRadio layout="pageDirection" value="#{managerSearch.searchBy}" >
+                            <p:ajax update="bookTable" />
+                            <f:selectItem itemValue = "title" itemLabel = "Title"/>
+                            <f:selectItem itemValue = "author" itemLabel = "Author" />
+                            <f:selectItem itemValue = "isbn" itemLabel = "ISBN#" />
+                        </h:selectOneRadio>
+                    </div>
+                    <div class="field">
+                        <div style="margin-bottom: 2px;" class="upper">
+
+                            <!--Search bar-->
+                            <div style="display: inline;" class="ui search">
+                                <h:inputText  id="query" value="#{managerSearch.query}" a:placeholder="Search books..." class="prompt" >
+                                    <p:ajax event="change" listener="#{managerSearch.onKeyUp}" update="bookTable" />
+                                </h:inputText>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                </div>
+
+                <h:commandButton value="Add Book" class="big pink ui button" onclick="setTimeout(function () {
+                            $('#addModal').modal('show', hideGrowl())
+                        }, 500)">
+                    <f:ajax event="click" render="editForm" listener="#{bookBacking.onCreate()}"/>
+                </h:commandButton>
+
+
+                    <h:dataTable id="bookTable" var="books" style="margin-bottom: 20px;" class="ui celled table" value="#{managerSearch.results}">
+                    <h:column>
+                        <f:facet name="header">ISBN</f:facet>
+                            #{books.isbn}
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">Title</f:facet>
+                            #{books.title}
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header"># of Authors</f:facet>
+                            #{books.authorsCollection.size()}
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">Genre</f:facet>
+                            #{books.genre}
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">Pages</f:facet>
+                            #{books.numOfPages}
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">Status</f:facet>
+                            #{bookJpaController.getStatusByIsbn(books.isbn)}
+                    </h:column>
+                    <h:column>
+                        <h:commandLink value="#{bookBacking.getRemovalStatus(books.isRemoved)}">
+                            <f:ajax event="click" listener="#{bookBacking.addOrRemoveBook(books)}" />
+                        </h:commandLink>
+                    </h:column>
+                    <h:column>
+                        <h:commandButton type="button" value="Edit Book" disabled="#{books.isRemoved}" onclick="setTimeout(function () {
+                                    $('#editModal').modal('show', hideGrowl())
+                                }, 500)" class="big ui primary button edit_btn" >
+                            <f:ajax event="click" render="@all" listener="#{editBook.onEdit(books.isbn)}" />
+                        </h:commandButton>
+                    </h:column>
+                </h:dataTable>
+            </div>
+            </div>
+            <bookstore:footer />
+        </h:form>
+        <div id="addModal" class="small ui modal">
+            <div class="header">
+                <h1>Add Book</h1>
+            </div>
+            <div class="content">
+                <h:form id="addForm" class="ui form">
+                    <div class="field">
+                        <h:outputLabel for="isbn" value="ISBN"/>
+                        <h:inputText id="isbn" label="ISBN" value="#{bookBacking.book.isbn}" required="true" requiredMessage="Please enter ISBN" a:placeholder="Enter ISBN" validator="#{bookBacking.validateISBN}">
+                            <f:ajax event="change" render="isbnError"/>
+                        </h:inputText>
+                        <br/>
+                        <h:message id="isbnError" class="error" for="isbn"/>
+                    </div>
+                    <div class="two fields">
+                        <div class="field">
+                            <h:outputLabel for="title" value="Title"/>
+                            <h:inputText id="title" label="Title" value="#{bookBacking.book.title}" required="true" requiredMessage="Please enter title" a:placeholder="Enter title" validator="#{bookBacking.validateNotNull}">
+                                <f:ajax event="change" render="titleError"/>
+                            </h:inputText>
+                            <br/>
+                            <h:message id="titleError" class="error" for="title"/>
+                        </div>
+                        <div class="field">
+                            <h:outputLabel for="author" value="Author"/>
+                            <h:selectOneMenu id="author" label="Author" value="#{bookBacking.selectedAuthor}" required="true" requiredMessage="Please select author" a:placeholder="Select author">
+                                <f:selectItems value="#{bookBacking.authorNames}" />
+                            </h:selectOneMenu>
+                            <br/>
+                            <h:message id="authorError" class="error" for="author"/>
+                        </div>   
+                    </div>
+                    <div class="three fields">
+                        <div class="field">
+                            <h:outputLabel for="publisher" value="Publisher"/>
+                            <h:selectOneMenu id="publisher" label="Publisher" value="#{bookBacking.selectedPub}" required="true" requiredMessage="Please select publisher" a:placeholder="Select publisher">
+                                <f:selectItems value="#{bookBacking.pubNames}" />
+                            </h:selectOneMenu>
+                            <br/>
+                            <h:message id="publisherError" class="error" for="publisher"/>
+                        </div>
+                        <div class="field">
+                            <h:outputLabel for="genre" value="Genre"/>
+                            <h:selectOneMenu id="genre" label="Genre" value="#{bookBacking.book.genre}" required="true" requiredMessage="Please select genre" a:placeholder="Select genre">
+                                <f:selectItems value="#{bookBacking.genres}" />
+                            </h:selectOneMenu>
+                            <br/>
+                            <h:message id="genreError" class="error" for="genre"/>
+                        </div>
+                        <div class="field">
+                            <h:outputLabel for="pages" value="# of Pages"/>
+                            <h:inputText id="pages" label="# of Pages" value="#{bookBacking.pageNum}" required="true" requiredMessage="Please enter number of pages" a:placeholder="Enter number of pages" validator="#{bookBacking.validatePages}">
+                                <f:ajax event="change" render="pagesError"/>
+                            </h:inputText>
+                            <br/>
+                            <h:message id="pagesError" class="error" for="pages"/>
+                        </div>
+                    </div>
+                    <div class="field">
+                        <h:outputLabel for="desc" value="Description"/>
+                        <h:inputTextarea id="desc" label="Description" value="#{bookBacking.book.description}" rows="3" cols="15" required="true" requiredMessage="Please enter description" a:placeholder="Enter description" validator="#{bookBacking.validateNotNull}">
+                            <f:ajax event="change" render="descError"/>
+                        </h:inputTextarea>
+                        <br/>
+                        <h:message id="descError" class="error" for="desc"/>
+                    </div>
+                    <div class="three fields">
+                        <div class="field">
+                            <h:outputLabel for="listPrice" value="List Price"/>
+                            <h:inputText id="listPrice" label="List Price" value="#{bookBacking.LPriceStr}" required="true" requiredMessage="Please enter list price" a:placeholder="Enter list price" validator="#{bookBacking.validatePrice}">
+                                <f:ajax event="change" render="listPriceError"/>
+                            </h:inputText>
+                            <br/>
+                            <h:message id="listPriceError" class="error" for="listPrice"/>
+                        </div>
+                        <div class="field">
+                            <h:outputLabel for="salePrice" value="Sale Price"/>
+                            <h:inputText id="salePrice" label="Sale Price" value="#{bookBacking.SPriceStr}" required="true" requiredMessage="Please enter sale price" a:placeholder="Enter sale price" validator="#{bookBacking.validatePrice}">
+                                <f:ajax event="change" render="salePriceError"/>
+                            </h:inputText>
+                            <br/>
+                            <h:message id="salePriceError" class="error" for="salePrice"/>
+                        </div>
+                        <div class="field">
+                            <h:outputLabel for="wholesalePrice" value="Wholesale Price"/>
+                            <h:inputText id="wholesalePrice" label="Wholesale Price" value="#{bookBacking.WSPriceStr}" required="true" requiredMessage="Please enter wholesale price" a:placeholder="Enter wholesale price" validator="#{bookBacking.validatePrice}">
+                                <f:ajax event="change" render="wholesalePriceError"/>
+                            </h:inputText>
+                            <br/>
+                            <h:message id="wholesalePriceError" class="error" for="wholesalePrice"/>
+                        </div>
+                    </div>
+                    <h:commandButton type="button" class="huge black fluid ui button" id="createBook" value="Create Book" action="#{bookBacking.createBook()}">
+                        <f:ajax event="click" execute="isbn title author publisher genre pages desc listPrice salePrice wholesalePrice" render="editForm"/>
+                    </h:commandButton>
+                </h:form>
+            </div>
+        </div>
+
+        <div id="editModal" class="small ui modal">
+            <div class="header">
+                <h1>Edit Book</h1>
+            </div>
+            <div class="content">
+                <h:form id="editBookForm" class="ui form">
+                    <div class="two fields">
+                        <div class="field">
+                            <h:outputLabel for="newTitle" value="Title"/>
+                            <h:inputText id="newTitle" label="Title" value="#{editBook.newTitle}" required="true" requiredMessage="Please enter title" a:placeholder="Enter title" validator="#{bookBacking.validateNotNull}">
+                                <f:ajax event="change" render="newTitleError"/>
+                            </h:inputText>
+                            <br/>
+                            <h:message id="newTitleError" class="error" for="newTitle"/>
+                        </div>
+                        <div class="field">
+                            <h:outputLabel for="newAuthor" value="Author"/>
+                            <h:selectOneMenu id="newAuthor" label="Author" value="#{editBook.newAuthor}" required="true" requiredMessage="Please select author" a:placeholder="Select author">
+                                <f:selectItems value="#{bookBacking.authorNames}" />
+                            </h:selectOneMenu>
+                            <br/>
+                            <h:message id="newAuthorError" class="error" for="newAuthor"/>
+                        </div>   
+                    </div>
+                    <div class="three fields">
+                        <div class="field">
+                            <h:outputLabel for="newPublisher" value="Publisher"/>
+                            <h:selectOneMenu id="newPublisher" label="Publisher" value="#{editBook.newPublisher}" required="true" requiredMessage="Please select publisher" a:placeholder="Select publisher">
+                                <f:selectItems value="#{bookBacking.pubNames}" />
+                            </h:selectOneMenu>
+                            <br/>
+                            <h:message id="newPublisherError" class="error" for="publisher"/>
+                        </div>
+                        <div class="field">
+                            <h:outputLabel for="newGenre" value="Genre"/>
+                            <h:selectOneMenu id="newGenre" label="Genre" value="#{editBook.newGenre}" required="true" requiredMessage="Please select genre" a:placeholder="Select genre">
+                                <f:selectItems value="#{bookBacking.genres}" />
+                            </h:selectOneMenu>
+                            <br/>
+                            <h:message id="newGenreError" class="error" for="newGenre"/>
+                        </div>
+                        <div class="field">
+                            <h:outputLabel for="newPages" value="# of Pages"/>
+                            <h:inputText id="newPages" label="# of Pages" value="#{editBook.newPages}" required="true" requiredMessage="Please enter number of pages" a:placeholder="Enter number of pages" validator="#{bookBacking.validatePages}">
+                                <f:ajax event="change" render="newPagesError"/>
+                            </h:inputText>
+                            <br/>
+                            <h:message id="newPagesError" class="error" for="newPages"/>
+                        </div>
+                    </div>
+                    <div class="field">
+                        <h:outputLabel for="newDesc" value="Description"/>
+                        <h:inputTextarea id="newDesc" label="Description" value="#{editBook.newDescription}" rows="3" cols="15" required="true" requiredMessage="Please enter description" a:placeholder="Enter description" validator="#{bookBacking.validateNotNull}">
+                            <f:ajax event="change" render="newDescError"/>
+                        </h:inputTextarea>
+                        <br/>
+                        <h:message id="newDescError" class="error" for="newDesc"/>
+                    </div>
+                    <div class="three fields">
+                        <div class="field">
+                            <h:outputLabel for="newListPrice" value="List Price"/>
+                            <h:inputText id="newListPrice" label="List Price" value="#{editBook.newListPrice}" required="true" requiredMessage="Please enter list price" a:placeholder="Enter list price" validator="#{bookBacking.validatePrice}">
+                                <f:ajax event="change" render="newListPriceError"/>
+                            </h:inputText>
+                            <br/>
+                            <h:message id="newListPriceError" class="error" for="newListPrice"/>
+                        </div>
+                        <div class="field">
+                            <h:outputLabel for="newSalePrice" value="Sale Price"/>
+                            <h:inputText id="newSalePrice" label="Sale Price" value="#{editBook.newSalePrice}" required="true" requiredMessage="Please enter sale price" a:placeholder="Enter sale price" validator="#{bookBacking.validatePrice}">
+                                <f:ajax event="change" render="newSalePriceError"/>
+                            </h:inputText>
+                            <br/>
+                            <h:message id="newSalePriceError" class="error" for="newSalePrice"/>
+                        </div>
+                        <div class="field">
+                            <h:outputLabel for="newWholesalePrice" value="Wholesale Price"/>
+                            <h:inputText id="newWholesalePrice" label="Wholesale Price" value="#{editBook.newWholesalePrice}" required="true" requiredMessage="Please enter wholesale price" a:placeholder="Enter wholesale price" validator="#{bookBacking.validatePrice}">
+                                <f:ajax event="change" render="newWholesalePriceError"/>
+                            </h:inputText>
+                            <br/>
+                            <h:message id="newWholesalePriceError" class="error" for="newWholesalePrice"/>
+                        </div>
+                    </div>
+                    <br/>
+                    <h:commandButton type="button" class="huge black fluid ui button" id="editBook" value="Edit Book" action="#{editBook.onSubmitEdit()}">
+                        <f:ajax event="click" execute="newTitle newAuthor newPublisher newGenre newPages newDesc newListPrice newSalePrice newWholesalePrice" render="editForm"/>
+                    </h:commandButton>
+                </h:form>
+            </div>
+        </div>
+
+
+        <script>
+            function hideGrowl() {
+                $('#editFormGrowl').hide('slow');
+            }
+
+        </script>
+
+    </h:body>
+</html>

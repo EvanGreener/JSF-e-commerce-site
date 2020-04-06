@@ -254,6 +254,10 @@ public class Book implements Serializable {
         LOG.debug("getAuthorsCollection");
         return authorsCollection;
     }
+    
+    public void setAuthorsCollection(List<Authors> newList) {
+        authorsCollection = newList;
+    }
 
     public List<OrderItem> getOrders() {
         return orders;

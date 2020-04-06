@@ -10,8 +10,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
- *
- * @author 1733408
+ * Bean to manage maximum and minimum possible dates that can be set by a DatePicker on our website
+ * @author Giancarlo
+ * @version April 4, 2020
  */
 @Named("date")
 @SessionScoped
@@ -20,6 +21,9 @@ public class DateValueBean implements Serializable {
     private Date minDate;
     private Date maxDate;
     
+    /**
+     * Sets the minimum and maximum dates that can be set
+     */
     @PostConstruct
     public void init() {
         LOG.error("hit");

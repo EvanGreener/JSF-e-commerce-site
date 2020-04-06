@@ -26,10 +26,16 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 
+/**
+ * Backing bean for the client entity
+ * @author Giancarlo Biasiucci, Saad Khan
+ * @version April 4, 2020
+ */
 @Named("clientBacking")
 @RequestScoped
 public class ClientBackingBean implements Serializable {
 
+    //Every class should have a logger
     private final static Logger LOG = LoggerFactory.getLogger(ClientBackingBean.class);
 
     @Inject
@@ -83,6 +89,7 @@ public class ClientBackingBean implements Serializable {
         this.message = message;
     }
     
+    //The list contains every province registered in our database.
     public List<SelectItem> getProvinces()
     {
         if (provinces.isEmpty())
@@ -126,12 +133,15 @@ public class ClientBackingBean implements Serializable {
     }
 
     /**
-     * Save the current client to the db
-     *
-     * @return
+     * Save the current client to the database
+     * @author Giancarlo Biasiucci
+     * @return The URI for the login page, which the user will be redirected to after successful registration
+     * & client creation
      * @throws Exception
      */
     public String createClient() throws Exception {
+        //Since the manner in which the password is being hashed (and de-hashed) is partially revolved
+        //around their email, a client's email cannot be changed
         MessageDigest md = MessageDigest.getInstance("SHA-256");
         byte[] hashEmail = md.digest(client.getEmail().getBytes(StandardCharsets.UTF_8));
         byte[] salt = new byte[20];
@@ -149,12 +159,21 @@ public class ClientBackingBean implements Serializable {
         client.setLastModified(new Date());
         client.setDateEntered(new Date());
         client.setIsRemoved(false);
+        //Users cannot register to be managers, since that is the roles that we (the developers) will play.
         client.setIsManager(false);
         clientsJpaController.create(client);
+        //Redirection is necessary to avoid form resubmittal on page reload
         FacesContext.getCurrentInstance().getExternalContext().redirect("signIn.xhtml");
         return "signIn.xhtml";
     }
     
+    /**
+     * General form validation method to ensure that a field is not left empty or blank (not just whitespace)
+     * @author Giancarlo Biasiucci
+     * @param context
+     * @param component
+     * @param value 
+     */
     public void validateNotNull(FacesContext context, UIComponent component, Object value) {
         String input = (String)value;
         if (input.isBlank() || input.isEmpty() || input == null)
@@ -165,6 +184,14 @@ public class ClientBackingBean implements Serializable {
         }
     }
     
+    /**
+     * Password validation method, makes sure that both entered passwords on the registration form
+     * are equal
+     * @author Giancarlo Biasiucci
+     * @param context
+     * @param component
+     * @param value 
+     */
     public void validatePassword(FacesContext context, UIComponent component, Object value) {
         String confirmPassword = (String)value;
         UIInput passwordInput = (UIInput)component.findComponent("password");
@@ -176,6 +203,14 @@ public class ClientBackingBean implements Serializable {
         }
     }
     
+    /**
+     * Email validation method, validates that a) the email does not exist in the database and also that
+     * b) the email is of a correct format (eg. albertofish@gmail.com) - for registration
+     * @author Giancarlo Biasiucci
+     * @param context
+     * @param component
+     * @param value 
+     */
     public void validateUniqueAndValidEmail(FacesContext context, UIComponent component, Object value) {
         String email = (String)value;
         UIInput emailInput = (UIInput)component.findComponent("email");
@@ -198,6 +233,14 @@ public class ClientBackingBean implements Serializable {
         }
     }
     
+    /**
+     * Validates that the password entered in the login form is in fact correct for the entered email
+     * @author Giancarlo Biasiucci
+     * @param context
+     * @param component
+     * @param value
+     * @throws Exception 
+     */
     public void validateCorrectPassword(FacesContext context, UIComponent component, Object value) throws Exception {
         String password = (String)value;
         if (password == null) {
@@ -221,6 +264,14 @@ public class ClientBackingBean implements Serializable {
         }
     }
     
+    /**
+     * Login form email validation - verifies that email (and user) exists in database.
+     * @author Giancarlo Biasiucci
+     * @param context
+     * @param component
+     * @param value
+     * @throws Exception 
+     */
     public void validateEmailExists(FacesContext context, UIComponent component, Object value) throws Exception {
         String email = (String)value;
         if (email == null) {
@@ -236,6 +287,12 @@ public class ClientBackingBean implements Serializable {
         }
     }
     
+    /**
+     * Logs the user in if their credentials are correct, and creates the login cookie.
+     * @author Giancarlo Biasiucci, Saad Khan
+     * @return
+     * @throws Exception 
+     */
     public String login() throws Exception
     {
         Object[] info = clientsJpaController.getInfoByEmail(loginEmail);
@@ -271,6 +328,13 @@ public class ClientBackingBean implements Serializable {
         }
     }
     
+    /**
+     * Logs the user in, only difference from previous login method is that it redirects the user
+     * back to the cart page after login.
+     * @author Giancarlo Biasiucci, Saad Khan
+     * @return
+     * @throws Exception 
+     */
     public String loginForCart() throws Exception
     {
         Object[] info = clientsJpaController.getInfoByEmail(loginEmail);
@@ -306,6 +370,14 @@ public class ClientBackingBean implements Serializable {
         }
     }
     
+    /**
+     * Registration form validation method for home phone, same as for cell phone,
+     * verify that it is in fact a legitemate 10-digit phone number.
+     * @author Giancarlo Biasiucci
+     * @param context
+     * @param component
+     * @param value 
+     */
     public void validateHomePhone(FacesContext context, UIComponent component, Object value)
     {
         String number = (String)value;
@@ -330,6 +402,14 @@ public class ClientBackingBean implements Serializable {
         }
     }
     
+    /**
+     * Registration form validation method for cell phone, same as for home phone,
+     * verify that it is in fact a legitemate 10-digit phone number.
+     * @author Giancarlo Biasiucci
+     * @param context
+     * @param component
+     * @param value 
+     */
     public void validateCellPhone(FacesContext context, UIComponent component, Object value)
     {
         String number = (String)value;
@@ -354,6 +434,14 @@ public class ClientBackingBean implements Serializable {
         }
     }
     
+    /**
+     * Registration form postal code validation method, verifies that the postal code
+     * entered is of a valid Canadian format.
+     * @author Giancarlo Biasiucci
+     * @param context
+     * @param component
+     * @param value 
+     */
     public void validatePostalCode(FacesContext context, UIComponent component, Object value)
     {
         String postalCode = (String)value;
@@ -368,6 +456,14 @@ public class ClientBackingBean implements Serializable {
         }
     }
     
+    /**
+     * Tests login for a pair of credentials (email and password)
+     * @author Giancarlo Biasiucci
+     * @param loginEmail
+     * @param password
+     * @return
+     * @throws Exception 
+     */
     public boolean loginTest(String loginEmail, String password) throws Exception
     {
         Object[] info = clientsJpaController.getInfoByEmail(loginEmail);
@@ -399,6 +495,11 @@ public class ClientBackingBean implements Serializable {
         }
     }
 
+    /**
+     * Creates the login cookie for the user after successful login
+     * @author Saad Khan
+     * @param email 
+     */
     private void createLoginCookie(String email) {
         
         FacesContext facesContext = FacesContext.getCurrentInstance();

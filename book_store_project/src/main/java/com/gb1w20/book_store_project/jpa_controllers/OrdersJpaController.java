@@ -198,7 +198,8 @@ public class OrdersJpaController implements Serializable {
           CriteriaBuilder cb = em.getCriteriaBuilder();
           CriteriaQuery<Orders> cq = cb.createQuery(Orders.class);
           Root<Orders> order = cq.from(Orders.class);
-          cq.where(cb.like(order.get(Orders_.client).get(Clients_.email), expression));
+          Join orderClients  = order.join("client");
+          cq.where(cb.like(orderClients.get(Clients_.email), expression));
           cq.select(order);
           cq.orderBy(cb.asc(order.get(Orders_.orderID)));
           TypedQuery<Orders> q = em.createQuery(cq);

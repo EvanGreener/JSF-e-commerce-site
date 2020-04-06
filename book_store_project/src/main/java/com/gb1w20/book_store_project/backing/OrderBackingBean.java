@@ -11,6 +11,11 @@ import javax.inject.Named;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+/**
+ * Backing bean for the order entity
+ * @author Giancarlo Biasiucci
+ * @version April 4, 2020
+ */
 @Named("orderBacking")
 @RequestScoped
 public class OrderBackingBean implements Serializable {
@@ -23,9 +28,9 @@ public class OrderBackingBean implements Serializable {
     private Orders order;
 
     /**
-     * Orders created if it does not exist.
+     * In the event where the order is null, it is created from scratch to avoid a NullPointerException.
      *
-     * @return
+     * @return The order being managed by the bean
      */
     public Orders getOrder() {
         if (order == null) {
@@ -35,7 +40,7 @@ public class OrderBackingBean implements Serializable {
     }
 
     /**
-     * Save the current order to the db
+     * Creates the order and saves it to the database
      *
      * @return
      * @throws Exception
@@ -45,6 +50,12 @@ public class OrderBackingBean implements Serializable {
         return null;
     }
     
+    /**
+     * Marks an order as removed (changes removal status to true)
+     * @param order
+     * @return
+     * @throws Exception 
+     */
     public String removeOrder(Orders order) throws Exception {
         order.setIsRemoved(true);
         order.setLastUpdated(new Date());
@@ -52,6 +63,12 @@ public class OrderBackingBean implements Serializable {
         return null;
     }
     
+    /**
+     * Marks an order as not removed (changes removal status to false)
+     * @param order
+     * @return
+     * @throws Exception 
+     */
     public String addOrder(Orders order) throws Exception {
         order.setIsRemoved(false);
         order.setLastUpdated(new Date());
@@ -59,6 +76,14 @@ public class OrderBackingBean implements Serializable {
         return null;
     }
     
+    /**
+     * Determines whether an order should be added or removed based on its current removal status
+     * whenever the corresponding link in the managerial order page is clicked
+     * (changed to other state, if true than changed to false and vice versa)
+     * @param order
+     * @return
+     * @throws Exception 
+     */
     public String addOrRemoveOrder(Orders order) throws Exception
     {
         if (order.getIsRemoved())
@@ -73,6 +98,13 @@ public class OrderBackingBean implements Serializable {
         return null;
     }
     
+    /**
+     * Returns a String indicating what will occur when the corresponding link in the managerial
+     * order page is clicked
+     * @param isRemoved
+     * @return
+     * @throws Exception 
+     */
     public String getRemovalStatus(boolean isRemoved) throws Exception {
         if (isRemoved)
         {

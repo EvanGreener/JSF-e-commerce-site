@@ -22,9 +22,6 @@ public class OrderItemBackingBean implements Serializable {
 
     @Inject
     private OrderItemJpaController orderItemJpaController;
-    
-    @Inject
-    private BookBean bb;
 
     private OrderItem orderItem;
 

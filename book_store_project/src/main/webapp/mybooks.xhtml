@@ -44,8 +44,8 @@ compatible with different screen sizes
                     <div class="centerItems">
                         <!--lists actual books owned by user from database -->
                         <div class="ui divided items downloadDiv">
-                            <ui:repeat value="#{UserLoginBean.getClient().booksCollection}" var="book">
-
+                            <ui:repeat value="#{clientInventoryJpaController.findClientInventory(UserLoginBean.getClient().clientID)}" var="inventory">
+                                <ui:repeat value="#{bookJpaController.findBook(inventory.isbn)}" var="book">
                                 <div class="item">
                                     <div class="ui tiny image">
                                         <h:graphicImage library="images" name="#{book.isbn}.jpg"  />
@@ -66,6 +66,7 @@ compatible with different screen sizes
                                         </div>
                                     </div>
                                 </div>
+                                     </ui:repeat>
                             </ui:repeat>
                         </div>
                     </div>

@@ -18,8 +18,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
- *
- * @author giancarlo
+ * Bean for editing an existing ad's information
+ * @author Giancarlo Biasiucci
+ * @version April 4, 2020
  */
 
 @Named("editAd")
@@ -65,6 +66,11 @@ public class EditAdBean implements Serializable {
         newUrl = newValue;
     }
     
+    /**
+     * Saves the current ad information to be displayed in the "Edit Ad" modal
+     * when the corresponding button is clicked
+     * @param id 
+     */
     public void onEdit(int id)
     {
         LOG.debug("onEdit called");
@@ -79,6 +85,12 @@ public class EditAdBean implements Serializable {
         LOG.debug("Current URL (var): " + newUrl);
     }
     
+    /**
+     * Edits the existing ad information with what is present in the fields in the "Edit Ad" modal
+     * and updates the entry in the database
+     * @return
+     * @throws Exception 
+     */
     public String onSubmitEdit() throws Exception
     {
         LOG.debug("onSubmitEdit called");

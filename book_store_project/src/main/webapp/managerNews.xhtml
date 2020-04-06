@@ -58,11 +58,6 @@ and open the template in the editor.
 
           <div class="middle">
                <h:form id="editForm">
-                    <!--Loading modal-->
-                    <p:ajaxStatus onstart="PF('statusDialog').show()" onsuccess="PF('statusDialog').hide()" />
-                    <p:dialog widgetVar="statusDialog" modal="true" draggable="false" closable="false" resizable="false" showHeader="false">
-                         <p:graphicImage style="display: inline;" class="loading" library="images" name="double-ring.svg" />
-                    </p:dialog>
 
                     <div id="editFormGrowl" class="ui floating positive message" >
                          <!--<i class="close icon"></i>-->
@@ -83,13 +78,15 @@ and open the template in the editor.
                               <f:facet name="header">Date created</f:facet>
                                    #{news.dateCreated}
                          </h:column>
-                         <h:column>
-                              <f:facet name="header">Removed</f:facet>
-                              <h:selectBooleanCheckbox value="#{news.isRemoved}" onclick="showGrowl()">
-                                   <p:ajax listener="#{newsManagement.onChangedRemoved(news.newsID, news.isRemoved )}" />
-                              </h:selectBooleanCheckbox>
-                               
-                         </h:column>
+                        <h:column>
+                            <f:facet name="header">Status</f:facet>
+                                #{newsJpaController.getStatusByNewsId(news.newsID)[1]}
+                        </h:column>
+                        <h:column>
+                            <h:commandLink value="#{newsJpaController.getStatusByNewsId(news.newsID)[2]}" disabled="#{!newsJpaController.getStatusByNewsId(news.newsID)[0]}">
+                                <f:ajax event="click" listener="#{newsBacking.addOrRemoveNews(news)}" />
+                            </h:commandLink>
+                        </h:column>
 
 
                     </h:dataTable>
