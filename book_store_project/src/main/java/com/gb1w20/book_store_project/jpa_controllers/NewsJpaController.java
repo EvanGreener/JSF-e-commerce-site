@@ -2,6 +2,7 @@ package com.gb1w20.book_store_project.jpa_controllers;
 
 import com.gb1w20.book_store_project.entities.Ads;
 import com.gb1w20.book_store_project.entities.News;
+import com.gb1w20.book_store_project.entities.News_;
 import com.gb1w20.book_store_project.jpa_controllers.exceptions.NonexistentEntityException;
 import java.io.Serializable;
 import java.util.List;
@@ -12,8 +13,10 @@ import javax.inject.Named;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
 import javax.persistence.EntityNotFoundException;
+import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
+import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 import javax.transaction.SystemException;
@@ -133,6 +136,37 @@ public class NewsJpaController implements Serializable {
         query.setMaxResults(1);
         News n = query.getSingleResult();
         return n;
+    }
+    
+    public Object[] getStatusByNewsId(int newsID)
+    {
+        CriteriaBuilder cb = em.getCriteriaBuilder();
+        CriteriaQuery cq = cb.createQuery();
+        Root<News> order = cq.from(News.class);
+        cq.where(cb.equal(order.get(News_.newsID), newsID));
+        cq.select(order.get(News_.isRemoved));
+        TypedQuery<Boolean> query = em.createQuery(cq);
+        try
+        {
+            query.getSingleResult();
+            Object[] returnArr = {false, "Not Removed", "Enabled"};
+            return returnArr;
+        }
+        catch(NoResultException nre)
+        {
+            Object[] returnArr = {true, "Removed", "Enable Ad"};
+            return returnArr;
+        }
+    }
+    
+    public News getEnabledNews(){
+        CriteriaBuilder cb = em.getCriteriaBuilder();
+        CriteriaQuery cq = cb.createQuery();
+        Root<News> news = cq.from(News.class);
+        cq.where(cb.isFalse(news.get(News_.isRemoved)));
+        cq.select(news);
+        TypedQuery<News> query = em.createQuery(cq);
+        return query.getSingleResult();
     }
 
 }
