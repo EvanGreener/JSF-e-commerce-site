@@ -260,7 +260,7 @@
                         </div>
                         <div class="field">
                             <h:outputLabel for="newGenre" value="Genre"/>
-                            <h:selectOneMenu id="newGenre" label="Genre" value="#{editBook.newGenre}" required="true" requiredMessage="Please select genre" a:placeholder="Select genre">
+                            <h:selectOneMenu id="newGenre" label="Genre" value="#{editBook.newGenre}" valueChangeListener="#{editBook.genreChangeMethod}" required="true" requiredMessage="Please select genre" a:placeholder="Select genre">
                                 <f:selectItems value="#{bookBacking.genres}" />
                             </h:selectOneMenu>
                             <br/>
@@ -311,7 +311,7 @@
                     </div>
                     <br/>
                     <h:commandButton type="button" class="huge black fluid ui button" id="editBook" value="Edit Book" action="#{editBook.onSubmitEdit()}">
-                        <f:ajax event="click" execute="newTitle newAuthor newPublisher newGenre newPages newDesc newListPrice newSalePrice newWholesalePrice" render="editForm"/>
+                        <f:ajax event="click" execute="title author publisher genre pages desc listPrice salePrice wholesalePrice" render="bookTable"/>
                     </h:commandButton>
                 </h:form>
             </div>

@@ -13,6 +13,7 @@ import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.enterprise.context.SessionScoped;
 import javax.faces.context.FacesContext;
+import javax.faces.event.ValueChangeEvent;
 import javax.inject.Inject;
 import javax.inject.Named;
 import org.slf4j.Logger;
@@ -169,6 +170,11 @@ public class EditBookBean implements Serializable {
         LOG.debug("Current ISBN: " + currentBook.getIsbn());
     }
     
+    public void genreChangeMethod(ValueChangeEvent e){
+        LOG.debug("new genre: " + e.getNewValue().toString());
+        newGenre = e.getNewValue().toString();
+    }
+    
     /**
      * Edits the existing book information with what is present in the fields in the "Edit Book" modal
      * and updates the entry in the database
@@ -180,8 +186,10 @@ public class EditBookBean implements Serializable {
         LOG.debug("onSubmitEdit called");
         List<Authors> authors = new ArrayList<>();
         authors.add(newAuthor);
+        currentBook.setTitle(newTitle);
         currentBook.setListPrice(newListPrice);
         currentBook.setSalePrice(newSalePrice);
+        currentBook.setGenre(newGenre);
         currentBook.setDescription(newDescription);
         currentBook.setWholesalePrice(newWholesalePrice);
         currentBook.setNumOfPages(newPages);
