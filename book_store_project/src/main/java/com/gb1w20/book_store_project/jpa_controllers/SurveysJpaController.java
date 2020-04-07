@@ -117,7 +117,6 @@ public class SurveysJpaController implements Serializable {
             q.setMaxResults(maxResults);
             q.setFirstResult(firstResult);
         }
-        LOG.error("yo this should be hit idk why itwont be thou");
         return q.getResultList();
     }
 
