@@ -104,8 +104,6 @@ public class SurveyData implements Serializable {
     }
 
     public void setChoice(String choice) {
-                LOG.info(choice);
-
         this.choice = choice;
     }
 

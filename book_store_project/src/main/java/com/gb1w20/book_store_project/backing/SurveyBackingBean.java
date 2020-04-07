@@ -107,8 +107,6 @@ public class SurveyBackingBean implements Serializable {
     public void setSurveyDataItem5(SurveyData surveyDataItem5) {
         this.surveyDataItem5 = surveyDataItem5;
     }
-
-    
     
     /**
      * Save the current ad to the db
@@ -132,7 +130,7 @@ public class SurveyBackingBean implements Serializable {
         return "managerSurveys.xhtml";
     }
 
-    public String removeSurvey(Surveys survey) throws Exception {
+    public String deactivateSurvey(Surveys survey) throws Exception {
         LOG.debug("Reached the remove method");
         survey.setIsRemoved(true);
         LOG.debug("Reached the setRemoved method");
@@ -143,8 +141,14 @@ public class SurveyBackingBean implements Serializable {
         return null;
     }
 
-    public String addSurvey(Surveys survey) throws Exception {
-        LOG.debug("Reached the add method");
+    public String activateSurvey(Surveys survey) throws Exception {
+        List<Surveys> allSurveys = surveysJpaController.findSurveysEntities();
+        for(Surveys surveyItem : allSurveys){
+            surveyItem.setIsRemoved(true);
+            surveyItem.setLastModified(new Date());
+            surveysJpaController.edit(surveyItem);
+        }
+        LOG.debug("Reached the activate method");
         survey.setIsRemoved(false);
         LOG.debug("Reached the setRemoved method");
         survey.setLastModified(new Date());
@@ -165,9 +169,9 @@ public class SurveyBackingBean implements Serializable {
 
     public String addOrRemoveSurvey(Surveys survey) throws Exception {
         if (survey.getIsRemoved()) {
-            addSurvey(survey);
+            activateSurvey(survey);
         } else {
-            removeSurvey(survey);
+            deactivateSurvey(survey);
         }
         FacesContext.getCurrentInstance().getExternalContext().redirect("managerSurveys.xhtml");
         return null;
@@ -192,7 +196,7 @@ public class SurveyBackingBean implements Serializable {
             LOG.info("this shit needs value "+ item.getChoice());
             item.setSurveyID(surveyID);
             item.setDateCreated(new Date());
-            item.setIsRemoved(true);
+            item.setIsRemoved(false);
             item.setLastModified(new Date());
             item.setVotes(0);
             surveyDataJpaController.create(item);
