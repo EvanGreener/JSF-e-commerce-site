@@ -3,6 +3,7 @@ package com.gb1w20.book_store_project.beans;
 import com.gb1w20.book_store_project.entities.Authors;
 import com.gb1w20.book_store_project.entities.Book;
 import com.gb1w20.book_store_project.entities.Publisher;
+import com.gb1w20.book_store_project.jpa_controllers.AuthorsJpaController;
 import com.gb1w20.book_store_project.jpa_controllers.BookJpaController;
 import com.gb1w20.book_store_project.jpa_controllers.PublisherJpaController;
 import java.io.Serializable;
@@ -28,6 +29,8 @@ import org.slf4j.LoggerFactory;
 @Named("editBook")
 @SessionScoped
 public class EditBookBean implements Serializable {
+    @Inject
+    private AuthorsJpaController authControl;
     
     @Inject
     private BookJpaController bookControl;
@@ -35,7 +38,7 @@ public class EditBookBean implements Serializable {
     @Inject
     private PublisherJpaController pubControl;
     
-    private final static Logger LOG = LoggerFactory.getLogger(EditAdBean.class);
+    private final static Logger LOG = LoggerFactory.getLogger(EditBookBean.class);
     private Book currentBook;
     private String newTitle;
     private Authors newAuthor;
@@ -170,9 +173,19 @@ public class EditBookBean implements Serializable {
         LOG.debug("Current ISBN: " + currentBook.getIsbn());
     }
     
-    public void genreChangeMethod(ValueChangeEvent e){
-        LOG.debug("new genre: " + e.getNewValue().toString());
-        newGenre = e.getNewValue().toString();
+    public void genreChangeMethod(String newGenre){
+        LOG.debug("new genre: " + newGenre);
+        this.newGenre = newGenre;
+    }
+    
+    public void authChangeMethod(String newAuthName){
+        LOG.debug("new auth: " + newAuthName);
+        newAuthor = authControl.getAuthorByName(newAuthName);
+    }
+    
+    public void pubChangeMethod(String newPubName){
+        LOG.debug("new pub: " + newPubName);
+        newPublisher = pubControl.getPublisherByName(newPubName);
     }
     
     /**

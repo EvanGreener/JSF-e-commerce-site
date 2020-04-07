@@ -70,7 +70,6 @@ compatible with different screen sizes
 
                             <!--Book title-->
                             <p class="textColor" style="font-size: 40px;line-height:0.8em;letter-spacing: 0em;font-weight: 100;">#{book.title}</p>
-                            <p class="textColor" style="font-size: 40px;line-height:0.8em;letter-spacing: 0em;font-weight: 100;">#{book.numOfPages} pages</p>
                             <div class="bookTextInfo">
 
                                 <!--Book author or authors-->
@@ -107,6 +106,7 @@ compatible with different screen sizes
                                 <!--Genre info-->
                                 <br/>
                                 <p class="thicker"> Genre: #{book.genre}</p>
+                                <p class="thicker"> Pages: #{book.numOfPages}</p>
 
                                 <!--Save the genre in a cookie-->
                                 #{cbb.saveLastGenre(book)}
