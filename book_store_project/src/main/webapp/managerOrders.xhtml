@@ -103,7 +103,7 @@
                     <!--Search bar-->
                     <div style="display: inline;" class="ui search" >
                          <h:inputText  id="query" value="#{orderSearch.query}"  a:placeholder="Search orders by email..." style="float: right; margin-top: 10px; margin-bottom: 10px; width: 200px; " class="prompt" >
-                              <p:ajax event="keyup"  listener="#{orderSearch.updateBean()}" update="ordersTable" />
+                              <f:ajax event="keyup"  listener="#{orderSearch.updateBean()}" render="ordersTable" />
                          </h:inputText>
                     </div>
                     
