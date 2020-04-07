@@ -39,11 +39,11 @@ public class OrderSearchBean implements Serializable {
     {
         return query;
     }
+
+     public void setQuery(String query) {
+          this.query = query;
+     }
     
-    public void setQuery(String newValue)
-    {
-        this.query = newValue;
-    }
     
     public List<Orders> getSearchResults() {
           return searchResults;
@@ -59,9 +59,8 @@ public class OrderSearchBean implements Serializable {
      */
     public void updateBean() {
           LOG.debug("Update called");
-          System.out.println("Query: " + query);
-          searchResults = orderCtrl.searchOrders(query);
-          System.out.println(searchResults.toString());
+          LOG.debug("Query: " + this.query);
+          searchResults = orderCtrl.searchOrders(this.query);
      }
     
      public void onEdit(int id) {
