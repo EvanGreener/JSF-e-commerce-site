@@ -10,7 +10,8 @@ compatible with different screen sizes
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-      xmlns:bookstore="http://java.sun.com/jsf/composite/default_components">
+      xmlns:bookstore="http://java.sun.com/jsf/composite/default_components"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
     <h:head>
         <title>My Books</title>
         <link rel="stylesheet" href="https://unpkg.com/swiper/css/swiper.min.css"/>
@@ -19,8 +20,8 @@ compatible with different screen sizes
         <link href="https://fonts.googleapis.com/css?family=Montserrat|Roboto&amp;display=swap" rel="stylesheet"/>
 
         <h:outputStylesheet library="webjars" name="Semantic-UI/2.4.1/semantic.min.css" />
-        <h:outputStylesheet library="css" name="homepage.css" />
-        <h:outputStylesheet library="book_css" name="bookpage.css" />
+        <h:outputStylesheet library="css" name="default.css" />
+        <h:outputStylesheet library="myBooksCss" name="mybooks.css" />
         <h:outputScript library="js" name="homepage.js" />
         <h:outputStylesheet library="webjars" name="font-awesome/4.7.0/css/font-awesome.min-jsf.css" />
         <!-- Swiper JS -->
@@ -38,13 +39,13 @@ compatible with different screen sizes
             <div class="ui">
                 <div class="ui fluid">
                     <br/>
-                    <h3 style="text-align: center;font-variant: small-caps;">Download MyBooks</h3>
+                    <h3 class="small">Download MyBooks</h3>
                     <br/>
                     <div class="centerItems">
                         <!--lists actual books owned by user from database -->
                         <div class="ui divided items downloadDiv">
-                            <ui:repeat value="#{UserLoginBean.getClient().booksCollection}" var="book">
-
+                            <ui:repeat value="#{clientInventoryJpaController.findClientInventory(UserLoginBean.getClient().clientID)}" var="inventory">
+                                <ui:repeat value="#{bookJpaController.findBook(inventory.isbn)}" var="book">
                                 <div class="item">
                                     <div class="ui tiny image">
                                         <h:graphicImage library="images" name="#{book.isbn}.jpg"  />
@@ -65,6 +66,7 @@ compatible with different screen sizes
                                         </div>
                                     </div>
                                 </div>
+                                     </ui:repeat>
                             </ui:repeat>
                         </div>
                     </div>

@@ -127,19 +127,23 @@ public class Book implements Serializable {
     @ManyToOne(optional = false)
     private BookFormat bookFormat;
 
-    public BookFormat getBookFormat() {
-        return this.bookFormat;
-    }
-
     public Book() {
-    }
-
-    public List<Clients> getClientsCollection() {
-        return this.clientsCollection;
     }
 
     public Book(String isbn) {
         this.isbn = isbn;
+    }
+    public Book(String isbn,String title) {
+        this.isbn = isbn;
+        this.title=title;
+    }
+
+    public BookFormat getBookFormat() {
+        return this.bookFormat;
+    }
+
+    public List<Clients> getClientsCollection() {
+        return this.clientsCollection;
     }
 
     public String getIsbn() {

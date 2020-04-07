@@ -288,13 +288,6 @@ Hidden button that appears when screen becomes smaller
     margin: 0 auto;
 }
 
-.error
-{
-    color: darkred;
-    font-weight: bold;
-    font-size: 16px;
-
-}
 
 .signUpLink
 {
@@ -574,19 +567,6 @@ p.small {
 .purpleContainer{
     background-color: #DBD3DB;
     height:80%;
-}
-
-.centerItems{
-    justify-content: center;
-    display:flex;
-
-}
-.downloadDiv{
-    width:60% !important;
-    background-color: white;
-    height:50% !important;
-    padding:40px !important;
-    overflow: auto;
 }
 
 .itemContainer{

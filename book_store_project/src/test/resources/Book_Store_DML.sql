@@ -299,12 +299,6 @@ values ("2", "9780141439471", 5, "Gastrointestinal stromal tumor of rectum",
 insert into Customer_Reviews
 (Client_ID, ISBN, Rating, Review_Body, Review_Title, Is_Removed, Pending, Last_Modified,
  Date_Entered, Date_Removed)
-values ("1", "9780141439471", 1, "Gastrointestinal stromal tumor of rectum",
-        "Gastrointestinal stromal tumor of rectum", false, false, "2019-08-30 21:23:27", "2019-01-14 22:11:32",
-        "2020-03-06 06:44:35");
-insert into Customer_Reviews
-(Client_ID, ISBN, Rating, Review_Body, Review_Title, Is_Removed, Pending, Last_Modified,
- Date_Entered, Date_Removed)
 values ("30", "9780770430078", 4, "Displacement of internal fixation device of vertebrae, initial encounter",
         "Displacement of internal fixation device of vertebrae, init",  false, true, "2019-03-22 18:56:14",
         "2019-10-07 02:08:47", "2020-03-15 02:23:18");
@@ -333,7 +327,7 @@ values ("5", "9780062259660", 2, "Borderline leprosy", "Borderline leprosy", tru
 insert into Customer_Reviews
 (Client_ID, ISBN, Rating, Review_Body, Review_Title,  Is_Removed, Pending, Last_Modified,
  Date_Entered, Date_Removed)
-values ("9", "9780141439471", 2, "Osteochondritis dissecans, unspecified knee",
+values ("11", "9780141439471", 2, "Osteochondritis dissecans, unspecified knee",
         "Osteochondritis dissecans, unspecified knee",  false, false, "2019-04-11 09:00:48",
         "2019-01-27 11:39:26", "2020-03-23 08:22:43");
 insert into Customer_Reviews
