@@ -1,0 +1,16 @@
+
+.wrapped{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  padding: 0px 10px;
+}
+
+.tabular.menu, .tab.segment{
+    font-size:16px;
+}
+
+.lightGreyDivLessSpacing{
+    padding:2%;
+    background-color: #EFF1F3 !important;
+}

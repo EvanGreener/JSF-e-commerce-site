@@ -5,6 +5,7 @@
  */
 package com.gb1w20.book_store_project.entities;
 
+import com.gb1w20.book_store_project.beans.BookBean;
 import java.io.Serializable;
 import java.util.Collection;
 import java.util.Date;
@@ -26,6 +27,8 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.Size;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  *
@@ -111,14 +114,16 @@ public class Clients implements Serializable {
     @Column(name = "Is_Removed")
     private Boolean isRemoved;
     
-    @OneToMany( cascade = CascadeType.ALL)
+    @OneToMany( cascade = CascadeType.ALL, mappedBy="client", fetch = FetchType.EAGER )
     private List<Orders> ordersCollection;
     
-    @OneToMany(cascade = CascadeType.ALL,mappedBy="clients")
+    @OneToMany(cascade = CascadeType.ALL,mappedBy="clients",fetch = FetchType.EAGER)
     private List<CustomerReviews> reviews;
     
     @ManyToMany(mappedBy = "clientsCollection", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
      private List<Book> booksCollection;
+    
+    private final static Logger LOG = LoggerFactory.getLogger(Clients.class);
 
     public Clients() {
     }

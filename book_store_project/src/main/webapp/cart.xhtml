@@ -18,7 +18,9 @@ and open the template in the editor.
         <link href="https://fonts.googleapis.com/css?family=Montserrat|Roboto&amp;display=swap" rel="stylesheet"/>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
         <h:outputStylesheet library="webjars" name="Semantic-UI/2.4.1/semantic.min.css" />
-        <h:outputStylesheet library="css" name="homepage.css" />
+        <h:outputStylesheet library="cartCss" name="cart.css" />
+        <h:outputStylesheet library="modalCss" name="modal.css" />
+        <h:outputStylesheet library="css" name="default.css" />
         <h:outputScript library="webjars" name="Semantic-UI/2.4.1/semantic.min.js"/>
         <h:outputStylesheet library="webjars" name="font-awesome/4.7.0/css/font-awesome.min-jsf.css" />
 
@@ -29,14 +31,6 @@ and open the template in the editor.
         <h:form id="editForm">
             <!--composite component that comes from the navbar.xhtml file to avoid coding nav bar in all web pages-->
             <bookstore:navbar/>
-
-
-            <div id="editFormGrowl" class="ui floating positive message" >
-                <!--<i class="close icon"></i>-->
-                <div class="header">
-                    Changes have been saved!
-                </div>
-            </div>
 
             <div class="purpleContainer">
                 <div class="ui very relaxed stackable grid">

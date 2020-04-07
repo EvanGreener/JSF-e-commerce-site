@@ -20,15 +20,16 @@ Reviews that have not be seen by the manager yet will have a status of pending a
         <h:outputStylesheet library="webjars" name="Semantic-UI/2.4.1/semantic.min.css" />
         <h:outputStylesheet library="webjars" name="swiper/4.5.1/dist/css/swiper.min.css" />
         <h:outputScript library="webjars" name="Semantic-UI/2.4.1/semantic.min.js"/>
-        <h:outputStylesheet library="css" name="homepage.css" />
+        <h:outputStylesheet library="css" name="default.css" />
+        <h:outputStylesheet library="temp" name="homepage.css" />
 
         <title>Manage Reviews</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     </h:head>
     <h:body>
+        <bookstore:navbar />
         <!--Table of customer reviews-->
         <h:form id="reviewTable">
-            <bookstore:navbar />
             <div class="middle">
                 <h1 class="ui header">Review Management</h1>
 

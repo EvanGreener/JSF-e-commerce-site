@@ -41,10 +41,11 @@ public class BookBackingBean implements Serializable {
     @Inject
     private AuthorsJpaController authorsJpaController;
     
-    private String selectedPub;
+    private Publisher selectedPub = new Publisher();
     private List<String> pubNames;
     private List<String> authorNames;
-    private String selectedAuthor;
+    private Authors selectedAuthor = new Authors();
+    private String selectedGenre;
     private String pageNum;
     private String lPriceStr;
     private String sPriceStr;
@@ -85,7 +86,7 @@ public class BookBackingBean implements Serializable {
     public List<String> getGenres() {
         if (genres == null) {
             genres = new ArrayList<String>();
-            genres.add("Sci-Fi");
+            genres.add("Science Fiction");
             genres.add("Mystery");
             genres.add("Fantasy");
             genres.add("Horror");
@@ -112,6 +113,16 @@ public class BookBackingBean implements Serializable {
     public void setPageNum(String newValue)
     {
         pageNum = newValue;
+    }
+    
+    public String getSelectedGenre()
+    {
+        return selectedGenre;
+    }
+    
+    public void setSelectedGenre(String newGenre)
+    {
+        selectedGenre = newGenre;
     }
     
     public String getLPriceStr()
@@ -144,22 +155,22 @@ public class BookBackingBean implements Serializable {
         wsPriceStr = newValue;
     }
     
-    public String getSelectedPub()
+    public Publisher getSelectedPub()
     {
         return selectedPub;
     }
     
-    public void setSelectedPub(String newPub)
+    public void setSelectedPub(Publisher newPub)
     {
         selectedPub = newPub;
     }
     
-    public String getSelectedAuthor()
+    public Authors getSelectedAuthor()
     {
         return selectedAuthor;
     }
     
-    public void setSelectedAuthor(String newAuthors)
+    public void setSelectedAuthor(Authors newAuthors)
     {
         selectedAuthor = newAuthors;
     }
@@ -171,17 +182,18 @@ public class BookBackingBean implements Serializable {
      */
     public String createBook() throws Exception {
         List<Authors> authors = new ArrayList<Authors>();
-        authors.add(authorsJpaController.getAuthorByName(selectedAuthor));
+        authors.add(selectedAuthor);
+        book.setGenre(selectedGenre);
         book.setListPrice(BigDecimal.valueOf(Double.parseDouble(lPriceStr)));
         book.setSalePrice(BigDecimal.valueOf(Double.parseDouble(sPriceStr)));
         book.setWholesalePrice(BigDecimal.valueOf(Double.parseDouble(wsPriceStr)));
         book.setNumOfPages(Integer.valueOf(pageNum));
-        book.setPublisherID(pubJpaController.getPublisherIDByName(selectedPub));
+        book.setPublisherID(selectedPub.getPublisherID());
         book.setDateOfPublication(new Date());
         book.setDateEntered(new Date());
         book.setLastModified(new Date());
         book.setIsRemoved(false);
-        //book.setAuthorsCollection(authors);
+        book.setAuthorsCollection(authors);
         bookJpaController.create(book);
         FacesContext.getCurrentInstance().getExternalContext().redirect("managerInventory.xhtml");
         return "managerInventory.xhtml";
@@ -321,6 +333,21 @@ public class BookBackingBean implements Serializable {
             FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR, message, message);
             throw new ValidatorException(msg);
         }
+    }
+    
+    public void genreChangeMethod(String newGenre){
+        LOG.debug("new genre: " + newGenre);
+        selectedGenre = newGenre;
+    }
+    
+    public void authChangeMethod(String newAuthName){
+        LOG.debug("new auth: " + newAuthName);
+        selectedAuthor = authorsJpaController.getAuthorByName(newAuthName);
+    }
+    
+    public void pubChangeMethod(String newPubName){
+        LOG.debug("new pub: " + newPubName);
+        selectedPub = pubJpaController.getPublisherByName(newPubName);
     }
     
     /**

@@ -29,12 +29,12 @@ compatible with different screen sizes
         <link rel="stylesheet" href="https://unpkg.com/swiper/css/swiper.min.css"/>
         <link href="https://fonts.googleapis.com/css?family=Montserrat|Roboto&amp;display=swap" rel="stylesheet"/>
         <h:outputStylesheet library="webjars" name="Semantic-UI/2.4.1/semantic.min.css" />
-        <h:outputStylesheet library="indexCss" name="index.css" />
+        <h:outputStylesheet library="css" name="default.css" />
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
         <h:outputScript library="js" name="homepage.js" />
         <h:outputScript library="js" name="book.js" />
         <h:outputScript library="webjars" name="Semantic-UI/2.4.1/semantic.min.js"/>
-        <h:outputStylesheet library="book_css" name="bookpage.css" />
+        <h:outputStylesheet library="bookCss" name="book.css" />
 
         <script  src="https://www.gstatic.com/charts/loader.js"></script>
         <script src="https://unpkg.com/swiper/js/swiper.min.js"></script>
@@ -106,6 +106,7 @@ compatible with different screen sizes
                                 <!--Genre info-->
                                 <br/>
                                 <p class="thicker"> Genre: #{book.genre}</p>
+                                <p class="thicker"> Pages: #{book.numOfPages}</p>
 
                                 <!--Save the genre in a cookie-->
                                 #{cbb.saveLastGenre(book)}
@@ -115,8 +116,8 @@ compatible with different screen sizes
                                 #{bb.getDisplayBookDescription(book.description)}<h:panelGroup rendered="#{! bb.getDisplayBookDescription(book.description).equals(book.description)}"><span id="dots">...</span><span id="more">#{bb.getHiddenBookDescription(book.description)}</span>
                                     <a  onclick="showMore()" id="moreBtn">Read more</a>
                                 </h:panelGroup>
-                                
-                                
+
+
                                 <!--list price displayed if sale price equal list price-->
                                 <h:panelGroup rendered="#{bb.book.listPrice.compareTo(bb.book.salePrice)== 0}">
                                     <h2>$#{bb.book.listPrice}</h2>
@@ -175,27 +176,27 @@ compatible with different screen sizes
                         <tr><td>
                                 <!--Review are all displayed here and scroll through them-->
                                 <h:panelGroup id="reviewDisplay" class="flex-review scrollReviews">
-                                    <ui:repeat value="#{reviewBean.getReviews(bb.book.isbn)}"  var="book">
+                                    <ui:repeat value="#{reviewBean.getReviews(bb.book.isbn)}"  var="review">
                                         <div>
                                             <!-- review Title-->
-                                            <p class="reviewTitle">#{book.reviewTitle}</p>
+                                            <p class="reviewTitle">#{review.reviewTitle}</p>
                                             <!-- author of review-->
-                                            <p class="reviewName">#{book.clients.firstName} #{book.clients.lastName}</p>
+                                            <p class="reviewName">#{clientsJpaController.findClients(review.clientID).firstName} #{clientsJpaController.findClients(review.clientID).lastName} </p>
 
                                             <!-- review body-->
-                                            <p>#{book.reviewBody} </p>
+                                            <p>#{review.reviewBody} </p>
                                             <div class="flex-review" style="padding:0px">
                                                 <div style="padding:0px">
-                                                    <ui:repeat value="#{reviewBean.getRating(book.rating)}" var="rate">
+                                                    <ui:repeat value="#{reviewBean.getRating(review.rating)}" var="rate">
                                                         <h:graphicImage class="image" height="20px" width="20px" library="images" name="ratestar.png"  />
                                                     </ui:repeat>
-                                                    <ui:repeat value="#{reviewBean.getRating(5-book.rating)}" var="rate">
+                                                    <ui:repeat value="#{reviewBean.getRating(5-review.rating)}" var="rate">
                                                         <h:graphicImage class="image" height="20px" width="20px" library="images" name="star.png"  />
                                                     </ui:repeat>
                                                 </div>
                                                 <!-- converting sql date to normal human readable format-->
                                                 <div style="padding:0px" class="reviewDate">
-                                                    <h:outputText value="#{book.dateEntered}">
+                                                    <h:outputText value="#{review.dateEntered}">
                                                         <f:convertDateTime type="date" dateStyle="medium"/>
                                                     </h:outputText>
                                                 </div>

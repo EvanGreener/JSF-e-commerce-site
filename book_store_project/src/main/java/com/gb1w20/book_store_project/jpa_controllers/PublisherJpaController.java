@@ -145,4 +145,14 @@ public class PublisherJpaController implements Serializable {
         return q.getSingleResult();
     }
     
+    public Publisher getPublisherByName(String name) {
+        CriteriaBuilder cb = em.getCriteriaBuilder();
+        CriteriaQuery cq = cb.createQuery();
+        Root<Publisher> pub = cq.from(Publisher.class);
+        cq.where(cb.equal(pub.get(Publisher_.name), name));
+        cq.select(pub);
+        TypedQuery<Publisher> q = em.createQuery(cq);
+        return q.getSingleResult();
+    }
+    
 }

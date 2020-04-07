@@ -1,5 +1,6 @@
 package com.gb1w20.book_store_project.jpa_controllers;
 
+import com.gb1w20.book_store_project.entities.Book;
 import com.gb1w20.book_store_project.entities.ClientInventory;
 import com.gb1w20.book_store_project.jpa_controllers.exceptions.NonexistentEntityException;
 import java.io.Serializable;
@@ -11,6 +12,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.Query;
 import javax.persistence.EntityNotFoundException;
 import javax.persistence.PersistenceContext;
+import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 import javax.transaction.SystemException;
@@ -113,7 +115,12 @@ public class ClientInventoryJpaController implements Serializable {
     public ClientInventory findClientInventory(int id) {
             return em.find(ClientInventory.class, id);
     }
-
+    public List<ClientInventory> findClientInventory(Integer clientId){
+        TypedQuery<ClientInventory> query = em.createQuery("SELECT c FROM ClientInventory c WHERE c.clientID=:clientId ", ClientInventory.class);
+        query.setParameter("clientId", clientId);
+        List<ClientInventory> inventory = query.getResultList();
+        return inventory;
+    }
     public int getClientInventoryCount() {
             CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
             Root<ClientInventory> rt = cq.from(ClientInventory.class);
