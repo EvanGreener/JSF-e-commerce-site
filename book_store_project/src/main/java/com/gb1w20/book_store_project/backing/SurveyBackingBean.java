@@ -130,7 +130,7 @@ public class SurveyBackingBean implements Serializable {
         return "managerSurveys.xhtml";
     }
 
-    public String deactivateSurvey(Surveys survey) throws Exception {
+    public void deactivateSurvey(Surveys survey) throws Exception {
         LOG.debug("Reached the remove method");
         survey.setIsRemoved(true);
         LOG.debug("Reached the setRemoved method");
@@ -138,15 +138,12 @@ public class SurveyBackingBean implements Serializable {
         LOG.debug("Reached the setModified method");
         surveysJpaController.edit(survey);
         LOG.debug("Reached the edit method");
-        return null;
     }
 
-    public String activateSurvey(Surveys survey) throws Exception {
+    public void activateSurvey(Surveys survey) throws Exception {
         List<Surveys> allSurveys = surveysJpaController.findSurveysEntities();
         for(Surveys surveyItem : allSurveys){
-            surveyItem.setIsRemoved(true);
-            surveyItem.setLastModified(new Date());
-            surveysJpaController.edit(surveyItem);
+            deactivateSurvey(surveyItem);
         }
         LOG.debug("Reached the activate method");
         survey.setIsRemoved(false);
@@ -155,7 +152,6 @@ public class SurveyBackingBean implements Serializable {
         LOG.debug("Reached the lastModified method");
         surveysJpaController.edit(survey);
         LOG.debug("Reached the edit method");
-        return null;
     }
 
     public void validateNotNull(FacesContext context, UIComponent component, Object value) {
