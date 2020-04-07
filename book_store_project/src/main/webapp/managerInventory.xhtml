@@ -24,6 +24,7 @@
         <h:form id="editForm">
             <bookstore:navbar />
 
+            <div class="gallery">
             <div class="middle">
 
                 <div id="editFormGrowl" class="ui floating positive message" >
@@ -43,7 +44,7 @@
                         <!--Search by & genre filters-->
                         <p>Filter By Genre</p>
                         <h:selectManyCheckbox layout="pageDirection" value="#{managerSearch.genreFilters}">
-                            <p:ajax update="editForm" listener="#{managerSearch.onChecked}" />
+                            <p:ajax update="bookTable" listener="#{managerSearch.onChecked}" />
                             <f:selectItem itemValue = "Science Fiction" itemLabel = "Sci-Fi"/>
                             <f:selectItem itemValue = "Mystery" itemLabel = "Mystery" />
                             <f:selectItem itemValue = "Fantasy" itemLabel = "Fantasy" />
@@ -121,6 +122,7 @@
                         </h:commandButton>
                     </h:column>
                 </h:dataTable>
+            </div>
             </div>
             <bookstore:footer />
         </h:form>

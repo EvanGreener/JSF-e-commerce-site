@@ -49,11 +49,13 @@ CREATE TABLE `Customer_Reviews` (
 );
 
 CREATE TABLE `Client_Inventory` (
+  `Inventory_ID` INT AUTO_INCREMENT,
   `Client_ID` INT,
   `ISBN` VARCHAR(13),
   `Date_Purchased` DATETIME,
   `Last_Modified` DATETIME,
   `Is_Removed` BOOL,
+  PRIMARY KEY (`Inventory_ID`),
   KEY `FK` (`Client_ID`, `ISBN`)
 );
 

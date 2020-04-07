@@ -130,6 +130,7 @@ public class SearchBean implements Serializable {
 
         results = genreFilters == null || genreFilters.length == 0 ? res : res.stream()
                 .filter(book -> Arrays.asList(genreFilters).contains(book.getGenre()))
+                .filter(book -> !book.getIsRemoved())
                 .collect(Collectors.toList());
         
         //reinitializing query,genrefilters,and search by so it does not affect the next search

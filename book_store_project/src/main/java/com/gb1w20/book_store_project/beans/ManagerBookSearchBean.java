@@ -19,6 +19,11 @@ import javax.inject.Inject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+/**
+ * Bean for updating the book search criteria on the manager-side inventory page. Most of this code is taken from the gallery page book search bean designed by my teammate Evan Greenstein
+ * @author Giancarlo Biasiucci, Evan Greenstein
+ * @version April 4, 2020
+ */
 @Named("managerSearch")
 @ViewScoped
 public class ManagerBookSearchBean implements Serializable {
@@ -33,10 +38,12 @@ public class ManagerBookSearchBean implements Serializable {
     private String searchBy = "title";
     private List<Book> results;
     private int page = 1;
-    private int numPages;
     private String surveyChoice;
     private String isbn;
 
+    /**
+     * Method by Evan Greenstein
+     */
     @PostConstruct
     public void init() {
         LOG.debug("Init called!");
@@ -109,20 +116,19 @@ public class ManagerBookSearchBean implements Serializable {
         page = newValue;
     }
 
-    public int getNumPages() {
-        return numPages;
-    }
-
-    public void setNumPages(int newValue) {
-        numPages = newValue;
-    }
-
     public List<Book> getResults() {
         return results;
     }
 
+    /**
+     * Method by Evan Greenstein, modified by myself to reflect manager side look and feel
+     * @author Giancarlo Biasiucci, Evan Greenstein.
+     * @throws IOException 
+     */
     private void updateSearchBean() throws IOException {
-
+        
+        //Since this is a manager-side page, all books are displayed, as opposed to only those
+        //which are not "removed"
         List<Book> res = searchBy != null && !query.isBlank() ? bookCtrlr.search(searchBy, query, page) : bookCtrlr.findBookEntities();
 
         LOG.debug(query);
@@ -140,17 +146,6 @@ public class ManagerBookSearchBean implements Serializable {
             resetSearchBy();
         
         */
-        numPages = (int) Math.ceil(results.size() / 8.0);
-        
-        if (results.size() == 1) {
-            FacesContext context = FacesContext.getCurrentInstance();
-            context.getExternalContext().redirect("book.xhtml?isbn=" + results.get(0).getIsbn());
-            //reinitializing query,genrefilters,and search by so it does not affect the next search
-            resetQuery();
-            resetGenreFilters();
-            resetSearchBy();
-        }
-
     }
 
     public void onKeyUp() throws IOException {

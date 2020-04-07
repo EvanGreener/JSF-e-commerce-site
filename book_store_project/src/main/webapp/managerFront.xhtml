@@ -17,7 +17,7 @@
         <link href="https://fonts.googleapis.com/css?family=Montserrat|Roboto&amp;display=swap" rel="stylesheet"/>
 
         <h:outputStylesheet library="webjars" name="Semantic-UI/2.4.1/semantic.min.css" />
-        <h:outputStylesheet library="css" name="homepage.css" />
+        <h:outputStylesheet library="temp" name="homepage.css" />
         <h:outputStylesheet library="managercss" name="manager.css" />
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 
@@ -39,7 +39,7 @@
                     <div class="column manager-outer-menu">
                         <div class="manager-menu">
                             <a href="managerClients.xhtml" style="color:black">
-                                <h:commandButton class="front-button" id="manage-client-button" value="Users"/>
+                                <h:commandButton class="front-button" id="manage-client-button" value="Clients"/>
                             </a>
                         </div>
                     </div>
@@ -79,7 +79,9 @@
                     </div>
                     <div class="column manager-outer-menu">
                         <div class="manager-menu">
-                            <h:commandButton class="front-button" id="survey-management-button" value="Surveys"/>
+                            <a href="managerSurveys.xhtml" style="color:black">
+                                <h:commandButton class="front-button" id="survey-management-button" value="Surveys"/>
+                            </a>
                         </div>
                     </div>
                     <div class="column manager-outer-menu">

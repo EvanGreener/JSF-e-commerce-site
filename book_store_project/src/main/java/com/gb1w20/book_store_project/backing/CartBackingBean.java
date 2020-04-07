@@ -11,17 +11,21 @@ import com.gb1w20.book_store_project.entities.Book;
 import com.gb1w20.book_store_project.entities.Clients;
 import com.gb1w20.book_store_project.entities.OrderItem;
 import com.gb1w20.book_store_project.entities.Orders;
+import com.gb1w20.book_store_project.entities.ClientInventory;
 import com.gb1w20.book_store_project.jpa_controllers.BookJpaController;
 import com.gb1w20.book_store_project.jpa_controllers.ClientsJpaController;
 import com.gb1w20.book_store_project.jpa_controllers.OrderItemJpaController;
 import com.gb1w20.book_store_project.jpa_controllers.OrdersJpaController;
+import com.gb1w20.book_store_project.jpa_controllers.ClientInventoryJpaController;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.regex.Pattern;
 import javax.enterprise.context.SessionScoped;
 import javax.faces.application.FacesMessage;
 import javax.faces.component.UIComponent;
+import javax.faces.component.UIInput;
 import javax.faces.context.FacesContext;
 import javax.faces.validator.ValidatorException;
 import javax.inject.Inject;
@@ -59,6 +63,9 @@ public class CartBackingBean implements Serializable {
     @Inject
     private ClientsJpaController clientCtrl;
 
+    @Inject
+    private ClientInventoryJpaController clientInventoryCtrl;
+    
     @Inject
     private TaxBackingBean taxbb;
 
@@ -196,15 +203,6 @@ public class CartBackingBean implements Serializable {
         }
     }
 
-    public void validateNotNull(FacesContext context, UIComponent component, Object value) {
-        String input = (String) value;
-        if (input.isBlank() || input.isEmpty() || input == null) {
-            String message = context.getApplication().evaluateExpressionGet(context, "Value must not be left blank", String.class);
-            FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR, message, message);
-            throw new ValidatorException(msg);
-        }
-    }
-
     public void validateCardNumber(FacesContext context, UIComponent component, Object value) {
         String number = (String) value;
         try {
@@ -264,6 +262,7 @@ public class CartBackingBean implements Serializable {
             oi.setBook(book);
             orderItemCtrl.create(oi);
             newOrderItems.add(oi);
+            addToClientInventory(client.getClientID(),book.getIsbn());
         }
         newOrder.setOrderItemsCollection(newOrderItems);
         orderCtrl.create(newOrder);
@@ -272,6 +271,17 @@ public class CartBackingBean implements Serializable {
         orderPage.setOrder(newOrder);
         FacesContext.getCurrentInstance().getExternalContext().redirect("myOrder.xhtml");
         return "myOrder.xhtml";
+    }
+    
+    
+    private void addToClientInventory(Integer clientID, String isbn) throws Exception {
+        ClientInventory item = new ClientInventory();
+        item.setClientID(clientID);
+        item.setDatePurchased(new Date());
+        item.setIsRemoved(false);
+        item.setIsbn(isbn);
+        item.setLastModified(new Date());
+        clientInventoryCtrl.create(item);
     }
 
     private void sendEmail(String receiver, Integer orderID) {
@@ -283,7 +293,7 @@ public class CartBackingBean implements Serializable {
         sender.sendOrderConfirmationEmail(mailBean);
     }
 
-    private void saveLastGenre(Book addingBook) {
+    public void saveLastGenre(Book addingBook) {
         FacesContext facesContext = FacesContext.getCurrentInstance();
         HttpServletRequest request = (HttpServletRequest) facesContext.getExternalContext().getRequest();
         Cookie cookie = null;
@@ -317,7 +327,7 @@ public class CartBackingBean implements Serializable {
         Cookie[] userCookies = request.getCookies();
         LOG.info("checking genre");
 
-        String lastGenre = "Fiction";
+        String lastGenre = "";
         
         if (userCookies != null && userCookies.length > 0) {
             for (int i = 0; i < userCookies.length; i++) {
@@ -328,5 +338,44 @@ public class CartBackingBean implements Serializable {
             }
         }
         return lastGenre;
+    }
+    
+    /**
+     * Registration form postal code validation method, verifies that the postal code
+     * entered is of a valid Canadian format.
+     * @author Giancarlo Biasiucci
+     * @param context
+     * @param component
+     * @param value 
+     */
+    public void validatePostalCode(FacesContext context, UIComponent component, Object value)
+    {
+        String postalCode = (String)value;
+        UIInput postalCodeInput = (UIInput)component.findComponent("postalCode");
+        boolean validPostalCode = Pattern.matches("[a-zA-Z][0-9][a-zA-Z][0-9][a-zA-Z][0-9]", postalCode);
+        if (!validPostalCode)
+        {
+            String message = context.getApplication().evaluateExpressionGet(context, "Incorrect postal code format (correct format: A1A1A1)", String.class);
+            FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR, message, message);
+            postalCodeInput.resetValue();
+            throw new ValidatorException(msg);
+        }
+    }
+    
+    /**
+     * General form validation method to ensure that a field is not left empty or blank (not just whitespace)
+     * @author Giancarlo Biasiucci
+     * @param context
+     * @param component
+     * @param value 
+     */
+    public void validateNotNull(FacesContext context, UIComponent component, Object value) {
+        String input = (String)value;
+        if (input.isBlank() || input.isEmpty() || input == null)
+        {
+            String message = context.getApplication().evaluateExpressionGet(context, "Value must not be left blank", String.class);
+            FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR, message, message);
+            throw new ValidatorException(msg);
+        }
     }
 }

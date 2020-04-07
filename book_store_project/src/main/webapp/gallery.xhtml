@@ -18,8 +18,9 @@
         <h:outputStylesheet library="webjars" name="Semantic-UI/2.4.1/semantic.min.css" />
         <h:outputStylesheet library="webjars" name="swiper/4.5.1/dist/css/swiper.min.css" />
         <h:outputStylesheet library="galleryCss" name="gallery.css" />
-        <h:outputStylesheet library="css" name="homepage.css" />
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+        <h:outputStylesheet library="css" name="default.css" />
+        <h:outputScript library="webjars" name="Semantic-UI/2.4.1/semantic.min.js"/>
 
         <h:outputScript library="js" name="homepage.js" />
 
@@ -88,45 +89,8 @@
                                     <!-- -1 because collections are 0-indexed-->
                                     <ui:repeat offset="#{(search.page - 1) * 8}" value="#{search.results}" var="books" varStatus="status">
                                         <ui:fragment rendered="#{status.index lt limit * search.page}">
-                                            <div class="ui fluid card darker">
-                                                <div class="homepageImg">
-                                                    <h:graphicImage class="img" height="250" width="156.25" library="images" name="#{books.isbn}.jpg"/>
-                                                    <div class="cardHoverBtn"> View Cover</div>
-                                                </div>
-
-                                                <div class="content">
-
-
-                                                    <h:link outcome = "book" value = "">
-                                                        <f:param  name="isbn" value="#{books.isbn}" /> 
-                                                        <div class="header">
-
-                                                            #{books.title}</div>
-                                                        <div class="meta">
-
-                                                            <ui:repeat value="#{books.authorsCollection}" var="author">
-                                                                #{author.name}
-                                                            </ui:repeat>
-
-                                                        </div>
-
-                                                        <div class="description">
-                                                            <div class="ui tag labels">
-                                                                <a class="ui label">
-                                                                    $#{books.listPrice}
-                                                                </a>
-                                                            </div>
-
-                                                        </div>
-                                                    </h:link>
-
-
-                                                </div>
-                                                <!--Button to add to shopping cart-->
-                                                <div class="ui two bottom attached buttons ">
-                                                    <h:commandButton action="#{cbb.addBookToCart(books)}" type="submit" value = "+ Add to Cart" class="ui button"/>
-                                                </div>
-                                            </div>
+                                            <!--Used composition to display all book cards-->
+                                            <bookstore:bookCard/>
                                         </ui:fragment>
                                     </ui:repeat>
                                 </div>
@@ -308,6 +272,19 @@
             <div class="swiper-pagination"></div>
 
         </h:form>
+ 
+        <!-- The Modal for view book cover -->
+        <!-- source https://semantic-ui.com/modules/modal.html-->
+        <div class="ui modals transition visible" id="myModal" style="display: none !important;z-index:3;" >
+            <div class="ui standard tiny modal transition visible scrolling" style="display: block !important;">
+                <span class="close">x</span>
+                <div class="image content" style="justify-content: center;">
+                    <div class="ui medium image">
+                        <h:graphicImage class="image" id="img01" height="650px" width="520px" library="images" name="9780062200570.jpg"  />
+                    </div>
+                </div>
+            </div>
+        </div>
 
         <!--composite component that comes from the footer.xhtml file to avoid coding the website footer in all web pages-->
         <bookstore:footer/>

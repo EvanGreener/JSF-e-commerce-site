@@ -21,6 +21,11 @@ import javax.inject.Named;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+/**
+ * Backing bean for the book entity
+ * @author Giancarlo Biasiucci
+ * @version April 4, 2020
+ */
 @Named("bookBacking")
 @RequestScoped
 public class BookBackingBean implements Serializable {
@@ -51,7 +56,7 @@ public class BookBackingBean implements Serializable {
     private Book book;
 
     /**
-     * Books created if it does not exist.
+     * The book managed by the bean is created if null to avoid a NullPointerException.
      *
      * @return
      */
@@ -76,6 +81,7 @@ public class BookBackingBean implements Serializable {
         return authorNames;
     }
     
+    //Genres are added manually since referencing the controller at this point would generate a NullPointerException
     public List<String> getGenres() {
         if (genres == null) {
             genres = new ArrayList<String>();
@@ -159,8 +165,7 @@ public class BookBackingBean implements Serializable {
     }
 
     /**
-     * Save the current book to the db
-     *
+     * Creates the book and saves it to the database. Data is retrieved from corresponding modal.
      * @return
      * @throws Exception
      */
@@ -176,7 +181,7 @@ public class BookBackingBean implements Serializable {
         book.setDateEntered(new Date());
         book.setLastModified(new Date());
         book.setIsRemoved(false);
-        book.setAuthorsCollection(authors);
+        //book.setAuthorsCollection(authors);
         bookJpaController.create(book);
         FacesContext.getCurrentInstance().getExternalContext().redirect("managerInventory.xhtml");
         return "managerInventory.xhtml";
@@ -186,6 +191,12 @@ public class BookBackingBean implements Serializable {
         LOG.debug("onCreate called!");
     }
     
+    /**
+     * Marks a book as removed (changes removal status to true)
+     * @param book
+     * @return
+     * @throws Exception 
+     */
     public String removeBook(Book book) throws Exception {
         LOG.debug("Reached the remove method");
         book.setIsRemoved(true);
@@ -197,6 +208,12 @@ public class BookBackingBean implements Serializable {
         return null;
     }
     
+    /**
+     * Marks a book as not removed (changes removal status to false)
+     * @param book
+     * @return
+     * @throws Exception 
+     */
     public String addBook(Book book) throws Exception {
         LOG.debug("Reached the add method");
         book.setIsRemoved(false);
@@ -208,6 +225,14 @@ public class BookBackingBean implements Serializable {
         return null;
     }
     
+    /**
+     * Determines whether a book should be added or removed based on its current removal status
+     * whenever the corresponding link in the managerial ad page is clicked
+     * (changed to other state, if true than changed to false and vice versa)
+     * @param book
+     * @return
+     * @throws Exception 
+     */
     public String addOrRemoveBook(Book book) throws Exception
     {
         if (book.getIsRemoved())
@@ -222,6 +247,13 @@ public class BookBackingBean implements Serializable {
         return null;
     }
     
+    /**
+     * Returns a String indicating what will occur when the corresponding link in the managerial
+     * book page is clicked
+     * @param isRemoved
+     * @return
+     * @throws Exception 
+     */
     public String getRemovalStatus(boolean isRemoved) throws Exception {
         if (isRemoved)
         {
@@ -233,6 +265,12 @@ public class BookBackingBean implements Serializable {
         }
     }
     
+    /**
+     * Validation method ensuring that a field in the "Add Book" modal is not left null
+     * @param context
+     * @param component
+     * @param value 
+     */
     public void validateNotNull(FacesContext context, UIComponent component, Object value) {
         String input = (String)value;
         if (input.isBlank() || input.isEmpty() || input == null)
@@ -243,6 +281,12 @@ public class BookBackingBean implements Serializable {
         }
     }
     
+    /**
+     * Validation method ensuring that an entered ISBN is entirely numerical and of a valid length
+     * @param context
+     * @param component
+     * @param value 
+     */
     public void validateISBN(FacesContext context, UIComponent component, Object value)
     {
         String input = (String)value;
@@ -279,6 +323,12 @@ public class BookBackingBean implements Serializable {
         }
     }
     
+    /**
+     * Validation method ensuring that the number of pages is entirely numerical
+     * @param context
+     * @param component
+     * @param value 
+     */
     public void validatePages(FacesContext context, UIComponent component, Object value)
     {
         String input = value.toString() + "";
@@ -300,6 +350,13 @@ public class BookBackingBean implements Serializable {
         }
     }
     
+    /**
+     * Validation method ensuring that the entered price is a valid double (so that it may be
+     * converted to a BigDecimal at creation time)
+     * @param context
+     * @param component
+     * @param value 
+     */
     public void validatePrice(FacesContext context, UIComponent component, Object value)
     {
         String input = value + "";
