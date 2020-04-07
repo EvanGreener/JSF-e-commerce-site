@@ -92,7 +92,7 @@ public class SurveyDataBean implements Serializable {
      * @return list
      */
     public List<SurveyData> getSurveyChoices(Integer surveyId) {
-        LOG.debug("getSurveyChoices");
+        LOG.debug("getSurveyChoices" + surveyId);
         this.surveyChoices = surveyDatasJpaController.getSurveyChoices(surveyId);
         return this.surveyChoices;
     }

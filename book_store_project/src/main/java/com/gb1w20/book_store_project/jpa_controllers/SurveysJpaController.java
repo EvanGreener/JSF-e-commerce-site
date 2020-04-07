@@ -117,7 +117,6 @@ public class SurveysJpaController implements Serializable {
             q.setMaxResults(maxResults);
             q.setFirstResult(firstResult);
         }
-        LOG.error("yo this should be hit idk why itwont be thou");
         return q.getResultList();
     }
 
@@ -140,7 +139,7 @@ public class SurveysJpaController implements Serializable {
         return em.find(Surveys.class, id);
     }
 
-    public Surveys getRandomSurvey() {
+    public Surveys getActiveSurvey() {
         TypedQuery<Surveys> query = em.createQuery("SELECT s FROM Surveys s WHERE s.isRemoved = :removed", Surveys.class);
         query.setParameter("removed", false);
         Random r = new Random();
