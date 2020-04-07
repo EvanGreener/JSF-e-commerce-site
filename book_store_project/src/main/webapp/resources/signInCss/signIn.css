@@ -1,0 +1,24 @@
+.lightGreyDiv{
+    padding:5%;
+    background-color: #EFF1F3 !important;
+}
+
+
+.thingy5{
+    background-color: white;
+    padding: 3%;
+    width: 80%;
+    margin: 0 auto;
+    border: 0.5px solid grey;
+}
+
+.thingy6{
+    padding:0%;
+    width:70%;
+    margin: 0 auto;
+}
+
+.ui.form
+{
+    font-size:1em;
+}
