@@ -2806,15 +2806,15 @@ INSERT INTO Ads (Image_Name,Ad_Url,Date_Created,Last_Modified,Is_Removed) VALUES
 INSERT INTO Surveys (Survey_Name,Date_Created,Last_Modified,Is_Removed,Survey_Description)
     VALUES('Do you like to read?','2019-06-01','2019-06-01',FALSE,'Here at TheBookStore we would like to ask our community what their opinion on reading is, positive, negative, or something else');
 INSERT INTO Surveys (Survey_Name,Date_Created,Last_Modified,Is_Removed,Survey_Description)
-    VALUES('What is your favorite year in history','2019-07-01','2019-07-01',TRUE,'Here at TheBookStore we are interested in the opinion of our audience on contemporary history, in particular we want your opinion on our selection of the juciest recent years.');
+    VALUES('What is your favorite year in history','2019-07-01','2019-07-01',FALSE,'Here at TheBookStore we are interested in the opinion of our audience on contemporary history, in particular we want your opinion on our selection of the juciest recent years.');
 INSERT INTO Surveys (Survey_Name,Date_Created,Last_Modified,Is_Removed,Survey_Description)
-    VALUES('Is Shakespeare overrated?','2019-08-01','2019-09-01',TRUE,'Here at TheBookStore we ask the buring questions we suppose are on everyones mind. Shakespeare brilliant artist or overrated hack? You decide.');
+    VALUES('Is Shakespeare overrated?','2019-08-01','2019-09-01',FALSE,'Here at TheBookStore we ask the buring questions we suppose are on everyones mind. Shakespeare brilliant artist or overrated hack? You decide.');
 INSERT INTO Surveys (Survey_Name,Date_Created,Last_Modified,Is_Removed,Survey_Description)
-    VALUES('What is your opinion on Trains','2019-09-01','2019-09-01',TRUE,'Trains some people obesess over them, others could not care less. Where do you fall?');
+    VALUES('What is your opinion on Trains','2019-09-01','2019-09-01',FALSE,'Trains some people obesess over them, others could not care less. Where do you fall?');
 INSERT INTO Surveys (Survey_Name,Date_Created,Last_Modified,Is_Removed,Survey_Description)
-    VALUES('Should we ban the word however?','2019-10-01','2019-10-01',TRUE,'We at TheBookstore would argue the word however has been overused and abused in too many school essays and should never see the light of day again, however it could be argued it has a place in mature literature. You decide its fate.');
+    VALUES('Should we ban the word however?','2019-10-01','2019-10-01',FALSE,'We at TheBookstore would argue the word however has been overused and abused in too many school essays and should never see the light of day again, however it could be argued it has a place in mature literature. You decide its fate.');
 INSERT INTO Surveys (Survey_Name,Date_Created,Last_Modified,Is_Removed,Survey_Description)
-    VALUES('Would you survive a zombie apocalipse?','2019-011-01','2019-012-01',TRUE,'The real questions right now. In light of all you know about zombies from countless educational sources would you survive a zombie apocalipse and why?');
+    VALUES('Would you survive a zombie apocalipse?','2019-011-01','2019-012-01',FALSE,'The real questions right now. In light of all you know about zombies from countless educational sources would you survive a zombie apocalipse and why?');
 INSERT INTO Survey_Data (Is_Removed,Survey_ID,Votes,Date_Created,Last_Modified,Choice)
     VALUES(FALSE,1,10,'2019-06-01','2019-06-01','Yes');
 INSERT INTO Survey_Data (Is_Removed,Survey_ID,Votes,Date_Created,Last_Modified,Choice)
