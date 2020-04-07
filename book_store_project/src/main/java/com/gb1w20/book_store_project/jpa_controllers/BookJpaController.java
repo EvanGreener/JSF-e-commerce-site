@@ -216,6 +216,13 @@ public class BookJpaController implements Serializable {
         List<Book> books = query.getResultList();
         return books;
     }
+    
+    public List<Book> getAllSaleBooks() {
+
+        TypedQuery<Book> query = em.createQuery("SELECT b FROM Book b where b.listPrice  <> b.salePrice", Book.class);
+        List<Book> books = query.getResultList();
+        return books;
+    }
 
     public List<Object> getPopularGenres() {
 

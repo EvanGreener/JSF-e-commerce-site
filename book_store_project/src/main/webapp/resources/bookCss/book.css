@@ -17,6 +17,24 @@
     border: 2px solid #D77A61;
     width:70px;
 }
+
+/*For modal*/
+.ui.page.dimmer {
+    position: fixed;
+    -webkit-transform-style: '';
+    transform-style: '';
+    -webkit-perspective: 2000px;
+    perspective: 2000px;
+    -webkit-transform-origin: center center;
+    transform-origin: center center;
+}
+.ui.dimmer{
+  background-color: rgba(0,0,0,0.2);
+}
+.visible{
+    visibility:visible;
+}
+
 /* Read More link in book description*/
 #more {
     display: none; /* By default extra text in book description is not shown*/

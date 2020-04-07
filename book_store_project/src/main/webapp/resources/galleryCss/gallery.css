@@ -5,6 +5,22 @@
      border-color: #D77A61 !important;
 }
 
+.ui.page.dimmer {
+    position: fixed;
+    -webkit-transform-style: '';
+    transform-style: '';
+    -webkit-perspective: 2000px;
+    perspective: 2000px;
+    -webkit-transform-origin: center center;
+    transform-origin: center center;
+}
+.ui.dimmer{
+  background-color: rgba(0,0,0,0.2);
+}
+.visible{
+    visibility:visible;
+}
+
 .gallery {
      padding: 40px 40px 20px 20px;
      background-color: #EFF1F3;
