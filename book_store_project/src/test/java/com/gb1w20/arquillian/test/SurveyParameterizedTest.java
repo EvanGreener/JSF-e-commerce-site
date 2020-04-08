@@ -12,7 +12,17 @@ import com.gb1w20.book_store_project.entities.Surveys;
 import com.gb1w20.book_store_project.jpa_controllers.SurveyDataJpaController;
 import com.gb1w20.book_store_project.jpa_controllers.SurveysJpaController;
 import com.gb1w20.book_store_project.jpa_controllers.exceptions.IllegalOrphanException;
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.Reader;
+import java.io.StringReader;
+import java.sql.Connection;
+import java.sql.SQLException;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Scanner;
 import javax.annotation.Resource;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
@@ -26,6 +36,7 @@ import org.jboss.shrinkwrap.api.asset.EmptyAsset;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.jboss.shrinkwrap.resolver.api.maven.Maven;
 import static org.junit.Assert.assertEquals;
+import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -120,5 +131,65 @@ public class SurveyParameterizedTest {
         int votes = surveyControl.getTotalVotesSingleSurvey(survey.getSurveyID());
         assertEquals("Expected number of  " + surveyTest.expectedVotes + " vs. actual size " + votes,
                 surveyTest.expectedVotes, votes);
+    }
+    
+    /**
+     * Restore the database to a known state before testing. This is important
+     * if the test is destructive. This routine is courtesy of Bartosz Majsak
+     * who also solved my Arquillian remote server problem
+     */
+    @Before
+    public void seedDatabase() {
+        final String seedDataScript = loadAsString("Test_DML.sql");
+
+        try (Connection connection = ds.getConnection()) {
+            for (String statement : splitStatements(new StringReader(
+                    seedDataScript), ";")) {
+                connection.prepareStatement(statement).execute();
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException("Failed seeding database", e);
+        }
+    }
+
+    /**
+     * The following methods support the seedDatabse method
+     */
+    private String loadAsString(final String path) {
+        try (InputStream inputStream = Thread.currentThread()
+                .getContextClassLoader().getResourceAsStream(path)) {
+            return new Scanner(inputStream).useDelimiter("\\A").next();
+        } catch (IOException e) {
+            throw new RuntimeException("Unable to close input stream.", e);
+        }
+    }
+
+    private List<String> splitStatements(Reader reader,
+            String statementDelimiter) {
+        final BufferedReader bufferedReader = new BufferedReader(reader);
+        final StringBuilder sqlStatement = new StringBuilder();
+        final List<String> statements = new LinkedList<>();
+        try {
+            String line;
+            while ((line = bufferedReader.readLine()) != null) {
+                line = line.trim();
+                if (line.isEmpty() || isComment(line)) {
+                    continue;
+                }
+                sqlStatement.append(line);
+                if (line.endsWith(statementDelimiter)) {
+                    statements.add(sqlStatement.toString());
+                    sqlStatement.setLength(0);
+                }
+            }
+            return statements;
+        } catch (IOException e) {
+            throw new RuntimeException("Failed parsing sql", e);
+        }
+    }
+
+    private boolean isComment(final String line) {
+        return line.startsWith("--") || line.startsWith("//")
+                || line.startsWith("/*");
     }
 }
