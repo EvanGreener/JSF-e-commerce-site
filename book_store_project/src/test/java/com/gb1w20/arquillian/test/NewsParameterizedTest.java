@@ -1,14 +1,19 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
+ * To change this license henewser, choose License Henewsers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
 package com.gb1w20.arquillian.test;
 
-import com.gb1w20.arquillian.test.beans.SearchTestingBean;
+import com.gb1w20.arquillian.test.beans.NewsTestingBean;
+import com.gb1w20.arquillian.test.beans.BookTestingBean;
+import com.gb1w20.arquillian.test.beans.ClientTestingBean;
 import com.gb1w20.book_store_project.backing.BookFormatBackingBean;
 import com.gb1w20.book_store_project.beans.NewsBean;
+import com.gb1w20.book_store_project.entities.News;
+import com.gb1w20.book_store_project.entities.Book;
 import com.gb1w20.book_store_project.entities.BookFormat;
+import com.gb1w20.book_store_project.jpa_controllers.NewsJpaController;
 import com.gb1w20.book_store_project.jpa_controllers.BookFormatJpaController;
 import com.gb1w20.book_store_project.jpa_controllers.BookJpaController;
 import com.gb1w20.book_store_project.jpa_controllers.exceptions.IllegalOrphanException;
@@ -36,6 +41,7 @@ import org.jboss.shrinkwrap.api.asset.EmptyAsset;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.jboss.shrinkwrap.resolver.api.maven.Maven;
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
@@ -48,9 +54,9 @@ import org.slf4j.LoggerFactory;
  * @author giancarlo
  */
 @RunWith(Arquillian.class)
-public class BookSearchParameterizedTest {
-
-    private final static Logger LOG = LoggerFactory.getLogger(BookSearchParameterizedTest.class);
+public class NewsParameterizedTest {
+    
+    private final static Logger LOG = LoggerFactory.getLogger(BookParameterizedTest.class);
 
     @Deployment
     public static WebArchive deploy() {
@@ -77,7 +83,7 @@ public class BookSearchParameterizedTest {
                 .addPackage(BookFormat.class.getPackage())
                 .addPackage(BookFormatBackingBean.class.getPackage())
                 .addPackage(ParameterRule.class.getPackage())
-                .addPackage(SearchTestingBean.class.getPackage())
+                .addPackage(ClientTestingBean.class.getPackage())
                 .addPackage(NewsBean.class.getPackage())
                 .addAsWebInfResource(EmptyAsset.INSTANCE, "beans.xml")
                 .addAsWebInfResource(new File("src/main/webapp/WEB-INF/payara-resources.xml"), "payara-resources.xml")
@@ -88,20 +94,22 @@ public class BookSearchParameterizedTest {
 
         return webArchive;
     }
-    
     @Inject
-    private BookJpaController bookControl;
-    
+    private NewsJpaController newsControl;
+
     @Rule
-    public ParameterRule rule = new ParameterRule("dynamic",
-            new SearchTestingBean("sh", "title", 3),
-            new SearchTestingBean("Dennis", "author", 2),
-            new SearchTestingBean("97801", "ISBN", 5),
-            new SearchTestingBean("Cor", "title", 1),
-            new SearchTestingBean("Test", "author", 0)
+    public ParameterRule newsRule = new ParameterRule("newsTest",
+            new NewsTestingBean(1,"Removed"),
+            new NewsTestingBean(2,"Removed"),
+            new NewsTestingBean(3,"Removed"),
+            new NewsTestingBean(4,"Removed"),
+            new NewsTestingBean(5,"Removed"),
+            new NewsTestingBean(6,"Not Removed")
+            
     );
-    
-    private SearchTestingBean dynamic;
+
+    private NewsTestingBean newsTest;
+
 
     @Resource(lookup = "java:app/jdbc/bookstore")
     private DataSource ds;
@@ -113,10 +121,27 @@ public class BookSearchParameterizedTest {
     private UserTransaction utx;
     
     @Test
-    public void testSearch()
+    public void testExpectedStatus()
     {
-        dynamic.results = bookControl.search(dynamic.searchByField, dynamic.queryString, 1);
-        assertEquals(dynamic.expectedSize, dynamic.results.size());
+        String removalStatus = newsControl.getStatusByNewsId(newsControl.findNews(newsTest.newsID).getNewsID())[1].toString();
+        assertEquals("Expected: " + newsTest.expectedStatus + ", actual: " + removalStatus,
+                newsTest.expectedStatus, removalStatus);
+    }
+    
+    @Test
+    public void testRandomNewsIsAlwaysReal()
+    {
+        News news = newsControl.getRandomNews();
+        List<News> allNews = newsControl.findNewsEntities();
+        assertTrue("Expected: included, actual: not", allNews.contains(news));
+    }
+    
+    @Test
+    public void testEnabledNewsIsAlwaysReal()
+    {
+        News news = newsControl.getEnabledNews();
+        List<News> allNews = newsControl.findNewsEntities();
+        assertTrue("Expected: included, actual: not", allNews.contains(news));
     }
     
     /**

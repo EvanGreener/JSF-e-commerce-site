@@ -91,6 +91,14 @@
         </dependency>
 
         <dependency>
+            <groupId>org.eclipse.persistence</groupId>
+            <artifactId>javax.persistence</artifactId>
+            <version>2.2.1</version>
+            <type>jar</type>
+        </dependency>
+
+
+        <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
             <scope>test</scope>
@@ -103,6 +111,7 @@
         <artifactId>web_project_dependencies</artifactId>
         <version>1.1</version>
     </parent>
+    
     
      
 </project>

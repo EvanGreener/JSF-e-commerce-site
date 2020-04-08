@@ -3,8 +3,11 @@ package com.gb1w20.book_store_project.jpa_controllers;
 import com.gb1w20.book_store_project.entities.Authors_;
 import com.gb1w20.book_store_project.entities.Book;
 import com.gb1w20.book_store_project.entities.Book_;
+
+import com.gb1w20.book_store_project.entities.RankedBook;
 import com.gb1w20.book_store_project.jpa_controllers.exceptions.NonexistentEntityException;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 import javax.annotation.Resource;
@@ -316,5 +319,21 @@ public class BookJpaController implements Serializable {
         {
             return "Removed";
         }
+    }
+    public List<RankedBook> getTopSellingBooks()
+    {
+        TypedQuery<Book> query = em.createQuery("SELECT B FROM Book B, OrderItem OI Where B.isbn = OI.isbn", Book.class);
+        List<Book> orderedBooks = query.getResultList();
+        TypedQuery<String> query2 = em.createQuery("SELECT CAST(COUNT(OI.isbn) AS CHAR(30)) as sales FROM Book B, OrderItem OI Where B.isbn = OI.isbn Order By sales DESC", String.class);
+        List<String> bookSales = query2.getResultList();
+        List<RankedBook> results = new ArrayList<RankedBook>();
+        int i = 0;
+        for(Book b : orderedBooks)
+        {
+            results.add(new RankedBook(b,"1"));
+            i++;
+        }
+        
+        return results;
     }
 }

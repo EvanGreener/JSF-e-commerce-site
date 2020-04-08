@@ -44,9 +44,9 @@ import org.slf4j.LoggerFactory;
  * @author giancarlo
  */
 @RunWith(Arquillian.class)
-public class ArquillianUnitTest {
+public class ClientParameterizedTest {
 
-    private final static Logger LOG = LoggerFactory.getLogger(ArquillianUnitTest.class);
+    private final static Logger LOG = LoggerFactory.getLogger(ClientParameterizedTest.class);
 
     @Deployment
     public static WebArchive deploy() {
