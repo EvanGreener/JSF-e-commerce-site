@@ -141,10 +141,18 @@ public class BookJpaController implements Serializable {
     }
 
     public Book findBook(String id) {
+      Book book;
+        try{
+             
         TypedQuery<Book> query = em.createQuery("SELECT b FROM Book b WHERE b.isRemoved = :removed AND b.isbn=:isbn", Book.class);
         query.setParameter("removed", false);
         query.setParameter("isbn", id);
-        Book book = query.getSingleResult();
+      
+        book = query.getSingleResult();
+         }
+         catch(NoResultException e){
+             book=null;
+         }
         return book;
     }
 
