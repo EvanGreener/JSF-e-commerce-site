@@ -5,77 +5,7 @@
     Created on : Feb. 4, 2020, 9:28:27 p.m.
     Author     : Saad,Shruti
 */
-*{
-    font-family: 'Roboto', sans-serif !important;
-}
-html, body {
-    position: relative;
-    height: 100%;
-}
-.ui-scrollpanel-content{
-    width:inherit !important;
-    position: relative !important;
-
-}
-.ui-scrollpanel-content p{
-    padding: 20px !important;
-
-}
-.ui-scrollpanel-content img{
-    width:400px !important;
-}
-.ui-scrollpanel img{
-    width:300px !important;
-}
-.ui-scrollpanel-content iframe{
-    width:300px !important;
-    height:300px !important;
-}
-.ui-scrollpanel iframe{
-    width:300px !important;
-    height:300px !important;
-}
-.ui-scrollpanel-container{
-    width:inherit !important;
-
-}
-
-.middle h1 {
-    margin-top: 20px !important;
-    text-align: center;
-    color: gray;
-}
-.middle{
-    padding: 0px 40px 0px 40px;
-}
-
-.actions{
-    height: 80%;
-    text-align: center !important;
-    font-size: 20px;
-    margin: 10px 10px 10px 10px;
-}
-
-.actions .ui.button {
-    margin: 10px 10px 10px 10px;
-}
-
-.footer button{
-    font-size: 20px !important;
-    margin: 0px 10px 0px 10px !important;
-}
-
-.header h1 {
-    text-align: center !important;
-}
-
-.form-field{
-    font-size: 18px;
-    margin: 10px 0px 10px 5px;
-
-}
-
-#editFormGrowl{
+.ui.page.dimmer {
     position: fixed;
     display: none;
     z-index: 777;
@@ -111,69 +41,33 @@ padding-bottom: 10px !important;
 }
 
 .item1{
-    background-color:  orange !important;
+    background-color:  #D77A61 !important;
 }
 .item2{
-    background-color: #ff6c17 !important;
+    background-color: #D77A61 !important;
 }
 .item3{
-    background-color:  coral !important;
+    background-color:  #D77A61 !important;
 }
 .searchBarDiv{
     text-align: center;
+    -webkit-transform-style: '';
+    transform-style: '';
+    -webkit-perspective: 2000px;
+    perspective: 2000px;
+    -webkit-transform-origin: center center;
+    transform-origin: center center;
 }
-
-.searchBar{
-    width: 50%;
-    padding: 12px 20px;
-    margin: 8px 0;
-    display: inline-block;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    box-sizing: border-box;
+.ui.dimmer{
+  background-color: rgba(0,0,0,0.2);
 }
-.searchButton{
-    padding: 12px 20px;
-    margin: 8px 0;
-    display: inline-block;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    box-sizing: border-box;
+.visible{
+    visibility:visible;
 }
 .swiper-container {
     width: 100%;
     height: 80%;
 }
-
-/*
-Hides description for recently added book carousel when screen size gets smaller
-sources:https://stackoverflow.com/questions/21323818/css-define-media-query-within-one-class
-*/
-@media only screen and (max-width: 905px) {
-
-    .sliderDescription{display:none;}
-    .sliderShopNow{display:none;}
-    .sliderShopNowHidden{display:block !important;}
-
-}
-/*
-Hidden button that appears when screen becomes smaller
-*/
-.sliderShopNowHidden{
-    display:none;
-}
-/* Divs inside flex-container div
- sources:https://www.w3schools.com/css/tryit.asp?filename=trycss3_flexbox_flex-wrap_nowrap8*/
-.flex-container > div {
-    width: 400px;
-    margin: 10px;
-}
-.flex-container {
-    display: flex;
-    flex-wrap: wrap;
-    padding:3%;
-}
-
 .swiper-slide {
     text-align: center;
     font-size: 18px;
@@ -193,118 +87,16 @@ Hidden button that appears when screen becomes smaller
     -webkit-align-items: center;
     align-items: center;
 }
-.headMenu{
-    margin-bottom: 0px !important;
-    background-color: #D77A61 !important;
-    border:none !important;
-    border-radius: 0px !important;
+/* Divs inside flex-container div
+ sources:https://www.w3schools.com/css/tryit.asp?filename=trycss3_flexbox_flex-wrap_nowrap8*/
+.flex-container > div {
+    width: 400px;
+    margin: 10px;
 }
-
-.thingy{
-    padding:5%;
-    background-color: #D8B4A0;
-
-}
-.thingy3{
-    padding:5%;
-    background-color: #DBD3DB;
-
-}
-.thingy4{
-    padding:5%;
-    background-color: #223843;
-
-
-}
-
-.lightGreyDiv{
-    padding:5%;
-    background-color: #EFF1F3 !important;
-}
-
-.lightGreyDivLessSpacing{
-    padding:2%;
-    background-color: #EFF1F3 !important;
-}
-
-.lightOrangeDiv{
-    padding:5%;
-    background-color: #D8B4A0;
-}
-.orangeDiv{
-    padding:5%;
-    background-color: #d77a61 important;
-}
-
-.lightPurpleDiv{
-    padding:5%;
-    background-color: #DBD3DB;
-
-}
-.darkBlueDiv{
-    padding:5%;
-    background-color: #223843 !important;
-}
-
-.purpleContainer{
-    background-color: #DBD3DB;
-    height:100%;
-}
-
-.thingy5{
-    background-color: white;
-    padding: 3%;
-    width: 80%;
-    margin: 0 auto;
-    border: 0.5px solid grey;
-}
-
-.thingy6{
-    padding:0%;
-    width:70%;
-    margin: 0 auto;
-}
-
-.error
-{
-    color: darkred;
-    font-weight: bold;
-    font-size: 16px;
-
-}
-
-.signUpLink
-{
-    text-align: center;
-    font-size:14px;
-}
-
-.ui.form
-{
-    font-size:1em;
-}
-
-.white
-{
-    color: white;
-}
-
-.mainBtn{
-    width: 15% !important;
-    background-color: white !important;
-}
-/*makes book cards darker on hover*/
-.darker:hover {
-    -webkit-filter:brightness(50%);
-    -moz-filter:brightness(50%);
-    filter: url(#brightness); 
-    filter:brightness(70%);
-}
-/*Styles div indicating recently added books in carousel*/
-.recentlyAddedDiv{
-    border-style: solid;
-    border-color: #545454;
-    border-width: 2px; 
+.flex-container {
+    display: flex;
+    flex-wrap: wrap;
+    padding:3%;
 }
 /*Div containing book description,author,and shop now button in recently added books carousel*/
 .sliderTextContent{
@@ -313,89 +105,66 @@ Hidden button that appears when screen becomes smaller
     width:60% !important;
 
 }
-.invisible{
-    position: absolute;
-    visibility:hidden;
-}
-.visible{
-    visibility:visible;
+/*Styles div indicating recently added books in carousel*/
+.recentlyAddedDiv{
+    border-style: solid;
+    border-color: #545454;
+    border-width: 2px; 
 }
 
-.sliderImageContent{
+/*
+Hides description for recently added book carousel when screen size gets smaller
+sources:https://stackoverflow.com/questions/21323818/css-define-media-query-within-one-class
+*/
+@media only screen and (max-width: 905px) {
+
+    .sliderDescription{display:none;}
+    .sliderShopNow{display:none;}
+    .sliderShopNowHidden{display:block !important;}
+
+}
+/*
+Hidden button that appears when screen becomes smaller
+*/
+.sliderShopNowHidden{
+    display:none;
+}
+.searchBarDiv{
     text-align: center;
-    margin: 20px 40px; 
-    box-shadow: 5px 10px 8px black;
+}
+.searchButton{
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+.searchBar{
+    width: 50%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
 }
 
-
-
-.shopBtn{
-    height:50px; 
-    width:10%; 
-    margin: 40px -50px; 
-    position:relative;
-    left:50%;
-    background-color: #223843;
-    color: white;
-
-}
-
-.cardHoverBtn{
-    position: absolute;
-    top: 40%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    -ms-transform: translate(-50%, -50%);
-    display:block;
-    border:2px solid black;
-    background-color: white;
-    color: black;
-    font-size: 16px;
-    padding: 12px 24px;
-    border-radius: 5px;
-    text-align: center;
-    cursor: pointer;
-    opacity: 0;
-    transition: opacity .50s ease;
-}
-
-.cardHoverBtn:hover {
-    background-color: grey;
-    cursor: pointer;
-}
 .parentDiv{
     display:flex;
     justify-content: center;
     align-items: center;
 }
-p.small {
-    font-variant: small-caps;
-    font-size: 24px;
-    text-align: center;
-    font-weight: bold;
+.survey{
+    background-color:white !important;
+    padding: 20px;
+    padding-bottom: 40px !important;
+    height:20% !important;
+    text-align:left;
 }
-.homepageImg{
-
-    text-align: center;
-    /*border:2px solid black;*/
-    background-color: #223843;
-
-}
-.homepageImg:hover .cardHoverBtn{
-    opacity: 1;
-}
-.homepageCard{
-    box-shadow: 5px 10px 8px black !important; 
-
-}
-.textColor{
-    color:black !important;   
-    font-family: georgia !important;
-    font-size: 20px;
-}
-.homepageCardContent{
-    background-color: #D8B4A0 !important;
-
+.invisible{
+    position: absolute;
+    visibility:hidden;
 }
 .bookFormatBtn:hover {
     background-color: #D77A61;
@@ -410,167 +179,36 @@ p.small {
     border-radius: 4px;
     border: 2px solid #D77A61;
 }
-#myImg {
 
-    border-radius: 5px;
-    cursor: pointer;
-    transition: 0.3s;
-}
-
-
-/* The Close Button */
-.close {
-
-
-    position: absolute;
-    top: 15px;
-    right: 35px;
-    color: white !important;
-    font-size: 50px !important;
-    font-weight: 0px;
-    transition: 0.3s;
-    opacity: 1 !important;
-    color: rgba(0,0,0,.87) !important;
-}
-
-.close:hover,
-.close:focus {
-
-    color: white;
-    text-decoration: none;
-    cursor: pointer;
-}
-
-/* 100% Image Width on Smaller Screens */
-@media only screen and (max-width: 700px){
-
-    .modal-content {
-        width: 100%;
-    }
-}
-@media only screen and (min-width: 992px){
-    .ui.longer.modal {
-        position: fixed;
-        top: 20%;
-    }
-}
-
-@media only screen and (min-width: 768px){
-    .ui.longer.modal {
-        position: fixed;
-        top: 20%;
-    }
-}
-
-@media only screen and (max-width: 767px){
-    .ui.modal {
-        width: 95%;
-        margin: 0;
-
-    }
-}
-
-.modal {
-
-    display: none;
-    overflow: auto !important;
-    position: fixed;
-    top: auto !important;
-    right: auto !important;
-    bottom: auto !important;
-    left: auto !important;
-    z-index: 1050;
-    -webkit-overflow-scrolling: touch;
-    outline: 0;
+.ui-scrollpanel-content{
+    width:inherit !important;
+    position: relative !important;
 
 }
-
-.ui.page.dimmer {
-    position: fixed;
-    -webkit-transform-style: '';
-    transform-style: '';
-    -webkit-perspective: 2000px;
-    perspective: 2000px;
-    -webkit-transform-origin: center center;
-    transform-origin: center center;
-}
-.ui.dimmer{
-  background-color: rgba(0,0,0,0.2);
-}
-
-.survey{
-    background-color:white !important;
-    padding: 20px;
-    padding-bottom: 40px !important;
-    height:20% !important;
-    text-align:left;
-}
-
-.purpleContainer{
-    background-color: #DBD3DB;
-    height:90%;
-}
-
-.centerItems{
-    justify-content: center;
-    display:flex;
+.ui-scrollpanel-content p{
+    padding: 20px !important;
 
 }
-.downloadDiv{
-    width:60% !important;
-    background-color: white;
-    height:50% !important;
-    padding:40px !important;
-    overflow: auto;
+.ui-scrollpanel-content img{
+    width:400px !important;
+}
+.ui-scrollpanel img{
+    width:300px !important;
+}
+.ui-scrollpanel-content iframe{
+    width:300px !important;
+    height:300px !important;
+}
+.ui-scrollpanel iframe{
+    width:300px !important;
+    height:300px !important;
+}
+.ui-scrollpanel-container{
+    width:inherit !important;
+
+}
+.genre{
+    color:black;
+    padding:10px;
 }
 
-
-.reviewModal{
-    position: fixed;
-    padding-top: 0px;
-    height: fit-content;
-    text-align: center;
-    font-size: 18px;
-}
-/* The Modal (background) */
-.reviewModal {
-    display: none; /* Hidden by default */
-    position: fixed; /* Stay in place */
-    z-index: 1; /* Sit on top */
-    padding-top: 100px; /* Location of the box */
-    left: 0;
-    top: 0;
-    width: 100%; /* Full width */
-    height: 100%; /* Full height */
-    overflow: auto; /* Enable scroll if needed */
-    background-color: rgb(0,0,0); /* Fallback color */
-    background-color: rgba(0,0,0,0.9); /* Black w/ opacity */
-}
-/* Modal Content (Image) */
-.modal-content {
-
-    margin: auto;
-    display: block;
-    width: 80%;
-    max-width: 700px;
-}
-/* Add Animation - Zoom in the Modal */
-.modal-content, #caption {
-
-    animation-name: zoom;
-    animation-duration: 0.6s;
-}
-/* Modal Content */
-.modal-content {
-    background-color: #fefefe;
-    margin: auto;
-    padding: 20px;
-    border: 1px solid #888;
-    width: 560px;
-}
-.salePrice{
-    color:red !important;
-}
-.oldPrice{
-    text-decoration: line-through;
-}

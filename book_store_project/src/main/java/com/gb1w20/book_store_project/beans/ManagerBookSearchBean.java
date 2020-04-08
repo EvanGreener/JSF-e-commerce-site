@@ -25,7 +25,7 @@ import org.slf4j.LoggerFactory;
  * @version April 4, 2020
  */
 @Named("managerSearch")
-@ViewScoped
+@SessionScoped
 public class ManagerBookSearchBean implements Serializable {
 
     private final static Logger LOG = LoggerFactory.getLogger(ManagerBookSearchBean.class);

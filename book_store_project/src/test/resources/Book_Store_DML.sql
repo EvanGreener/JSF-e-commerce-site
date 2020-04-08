@@ -49,11 +49,13 @@ CREATE TABLE `Customer_Reviews` (
 );
 
 CREATE TABLE `Client_Inventory` (
+  `Inventory_ID` INT AUTO_INCREMENT,
   `Client_ID` INT,
   `ISBN` VARCHAR(13),
   `Date_Purchased` DATETIME,
   `Last_Modified` DATETIME,
   `Is_Removed` BOOL,
+  PRIMARY KEY (`Inventory_ID`),
   KEY `FK` (`Client_ID`, `ISBN`)
 );
 
@@ -297,12 +299,6 @@ values ("2", "9780141439471", 5, "Gastrointestinal stromal tumor of rectum",
 insert into Customer_Reviews
 (Client_ID, ISBN, Rating, Review_Body, Review_Title, Is_Removed, Pending, Last_Modified,
  Date_Entered, Date_Removed)
-values ("1", "9780141439471", 1, "Gastrointestinal stromal tumor of rectum",
-        "Gastrointestinal stromal tumor of rectum", false, false, "2019-08-30 21:23:27", "2019-01-14 22:11:32",
-        "2020-03-06 06:44:35");
-insert into Customer_Reviews
-(Client_ID, ISBN, Rating, Review_Body, Review_Title, Is_Removed, Pending, Last_Modified,
- Date_Entered, Date_Removed)
 values ("30", "9780770430078", 4, "Displacement of internal fixation device of vertebrae, initial encounter",
         "Displacement of internal fixation device of vertebrae, init",  false, true, "2019-03-22 18:56:14",
         "2019-10-07 02:08:47", "2020-03-15 02:23:18");
@@ -331,7 +327,7 @@ values ("5", "9780062259660", 2, "Borderline leprosy", "Borderline leprosy", tru
 insert into Customer_Reviews
 (Client_ID, ISBN, Rating, Review_Body, Review_Title,  Is_Removed, Pending, Last_Modified,
  Date_Entered, Date_Removed)
-values ("9", "9780141439471", 2, "Osteochondritis dissecans, unspecified knee",
+values ("11", "9780141439471", 2, "Osteochondritis dissecans, unspecified knee",
         "Osteochondritis dissecans, unspecified knee",  false, false, "2019-04-11 09:00:48",
         "2019-01-27 11:39:26", "2020-03-23 08:22:43");
 insert into Customer_Reviews
@@ -2789,12 +2785,12 @@ INSERT INTO Book_Format(ISBN,Date_Created,Last_Modified,Is_Removed,File_Location
 INSERT INTO Book_Format(ISBN,Date_Created,Last_Modified,Is_Removed,File_Location,Format) VALUES ('9781101988527','2017-04-04','2019-04-04',FALSE,'9781101988527.pdf','pdf');
 INSERT INTO Book_Format(ISBN,Date_Created,Last_Modified,Is_Removed,File_Location,Format) VALUES ('9780356507217','2018-06-05','2019-06-05',FALSE,'9780356507217.pdf','pdf');
 INSERT INTO Book_Format(ISBN,Date_Created,Last_Modified,Is_Removed,File_Location,Format) VALUES ('9780440000587','2019-09-24','2019-09-24',FALSE,'9780440000587.pdf','pdf');
-INSERT INTO News (RSS_Feed,Date_Created,Date_Ended,Is_Removed,Last_Modified) VALUES('https://xkcd.com/atom.xml','2019-05-01',NULL,FALSE,'2019-05-01');
-INSERT INTO News (RSS_Feed,Date_Created,Date_Ended,Is_Removed,Last_Modified) VALUES('https://feeds.feedburner.com/CssTricks','2019-06-01',NULL,FALSE,'2019-07-01');
-INSERT INTO News (RSS_Feed,Date_Created,Date_Ended,Is_Removed,Last_Modified) VALUES('http://rss.slashdot.org/Slashdot/slashdot','2019-07-01',NULL,FALSE,'2019-08-01');
-INSERT INTO News (RSS_Feed,Date_Created,Date_Ended,Is_Removed,Last_Modified) VALUES('http://feeds.mashable.com/Mashable','2019-05-01',NULL,FALSE,'2019-08-01');
+INSERT INTO News (RSS_Feed,Date_Created,Date_Ended,Is_Removed,Last_Modified) VALUES('https://xkcd.com/atom.xml','2019-05-01',NULL,TRUE,'2019-05-01');
+INSERT INTO News (RSS_Feed,Date_Created,Date_Ended,Is_Removed,Last_Modified) VALUES('https://feeds.feedburner.com/CssTricks','2019-06-01',NULL,TRUE,'2019-07-01');
+INSERT INTO News (RSS_Feed,Date_Created,Date_Ended,Is_Removed,Last_Modified) VALUES('http://rss.slashdot.org/Slashdot/slashdot','2019-07-01',NULL,TRUE,'2019-08-01');
+INSERT INTO News (RSS_Feed,Date_Created,Date_Ended,Is_Removed,Last_Modified) VALUES('http://feeds.mashable.com/Mashable','2019-05-01',NULL,TRUE,'2019-08-01');
 INSERT INTO News (RSS_Feed,Date_Created,Date_Ended,Is_Removed,Last_Modified) VALUES('https://www.theverge.com/rss/index.xml','2020-01-01','2019-02-01',TRUE,'2019-02-01');
-INSERT INTO News (RSS_Feed,Date_Created,Date_Ended,Is_Removed,Last_Modified) VALUES('http://feeds.macrumors.com/MacRumors-All','2020-01-01','2020-01-02',TRUE,'2020-01-02');
+INSERT INTO News (RSS_Feed,Date_Created,Date_Ended,Is_Removed,Last_Modified) VALUES('http://feeds.macrumors.com/MacRumors-All','2020-01-01','2020-01-02',FALSE,'2020-01-02');
 INSERT INTO Ads (Image_Name,Ad_Url,Date_Created,Last_Modified,Is_Removed) VALUES('banana','https://en.wikipedia.org/wiki/Banana','2019-05-01','2019-05-01',FALSE);
 INSERT INTO Ads (Image_Name,Ad_Url,Date_Created,Last_Modified,Is_Removed) VALUES('apple','https://en.wikipedia.org/wiki/Apple','2019-05-01','2019-05-01',FALSE);
 INSERT INTO Ads (Image_Name,Ad_Url,Date_Created,Last_Modified,Is_Removed) VALUES('pineapple','https://en.wikipedia.org/wiki/Pineapple','2019-06-01','2019-07-01',TRUE);

@@ -141,8 +141,8 @@ public class ClientManagementBean implements Serializable {
                currentClient.setCompanyName(newCompanyName);
           }
           
-          LOG.debug(newAddress2);
-          LOG.debug(currentClient.getAddress2());
+          LOG.debug("newAddress2:       " + newAddress2);
+          LOG.debug("currentClient.getAddress2"+ currentClient.getAddress2());
           
           clientCtrl.edit(currentClient);
      }

@@ -17,7 +17,7 @@
         <link href="https://fonts.googleapis.com/css?family=Montserrat|Roboto&amp;display=swap" rel="stylesheet"/>
 
         <h:outputStylesheet library="webjars" name="Semantic-UI/2.4.1/semantic.min.css" />
-        <h:outputStylesheet library="css" name="homepage.css" />
+        <h:outputStylesheet library="temp" name="homepage.css" />
         <h:outputStylesheet library="managercss" name="manager.css" />
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 
@@ -39,18 +39,22 @@
                     <div class="column manager-outer-menu">
                         <div class="manager-menu">
                             <a href="managerClients.xhtml" style="color:black">
-                                <h:commandButton class="front-button" id="manage-client-button" value="Users"/>
+                                <h:commandButton class="front-button" id="manage-client-button" value="Clients"/>
                             </a>
                         </div>
                     </div>
                     <div class="column manager-outer-menu">
                         <div class="manager-menu">
-                            <h:commandButton class="front-button" id="edit-inventory-button" value="Inventory"/>
+                            <a href="managerInventory.xhtml" style="color:black">
+                                <h:commandButton class="front-button" id="edit-inventory-button" value="Inventory"/>
+                            </a>
                         </div>
                     </div>
                     <div class="column manager-outer-menu">
                         <div class="manager-menu">
-                            <h:commandButton class="front-button" id="set-sales-button" value="Sales"/>
+                            <a href="managerSales.xhtml" style="color:black">
+                                <h:commandButton class="front-button" id="set-sales-button" value="Sales"/>
+                            </a>
                         </div>
                     </div>
                     <div class="column manager-outer-menu">
@@ -69,12 +73,16 @@
                     </div>
                     <div class="column manager-outer-menu">
                         <div class="manager-menu">
-                            <h:commandButton class="front-button" id="reporting-button" value="Reports"/>
+                            <a href="managerReports.xhtml" style="color:black">
+                                <h:commandButton class="front-button" id="reporting-button" value="Reports"/>
+                            </a>
                         </div>
                     </div>
                     <div class="column manager-outer-menu">
                         <div class="manager-menu">
-                            <h:commandButton class="front-button" id="newsfeed-management-button" value="Newsfeeds"/>
+                            <a href="managerNews.xhtml" style="color:black">
+                                <h:commandButton class="front-button" id="newsfeed-management-button" value="Newsfeeds"/>
+                            </a>
                         </div>
                     </div>
                     <div class="column manager-outer-menu">

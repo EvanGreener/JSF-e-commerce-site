@@ -140,7 +140,7 @@ public class BookJpaController implements Serializable {
         return em.find(Book.class, id);
     }
 
-    public Book findSingleBook(String id) {
+    public Book findBook(String id) {
         TypedQuery<Book> query = em.createQuery("SELECT b FROM Book b WHERE b.isRemoved = :removed AND b.isbn=:isbn", Book.class);
         query.setParameter("removed", false);
         query.setParameter("isbn", id);
@@ -155,13 +155,6 @@ public class BookJpaController implements Serializable {
         return book;
     }
 
-    public List<Book> findBook(String id) {
-        TypedQuery<Book> query = em.createQuery("SELECT b FROM Book b WHERE b.isRemoved = :removed AND b.isbn=:isbn", Book.class);
-        query.setParameter("removed", false);
-        query.setParameter("isbn", id);
-        List<Book> books = query.getResultList();
-        return books;
-    }
 
     public List<Book> findBookAll(String id) {
         TypedQuery<Book> query = em.createQuery("SELECT b FROM Book b WHERE b.isbn=:isbn", Book.class);
@@ -188,13 +181,13 @@ public class BookJpaController implements Serializable {
 
         switch (searchBy) {
             case "title":
-                cq.where(cb.like(book.get(Book_.title), expression));
+                cq.where(cb.and(cb.isFalse(book.get(Book_.isRemoved))),cb.like(book.get(Book_.title), expression));
                 break;
             case "author":
-                cq.where(cb.like(author.get(Authors_.name), expression));
+                cq.where(cb.and(cb.isFalse(book.get(Book_.isRemoved))),cb.like(author.get(Authors_.name), expression));
                 break;
             default:
-                cq.where(cb.like(book.get(Book_.isbn), expression));
+                cq.where(cb.and(cb.isFalse(book.get(Book_.isRemoved))),cb.like(book.get(Book_.isbn), expression));
                 break;
         }
 
@@ -223,6 +216,13 @@ public class BookJpaController implements Serializable {
 
         TypedQuery<Book> query = em.createQuery("SELECT b FROM Book b where b.isRemoved = :removed AND b.listPrice  <> b.salePrice", Book.class);
         query.setParameter("removed", false);
+        List<Book> books = query.getResultList();
+        return books;
+    }
+    
+    public List<Book> getAllSaleBooks() {
+
+        TypedQuery<Book> query = em.createQuery("SELECT b FROM Book b where b.listPrice  <> b.salePrice", Book.class);
         List<Book> books = query.getResultList();
         return books;
     }

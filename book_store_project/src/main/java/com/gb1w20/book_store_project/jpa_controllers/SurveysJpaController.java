@@ -3,7 +3,9 @@ package com.gb1w20.book_store_project.jpa_controllers;
 import com.gb1w20.book_store_project.backing.AdBackingBean;
 import com.gb1w20.book_store_project.entities.Book;
 import com.gb1w20.book_store_project.entities.News;
+import com.gb1w20.book_store_project.entities.SurveyData_;
 import com.gb1w20.book_store_project.entities.Surveys;
+import com.gb1w20.book_store_project.entities.Surveys_;
 import com.gb1w20.book_store_project.jpa_controllers.exceptions.NonexistentEntityException;
 import java.io.Serializable;
 import java.util.List;
@@ -16,7 +18,10 @@ import javax.persistence.Query;
 import javax.persistence.EntityNotFoundException;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
+import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Join;
+import javax.persistence.criteria.JoinType;
 import javax.persistence.criteria.Root;
 import javax.transaction.SystemException;
 import javax.transaction.UserTransaction;
@@ -117,7 +122,6 @@ public class SurveysJpaController implements Serializable {
             q.setMaxResults(maxResults);
             q.setFirstResult(firstResult);
         }
-        LOG.error("yo this should be hit idk why itwont be thou");
         return q.getResultList();
     }
 
@@ -135,12 +139,23 @@ public class SurveysJpaController implements Serializable {
         List<Integer> sum = query.getResultList();
         return sum;
     }
+    
+    public int getTotalVotesSingleSurvey(int id) {
+        CriteriaBuilder cb = em.getCriteriaBuilder();
+        CriteriaQuery cq = cb.createQuery();
+        Root<Surveys> surveys = cq.from(Surveys.class);
+        Join surveyData = surveys.join("surveyData",JoinType.INNER);
+        cq.where(cb.equal(surveys.get(Surveys_.surveyID), id));
+        cq.select(cb.sum(surveyData.get(SurveyData_.votes)));
+        TypedQuery<Integer> query = em.createQuery(cq);
+        return query.getSingleResult();
+    }
 
     public Surveys findSurveys(Integer id) {
         return em.find(Surveys.class, id);
     }
 
-    public Surveys getRandomSurvey() {
+    public Surveys getActiveSurvey() {
         TypedQuery<Surveys> query = em.createQuery("SELECT s FROM Surveys s WHERE s.isRemoved = :removed", Surveys.class);
         query.setParameter("removed", false);
         Random r = new Random();

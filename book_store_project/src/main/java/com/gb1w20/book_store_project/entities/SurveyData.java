@@ -5,6 +5,7 @@
  */
 package com.gb1w20.book_store_project.entities;
 
+import com.gb1w20.book_store_project.backing.SurveyBackingBean;
 import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.Basic;
@@ -21,6 +22,8 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.Size;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  *
@@ -65,6 +68,9 @@ public class SurveyData implements Serializable {
     @ManyToOne(optional = false)
     private Surveys survey;
      
+     
+         private final static Logger LOG = LoggerFactory.getLogger(SurveyData.class);
+
      public Surveys getSurvey(){
          return survey;
      }
@@ -93,6 +99,7 @@ public class SurveyData implements Serializable {
     }
 
     public String getChoice() {
+        LOG.info(choice);
         return choice;
     }
 

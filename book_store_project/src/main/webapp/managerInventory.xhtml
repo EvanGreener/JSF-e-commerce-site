@@ -14,32 +14,84 @@
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
         <h:outputStylesheet library="webjars" name="Semantic-UI/2.4.1/semantic.min.css" />
         <h:outputStylesheet library="webjars" name="swiper/4.5.1/dist/css/swiper.min.css" />
-        <h:outputStylesheet library="css" name="homepage.css" />
-        <h:outputStylesheet library="css" name="gallery.css" />
+        <h:outputStylesheet library="css" name="default.css" />
+        <h:outputStylesheet library="modalCss" name="modal.css" />
+        <h:outputStylesheet library="managercss" name="manager.css" />
         <h:outputScript library="webjars" name="Semantic-UI/2.4.1/semantic.min.js"/>
+               <style>
+
+               .modal{
+                    position: fixed;
+                    padding-top: 0px;
+                    height: fit-content;
+                    text-align: center;
+                    font-size: 18px;
+               }
+
+               .middle h1 {
+                    margin-top: 20px !important;
+                    text-align: center;
+                    color: gray;
+               }
+               .middle{
+                    padding: 0px 40px 0px 40px;
+               }
+
+               .actions{
+                    height: 80%;
+                    text-align: center !important;
+                    font-size: 20px;
+                    margin: 10px 10px 10px 10px;
+               }
+
+               .actions .ui.button {
+                    margin: 10px 10px 10px 10px;
+               }
+
+               .footer button{
+                    font-size: 20px !important;
+                    margin: 0px 10px 0px 10px !important;
+               }
+
+               .header h1 {
+                    text-align: center !important;
+               }
+
+               /*               .content h3 {
+                                   
+                              }*/
+
+               .form-field{
+                    font-size: 18px;
+                    margin: 10px 0px 10px 5px;
+
+               }
+
+               #editFormGrowl{
+                    position: fixed;
+                    display: none;
+                    z-index: 777;
+                    left: 100%;
+                    margin-left: -257.42px;
+
+
+               }
+               </style>
     </h:head>
 
     <h:body>
-
+        <bookstore:navbar />
         <h:form id="editForm">
-            <bookstore:navbar />
+            
 
-            <div class="gallery">
             <div class="middle">
-
-                <div id="editFormGrowl" class="ui floating positive message" >
-                    <!--<i class="close icon"></i>-->
-                    <div class="header">
-                        Changes have been saved!
-                    </div>
-                </div>
 
                 <h1 class="ui header">Inventory Management</h1>
                 
                 <br/>
                 
                 <div class="ui form">
-                    <div class="three fields">
+                    <div class="three fields searchCriteria">
                         <div class="field">
                         <!--Search by & genre filters-->
                         <p>Filter By Genre</p>
@@ -67,9 +119,9 @@
 
                             <!--Search bar-->
                             <div style="display: inline;" class="ui search">
-                                <h:inputText  id="query" value="#{managerSearch.query}" a:placeholder="Search books..." class="prompt" >
+                                <p:inputText  id="query" value="#{managerSearch.query}" a:placeholder="Search books..." class="prompt" >
                                     <p:ajax event="change" listener="#{managerSearch.onKeyUp}" update="bookTable" />
-                                </h:inputText>
+                                </p:inputText>
                             </div>
 
                         </div>
@@ -94,16 +146,24 @@
                             #{books.title}
                     </h:column>
                     <h:column>
-                        <f:facet name="header"># of Authors</f:facet>
-                            #{books.authorsCollection.size()}
+                        <f:facet name="header">Author(s)</f:facet>
+                            #{books.authorsCollection[0].name}
                     </h:column>
                     <h:column>
                         <f:facet name="header">Genre</f:facet>
                             #{books.genre}
                     </h:column>
                     <h:column>
-                        <f:facet name="header">Pages</f:facet>
-                            #{books.numOfPages}
+                        <f:facet name="header">Sale</f:facet>
+                            $#{books.salePrice}
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">List</f:facet>
+                            $#{books.listPrice}
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">Wholesale</f:facet>
+                            $#{books.wholesalePrice}
                     </h:column>
                     <h:column>
                         <f:facet name="header">Status</f:facet>
@@ -122,7 +182,6 @@
                         </h:commandButton>
                     </h:column>
                 </h:dataTable>
-            </div>
             </div>
             <bookstore:footer />
         </h:form>
@@ -151,8 +210,9 @@
                         </div>
                         <div class="field">
                             <h:outputLabel for="author" value="Author"/>
-                            <h:selectOneMenu id="author" label="Author" value="#{bookBacking.selectedAuthor}" required="true" requiredMessage="Please select author" a:placeholder="Select author">
+                            <h:selectOneMenu id="author" label="Author" value="#{bookBacking.selectedAuthor.name}" required="true" requiredMessage="Please select author" a:placeholder="Select author">
                                 <f:selectItems value="#{bookBacking.authorNames}" />
+                                <f:ajax execute="@this" listener="#{bookBacking.authChangeMethod(bookBacking.selectedAuthor.name)}" />
                             </h:selectOneMenu>
                             <br/>
                             <h:message id="authorError" class="error" for="author"/>
@@ -161,16 +221,18 @@
                     <div class="three fields">
                         <div class="field">
                             <h:outputLabel for="publisher" value="Publisher"/>
-                            <h:selectOneMenu id="publisher" label="Publisher" value="#{bookBacking.selectedPub}" required="true" requiredMessage="Please select publisher" a:placeholder="Select publisher">
+                            <h:selectOneMenu id="publisher" label="Publisher" value="#{bookBacking.selectedPub.name}" required="true" requiredMessage="Please select publisher" a:placeholder="Select publisher">
                                 <f:selectItems value="#{bookBacking.pubNames}" />
+                                <f:ajax execute="@this" listener="#{bookBacking.pubChangeMethod(bookBacking.selectedPub.name)}" />
                             </h:selectOneMenu>
                             <br/>
                             <h:message id="publisherError" class="error" for="publisher"/>
                         </div>
                         <div class="field">
                             <h:outputLabel for="genre" value="Genre"/>
-                            <h:selectOneMenu id="genre" label="Genre" value="#{bookBacking.book.genre}" required="true" requiredMessage="Please select genre" a:placeholder="Select genre">
+                            <h:selectOneMenu id="genre" label="Genre" value="#{bookBacking.selectedGenre}" required="true" requiredMessage="Please select genre" a:placeholder="Select genre">
                                 <f:selectItems value="#{bookBacking.genres}" />
+                                <f:ajax execute="@this" listener="#{bookBacking.genreChangeMethod(bookBacking.selectedGenre)}" />
                             </h:selectOneMenu>
                             <br/>
                             <h:message id="genreError" class="error" for="genre"/>
@@ -242,8 +304,9 @@
                         </div>
                         <div class="field">
                             <h:outputLabel for="newAuthor" value="Author"/>
-                            <h:selectOneMenu id="newAuthor" label="Author" value="#{editBook.newAuthor}" required="true" requiredMessage="Please select author" a:placeholder="Select author">
+                            <h:selectOneMenu id="newAuthor" label="Author" value="#{editBook.newAuthor.name}" required="true" requiredMessage="Please select author" a:placeholder="Select author">
                                 <f:selectItems value="#{bookBacking.authorNames}" />
+                                <f:ajax execute="@this" listener="#{editBook.authChangeMethod(editBook.newAuthor.name)}" />
                             </h:selectOneMenu>
                             <br/>
                             <h:message id="newAuthorError" class="error" for="newAuthor"/>
@@ -252,16 +315,18 @@
                     <div class="three fields">
                         <div class="field">
                             <h:outputLabel for="newPublisher" value="Publisher"/>
-                            <h:selectOneMenu id="newPublisher" label="Publisher" value="#{editBook.newPublisher}" required="true" requiredMessage="Please select publisher" a:placeholder="Select publisher">
+                            <h:selectOneMenu id="newPublisher" label="Publisher" value="#{editBook.newPublisher.name}" required="true" requiredMessage="Please select publisher" a:placeholder="Select publisher">
                                 <f:selectItems value="#{bookBacking.pubNames}" />
+                                <f:ajax execute="@this" listener="#{editBook.pubChangeMethod(editBook.newPublisher.name)}" />
                             </h:selectOneMenu>
                             <br/>
                             <h:message id="newPublisherError" class="error" for="publisher"/>
                         </div>
                         <div class="field">
                             <h:outputLabel for="newGenre" value="Genre"/>
-                            <h:selectOneMenu id="newGenre" label="Genre" value="#{editBook.newGenre}" required="true" requiredMessage="Please select genre" a:placeholder="Select genre">
+                            <h:selectOneMenu id="newGenre" label="Genre" value="#{editBook.newGenre}" immediate="true" required="true" requiredMessage="Please select genre" a:placeholder="Select genre">
                                 <f:selectItems value="#{bookBacking.genres}" />
+                                <f:ajax execute="@this" listener="#{editBook.genreChangeMethod(editBook.newGenre)}" />
                             </h:selectOneMenu>
                             <br/>
                             <h:message id="newGenreError" class="error" for="newGenre"/>
@@ -311,7 +376,7 @@
                     </div>
                     <br/>
                     <h:commandButton type="button" class="huge black fluid ui button" id="editBook" value="Edit Book" action="#{editBook.onSubmitEdit()}">
-                        <f:ajax event="click" execute="newTitle newAuthor newPublisher newGenre newPages newDesc newListPrice newSalePrice newWholesalePrice" render="editForm"/>
+                        <f:ajax event="click" execute="title author publisher genre pages desc listPrice salePrice wholesalePrice" render="bookTable"/>
                     </h:commandButton>
                 </h:form>
             </div>

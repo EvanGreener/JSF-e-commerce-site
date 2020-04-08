@@ -73,6 +73,7 @@ public class UserLoginBean implements Serializable {
     }
 
     public Clients getClient() {
+        LOG.debug("getClient");
         if (getIfSignedIn()) {
             FacesContext facesContext = FacesContext.getCurrentInstance();
             HttpServletRequest request = (HttpServletRequest) facesContext.getExternalContext().getRequest();

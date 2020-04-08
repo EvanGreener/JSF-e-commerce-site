@@ -1,4 +1,4 @@
-package com.gb1w20.book_store_project.beans;
+ package com.gb1w20.book_store_project.beans;
 
 import com.gb1w20.book_store_project.entities.Book;
 import com.gb1w20.book_store_project.jpa_controllers.BookJpaController;
@@ -130,6 +130,7 @@ public class SearchBean implements Serializable {
 
         results = genreFilters == null || genreFilters.length == 0 ? res : res.stream()
                 .filter(book -> Arrays.asList(genreFilters).contains(book.getGenre()))
+                .filter(book -> !book.getIsRemoved())
                 .collect(Collectors.toList());
         
         //reinitializing query,genrefilters,and search by so it does not affect the next search

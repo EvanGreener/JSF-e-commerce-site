@@ -42,6 +42,18 @@ html, body {
     height: fit-content;
     text-align: center;
     font-size: 18px;
+    overflow-y: auto;
+}
+
+.long-content{
+    display: block;
+    width: 100%;
+    height: 400px;
+    font-size: 1em;
+    line-height: 1.4;
+    padding: 1.5rem;
+    overflow-y: scroll;
+    background: #fff;
 }
 
 .middle h1 {
@@ -122,13 +134,13 @@ body {
 }
 
 .item1{
-    background-color:  orange !important;
+    background-color:  #d77a61 !important;
 }
 .item2{
-    background-color: #ff6c17 !important;
+    background-color: #d77a61 !important;
 }
 .item3{
-    background-color:  coral !important;
+    background-color:  #d77a61 !important;
 }
 .searchBarDiv{
     text-align: center;
@@ -276,13 +288,6 @@ Hidden button that appears when screen becomes smaller
     margin: 0 auto;
 }
 
-.error
-{
-    color: darkred;
-    font-weight: bold;
-    font-size: 16px;
-
-}
 
 .signUpLink
 {
@@ -562,19 +567,6 @@ p.small {
 .purpleContainer{
     background-color: #DBD3DB;
     height:80%;
-}
-
-.centerItems{
-    justify-content: center;
-    display:flex;
-
-}
-.downloadDiv{
-    width:60% !important;
-    background-color: white;
-    height:50% !important;
-    padding:40px !important;
-    overflow: auto;
 }
 
 .itemContainer{
