@@ -130,4 +130,6 @@ public class ClientInventoryJpaController implements Serializable {
             return ((Long) q.getSingleResult()).intValue();
     }
     
+    
+    
 }

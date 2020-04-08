@@ -29,6 +29,8 @@ public class ReviewManagementBean implements Serializable {
     private CustomerReviewsJpaController customerReviewCtlr;
 
     private CustomerReviews customerReview;
+    private Boolean isRemoved;
+    private Boolean pending;
 
     private final static Logger LOG = LoggerFactory.getLogger(ReviewManagementBean.class);
 
@@ -41,6 +43,24 @@ public class ReviewManagementBean implements Serializable {
     public void init() {
         LOG.debug("Init called!");
 
+    }
+
+    public Boolean getIsRemoved(Integer id) {
+         isRemoved=customerReviewCtlr.findCustomerReviews(id).getIsRemoved();
+        return isRemoved;
+    }
+
+    public void setIsRemoved(Boolean isRemoved) {
+        this.isRemoved = isRemoved;
+    }
+
+    public void setPending(Boolean pending) {
+        this.pending = pending;
+    }
+
+    public Boolean getPending(Integer id) {
+        pending=customerReviewCtlr.findCustomerReviews(id).getPending();
+        return pending;
     }
 
     /**
@@ -97,11 +117,8 @@ public class ReviewManagementBean implements Serializable {
 
         this.customerReview.setLastModified(getCurrentDateTime());
 
-        //change pending status to no longer pending
-        if (pending) {
-            pending = getOpposite(pending);
-            this.customerReview.setPending(pending);
-        }
+        this.customerReview.setPending(pending);
+
         customerReviewCtlr.edit(customerReview);
     }
 
@@ -125,13 +142,32 @@ public class ReviewManagementBean implements Serializable {
     }
 
     /**
+     * called when approve or unapprove button is clicked edits review and
+     *
+     *
+     * @param isRemoved
+     * @param reviewId
+     * @param pending
+     * @throws java.lang.Exception
+     */
+    public void managePending(boolean isRemoved, Integer reviewId, boolean pending) throws Exception {
+
+        LOG.debug("managePending");
+        LOG.debug(reviewId + "");
+        //modify a review's values
+         pending = getOpposite(pending);
+        editReview(isRemoved, reviewId, pending);
+
+    }
+
+    /**
      * returns string pending if pending true and reviewed if false
      *
      * @param pending
      * @return String
      */
     public String getPendingStatus(boolean pending) {
-        LOG.debug("getRemovalStatus");
+        LOG.debug("getPendingStatus");
         if (pending) {
             return "Pending";
         } else {
