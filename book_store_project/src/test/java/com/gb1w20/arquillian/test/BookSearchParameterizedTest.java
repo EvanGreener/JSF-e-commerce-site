@@ -39,7 +39,7 @@ import org.slf4j.LoggerFactory;
 @RunWith(Arquillian.class)
 public class BookSearchParameterizedTest {
 
-    private final static Logger LOG = LoggerFactory.getLogger(BookParameterizedTest.class);
+    private final static Logger LOG = LoggerFactory.getLogger(BookSearchParameterizedTest.class);
 
     @Deployment
     public static WebArchive deploy() {

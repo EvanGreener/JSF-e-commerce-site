@@ -14,10 +14,12 @@ import java.util.List;
 public class SurveyTestingBean {
     public int surveyID;
     public int expectedChoices;
+    public int expectedVotes;
     
-    public SurveyTestingBean(int surveyID, int expectedChoices)
+    public SurveyTestingBean(int surveyID, int expectedChoices, int expectedVotes)
     {
         this.surveyID = surveyID;
         this.expectedChoices = expectedChoices;
+        this.expectedVotes = expectedVotes;
     }
 }

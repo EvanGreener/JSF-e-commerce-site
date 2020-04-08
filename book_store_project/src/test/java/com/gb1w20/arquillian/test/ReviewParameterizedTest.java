@@ -1,16 +1,10 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.gb1w20.arquillian.test;
 
-import com.gb1w20.arquillian.test.beans.SurveyTestingBean;
-import com.gb1w20.book_store_project.backing.SurveyBackingBean;
-import com.gb1w20.book_store_project.beans.SurveyBean;
-import com.gb1w20.book_store_project.entities.Surveys;
-import com.gb1w20.book_store_project.jpa_controllers.SurveyDataJpaController;
-import com.gb1w20.book_store_project.jpa_controllers.SurveysJpaController;
+import com.gb1w20.arquillian.test.beans.ReviewTestingBean;
+import com.gb1w20.book_store_project.backing.CustomerReviewBackingBean;
+import com.gb1w20.book_store_project.beans.NewsBean;
+import com.gb1w20.book_store_project.entities.CustomerReviews;
+import com.gb1w20.book_store_project.jpa_controllers.CustomerReviewsJpaController;
 import com.gb1w20.book_store_project.jpa_controllers.exceptions.IllegalOrphanException;
 import java.io.File;
 import javax.annotation.Resource;
@@ -37,9 +31,9 @@ import org.slf4j.LoggerFactory;
  * @author giancarlo
  */
 @RunWith(Arquillian.class)
-public class SurveyParameterizedTest {
+public class ReviewParameterizedTest {
 
-    private final static Logger LOG = LoggerFactory.getLogger(SurveyParameterizedTest.class);
+    private final static Logger LOG = LoggerFactory.getLogger(BookParameterizedTest.class);
 
     @Deployment
     public static WebArchive deploy() {
@@ -61,13 +55,13 @@ public class SurveyParameterizedTest {
         final WebArchive webArchive;
         webArchive = ShrinkWrap.create(WebArchive.class, "test.war")
                 .setWebXML(new File("src/main/webapp/WEB-INF/web.xml"))
-                .addPackage(SurveysJpaController.class.getPackage())
+                .addPackage(CustomerReviewsJpaController.class.getPackage())
                 .addPackage(IllegalOrphanException.class.getPackage())
-                .addPackage(Surveys.class.getPackage())
-                .addPackage(SurveyBackingBean.class.getPackage())
+                .addPackage(CustomerReviews.class.getPackage())
+                .addPackage(CustomerReviewBackingBean.class.getPackage())
                 .addPackage(ParameterRule.class.getPackage())
-                .addPackage(SurveyTestingBean.class.getPackage())
-                .addPackage(SurveyBean.class.getPackage())
+                .addPackage(ReviewTestingBean.class.getPackage())
+                .addPackage(NewsBean.class.getPackage())
                 .addAsWebInfResource(EmptyAsset.INSTANCE, "beans.xml")
                 .addAsWebInfResource(new File("src/main/webapp/WEB-INF/payara-resources.xml"), "payara-resources.xml")
                 .addAsResource(new File("src/main/resources/META-INF/persistence.xml"), "META-INF/persistence.xml")
@@ -77,24 +71,20 @@ public class SurveyParameterizedTest {
 
         return webArchive;
     }
-    
     @Inject
-    private SurveysJpaController surveyControl;
-    
-    @Inject
-    private SurveyDataJpaController surveyDataControl;
-    
+    private CustomerReviewsJpaController reviewControl;
+
     @Rule
-    public ParameterRule surveyRule = new ParameterRule("surveyTest",
-            new SurveyTestingBean(1,5,38),
-            new SurveyTestingBean(2,6,68),
-            new SurveyTestingBean(3,4,37),
-            new SurveyTestingBean(4,4,28),
-            new SurveyTestingBean(6,6,43)
+    public ParameterRule reviewRule = new ParameterRule("reviewTest",
+            new ReviewTestingBean("9780141439471",5,3.4,4,1),
+            new ReviewTestingBean("9780743298025",2,3.5,9,1),
+            new ReviewTestingBean("9780142000670",1,2,1,1),
+            new ReviewTestingBean("9780439023481",1,3,7,1),
+            new ReviewTestingBean("9780060584757",1,4,13,1)
     );
-    
-    private SurveyTestingBean surveyTest;
-    
+
+    private ReviewTestingBean reviewTest;
+
     @Resource(lookup = "java:app/jdbc/bookstore")
     private DataSource ds;
 
@@ -105,20 +95,26 @@ public class SurveyParameterizedTest {
     private UserTransaction utx;
     
     @Test
-    public void testCorrectChoiceAmount()
+    public void testExpectedReviewCount()
     {
-        Surveys survey = surveyControl.findSurveys(surveyTest.surveyID);
-        int choices = surveyDataControl.getSurveyChoices(survey.getSurveyID()).size();
-        assertEquals("Expected size " + surveyTest.expectedChoices + " vs. actual size " + choices,
-                surveyTest.expectedChoices, choices);
+        int totalReviews = reviewControl.getCustomerReviewsCount(reviewTest.isbn);
+        assertEquals("Expected: " + reviewTest.expectedReviews + ", actual: " + totalReviews, 
+                reviewTest.expectedReviews, totalReviews);
     }
     
     @Test
-    public void testCorrectUserVotes()
+    public void testExpectedReviewAverage()
     {
-        Surveys survey = surveyControl.findSurveys(surveyTest.surveyID);
-        int votes = surveyControl.getTotalVotesSingleSurvey(survey.getSurveyID());
-        assertEquals("Expected number of  " + surveyTest.expectedVotes + " vs. actual size " + votes,
-                surveyTest.expectedVotes, votes);
+        double averageReview = reviewControl.getAverageRating(reviewTest.isbn);
+        assertEquals("Expected: " + reviewTest.expectedAverage + ", actual: " + averageReview, 
+                reviewTest.expectedAverage, averageReview,0.1);
+    }
+    
+    @Test
+    public void testExpectedCustomerReviewCount()
+    {
+        int expectedReviewCount = reviewControl.findCustomerReviewsByClientId(reviewTest.clientID, reviewTest.isbn).size();
+        assertEquals("Expected: " + reviewTest.expectedClientReviews + ", actual: " + expectedReviewCount, 
+                reviewTest.expectedClientReviews, expectedReviewCount);
     }
 }

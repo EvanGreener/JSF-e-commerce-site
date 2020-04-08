@@ -67,7 +67,7 @@
                         <h:commandButton type="button" value="Edit survey" onclick="setTimeout(function () {
                                     $('#editModal').modal('show', hideGrowl())
                                 }, 500)" class="big ui primary button edit_btn" >
-                            <f:ajax event="click" listener="#{editSurvey.onEdit(survey.surveyID)}" />
+                            <f:ajax event="click" render="@all" listener="#{editSurvey.onEdit(survey.surveyID)}" />
                         </h:commandButton>
                     </h:column>
                 </h:dataTable>
