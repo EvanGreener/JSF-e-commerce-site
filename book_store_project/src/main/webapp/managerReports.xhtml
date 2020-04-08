@@ -21,6 +21,7 @@
         <h:outputStylesheet library="book_css" name="bookpage.css" />
         <h:outputStylesheet library="managerReportsCss" name="managerReports.css" />
         <h:outputStylesheet library="managercss" name="manager.css" />
+        <h:outputScript library="js" name="managerReports.js" />
         <h:outputStylesheet library="webjars" name="font-awesome/4.7.0/css/font-awesome.min-jsf.css" />
         
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
@@ -58,46 +59,51 @@
 
                 <div class="column manager-outer-menu">
                     <div class="manager-menu">
-                        <a href="managerClients.xhtml" style="color:black">
-                            <h:commandButton class="front-button" id="manage-client-button" value="Total Sales"/>
-                        </a>
+                            <h:commandButton class="front-button" id="total-sales-button" value="Total Sales"
+                                             onclick="toggleVisible(&quot;#totalSalesModal&quot;)"/>
                     </div>
                 </div>
                 <div class="column manager-outer-menu">
                     <div class="manager-menu">
-                        <h:commandButton class="front-button" id="edit-inventory-button" value="Sales by Client"/>
+                        <h:commandButton type="button" class="front-button" id="sales-by-client-button" value="Sales by Client"
+                                         onclick="toggleVisible(&quot;#totalSalesModal&quot;)"/>
+                                         
                     </div>
                 </div>
                 <div class="column manager-outer-menu">
                     <div class="manager-menu">
-                        <h:commandButton class="front-button" id="set-sales-button" value="Sales by Author"/>
+                        <h:commandButton class="front-button" id="sales-by-author-button" value="Sales by Author"
+                                         onclick="toggleVisible(&quot;#salesByAuthorModal&quot;)"/>
                     </div>
                 </div>
                 <div class="column manager-outer-menu">
                     <div class="manager-menu">
-                        <a href="managerOrders.xhtml" style="color:black">
-                            <h:commandButton class="front-button" id="order-management-button" value="Sales by Publisher"/>
-                        </a>
+                            <h:commandButton class="front-button" id="sales-by-publisher" value="Sales by Publisher"
+                                             onclick="toggleVisible(&quot;#salesByPublisherModal&quot;)"/>
                     </div>
                 </div>
                 <div class="column manager-outer-menu">
                     <div class="manager-menu">
-                        <h:commandButton class="front-button" id="review-management-button" value="Top Sellers"/>
+                        <h:commandButton class="front-button" id="top-sellers-button" value="Top Sellers"
+                                         onclick="toggleVisible(&quot;#topSellersModal&quot;)"/>
                     </div>
                 </div>
                 <div class="column manager-outer-menu">
                     <div class="manager-menu">
-                        <h:commandButton class="front-button" id="reporting-button" value="Top Clients"/>
+                        <h:commandButton class="front-button" id="top-clients-button" value="Top Clients"
+                                         onclick="toggleVisible(&quot;#topClientsModal&quot;)"/>
                     </div>
                 </div>
                 <div class="column manager-outer-menu">
                     <div class="manager-menu">
-                        <h:commandButton class="front-button" id="newsfeed-management-button" value="Zero Sales"/>
+                        <h:commandButton class="front-button" id="zero-sales-button" value="Zero Sales"
+                                         onclick="toggleVisible(&quot;#zeroSalesModal&quot;)"/>
                     </div>
                 </div>
                 <div class="column manager-outer-menu">
                     <div class="manager-menu">
-                        <h:commandButton class="front-button" id="survey-management-button" value="Stock Report"/>
+                        <h:commandButton class="front-button" id="stock-report-button" value="Stock Report"
+                                         onclick="toggleVisible(&quot;#stockReportModal&quot;)"/>
                     </div>
                 </div>
                 
@@ -105,11 +111,11 @@
 
         </h:panelGroup>
         </div>
-        <div id="topSellers" class=" ui modals transition reportsModal">
+        <div id="totalSalesModal" class=" ui modals transition reportsModal">
                 <!-- Modal content -->
                 <div class="modal-content reportsContent">
-                    <span class="close">x</span>
-                    <h:dataTable  id="ordersTable" var="orders" style="margin-bottom: 20px;"  class="ui celled table" value="#{orderSearch.searchResults}" >
+                    <span class="close reportsClose">x</span>
+                    <h:dataTable  var="orders" style="margin-bottom: 20px;"  class="ui celled table" value="#{orderSearch.searchResults}" >
                          <h:column>
                               <f:facet name="header">Order ID</f:facet>
                                    #{orders.orderID}
@@ -145,46 +151,292 @@
                         </h:column>
                     </h:dataTable>
                </div>
-
+               </div>
+               <div id="salesByClientModal" class=" ui modals transition reportsModal">
+                <!-- Modal content -->
+                <div class="modal-content reportsContent">
+                    <span class="close reportsClose">x</span>
+                    <h:dataTable   var="orders" style="margin-bottom: 20px;"  class="ui celled table" value="#{orderSearch.searchResults}" >
+                         <h:column>
+                              <f:facet name="header">Order ID</f:facet>
+                                   #{orders.orderID}
+                         </h:column>
+                         <h:column>
+                              <f:facet name="header">Client Email</f:facet>
+                                   #{orders.client.email}
+                         </h:column>
+                         <h:column>
+                              <f:facet name="header">Number of Items</f:facet>
+                                   #{orders.orderItems.size()}
+                         </h:column>
+                         <h:column>
+                              <f:facet name="header">Date Created</f:facet>
+                                   #{orders.dateCreated}
+                         </h:column>
+                         <h:column>
+                              <f:facet name="header">Last Modified</f:facet>
+                                   #{orders.lastUpdated}
+                         </h:column>
+                         <h:column>
+                              <f:facet name="header">Status</f:facet>
+                                   #{ordersJpaController.getStatusByOrderId(orders.orderID)}
+                         </h:column>
+                         <h:column>
+                              <h:commandButton type="button" onclick="setTimeout(function(){$('#editModal').modal('show', hideGrowl())}, 500)" 
+                                               value="Edit Order" class="big ui primary button edit_btn" disabled="#{orders.isRemoved}">
+                                  <f:ajax event="click"  render="editForm" listener="#{orderEdit.onEdit(orders.orderID)}"/>
+                              </h:commandButton>
+                         </h:column>
+                        <h:column>
+                            <h:commandLink value="#{orderBacking.getRemovalStatus(orders.isRemoved)}" action="#{orderBacking.addOrRemoveOrder(orders)}" />
+                        </h:column>
+                    </h:dataTable>
+               </div>
+               </div>
+               <div id="salesByAuthorModal" class=" ui modals transition reportsModal">
+                <!-- Modal content -->
+                <div class="modal-content reportsContent">
+                    <span class="close reportsClose">x</span>
+                    <h:dataTable  var="orders" style="margin-bottom: 20px;"  class="ui celled table" value="#{orderSearch.searchResults}" >
+                         <h:column>
+                              <f:facet name="header">Order ID</f:facet>
+                                   #{orders.orderID}
+                         </h:column>
+                         <h:column>
+                              <f:facet name="header">Client Email</f:facet>
+                                   #{orders.client.email}
+                         </h:column>
+                         <h:column>
+                              <f:facet name="header">Number of Items</f:facet>
+                                   #{orders.orderItems.size()}
+                         </h:column>
+                         <h:column>
+                              <f:facet name="header">Date Created</f:facet>
+                                   #{orders.dateCreated}
+                         </h:column>
+                         <h:column>
+                              <f:facet name="header">Last Modified</f:facet>
+                                   #{orders.lastUpdated}
+                         </h:column>
+                         <h:column>
+                              <f:facet name="header">Status</f:facet>
+                                   #{ordersJpaController.getStatusByOrderId(orders.orderID)}
+                         </h:column>
+                         <h:column>
+                              <h:commandButton type="button" onclick="setTimeout(function(){$('#editModal').modal('show', hideGrowl())}, 500)" 
+                                               value="Edit Order" class="big ui primary button edit_btn" disabled="#{orders.isRemoved}">
+                                  <f:ajax event="click"  render="editForm" listener="#{orderEdit.onEdit(orders.orderID)}"/>
+                              </h:commandButton>
+                         </h:column>
+                        <h:column>
+                            <h:commandLink value="#{orderBacking.getRemovalStatus(orders.isRemoved)}" action="#{orderBacking.addOrRemoveOrder(orders)}" />
+                        </h:column>
+                    </h:dataTable>
+               </div>
+               </div>
+               <div id="salesByPublisherModal" class=" ui modals transition reportsModal">
+                <!-- Modal content -->
+                <div class="modal-content reportsContent">
+                    <span class="close reportsClose">x</span>
+                    <h:dataTable  var="orders" style="margin-bottom: 20px;"  class="ui celled table" value="#{orderSearch.searchResults}" >
+                         <h:column>
+                              <f:facet name="header">Order ID</f:facet>
+                                   #{orders.orderID}
+                         </h:column>
+                         <h:column>
+                              <f:facet name="header">Client Email</f:facet>
+                                   #{orders.client.email}
+                         </h:column>
+                         <h:column>
+                              <f:facet name="header">Number of Items</f:facet>
+                                   #{orders.orderItems.size()}
+                         </h:column>
+                         <h:column>
+                              <f:facet name="header">Date Created</f:facet>
+                                   #{orders.dateCreated}
+                         </h:column>
+                         <h:column>
+                              <f:facet name="header">Last Modified</f:facet>
+                                   #{orders.lastUpdated}
+                         </h:column>
+                         <h:column>
+                              <f:facet name="header">Status</f:facet>
+                                   #{ordersJpaController.getStatusByOrderId(orders.orderID)}
+                         </h:column>
+                         <h:column>
+                              <h:commandButton type="button" onclick="setTimeout(function(){$('#editModal').modal('show', hideGrowl())}, 500)" 
+                                               value="Edit Order" class="big ui primary button edit_btn" disabled="#{orders.isRemoved}">
+                                  <f:ajax event="click"  render="editForm" listener="#{orderEdit.onEdit(orders.orderID)}"/>
+                              </h:commandButton>
+                         </h:column>
+                        <h:column>
+                            <h:commandLink value="#{orderBacking.getRemovalStatus(orders.isRemoved)}" action="#{orderBacking.addOrRemoveOrder(orders)}" />
+                        </h:column>
+                    </h:dataTable>
+               </div>
+               </div>
+               <div id="topSellersModal" class=" ui modals transition reportsModal">
+                <!-- Modal content -->
+                <div class="modal-content reportsContent">
+                    <span class="close reportsClose">x</span>
+                    <h:dataTable   var="rankedBook" style="margin-bottom: 20px;"  class="ui celled table" value="#{reports.topBooks}" >
+                         <h:column>
+                              <f:facet name="header">ISBN</f:facet>
+                                   #{rankedBook.book.isbn}
+                         </h:column>
+                         <h:column>
+                              <f:facet name="header">Title</f:facet>
+                                   #{rankedBook.book.title}
+                         </h:column>
+                         <h:column>
+                              <f:facet name="header">Publisher</f:facet>
+                                   #{rankedBook.book.publisherID}
+                         </h:column>
+                         <h:column>
+                              <f:facet name="header">List Price</f:facet>
+                                   #{rankedBook.book.listPrice}
+                         </h:column>
+                         <h:column>
+                              <f:facet name="header">Sale Price</f:facet>
+                                   #{rankedBook.book.salePrice}
+                         </h:column>
+                         <h:column>
+                              <f:facet name="header">Sales</f:facet>
+                                   #{rankedBook.sales}
+                         </h:column>
+                         
+                        
+                    </h:dataTable>
+               </div>
+               </div>
+               <div id="topClientsModal" class=" ui modals transition reportsModal">
+                <!-- Modal content -->
+                <div class="modal-content reportsContent">
+                    <span class="close reportsClose">x</span>
+                    <h:dataTable   var="orders" style="margin-bottom: 20px;"  class="ui celled table" value="#{orderSearch.searchResults}" >
+                         <h:column>
+                              <f:facet name="header">Order ID</f:facet>
+                                   #{orders.orderID}
+                         </h:column>
+                         <h:column>
+                              <f:facet name="header">Client Email</f:facet>
+                                   #{orders.client.email}
+                         </h:column>
+                         <h:column>
+                              <f:facet name="header">Number of Items</f:facet>
+                                   #{orders.orderItems.size()}
+                         </h:column>
+                         <h:column>
+                              <f:facet name="header">Date Created</f:facet>
+                                   #{orders.dateCreated}
+                         </h:column>
+                         <h:column>
+                              <f:facet name="header">Last Modified</f:facet>
+                                   #{orders.lastUpdated}
+                         </h:column>
+                         <h:column>
+                              <f:facet name="header">Status</f:facet>
+                                   #{ordersJpaController.getStatusByOrderId(orders.orderID)}
+                         </h:column>
+                         <h:column>
+                              <h:commandButton type="button" onclick="setTimeout(function(){$('#editModal').modal('show', hideGrowl())}, 500)" 
+                                               value="Edit Order" class="big ui primary button edit_btn" disabled="#{orders.isRemoved}">
+                                  <f:ajax event="click"  render="editForm" listener="#{orderEdit.onEdit(orders.orderID)}"/>
+                              </h:commandButton>
+                         </h:column>
+                        <h:column>
+                            <h:commandLink value="#{orderBacking.getRemovalStatus(orders.isRemoved)}" action="#{orderBacking.addOrRemoveOrder(orders)}" />
+                        </h:column>
+                    </h:dataTable>
+               </div>
+               </div>
+               <div id="zeroSalesModal" class=" ui modals transition reportsModal">
+                <!-- Modal content -->
+                <div class="modal-content reportsContent">
+                    <span class="close reportsClose">x</span>
+                    <h:dataTable  var="orders" style="margin-bottom: 20px;"  class="ui celled table" value="#{orderSearch.searchResults}" >
+                         <h:column>
+                              <f:facet name="header">Order ID</f:facet>
+                                   #{orders.orderID}
+                         </h:column>
+                         <h:column>
+                              <f:facet name="header">Client Email</f:facet>
+                                   #{orders.client.email}
+                         </h:column>
+                         <h:column>
+                              <f:facet name="header">Number of Items</f:facet>
+                                   #{orders.orderItems.size()}
+                         </h:column>
+                         <h:column>
+                              <f:facet name="header">Date Created</f:facet>
+                                   #{orders.dateCreated}
+                         </h:column>
+                         <h:column>
+                              <f:facet name="header">Last Modified</f:facet>
+                                   #{orders.lastUpdated}
+                         </h:column>
+                         <h:column>
+                              <f:facet name="header">Status</f:facet>
+                                   #{ordersJpaController.getStatusByOrderId(orders.orderID)}
+                         </h:column>
+                         <h:column>
+                              <h:commandButton type="button" onclick="setTimeout(function(){$('#editModal').modal('show', hideGrowl())}, 500)" 
+                                               value="Edit Order" class="big ui primary button edit_btn" disabled="#{orders.isRemoved}">
+                                  <f:ajax event="click"  render="editForm" listener="#{orderEdit.onEdit(orders.orderID)}"/>
+                              </h:commandButton>
+                         </h:column>
+                        <h:column>
+                            <h:commandLink value="#{orderBacking.getRemovalStatus(orders.isRemoved)}" action="#{orderBacking.addOrRemoveOrder(orders)}" />
+                        </h:column>
+                    </h:dataTable>
+               </div>
+               </div>
+               <div id="stockReportModal" class=" ui modals transition reportsModal">
+                <!-- Modal content -->
+                <div class="modal-content reportsContent">
+                    <span class="close reportsClose">x</span>
+                    <h:dataTable  var="orders" style="margin-bottom: 20px;"  class="ui celled table" value="#{orderSearch.searchResults}" >
+                         <h:column>
+                              <f:facet name="header">Order ID</f:facet>
+                                   #{orders.orderID}
+                         </h:column>
+                         <h:column>
+                              <f:facet name="header">Client Email</f:facet>
+                                   #{orders.client.email}
+                         </h:column>
+                         <h:column>
+                              <f:facet name="header">Number of Items</f:facet>
+                                   #{orders.orderItems.size()}
+                         </h:column>
+                         <h:column>
+                              <f:facet name="header">Date Created</f:facet>
+                                   #{orders.dateCreated}
+                         </h:column>
+                         <h:column>
+                              <f:facet name="header">Last Modified</f:facet>
+                                   #{orders.lastUpdated}
+                         </h:column>
+                         <h:column>
+                              <f:facet name="header">Status</f:facet>
+                                   #{ordersJpaController.getStatusByOrderId(orders.orderID)}
+                         </h:column>
+                         <h:column>
+                              <h:commandButton type="button" onclick="setTimeout(function(){$('#editModal').modal('show', hideGrowl())}, 500)" 
+                                               value="Edit Order" class="big ui primary button edit_btn" disabled="#{orders.isRemoved}">
+                                  <f:ajax event="click"  render="editForm" listener="#{orderEdit.onEdit(orders.orderID)}"/>
+                              </h:commandButton>
+                         </h:column>
+                        <h:column>
+                            <h:commandLink value="#{orderBacking.getRemovalStatus(orders.isRemoved)}" action="#{orderBacking.addOrRemoveOrder(orders)}" />
+                        </h:column>
+                    </h:dataTable>
+               </div>
+               </div>
+               
                
 
-               <div id="editModal" class="ui dimmer modals transition">
-                    <div class="header">
-                        <h1>Order ID# #{orderEdit.currentOrder.orderID} </h1>
-                    </div>
-                   <div class="content">
-                        <h:dataTable class="ui celled table" value="#{orderEdit.currentOrder.orderItems}" var="items">
-                            <h:column>
-                                <f:facet name="header">ISBN</f:facet>
-                                #{items.isbn}
-                            </h:column>
-                            <h:column>
-                                <f:facet name="header">Title</f:facet>
-                                #{items.book.title}
-                            </h:column>
-                            <h:column>
-                                <f:facet name="header">Price Sold</f:facet>
-                                #{items.priceSold}
-                            </h:column>
-                            <h:column>
-                                <f:facet name="header">Status</f:facet>
-                                #{orderItemJpaController.getStatusByItemId(items.itemID)}
-                            </h:column>
-                            <h:column>
-                                <h:commandLink value="#{orderItemBacking.getRemovalStatus(items.isRemoved)}" action="#{orderItemBacking.addOrRemoveItem(items)}" />
-                            </h:column>
-                            <h:column>
-                                <h:commandButton type="button" onclick="setTimeout(function(){$('#editItemModal').modal('show', hideGrowl())}, 500)" 
-                                               value="Edit Item" class="big ui primary button edit_btn" disabled="#{items.isRemoved}">
-                                    <f:ajax event="click" render="editForm" listener="#{orderEdit.onItemEdit(items.itemID)}"/>
-                              </h:commandButton>
-                            </h:column>
-                        </h:dataTable>
-                       
-
-                </div>
-                </div>
-            </div>
+               
+            
         <bookstore:footer/>
 
 
