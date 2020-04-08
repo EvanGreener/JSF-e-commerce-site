@@ -154,7 +154,7 @@ public class NewsJpaController implements Serializable {
         }
         catch(NoResultException nre)
         {
-            Object[] returnArr = {true, "Removed", "Enable Ad"};
+            Object[] returnArr = {true, "Removed", "Enable News"};
             return returnArr;
         }
     }

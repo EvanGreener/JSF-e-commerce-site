@@ -89,11 +89,11 @@ public class BookParameterizedTest {
 
     @Rule
     public ParameterRule Bookrule = new ParameterRule("bookTest",
-            new BookTestingBean(new Book("9780141439471","Frankenstein")),
-            new BookTestingBean(new Book("9780593099322","Dune")),
-            new BookTestingBean(new Book("9780060584757","Mystic River")),
-            new BookTestingBean(new Book("9780061007224","The Exorcist")),
-            new BookTestingBean(new Book("9780061120084","To Kill a Mockingbird"))
+            new BookTestingBean(new Book("9780141439471","Frankenstein"),14, "Not Removed"),
+            new BookTestingBean(new Book("9780062024039","Divergent"), 13, "Removed"),
+            new BookTestingBean(new Book("9780060584757","Mystic River"), 8, "Not Removed"),
+            new BookTestingBean(new Book("9780756404734","The Wise Man's Fear"), 8, "Not Removed"),
+            new BookTestingBean(new Book("9780451526342","Animal Farm"), 12, "Removed")
             
     );
 
@@ -115,7 +115,7 @@ public class BookParameterizedTest {
     @Test
     public void testFindSingleBook() {
         boolean isSuccess = true;
-        Book testBookInfo = bookControl.findBook(bookTest.book.getIsbn());
+        Book testBookInfo = bookControl.findAnySingleBook(bookTest.book.getIsbn());
         LOG.debug(testBookInfo.toString());
         if (!(testBookInfo.toString().equals(bookTest.book.toString()))) {
             isSuccess = false;
@@ -123,8 +123,33 @@ public class BookParameterizedTest {
         assertTrue("Book info returned inconsistent results Expected:"+bookTest.book.toString()+" Result:"+testBookInfo.toString(), isSuccess);
     }
     
-
+    /**
+     * Tests if the correct number of similar genre books are returned from an isbn
+     */
+    @Test
+    public void testFindSimilarGenres() {
+        boolean isSuccess = true;
+        Book testBookInfo = bookControl.findAnySingleBook(bookTest.book.getIsbn());
+        int similarGenreCount = bookControl.getSimilarGenresBookCount(testBookInfo);
+        if (!(similarGenreCount == bookTest.expectedSimilar)) {
+            isSuccess = false;
+        }
+        assertTrue("Similar genres returned inconsistent results Expected:"+bookTest.expectedSimilar+" Result:"+similarGenreCount, isSuccess);
+    }
     
+    /**
+     * Tests if the correct status of a book is returned
+     */
+    @Test
+    public void testStatusRetrieval() {
+        boolean isSuccess = true;
+        Book testBookInfo = bookControl.findAnySingleBook(bookTest.book.getIsbn());
+        String status = bookControl.getStatusByIsbn(bookTest.book.getIsbn());
+        if (!(status.equals(bookTest.expectedStatus))) {
+            isSuccess = false;
+        }
+        assertTrue("Book status returned inconsistent results Expected:"+bookTest.expectedStatus+" Result:"+status, isSuccess);
+    }
     
     
     /**
