@@ -44,6 +44,7 @@ compatible with different screen sizes
                     <div class="centerItems">
                         <!--lists actual books owned by user from database -->
                         <div class="ui divided items downloadDiv">
+                            <h:panelGroup rendered="#{clientInventoryJpaController.findClientInventory(UserLoginBean.getClient().clientID).size() != 0}">
                             <ui:repeat value="#{clientInventoryJpaController.findClientInventory(UserLoginBean.getClient().clientID)}" var="inventory">
                                 <ui:repeat value="#{bookJpaController.findBook(inventory.isbn)}" var="book">
                                 <div class="item">
@@ -68,6 +69,7 @@ compatible with different screen sizes
                                 </div>
                                      </ui:repeat>
                             </ui:repeat>
+                                </h:panelGroup>
                         </div>
                     </div>
                 </div>
