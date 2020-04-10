@@ -4,12 +4,12 @@ import com.gb1w20.book_store_project.entities.Book;
 import com.gb1w20.book_store_project.entities.CustomerReviews;
 import com.gb1w20.book_store_project.entities.Orders;
 import java.util.Date;
-import javax.annotation.Generated;
+import javax.annotation.processing.Generated;
 import javax.persistence.metamodel.ListAttribute;
 import javax.persistence.metamodel.SingularAttribute;
 import javax.persistence.metamodel.StaticMetamodel;
 
-@Generated(value="EclipseLink-2.7.6.v20200131-rNA", date="2020-04-08T12:17:44")
+@Generated(value="org.eclipse.persistence.internal.jpa.modelgen.CanonicalModelProcessor", date="2020-04-10T10:58:01", comments="EclipseLink-2.7.6.v20200131-rNA")
 @StaticMetamodel(Clients.class)
 public class Clients_ { 
 

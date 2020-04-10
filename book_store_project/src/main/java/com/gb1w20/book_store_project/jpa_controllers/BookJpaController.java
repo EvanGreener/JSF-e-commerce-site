@@ -3,6 +3,8 @@ package com.gb1w20.book_store_project.jpa_controllers;
 import com.gb1w20.book_store_project.entities.Authors_;
 import com.gb1w20.book_store_project.entities.Book;
 import com.gb1w20.book_store_project.entities.Book_;
+import com.gb1w20.book_store_project.entities.OrderItem_;
+import com.gb1w20.book_store_project.entities.Orders;
 
 import com.gb1w20.book_store_project.entities.RankedBook;
 import com.gb1w20.book_store_project.jpa_controllers.exceptions.NonexistentEntityException;
@@ -22,6 +24,7 @@ import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Join;
+import javax.persistence.criteria.JoinType;
 import javax.persistence.criteria.Root;
 import javax.transaction.SystemException;
 import javax.transaction.UserTransaction;
@@ -141,10 +144,18 @@ public class BookJpaController implements Serializable {
     }
 
     public Book findBook(String id) {
+      Book book;
+        try{
+             
         TypedQuery<Book> query = em.createQuery("SELECT b FROM Book b WHERE b.isRemoved = :removed AND b.isbn=:isbn", Book.class);
         query.setParameter("removed", false);
         query.setParameter("isbn", id);
-        Book book = query.getSingleResult();
+      
+        book = query.getSingleResult();
+         }
+         catch(NoResultException e){
+             book=null;
+         }
         return book;
     }
 
@@ -193,7 +204,31 @@ public class BookJpaController implements Serializable {
 
         TypedQuery<Book> query = em.createQuery(cq);
         return query.getResultList();
+    }
+    
+    public List<Book> searchAllBooks(String searchBy, String q, int page) {
 
+        String expression = "%" + q + "%";
+
+        CriteriaBuilder cb = em.getCriteriaBuilder();
+        CriteriaQuery<Book> cq = cb.createQuery(Book.class);
+        Root<Book> book = cq.from(Book.class);
+        Join author = book.join("authorsCollection");
+
+        switch (searchBy) {
+            case "title":
+                cq.where(cb.like(book.get(Book_.title), expression));
+                break;
+            case "author":
+                cq.where(cb.like(author.get(Authors_.name), expression));
+                break;
+            default:
+                cq.where(cb.like(book.get(Book_.isbn), expression));
+                break;
+        }
+
+        TypedQuery<Book> query = em.createQuery(cq);
+        return query.getResultList();
     }
 
     public List<Book> getBestSeller() {
@@ -223,6 +258,13 @@ public class BookJpaController implements Serializable {
     public List<Book> getAllSaleBooks() {
 
         TypedQuery<Book> query = em.createQuery("SELECT b FROM Book b where b.listPrice  <> b.salePrice", Book.class);
+        List<Book> books = query.getResultList();
+        return books;
+    }
+    
+    public List<Book> getAllNotOnSaleBooks() {
+
+        TypedQuery<Book> query = em.createQuery("SELECT b FROM Book b where b.listPrice = b.salePrice", Book.class);
         List<Book> books = query.getResultList();
         return books;
     }
@@ -335,5 +377,17 @@ public class BookJpaController implements Serializable {
         }
         
         return results;
+    }
+    
+    public double getTotalSalesByIsbn(String isbn)
+    {
+        CriteriaBuilder cb = em.getCriteriaBuilder();
+        CriteriaQuery cq = cb.createQuery();
+        Root<Orders> books = cq.from(Orders.class);
+        Join ordersToItems = books.join("orderItemsCollection",JoinType.LEFT);
+        cq.where(cb.equal(ordersToItems.get(OrderItem_.isbn), isbn));
+        cq.select(cb.sumAsDouble(ordersToItems.get(OrderItem_.priceSold)));
+        TypedQuery<Double> query = em.createQuery(cq);
+        return query.getSingleResult() == null ? 0 : query.getSingleResult();
     }
 }

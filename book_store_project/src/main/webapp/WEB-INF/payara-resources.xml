@@ -11,9 +11,9 @@
                           res-type="javax.sql.ConnectionPoolDataSource"
                           steady-pool-size="8">
         <property name="URL" value="jdbc:mysql://localhost:3306/bookstore?zeroDateTimeBehavior=CONVERT_TO_NULL&amp;serverTimezone=UTC&amp;useSSL=false&amp;allowPublicKeyRetrieval=true"/>
-        <property name="User" value="root"/>
+        <property name="User" value="gb1w20"/>
+        <property name="Password" value="password123"/>
 
-        <property name="Password" value="dawson123"/>
     </jdbc-connection-pool>
 </resources>
 

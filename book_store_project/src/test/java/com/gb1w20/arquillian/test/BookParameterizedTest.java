@@ -79,7 +79,7 @@ public class BookParameterizedTest {
                 .addAsWebInfResource(new File("src/main/webapp/WEB-INF/payara-resources.xml"), "payara-resources.xml")
                 .addAsResource(new File("src/main/resources/META-INF/persistence.xml"), "META-INF/persistence.xml")
                 .addAsResource(new File("src/main/resources/log4j2.xml"), "log4j2.xml")
-                .addAsResource("Test_DML.sql")
+                .addAsResource("Book_Store_DML.sql")
                 .addAsLibraries(dependencies);
 
         return webArchive;
@@ -93,7 +93,7 @@ public class BookParameterizedTest {
             new BookTestingBean(new Book("9780062024039","Divergent"), 13, "Removed"),
             new BookTestingBean(new Book("9780060584757","Mystic River"), 8, "Not Removed"),
             new BookTestingBean(new Book("9780756404734","The Wise Man's Fear"), 8, "Not Removed"),
-            new BookTestingBean(new Book("9780451526342","Animal Farm"), 12, "Removed")
+            new BookTestingBean(new Book("9780345504968","The Passage"), 14, "Not Removed")
             
     );
 
@@ -159,7 +159,7 @@ public class BookParameterizedTest {
      */
     @Before
     public void seedDatabase() {
-        final String seedDataScript = loadAsString("Test_DML.sql");
+        final String seedDataScript = loadAsString("Book_Store_DML.sql");
 
         try (Connection connection = ds.getConnection()) {
             for (String statement : splitStatements(new StringReader(

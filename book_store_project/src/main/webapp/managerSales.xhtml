@@ -90,10 +90,13 @@
                 
                 <br/>
                 
-                <h:commandButton value="Only Show Sales">
-                    <f:ajax event="click" listener="#{salesBean.setBooksDisplayed(bookJpaController.allSaleBooks)}" />
+                <h:commandButton value="On Sale">
+                    <f:ajax event="click" listener="#{salesBean.setBooksDisplayed(bookJpaController.getAllSaleBooks())}" />
                 </h:commandButton>
-                <h:commandButton value="Show All Books">
+                <h:commandButton value="Not on Sale">
+                    <f:ajax event="click" listener="#{salesBean.setBooksDisplayed(bookJpaController.getAllNotOnSaleBooks())}" />
+                </h:commandButton>
+                <h:commandButton value="All Books">
                     <f:ajax event="click" listener="#{salesBean.setBooksDisplayed(bookJpaController.findBookEntities())}" />
                 </h:commandButton>
 
