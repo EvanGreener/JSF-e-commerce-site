@@ -36,23 +36,23 @@
                 <div class="ui grid">
                     <div class="three wide column">
                         <!--Search by & genre filters-->
-                        <p>Filter By Genre</p>
+                        <p>#{msgs.filterByGenre}</p>
                         <h:selectManyCheckbox layout="pageDirection" value="#{search.genreFilters}">
                             <p:ajax update="gallery pagination resLabel" listener="#{search.onChecked}" />
-                            <f:selectItem itemValue = "Science Fiction" itemLabel = "Sci-Fi"/>
-                            <f:selectItem itemValue = "Mystery" itemLabel = "Mystery" />
-                            <f:selectItem itemValue = "Fantasy" itemLabel = "Fantasy" />
-                            <f:selectItem itemValue = "Horror" itemLabel = "Horror" />
-                            <f:selectItem itemValue = "Fiction" itemLabel = "Fiction" />
+                            <f:selectItem itemValue = "Science Fiction" itemLabel = "#{msgs.sciFi}"/>
+                            <f:selectItem itemValue = "Mystery" itemLabel = "#{msgs.mystery}" />
+                            <f:selectItem itemValue = "Fantasy" itemLabel = "#{msgs.fantasy}" />
+                            <f:selectItem itemValue = "Horror" itemLabel = "#{msgs.horror}" />
+                            <f:selectItem itemValue = "Fiction" itemLabel = "#{msgs.fiction}" />
                         </h:selectManyCheckbox>
 
                         <div class="ui divider" />
 
-                        <p>Search by</p>
+                        <p>#{msgs.searchBy}</p>
                         <h:selectOneRadio layout="pageDirection" value="#{search.searchBy}" >
                             <p:ajax update="gallery pagination resLabel" />
-                            <f:selectItem itemValue = "title" itemLabel = "Title"/>
-                            <f:selectItem itemValue = "author" itemLabel = "Author" />
+                            <f:selectItem itemValue = "title" itemLabel = "#{msgs.title}"/>
+                            <f:selectItem itemValue = "author" itemLabel = "#{msgs.author}" />
                             <f:selectItem itemValue = "isbn" itemLabel = "ISBN#" />
                         </h:selectOneRadio>
                     </div>
@@ -61,7 +61,7 @@
                         <div style="margin-bottom: 2px;" class="upper">
 
                             <h:panelGroup id="resLabel">
-                                <h3  style="display: inline;">Found #{search.results.size()} result(s) matching your search query</h3>
+                                 <h3  style="display: inline;">#{msgs.found} #{search.results.size()} #{msgs.resultsMatchingSearch}</h3>
                             </h:panelGroup>
 
                             <!--Loading modal-->
@@ -72,7 +72,7 @@
 
                             <!--Search bar-->
                             <div style="display: inline;" class="ui search">
-                                <h:inputText  id="query" value="#{search.query}" a:placeholder="Search books..." style="float: right; margin-top: -30px;" class="prompt" >
+                                 <h:inputText  id="query" value="#{search.query}" a:placeholder="#{msgs.searchBooks}" style="float: right; margin-top: -30px;" class="prompt" >
                                     <p:ajax event="keyup" listener="#{search.onKeyUp}" update="gallery pagination resLabel" />
                                 </h:inputText>
                             </div>
@@ -105,10 +105,10 @@
                                 <!--Previous-->
                                 <c:choose>
                                     <c:when test="#{search.page == 1}">
-                                        <button disabled="true"  class="ui button"> Prev. </button>
+                                        <button disabled="true"  class="ui button"> #{msgs.Prev} </button>
                                     </c:when>
                                     <c:otherwise>
-                                        <h:commandButton value="Prev." class="ui button">
+                                         <h:commandButton value="#{msgs.Prev}" class="ui button">
                                             <p:ajax update="gallery pagination resLabel" listener="#{search.onPrevious}" />
                                         </h:commandButton>
                                     </c:otherwise>
@@ -134,10 +134,10 @@
                                 <!--Next-->
                                 <c:choose>
                                     <c:when test="#{search.page == search.numPages}">
-                                        <button disabled="true"  class="ui button"> Next </button>
+                                         <button disabled="true"  class="ui button"> #{msgs.Next} </button>
                                     </c:when>
                                     <c:otherwise>
-                                        <h:commandButton value="Next" class="ui button">
+                                        <h:commandButton value="#{msgs.Next}" class="ui button">
                                             <p:ajax update="gallery pagination resLabel" listener="#{search.onNext}" />
                                         </h:commandButton>
                                     </c:otherwise>
@@ -149,12 +149,12 @@
                 </div>
 
             </div>
-            <div class="recommendations">
+<!--            <div class="recommendations">
                 <h3 style="text-align: center;">You may also like</h3>
                 <div class="swiper-container">
                     <div class="swiper-wrapper">
 
-                        <!--1-->
+                        1
                         <div class="swiper-slide">
                             <div class="ui fluid card darker">
                                 <div class="homepageImg">
@@ -175,7 +175,7 @@
                                 </div>
                             </div>
                         </div>
-                        <!--2-->
+                        2
 
                         <div class="swiper-slide">
                             <div class="ui fluid card darker">
@@ -197,7 +197,7 @@
                                 </div>
                             </div>
                         </div>
-                        <!--3-->
+                        3
                         <div class="swiper-slide">
                             <div class="ui fluid card darker">
                                 <div class="homepageImg">
@@ -218,7 +218,7 @@
                                 </div>
                             </div>
                         </div>
-                        <!--4-->
+                        4
                         <div class="swiper-slide">
                             <div class="ui fluid card darker">
                                 <div class="homepageImg">
@@ -239,7 +239,7 @@
                                 </div>
                             </div>
                         </div>
-                        <!--5-->
+                        5
                         <div class="swiper-slide">
                             <div class="ui fluid card darker">
                                 <div class="homepageImg">
@@ -261,15 +261,15 @@
                             </div>
                         </div>
                     </div>
-                    <!-- Add Pagination -->
+                     Add Pagination 
                     <div class="swiper-pagination">
 
                     </div>
                 </div>
 
             </div>
-            <!-- Add Pagination -->
-            <div class="swiper-pagination"></div>
+             Add Pagination 
+            <div class="swiper-pagination"></div>-->
 
         </h:form>
  
