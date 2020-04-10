@@ -22,6 +22,7 @@ public class ClientManagementBean implements Serializable {
 
      private String query = "";
      private List<Object[]> results;
+     private String searchBy = "email";
      private Clients currentClient;
      private String newFname;
      private String newLname;
@@ -36,6 +37,16 @@ public class ClientManagementBean implements Serializable {
           updateBean();
      }
 
+     public String getSearchBy()
+     {
+         return searchBy;
+     }
+     
+     public void setSearchBy(String newValue)
+     {
+         searchBy = newValue;
+     }
+     
      public String getQuery() {
           return query;
      }
@@ -104,7 +115,7 @@ public class ClientManagementBean implements Serializable {
 
      public void updateBean() {
           LOG.debug(query);
-          results = clientCtrl.searchClients(query);
+          results = clientCtrl.searchClients(query, searchBy);
      }
 
      public void onEdit(int id) {

@@ -96,7 +96,15 @@
                     <p:ajaxStatus onstart="PF('statusDialog').show()" onsuccess="PF('statusDialog').hide()" />
                     <p:dialog widgetVar="statusDialog" modal="true" draggable="false" closable="false" resizable="false" showHeader="false">
                          <p:graphicImage style="display: inline;" class="loading" library="images" name="double-ring.svg" />
-                    </p:dialog>   
+                    </p:dialog>
+                    
+                    <p>Search by</p>
+                        <h:selectOneRadio layout="pageDirection" value="#{orderSearch.searchBy}" >
+                            <p:ajax update="ordersTable" />
+                            <f:selectItem itemValue = "id" itemLabel = "Order ID"/>
+                            <f:selectItem itemValue = "email" itemLabel = "Email" />
+                            <f:selectItem itemValue = "isbn" itemLabel = "Item ISBN" />
+                        </h:selectOneRadio>
 
                     <!--Search bar-->
                     <div style="display: inline;" class="ui search" >
