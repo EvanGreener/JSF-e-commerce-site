@@ -18,86 +18,131 @@
         <h:outputStylesheet library="modalCss" name="modal.css" />
         <h:outputStylesheet library="managercss" name="manager.css" />
         <h:outputScript library="webjars" name="Semantic-UI/2.4.1/semantic.min.js"/>
-               <style>
+        <style>
 
-               .modal{
-                    position: fixed;
-                    padding-top: 0px;
-                    height: fit-content;
-                    text-align: center;
-                    font-size: 18px;
-               }
+            .modal{
+                position: fixed;
+                padding-top: 0px;
+                height: fit-content;
+                text-align: center;
+                font-size: 18px;
+            }
 
-               .middle h1 {
-                    margin-top: 20px !important;
-                    text-align: center;
-                    color: gray;
-               }
-               .middle{
-                    padding: 0px 40px 0px 40px;
-               }
+            .middle h1 {
+                margin-top: 20px !important;
+                text-align: center;
+                color: gray;
+            }
+            .middle{
+                padding: 0px 40px 0px 40px;
+            }
 
-               .actions{
-                    height: 80%;
-                    text-align: center !important;
-                    font-size: 20px;
-                    margin: 10px 10px 10px 10px;
-               }
+            .actions{
+                height: 80%;
+                text-align: center !important;
+                font-size: 20px;
+                margin: 10px 10px 10px 10px;
+            }
 
-               .actions .ui.button {
-                    margin: 10px 10px 10px 10px;
-               }
+            .actions .ui.button {
+                margin: 10px 10px 10px 10px;
+            }
 
-               .footer button{
-                    font-size: 20px !important;
-                    margin: 0px 10px 0px 10px !important;
-               }
+            .footer button{
+                font-size: 20px !important;
+                margin: 0px 10px 0px 10px !important;
+            }
 
-               .header h1 {
-                    text-align: center !important;
-               }
+            .header h1 {
+                text-align: center !important;
+            }
 
-               /*               .content h3 {
-                                   
-                              }*/
+            /*               .content h3 {
+                                
+                           }*/
 
-               .form-field{
-                    font-size: 18px;
-                    margin: 10px 0px 10px 5px;
+            .form-field{
+                font-size: 18px;
+                margin: 10px 0px 10px 5px;
 
-               }
+            }
 
-               #editFormGrowl{
-                    position: fixed;
-                    display: none;
-                    z-index: 777;
-                    left: 100%;
-                    margin-left: -257.42px;
+            #editFormGrowl{
+                position: fixed;
+                display: none;
+                z-index: 777;
+                left: 100%;
+                margin-left: -257.42px;
 
 
-               }
-               </style>
+            }
+        </style>
     </h:head>
 
     <h:body>
 
-        <h:form id="editForm">
-            <bookstore:navbar />
-
+        <bookstore:navbar />
+        <h:form onsubmit="return false;">
             <div class="middle">
 
                 <h1 class="ui header">Sales Management</h1>
-                
+
                 <br/>
-                
+
+                <div class="ui form">
+                    <div class="three fields searchCriteria">
+                        <div class="field">
+                            <!--Search by & genre filters-->
+                            <p>Filter By Genre</p>
+                            <h:selectManyCheckbox layout="pageDirection" value="#{managerSearch.genreFilters}">
+                                <p:ajax update=":editForm:saleTable" listener="#{managerSearch.onChecked}" />
+                                <f:selectItem itemValue = "Science Fiction" itemLabel = "Sci-Fi"/>
+                                <f:selectItem itemValue = "Mystery" itemLabel = "Mystery" />
+                                <f:selectItem itemValue = "Fantasy" itemLabel = "Fantasy" />
+                                <f:selectItem itemValue = "Horror" itemLabel = "Horror" />
+                                <f:selectItem itemValue = "Fiction" itemLabel = "Fiction" />
+                            </h:selectManyCheckbox>
+                        </div>
+
+                        <div class="field">
+                            <p>Search by</p>
+                            <h:selectOneRadio layout="pageDirection" value="#{managerSearch.searchBy}" >
+                                <p:ajax update=":editForm:saleTable" />
+                                <f:selectItem itemValue = "title" itemLabel = "Title"/>
+                                <f:selectItem itemValue = "author" itemLabel = "Author" />
+                                <f:selectItem itemValue = "isbn" itemLabel = "ISBN#" />
+                            </h:selectOneRadio>
+                        </div>
+                        <div class="field">
+                            <div style="margin-bottom: 2px;" class="upper">
+
+                                <!--Search bar-->
+                                <div style="display: inline;" class="ui search">
+                                    <p:inputText  id="query" value="#{managerSearch.query}" a:placeholder="Search books..." class="prompt" >
+                                        <p:ajax event="change" listener="#{managerSearch.onKeyUp(salesBean.booksDisplayed)}" update=":editForm:saleTable" />
+                                    </p:inputText>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+        </h:form>
+
+        <h:form id="editForm">
+
+            <div class="middle">
                 <h:commandButton value="Only Show Sales">
                     <f:ajax event="click" listener="#{salesBean.setBooksDisplayed(bookJpaController.allSaleBooks)}" />
                 </h:commandButton>
                 <h:commandButton value="Show All Books">
                     <f:ajax event="click" listener="#{salesBean.setBooksDisplayed(bookJpaController.findBookEntities())}" />
                 </h:commandButton>
-
-                <h:dataTable id="saleTable" var="sales" style="margin-bottom: 20px;" class="ui celled table" value="#{salesBean.booksDisplayed}">
+                #{managerSearch.onKeyUp(salesBean.booksDisplayed)}
+                <h:dataTable id="saleTable" var="sales" style="margin-bottom: 20px;" class="ui celled table" value="#{managerSearch.results}">
                     <h:column>
                         <f:facet name="header">ISBN</f:facet>
                             #{sales.isbn}
@@ -107,16 +152,24 @@
                             #{sales.title}
                     </h:column>
                     <h:column>
+                        <f:facet name="header">Author(s)</f:facet>
+                            #{authorsJpaController.findAuthors(bookAuthorsJpaController.findBookAuthorsByIsbn(sales.isbn)[0].authorID).name}
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">Genre</f:facet>
+                            #{sales.genre}
+                    </h:column>
+                    <h:column>
                         <f:facet name="header">List</f:facet>
-                            $#{sales.listPrice}
+                        $#{sales.listPrice}
                     </h:column>
                     <h:column>
                         <f:facet name="header">Sale</f:facet>
-                            $#{sales.salePrice}
+                        $#{sales.salePrice}
                     </h:column>
                     <h:column>
                         <f:facet name="header">Wholesale</f:facet>
-                            $#{sales.wholesalePrice}
+                        $#{sales.wholesalePrice}
                     </h:column>
                     <h:column>
                         <f:facet name="header">Status</f:facet>

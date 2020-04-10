@@ -22,6 +22,7 @@
     <class>com.gb1w20.book_store_project.beans.EditSurveyBean</class>
     <class>com.gb1w20.book_store_project.backing.SurveyItemBackingBean</class>
     <class>com.gb1w20.book_store_project.entities.ClientInventory</class>
+    <class>com.gb1w20.book_store_project.entities.BookAuthors</class>
     <exclude-unlisted-classes>true</exclude-unlisted-classes>
   </persistence-unit>
 </persistence>

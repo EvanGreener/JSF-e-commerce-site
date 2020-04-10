@@ -114,7 +114,7 @@ public class Clients implements Serializable {
     @Column(name = "Is_Removed")
     private Boolean isRemoved;
     
-    @OneToMany( cascade = CascadeType.ALL)
+    @OneToMany(cascade = CascadeType.ALL,mappedBy="client",fetch = FetchType.EAGER)
     private List<Orders> ordersCollection;
     
     @OneToMany(cascade = CascadeType.ALL,mappedBy="clients",fetch = FetchType.EAGER)

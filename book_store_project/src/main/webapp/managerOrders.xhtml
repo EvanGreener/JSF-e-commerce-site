@@ -81,10 +81,10 @@
 
      <h:body>
 
-          <h:form id="editForm">
+         
                <bookstore:navbar />
-
-               <div class="middle">
+               <h:form onsubmit="return false;">
+               <div class="middle"> 
 
                     <div id="editFormGrowl" class="ui floating positive message" >
                          <!--<i class="close icon"></i>-->
@@ -95,21 +95,16 @@
 
                     <h1>Order Management</h1>
 
-                    <!--Loading modal-->
-                    <p:ajaxStatus onstart="PF('statusDialog').show()" onsuccess="PF('statusDialog').hide()" />
-                    <p:dialog widgetVar="statusDialog" modal="true" draggable="false" closable="false" resizable="false" showHeader="false">
-                         <p:graphicImage style="display: inline;" class="loading" library="images" name="double-ring.svg" />
-                    </p:dialog>   
-                    
                     <!--Search bar-->
                     <div style="display: inline;" class="ui search" >
                          <h:inputText  id="query" value="#{orderSearch.query}"  a:placeholder="Search orders by email..." style="float: right; margin-top: 10px; margin-bottom: 10px; width: 200px; " class="prompt" >
-                              <p:ajax event="keyup"  listener="#{orderSearch.updateBean()}" update="ordersTable" />
+                              <p:ajax event="change"  listener="#{orderSearch.updateBean()}" update=":editForm:ordersTable" />
                          </h:inputText>
                     </div>
-                    
-                    
-                    
+                     </div>
+                    </h:form>
+                     <h:form id="editForm">
+                          <div class="middle">
                     <h:dataTable  id="ordersTable" var="orders" style="margin-bottom: 20px;"  class="ui celled table" value="#{orderSearch.searchResults}" >
                          <h:column>
                               <f:facet name="header">Order ID</f:facet>
