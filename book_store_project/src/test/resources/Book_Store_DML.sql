@@ -1,4 +1,3 @@
-CREATE DATABASE IF NOT EXISTS bookstore;
 USE bookstore;
 
 DROP TABLE IF EXISTS `Tax`;
@@ -761,319 +760,215 @@ insert into Order_Item
     (Order_ID, ISBN, Price_Sold, Last_updated, Is_Removed)
 values (20, "9781416524793", 14, "2019-07-11 04:24:09", true);
 
-INSERT INTO Book_Authors
-    (Author_ID, ISBN)
+INSERT INTO Book_Authors (Author_ID, ISBN) 
 VALUES (1, "9780142000670");
-#Of Mice and Men
-INSERT INTO Book_Authors
+INSERT INTO Book_Authors (Author_ID, ISBN) 
 VALUES (2, "9780439244190");
-#Holes
-INSERT INTO Book_Authors
+INSERT INTO Book_Authors (Author_ID, ISBN) 
 VALUES (3, "9780061120084");
-#To Kill a Mockingbird
-INSERT INTO Book_Authors
+INSERT INTO Book_Authors (Author_ID, ISBN) 
 VALUES (4, "9780684830421");
-#The Great Gatsby
-INSERT INTO Book_Authors
+INSERT INTO Book_Authors (Author_ID, ISBN) 
 VALUES (5, "9780606323451");
-#HP and Sorceror Stone
-INSERT INTO Book_Authors
+INSERT INTO Book_Authors (Author_ID, ISBN) 
 VALUES (6, "9780451526342");
-#Animal Farm
-INSERT INTO Book_Authors
+INSERT INTO Book_Authors (Author_ID, ISBN) 
 VALUES (7, "9780316769174");
-#Catcher in the Rye
-INSERT INTO Book_Authors
+INSERT INTO Book_Authors (Author_ID, ISBN) 
 VALUES (56, "9780439023481");
-#Hunger Games
-INSERT INTO Book_Authors
+INSERT INTO Book_Authors (Author_ID, ISBN) 
 VALUES (31, "9780307277671");
-#Da Vinci Code
-INSERT INTO Book_Authors
+INSERT INTO Book_Authors (Author_ID, ISBN) 
 VALUES (8, "9781594480003");
-#Kite Runner
-INSERT INTO Book_Authors
+INSERT INTO Book_Authors (Author_ID, ISBN) 
 VALUES (9, "9780140283334");
-#Lord of the Flies
-INSERT INTO Book_Authors
+INSERT INTO Book_Authors (Author_ID, ISBN) 
 VALUES (10, "9780679601685");
-#Pride and Prejudice
-INSERT INTO Book_Authors
+INSERT INTO Book_Authors (Author_ID, ISBN) 
 VALUES (11, "9780062315007");
-#The Alchemist
-INSERT INTO Book_Authors
+INSERT INTO Book_Authors (Author_ID, ISBN) 
 VALUES (12, "9780770430078");
-#Life of Pi
-INSERT INTO Book_Authors
+INSERT INTO Book_Authors (Author_ID, ISBN) 
 VALUES (13, "9780375831003");
-#The Book Thief
-INSERT INTO Book_Authors
+INSERT INTO Book_Authors (Author_ID, ISBN) 
 VALUES (38, "9780307588371");
-#Gone Girl
-INSERT INTO Book_Authors
+INSERT INTO Book_Authors (Author_ID, ISBN) 
 VALUES (31, "9781416524793");
-#Angels & Demons
-INSERT INTO Book_Authors
+INSERT INTO Book_Authors (Author_ID, ISBN) 
 VALUES (14, "9780393970128");
-#Dracula
-INSERT INTO Book_Authors
+INSERT INTO Book_Authors (Author_ID, ISBN) 
 VALUES (15, "9780141439471");
-#Frankenstein
-INSERT INTO Book_Authors
+INSERT INTO Book_Authors (Author_ID, ISBN) 
 VALUES (16, "9780385603102");
-#House of Leaves
-INSERT INTO Book_Authors
+INSERT INTO Book_Authors (Author_ID, ISBN) 
 VALUES (17, "9780143039983");
-#The Haunting of Hill House
-INSERT INTO Book_Authors
+INSERT INTO Book_Authors (Author_ID, ISBN) 
 VALUES (28, "9780450040184");
-#The Shining
-INSERT INTO Book_Authors
+INSERT INTO Book_Authors (Author_ID, ISBN) 
 VALUES (18, "9780061007224");
-#The Exorcist
-INSERT INTO Book_Authors
+INSERT INTO Book_Authors (Author_ID, ISBN) 
 VALUES (28, "9781416524342");
-#Pet Sematary
-INSERT INTO Book_Authors
+INSERT INTO Book_Authors (Author_ID, ISBN) 
 VALUES (28, "9780450411434");
-#It
-INSERT INTO Book_Authors
+INSERT INTO Book_Authors (Author_ID, ISBN) 
 VALUES (53, "9780380729401");
-#Something Wicked This Way Comes
-INSERT INTO Book_Authors
+INSERT INTO Book_Authors (Author_ID, ISBN) 
 VALUES (19, "9780345476876");
-#Interview with the Vampire
-INSERT INTO Book_Authors
+INSERT INTO Book_Authors (Author_ID, ISBN) 
 VALUES (20, "9780735212510");
-#The Hunger
-INSERT INTO Book_Authors
+INSERT INTO Book_Authors (Author_ID, ISBN) 
 VALUES (28, "9780450031069");
-#Salem''s Lot
-INSERT INTO Book_Authors
+INSERT INTO Book_Authors (Author_ID, ISBN) 
 VALUES (21, "9780307346605");
-#World War Z: An Oral History of the Zombie War
-INSERT INTO Book_Authors
+INSERT INTO Book_Authors (Author_ID, ISBN) 
 VALUES (22, "9780727860996");
-#Hell House
-INSERT INTO Book_Authors
+INSERT INTO Book_Authors (Author_ID, ISBN) 
 VALUES (23, "9780062200570");
-#NOS4A2
-INSERT INTO Book_Authors
+INSERT INTO Book_Authors (Author_ID, ISBN) 
 VALUES (24, "9780061139376");
-#Coraline
-INSERT INTO Book_Authors
+INSERT INTO Book_Authors (Author_ID, ISBN) 
 VALUES (25, "9780671685638");
-#Ghost Story
-INSERT INTO Book_Authors
+INSERT INTO Book_Authors (Author_ID, ISBN) 
 VALUES (26, "9780345504968");
-#The Passage
-INSERT INTO Book_Authors
+INSERT INTO Book_Authors (Author_ID, ISBN) 
 VALUES (27, "9780062259660");
-#Bird Box
-INSERT INTO Book_Authors
+INSERT INTO Book_Authors (Author_ID, ISBN) 
 VALUES (28, "9781982110567");
-#The Institute
-INSERT INTO Book_Authors
+INSERT INTO Book_Authors (Author_ID, ISBN) 
 VALUES (29, "9780307949486");
-#The Girl with the Dragon Tattoo
-INSERT INTO Book_Authors
+INSERT INTO Book_Authors (Author_ID, ISBN) 
 VALUES (30, "9780312330873");
-#And Then There Were None
-INSERT INTO Book_Authors
+INSERT INTO Book_Authors (Author_ID, ISBN) 
 VALUES (32, "9780316323703");
-#Rebecca
-INSERT INTO Book_Authors
+INSERT INTO Book_Authors (Author_ID, ISBN) 
 VALUES (33, "9780679745587");
-#In Cold Blood
-INSERT INTO Book_Authors
+INSERT INTO Book_Authors (Author_ID, ISBN) 
 VALUES (34, "9780451205766");
-#The Godfather
-INSERT INTO Book_Authors
+INSERT INTO Book_Authors (Author_ID, ISBN) 
 VALUES (35, "9780316166683");
-#The Lovely Bones
-INSERT INTO Book_Authors
+INSERT INTO Book_Authors (Author_ID, ISBN) 
 VALUES (36, "9780156001311");
-#The Name of the Rose
-INSERT INTO Book_Authors
+INSERT INTO Book_Authors (Author_ID, ISBN) 
 VALUES (37, "9780582418271");
-#The Firm
-INSERT INTO Book_Authors
+INSERT INTO Book_Authors (Author_ID, ISBN) 
 VALUES (39, "9780380731862");
-#Shutter Island
-INSERT INTO Book_Authors
+INSERT INTO Book_Authors (Author_ID, ISBN) 
 VALUES (39, "9780060584757");
-#Mystic River
-INSERT INTO Book_Authors
+INSERT INTO Book_Authors (Author_ID, ISBN) 
 VALUES (40, "9780143034902");
-#The Shadow of the Wind
-INSERT INTO Book_Authors
+INSERT INTO Book_Authors (Author_ID, ISBN) 
 VALUES (41, "9780812976144");
-#The Alienist
-INSERT INTO Book_Authors
+INSERT INTO Book_Authors (Author_ID, ISBN) 
 VALUES (42, "9780394758282");
-#The Big Sleep
-INSERT INTO Book_Authors
+INSERT INTO Book_Authors (Author_ID, ISBN) 
 VALUES (43, "9780312362089");
-#One for the Money
-INSERT INTO Book_Authors
+INSERT INTO Book_Authors (Author_ID, ISBN) 
 VALUES (44, "9780752865331");
-#The Maltese Falcon
-INSERT INTO Book_Authors
+INSERT INTO Book_Authors (Author_ID, ISBN) 
 VALUES (45, "9780525945567");
-#Red Dragon
-INSERT INTO Book_Authors
+INSERT INTO Book_Authors (Author_ID, ISBN) 
 VALUES (46, "9780670038602");
-#In the Woods
-INSERT INTO Book_Authors
+--In the Woods
+INSERT INTO Book_Authors (Author_ID, ISBN) 
 VALUES (47, "9780446350983");
-#Presumed Innocent
-INSERT INTO Book_Authors
+INSERT INTO Book_Authors (Author_ID, ISBN) 
 VALUES (48, "9780743298025");
-#The Thirteenth Tale
-INSERT INTO Book_Authors
+INSERT INTO Book_Authors (Author_ID, ISBN) 
 VALUES (49, "9780812550702");
-#Ender''s Game
-INSERT INTO Book_Authors
+INSERT INTO Book_Authors (Author_ID, ISBN) 
 VALUES (50, "9780141036144");
-#1984 (Sci-Fi)
-INSERT INTO Book_Authors
+INSERT INTO Book_Authors (Author_ID, ISBN) 
 VALUES (51, "9780307887436");
-#Ready Player One
-INSERT INTO Book_Authors
+INSERT INTO Book_Authors (Author_ID, ISBN) 
 VALUES (52, "9780593099322");
-#Dune
-INSERT INTO Book_Authors
+INSERT INTO Book_Authors (Author_ID, ISBN) 
 VALUES (53, "9781451673319");
-#Farenheit 451 (Sci-Fi)
-INSERT INTO Book_Authors
+INSERT INTO Book_Authors (Author_ID, ISBN) 
 VALUES (54, "9780804139021");
-#The Martian
-INSERT INTO Book_Authors
+INSERT INTO Book_Authors (Author_ID, ISBN) 
 VALUES (58, "9780553803716");
-#Foundation
-INSERT INTO Book_Authors
+INSERT INTO Book_Authors (Author_ID, ISBN) 
 VALUES (56, "9780439023498");
-#Catching Fire
-INSERT INTO Book_Authors
+INSERT INTO Book_Authors (Author_ID, ISBN) 
 VALUES (55, "9781524796976");
-#Do Androids Dream of Electric Sheep?
-INSERT INTO Book_Authors
+INSERT INTO Book_Authors (Author_ID, ISBN) 
 VALUES (56, "9780439023511");
-#Mockingjay
-INSERT INTO Book_Authors
+INSERT INTO Book_Authors (Author_ID, ISBN) 
 VALUES (57, "9780486284729");
-#The Time Machine
-INSERT INTO Book_Authors
+INSERT INTO Book_Authors (Author_ID, ISBN) 
 VALUES (58, "9780553803709");
-#I, Robot
-INSERT INTO Book_Authors
+INSERT INTO Book_Authors (Author_ID, ISBN) 
 VALUES (59, "9780062024039");
-#Divergent
-INSERT INTO Book_Authors
+INSERT INTO Book_Authors (Author_ID, ISBN) 
 VALUES (60, "9780441788385");
-#Stranger in a Strange Land
-INSERT INTO Book_Authors
+INSERT INTO Book_Authors (Author_ID, ISBN) 
 VALUES (61, "9780771008795");
-#Handmaid''s Tale (Sci-Fi)
-INSERT INTO Book_Authors
+INSERT INTO Book_Authors (Author_ID, ISBN) 
 VALUES (62, "9781509808335");
-#The Restaurant at the End of the Universe
-INSERT INTO Book_Authors
+INSERT INTO Book_Authors (Author_ID, ISBN) 
 VALUES (63, "9780345538987");
-#Jurassic Park
-INSERT INTO Book_Authors
+INSERT INTO Book_Authors (Author_ID, ISBN) 
 VALUES (64, "9780451457998");
-#2001: A Space Odyssey
-INSERT INTO Book_Authors
+INSERT INTO Book_Authors (Author_ID, ISBN) 
 VALUES (65, "9780989671767");
-#Unsouled
-INSERT INTO Book_Authors
+INSERT INTO Book_Authors (Author_ID, ISBN) 
 VALUES (65, "9780989671774");
-#Soulsmith
-INSERT INTO Book_Authors
+INSERT INTO Book_Authors (Author_ID, ISBN) 
 VALUES (65, "9780989671781");
-#Blackflame
-INSERT INTO Book_Authors
+INSERT INTO Book_Authors (Author_ID, ISBN) 
 VALUES (65, "9780999851104");
-#Skysworn
-INSERT INTO Book_Authors
+INSERT INTO Book_Authors (Author_ID, ISBN) 
 VALUES (65, "9780999851111");
-#Ghostwater
-INSERT INTO Book_Authors
+INSERT INTO Book_Authors (Author_ID, ISBN) 
 VALUES (65, "9780999851128");
-#Underlord
-INSERT INTO Book_Authors
+INSERT INTO Book_Authors (Author_ID, ISBN) 
 VALUES (65, "9780999851135");
-#Uncrowned
-INSERT INTO Book_Authors
+INSERT INTO Book_Authors (Author_ID, ISBN) 
 VALUES (66, "9780316075558");
-#The Black Prism
-INSERT INTO Book_Authors
+INSERT INTO Book_Authors (Author_ID, ISBN) 
 VALUES (66, "9780316079914");
-#The Blinding Knife
-INSERT INTO Book_Authors
+INSERT INTO Book_Authors (Author_ID, ISBN) 
 VALUES (66, "9780316058964");
-#The Broken Eye
-INSERT INTO Book_Authors
+INSERT INTO Book_Authors (Author_ID, ISBN) 
 VALUES (66, "9780316251334");
-#The Blood Mirror
-INSERT INTO Book_Authors
+INSERT INTO Book_Authors (Author_ID, ISBN) 
 VALUES (66, "9780316251303");
-#The Burning White
-INSERT INTO Book_Authors
+INSERT INTO Book_Authors (Author_ID, ISBN) 
 VALUES (67, "9780765311788");
-#The Final Empire
-INSERT INTO Book_Authors
+INSERT INTO Book_Authors (Author_ID, ISBN) 
 VALUES (67, "9780765316882");
-#The Well of Ascension
-INSERT INTO Book_Authors
+INSERT INTO Book_Authors (Author_ID, ISBN) 
 VALUES (67, "9780765316899");
-#The Hero of Ages
-INSERT INTO Book_Authors
+INSERT INTO Book_Authors (Author_ID, ISBN) 
 VALUES (67, "9780765330420");
-#The Alloy of Law
-INSERT INTO Book_Authors
+INSERT INTO Book_Authors (Author_ID, ISBN) 
 VALUES (67, "9780765378552");
-#Shadows of Self
-INSERT INTO Book_Authors
+INSERT INTO Book_Authors (Author_ID, ISBN) 
 VALUES (67, "9781466862678");
-#The Bands of Mourning
-INSERT INTO Book_Authors
+INSERT INTO Book_Authors (Author_ID, ISBN) 
 VALUES (68, "9780756404079");
-#The Name of the Wind
-INSERT INTO Book_Authors
+INSERT INTO Book_Authors (Author_ID, ISBN) 
 VALUES (68, "9780756404734");
-#The Wise Man''s Fear
-INSERT INTO Book_Authors
+INSERT INTO Book_Authors (Author_ID, ISBN) 
 VALUES (69, "9781937007294");
-#Fated
-INSERT INTO Book_Authors
+INSERT INTO Book_Authors (Author_ID, ISBN) 
 VALUES (69, "9781937007591");
-#Cursed
-INSERT INTO Book_Authors
+INSERT INTO Book_Authors (Author_ID, ISBN) 
 VALUES (69, "9781937007720");
-#Taken
-INSERT INTO Book_Authors
+INSERT INTO Book_Authors (Author_ID, ISBN) 
 VALUES (69, "9780425264928");
-#Chosen
-INSERT INTO Book_Authors
+INSERT INTO Book_Authors (Author_ID, ISBN) 
 VALUES (69, "9780425264942");
-#Hidden
-INSERT INTO Book_Authors
+INSERT INTO Book_Authors (Author_ID, ISBN) 
 VALUES (69, "9780425275757");
-#Veiled
-INSERT INTO Book_Authors
+INSERT INTO Book_Authors (Author_ID, ISBN) 
 VALUES (69, "9780698165083");
-#Burned
-INSERT INTO Book_Authors
+INSERT INTO Book_Authors (Author_ID, ISBN) 
 VALUES (69, "9781101988527");
-#Bound
-INSERT INTO Book_Authors
+INSERT INTO Book_Authors (Author_ID, ISBN) 
 VALUES (69, "9780356507217");
-#Marked
-INSERT INTO Book_Authors
+INSERT INTO Book_Authors (Author_ID, ISBN) 
 VALUES (69, "9780440000587");
-#Fallen
 
 INSERT INTO Book
 (ISBN, Title, Genre, Num_Of_Pages, Description, Date_Of_Publication, Publisher_ID, Date_Entered, Last_Modified,
@@ -1716,7 +1611,7 @@ INSERT INTO Book
 (ISBN, Title, Genre, Num_Of_Pages, Description, Date_Of_Publication, Publisher_ID, Date_Entered, Last_Modified,
  Is_Removed, List_Price, Sale_Price, Wholesale_Price)
 VALUES ("9781466862678", "The Bands of Mourning", "Fantasy", 448,
-        "From #1 New York Times bestselling author Brandon Sanderson, the Mistborn series is a heist story of political intrigue and magical, martial-arts action. Three hundred years after the events of the Mistborn trilogy, Scadrial is now on the verge of modernity, with railroads to supplement the canals, electric lighting in the streets and the homes of the wealthy, and the first steel-framed skyscrapers racing for the clouds.The Bands of Mourning are the mythical metal minds owned by the Lord Ruler, said to grant anyone who wears them the powers that the Lord Ruler had at his command. Hardly anyone thinks they really exist. A kandra researcher has returned to Elendel with images that seem to depict the Bands, as well as writings in a language that no one can read. Waxillium Ladrian is recruited to travel south to the city of New Seran to investigate. Along the way he discovers hints that point to the true goals of his uncle Edwarn and the shadowy organization known as The Set.",
+        "From --1 New York Times bestselling author Brandon Sanderson, the Mistborn series is a heist story of political intrigue and magical, martial-arts action. Three hundred years after the events of the Mistborn trilogy, Scadrial is now on the verge of modernity, with railroads to supplement the canals, electric lighting in the streets and the homes of the wealthy, and the first steel-framed skyscrapers racing for the clouds.The Bands of Mourning are the mythical metal minds owned by the Lord Ruler, said to grant anyone who wears them the powers that the Lord Ruler had at his command. Hardly anyone thinks they really exist. A kandra researcher has returned to Elendel with images that seem to depict the Bands, as well as writings in a language that no one can read. Waxillium Ladrian is recruited to travel south to the city of New Seran to investigate. Along the way he discovers hints that point to the true goals of his uncle Edwarn and the shadowy organization known as The Set.",
         STR_TO_DATE("1/26/2016", "%m/%d/%Y"), 3, STR_TO_DATE("1/26/2018", "%m/%d/%Y"),
         STR_TO_DATE("1/26/2019", "%m/%d/%Y"), TRUE, 19, 19, 6);
 INSERT INTO Book
@@ -1804,7 +1699,6 @@ VALUES ("9780440000587", "Fallen", "Fantasy", 296,
         STR_TO_DATE("9/24/2019", "%m/%d/%Y"), 6, STR_TO_DATE("9/24/2019", "%m/%d/%Y"),
         STR_TO_DATE("9/24/2019", "%m/%d/%Y"), TRUE, 17, 15, 5);
 
-## Authors
 insert into Authors
     (Name, Is_Removed, Date_Entered, Last_Modified)
 values ("John Steinbeck", false, "2019-03-25 19:21:49", "2020-11-11 04:47:09");
@@ -2013,9 +1907,6 @@ insert into Authors
     (Name, Is_Removed, Date_Entered, Last_Modified)
 values ("Benedict Jacka", true, "2019-04-11 13:34:51", "2021-01-08 19:40:42");
 
-## Clients
-
-##DawsonConsumer, Ken client account
 insert into clients
 (Hashed_Password, Is_Manager, First_Name, Last_Name, Company_Name, Address_1, Address_2, City, Province_Abbreviation, Country,
  Postal_Code, Home_Telephone, Cell_Telephone, Email, Date_Entered, Last_Modified, Is_Removed)
@@ -2023,7 +1914,6 @@ values ("e839ce0de10e513e90272e7d9dc5c00439cd12363ac2a48e307cb9eabbcaed13",false
         "Canada", "H3Z1A4", "5149318731", null, "cst.send@gmail.com", "2019-01-30 00:00:00",
         "2019-06-18 21:37:30", false);
 
-##DawsonManager, Ken manager account
 insert into clients
 (Hashed_Password, Is_Manager, First_Name, Last_Name, Company_Name, Address_1, Address_2, City, Province_Abbreviation, Country,
  Postal_Code, Home_Telephone, Cell_Telephone, Email, Date_Entered, Last_Modified, Is_Removed)
@@ -2206,7 +2096,6 @@ values ("placeholder12345!",true, "Sawyer", "Gosling", "Pouros, Lynch and Trembl
 "Ivory Coast", null, "8377915332", "5413296991", "sgoslingt@soundcloud.com", "2019-01-30 00:00:00",
 "2019-03-08 13:33:42", false);
 
-## TAX
 insert into tax
     (Province_Abbreviation, GST, PST, HST)
 values ("AB", 0.05, 0.00, 0.00);

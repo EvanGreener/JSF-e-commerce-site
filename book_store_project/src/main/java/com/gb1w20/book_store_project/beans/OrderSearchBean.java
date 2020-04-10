@@ -23,6 +23,7 @@ public class OrderSearchBean implements Serializable {
     
     private final static Logger LOG = LoggerFactory.getLogger(OrderSearchBean.class);
     private String query = "";
+    private String searchBy = "email";
     private List<Orders> searchResults;
     private Orders currentOrder;
     
@@ -43,7 +44,16 @@ public class OrderSearchBean implements Serializable {
      public void setQuery(String query) {
           this.query = query;
      }
-    
+     
+     public String getSearchBy()
+     {
+         return searchBy;
+     }
+     
+     public void setSearchBy(String newValue)
+     {
+         searchBy = newValue;
+     }
     
     public List<Orders> getSearchResults() {
           return searchResults;
@@ -60,7 +70,7 @@ public class OrderSearchBean implements Serializable {
     public void updateBean() {
           LOG.debug("Update called");
           LOG.debug("Query: " + this.query);
-          searchResults = orderCtrl.searchOrders(this.query);
+          searchResults = orderCtrl.searchOrders(this.query, this.searchBy);
      }
     
      public void onEdit(int id) {

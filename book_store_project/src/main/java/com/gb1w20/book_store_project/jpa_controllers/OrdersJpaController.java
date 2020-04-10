@@ -192,14 +192,28 @@ public class OrdersJpaController implements Serializable {
         }
     }
     
-     public List<Orders> searchOrders(String query) {
-          String expression = "%" + query + "%";
-
+     public List<Orders> searchOrders(String query, String searchBy) {
+         String expression = "%" + query + "%";
+          if (searchBy.equals("id"))
+          {
+              expression = query;
+          }
           CriteriaBuilder cb = em.getCriteriaBuilder();
           CriteriaQuery<Orders> cq = cb.createQuery(Orders.class);
           Root<Orders> order = cq.from(Orders.class);
           Join orderClients  = order.join("client");
-          cq.where(cb.like(orderClients.get(Clients_.email), expression));
+          Join orderToItems = order.join("orderItemsCollection", JoinType.LEFT);
+          switch (searchBy) {
+              case "id":
+                 cq.where(cb.equal(order.get(Orders_.clientID), expression));
+                 break;
+              case "isbn":
+                  cq.where(cb.like(orderToItems.get(OrderItem_.isbn), expression));
+                  break;
+              default:
+                  cq.where(cb.like(orderClients.get(Clients_.email), expression));
+                  break;
+          }
           cq.select(order);
           cq.orderBy(cb.asc(order.get(Orders_.orderID)));
           TypedQuery<Orders> q = em.createQuery(cq);

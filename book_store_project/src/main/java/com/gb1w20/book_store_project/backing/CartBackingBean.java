@@ -120,8 +120,8 @@ public class CartBackingBean implements Serializable {
         List<Book> cartList = this.getCartItems();
         double cartTotal = 0.00;
         for (Book cartBook : cartList) {
-            LOG.info("cart has " + cartBook.getListPrice());
-            cartTotal += cartBook.getListPrice().doubleValue();
+            LOG.info("cart has " + cartBook.getSalePrice());
+            cartTotal += cartBook.getSalePrice().doubleValue();
         }
         cartTotal = Math.round(cartTotal * 100.0) / 100.0;
         return cartTotal;
@@ -136,7 +136,7 @@ public class CartBackingBean implements Serializable {
     }
 
     public double calculateItemTaxPrice(Book book) {
-        return taxbb.getTotalWithTaxByProvince(book.getListPrice().doubleValue());
+        return taxbb.getTotalWithTaxByProvince(book.getSalePrice().doubleValue());
     }
 
     public void addBookToCart(Book addingBook) {
