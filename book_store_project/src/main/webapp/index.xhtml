@@ -23,306 +23,306 @@ compatible with different screen sizes
       xmlns:p="http://primefaces.org/ui"
       xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
       xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
-    <h:head>
-        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+     <h:head>
+          <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 
-        <title>The BookStore</title>
-        <link rel="stylesheet" href="https://unpkg.com/swiper/css/swiper.min.css"/>
+          <title>The BookStore</title>
+          <link rel="stylesheet" href="https://unpkg.com/swiper/css/swiper.min.css"/>
 
-        <link href="https://fonts.googleapis.com/css?family=Montserrat|Roboto&amp;display=swap" rel="stylesheet"/>
+          <link href="https://fonts.googleapis.com/css?family=Montserrat|Roboto&amp;display=swap" rel="stylesheet"/>
 
-        <h:outputStylesheet library="webjars" name="Semantic-UI/2.4.1/semantic.min.css" />
-        <h:outputStylesheet library="indexCss" name="index.css" />
-        <h:outputStylesheet library="css" name="default.css" />
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-        <h:outputScript library="js" name="homepage.js" />
-        <h:outputScript library="webjars" name="Semantic-UI/2.4.1/semantic.min.js"/>
+          <h:outputStylesheet library="webjars" name="Semantic-UI/2.4.1/semantic.min.css" />
+          <h:outputStylesheet library="indexCss" name="index.css" />
+          <h:outputStylesheet library="css" name="default.css" />
+          <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+          <h:outputScript library="js" name="homepage.js" />
+          <h:outputScript library="webjars" name="Semantic-UI/2.4.1/semantic.min.js"/>
 
-        <script  src="https://www.gstatic.com/charts/loader.js"></script>
-        <script src="https://unpkg.com/swiper/js/swiper.min.js"></script>
+          <script  src="https://www.gstatic.com/charts/loader.js"></script>
+          <script src="https://unpkg.com/swiper/js/swiper.min.js"></script>
 
 
-    </h:head>
-    <h:body>
+     </h:head>
+     <h:body>
 
-        <!--composite component that comes from the navbar.xhtml file to avoid coding nav bar in all web pages-->
-        <bookstore:navbar/>
+          <!--composite component that comes from the navbar.xhtml file to avoid coding nav bar in all web pages-->
+          <bookstore:navbar/>
 
-        <!--Carousel that displays recently added books and their information-->
-        <div class="swiper-container">
-            <div class="swiper-wrapper">
+          <!--Carousel that displays recently added books and their information-->
+          <div class="swiper-container">
+               <div class="swiper-wrapper">
 
-                <!--Book information -->
-                <!--https://framework7.io/docs/swiper.html-->
-                <ui:repeat value="#{bb.recentlyAdded}" var="book">
-                    <div class="swiper-slide flex-container item#{bb.bookSlideColor}" >
-                        <div class="sliderTextContent">
-                            <div class="recentlyAddedDiv">
-                                <p class="small" style="text-align:center">
-                                    Recently Added
-                                </p>
-                            </div>
-                            <div class="sliderDescription">
-                                <br/><br/>
-                                <h1>#{book.title}</h1>
-                                <span>    <ui:repeat value="#{book.authorsCollection}" var="author">
-                                        #{author.name}
-                                    </ui:repeat></span>
-                                <p> #{bb.getDisplayBookDescription(book.description)}...</p>
-                            </div>
+                    <!--Book information -->
+                    <!--https://framework7.io/docs/swiper.html-->
+                    <ui:repeat value="#{bb.recentlyAdded}" var="book">
+                         <div class="swiper-slide flex-container item#{bb.bookSlideColor}" >
+                              <div class="sliderTextContent">
+                                   <div class="recentlyAddedDiv">
+                                        <p class="small" style="text-align:center">
+                                             #{msgs.recentlyAdded}
+                                        </p>
+                                   </div>
+                                   <div class="sliderDescription">
+                                        <br/><br/>
+                                        <h1>#{book.title}</h1>
+                                        <span>    <ui:repeat value="#{book.authorsCollection}" var="author">
+                                                  #{author.name}
+                                             </ui:repeat></span>
+                                        <p> #{bb.getDisplayBookDescription(book.description)}...</p>
+                                   </div>
 
-                            <!--shop now button displayed on bigger screen widths and hidden in  smaller size-->
-                            <div class="sliderShopNow" style="z-index: 1;">
-                                <br/> <br/>
-                                <h:form>
-                                    <h:button  class="ui inverted secondary button" style="width:200px;font-size: 20px" value="Shop Now" outcome="book" >
-                                        <f:param  name="isbn" value="#{book.isbn}" />
-                                    </h:button>
-                                </h:form>
-                            </div>
-                        </div>
-                        <div style="text-align: right;float:right;width:auto;">
-                            <!--Book cover-->
-                            <h:graphicImage width="300px" height="400px" library="images" name="#{book.isbn}.jpg"  />
+                                   <!--shop now button displayed on bigger screen widths and hidden in  smaller size-->
+                                   <div class="sliderShopNow" style="z-index: 1;">
+                                        <br/> <br/>
+                                        <h:form>
+                                             <h:button  class="ui inverted secondary button" style="width:200px;font-size: 20px" value="#{msgs.shopNow}" outcome="book" >
+                                                  <f:param  name="isbn" value="#{book.isbn}" />
+                                             </h:button>
+                                        </h:form>
+                                   </div>
+                              </div>
+                              <div style="text-align: right;float:right;width:auto;">
+                                   <!--Book cover-->
+                                   <h:graphicImage width="300px" height="400px" library="images" name="#{book.isbn}.jpg"  />
 
-                            <!--shop now button displayed on smaller screen widths and hidden in  bigger size-->
-                            <div class="sliderShopNowHidden" style="text-align: center;z-index: 1;">
-                                <br/>
-                                <h:form>
-                                    <h:button  class="ui inverted secondary button" style="width:200px;font-size: 20px" value="Shop Now" outcome="book" >
-                                        <f:param  name="isbn" value="#{book.isbn}" />
-                                    </h:button>
-                                </h:form>
-                            </div>
-                        </div>
+                                   <!--shop now button displayed on smaller screen widths and hidden in  bigger size-->
+                                   <div class="sliderShopNowHidden" style="text-align: center;z-index: 1;">
+                                        <br/>
+                                        <h:form>
+                                             <h:button  class="ui inverted secondary button" style="width:200px;font-size: 20px" value="#{msgs.shopNow}" outcome="book" >
+                                                  <f:param  name="isbn" value="#{book.isbn}" />
+                                             </h:button>
+                                        </h:form>
+                                   </div>
+                              </div>
+                         </div>
+                    </ui:repeat>
+               </div>
+          </div>
+          <div class="lightOrangeDiv">
+
+               <!--Search bar used searching for books that will display results in gallery page-->
+               <form action="gallery.xhtml" method="get">
+                    <div class=" searchBarDiv">
+                         <input placeholder="#{msgs.searchBooks}" type="text" name="query" style=" float: center; margin-top: -30px;" class="searchBar"/>
+                         <input class="searchButton" type="submit" value = "#{msgs.search}"/>
                     </div>
-                </ui:repeat>
-            </div>
-        </div>
-        <div class="lightOrangeDiv">
+               </form>
+               <br/><br/>
 
-            <!--Search bar used searching for books that will display results in gallery page-->
-            <form action="gallery.xhtml" method="get">
-                <div class=" searchBarDiv">
-                    <input placeholder="Search books..." type="text" name="query" style=" float: center; margin-top: -30px;" class="searchBar"/>
-                    <input class="searchButton" type="submit" value = "Search"/>
-                </div>
-            </form>
-            <br/><br/>
+               <!--Shows books of genre last visited by user to recommend-->
+               <!--https://semantic-ui.com/views/card.html-->
 
-            <!--Shows books of genre last visited by user to recommend-->
-            <!--https://semantic-ui.com/views/card.html-->
+               <!--Only if cookie created-->
 
-            <!--Only if cookie created-->
+               <c:if test="#{not empty cbb.getLastGenre()}">
+                    <p class="small">#{msgs.recommended}</p><br/>
+                    <h:form>
+                         <h:panelGroup>
+                              <div class="ui four doubling stackable cards">
+                                   <ui:repeat size="4" value="#{bb.getSimilarGenreBooks(cbb.getLastGenre())}" var="books">
+                                        <!--Used composition to display all book cards-->
+                                        <bookstore:bookCard/>
+                                   </ui:repeat>
+                              </div>
+                         </h:panelGroup>
+                    </h:form>
+                    <br/><br/>
+               </c:if>
 
-            <c:if test="#{not empty cbb.getLastGenre()}">
-                <p class="small">Recommended</p><br/>
-                <h:form>
+
+               <!--Shows top eight books with that have been purchased most-->
+               <!--https://semantic-ui.com/views/card.html-->
+               <p class="small">#{msgs.bestSellers}</p><br/>
+               <h:form>
                     <h:panelGroup>
-                        <div class="ui four doubling stackable cards">
-                            <ui:repeat size="4" value="#{bb.getSimilarGenreBooks(cbb.getLastGenre())}" var="books">
-                                <!--Used composition to display all book cards-->
-                                <bookstore:bookCard/>
-                            </ui:repeat>
-                        </div>
+                         <div class="ui four doubling stackable cards">
+
+                              <ui:repeat size="8" value="#{bb.bestSeller}" var="books">
+                                   <!--Used composition to display all book cards-->
+                                   <bookstore:bookCard/>
+                              </ui:repeat>
+                         </div>
                     </h:panelGroup>
-                </h:form>
-                <br/><br/>
-            </c:if>
+               </h:form>
+
+               <br/><br/>
+
+               <p class="small" id="sales">#{msgs.specials}</p><br/>
+               <h:form>
+                    <h:panelGroup>
+                         <div class="ui four doubling stackable cards" style=" overflow: auto; height: 420px;">
+                              <ui:repeat size="#{bb.saleBooks.size()}" value="#{bb.saleBooks}" var="books">
+                                   <!--Used composition to display all book cards-->
+                                   <bookstore:bookCard/>
+                              </ui:repeat>
+                         </div>
+                    </h:panelGroup>
+               </h:form>
+               <br/><br/>
 
 
-            <!--Shows top eight books with that have been purchased most-->
-            <!--https://semantic-ui.com/views/card.html-->
-            <p class="small">#{msgs.bestSellers}</p><br/>
-            <h:form>
-                <h:panelGroup>
-                    <div class="ui four doubling stackable cards">
 
-                        <ui:repeat size="8" value="#{bb.bestSeller}" var="books">
-                            <!--Used composition to display all book cards-->
-                            <bookstore:bookCard/>
-                        </ui:repeat>
+
+               <!-- The Modal for view book cover -->
+               <!-- source https://semantic-ui.com/modules/modal.html-->
+               <div class="ui dimmer modals transition visible" id="myModal" style="display: flex !important; z-index: -1" >
+                    <div class="ui standard tiny modal transition visible scrolling" style="display: block !important;">
+                         <span class="close">x</span>
+                         <div class="image content" style="justify-content: center;">
+                              <div class="ui medium image">
+                                   <h:graphicImage class="image" id="img01" height="650px" width="520px" library="images" name="9780062200570.jpg"  />
+                              </div>
+                         </div>
                     </div>
-                </h:panelGroup>
-            </h:form>
-
-            <br/><br/>
-
-            <p class="small" id="sales">Sales</p><br/>
-            <h:form>
-                <h:panelGroup>
-                    <div class="ui four doubling stackable cards" style=" overflow: auto; height: 420px;">
-                        <ui:repeat size="#{bb.saleBooks.size()}" value="#{bb.saleBooks}" var="books">
-                            <!--Used composition to display all book cards-->
-                            <bookstore:bookCard/>
-                        </ui:repeat>
-                    </div>
-                </h:panelGroup>
-            </h:form>
-            <br/><br/>
+               </div>
+          </div>
 
 
+          <!-- Survey/Ad/News Section -->
+          <!--https://semantic-ui.com/views/advertisement.html-->
+          <div   class="lightGreyDiv">
 
-
-            <!-- The Modal for view book cover -->
-            <!-- source https://semantic-ui.com/modules/modal.html-->
-            <div class="ui dimmer modals transition visible" id="myModal" style="display: flex !important; z-index: -1" >
-                <div class="ui standard tiny modal transition visible scrolling" style="display: block !important;">
-                    <span class="close">x</span>
-                    <div class="image content" style="justify-content: center;">
-                        <div class="ui medium image">
-                            <h:graphicImage class="image" id="img01" height="650px" width="520px" library="images" name="9780062200570.jpg"  />
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-
-        <!-- Survey/Ad/News Section -->
-        <!--https://semantic-ui.com/views/advertisement.html-->
-        <div   class="lightGreyDiv">
-
-            <!-- Shows the News -->
-            <!--source https://www.primefaces.org/showcase/ui/misc/feedReader.xhtml-->
-            <div class="ui three doubling stackable cards parentDiv">
-                <div class="ui card" style="width:25%">
-                    <div class="image">
-                        <div style="background-color:#d77a61;width: inherit;" class="ui half page test ad left " data-text="">
-                            <h3 style="color:white;padding-top: 10px;text-align: center" >News</h3>
-                            <p:scrollPanel id="newsDiv" style="overflow-y: scroll;height: 100%;width: inherit !important;">
-                                <p:feedReader size="10" value="#{newsBean.randomNews.RSSFeed}" var="feed">
-                                    <h:outputText value="#{feed.title}" style="font-weight: bold"/>
-                                    <h:outputText value="#{feed.description.value}" escape="false"/>
-                                    <p:separator />
-                                    <f:facet name="error">
-                                        Something went wrong.
-                                    </f:facet>
-                                </p:feedReader>
-                            </p:scrollPanel>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="ui card" style="width:50%">
-                    <div id="surveyDiv" class="content survey">
-
-
-                        <!-- Survey Section -->
-                        <h:form >
-                            <p>#{ss.setSurvey()}</p>
-                            <ui:repeat value="#{ss.survey}" var="s">
-                                <h1 id="surveyStatus" style="text-align:center">  #{s.surveyName}</h1>
-
-                                <!-- Shows the survey results once survey completed-->
-                                <p id="surveyId" class="invisible">#{s.surveyID}</p>
-                                <div id="results" class="invisible">
-                                    <hr/>
-                                    <div class="ui horizontal statistics">
-                                        <p>Votes | Choices</p>
-                                        <h:panelGroup id="surveyResults" >
-                                            <ui:repeat  value="#{surveyDataBean.getSurveyChoices(s.surveyID)}" var="sd">
-                                                <div class="ui statistic">
-                                                    <div class="value">#{sd.votes}</div>
-                                                    <div class="label" style="white-space:normal">#{sd.choice}</div>
-                                                </div>
-                                                <br/>
-                                            </ui:repeat>
-                                        </h:panelGroup>
-                                    </div>
-                                    <hr/>
-                                    <h2 style="text-align:center">Thank you for answering!</h2>
-                                </div>
-
-
-                                <!-- Shows the actual survey-->
-                                <div id="survey">
-                                    <p style="font-size:20px;padding:2%">#{s.surveyDescription}</p>
-                                    <p:selectOneRadio style="font-size:20px" required="true" layout="pageDirection" value="#{surveyDataBean.surveyDataChoice}" >
-                                        <f:selectItems value="#{s.surveyData}" var="sd" itemValue="#{sd.dataID}" itemLabel = " #{sd.choice}" />
-                                    </p:selectOneRadio>
-                                    <br/>
-                                    <p:commandButton  update="surveyResults" class="bookFormatBtn"  value="Submit" oncomplete="showResults(#{s.surveyID})"/>
-                                </div>
-                            </ui:repeat>
-                        </h:form>
-                    </div>
-                </div>
-
-
-
-                <div class="ui card" style="width:10%">
-
-                    <!-- First Ad location -->
-                    <div class="image homepageCard">
-                        <ui:repeat value="#{adsBean.randomAd}" var="ad">
-                            <h:graphicImage height="100%" width="100%" library="images" name="#{ad.imageName}1.png"  onclick="viewAd('#{ad.adUrl}')"/>
-                        </ui:repeat>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Shows the most popular book genres -->
-        <div class="lightPurpleDiv" id="popularGenres">
-            <p class="small">Popular Genres</p><br/>
-            <h:form>
-                <h:panelGroup>
-                    <div class="ui four doubling stackable cards">
-                        <ui:repeat value="#{bb.popularGenres}" var="genres">
-
-                            <div class="ui fluid card darker">
-                                <h:link outcome="gallery" value="">
-                                    <f:param  name="genre" value="#{genres}" />
-                                    <div class="homepageImg">
-                                        <h:graphicImage class="img" height="100%" width="100%" library="images" name="#{genres}.jpg"/>
-                                    </div>
-                                    <div class="content">
-                                        <div class="header"><h3 class="genre">#{genres}</h3></div>
-                                    </div>
-                                </h:link>
-                            </div>
-                        </ui:repeat>
-                    </div>
-                </h:panelGroup>
-            </h:form>
-            <br/><br/>
-
-            <!-- Second Ad location -->
-            <div class="ui one doubling stackable cards parentDiv">
-                <div class="ui card" style="width:40%">
-                    <div class="image">
-                        <ui:repeat value="#{adsBean.randomAd}" var="ad">
-                            <h:graphicImage height="100%" width="100%" library="images" name="#{ad.imageName}2.png" onclick="viewAd('#{ad.adUrl}')" />
-                        </ui:repeat>
+               <!-- Shows the News -->
+               <!--source https://www.primefaces.org/showcase/ui/misc/feedReader.xhtml-->
+               <div class="ui three doubling stackable cards parentDiv">
+                    <div class="ui card" style="width:25%">
+                         <div class="image">
+                              <div style="background-color:#d77a61;width: inherit;" class="ui half page test ad left " data-text="">
+                                   <h3 style="color:white;padding-top: 10px;text-align: center" >#{msgs.news}</h3>
+                                   <p:scrollPanel id="newsDiv" style="overflow-y: scroll;height: 100%;width: inherit !important;">
+                                        <p:feedReader size="10" value="#{newsBean.randomNews.RSSFeed}" var="feed">
+                                             <h:outputText value="#{feed.title}" style="font-weight: bold"/>
+                                             <h:outputText value="#{feed.description.value}" escape="false"/>
+                                             <p:separator />
+                                             <f:facet name="error">
+                                                  #{msgs.errorMsg}
+                                             </f:facet>
+                                        </p:feedReader>
+                                   </p:scrollPanel>
+                              </div>
+                         </div>
                     </div>
 
-                </div>
-            </div>
-        </div>
+                    <div class="ui card" style="width:50%">
+                         <div id="surveyDiv" class="content survey">
 
-        <!--composite component that comes from the footer.xhtml file to avoid coding the website footer in all web pages-->
-        <bookstore:footer/>
 
-        <!-- Initialize Swiper  for carousel of recently added books-->
-        <script>
-            var swiper = new Swiper('.swiper-container', {
-                loop: true,
-                centeredSlides: true,
-                autoHeight: true, //enable auto height
-                autoplay: {
-                    delay: 5000,
-                    disableOnInteraction: false,
-                },
-                pagination: {
-                    el: '.swiper-pagination',
-                },
-                navigation: {
-                    nextEl: '.swiper-button-next',
-                    prevEl: '.swiper-button-prev',
-                },
-            });
+                              <!-- Survey Section -->
+                              <h:form >
+                                   <p>#{ss.setSurvey()}</p>
+                                   <ui:repeat value="#{ss.survey}" var="s">
+                                        <h1 id="surveyStatus" style="text-align:center">  #{s.surveyName}</h1>
 
-        </script>
-    </h:body>
+                                        <!-- Shows the survey results once survey completed-->
+                                        <p id="surveyId" class="invisible">#{s.surveyID}</p>
+                                        <div id="results" class="invisible">
+                                             <hr/>
+                                             <div class="ui horizontal statistics">
+                                                  <p>#{msgs.votesChoices}</p>
+                                                  <h:panelGroup id="surveyResults" >
+                                                       <ui:repeat  value="#{surveyDataBean.getSurveyChoices(s.surveyID)}" var="sd">
+                                                            <div class="ui statistic">
+                                                                 <div class="value">#{sd.votes}</div>
+                                                                 <div class="label" style="white-space:normal">#{sd.choice}</div>
+                                                            </div>
+                                                            <br/>
+                                                       </ui:repeat>
+                                                  </h:panelGroup>
+                                             </div>
+                                             <hr/>
+                                             <h2 style="text-align:center">#{msgs.thankYou}</h2>
+                                        </div>
+
+
+                                        <!-- Shows the actual survey-->
+                                        <div id="survey">
+                                             <p style="font-size:20px;padding:2%">#{s.surveyDescription}</p>
+                                             <p:selectOneRadio style="font-size:20px" required="true" layout="pageDirection" value="#{surveyDataBean.surveyDataChoice}" >
+                                                  <f:selectItems value="#{s.surveyData}" var="sd" itemValue="#{sd.dataID}" itemLabel = " #{sd.choice}" />
+                                             </p:selectOneRadio>
+                                             <br/>
+                                             <p:commandButton  update="surveyResults" class="bookFormatBtn"  value="Submit" oncomplete="showResults(#{s.surveyID})"/>
+                                        </div>
+                                   </ui:repeat>
+                              </h:form>
+                         </div>
+                    </div>
+
+
+
+                    <div class="ui card" style="width:10%">
+
+                         <!-- First Ad location -->
+                         <div class="image homepageCard">
+                              <ui:repeat value="#{adsBean.randomAd}" var="ad">
+                                   <h:graphicImage height="100%" width="100%" library="images" name="#{ad.imageName}1.png"  onclick="viewAd('#{ad.adUrl}')"/>
+                              </ui:repeat>
+                         </div>
+                    </div>
+               </div>
+          </div>
+
+          <!-- Shows the most popular book genres -->
+          <div class="lightPurpleDiv" id="popularGenres">
+               <p class="small">#{msgs.popularGenres}</p><br/>
+               <h:form>
+                    <h:panelGroup>
+                         <div class="ui four doubling stackable cards">
+                              <ui:repeat value="#{bb.popularGenres}" var="genres">
+
+                                   <div class="ui fluid card darker">
+                                        <h:link outcome="gallery" value="">
+                                             <f:param  name="genre" value="#{genres}" />
+                                             <div class="homepageImg">
+                                                  <h:graphicImage class="img" height="100%" width="100%" library="images" name="#{genres}.jpg"/>
+                                             </div>
+                                             <div class="content">
+                                                  <div class="header"><h3 class="genre">#{genres}</h3></div>
+                                             </div>
+                                        </h:link>
+                                   </div>
+                              </ui:repeat>
+                         </div>
+                    </h:panelGroup>
+               </h:form>
+               <br/><br/>
+
+               <!-- Second Ad location -->
+               <div class="ui one doubling stackable cards parentDiv">
+                    <div class="ui card" style="width:40%">
+                         <div class="image">
+                              <ui:repeat value="#{adsBean.randomAd}" var="ad">
+                                   <h:graphicImage height="100%" width="100%" library="images" name="#{ad.imageName}2.png" onclick="viewAd('#{ad.adUrl}')" />
+                              </ui:repeat>
+                         </div>
+
+                    </div>
+               </div>
+          </div>
+
+          <!--composite component that comes from the footer.xhtml file to avoid coding the website footer in all web pages-->
+          <bookstore:footer/>
+
+          <!-- Initialize Swiper  for carousel of recently added books-->
+          <script>
+               var swiper = new Swiper('.swiper-container', {
+                    loop: true,
+                    centeredSlides: true,
+                    autoHeight: true, //enable auto height
+                    autoplay: {
+                         delay: 5000,
+                         disableOnInteraction: false,
+                    },
+                    pagination: {
+                         el: '.swiper-pagination',
+                    },
+                    navigation: {
+                         nextEl: '.swiper-button-next',
+                         prevEl: '.swiper-button-prev',
+                    },
+               });
+
+          </script>
+     </h:body>
 </html>
