@@ -6,6 +6,7 @@ import com.gb1w20.book_store_project.entities.Book;
 import com.gb1w20.book_store_project.entities.Orders;
 import com.gb1w20.book_store_project.entities.Orders_;
 import com.gb1w20.book_store_project.jpa_controllers.exceptions.NonexistentEntityException;
+import com.gb1w20.book_store_project.util.MessageLoader;
 import java.io.Serializable;
 import java.util.List;
 import java.util.Random;
@@ -148,11 +149,11 @@ public class AdsJpaController implements Serializable {
         try
         {
             query.getSingleResult();
-            return "Not Removed";
+            return MessageLoader.getString("com.gb1w20.bundles.messages", "notRemoved", null);
         }
         catch(NoResultException nre)
         {
-            return "Removed";
+            return MessageLoader.getString("com.gb1w20.bundles.messages", "removed", null);
         }
     }
     

@@ -4,6 +4,7 @@ import com.gb1w20.book_store_project.entities.OrderItem;
 import com.gb1w20.book_store_project.entities.Orders;
 import com.gb1w20.book_store_project.jpa_controllers.OrderItemJpaController;
 import com.gb1w20.book_store_project.jpa_controllers.OrdersJpaController;
+import com.gb1w20.book_store_project.util.MessageLoader;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import javax.annotation.PostConstruct;
@@ -139,8 +140,8 @@ public class OrderEditModalBean implements Serializable {
         String doubleStr = (String)value;
         if (doubleStr.isBlank() || doubleStr.isEmpty() || doubleStr == null)
         {
-            String message = context.getApplication().evaluateExpressionGet(context, "Value must not be left blank", String.class);
-            FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR, message, message);
+            FacesMessage msg = MessageLoader.getMessage("com.gb1w20.bundles.messages", "valueNotNull", null);
+            msg.setSeverity(FacesMessage.SEVERITY_ERROR);
             throw new ValidatorException(msg);
         }
         try
@@ -149,8 +150,8 @@ public class OrderEditModalBean implements Serializable {
         }
         catch(NumberFormatException nfe)
         {
-            String message = context.getApplication().evaluateExpressionGet(context, "Invalid double", String.class);
-            FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR, message, message);
+            FacesMessage msg = MessageLoader.getMessage("com.gb1w20.bundles.messages", "invalidDouble", null);
+            msg.setSeverity(FacesMessage.SEVERITY_ERROR);
             throw new ValidatorException(msg);
         }
     }

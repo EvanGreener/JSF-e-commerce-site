@@ -5,6 +5,7 @@ import com.gb1w20.book_store_project.entities.Book;
 import com.gb1w20.book_store_project.entities.OrderItem;
 import com.gb1w20.book_store_project.jpa_controllers.BookJpaController;
 import com.gb1w20.book_store_project.jpa_controllers.OrderItemJpaController;
+import com.gb1w20.book_store_project.util.MessageLoader;
 import java.io.Serializable;
 import java.util.Date;
 import javax.enterprise.context.RequestScoped;
@@ -50,9 +51,9 @@ public class OrderItemBackingBean implements Serializable {
 
     public String getRemovalStatus(boolean isRemoved) throws Exception {
         if (isRemoved) {
-            return "Add Item";
+            return MessageLoader.getString("com.gb1w20.bundles.messages", "addItem", null);
         } else {
-            return "Remove Item";
+            return MessageLoader.getString("com.gb1w20.bundles.messages", "removeItem", null);
         }
     }
 

@@ -7,7 +7,7 @@
       xmlns:p="http://primefaces.org/ui"
       xmlns:a="http://xmlns.jcp.org/jsf/passthrough">
     <h:head>
-        <title>Manager Sales</title>
+        <title>#{msgs.manSales}</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 
         <link href="https://fonts.googleapis.com/css?family=Montserrat|Roboto&amp;display=swap" rel="stylesheet"/>
@@ -80,53 +80,52 @@
     </h:head>
 
     <h:body>
-
+        <bookstore:navbar />
         <h:form id="editForm">
-            <bookstore:navbar />
 
             <div class="middle">
 
-                <h1 class="ui header">Sales Management</h1>
+                <h1 class="ui header">#{msgs.saleManage}</h1>
                 
                 <br/>
                 
-                <h:commandButton value="On Sale">
+                <h:commandButton value="#{msgs.onSale}">
                     <f:ajax event="click" listener="#{salesBean.setBooksDisplayed(bookJpaController.getAllSaleBooks())}" />
                 </h:commandButton>
-                <h:commandButton value="Not on Sale">
+                <h:commandButton value="#{msgs.noSale}">
                     <f:ajax event="click" listener="#{salesBean.setBooksDisplayed(bookJpaController.getAllNotOnSaleBooks())}" />
                 </h:commandButton>
-                <h:commandButton value="All Books">
+                <h:commandButton value="#{msgs.allBooks}">
                     <f:ajax event="click" listener="#{salesBean.setBooksDisplayed(bookJpaController.findBookEntities())}" />
                 </h:commandButton>
 
                 <h:dataTable id="saleTable" var="sales" style="margin-bottom: 20px;" class="ui celled table" value="#{salesBean.booksDisplayed}">
                     <h:column>
-                        <f:facet name="header">ISBN</f:facet>
+                        <f:facet name="header">#{msgs.isbn}</f:facet>
                             #{sales.isbn}
                     </h:column>
                     <h:column>
-                        <f:facet name="header">Title</f:facet>
+                        <f:facet name="header">#{msgs.title}</f:facet>
                             #{sales.title}
                     </h:column>
                     <h:column>
-                        <f:facet name="header">List</f:facet>
+                        <f:facet name="header">#{msgs.listPrice}</f:facet>
                             $#{sales.listPrice}
                     </h:column>
                     <h:column>
-                        <f:facet name="header">Sale</f:facet>
+                        <f:facet name="header">#{msgs.salePrice}</f:facet>
                             $#{sales.salePrice}
                     </h:column>
                     <h:column>
-                        <f:facet name="header">Wholesale</f:facet>
+                        <f:facet name="header">#{msgs.wholesalePrice}</f:facet>
                             $#{sales.wholesalePrice}
                     </h:column>
                     <h:column>
-                        <f:facet name="header">Status</f:facet>
+                        <f:facet name="header">#{msgs.status}</f:facet>
                             #{salesBean.determineOnSale(sales)}
                     </h:column>
                     <h:column>
-                        <h:commandButton type="button" value="Edit Sale" onclick="setTimeout(function () {
+                        <h:commandButton type="button" value="#{msgs.editSale}" onclick="setTimeout(function () {
                                     $('#editModal').modal('show', hideGrowl())
                                 }, 500)" class="big ui primary button edit_btn" >
                             <f:ajax event="click" render="@all" listener="#{salesBean.onEdit(sales.isbn)}" />
@@ -139,22 +138,22 @@
 
         <div id="editModal" class="small ui modal">
             <div class="header">
-                <h1>Edit Book</h1>
+                <h1>#{msgs.editSale}</h1>
             </div>
             <div class="content">
                 <h:form id="editSaleForm" class="ui form">
                     <div class="three fields">
                         <div class="field">
-                            <h:outputLabel for="listPrice" value="List Price"/>
+                            <h:outputLabel for="listPrice" value="#{msgs.listPrice}"/>
                             <h:outputText id="listPrice" value="#{salesBean.currentBook.listPrice}" />
                         </div>
                         <div class="field">
-                            <h:outputLabel for="oldSalePrice" value="Old Sale Price"/>
+                            <h:outputLabel for="oldSalePrice" value="#{msgs.oldSale}"/>
                             <h:outputText id="oldSalePrice" value="#{salesBean.currentBook.salePrice}" />
                         </div>
                         <div class="field">
-                            <h:outputLabel for="newSalePrice" value="New Sale Price"/>
-                            <h:inputText id="newSalePrice" label="New Sale Price" value="#{salesBean.newSalePrice}" required="true" requiredMessage="Please enter new sale price" a:placeholder="Enter new sale price" validator="#{salesBean.validatePrice}">
+                            <h:outputLabel for="newSalePrice" value="#{msgs.newSale}"/>
+                            <h:inputText id="newSalePrice" label="#{msgs.newSale}" value="#{salesBean.newSalePrice}" required="true" requiredMessage="#{msgs.newSalePriceMsg}" a:placeholder="#{msgs.newSalePriceMsg}" validator="#{salesBean.validatePrice}">
                                 <f:ajax event="change" render="newSalePriceError"/>
                             </h:inputText>
                             <br/>
@@ -162,7 +161,7 @@
                         </div>
                     </div>
                     <br/>
-                    <h:commandButton type="button" class="huge black fluid ui button" id="editBook" value="Edit Sale" action="#{salesBean.onSubmitEdit()}">
+                    <h:commandButton type="button" class="huge black fluid ui button" id="editBook" value="#{msgs.editSale}" action="#{salesBean.onSubmitEdit()}">
                         <f:ajax event="click" execute="newSalePrice" render="bookTable"/>
                     </h:commandButton>
                 </h:form>

@@ -6,7 +6,7 @@
       xmlns:bookstore="http://java.sun.com/jsf/composite/default_components"
       xmlns:a="http://xmlns.jcp.org/jsf/passthrough">
     <h:head>
-        <title>Manager Surveys</title>
+        <title>#{msgs.manSurveys}</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 
         <link href="https://fonts.googleapis.com/css?family=Montserrat|Roboto&amp;display=swap" rel="stylesheet"/>
@@ -18,23 +18,15 @@
     </h:head>
 
     <h:body>
-
+        <bookstore:navbar />
         <h:form id="editForm">
-            <bookstore:navbar />
 
             <div class="middle">
 
-                <!--                <div id="editFormGrowl" class="ui floating positive message" >
-                                    <i class="close icon"></i>
-                                    <div class="header">
-                                        Changes have been saved!
-                                    </div>
-                                </div>-->
-
-                <h1 class="ui header">Manage Surveys</h1>
+                <h1 class="ui header">#{msgs.surveyManage}</h1>
 
 
-                <h:commandButton value="Add Survey" class="big pink ui button" onclick="setTimeout(function () {
+                <h:commandButton value="#{msgs.addSurvey}" class="big pink ui button" onclick="setTimeout(function () {
                             $('#addModal').modal('show', hideGrowl())
                         }, 500)">
                     <f:ajax event="click" render="editForm" listener="#{surveyBacking.onCreate()}"/>
@@ -43,19 +35,19 @@
 
                 <h:dataTable id="adsTable" var="survey" style="margin-bottom: 20px;" class="ui celled table" value="#{surveysJpaController.findSurveysEntities()}">
                     <h:column>
-                        <f:facet name="header">Survey #</f:facet>
+                        <f:facet name="header">#{msgs.surveyId}</f:facet>
                             #{survey.surveyID}
                     </h:column>
                     <h:column>
-                        <f:facet name="header">Survey Name</f:facet>
+                        <f:facet name="header">#{msgs.surveyName}</f:facet>
                             #{survey.surveyName}
                     </h:column>
                     <h:column>
-                        <f:facet name="header">Survey Description</f:facet>
+                        <f:facet name="header">#{msgs.surveyDesc}</f:facet>
                             #{survey.surveyDescription}
                     </h:column>
                     <h:column>
-                        <f:facet name="header">Last Modified</f:facet>
+                        <f:facet name="header">#{msgs.lastModified}</f:facet>
                             #{survey.lastModified}
                     </h:column>
                     <h:column>
@@ -64,7 +56,7 @@
                         </h:commandLink>
                     </h:column>
                     <h:column>
-                        <h:commandButton type="button" value="Edit survey" onclick="setTimeout(function () {
+                        <h:commandButton type="button" value="#{msgs.editSurvey}" onclick="setTimeout(function () {
                                     $('#editModal').modal('show', hideGrowl())
                                 }, 500)" class="big ui primary button edit_btn" >
                             <f:ajax event="click" render="@all" listener="#{editSurvey.onEdit(survey.surveyID)}" />
@@ -77,13 +69,13 @@
         </h:form>
         <div id="addModal" class="small ui modal">
             <div class="header">
-                <h1>Add Survey</h1>
+                <h1>#{msgs.addSurvey}</h1>
             </div>
             <div class="content">
                 <h:form id="addForm">
                     <div class="ui form field">
-                        <h:outputLabel for="surveyName" value="Survey Name"/>
-                        <h:inputText id="surveyName" label="Survey Name" value="#{surveyBacking.survey.surveyName}" required="true" requiredMessage="Please enter Survey Name" a:placeholder="Enter Survey Name" validator="#{surveyBacking.validateNotNull}">
+                        <h:outputLabel for="surveyName" value="#{msgs.surveyName}"/>
+                        <h:inputText id="surveyName" label="#{msgs.surveyName}" value="#{surveyBacking.survey.surveyName}" required="true" requiredMessage="#{msgs.surveyNameMsg}" a:placeholder="#{msgs.surveyNameMsg}" validator="#{surveyBacking.validateNotNull}">
                             <f:ajax event="change" render="surveyNameError"/>
                         </h:inputText>
                         <br/>
@@ -91,40 +83,40 @@
                     </div>
                     <br/>
                     <div class="ui form field">
-                        <h:outputLabel for="surveyDescription" value="Survey Description"/>
-                        <h:inputText id="surveyDescription" label="Survey Description" value="#{surveyBacking.survey.surveyDescription}" required="true" requiredMessage="Please Survey Description" a:placeholder="Enter Survey Description" validator="#{surveyBacking.validateNotNull}">
+                        <h:outputLabel for="surveyDescription" value="#{msgs.surveyDesc}"/>
+                        <h:inputText id="surveyDescription" label="#{msgs.surveyDesc}" value="#{surveyBacking.survey.surveyDescription}" required="true" requiredMessage="#{msgs.surveyDescMsg}" a:placeholder="#{msgs.surveyDescMsg}" validator="#{surveyBacking.validateNotNull}">
                             <f:ajax event="change" render="surveyDescriptionName"/>
                         </h:inputText>
                         <br/>
                         <h:message id="surveyDescriptionName" class="error" for="surveyDescriptionName"/>
                     </div>
                     <div class="ui form field">
-                        <h:outputLabel for="newSurveyItem1" value="Survey Item"/>
-                        <h:inputText id="newSurveyItem1" label="Survey Item" value="#{surveyBacking.surveyDataItem1.choice}" required="true" requiredMessage="Please enter Survey Item" a:placeholder="Enter Survey Item" validator="#{surveyBacking.validateNotNull}">
+                        <h:outputLabel for="newSurveyItem1" value="#{msgs.surveyItem}"/>
+                        <h:inputText id="newSurveyItem1" label="#{msgs.surveyItem}" value="#{surveyBacking.surveyDataItem1.choice}" required="true" requiredMessage="#{msgs.surveyItemMsg}" a:placeholder="#{msgs.surveyItemMsg}" validator="#{surveyBacking.validateNotNull}">
                             <f:ajax event="change" render="newSurveyItem1Error"/>
                         </h:inputText>
                         <br/>
                         <h:message id="newSurveyItem1Error" class="error" for="newSurveyItem1"/>
                     </div>
                     <div class="ui form field">
-                        <h:outputLabel for="newSurveyItem2" value="Survey Item"/>
-                        <h:inputText id="newSurveyItem2" label="Survey Item" value="#{surveyBacking.surveyDataItem2.choice}" required="true" requiredMessage="Please enter Survey Item" a:placeholder="Enter Survey Item" validator="#{surveyBacking.validateNotNull}">
+                        <h:outputLabel for="newSurveyItem2" value="#{msgs.surveyItem}"/>
+                        <h:inputText id="newSurveyItem2" label="#{msgs.surveyItem}" value="#{surveyBacking.surveyDataItem2.choice}" required="true" requiredMessage="#{msgs.surveyItemMsg}" a:placeholder="#{msgs.surveyItemMsg}" validator="#{surveyBacking.validateNotNull}">
                             <f:ajax event="change" render="newSurveyItem2Error"/>
                         </h:inputText>
                         <br/>
                         <h:message id="newSurveyItem2Error" class="error" for="newSurveyItem2"/>
                     </div>
                     <div class="ui form field">
-                        <h:outputLabel for="newSurveyItem3" value="Survey Item"/>
-                        <h:inputText id="newSurveyItem3" label="Survey Item" value="#{surveyBacking.surveyDataItem3.choice}" required="true" requiredMessage="Please enter Survey Item" a:placeholder="Enter Survey Item" validator="#{surveyBacking.validateNotNull}">
+                        <h:outputLabel for="newSurveyItem3" value="#{msgs.surveyItem}"/>
+                        <h:inputText id="newSurveyItem3" label="#{msgs.surveyItem}" value="#{surveyBacking.surveyDataItem3.choice}" required="true" requiredMessage="#{msgs.surveyItemMsg}" a:placeholder="#{msgs.surveyItemMsg}" validator="#{surveyBacking.validateNotNull}">
                             <f:ajax event="change" render="newSurveyItem3Error"/>
                         </h:inputText>
                         <br/>
                         <h:message id="newSurveyItem3Error" class="error" for="newSurveyItem3"/>
                     </div>
                     <div class="ui form field">
-                        <h:outputLabel for="newSurveyItem4" value="Survey Item"/>
-                        <h:inputText id="newSurveyItem4" label="Survey Item" value="#{surveyBacking.surveyDataItem4.choice}" required="true" requiredMessage="Please enter Survey Item" a:placeholder="Enter Survey Item" validator="#{surveyBacking.validateNotNull}">
+                        <h:outputLabel for="newSurveyItem4" value="#{msgs.surveyItem}"/>
+                        <h:inputText id="newSurveyItem4" label="#{msgs.surveyItem}" value="#{surveyBacking.surveyDataItem4.choice}" required="true" requiredMessage="#{msgs.surveyItemMsg}" a:placeholder="#{msgs.surveyItemMsg}" validator="#{surveyBacking.validateNotNull}">
                             <f:ajax event="change" render="newSurveyItem4Error"/>
                         </h:inputText>
                         <br/>
@@ -132,8 +124,8 @@
                     </div>
 
                     <div class="ui form field">
-                        <h:outputLabel for="newSurveyItem5" value="Survey Item"/>
-                        <h:inputText id="newSurveyItem5" label="Survey Item" value="#{surveyBacking.surveyDataItem5.choice}" required="true" requiredMessage="Please enter Survey Item" a:placeholder="Enter Survey Item" validator="#{surveyBacking.validateNotNull}">
+                        <h:outputLabel for="newSurveyItem5" value="#{msgs.surveyItem}"/>
+                        <h:inputText id="newSurveyItem5" label="#{msgs.surveyItem}" value="#{surveyBacking.surveyDataItem5.choice}" required="true" requiredMessage="#{msgs.surveyItemMsg}" a:placeholder="#{msgs.surveyItemMsg}" validator="#{surveyBacking.validateNotNull}">
                             <f:ajax event="change" render="newSurveyItem5Error"/>
                         </h:inputText>
                         <br/>
@@ -142,7 +134,7 @@
 
 
                     <br/>
-                    <h:commandButton type="button" class="huge black fluid ui button" id="createSurvey" value="Create Survey" action="#{surveyBacking.createSurvey()}">
+                    <h:commandButton type="button" class="huge black fluid ui button" id="createSurvey" value="#{msgs.addSurvey}" action="#{surveyBacking.createSurvey()}">
                         <f:ajax event="click" execute="surveyName surveyDescription" render="editForm"/>
                     </h:commandButton>
                 </h:form>
@@ -151,21 +143,21 @@
 
         <div id="editModal" class="small ui modal">
             <div class="header">
-                <h1>Edit Survey</h1>
+                <h1>#{msgs.editSurvey}</h1>
             </div>
             <div class="content">
                 <h:form id="editSurveyForm">
                     <div class="ui form field">
-                        <h:outputLabel for="newSurveyName" value="Survey Name"/>
-                        <h:inputText id="newSurveyName" label="Survey Name" value="#{editSurvey.newSurveyName}" required="true" requiredMessage="Please enter Survey Name" a:placeholder="Enter Survey Name" validator="#{surveyBacking.validateNotNull}">
+                        <h:outputLabel for="newSurveyName" value="#{msgs.surveyName}"/>
+                        <h:inputText id="newSurveyName" label="#{msgs.surveyName}" value="#{editSurvey.newSurveyName}" required="true" requiredMessage="#{msgs.surveyNameMsg}" a:placeholder="#{msgs.surveyNameMsg}" validator="#{surveyBacking.validateNotNull}">
                             <f:ajax event="change" render="newSurveyNameError"/>
                         </h:inputText>
                         <br/>
                         <h:message id="newSurveyNameError" class="error" for="newSurveyName"/>
                     </div>
                     <div class="ui form field">
-                        <h:outputLabel for="newSurveyDescription" value="Survey Description"/>
-                        <h:inputText id="newSurveyDescription" label="Survey Description" value="#{editSurvey.newSurveyDescription}" required="true" requiredMessage="Please enter Survey Description" a:placeholder="Enter Survey Description" validator="#{surveyBacking.validateNotNull}">
+                        <h:outputLabel for="newSurveyDescription" value="#{msgs.surveyDesc}"/>
+                        <h:inputText id="newSurveyDescription" label="#{msgs.surveyDesc}" value="#{editSurvey.newSurveyDescription}" required="true" requiredMessage="#{msgs.surveyDescMsg}" a:placeholder="#{msgs.surveyDescMsg}" validator="#{surveyBacking.validateNotNull}">
                             <f:ajax event="change" render="newSurveyDescriptionError"/>
                         </h:inputText>
                         <br/>
@@ -173,32 +165,32 @@
                     </div>
 
                     <div class="ui form field">
-                        <h:outputLabel for="newSurveyItem1" value="Survey Item"/>
-                        <h:inputText id="newSurveyItem1" label="Survey Item" value="#{editSurvey.newSurveyItem1}" required="true" requiredMessage="Please enter Survey Item" a:placeholder="Enter Survey Item" validator="#{surveyBacking.validateNotNull}">
+                        <h:outputLabel for="newSurveyItem1" value="#{msgs.surveyItem}"/>
+                        <h:inputText id="newSurveyItem1" label="#{msgs.surveyItem}" value="#{editSurvey.newSurveyItem1}" required="true" requiredMessage="#{msgs.surveyItemMsg}" a:placeholder="#{msgs.surveyItemMsg}" validator="#{surveyBacking.validateNotNull}">
                             <f:ajax event="change" render="newSurveyItem1Error"/>
                         </h:inputText>
                         <br/>
                         <h:message id="newSurveyItem1Error" class="error" for="newSurveyItem1"/>
                     </div>
                     <div class="ui form field">
-                        <h:outputLabel for="newSurveyItem2" value="Survey Item"/>
-                        <h:inputText id="newSurveyItem2" label="Survey Item" value="#{editSurvey.newSurveyItem2}" required="true" requiredMessage="Please enter Survey Item" a:placeholder="Enter Survey Item" validator="#{surveyBacking.validateNotNull}">
+                        <h:outputLabel for="newSurveyItem2" value="#{msgs.surveyItem}"/>
+                        <h:inputText id="newSurveyItem2" label="#{msgs.surveyItem}" value="#{editSurvey.newSurveyItem2}" required="true" requiredMessage="#{msgs.surveyItemMsg}" a:placeholder="#{msgs.surveyItemMsg}" validator="#{surveyBacking.validateNotNull}">
                             <f:ajax event="change" render="newSurveyItem2Error"/>
                         </h:inputText>
                         <br/>
                         <h:message id="newSurveyItem2Error" class="error" for="newSurveyItem2"/>
                     </div>
                     <div class="ui form field">
-                        <h:outputLabel for="newSurveyItem3" value="Survey Item"/>
-                        <h:inputText id="newSurveyItem3" label="Survey Item" value="#{editSurvey.newSurveyItem3}" required="true" requiredMessage="Please enter Survey Item" a:placeholder="Enter Survey Item" validator="#{surveyBacking.validateNotNull}">
+                        <h:outputLabel for="newSurveyItem3" value="#{msgs.surveyItem}"/>
+                        <h:inputText id="newSurveyItem3" label="#{msgs.surveyItem}" value="#{editSurvey.newSurveyItem3}" required="true" requiredMessage="#{msgs.surveyItemMsg}" a:placeholder="#{msgs.surveyItemMsg}" validator="#{surveyBacking.validateNotNull}">
                             <f:ajax event="change" render="newSurveyItem3Error"/>
                         </h:inputText>
                         <br/>
                         <h:message id="newSurveyItem3Error" class="error" for="newSurveyItem3"/>
                     </div>
                     <div class="ui form field">
-                        <h:outputLabel for="newSurveyItem4" value="Survey Item"/>
-                        <h:inputText id="newSurveyItem4" label="Survey Item" value="#{editSurvey.newSurveyItem4}" required="true" requiredMessage="Please enter Survey Item" a:placeholder="Enter Survey Item" validator="#{surveyBacking.validateNotNull}">
+                        <h:outputLabel for="newSurveyItem4" value="#{msgs.surveyItem}"/>
+                        <h:inputText id="newSurveyItem4" label="#{msgs.surveyItem}" value="#{editSurvey.newSurveyItem4}" required="true" requiredMessage="#{msgs.surveyItemMsg}" a:placeholder="#{msgs.surveyItemMsg}" validator="#{surveyBacking.validateNotNull}">
                             <f:ajax event="change" render="newSurveyItem4Error"/>
                         </h:inputText>
                         <br/>
@@ -206,8 +198,8 @@
                     </div>
 
                     <div class="ui form field">
-                        <h:outputLabel for="newSurveyItem5" value="Survey Item"/>
-                        <h:inputText id="newSurveyItem5" label="Survey Item" value="#{editSurvey.newSurveyItem5}" required="true" requiredMessage="Please enter Survey Item" a:placeholder="Enter Survey Item" validator="#{surveyBacking.validateNotNull}">
+                        <h:outputLabel for="newSurveyItem5" value="#{msgs.surveyItem}"/>
+                        <h:inputText id="newSurveyItem5" label="#{msgs.surveyItem}" value="#{editSurvey.newSurveyItem5}" required="true" requiredMessage="#{msgs.surveyItemMsg}" a:placeholder="#{msgs.surveyItemMsg}" validator="#{surveyBacking.validateNotNull}">
                             <f:ajax event="change" render="newSurveyItem5Error"/>
                         </h:inputText>
                         <br/>
@@ -215,7 +207,7 @@
                     </div>
 
                     <br/>
-                    <h:commandButton type="button" class="huge black fluid ui button" id="editAd" value="Edit Survey" action="#{editSurvey.onSubmitEdit()}">
+                    <h:commandButton type="button" class="huge black fluid ui button" id="editAd" value="#{msgs.editSurvey}" action="#{editSurvey.onSubmitEdit()}">
                         <f:ajax event="click" execute="surveyName surveyDescription" render="editForm"/>
                     </h:commandButton>
                 </h:form>

@@ -6,6 +6,7 @@ import com.gb1w20.book_store_project.entities.Publisher;
 import com.gb1w20.book_store_project.jpa_controllers.AuthorsJpaController;
 import com.gb1w20.book_store_project.jpa_controllers.BookJpaController;
 import com.gb1w20.book_store_project.jpa_controllers.PublisherJpaController;
+import com.gb1w20.book_store_project.util.MessageLoader;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.ArrayList;
@@ -269,11 +270,11 @@ public class BookBackingBean implements Serializable {
     public String getRemovalStatus(boolean isRemoved) throws Exception {
         if (isRemoved)
         {
-            return "Display Book";
+            return MessageLoader.getString("com.gb1w20.bundles.messages", "displayBook", null);
         }
         else
         {
-            return "Remove Book";
+            return MessageLoader.getString("com.gb1w20.bundles.messages", "removeBook", null);
         }
     }
     
@@ -287,8 +288,8 @@ public class BookBackingBean implements Serializable {
         String input = (String)value;
         if (input.isBlank() || input.isEmpty() || input == null)
         {
-            String message = context.getApplication().evaluateExpressionGet(context, "Value must not be left blank", String.class);
-            FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR, message, message);
+            FacesMessage msg = MessageLoader.getMessage("com.gb1w20.bundles.messages", "valueNotNull", null);
+            msg.setSeverity(FacesMessage.SEVERITY_ERROR);
             throw new ValidatorException(msg);
         }
     }
@@ -304,20 +305,20 @@ public class BookBackingBean implements Serializable {
         String input = (String)value;
         if (input.isBlank() || input.isEmpty() || input == null)
         {
-            String message = context.getApplication().evaluateExpressionGet(context, "Value must not be left blank", String.class);
-            FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR, message, message);
+            FacesMessage msg = MessageLoader.getMessage("com.gb1w20.bundles.messages", "valueNotNull", null);
+            msg.setSeverity(FacesMessage.SEVERITY_ERROR);
             throw new ValidatorException(msg);
         }
         if (input.length() > 13)
         {
-            String message = context.getApplication().evaluateExpressionGet(context, "ISBN must not be more than 13 digits", String.class);
-            FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR, message, message);
+            FacesMessage msg = MessageLoader.getMessage("com.gb1w20.bundles.messages", "isbnDigits", null);
+            msg.setSeverity(FacesMessage.SEVERITY_ERROR);
             throw new ValidatorException(msg);
         }
         if (bookJpaController.getAllISBN().contains(input))
         {
-            String message = context.getApplication().evaluateExpressionGet(context, "ISBN already exists", String.class);
-            FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR, message, message);
+            FacesMessage msg = MessageLoader.getMessage("com.gb1w20.bundles.messages", "isbnExists", null);
+            msg.setSeverity(FacesMessage.SEVERITY_ERROR);
             throw new ValidatorException(msg);
         }
         try
@@ -329,8 +330,8 @@ public class BookBackingBean implements Serializable {
         }
         catch(NumberFormatException nfe)
         {
-            String message = context.getApplication().evaluateExpressionGet(context, "Invalid ISBN: contains non-numeric characters", String.class);
-            FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR, message, message);
+            FacesMessage msg = MessageLoader.getMessage("com.gb1w20.bundles.messages", "badIsbn", null);
+            msg.setSeverity(FacesMessage.SEVERITY_ERROR);
             throw new ValidatorException(msg);
         }
     }
@@ -361,8 +362,8 @@ public class BookBackingBean implements Serializable {
         String input = value.toString() + "";
         if (input.isBlank() || input.isEmpty() || input == null)
         {
-            String message = context.getApplication().evaluateExpressionGet(context, "Value must not be left blank", String.class);
-            FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR, message, message);
+            FacesMessage msg = MessageLoader.getMessage("com.gb1w20.bundles.messages", "valueNotNull", null);
+            msg.setSeverity(FacesMessage.SEVERITY_ERROR);
             throw new ValidatorException(msg);
         }
         try
@@ -371,8 +372,8 @@ public class BookBackingBean implements Serializable {
         }
         catch(NumberFormatException nfe)
         {
-            String message = context.getApplication().evaluateExpressionGet(context, "Invalid number of pages: contains non-numeric characters", String.class);
-            FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR, message, message);
+            FacesMessage msg = MessageLoader.getMessage("com.gb1w20.bundles.messages", "badPages", null);
+            msg.setSeverity(FacesMessage.SEVERITY_ERROR);
             throw new ValidatorException(msg);
         }
     }
@@ -389,8 +390,8 @@ public class BookBackingBean implements Serializable {
         String input = value + "";
         if (input.isBlank() || input.isEmpty() || input == null)
         {
-            String message = context.getApplication().evaluateExpressionGet(context, "Value must not be left blank", String.class);
-            FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR, message, message);
+            FacesMessage msg = MessageLoader.getMessage("com.gb1w20.bundles.messages", "valueNotNull", null);
+            msg.setSeverity(FacesMessage.SEVERITY_ERROR);
             throw new ValidatorException(msg);
         }
         try
@@ -399,8 +400,8 @@ public class BookBackingBean implements Serializable {
         }
         catch(NumberFormatException nfe)
         {
-            String message = context.getApplication().evaluateExpressionGet(context, "Invalid price: contains non-numeric characters", String.class);
-            FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR, message, message);
+            FacesMessage msg = MessageLoader.getMessage("com.gb1w20.bundles.messages", "badPrice", null);
+            msg.setSeverity(FacesMessage.SEVERITY_ERROR);
             throw new ValidatorException(msg);
         }
     }

@@ -2,6 +2,7 @@ package com.gb1w20.book_store_project.backing;
 
 import com.gb1w20.book_store_project.entities.Ads;
 import com.gb1w20.book_store_project.jpa_controllers.AdsJpaController;
+import com.gb1w20.book_store_project.util.MessageLoader;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
@@ -157,11 +158,11 @@ public class AdBackingBean implements Serializable {
     public String getRemovalStatus(boolean isRemoved) throws Exception {
         if (isRemoved)
         {
-            return "Display Ad";
+            return MessageLoader.getString("com.gb1w20.bundles.messages", "displayAd", null);
         }
         else
         {
-            return "Remove Ad";
+            return MessageLoader.getString("com.gb1w20.bundles.messages", "removeAd", null);
         }
     }
     
@@ -175,8 +176,8 @@ public class AdBackingBean implements Serializable {
         String input = (String)value;
         if (input.isBlank() || input.isEmpty() || input == null)
         {
-            String message = context.getApplication().evaluateExpressionGet(context, "Value must not be left blank", String.class);
-            FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR, message, message);
+            FacesMessage msg = MessageLoader.getMessage("com.gb1w20.bundles.messages", "valueNotNull", null);
+            msg.setSeverity(FacesMessage.SEVERITY_ERROR);
             throw new ValidatorException(msg);
         }
     }

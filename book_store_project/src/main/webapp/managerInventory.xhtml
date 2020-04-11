@@ -7,7 +7,7 @@
       xmlns:p="http://primefaces.org/ui"
       xmlns:a="http://xmlns.jcp.org/jsf/passthrough">
     <h:head>
-        <title>Manager Inventory</title>
+        <title>#{msgs.manInventory}</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 
         <link href="https://fonts.googleapis.com/css?family=Montserrat|Roboto&amp;display=swap" rel="stylesheet"/>
@@ -86,7 +86,7 @@
 
             <div class="middle">
 
-                <h1 class="ui header">Inventory Management</h1>
+                <h1 class="ui header">#{msgs.invManage}</h1>
                 
                 <br/>
                 
@@ -94,24 +94,24 @@
                     <div class="three fields searchCriteria">
                         <div class="field">
                         <!--Search by & genre filters-->
-                        <p>Filter By Genre</p>
+                        <p>#{msgs.filterGenre}</p>
                         <h:selectManyCheckbox layout="pageDirection" value="#{managerSearch.genreFilters}">
                             <p:ajax update="bookTable" listener="#{managerSearch.onChecked}" />
-                            <f:selectItem itemValue = "Science Fiction" itemLabel = "Sci-Fi"/>
-                            <f:selectItem itemValue = "Mystery" itemLabel = "Mystery" />
-                            <f:selectItem itemValue = "Fantasy" itemLabel = "Fantasy" />
-                            <f:selectItem itemValue = "Horror" itemLabel = "Horror" />
-                            <f:selectItem itemValue = "Fiction" itemLabel = "Fiction" />
+                            <f:selectItem itemValue = "Science Fiction" itemLabel = "#{msgs.scifi}"/>
+                            <f:selectItem itemValue = "Mystery" itemLabel = "#{msgs.mystery}" />
+                            <f:selectItem itemValue = "Fantasy" itemLabel = "#{msgs.fantasy}" />
+                            <f:selectItem itemValue = "Horror" itemLabel = "#{msgs.horror}" />
+                            <f:selectItem itemValue = "Fiction" itemLabel = "#{msgs.fiction}" />
                         </h:selectManyCheckbox>
                         </div>
                         
                         <div class="field">
-                        <p>Search by</p>
+                        <p>#{msgs.searchBy}</p>
                         <h:selectOneRadio layout="pageDirection" value="#{managerSearch.searchBy}" >
                             <p:ajax update="bookTable" />
-                            <f:selectItem itemValue = "title" itemLabel = "Title"/>
-                            <f:selectItem itemValue = "author" itemLabel = "Author" />
-                            <f:selectItem itemValue = "isbn" itemLabel = "ISBN#" />
+                            <f:selectItem itemValue = "title" itemLabel = "#{msgs.title}"/>
+                            <f:selectItem itemValue = "author" itemLabel = "#{msgs.author}" />
+                            <f:selectItem itemValue = "isbn" itemLabel = "#{msgs.isbn}" />
                         </h:selectOneRadio>
                     </div>
                     <div class="field">
@@ -119,7 +119,7 @@
 
                             <!--Search bar-->
                             <div style="display: inline;" class="ui search">
-                                <p:inputText  id="query" value="#{managerSearch.query}" a:placeholder="Search books..." class="prompt" >
+                                <p:inputText  id="query" value="#{managerSearch.query}" a:placeholder="#{msgs.searchBooks}" class="prompt" >
                                     <p:ajax event="change" listener="#{managerSearch.onKeyUp}" update="bookTable" />
                                 </p:inputText>
                             </div>
@@ -129,7 +129,7 @@
                 </div>
                 </div>
 
-                <h:commandButton value="Add Book" class="big pink ui button" onclick="setTimeout(function () {
+                <h:commandButton value="#{msgs.createBook}" class="big pink ui button" onclick="setTimeout(function () {
                             $('#addModal').modal('show', hideGrowl())
                         }, 500)">
                     <f:ajax event="click" render="editForm" listener="#{bookBacking.onCreate()}"/>
@@ -138,39 +138,39 @@
 
                     <h:dataTable id="bookTable" var="books" style="margin-bottom: 20px;" class="ui celled table" value="#{managerSearch.results}">
                     <h:column>
-                        <f:facet name="header">ISBN</f:facet>
+                        <f:facet name="header">#{msgs.isbn}</f:facet>
                             #{books.isbn}
                     </h:column>
                     <h:column>
-                        <f:facet name="header">Title</f:facet>
+                        <f:facet name="header">#{msgs.title}</f:facet>
                             #{books.title}
                     </h:column>
                     <h:column>
-                        <f:facet name="header">Author(s)</f:facet>
+                        <f:facet name="header">#{msgs.author}</f:facet>
                             #{books.authorsCollection[0].name}
                     </h:column>
                     <h:column>
-                        <f:facet name="header">Genre</f:facet>
+                        <f:facet name="header">#{msgs.genre}</f:facet>
                             #{books.genre}
                     </h:column>
                     <h:column>
-                        <f:facet name="header">Sale</f:facet>
+                        <f:facet name="header">#{msgs.salePrice}</f:facet>
                             $#{books.salePrice}
                     </h:column>
                     <h:column>
-                        <f:facet name="header">List</f:facet>
+                        <f:facet name="header">#{msgs.listPrice}</f:facet>
                             $#{books.listPrice}
                     </h:column>
                     <h:column>
-                        <f:facet name="header">Wholesale</f:facet>
+                        <f:facet name="header">#{msgs.wholesalePrice}</f:facet>
                             $#{books.wholesalePrice}
                     </h:column>
                     <h:column>
-                        <f:facet name="header">Total Sales</f:facet>
+                        <f:facet name="header">#{msgs.totalSales}</f:facet>
                             $#{bookJpaController.getTotalSalesByIsbn(books.isbn)}
                     </h:column>
                     <h:column>
-                        <f:facet name="header">Status</f:facet>
+                        <f:facet name="header">#{msgs.status}</f:facet>
                             #{bookJpaController.getStatusByIsbn(books.isbn)}
                     </h:column>
                     <h:column>
@@ -179,7 +179,7 @@
                         </h:commandLink>
                     </h:column>
                     <h:column>
-                        <h:commandButton type="button" value="Edit Book" disabled="#{books.isRemoved}" onclick="setTimeout(function () {
+                        <h:commandButton type="button" value="#{msgs.editBook}" disabled="#{books.isRemoved}" onclick="setTimeout(function () {
                                     $('#editModal').modal('show', hideGrowl())
                                 }, 500)" class="big ui primary button edit_btn" >
                             <f:ajax event="click" render="@all" listener="#{editBook.onEdit(books.isbn)}" />
@@ -191,13 +191,13 @@
         </h:form>
         <div id="addModal" class="small ui modal">
             <div class="header">
-                <h1>Add Book</h1>
+                <h1>#{msgs.createBook}</h1>
             </div>
             <div class="content">
                 <h:form id="addForm" class="ui form">
                     <div class="field">
-                        <h:outputLabel for="isbn" value="ISBN"/>
-                        <h:inputText id="isbn" label="ISBN" value="#{bookBacking.book.isbn}" required="true" requiredMessage="Please enter ISBN" a:placeholder="Enter ISBN" validator="#{bookBacking.validateISBN}">
+                        <h:outputLabel for="isbn" value="#{msgs.isbn}"/>
+                        <h:inputText id="isbn" label="#{msgs.isbn}" value="#{bookBacking.book.isbn}" required="true" requiredMessage="Please enter ISBN" a:placeholder="Enter ISBN" validator="#{bookBacking.validateISBN}">
                             <f:ajax event="change" render="isbnError"/>
                         </h:inputText>
                         <br/>
@@ -205,16 +205,16 @@
                     </div>
                     <div class="two fields">
                         <div class="field">
-                            <h:outputLabel for="title" value="Title"/>
-                            <h:inputText id="title" label="Title" value="#{bookBacking.book.title}" required="true" requiredMessage="Please enter title" a:placeholder="Enter title" validator="#{bookBacking.validateNotNull}">
+                            <h:outputLabel for="title" value="#{msgs.title}"/>
+                            <h:inputText id="title" label="#{msgs.title}" value="#{bookBacking.book.title}" required="true" requiredMessage="#{msgs.titleMsg}" a:placeholder="#{msgs.titleMsg}" validator="#{bookBacking.validateNotNull}">
                                 <f:ajax event="change" render="titleError"/>
                             </h:inputText>
                             <br/>
                             <h:message id="titleError" class="error" for="title"/>
                         </div>
                         <div class="field">
-                            <h:outputLabel for="author" value="Author"/>
-                            <h:selectOneMenu id="author" label="Author" value="#{bookBacking.selectedAuthor.name}" required="true" requiredMessage="Please select author" a:placeholder="Select author">
+                            <h:outputLabel for="author" value="#{msgs.author}"/>
+                            <h:selectOneMenu id="author" label="#{msgs.author}" value="#{bookBacking.selectedAuthor.name}" required="true" requiredMessage="#{msgs.authorMsg}" a:placeholder="#{msgs.authorMsg}">
                                 <f:selectItems value="#{bookBacking.authorNames}" />
                                 <f:ajax execute="@this" listener="#{bookBacking.authChangeMethod(bookBacking.selectedAuthor.name)}" />
                             </h:selectOneMenu>
@@ -224,8 +224,8 @@
                     </div>
                     <div class="three fields">
                         <div class="field">
-                            <h:outputLabel for="publisher" value="Publisher"/>
-                            <h:selectOneMenu id="publisher" label="Publisher" value="#{bookBacking.selectedPub.name}" required="true" requiredMessage="Please select publisher" a:placeholder="Select publisher">
+                            <h:outputLabel for="publisher" value="#{msgs.publisher}"/>
+                            <h:selectOneMenu id="publisher" label="#{msgs.publisher}" value="#{bookBacking.selectedPub.name}" required="true" requiredMessage="#{msgs.publisherMsg}" a:placeholder="#{msgs.publisherMsg}">
                                 <f:selectItems value="#{bookBacking.pubNames}" />
                                 <f:ajax execute="@this" listener="#{bookBacking.pubChangeMethod(bookBacking.selectedPub.name)}" />
                             </h:selectOneMenu>
@@ -233,8 +233,8 @@
                             <h:message id="publisherError" class="error" for="publisher"/>
                         </div>
                         <div class="field">
-                            <h:outputLabel for="genre" value="Genre"/>
-                            <h:selectOneMenu id="genre" label="Genre" value="#{bookBacking.selectedGenre}" required="true" requiredMessage="Please select genre" a:placeholder="Select genre">
+                            <h:outputLabel for="genre" value="#{msgs.genre}"/>
+                            <h:selectOneMenu id="genre" label="#{msgs.genre}" value="#{bookBacking.selectedGenre}" required="true" requiredMessage="#{msgs.genreMsg}" a:placeholder="#{msgs.genreMsg}">
                                 <f:selectItems value="#{bookBacking.genres}" />
                                 <f:ajax execute="@this" listener="#{bookBacking.genreChangeMethod(bookBacking.selectedGenre)}" />
                             </h:selectOneMenu>
@@ -242,8 +242,8 @@
                             <h:message id="genreError" class="error" for="genre"/>
                         </div>
                         <div class="field">
-                            <h:outputLabel for="pages" value="# of Pages"/>
-                            <h:inputText id="pages" label="# of Pages" value="#{bookBacking.pageNum}" required="true" requiredMessage="Please enter number of pages" a:placeholder="Enter number of pages" validator="#{bookBacking.validatePages}">
+                            <h:outputLabel for="pages" value="#{msgs.pages}"/>
+                            <h:inputText id="pages" label="#{msgs.pages}" value="#{bookBacking.pageNum}" required="true" requiredMessage="#{msgs.pagesMsg}" a:placeholder="#{msgs.pagesMsg}" validator="#{bookBacking.validatePages}">
                                 <f:ajax event="change" render="pagesError"/>
                             </h:inputText>
                             <br/>
@@ -251,8 +251,8 @@
                         </div>
                     </div>
                     <div class="field">
-                        <h:outputLabel for="desc" value="Description"/>
-                        <h:inputTextarea id="desc" label="Description" value="#{bookBacking.book.description}" rows="3" cols="15" required="true" requiredMessage="Please enter description" a:placeholder="Enter description" validator="#{bookBacking.validateNotNull}">
+                        <h:outputLabel for="desc" value="#{msgs.desc}"/>
+                        <h:inputTextarea id="desc" label="#{msgs.desc}" value="#{bookBacking.book.description}" rows="3" cols="15" required="true" requiredMessage="#{msgs.descMsg}" a:placeholder="#{msgs.descMsg}" validator="#{bookBacking.validateNotNull}">
                             <f:ajax event="change" render="descError"/>
                         </h:inputTextarea>
                         <br/>
@@ -260,31 +260,31 @@
                     </div>
                     <div class="three fields">
                         <div class="field">
-                            <h:outputLabel for="listPrice" value="List Price"/>
-                            <h:inputText id="listPrice" label="List Price" value="#{bookBacking.LPriceStr}" required="true" requiredMessage="Please enter list price" a:placeholder="Enter list price" validator="#{bookBacking.validatePrice}">
+                            <h:outputLabel for="listPrice" value="#{msgs.listPrice}"/>
+                            <h:inputText id="listPrice" label="#{msgs.listPrice}" value="#{bookBacking.LPriceStr}" required="true" requiredMessage="#{msgs.listPriceMsg}" a:placeholder="#{msgs.listPriceMsg}" validator="#{bookBacking.validatePrice}">
                                 <f:ajax event="change" render="listPriceError"/>
                             </h:inputText>
                             <br/>
                             <h:message id="listPriceError" class="error" for="listPrice"/>
                         </div>
                         <div class="field">
-                            <h:outputLabel for="salePrice" value="Sale Price"/>
-                            <h:inputText id="salePrice" label="Sale Price" value="#{bookBacking.SPriceStr}" required="true" requiredMessage="Please enter sale price" a:placeholder="Enter sale price" validator="#{bookBacking.validatePrice}">
+                            <h:outputLabel for="salePrice" value="#{msgs.salePrice}"/>
+                            <h:inputText id="salePrice" label="#{msgs.salePrice}" value="#{bookBacking.SPriceStr}" required="true" requiredMessage="#{msgs.salePriceMsg}" a:placeholder="#{msgs.salePriceMsg}" validator="#{bookBacking.validatePrice}">
                                 <f:ajax event="change" render="salePriceError"/>
                             </h:inputText>
                             <br/>
                             <h:message id="salePriceError" class="error" for="salePrice"/>
                         </div>
                         <div class="field">
-                            <h:outputLabel for="wholesalePrice" value="Wholesale Price"/>
-                            <h:inputText id="wholesalePrice" label="Wholesale Price" value="#{bookBacking.WSPriceStr}" required="true" requiredMessage="Please enter wholesale price" a:placeholder="Enter wholesale price" validator="#{bookBacking.validatePrice}">
+                            <h:outputLabel for="wholesalePrice" value="#{msgs.wholesalePrice}"/>
+                            <h:inputText id="wholesalePrice" label="#{msgs.wholesalePrice}" value="#{bookBacking.WSPriceStr}" required="true" requiredMessage="#{msgs.wholesalePriceMsg}" a:placeholder="#{msgs.wholesalePriceMsg}" validator="#{bookBacking.validatePrice}">
                                 <f:ajax event="change" render="wholesalePriceError"/>
                             </h:inputText>
                             <br/>
                             <h:message id="wholesalePriceError" class="error" for="wholesalePrice"/>
                         </div>
                     </div>
-                    <h:commandButton type="button" class="huge black fluid ui button" id="createBook" value="Create Book" action="#{bookBacking.createBook()}">
+                    <h:commandButton type="button" class="huge black fluid ui button" id="createBook" value="#{msgs.createBook}" action="#{bookBacking.createBook()}">
                         <f:ajax event="click" execute="isbn title author publisher genre pages desc listPrice salePrice wholesalePrice" render="editForm"/>
                     </h:commandButton>
                 </h:form>
@@ -293,26 +293,26 @@
 
         <div id="editModal" class="small ui modal">
             <div class="header">
-                <h1>Edit Book</h1>
+                <h1>#{msgs.editBook}</h1>
             </div>
             <div class="content">
                 <h:form id="editBookForm" class="ui form">
                     <div class="field">
-                        <h:outputLabel for="totalSales" value="Total Sales" />
+                        <h:outputLabel for="totalSales" value="#{msgs.totalSales}" />
                         <h:outputText id="totalSales" value="$#{bookJpaController.getTotalSalesByIsbn(editBook.currentBook.isbn)}" />
                     </div>
                     <div class="two fields">
                         <div class="field">
-                            <h:outputLabel for="newTitle" value="Title"/>
-                            <h:inputText id="newTitle" label="Title" value="#{editBook.newTitle}" required="true" requiredMessage="Please enter title" a:placeholder="Enter title" validator="#{bookBacking.validateNotNull}">
+                            <h:outputLabel for="newTitle" value="#{msgs.title}"/>
+                            <h:inputText id="newTitle" label="#{msgs.title}" value="#{editBook.newTitle}" required="true" requiredMessage="#{msgs.titleMsg}" a:placeholder="#{msgs.titleMsg}" validator="#{bookBacking.validateNotNull}">
                                 <f:ajax event="change" render="newTitleError"/>
                             </h:inputText>
                             <br/>
                             <h:message id="newTitleError" class="error" for="newTitle"/>
                         </div>
                         <div class="field">
-                            <h:outputLabel for="newAuthor" value="Author"/>
-                            <h:selectOneMenu id="newAuthor" label="Author" value="#{editBook.newAuthor.name}" required="true" requiredMessage="Please select author" a:placeholder="Select author">
+                            <h:outputLabel for="newAuthor" value="#{msgs.author}"/>
+                            <h:selectOneMenu id="newAuthor" label="#{msgs.author}" value="#{editBook.newAuthor.name}" required="true" requiredMessage="#{msgs.authorMsg}" a:placeholder="#{msgs.authorMsg}">
                                 <f:selectItems value="#{bookBacking.authorNames}" />
                                 <f:ajax execute="@this" listener="#{editBook.authChangeMethod(editBook.newAuthor.name)}" />
                             </h:selectOneMenu>
@@ -322,8 +322,8 @@
                     </div>
                     <div class="three fields">
                         <div class="field">
-                            <h:outputLabel for="newPublisher" value="Publisher"/>
-                            <h:selectOneMenu id="newPublisher" label="Publisher" value="#{editBook.newPublisher.name}" required="true" requiredMessage="Please select publisher" a:placeholder="Select publisher">
+                            <h:outputLabel for="newPublisher" value="#{msgs.publisher}"/>
+                            <h:selectOneMenu id="newPublisher" label="#{msgs.publisher}" value="#{editBook.newPublisher.name}" required="true" requiredMessage="#{msgs.publisherMsg}" a:placeholder="#{msgs.publisherMsg}">
                                 <f:selectItems value="#{bookBacking.pubNames}" />
                                 <f:ajax execute="@this" listener="#{editBook.pubChangeMethod(editBook.newPublisher.name)}" />
                             </h:selectOneMenu>
@@ -331,8 +331,8 @@
                             <h:message id="newPublisherError" class="error" for="publisher"/>
                         </div>
                         <div class="field">
-                            <h:outputLabel for="newGenre" value="Genre"/>
-                            <h:selectOneMenu id="newGenre" label="Genre" value="#{editBook.newGenre}" immediate="true" required="true" requiredMessage="Please select genre" a:placeholder="Select genre">
+                            <h:outputLabel for="newGenre" value="#{msgs.genre}"/>
+                            <h:selectOneMenu id="newGenre" label="#{msgs.genre}" value="#{editBook.newGenre}" immediate="true" required="true" requiredMessage="#{msgs.genreMsg}" a:placeholder="#{msgs.genreMsg}">
                                 <f:selectItems value="#{bookBacking.genres}" />
                                 <f:ajax execute="@this" listener="#{editBook.genreChangeMethod(editBook.newGenre)}" />
                             </h:selectOneMenu>
@@ -340,8 +340,8 @@
                             <h:message id="newGenreError" class="error" for="newGenre"/>
                         </div>
                         <div class="field">
-                            <h:outputLabel for="newPages" value="# of Pages"/>
-                            <h:inputText id="newPages" label="# of Pages" value="#{editBook.newPages}" required="true" requiredMessage="Please enter number of pages" a:placeholder="Enter number of pages" validator="#{bookBacking.validatePages}">
+                            <h:outputLabel for="newPages" value="#{msgs.pages}"/>
+                            <h:inputText id="newPages" label="#{msgs.pages}" value="#{editBook.newPages}" required="true" requiredMessage="#{msgs.pagesMsg}" a:placeholder="#{msgs.pagesMsg}" validator="#{bookBacking.validatePages}">
                                 <f:ajax event="change" render="newPagesError"/>
                             </h:inputText>
                             <br/>
@@ -349,8 +349,8 @@
                         </div>
                     </div>
                     <div class="field">
-                        <h:outputLabel for="newDesc" value="Description"/>
-                        <h:inputTextarea id="newDesc" label="Description" value="#{editBook.newDescription}" rows="3" cols="15" required="true" requiredMessage="Please enter description" a:placeholder="Enter description" validator="#{bookBacking.validateNotNull}">
+                        <h:outputLabel for="newDesc" value="#{msgs.desc}"/>
+                        <h:inputTextarea id="newDesc" label="#{msgs.desc}" value="#{editBook.newDescription}" rows="3" cols="15" required="true" requiredMessage="#{msgs.descMsg}" a:placeholder="#{msgs.descMsg}" validator="#{bookBacking.validateNotNull}">
                             <f:ajax event="change" render="newDescError"/>
                         </h:inputTextarea>
                         <br/>
@@ -358,24 +358,24 @@
                     </div>
                     <div class="three fields">
                         <div class="field">
-                            <h:outputLabel for="newListPrice" value="List Price"/>
-                            <h:inputText id="newListPrice" label="List Price" value="#{editBook.newListPrice}" required="true" requiredMessage="Please enter list price" a:placeholder="Enter list price" validator="#{bookBacking.validatePrice}">
+                            <h:outputLabel for="newListPrice" value="#{msgs.listPrice}"/>
+                            <h:inputText id="newListPrice" label="#{msgs.listPrice}" value="#{editBook.newListPrice}" required="true" requiredMessage="#{msgs.listPriceMsg}" a:placeholder="#{msgs.listPriceMsg}" validator="#{bookBacking.validatePrice}">
                                 <f:ajax event="change" render="newListPriceError"/>
                             </h:inputText>
                             <br/>
                             <h:message id="newListPriceError" class="error" for="newListPrice"/>
                         </div>
                         <div class="field">
-                            <h:outputLabel for="newSalePrice" value="Sale Price"/>
-                            <h:inputText id="newSalePrice" label="Sale Price" value="#{editBook.newSalePrice}" required="true" requiredMessage="Please enter sale price" a:placeholder="Enter sale price" validator="#{bookBacking.validatePrice}">
+                            <h:outputLabel for="newSalePrice" value="#{msgs.salePrice}"/>
+                            <h:inputText id="newSalePrice" label="#{msgs.salePrice}" value="#{editBook.newSalePrice}" required="true" requiredMessage="#{msgs.salePriceMsg}" a:placeholder="#{msgs.salePriceMsg}" validator="#{bookBacking.validatePrice}">
                                 <f:ajax event="change" render="newSalePriceError"/>
                             </h:inputText>
                             <br/>
                             <h:message id="newSalePriceError" class="error" for="newSalePrice"/>
                         </div>
                         <div class="field">
-                            <h:outputLabel for="newWholesalePrice" value="Wholesale Price"/>
-                            <h:inputText id="newWholesalePrice" label="Wholesale Price" value="#{editBook.newWholesalePrice}" required="true" requiredMessage="Please enter wholesale price" a:placeholder="Enter wholesale price" validator="#{bookBacking.validatePrice}">
+                            <h:outputLabel for="newWholesalePrice" value="#{msgs.wholesalePrice}"/>
+                            <h:inputText id="newWholesalePrice" label="#{msgs.wholesalePrice}" value="#{editBook.newWholesalePrice}" required="true" requiredMessage="#{msgs.wholesalePriceMsg}" a:placeholder="#{msgs.wholesalePriceMsg}" validator="#{bookBacking.validatePrice}">
                                 <f:ajax event="change" render="newWholesalePriceError"/>
                             </h:inputText>
                             <br/>
@@ -383,7 +383,7 @@
                         </div>
                     </div>
                     <br/>
-                    <h:commandButton type="button" class="huge black fluid ui button" id="editBook" value="Edit Book" action="#{editBook.onSubmitEdit()}">
+                    <h:commandButton type="button" class="huge black fluid ui button" id="editBook" value="#{msgs.editBook}" action="#{editBook.onSubmitEdit()}">
                         <f:ajax event="click" execute="title author publisher genre pages desc listPrice salePrice wholesalePrice" render="bookTable"/>
                     </h:commandButton>
                 </h:form>

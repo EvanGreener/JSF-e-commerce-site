@@ -12,6 +12,7 @@ import com.gb1w20.book_store_project.entities.Surveys;
 import com.gb1w20.book_store_project.jpa_controllers.SurveyDataJpaController;
 import com.gb1w20.book_store_project.jpa_controllers.SurveysJpaController;
 import com.gb1w20.book_store_project.jpa_controllers.exceptions.IllegalOrphanException;
+import com.gb1w20.book_store_project.util.MessageLoader;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;
@@ -80,6 +81,7 @@ public class SurveyParameterizedTest {
                 .addPackage(ParameterRule.class.getPackage())
                 .addPackage(SurveyTestingBean.class.getPackage())
                 .addPackage(SurveyBean.class.getPackage())
+                .addPackage(MessageLoader.class.getPackage())
                 .addAsWebInfResource(EmptyAsset.INSTANCE, "beans.xml")
                 .addAsWebInfResource(new File("src/main/webapp/WEB-INF/payara-resources.xml"), "payara-resources.xml")
                 .addAsResource(new File("src/main/resources/META-INF/persistence.xml"), "META-INF/persistence.xml")

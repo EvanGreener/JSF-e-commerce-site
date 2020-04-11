@@ -7,6 +7,7 @@ package com.gb1w20.book_store_project.beans;
 
 import com.gb1w20.book_store_project.entities.Book;
 import com.gb1w20.book_store_project.jpa_controllers.BookJpaController;
+import com.gb1w20.book_store_project.util.MessageLoader;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
@@ -98,8 +99,8 @@ public class SaleManagementBean implements Serializable {
         String input = value + "";
         if (input.isBlank() || input.isEmpty() || input == null)
         {
-            String message = context.getApplication().evaluateExpressionGet(context, "Value must not be left blank", String.class);
-            FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR, message, message);
+            FacesMessage msg = MessageLoader.getMessage("com.gb1w20.bundles.messages", "valueNotNull", null);
+            msg.setSeverity(FacesMessage.SEVERITY_ERROR);
             throw new ValidatorException(msg);
         }
         try
@@ -108,14 +109,14 @@ public class SaleManagementBean implements Serializable {
         }
         catch(NumberFormatException nfe)
         {
-            String message = context.getApplication().evaluateExpressionGet(context, "Invalid price: contains non-numeric characters", String.class);
-            FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR, message, message);
+            FacesMessage msg = MessageLoader.getMessage("com.gb1w20.bundles.messages", "badPrice", null);
+            msg.setSeverity(FacesMessage.SEVERITY_ERROR);
             throw new ValidatorException(msg);
         }
     }
     
     public String determineOnSale(Book book)
     {
-        return book.getSalePrice().doubleValue() < book.getListPrice().doubleValue() ? "On Sale" : "Not on Sale";
+        return book.getSalePrice().doubleValue() < book.getListPrice().doubleValue() ? MessageLoader.getString("com.gb1w20.bundles.messages", "onSale", null) : MessageLoader.getString("com.gb1w20.bundles.messages", "noSale", null);
     }
 }

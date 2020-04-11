@@ -2,6 +2,7 @@ package com.gb1w20.book_store_project.backing;
 
 import com.gb1w20.book_store_project.entities.Orders;
 import com.gb1w20.book_store_project.jpa_controllers.OrdersJpaController;
+import com.gb1w20.book_store_project.util.MessageLoader;
 import java.io.Serializable;
 import java.util.Date;
 import javax.enterprise.context.RequestScoped;
@@ -108,11 +109,11 @@ public class OrderBackingBean implements Serializable {
     public String getRemovalStatus(boolean isRemoved) throws Exception {
         if (isRemoved)
         {
-            return "Add Order";
+            return MessageLoader.getString("com.gb1w20.bundles.messages", "addOrder", null);
         }
         else
         {
-            return "Remove Order";
+            return MessageLoader.getString("com.gb1w20.bundles.messages", "removeOrder", null);
         }
     }
 }

@@ -4,6 +4,7 @@ import com.gb1w20.book_store_project.entities.Ads;
 import com.gb1w20.book_store_project.entities.News;
 import com.gb1w20.book_store_project.entities.News_;
 import com.gb1w20.book_store_project.jpa_controllers.exceptions.NonexistentEntityException;
+import com.gb1w20.book_store_project.util.MessageLoader;
 import java.io.Serializable;
 import java.util.List;
 import java.util.Random;
@@ -149,12 +150,16 @@ public class NewsJpaController implements Serializable {
         try
         {
             query.getSingleResult();
-            Object[] returnArr = {false, "Not Removed", "Enabled"};
+            Object[] returnArr = {false,
+                MessageLoader.getString("com.gb1w20.bundles.messages", "notRemoved", null), 
+                MessageLoader.getString("com.gb1w20.bundles.messages", "enabled", null)};
             return returnArr;
         }
         catch(NoResultException nre)
         {
-            Object[] returnArr = {true, "Removed", "Enable News"};
+            Object[] returnArr = {true, 
+                MessageLoader.getString("com.gb1w20.bundles.messages", "removed", null),
+                MessageLoader.getString("com.gb1w20.bundles.messages", "enableNews", null)};
             return returnArr;
         }
     }

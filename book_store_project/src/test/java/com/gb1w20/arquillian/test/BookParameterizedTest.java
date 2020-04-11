@@ -10,6 +10,7 @@ import com.gb1w20.book_store_project.entities.BookFormat;
 import com.gb1w20.book_store_project.jpa_controllers.BookJpaController;
 import com.gb1w20.book_store_project.jpa_controllers.ClientsJpaController;
 import com.gb1w20.book_store_project.jpa_controllers.exceptions.IllegalOrphanException;
+import com.gb1w20.book_store_project.util.MessageLoader;
 
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.junit.Arquillian;
@@ -75,6 +76,7 @@ public class BookParameterizedTest {
                 .addPackage(ParameterRule.class.getPackage())
                 .addPackage(ClientTestingBean.class.getPackage())
                 .addPackage(NewsBean.class.getPackage())
+                .addPackage(MessageLoader.class.getPackage())
                 .addAsWebInfResource(EmptyAsset.INSTANCE, "beans.xml")
                 .addAsWebInfResource(new File("src/main/webapp/WEB-INF/payara-resources.xml"), "payara-resources.xml")
                 .addAsResource(new File("src/main/resources/META-INF/persistence.xml"), "META-INF/persistence.xml")
@@ -135,20 +137,6 @@ public class BookParameterizedTest {
             isSuccess = false;
         }
         assertTrue("Similar genres returned inconsistent results Expected:"+bookTest.expectedSimilar+" Result:"+similarGenreCount, isSuccess);
-    }
-    
-    /**
-     * Tests if the correct status of a book is returned
-     */
-    @Test
-    public void testStatusRetrieval() {
-        boolean isSuccess = true;
-        Book testBookInfo = bookControl.findAnySingleBook(bookTest.book.getIsbn());
-        String status = bookControl.getStatusByIsbn(bookTest.book.getIsbn());
-        if (!(status.equals(bookTest.expectedStatus))) {
-            isSuccess = false;
-        }
-        assertTrue("Book status returned inconsistent results Expected:"+bookTest.expectedStatus+" Result:"+status, isSuccess);
     }
     
     
