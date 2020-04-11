@@ -95,18 +95,18 @@ compatible with different screen sizes
                                     <!--Choose plural or singular form depending on how many reviews there are-->
                                     <c:choose>
                                         <c:when test="${reviewBean.getReviewCount(book.isbn)eq 1}">
-                                            review
+                                            #{msgs.review}
                                         </c:when>
                                         <c:otherwise>
-                                            reviews
+                                            #{msgs.reviews}
                                         </c:otherwise>
                                     </c:choose>
                                 </p>
 
                                 <!--Genre info-->
                                 <br/>
-                                <p class="thicker"> Genre: #{book.genre}</p>
-                                <p class="thicker"> Pages: #{book.numOfPages}</p>
+                                <p class="thicker">#{msgs.genreColon} #{book.genre}</p>
+                                <p class="thicker">#{msgs.pagesColon} #{book.numOfPages}</p>
 
                                 <!--Save the genre in a cookie-->
                                 #{cbb.saveLastGenre(book)}
@@ -114,7 +114,7 @@ compatible with different screen sizes
 
                                 <!--Book description-->
                                 #{bb.getDisplayBookDescription(book.description)}<h:panelGroup rendered="#{! bb.getDisplayBookDescription(book.description).equals(book.description)}"><span id="dots">...</span><span id="more">#{bb.getHiddenBookDescription(book.description)}</span>
-                                    <a  onclick="showMore()" id="moreBtn">Read more</a>
+                                    <a  onclick="showMore()" id="moreBtn">#{msgs.readMore}</a>
                                 </h:panelGroup>
 
 
@@ -134,7 +134,7 @@ compatible with different screen sizes
                                 <br/>
                                 <h:form>
                                     <!--Button to add to shopping cart-->
-                                    <h:commandButton action="#{cbb.addBookToCart(bb.book)}" value = "Add to Cart" class="addToCartBtn button">
+                                    <h:commandButton action="#{cbb.addBookToCart(bb.book)}" value = "#{msgs.addToCart}" class="addToCartBtn button">
                                         <f:ajax event="click" ></f:ajax>
                                     </h:commandButton>
                                 </h:form>
@@ -157,7 +157,7 @@ compatible with different screen sizes
             <table class="ui padded table">
                 <tr>
                     <td  style="vertical-align: middle; text-align: center">
-                        <p style="font-size: 1.7em">Reviews</p>
+                        <p style="font-size: 1.7em">#{msgs.reviewsBtn}</p>
                     </td>
                     <td  colspan="5" class="right aligned single line">  
                         <h:panelGroup id="reviewSection">
@@ -209,7 +209,7 @@ compatible with different screen sizes
 
                                 <!--Display no reviews if there are none-->
                                 <h:panelGroup rendered="#{reviewBean.getReviewCount(bb.book.isbn) ==0}">
-                                    <h4> No Reviews yet.</h4>
+                                    <h4>#{msgs.noReviews}</h4>
                                 </h:panelGroup>
                             </td>
                         </tr>
@@ -234,15 +234,15 @@ compatible with different screen sizes
 
                     <!-- Form uses ajax to display errors or warnings and success message -->
                     <h:form>
-                        <p style="font-size: 25px; text-align: center;">Create Review</p>
+                        <p style="font-size: 25px; text-align: center;">#{msgs.createReview}</p>
                         <br></br>
                         <p style="font-size: 20px; font-family: georgia !important;">#{bb.book.title}</p>
                         <hr></hr>
 
                         <!-- The title field limits the amount of characters-->
-                        <h:outputLabel for="title" value="Add a Title"/>
+                        <h:outputLabel for="title" value="#{msgs.addTitle}"/>
                         <br/>
-                        <h:inputText id="title" label="Add a Title" value="#{reviewBean.title}" required="true" requiredMessage="Please enter a title" validator="#{reviewBean.validateReviewTitle}">
+                        <h:inputText id="title" label="#{msgs.addTitle}" value="#{reviewBean.title}" required="true" requiredMessage="#{msgs.addTitleMsg}" validator="#{reviewBean.validateReviewTitle}">
                             <f:ajax event="blur" render="titleError"/>
                         </h:inputText>
                         <br/>
@@ -251,18 +251,18 @@ compatible with different screen sizes
                         <br/>
                         <br/>
                         <!-- Rating out of /5 -->
-                        <h:outputLabel for="rating" value="Overall Rating"/>
+                        <h:outputLabel for="rating" value="#{msgs.overallRating}"/>
                         <br/>
-                        <h:selectOneMenu id="rating" label="Overall Rating" value="#{reviewBean.ratingChoice}" required="true" >
+                        <h:selectOneMenu id="rating" label="#{msgs.overallRating}" value="#{reviewBean.ratingChoice}" required="true" >
                             <f:selectItems value="#{reviewBean.ratings}" />
                         </h:selectOneMenu>
                         <h:outputLabel value="/5"/>
 
                         <!-- Actual review body field -->
                         <br/><br/>
-                        <h:outputLabel for="review" value="Add a Review"/>
+                        <h:outputLabel for="review" value="#{msgs.addReview}"/>
                         <br/>
-                        <h:inputTextarea value="#{reviewBean.reviewBody}" id="review" cols="30" rows="4" validator="#{reviewBean.validateReviewBody}" required="true" requiredMessage="Please enter a review">
+                        <h:inputTextarea value="#{reviewBean.reviewBody}" id="review" cols="30" rows="4" validator="#{reviewBean.validateReviewBody}" required="true" requiredMessage="#{msgs.addReviewMsg}">
                             <f:ajax event="blur" render="reviewError"/>
                         </h:inputTextarea>
                         <br/>
@@ -272,11 +272,11 @@ compatible with different screen sizes
 
 
                             <!-- Button submits review if all input is correct, displays success message and disables submit button so user can no longer submit a review for the same book -->
-                            <h:commandButton  value="Submit"  rendered="#{reviewBean.getUserWrittenReviews(UserLoginBean.getClient().clientID,bb.book.isbn) eq 0}" action="#{reviewBean.setCustomerReview(bb.book.isbn,UserLoginBean.getClient().clientID)}">
+                            <h:commandButton  value="#{msgs.submit}"  rendered="#{reviewBean.getUserWrittenReviews(UserLoginBean.getClient().clientID,bb.book.isbn) eq 0}" action="#{reviewBean.setCustomerReview(bb.book.isbn,UserLoginBean.getClient().clientID)}">
                                 <f:ajax execute="@form" render="@form reviewSection successMsg"/>
                             </h:commandButton>
                             <!--Message shows up after successful review submission-->
-                            <h:outputLabel id="successMsg" value="Review Submitted!"  rendered="#{reviewBean.getUserWrittenReviews(UserLoginBean.getClient().clientID,bb.book.isbn) != 0}"/>
+                            <h:outputLabel id="successMsg" value="#{msgs.reviewSubmitted}"  rendered="#{reviewBean.getUserWrittenReviews(UserLoginBean.getClient().clientID,bb.book.isbn) != 0}"/>
                         </div>
                     </h:form>
                 </div>
@@ -289,7 +289,7 @@ compatible with different screen sizes
 
             <!--Suggests books by similar genres if any-->
             <h:panelGroup rendered="#{!empty bb.getSimilarGenreBooks(bb.book,bb.book.authorsCollection)}">
-                <p class="small">Similar Genre</p>
+                <p class="small">#{msgs.similarGenre}</p>
             </h:panelGroup>
             <div class="ui four doubling stackable cards">
                 <ui:repeat value="#{bb.getSimilarGenreBooks(bb.book,bb.book.authorsCollection)}" var="books">
@@ -302,7 +302,7 @@ compatible with different screen sizes
             <h:panelGroup rendered="#{!empty bb.getSimilarAuthorBooks(bb.book.authorsCollection,bb.book.isbn)}">
                 <br/><br/><br/>
                 <ui:repeat value="#{bb.book.authorsCollection}" var="author" >
-                    <p class="small">Books by #{author.name}</p>
+                    <p class="small">#{msgs.booksBy} #{author.name}</p>
                 </ui:repeat>
             </h:panelGroup>
 

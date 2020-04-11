@@ -349,7 +349,7 @@ public class BookBackingBean implements Serializable {
     public void authChangeMethod(String newAuthName) {
         LOG.debug("new auth: " + newAuthName);
         selectedAuthor = authorsJpaController.getAuthorByName(newAuthName);
-        LOG.debug("new auth: " + selectedAuthor.getDateEntered());
+        LOG.debug("new auth: " + selectedAuthor.getAuthorID());
     }
 
     public void pubChangeMethod(String newPubName) {

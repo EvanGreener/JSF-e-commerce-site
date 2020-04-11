@@ -5,6 +5,7 @@ package com.gb1w20.book_store_project.beans;
 
 import com.gb1w20.book_store_project.entities.CustomerReviews;
 import com.gb1w20.book_store_project.jpa_controllers.CustomerReviewsJpaController;
+import com.gb1w20.book_store_project.util.MessageLoader;
 import java.io.Serializable;
 import java.util.Date;
 import javax.annotation.PostConstruct;
@@ -169,9 +170,9 @@ public class ReviewManagementBean implements Serializable {
     public String getPendingStatus(boolean pending) {
         LOG.debug("getPendingStatus");
         if (pending) {
-            return "Pending";
+            return MessageLoader.getString("com.gb1w20.bundles.messages", "pending", null);
         } else {
-            return "Reviewed";
+            return MessageLoader.getString("com.gb1w20.bundles.messages", "reviewed", null);
         }
     }
 
@@ -184,9 +185,9 @@ public class ReviewManagementBean implements Serializable {
     public String getRemovalStatus(boolean isRemoved) {
         LOG.debug("getRemovalStatus");
         if (isRemoved) {
-            return "Approve";
+            return MessageLoader.getString("com.gb1w20.bundles.messages", "approve", null);
         } else {
-            return "Unapprove";
+            return MessageLoader.getString("com.gb1w20.bundles.messages", "unapprove", null);
         }
     }
 

@@ -5,6 +5,7 @@ package com.gb1w20.book_store_project.beans;
 
 import com.gb1w20.book_store_project.entities.CustomerReviews;
 import com.gb1w20.book_store_project.jpa_controllers.CustomerReviewsJpaController;
+import com.gb1w20.book_store_project.util.MessageLoader;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
@@ -94,14 +95,15 @@ public class ReviewBean implements Serializable {
     public void validateReviewBody(FacesContext context, UIComponent component, Object value) throws Exception {
         String review = (String) value;
         if (review == null || review.isBlank()) {
-            String message = context.getApplication().evaluateExpressionGet(context, "Please enter a review", String.class);
-            FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR, message, message);
+            FacesMessage msg = MessageLoader.getMessage("com.gb1w20.bundles.messages", "addReviewMsg", null);
+            msg.setSeverity(FacesMessage.SEVERITY_ERROR);
             throw new ValidatorException(msg);
         }
         if (review.length() > 750) {
-            String message = context.getApplication().evaluateExpressionGet(context, "Reviews are limited to 750 characters", String.class);
-            FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR, message, message);
+            FacesMessage msg = MessageLoader.getMessage("com.gb1w20.bundles.messages", "reviewCharLimit", null);
+            msg.setSeverity(FacesMessage.SEVERITY_ERROR);
             throw new ValidatorException(msg);
+            
         }
 
     }
@@ -118,13 +120,13 @@ public class ReviewBean implements Serializable {
     public void validateReviewTitle(FacesContext context, UIComponent component, Object value) throws Exception {
         String review = (String) value;
         if (review == null || review.isBlank()) {
-            String message = context.getApplication().evaluateExpressionGet(context, "Please enter a review", String.class);
-            FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR, message, message);
+            FacesMessage msg = MessageLoader.getMessage("com.gb1w20.bundles.messages", "addReviewMsg", null);
+            msg.setSeverity(FacesMessage.SEVERITY_ERROR);
             throw new ValidatorException(msg);
         }
         if (review.length() > 150) {
-            String message = context.getApplication().evaluateExpressionGet(context, "Reviews are limited to 150 characters", String.class);
-            FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR, message, message);
+            FacesMessage msg = MessageLoader.getMessage("com.gb1w20.bundles.messages", "titleCharLimit", null);
+            msg.setSeverity(FacesMessage.SEVERITY_ERROR);
             throw new ValidatorException(msg);
         }
 

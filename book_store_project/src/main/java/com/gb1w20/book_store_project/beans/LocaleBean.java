@@ -1,5 +1,6 @@
 package com.gb1w20.book_store_project.beans;
 
+import com.gb1w20.book_store_project.util.MessageLoader;
 import java.io.IOException;
 import java.io.Serializable;
 import java.util.Locale;
@@ -106,15 +107,15 @@ public class LocaleBean implements Serializable {
     {
         if (locale.equals(new Locale("en", "CA")))
         {
-            return "English";
+            return MessageLoader.getString("com.gb1w20.bundles.messages", "english", null);
         }
         else if (locale.equals(new Locale("fr", "CA")))
         {
-            return "Français";
+            return MessageLoader.getString("com.gb1w20.bundles.messages", "french", null);
         }
         else
         {
-            return "English";
+            return MessageLoader.getString("com.gb1w20.bundles.messages", "english", null);
         }
     }
 

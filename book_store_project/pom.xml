@@ -8,7 +8,7 @@
     <name>book_store_project</name>
        
     <properties>
-        <skipTests>false</skipTests>
+        <skipTests>true</skipTests>
     </properties>
     
     <dependencies>

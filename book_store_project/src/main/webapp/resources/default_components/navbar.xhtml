@@ -25,9 +25,9 @@ A Composite component created for nav bar to avoid code duplication in all web p
                 </f:facet>
 
                 <b:navbarLinks pull="center">
-                    <b:navLink style="color: white " class="nav" value="Shop" href="./gallery.xhtml"></b:navLink>
-                    <b:navLink  style="color: white;" value="Sales" href="index.xhtml#sales"></b:navLink>
-                    <b:navLink style="color: white" value="Genres" href="index.xhtml#popularGenres"></b:navLink>
+                    <b:navLink style="color: white " class="nav" value="#{msgs.shopNav}" href="./gallery.xhtml"></b:navLink>
+                    <b:navLink  style="color: white;" value="#{msgs.salesBtn}" href="index.xhtml#sales"></b:navLink>
+                    <b:navLink style="color: white" value="#{msgs.genresNav}" href="index.xhtml#popularGenres"></b:navLink>
                 </b:navbarLinks>
 
                 <!--Adds spacing in nav bar-->
@@ -35,23 +35,23 @@ A Composite component created for nav bar to avoid code duplication in all web p
                 <b:navbarLinks pull="right" styleClass="hidden-xs">
 
                     <b:dropMenu value="Site View" rendered="#{UserLoginBean.getIfManager()}" style="color: white">
-                        <b:navLink id="man" value="Manager View" href="managerFront.xhtml"></b:navLink>
-                        <b:navLink id="cli" value="Clinet View" href="index.xhtml"></b:navLink>
+                        <b:navLink id="man" value="#{msgs.managerView}" href="managerFront.xhtml"></b:navLink>
+                        <b:navLink id="cli" value="#{msgs.clientView}" href="index.xhtml"></b:navLink>
                     </b:dropMenu>
 
-                    <b:navLink rendered="#{UserLoginBean.getIfSignedIn()}" style="color: white" class="nav" value="My Books" href="mybooks.xhtml"></b:navLink>
-                    <b:navLink style="color: white" class="nav" value="Cart" href="cart.xhtml"></b:navLink>
+                    <b:navLink rendered="#{UserLoginBean.getIfSignedIn()}" style="color: white" class="nav" value="#{msgs.myBooks}" href="mybooks.xhtml"></b:navLink>
+                    <b:navLink style="color: white" class="nav" value="#{msgs.cart}" href="cart.xhtml"></b:navLink>
 
                     <b:dropMenu value="#{locale.getLocaleString()}" style="color: white">
-                        <b:navCommandLink id="en" value="English - En" action="#{locale.setLanguage('en','CA')}" />
-                        <b:navCommandLink id="fr" value="Francais - Fr" action="#{locale.setLanguage('fr','CA')}" />
+                        <b:navCommandLink id="en" value="#{msgs.englishNav}" action="#{locale.setLanguage('en','CA')}" />
+                        <b:navCommandLink id="fr" value="#{msgs.frenchNav}" action="#{locale.setLanguage('fr','CA')}" />
                     </b:dropMenu>
 
-                    <b:navLink rendered="#{!UserLoginBean.getIfSignedIn()}" style="color: white;font-weight: bold" value="Log In" href="signIn.xhtml">
+                    <b:navLink rendered="#{!UserLoginBean.getIfSignedIn()}" style="color: white;font-weight: bold" value="#{msgs.signIn}" href="signIn.xhtml">
                     </b:navLink>
 
-                    <b:dropMenu rendered="#{UserLoginBean.getIfSignedIn()}" value="Hello #{UserLoginBean.getFirstName()}" style="color: white">
-                        <b:navCommandLink id="signout" value="Signout" href="#" action="#{UserLoginBean.signOut()}"></b:navCommandLink>
+                    <b:dropMenu rendered="#{UserLoginBean.getIfSignedIn()}" value="#{msgs.hello} #{UserLoginBean.getFirstName()}" style="color: white">
+                        <b:navCommandLink id="signout" value="#{msgs.signout}" href="#" action="#{UserLoginBean.signOut()}"></b:navCommandLink>
                     </b:dropMenu>
 
 
