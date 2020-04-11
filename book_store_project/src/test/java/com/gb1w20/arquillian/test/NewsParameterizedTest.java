@@ -1,16 +1,21 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
+ * To change this license henewser, choose License Henewsers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
 package com.gb1w20.arquillian.test;
 
-import com.gb1w20.arquillian.test.beans.SurveyTestingBean;
-import com.gb1w20.book_store_project.backing.SurveyBackingBean;
-import com.gb1w20.book_store_project.beans.SurveyBean;
-import com.gb1w20.book_store_project.entities.Surveys;
-import com.gb1w20.book_store_project.jpa_controllers.SurveyDataJpaController;
-import com.gb1w20.book_store_project.jpa_controllers.SurveysJpaController;
+import com.gb1w20.arquillian.test.beans.NewsTestingBean;
+import com.gb1w20.arquillian.test.beans.BookTestingBean;
+import com.gb1w20.arquillian.test.beans.ClientTestingBean;
+import com.gb1w20.book_store_project.backing.BookFormatBackingBean;
+import com.gb1w20.book_store_project.beans.NewsBean;
+import com.gb1w20.book_store_project.entities.News;
+import com.gb1w20.book_store_project.entities.Book;
+import com.gb1w20.book_store_project.entities.BookFormat;
+import com.gb1w20.book_store_project.jpa_controllers.NewsJpaController;
+import com.gb1w20.book_store_project.jpa_controllers.BookFormatJpaController;
+import com.gb1w20.book_store_project.jpa_controllers.BookJpaController;
 import com.gb1w20.book_store_project.jpa_controllers.exceptions.IllegalOrphanException;
 import java.io.BufferedReader;
 import java.io.File;
@@ -49,9 +54,9 @@ import org.slf4j.LoggerFactory;
  * @author giancarlo
  */
 @RunWith(Arquillian.class)
-public class SurveyParameterizedTest {
-
-    private final static Logger LOG = LoggerFactory.getLogger(SurveyParameterizedTest.class);
+public class NewsParameterizedTest {
+    
+    private final static Logger LOG = LoggerFactory.getLogger(BookParameterizedTest.class);
 
     @Deployment
     public static WebArchive deploy() {
@@ -73,13 +78,13 @@ public class SurveyParameterizedTest {
         final WebArchive webArchive;
         webArchive = ShrinkWrap.create(WebArchive.class, "test.war")
                 .setWebXML(new File("src/main/webapp/WEB-INF/web.xml"))
-                .addPackage(SurveysJpaController.class.getPackage())
+                .addPackage(BookFormatJpaController.class.getPackage())
                 .addPackage(IllegalOrphanException.class.getPackage())
-                .addPackage(Surveys.class.getPackage())
-                .addPackage(SurveyBackingBean.class.getPackage())
+                .addPackage(BookFormat.class.getPackage())
+                .addPackage(BookFormatBackingBean.class.getPackage())
                 .addPackage(ParameterRule.class.getPackage())
-                .addPackage(SurveyTestingBean.class.getPackage())
-                .addPackage(SurveyBean.class.getPackage())
+                .addPackage(ClientTestingBean.class.getPackage())
+                .addPackage(NewsBean.class.getPackage())
                 .addAsWebInfResource(EmptyAsset.INSTANCE, "beans.xml")
                 .addAsWebInfResource(new File("src/main/webapp/WEB-INF/payara-resources.xml"), "payara-resources.xml")
                 .addAsResource(new File("src/main/resources/META-INF/persistence.xml"), "META-INF/persistence.xml")
@@ -89,25 +94,23 @@ public class SurveyParameterizedTest {
 
         return webArchive;
     }
-    
     @Inject
-    private SurveysJpaController surveyControl;
-    
-    @Inject
-    private SurveyDataJpaController surveyDataControl;
-    
+    private NewsJpaController newsControl;
+
     @Rule
-    public ParameterRule surveyRule = new ParameterRule("surveyTest",
-            new SurveyTestingBean(1,5,38),
-            new SurveyTestingBean(2,6,68),
-            new SurveyTestingBean(3,4,37),
-            new SurveyTestingBean(4,4,28),
-            new SurveyTestingBean(5,4,55),
-            new SurveyTestingBean(6,6,43)
+    public ParameterRule newsRule = new ParameterRule("newsTest",
+            new NewsTestingBean(1,"Removed"),
+            new NewsTestingBean(2,"Removed"),
+            new NewsTestingBean(3,"Removed"),
+            new NewsTestingBean(4,"Removed"),
+            new NewsTestingBean(5,"Removed"),
+            new NewsTestingBean(6,"Not Removed")
+            
     );
-    
-    private SurveyTestingBean surveyTest;
-    
+
+    private NewsTestingBean newsTest;
+
+
     @Resource(lookup = "java:app/jdbc/bookstore")
     private DataSource ds;
 
@@ -118,29 +121,27 @@ public class SurveyParameterizedTest {
     private UserTransaction utx;
     
     @Test
-    public void testCorrectChoiceAmount()
+    public void testExpectedStatus()
     {
-        Surveys survey = surveyControl.findSurveys(surveyTest.surveyID);
-        int choices = surveyDataControl.getSurveyChoices(survey.getSurveyID()).size();
-        assertEquals("Expected size " + surveyTest.expectedChoices + " vs. actual size " + choices,
-                surveyTest.expectedChoices, choices);
+        String removalStatus = newsControl.getStatusByNewsId(newsControl.findNews(newsTest.newsID).getNewsID())[1].toString();
+        assertEquals("Expected: " + newsTest.expectedStatus + ", actual: " + removalStatus,
+                newsTest.expectedStatus, removalStatus);
     }
     
     @Test
-    public void testCorrectUserVotes()
+    public void testRandomNewsIsAlwaysReal()
     {
-        Surveys survey = surveyControl.findSurveys(surveyTest.surveyID);
-        int votes = surveyControl.getTotalVotesSingleSurvey(survey.getSurveyID());
-        assertEquals("Expected number of  " + surveyTest.expectedVotes + " vs. actual size " + votes,
-                surveyTest.expectedVotes, votes);
+        News news = newsControl.getRandomNews();
+        List<News> allNews = newsControl.findNewsEntities();
+        assertTrue("Expected: included, actual: not", allNews.contains(news));
     }
     
     @Test
-    public void testActiveSurveyIsReal()
+    public void testEnabledNewsIsAlwaysReal()
     {
-        Surveys survey = surveyControl.getActiveSurvey();
-        List<Surveys> surveyList = surveyControl.findSurveysEntities();
-        assertTrue("Expected: contains, actual: doesn't contain", surveyList.contains(survey));
+        News news = newsControl.getEnabledNews();
+        List<News> allNews = newsControl.findNewsEntities();
+        assertTrue("Expected: included, actual: not", allNews.contains(news));
     }
     
     /**

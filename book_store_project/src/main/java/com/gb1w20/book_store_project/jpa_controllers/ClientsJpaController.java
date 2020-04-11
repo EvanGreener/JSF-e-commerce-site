@@ -172,17 +172,29 @@ public class ClientsJpaController implements Serializable {
      * false GROUP BY c.client_id, c.fname, c.lname;
      *
      * @param query
+     * @param searchBy
      * @return
      */
-    public List<Object[]> searchClients(String query) {
+    public List<Object[]> searchClients(String query, String searchBy) {
         String expression = "%" + query + "%";
-
+        if (searchBy.equals("id"))
+        {
+            expression = query;
+        }
         CriteriaBuilder cb = em.getCriteriaBuilder();
         CriteriaQuery<Object[]> cq = cb.createQuery(Object[].class);
         Root<Clients> client = cq.from(Clients.class);
         Join clientOrders = client.join("ordersCollection", JoinType.LEFT);
         Join orderOrderItems = clientOrders.join("orderItemsCollection", JoinType.LEFT);
-        cq.where(cb.and(cb.isFalse(client.get(Clients_.isManager)), cb.like(client.get(Clients_.email), expression)));
+        switch(searchBy)
+        {
+            case "email":
+                cq.where(cb.and(cb.isFalse(client.get(Clients_.isManager)), cb.like(client.get(Clients_.email), expression)));
+                break;
+            default:
+                cq.where(cb.and(cb.isFalse(client.get(Clients_.isManager)), cb.equal(client.get(Clients_.clientID), expression)));
+                break;
+        }
         cq.groupBy(client.get(Clients_.clientID));
         cq.multiselect(
                 client.get(Clients_.clientID),

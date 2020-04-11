@@ -7,12 +7,12 @@ import com.gb1w20.book_store_project.entities.CustomerReviews;
 import com.gb1w20.book_store_project.entities.OrderItem;
 import java.math.BigDecimal;
 import java.util.Date;
-import javax.annotation.Generated;
+import javax.annotation.processing.Generated;
 import javax.persistence.metamodel.ListAttribute;
 import javax.persistence.metamodel.SingularAttribute;
 import javax.persistence.metamodel.StaticMetamodel;
 
-@Generated(value="EclipseLink-2.7.1.v20171221-rNA", date="2020-04-09T18:03:30")
+@Generated(value="org.eclipse.persistence.internal.jpa.modelgen.CanonicalModelProcessor", date="2020-04-10T20:58:28", comments="EclipseLink-2.7.6.v20200131-rNA")
 @StaticMetamodel(Book.class)
 public class Book_ { 
 
