@@ -37,82 +37,86 @@ public class ClientManagementBean implements Serializable {
           updateBean();
      }
 
-     public String getSearchBy()
-     {
-         return searchBy;
-     }
-     
-     public void setSearchBy(String newValue)
-     {
-         searchBy = newValue;
-     }
-     
      public String getQuery() {
           return query;
      }
 
-     public void setQuery(String newValue) {
-          query = newValue;
+     public void setQuery(String query) {
+          this.query = query;
      }
 
      public List<Object[]> getResults() {
           return results;
      }
 
+     public void setResults(List<Object[]> results) {
+          this.results = results;
+     }
+
+     public String getSearchBy() {
+          return searchBy;
+     }
+
+     public void setSearchBy(String searchBy) {
+          this.searchBy = searchBy;
+     }
+
      public Clients getCurrentClient() {
           return currentClient;
+     }
+
+     public void setCurrentClient(Clients currentClient) {
+          this.currentClient = currentClient;
      }
 
      public String getNewFname() {
           return newFname;
      }
 
-     public void setNewFname(String newValue) {
-          newFname = newValue;
+     public void setNewFname(String newFname) {
+          this.newFname = newFname;
      }
 
      public String getNewLname() {
           return newLname;
      }
 
-     public void setNewLname(String newValue) {
-          newLname = newValue;
+     public void setNewLname(String newLname) {
+          this.newLname = newLname;
      }
-     
-      public String getNewAddress1() {
+
+     public String getNewAddress1() {
           return newAddress1;
-     }
-
-     public String getNewAddress2() {
-          return newAddress2;
-     }
-
-     public String getNewCell() {
-          return newCell;
-     }
-
-     public String getNewCompanyName() {
-          return newCompanyName;
      }
 
      public void setNewAddress1(String newAddress1) {
           this.newAddress1 = newAddress1;
      }
 
+     public String getNewAddress2() {
+          return newAddress2;
+     }
+
      public void setNewAddress2(String newAddress2) {
           this.newAddress2 = newAddress2;
+     }
+
+     public String getNewCell() {
+          return newCell;
      }
 
      public void setNewCell(String newCell) {
           this.newCell = newCell;
      }
 
+     public String getNewCompanyName() {
+          return newCompanyName;
+     }
+
      public void setNewCompanyName(String newCompanyName) {
           this.newCompanyName = newCompanyName;
      }
      
-     
-
      public void updateBean() {
           LOG.debug(query);
           results = clientCtrl.searchClients(query, searchBy);
@@ -126,7 +130,6 @@ public class ClientManagementBean implements Serializable {
      public void onClickEdit(int id) {
           LOG.debug(id + "");
           currentClient = clientCtrl.findClients(id);
-
      }
      
      /**
