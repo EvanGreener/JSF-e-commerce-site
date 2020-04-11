@@ -319,8 +319,6 @@ compatible with different screen sizes
           <!--composite component that comes from the footer.xhtml file to avoid coding the website footer in all web pages-->
           <bookstore:footer/>
 
-          
-          
           <!-- Initialize Swiper  for carousel of recently added books-->
           <script>
                var swiper = new Swiper('.swiper-container', {
@@ -340,12 +338,18 @@ compatible with different screen sizes
                     },
                });
                
-               //Checking if cookies are disabled
+               /**
+                * Checking if cookies are disabled and does things
+                */
                if(!navigator.cookieEnabled){
-                    $('div.recommendCookies').show()
+                    $('div.recommendCookies').show();
+                    //Disables all links
+                    $("a").attr('href', '#');
+                    //Disables all input including buttons
+                    $('input').attr('disabled', 'true');
                }
                else{
-                    $('div.recommendCookies').hide()
+                    $('div.recommendCookies').hide();
                }
 
           </script>
