@@ -18,116 +18,124 @@
         <h:outputStylesheet library="modalCss" name="modal.css" />
         <h:outputStylesheet library="managercss" name="manager.css" />
         <h:outputScript library="webjars" name="Semantic-UI/2.4.1/semantic.min.js"/>
-               <style>
+        <style>
 
-               .modal{
-                    position: fixed;
-                    padding-top: 0px;
-                    height: fit-content;
-                    text-align: center;
-                    font-size: 18px;
-               }
+            .modal{
+                position: fixed;
+                padding-top: 0px;
+                height: fit-content;
+                text-align: center;
+                font-size: 18px;
+            }
 
-               .middle h1 {
-                    margin-top: 20px !important;
-                    text-align: center;
-                    color: gray;
-               }
-               .middle{
-                    padding: 0px 40px 0px 40px;
-               }
+            .middle h1 {
+                margin-top: 20px !important;
+                text-align: center;
+                color: gray;
+            }
+            .middle{
+                padding: 0px 40px 0px 40px;
+            }
 
-               .actions{
-                    height: 80%;
-                    text-align: center !important;
-                    font-size: 20px;
-                    margin: 10px 10px 10px 10px;
-               }
+            .actions{
+                height: 80%;
+                text-align: center !important;
+                font-size: 20px;
+                margin: 10px 10px 10px 10px;
+            }
 
-               .actions .ui.button {
-                    margin: 10px 10px 10px 10px;
-               }
+            .actions .ui.button {
+                margin: 10px 10px 10px 10px;
+            }
 
-               .footer button{
-                    font-size: 20px !important;
-                    margin: 0px 10px 0px 10px !important;
-               }
+            .footer button{
+                font-size: 20px !important;
+                margin: 0px 10px 0px 10px !important;
+            }
 
-               .header h1 {
-                    text-align: center !important;
-               }
+            .header h1 {
+                text-align: center !important;
+            }
 
-               /*               .content h3 {
-                                   
-                              }*/
+            /*               .content h3 {
+                                
+                           }*/
 
-               .form-field{
-                    font-size: 18px;
-                    margin: 10px 0px 10px 5px;
+            .form-field{
+                font-size: 18px;
+                margin: 10px 0px 10px 5px;
 
-               }
+            }
 
-               #editFormGrowl{
-                    position: fixed;
-                    display: none;
-                    z-index: 777;
-                    left: 100%;
-                    margin-left: -257.42px;
+            #editFormGrowl{
+                position: fixed;
+                display: none;
+                z-index: 777;
+                left: 100%;
+                margin-left: -257.42px;
 
 
-               }
-               </style>
+            }
+        </style>
     </h:head>
 
     <h:body>
+         
         <bookstore:navbar />
-        <h:form id="editForm">
-            
-
+        
+        <h:form onsubmit="return false;">
             <div class="middle">
 
                 <h1 class="ui header">Inventory Management</h1>
-                
-                <br/>
-                
                 <div class="ui form">
                     <div class="three fields searchCriteria">
                         <div class="field">
-                        <!--Search by & genre filters-->
-                        <p>Filter By Genre</p>
-                        <h:selectManyCheckbox layout="pageDirection" value="#{managerSearch.genreFilters}">
-                            <p:ajax update="bookTable" listener="#{managerSearch.onChecked}" />
-                            <f:selectItem itemValue = "Science Fiction" itemLabel = "Sci-Fi"/>
-                            <f:selectItem itemValue = "Mystery" itemLabel = "Mystery" />
-                            <f:selectItem itemValue = "Fantasy" itemLabel = "Fantasy" />
-                            <f:selectItem itemValue = "Horror" itemLabel = "Horror" />
-                            <f:selectItem itemValue = "Fiction" itemLabel = "Fiction" />
-                        </h:selectManyCheckbox>
+                            <!--Search by & genre filters-->
+                            <p>Filter By Genre</p>
+                            <h:selectManyCheckbox layout="pageDirection" value="#{managerSearch.genreFilters}">
+                                <p:ajax update=":editForm:bookTable" listener="#{managerSearch.onChecked}" />
+                                <f:selectItem itemValue = "Science Fiction" itemLabel = "Sci-Fi"/>
+                                <f:selectItem itemValue = "Mystery" itemLabel = "Mystery" />
+                                <f:selectItem itemValue = "Fantasy" itemLabel = "Fantasy" />
+                                <f:selectItem itemValue = "Horror" itemLabel = "Horror" />
+                                <f:selectItem itemValue = "Fiction" itemLabel = "Fiction" />
+                            </h:selectManyCheckbox>
                         </div>
-                        
+
                         <div class="field">
-                        <p>Search by</p>
-                        <h:selectOneRadio layout="pageDirection" value="#{managerSearch.searchBy}" >
-                            <p:ajax update="bookTable" />
-                            <f:selectItem itemValue = "title" itemLabel = "Title"/>
-                            <f:selectItem itemValue = "author" itemLabel = "Author" />
-                            <f:selectItem itemValue = "isbn" itemLabel = "ISBN#" />
-                        </h:selectOneRadio>
-                    </div>
-                    <div class="field">
-                        <div style="margin-bottom: 2px;" class="upper">
+                            <p>Search by</p>
+                            <h:selectOneRadio layout="pageDirection" value="#{managerSearch.searchBy}" >
+                                <p:ajax update=":editForm:bookTable" />
+                                <f:selectItem itemValue = "title" itemLabel = "Title"/>
+                                <f:selectItem itemValue = "author" itemLabel = "Author" />
+                                <f:selectItem itemValue = "isbn" itemLabel = "ISBN#" />
+                            </h:selectOneRadio>
+                        </div>
+                        <div class="field">
+                            <div style="margin-bottom: 2px;" class="upper">
 
-                            <!--Search bar-->
-                            <div style="display: inline;" class="ui search">
-                                <p:inputText  id="query" value="#{managerSearch.query}" a:placeholder="Search books..." class="prompt" >
-                                    <p:ajax event="change" listener="#{managerSearch.onKeyUp}" update="bookTable" />
-                                </p:inputText>
+                                <!--Search bar-->
+                                <div style="display: inline;" class="ui search">
+                                    <p:inputText  id="query" value="#{managerSearch.query}" a:placeholder="Search books..." class="prompt" >
+                                        <p:ajax event="change" listener="#{managerSearch.onKeyUp}" update=":editForm:bookTable" />
+                                    </p:inputText>
+                                </div>
+
                             </div>
-
                         </div>
                     </div>
                 </div>
-                </div>
+
+            </div>
+
+        </h:form>
+
+
+        <h:form id="editForm">
+
+
+            <div class="middle">
+
 
                 <h:commandButton value="Add Book" class="big pink ui button" onclick="setTimeout(function () {
                             $('#addModal').modal('show', hideGrowl())
@@ -136,7 +144,7 @@
                 </h:commandButton>
 
 
-                    <h:dataTable id="bookTable" var="books" style="margin-bottom: 20px;" class="ui celled table" value="#{managerSearch.results}">
+                <h:dataTable id="bookTable" var="books" style="margin-bottom: 20px;" class="ui celled table" value="#{managerSearch.results}">
                     <h:column>
                         <f:facet name="header">ISBN</f:facet>
                             #{books.isbn}
@@ -147,7 +155,7 @@
                     </h:column>
                     <h:column>
                         <f:facet name="header">Author(s)</f:facet>
-                            #{books.authorsCollection[0].name}
+                            #{authorsJpaController.findAuthors(bookAuthorsJpaController.findBookAuthorsByIsbn(books.isbn)[0].authorID).name}
                     </h:column>
                     <h:column>
                         <f:facet name="header">Genre</f:facet>
@@ -155,15 +163,15 @@
                     </h:column>
                     <h:column>
                         <f:facet name="header">Sale</f:facet>
-                            $#{books.salePrice}
+                        $#{books.salePrice}
                     </h:column>
                     <h:column>
                         <f:facet name="header">List</f:facet>
-                            $#{books.listPrice}
+                        $#{books.listPrice}
                     </h:column>
                     <h:column>
                         <f:facet name="header">Wholesale</f:facet>
-                            $#{books.wholesalePrice}
+                        $#{books.wholesalePrice}
                     </h:column>
                     <h:column>
                         <f:facet name="header">Total Sales</f:facet>
@@ -182,7 +190,8 @@
                         <h:commandButton type="button" value="Edit Book" disabled="#{books.isRemoved}" onclick="setTimeout(function () {
                                     $('#editModal').modal('show', hideGrowl())
                                 }, 500)" class="big ui primary button edit_btn" >
-                            <f:ajax event="click" render="@all" listener="#{editBook.onEdit(books.isbn)}" />
+                            <f:ajax event="click" render="@all" listener="#{editBook.onEdit(books.isbn,authorsJpaController.findAuthors(bookAuthorsJpaController.findBookAuthorsByIsbn(books.isbn)[0].authorID))}" />
+
                         </h:commandButton>
                     </h:column>
                 </h:dataTable>
@@ -225,9 +234,9 @@
                     <div class="three fields">
                         <div class="field">
                             <h:outputLabel for="publisher" value="Publisher"/>
-                            <h:selectOneMenu id="publisher" label="Publisher" value="#{bookBacking.selectedPub.name}" required="true" requiredMessage="Please select publisher" a:placeholder="Select publisher">
+                            <h:selectOneMenu id="publisher" label="Publisher" value="#{bookBacking.selectedPub}" required="true" requiredMessage="Please select publisher" >
                                 <f:selectItems value="#{bookBacking.pubNames}" />
-                                <f:ajax execute="@this" listener="#{bookBacking.pubChangeMethod(bookBacking.selectedPub.name)}" />
+                                <f:ajax execute="@this" listener="#{bookBacking.pubChangeMethod(bookBacking.selectedPub)}" />
                             </h:selectOneMenu>
                             <br/>
                             <h:message id="publisherError" class="error" for="publisher"/>
@@ -284,9 +293,10 @@
                             <h:message id="wholesalePriceError" class="error" for="wholesalePrice"/>
                         </div>
                     </div>
-                    <h:commandButton type="button" class="huge black fluid ui button" id="createBook" value="Create Book" action="#{bookBacking.createBook()}">
-                        <f:ajax event="click" execute="isbn title author publisher genre pages desc listPrice salePrice wholesalePrice" render="editForm"/>
-                    </h:commandButton>
+                    <p:commandButton type="button" class="huge black fluid ui button" id="createBook" value="Create Book" update="editForm" action="#{bookBacking.createBook()}">
+                        <f:ajax execute="isbn title author publisher genre pages desc listPrice salePrice wholesalePrice" render="bookTable"/>
+                        <p:ajax listener="#{managerSearch.init}" update=":editForm" />
+                    </p:commandButton>
                 </h:form>
             </div>
         </div>
@@ -383,9 +393,10 @@
                         </div>
                     </div>
                     <br/>
-                    <h:commandButton type="button" class="huge black fluid ui button" id="editBook" value="Edit Book" action="#{editBook.onSubmitEdit()}">
+                    <p:commandButton type="button" class="huge black fluid ui button" id="editBook" value="Edit Book" action="#{editBook.onSubmitEdit()}">
                         <f:ajax event="click" execute="title author publisher genre pages desc listPrice salePrice wholesalePrice" render="bookTable"/>
-                    </h:commandButton>
+                        <p:ajax listener="#{managerSearch.init}" update=":editForm" />
+                    </p:commandButton>
                 </h:form>
             </div>
         </div>

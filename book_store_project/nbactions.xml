@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<actions>
+    <action>
+            <actionName>CUSTOM-SeleniumTest</actionName>
+            <displayName>Run Selenium Tests</displayName>
+            <goals>
+                <goal>test</goal>
+            </goals>
+            <properties>
+                <test>IndexPageTestIT</test>
+            </properties>
+        </action>
+    <action>
+            <actionName>CUSTOM-Proper Testing</actionName>
+            <displayName>Proper Testing</displayName>
+            <goals>
+                <goal>test</goal>
+            </goals>
+            <properties>
+                <test>IndexPageTestIT#testShopNowButon</test>
+            </properties>
+        </action>
+    <action>
+            <actionName>CUSTOM-Proper Selenium Testing</actionName>
+            <displayName>Proper Selenium Testing</displayName>
+            <goals>
+                <goal>test</goal>
+            </goals>
+            <properties>
+                <test>IndexPageTestIT</test>
+            </properties>
+        </action>
+</actions>

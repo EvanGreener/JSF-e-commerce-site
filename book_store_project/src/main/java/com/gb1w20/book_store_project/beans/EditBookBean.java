@@ -156,14 +156,14 @@ public class EditBookBean implements Serializable {
      * when the corresponding button is clicked
      * @param isbn 
      */
-    public void onEdit(String isbn)
+    public void onEdit(String isbn,Authors author)
     {
         LOG.debug("onEdit called");
         LOG.debug("ISBN we are looking for: " + isbn);
         currentBook = bookControl.findAnySingleBook(isbn);
         newTitle = currentBook.getTitle();
         newDescription = currentBook.getDescription();
-        newAuthor = currentBook.getAuthorsCollection().get(0);
+        newAuthor = author;
         newPublisher = pubControl.findPublisher(currentBook.getPublisherID());
         newGenre = currentBook.getGenre();
         newPages = currentBook.getNumOfPages();

@@ -163,8 +163,10 @@ CREATE TABLE `Book_Format` (
 );
 
 CREATE TABLE `Book_Authors` (
+`BookAuthor_ID` INT AUTO_INCREMENT,
   `Author_ID` INT,
   `ISBN` VARCHAR(13),
+PRIMARY KEY (`BookAuthor_ID`),
   KEY `FK` (`Author_ID`, `ISBN`)
 );
 
