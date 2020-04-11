@@ -76,7 +76,7 @@ public class SurveyBean implements Serializable {
      */
     public void setSurvey() {
         LOG.debug("setSurvey");
-        survey = surveyCtrlr.getRandomSurvey();
+        survey = surveyCtrlr.getActiveSurvey();
     }
 
     /**

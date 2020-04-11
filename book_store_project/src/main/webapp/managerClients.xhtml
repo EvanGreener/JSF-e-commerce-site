@@ -84,9 +84,9 @@
 
      </h:head>
      <h:body>
-
+          <bookstore:navbar ></bookstore:navbar>
           <h:form id="editForm">
-               <bookstore:navbar ></bookstore:navbar>
+
 
                <div class="middle">
 
@@ -98,6 +98,13 @@
                     </div>
                     
                     <h1>Client Management</h1>
+                    
+                    <p>Search by</p>
+                        <h:selectOneRadio layout="pageDirection" value="#{clientManagement.searchBy}" >
+                            <p:ajax update="clientsTable" />
+                            <f:selectItem itemValue = "email" itemLabel = "Email"/>
+                            <f:selectItem itemValue = "id" itemLabel = "Client ID" />
+                        </h:selectOneRadio>
 
                     <!--Search bar-->
                     <div style="display: inline;" class="ui search" >
@@ -109,7 +116,11 @@
 
 
                     <h:dataTable  id="clientsTable" var="client" style="margin-bottom: 20px;"  class="ui celled table" value="#{clientManagement.results}" >
-                         <h:column>
+                        <h:column>
+                              <f:facet name="header">Client ID</f:facet>
+                                   #{client[0]}
+                         </h:column> 
+                        <h:column>
                               <f:facet name="header">Login email</f:facet>
                                    #{client[1]}
                          </h:column>

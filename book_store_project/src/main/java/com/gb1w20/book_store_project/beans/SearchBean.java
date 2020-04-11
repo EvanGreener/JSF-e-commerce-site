@@ -1,4 +1,4 @@
-package com.gb1w20.book_store_project.beans;
+ package com.gb1w20.book_store_project.beans;
 
 import com.gb1w20.book_store_project.entities.Book;
 import com.gb1w20.book_store_project.jpa_controllers.BookJpaController;

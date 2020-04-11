@@ -7,6 +7,47 @@
 */
 .ui.page.dimmer {
     position: fixed;
+    display: none;
+    z-index: 777;
+    left: 100%;
+}
+
+.genre{
+    color:black;
+    padding:10px;
+}
+body {
+    background: #eee;
+    font-size: 14px;
+    color:#000;
+    margin: 0;
+    padding: 0;
+}
+.nav {
+    margin: 0 auto 0 10px;
+
+}
+.navbar-brand{
+padding: 0 !important;
+padding-left: 20px !important;
+padding-bottom: 10px !important;
+}
+.brand-img-style {
+    height: 100%;
+    width: auto;
+}
+
+.item1{
+    background-color:  #D77A61 !important;
+}
+.item2{
+    background-color: #D77A61 !important;
+}
+.item3{
+    background-color:  #D77A61 !important;
+}
+.searchBarDiv{
+    text-align: center;
     -webkit-transform-style: '';
     transform-style: '';
     -webkit-perspective: 2000px;
@@ -166,14 +207,5 @@ Hidden button that appears when screen becomes smaller
 .genre{
     color:black;
     padding:10px;
-}
-.item1{
-    background-color:  orange !important;
-}
-.item2{
-    background-color: #ff6c17 !important;
-}
-.item3{
-    background-color:  coral !important;
 }
 

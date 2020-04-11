@@ -172,6 +172,10 @@
                         $#{books.wholesalePrice}
                     </h:column>
                     <h:column>
+                        <f:facet name="header">Total Sales</f:facet>
+                            $#{bookJpaController.getTotalSalesByIsbn(books.isbn)}
+                    </h:column>
+                    <h:column>
                         <f:facet name="header">Status</f:facet>
                             #{bookJpaController.getStatusByIsbn(books.isbn)}
                     </h:column>
@@ -301,6 +305,10 @@
             </div>
             <div class="content">
                 <h:form id="editBookForm" class="ui form">
+                    <div class="field">
+                        <h:outputLabel for="totalSales" value="Total Sales" />
+                        <h:outputText id="totalSales" value="$#{bookJpaController.getTotalSalesByIsbn(editBook.currentBook.isbn)}" />
+                    </div>
                     <div class="two fields">
                         <div class="field">
                             <h:outputLabel for="newTitle" value="Title"/>

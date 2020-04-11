@@ -19,8 +19,12 @@ public class BookTestingBean {
 
     private final static Logger LOG = LoggerFactory.getLogger(BookTestingBean.class);
     public Book book;
+    public int expectedSimilar;
+    public String expectedStatus;
 
-    public BookTestingBean(Book book) {
+    public BookTestingBean(Book book, int expectedSimilar, String expectedStatus) {
         this.book = book;
+        this.expectedSimilar = expectedSimilar;
+        this.expectedStatus = expectedStatus;
     }
 }

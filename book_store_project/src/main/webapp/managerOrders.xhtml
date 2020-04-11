@@ -56,10 +56,6 @@
                     text-align: center !important;
                }
 
-               /*               .content h3 {
-                                   
-                              }*/
-
                .form-field{
                     font-size: 18px;
                     margin: 10px 0px 10px 5px;
@@ -81,10 +77,11 @@
 
      <h:body>
 
-         
-               <bookstore:navbar />
-               <h:form onsubmit="return false;">
-               <div class="middle"> 
+          <bookstore:navbar />
+
+          <h:form id="editForm">
+
+               <div class="middle">
 
                     <div id="editFormGrowl" class="ui floating positive message" >
                          <!--<i class="close icon"></i>-->
@@ -95,16 +92,29 @@
 
                     <h1>Order Management</h1>
 
+                    <!--Loading modal-->
+                    <p:ajaxStatus onstart="PF('statusDialog').show()" onsuccess="PF('statusDialog').hide()" />
+                    <p:dialog widgetVar="statusDialog" modal="true" draggable="false" closable="false" resizable="false" showHeader="false">
+                         <p:graphicImage style="display: inline;" class="loading" library="images" name="double-ring.svg" />
+                    </p:dialog>
+                    
+                    <p>Search by</p>
+                        <h:selectOneRadio layout="pageDirection" value="#{orderSearch.searchBy}" >
+                            <p:ajax update="ordersTable" />
+                            <f:selectItem itemValue = "id" itemLabel = "Order ID"/>
+                            <f:selectItem itemValue = "email" itemLabel = "Email" />
+                            <f:selectItem itemValue = "isbn" itemLabel = "Item ISBN" />
+                        </h:selectOneRadio>
+
                     <!--Search bar-->
                     <div style="display: inline;" class="ui search" >
                          <h:inputText  id="query" value="#{orderSearch.query}"  a:placeholder="Search orders by email..." style="float: right; margin-top: 10px; margin-bottom: 10px; width: 200px; " class="prompt" >
-                              <p:ajax event="change"  listener="#{orderSearch.updateBean()}" update=":editForm:ordersTable" />
+                              <f:ajax event="keyup" execute="@all"  listener="#{orderSearch.updateBean}" render="ordersTable" />
                          </h:inputText>
                     </div>
-                     </div>
-                    </h:form>
-                     <h:form id="editForm">
-                          <div class="middle">
+
+
+
                     <h:dataTable  id="ordersTable" var="orders" style="margin-bottom: 20px;"  class="ui celled table" value="#{orderSearch.searchResults}" >
                          <h:column>
                               <f:facet name="header">Order ID</f:facet>
@@ -173,7 +183,8 @@
                               </h:column>
                               <h:column>
                                    <h:commandButton type="button" onclick="setTimeout(function () {
-                                               $('#editItemModal').modal('show', hideGrowl())}, 500)" 
+                                                  $('#editItemModal').modal('show', hideGrowl())
+                                             }, 500)" 
                                                     value="Edit Item" class="big ui primary button edit_btn" disabled="#{items.isRemoved}">
                                         <f:ajax event="click" render="@all" listener="#{orderEdit.onItemEdit(items.itemID)}"/>
                                    </h:commandButton>

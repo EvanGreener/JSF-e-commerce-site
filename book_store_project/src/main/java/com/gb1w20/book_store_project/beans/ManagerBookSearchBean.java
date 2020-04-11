@@ -130,7 +130,7 @@ public class ManagerBookSearchBean implements Serializable {
 
         //Since this is a manager-side page, all books are displayed, as opposed to only those
         //which are not "removed"
-        List<Book> res = searchBy != null && !query.isBlank() ? bookCtrlr.search(searchBy, query, page) : bookCtrlr.findBookEntities();
+        List<Book> res = searchBy != null && !query.isBlank() ? bookCtrlr.searchAllBooks(searchBy, query, page) : bookCtrlr.findBookEntities();
 
         LOG.debug(query);
         LOG.debug(searchBy);
