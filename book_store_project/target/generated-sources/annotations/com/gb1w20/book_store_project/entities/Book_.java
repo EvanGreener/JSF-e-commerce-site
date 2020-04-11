@@ -12,11 +12,7 @@ import javax.persistence.metamodel.ListAttribute;
 import javax.persistence.metamodel.SingularAttribute;
 import javax.persistence.metamodel.StaticMetamodel;
 
-<<<<<<< HEAD
-@Generated(value="org.eclipse.persistence.internal.jpa.modelgen.CanonicalModelProcessor", date="2020-04-10T22:40:09", comments="EclipseLink-2.7.6.v20200131-rNA")
-=======
-@Generated(value="org.eclipse.persistence.internal.jpa.modelgen.CanonicalModelProcessor", date="2020-04-10T12:13:33", comments="EclipseLink-2.7.6.v20200131-rNA")
->>>>>>> e45bae9a3fba5abe97e954fa25e80e25aedb842b
+@Generated(value="org.eclipse.persistence.internal.jpa.modelgen.CanonicalModelProcessor", date="2020-04-10T23:38:01", comments="EclipseLink-2.7.6.v20200131-rNA")
 @StaticMetamodel(Book.class)
 public class Book_ { 
 
