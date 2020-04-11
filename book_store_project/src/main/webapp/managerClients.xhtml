@@ -85,6 +85,7 @@
      </h:head>
      <h:body>
           <bookstore:navbar ></bookstore:navbar>
+          
           <h:form id="editForm">
 
 
@@ -163,7 +164,7 @@
                     </h:dataTable>
                </div>
 
-               <bookstore:footer></bookstore:footer>
+               
 
                <div id="editModal" class=" small ui modal">
                     <div class="header">
@@ -174,7 +175,6 @@
                          <div class="form-field">
                               <h3>First Name</h3>
                               <p:inputText placeholder="#{clientManagement.currentClient.firstName}" value="#{clientManagement.newFname} " validator="#{clientBacking.validateNotNull}"/>
-<!--                              <h:outputText value="First name cannot contain only whitespace" />-->
                          </div>
 
                          <div class="form-field">
@@ -217,6 +217,8 @@
                </div>
 
           </h:form>
+          
+          <bookstore:footer></bookstore:footer>
 
           <script>
                function hideGrowl() {
