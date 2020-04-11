@@ -40,7 +40,22 @@ compatible with different screen sizes
 
           <script  src="https://www.gstatic.com/charts/loader.js"></script>
           <script src="https://unpkg.com/swiper/js/swiper.min.js"></script>
-
+          
+          <style>
+               .recommendCookies{
+                    position: fixed;
+                    font-size: 2em;
+                    bottom: 0em;
+                    z-index: 300;
+                    text-align: center;
+                    width: 100%;
+                    height: 2.5em;
+                    background-color: rgb(34, 56, 67);
+                    color:  white;
+                    opacity: 90%;
+                    
+               }
+          </style>
 
      </h:head>
      <h:body>
@@ -297,10 +312,15 @@ compatible with different screen sizes
                     </div>
                </div>
           </div>
+          <div class="recommendCookies" >
+               We recommend that you <strong>enable cookies</strong>. Enable cookies and refresh the page
+          </div>
 
           <!--composite component that comes from the footer.xhtml file to avoid coding the website footer in all web pages-->
           <bookstore:footer/>
 
+          
+          
           <!-- Initialize Swiper  for carousel of recently added books-->
           <script>
                var swiper = new Swiper('.swiper-container', {
@@ -319,6 +339,14 @@ compatible with different screen sizes
                          prevEl: '.swiper-button-prev',
                     },
                });
+               
+               //Checking if cookies are disabled
+               if(!navigator.cookieEnabled){
+                    $('div.recommendCookies').show()
+               }
+               else{
+                    $('div.recommendCookies').hide()
+               }
 
           </script>
      </h:body>
