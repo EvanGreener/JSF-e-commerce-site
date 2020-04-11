@@ -43,6 +43,7 @@ compatible with different screen sizes
           
           <style>
                .recommendCookies{
+                    display: none;
                     position: fixed;
                     font-size: 2em;
                     bottom: 0em;
@@ -347,10 +348,7 @@ compatible with different screen sizes
                     $("a").attr('href', '#');
                     //Disables all input including buttons
                     $('input').attr('disabled', 'true');
-               }
-               else{
-                    $('div.recommendCookies').hide();
-               }
+               }              
 
           </script>
      </h:body>
