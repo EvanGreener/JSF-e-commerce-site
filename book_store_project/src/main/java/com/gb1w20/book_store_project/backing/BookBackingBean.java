@@ -2,8 +2,10 @@ package com.gb1w20.book_store_project.backing;
 
 import com.gb1w20.book_store_project.entities.Authors;
 import com.gb1w20.book_store_project.entities.Book;
+import com.gb1w20.book_store_project.entities.BookAuthors;
 import com.gb1w20.book_store_project.entities.Publisher;
 import com.gb1w20.book_store_project.jpa_controllers.AuthorsJpaController;
+import com.gb1w20.book_store_project.jpa_controllers.BookAuthorsJpaController;
 import com.gb1w20.book_store_project.jpa_controllers.BookJpaController;
 import com.gb1w20.book_store_project.jpa_controllers.PublisherJpaController;
 import com.gb1w20.book_store_project.util.MessageLoader;
@@ -24,6 +26,7 @@ import org.slf4j.LoggerFactory;
 
 /**
  * Backing bean for the book entity
+ *
  * @author Giancarlo Biasiucci
  * @version April 4, 2020
  */
@@ -35,14 +38,17 @@ public class BookBackingBean implements Serializable {
 
     @Inject
     private BookJpaController bookJpaController;
-    
+
     @Inject
     private PublisherJpaController pubJpaController;
-    
+
     @Inject
     private AuthorsJpaController authorsJpaController;
-    
-    private Publisher selectedPub = new Publisher();
+
+    @Inject
+    private BookAuthorsJpaController bookauthorsJpaController;
+
+    private String selectedPub;
     private List<String> pubNames;
     private List<String> authorNames;
     private Authors selectedAuthor = new Authors();
@@ -52,13 +58,14 @@ public class BookBackingBean implements Serializable {
     private String sPriceStr;
     private String wsPriceStr;
     private Book currentBook;
-    
+
     private List<String> genres;
 
     private Book book;
 
     /**
-     * The book managed by the bean is created if null to avoid a NullPointerException.
+     * The book managed by the bean is created if null to avoid a
+     * NullPointerException.
      *
      * @return
      */
@@ -68,21 +75,21 @@ public class BookBackingBean implements Serializable {
         }
         return book;
     }
-    
+
     public List<String> getPubNames() {
         if (pubNames == null) {
             pubNames = pubJpaController.getPublisherNames();
         }
         return pubNames;
     }
-    
+
     public List<String> getAuthorNames() {
         if (authorNames == null) {
             authorNames = authorsJpaController.getAuthorNames();
         }
         return authorNames;
     }
-    
+
     //Genres are added manually since referencing the controller at this point would generate a NullPointerException
     public List<String> getGenres() {
         if (genres == null) {
@@ -95,89 +102,80 @@ public class BookBackingBean implements Serializable {
         }
         return genres;
     }
-    
-    public String getPageNum()
-    {
+
+    public String getPageNum() {
         return pageNum;
     }
-    
-    public Book getCurrentBook()
-    {
+
+    public Book getCurrentBook() {
         return currentBook;
     }
-    
-    public void setCurrentBook(Book newBook)
-    {
+
+    public void setCurrentBook(Book newBook) {
         currentBook = newBook;
     }
-    
-    public void setPageNum(String newValue)
-    {
+
+    public void setPageNum(String newValue) {
         pageNum = newValue;
     }
-    
-    public String getSelectedGenre()
-    {
+
+    public String getSelectedGenre() {
+        LOG.debug("getSelectedGenre: " + selectedGenre);
         return selectedGenre;
     }
-    
-    public void setSelectedGenre(String newGenre)
-    {
+
+    public void setSelectedGenre(String newGenre) {
+        LOG.debug("setSelectedGenre: " + newGenre);
         selectedGenre = newGenre;
     }
-    
-    public String getLPriceStr()
-    {
+
+    public String getLPriceStr() {
         return lPriceStr;
     }
-    
-    public void setLPriceStr(String newValue)
-    {
+
+    public void setLPriceStr(String newValue) {
         lPriceStr = newValue;
     }
-    
-    public String getSPriceStr()
-    {
+
+    public String getSPriceStr() {
         return sPriceStr;
     }
-    
-    public void setSPriceStr(String newValue)
-    {
+
+    public void setSPriceStr(String newValue) {
         sPriceStr = newValue;
     }
-    
-    public String getWSPriceStr()
-    {
+
+    public String getWSPriceStr() {
         return wsPriceStr;
     }
-    
-    public void setWSPriceStr(String newValue)
-    {
+
+    public void setWSPriceStr(String newValue) {
         wsPriceStr = newValue;
     }
-    
-    public Publisher getSelectedPub()
-    {
+
+    public String getSelectedPub() {
+        LOG.debug("getSelectedPub" + selectedPub);
         return selectedPub;
     }
-    
-    public void setSelectedPub(Publisher newPub)
-    {
+
+    public void setSelectedPub(String newPub) {
+        LOG.debug("setSelectedPub" + newPub);
         selectedPub = newPub;
     }
-    
-    public Authors getSelectedAuthor()
-    {
+
+    public Authors getSelectedAuthor() {
         return selectedAuthor;
     }
-    
-    public void setSelectedAuthor(Authors newAuthors)
-    {
+
+    public void setSelectedAuthor(Authors newAuthors) {
         selectedAuthor = newAuthors;
     }
 
     /**
-     * Creates the book and saves it to the database. Data is retrieved from corresponding modal.
+     * Creates the book and saves it to the database. Data is retrieved from
+     * corresponding modal.
+     *
+     * @author Shruti Pareek, Giancarlo
      * @return
      * @throws Exception
      */
@@ -189,26 +187,31 @@ public class BookBackingBean implements Serializable {
         book.setSalePrice(BigDecimal.valueOf(Double.parseDouble(sPriceStr)));
         book.setWholesalePrice(BigDecimal.valueOf(Double.parseDouble(wsPriceStr)));
         book.setNumOfPages(Integer.valueOf(pageNum));
-        book.setPublisherID(selectedPub.getPublisherID());
+        book.setPublisherID(pubJpaController.getPublisherByName(selectedPub).getPublisherID());
         book.setDateOfPublication(new Date());
         book.setDateEntered(new Date());
         book.setLastModified(new Date());
         book.setIsRemoved(false);
-        book.setAuthorsCollection(authors);
+        selectedAuthor = authorsJpaController.getAuthorByName(selectedAuthor.getName());
+        BookAuthors ba = new BookAuthors();
+        ba.setIsbn(book.getIsbn());
+        ba.setAuthorID(selectedAuthor.getAuthorID());
+        this.bookauthorsJpaController.create(ba);
         bookJpaController.create(book);
         FacesContext.getCurrentInstance().getExternalContext().redirect("managerInventory.xhtml");
         return "managerInventory.xhtml";
     }
-    
-    public void onCreate(){
+
+    public void onCreate() {
         LOG.debug("onCreate called!");
     }
-    
+
     /**
      * Marks a book as removed (changes removal status to true)
+     *
      * @param book
      * @return
-     * @throws Exception 
+     * @throws Exception
      */
     public String removeBook(Book book) throws Exception {
         LOG.debug("Reached the remove method");
@@ -220,12 +223,13 @@ public class BookBackingBean implements Serializable {
         LOG.debug("Reached the edit method");
         return null;
     }
-    
+
     /**
      * Marks a book as not removed (changes removal status to false)
+     *
      * @param book
      * @return
-     * @throws Exception 
+     * @throws Exception
      */
     public String addBook(Book book) throws Exception {
         LOG.debug("Reached the add method");
@@ -237,35 +241,34 @@ public class BookBackingBean implements Serializable {
         LOG.debug("Reached the edit method");
         return null;
     }
-    
+
     /**
-     * Determines whether a book should be added or removed based on its current removal status
-     * whenever the corresponding link in the managerial ad page is clicked
-     * (changed to other state, if true than changed to false and vice versa)
+     * Determines whether a book should be added or removed based on its current
+     * removal status whenever the corresponding link in the managerial ad page
+     * is clicked (changed to other state, if true than changed to false and
+     * vice versa)
+     *
      * @param book
      * @return
-     * @throws Exception 
+     * @throws Exception
      */
-    public String addOrRemoveBook(Book book) throws Exception
-    {
-        if (book.getIsRemoved())
-        {
+    public String addOrRemoveBook(Book book) throws Exception {
+        if (book.getIsRemoved()) {
             addBook(book);
-        }
-        else
-        {
+        } else {
             removeBook(book);
         }
         FacesContext.getCurrentInstance().getExternalContext().redirect("managerInventory.xhtml");
         return null;
     }
-    
+
     /**
-     * Returns a String indicating what will occur when the corresponding link in the managerial
-     * book page is clicked
+     * Returns a String indicating what will occur when the corresponding link
+     * in the managerial book page is clicked
+     *
      * @param isRemoved
      * @return
-     * @throws Exception 
+     * @throws Exception
      */
     public String getRemovalStatus(boolean isRemoved) throws Exception {
         if (isRemoved)
@@ -277,12 +280,14 @@ public class BookBackingBean implements Serializable {
             return MessageLoader.getString("com.gb1w20.bundles.messages", "removeBook", null);
         }
     }
-    
+
     /**
-     * Validation method ensuring that a field in the "Add Book" modal is not left null
+     * Validation method ensuring that a field in the "Add Book" modal is not
+     * left null
+     *
      * @param context
      * @param component
-     * @param value 
+     * @param value
      */
     public void validateNotNull(FacesContext context, UIComponent component, Object value) {
         String input = (String)value;
@@ -293,12 +298,14 @@ public class BookBackingBean implements Serializable {
             throw new ValidatorException(msg);
         }
     }
-    
+
     /**
-     * Validation method ensuring that an entered ISBN is entirely numerical and of a valid length
+     * Validation method ensuring that an entered ISBN is entirely numerical and
+     * of a valid length
+     *
      * @param context
      * @param component
-     * @param value 
+     * @param value
      */
     public void validateISBN(FacesContext context, UIComponent component, Object value)
     {
@@ -321,10 +328,8 @@ public class BookBackingBean implements Serializable {
             msg.setSeverity(FacesMessage.SEVERITY_ERROR);
             throw new ValidatorException(msg);
         }
-        try
-        {
-            for (char c: input.toCharArray())
-            {
+        try {
+            for (char c : input.toCharArray()) {
                 Integer.parseInt(Character.toString(c));
             }
         }
@@ -335,30 +340,31 @@ public class BookBackingBean implements Serializable {
             throw new ValidatorException(msg);
         }
     }
-    
-    public void genreChangeMethod(String newGenre){
+
+    public void genreChangeMethod(String newGenre) {
         LOG.debug("new genre: " + newGenre);
         selectedGenre = newGenre;
     }
-    
-    public void authChangeMethod(String newAuthName){
+
+    public void authChangeMethod(String newAuthName) {
         LOG.debug("new auth: " + newAuthName);
         selectedAuthor = authorsJpaController.getAuthorByName(newAuthName);
+        LOG.debug("new auth: " + selectedAuthor.getDateEntered());
     }
-    
-    public void pubChangeMethod(String newPubName){
+
+    public void pubChangeMethod(String newPubName) {
         LOG.debug("new pub: " + newPubName);
-        selectedPub = pubJpaController.getPublisherByName(newPubName);
+        selectedPub = newPubName;
     }
-    
+
     /**
      * Validation method ensuring that the number of pages is entirely numerical
+     *
      * @param context
      * @param component
-     * @param value 
+     * @param value
      */
-    public void validatePages(FacesContext context, UIComponent component, Object value)
-    {
+    public void validatePages(FacesContext context, UIComponent component, Object value) {
         String input = value.toString() + "";
         if (input.isBlank() || input.isEmpty() || input == null)
         {
@@ -366,8 +372,7 @@ public class BookBackingBean implements Serializable {
             msg.setSeverity(FacesMessage.SEVERITY_ERROR);
             throw new ValidatorException(msg);
         }
-        try
-        {
+        try {
             Integer.parseInt(input);
         }
         catch(NumberFormatException nfe)
@@ -377,16 +382,16 @@ public class BookBackingBean implements Serializable {
             throw new ValidatorException(msg);
         }
     }
-    
+
     /**
-     * Validation method ensuring that the entered price is a valid double (so that it may be
-     * converted to a BigDecimal at creation time)
+     * Validation method ensuring that the entered price is a valid double (so
+     * that it may be converted to a BigDecimal at creation time)
+     *
      * @param context
      * @param component
-     * @param value 
+     * @param value
      */
-    public void validatePrice(FacesContext context, UIComponent component, Object value)
-    {
+    public void validatePrice(FacesContext context, UIComponent component, Object value) {
         String input = value + "";
         if (input.isBlank() || input.isEmpty() || input == null)
         {
@@ -394,8 +399,7 @@ public class BookBackingBean implements Serializable {
             msg.setSeverity(FacesMessage.SEVERITY_ERROR);
             throw new ValidatorException(msg);
         }
-        try
-        {
+        try {
             Double.parseDouble(input);
         }
         catch(NumberFormatException nfe)
@@ -405,5 +409,5 @@ public class BookBackingBean implements Serializable {
             throw new ValidatorException(msg);
         }
     }
-
+    
 }
