@@ -32,6 +32,10 @@ public class ReportsBean implements Serializable {
     
     private List<RankedBook> topSellers;
     
+    private List<Book> zeroSellers;
+    
+    private List<Book> stockReport;
+    
     
     @PostConstruct
     public void init() {
@@ -40,10 +44,19 @@ public class ReportsBean implements Serializable {
     private void updateReportsBean()
     {
         topSellers = bookCtrlr.getTopSellingBooks();
+        zeroSellers = bookCtrlr.getZeroSellingBooks();
+        stockReport = bookCtrlr.findBookEntities();
     }
     public List<RankedBook> getTopBooks()
     {
         return topSellers;
     }
-    
+    public List<Book> getZeroSellingBooks()
+    {
+        return zeroSellers;
+    }
+    public List<Book> getStockReport()
+    {
+        return stockReport;
+    }
 }
