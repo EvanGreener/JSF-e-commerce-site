@@ -157,7 +157,7 @@
                             #{sales.title}
                     </h:column>
                     <h:column>
-                        <f:facet name="header">Author(s)</f:facet>
+                        <f:facet name="header">#{msgs.author}</f:facet>
                             #{authorsJpaController.findAuthors(bookAuthorsJpaController.findBookAuthorsByIsbn(sales.isbn)[0].authorID).name}
                     </h:column>
                     <h:column>
@@ -166,14 +166,14 @@
                     </h:column>
                     <h:column>
                         <f:facet name="header">#{msgs.salePrice}</f:facet>
-                            $#{sales.salePrice}
+                            $#{bookJpaController.findAnySingleBook(sales.isbn).salePrice}
                     </h:column>
                     <h:column>
                         <f:facet name="header">#{msgs.wholesalePrice}</f:facet>
                             $#{sales.wholesalePrice}
                     </h:column>
                     <h:column>
-                        <f:facet name="header">Genre</f:facet>
+                        <f:facet name="header">#{msgs.genre}</f:facet>
                             #{sales.genre}
                     </h:column>
                     <h:column>

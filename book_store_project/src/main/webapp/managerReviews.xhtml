@@ -69,10 +69,6 @@ Reviews that have not be seen by the manager yet will have a status of pending a
                             #{reviews.dateEntered}
                     </h:column>
                     <h:column>
-                        <f:facet name="header">#{msgs.dateRemoved}</f:facet>
-                            #{reviews.dateRemoved}
-                    </h:column>
-                    <h:column>
                         <f:facet name="header">#{msgs.status}</f:facet>
                         <h:commandButton type="button" action="#{reviewManagmentBean.managePending(reviewManagmentBean.getIsRemoved(reviews.reviewID), reviews.reviewID , reviewManagmentBean.getPending(reviews.reviewID))}" value="#{reviewManagmentBean.getPendingStatus(reviewManagmentBean.getPending(reviews.reviewID))}" class="big ui primary button edit_btn">
                             <f:ajax execute="@form" render="reviewTable" />

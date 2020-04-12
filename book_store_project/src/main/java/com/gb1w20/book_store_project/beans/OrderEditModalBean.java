@@ -58,11 +58,13 @@ public class OrderEditModalBean implements Serializable {
      
      public String getNewSalePriceStr()
      {
+           LOG.debug("getNewSalePriceStr");
          return newSalePriceStr;
      }
      
      public void setNewSalePriceStr(String newVal)
      {
+          LOG.debug("setNewSalePriceStr");
          newSalePriceStr = newVal;
      }
     
@@ -119,13 +121,13 @@ public class OrderEditModalBean implements Serializable {
      * @return
      * @throws Exception 
      */
-    public String onSubmitEdit() throws Exception {
+    public String onSubmitEdit(String price) throws Exception {
         LOG.debug("onSubmitEdit called");
         currentItem.setPriceSold(Double.parseDouble(newSalePriceStr));
         LOG.debug("The new price of the item is: " + currentItem.getPriceSold());
         orderItemCtrl.edit(currentItem);
         LOG.debug("Item has been edited");
-        LOG.debug("The new price of the item is: " + currentItem.getPriceSold());
+        LOG.debug("The new price of the item is: " + newSalePriceStr);
         return null;
     }
     

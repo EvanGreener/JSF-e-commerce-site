@@ -1,17 +1,34 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package com.gb1w20.arquillian.test;
 
-import com.gb1w20.arquillian.test.beans.BookTestingBean;
-import com.gb1w20.arquillian.test.beans.ClientTestingBean;
-import com.gb1w20.book_store_project.backing.BookFormatBackingBean;
+import com.gb1w20.arquillian.test.beans.BookSearchTestingBean;
+import com.gb1w20.arquillian.test.beans.OrderSaleTestingBean;
 import com.gb1w20.book_store_project.beans.NewsBean;
 import com.gb1w20.book_store_project.entities.Book;
-import com.gb1w20.book_store_project.jpa_controllers.BookFormatJpaController;
-import com.gb1w20.book_store_project.entities.BookFormat;
 import com.gb1w20.book_store_project.jpa_controllers.BookJpaController;
-import com.gb1w20.book_store_project.jpa_controllers.ClientsJpaController;
 import com.gb1w20.book_store_project.jpa_controllers.exceptions.IllegalOrphanException;
 import com.gb1w20.book_store_project.util.MessageLoader;
-
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.Reader;
+import java.io.StringReader;
+import java.sql.Connection;
+import java.sql.SQLException;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Scanner;
+import javax.annotation.Resource;
+import javax.inject.Inject;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+import javax.sql.DataSource;
+import javax.transaction.UserTransaction;
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.junit.Arquillian;
 import org.jboss.shrinkwrap.api.ShrinkWrap;
@@ -19,41 +36,27 @@ import org.jboss.shrinkwrap.api.asset.EmptyAsset;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.jboss.shrinkwrap.resolver.api.maven.Maven;
 import org.junit.Before;
-import org.junit.runner.RunWith;
-
-import javax.annotation.Resource;
-import javax.inject.Inject;
-import javax.sql.DataSource;
-import java.io.*;
-import java.sql.Connection;
-import java.sql.SQLException;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Scanner;
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
-import javax.transaction.UserTransaction;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
-
 import org.junit.Rule;
 import org.junit.Test;
+import static org.junit.Assert.assertEquals;
+import org.junit.runner.RunWith;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
- * Arquillian testing for the book entity
- * @author Giancarlo Biasiucci
- * @version April 11, 2020
+ *
+ * @author giancarlo
  */
 @RunWith(Arquillian.class)
-public class BookParameterizedTest {
-
+public class OrderSaleParameterizedTest {
     private final static Logger LOG = LoggerFactory.getLogger(BookParameterizedTest.class);
 
     @Deployment
     public static WebArchive deploy() {
 
+        // Use an alternative to the JUnit assert library called AssertJ
+        // Need to reference MySQL driver as it is not part of either
+        // embedded or remote
         final File[] dependencies = Maven
                 .resolver()
                 .loadPomFromFile("pom.xml")
@@ -68,14 +71,14 @@ public class BookParameterizedTest {
         final WebArchive webArchive;
         webArchive = ShrinkWrap.create(WebArchive.class, "test.war")
                 .setWebXML(new File("src/main/webapp/WEB-INF/web.xml"))
-                .addPackage(BookFormatJpaController.class.getPackage())
+                
                 .addPackage(IllegalOrphanException.class.getPackage())
-                .addPackage(BookFormat.class.getPackage())
-                .addPackage(BookFormatBackingBean.class.getPackage())
+                .addPackage(BookJpaController.class.getPackage())
                 .addPackage(ParameterRule.class.getPackage())
-                .addPackage(ClientTestingBean.class.getPackage())
                 .addPackage(NewsBean.class.getPackage())
                 .addPackage(MessageLoader.class.getPackage())
+                .addPackage(OrderSaleTestingBean.class.getPackage())
+                .addPackage(Book.class.getPackage())
                 .addAsWebInfResource(EmptyAsset.INSTANCE, "beans.xml")
                 .addAsWebInfResource(new File("src/main/webapp/WEB-INF/payara-resources.xml"), "payara-resources.xml")
                 .addAsResource(new File("src/main/resources/META-INF/persistence.xml"), "META-INF/persistence.xml")
@@ -85,22 +88,21 @@ public class BookParameterizedTest {
 
         return webArchive;
     }
-    @Inject
-    private BookJpaController bookControl;
-
+    
     @Rule
-    public ParameterRule Bookrule = new ParameterRule("bookTest",
-            new BookTestingBean(new Book("9780141439471","Frankenstein"),14, "Not Removed"),
-            new BookTestingBean(new Book("9780062024039","Divergent"), 13, "Removed"),
-            new BookTestingBean(new Book("9780060584757","Mystic River"), 8, "Not Removed"),
-            new BookTestingBean(new Book("9780756404734","The Wise Man's Fear"), 8, "Not Removed"),
-            new BookTestingBean(new Book("9780345504968","The Passage"), 14, "Not Removed")
-            
+    public ParameterRule saleRule = new ParameterRule("saleTest",
+            new OrderSaleTestingBean("9780142000670", 10.00),
+            new OrderSaleTestingBean("9780439244190", 15.00),
+            new OrderSaleTestingBean("9780061120084", 12.00),
+            new OrderSaleTestingBean("9780684830421", 13.00),
+            new OrderSaleTestingBean("9780316769174", 18.00)
     );
-
-    private BookTestingBean bookTest;
-
-
+    
+    public OrderSaleTestingBean saleTest;
+    
+    @Inject
+    public BookJpaController bookControl;
+    
     @Resource(lookup = "java:app/jdbc/bookstore")
     private DataSource ds;
 
@@ -110,57 +112,18 @@ public class BookParameterizedTest {
     @Resource
     private UserTransaction utx;
     
-     /**
-     * Tests if a correct book is returned from an ISBN number
-     * By: Giancarlo Biasiucci
-     */
     @Test
-    public void testFindSingleBook() {
-        boolean isSuccess = true;
-        Book testBookInfo = bookControl.findAnySingleBook(bookTest.book.getIsbn());
-        LOG.debug(testBookInfo.toString());
-        if (!(testBookInfo.toString().equals(bookTest.book.toString()))) {
-            isSuccess = false;
-        }
-        assertTrue("Book info returned inconsistent results Expected:"+bookTest.book.toString()+" Result:"+testBookInfo.toString(), isSuccess);
-    }
-    
-    /**
-     * Tests if the correct number of similar genre books are returned from an isbn
-     * By: Giancarlo Biasiucci
-     */
-    @Test
-    public void testFindSimilarGenres() {
-        boolean isSuccess = true;
-        Book testBookInfo = bookControl.findAnySingleBook(bookTest.book.getIsbn());
-        int similarGenreCount = bookControl.getSimilarGenresBookCount(testBookInfo);
-        if (!(similarGenreCount == bookTest.expectedSimilar)) {
-            isSuccess = false;
-        }
-        assertTrue("Similar genres returned inconsistent results Expected:"+bookTest.expectedSimilar+" Result:"+similarGenreCount, isSuccess);
-    }
-    
-    /**
-     * Tests if the correct book status is retrieved (identical process to controller method)
-     * By: Giancarlo Biasiucci
-     */
-    @Test
-    public void testStatusRetrieval()
+    public void testExpectedSaleTotal()
     {
-        String removalStatus = "Not Removed";
-        if (bookControl.findAnySingleBook(bookTest.book.getIsbn()).getIsRemoved())
-        {
-            removalStatus = "Removed";
-        }
-        assertEquals("Expected: " + bookTest.expectedStatus + ", actual: " + removalStatus,
-                bookTest.expectedStatus, removalStatus);
+        double expectedSales = bookControl.getTotalSalesByIsbn(saleTest.isbn);
+        assertEquals("Expected: " + saleTest.expectedTotal + " actual: " + expectedSales, 
+                saleTest.expectedTotal, expectedSales,0.01);
     }
     
     /**
      * Restore the database to a known state before testing. This is important
      * if the test is destructive. This routine is courtesy of Bartosz Majsak
      * who also solved my Arquillian remote server problem
-     * From: KFWebStandardProject - ArquillianUnitTest.java
      */
     @Before
     public void seedDatabase() {
@@ -178,7 +141,6 @@ public class BookParameterizedTest {
 
     /**
      * The following methods support the seedDatabse method
-     * All of the following are from: KFWebStandardProject - ArquillianUnitTest.java
      */
     private String loadAsString(final String path) {
         try (InputStream inputStream = Thread.currentThread()

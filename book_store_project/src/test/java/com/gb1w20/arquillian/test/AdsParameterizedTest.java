@@ -51,20 +51,18 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
- *
- * @author giancarlo
+ * Parameterized testing for the ad class
+ * @author Giancarlo Biasiucci,shruti pareek
+ * @version April 11, 2020
  */
 @RunWith(Arquillian.class)
 public class AdsParameterizedTest {
-    
+
     private final static Logger LOG = LoggerFactory.getLogger(BookParameterizedTest.class);
 
     @Deployment
     public static WebArchive deploy() {
 
-        // Use an alternative to the JUnit assert library called AssertJ
-        // Need to reference MySQL driver as it is not part of either
-        // embedded or remote
         final File[] dependencies = Maven
                 .resolver()
                 .loadPomFromFile("pom.xml")
@@ -79,14 +77,14 @@ public class AdsParameterizedTest {
         final WebArchive webArchive;
         webArchive = ShrinkWrap.create(WebArchive.class, "test.war")
                 .setWebXML(new File("src/main/webapp/WEB-INF/web.xml"))
-                .addPackage(BookFormatJpaController.class.getPackage())
+                
                 .addPackage(IllegalOrphanException.class.getPackage())
-                .addPackage(BookFormat.class.getPackage())
-                .addPackage(BookFormatBackingBean.class.getPackage())
+                .addPackage(AdsJpaController.class.getPackage())
                 .addPackage(ParameterRule.class.getPackage())
-                .addPackage(ClientTestingBean.class.getPackage())
                 .addPackage(NewsBean.class.getPackage())
                 .addPackage(MessageLoader.class.getPackage())
+                .addPackage(AdsTestingBean.class.getPackage())
+                .addPackage(Ads.class.getPackage())
                 .addAsWebInfResource(EmptyAsset.INSTANCE, "beans.xml")
                 .addAsWebInfResource(new File("src/main/webapp/WEB-INF/payara-resources.xml"), "payara-resources.xml")
                 .addAsResource(new File("src/main/resources/META-INF/persistence.xml"), "META-INF/persistence.xml")
@@ -101,17 +99,15 @@ public class AdsParameterizedTest {
 
     @Rule
     public ParameterRule adsRule = new ParameterRule("adTest",
-            new AdsTestingBean(1, "Not Removed"),
-            new AdsTestingBean(2, "Not Removed"),
-            new AdsTestingBean(3, "Removed"),
-            new AdsTestingBean(4, "Removed"),
-            new AdsTestingBean(5, "Removed"),
-            new AdsTestingBean(6, "Removed")
-            
+            new AdsTestingBean(1, "Not Removed", 2),
+            new AdsTestingBean(2, "Not Removed", 2),
+            new AdsTestingBean(3, "Removed", 2),
+            new AdsTestingBean(4, "Removed", 2),
+            new AdsTestingBean(5, "Removed", 2),
+            new AdsTestingBean(6, "Removed", 2)
     );
 
     private AdsTestingBean adTest;
-
 
     @Resource(lookup = "java:app/jdbc/bookstore")
     private DataSource ds;
@@ -121,15 +117,23 @@ public class AdsParameterizedTest {
 
     @Resource
     private UserTransaction utx;
-    
+
+    /**
+     * Tests if a randomly generated advertisement is an actual ad
+     * By: Giancarlo Biasiucci
+     */
     @Test
-    public void testRandomAdIsAlwaysReal()
-    {
+    public void testRandomAdIsAlwaysReal() {
         Ads ad = adsControl.getRandomAd();
         List<Ads> allAds = adsControl.findAdsEntities();
         assertTrue("Expected: included, actual: not", allAds.contains(ad));
     }
     
+    /**
+     * Replicates the status retrieval method in the controller to test if the expected
+     * removal status of an ad is retrieved
+     * By: Giancarlo Biasiucci
+     */
     @Test
     public void testExpectedStatus()
     {
@@ -144,9 +148,40 @@ public class AdsParameterizedTest {
     }
     
     /**
+     * @author shruti pareek
+     */
+    @Test
+    public void testGetAdsCount() {
+        LOG.debug("testGetAdsCount");
+        boolean isSuccess = true;
+        int resultAdCount = adsControl.getAdsCount();
+        if (!(resultAdCount == adTest.expectedCount)) {
+            isSuccess = false;
+        }
+        assertTrue("adTest returned inconsistent results Expected:" + adTest.expectedCount + " Actual:" + resultAdCount, isSuccess);
+    }
+
+    /**
+     * @author shruti pareek
+     */
+    @Test
+    public void testAllEnabledAds() {
+        LOG.debug("testAllEnabledAds");
+        boolean isSuccess = false;
+        List<Ads> resultEnabledAds = adsControl.getAllEnabledAds();
+        for (Ads testAd : resultEnabledAds) {
+            if (!(testAd.getAdID() == adTest.adID)) {
+                isSuccess = true;
+            }
+        }
+        assertTrue("adTest returned inconsistent results", isSuccess);
+    }
+
+    /**
      * Restore the database to a known state before testing. This is important
      * if the test is destructive. This routine is courtesy of Bartosz Majsak
      * who also solved my Arquillian remote server problem
+     * From: KFWebStandardProject - ArquillianUnitTest.java
      */
     @Before
     public void seedDatabase() {
@@ -164,6 +199,7 @@ public class AdsParameterizedTest {
 
     /**
      * The following methods support the seedDatabse method
+     * All of the following are from: KFWebStandardProject - ArquillianUnitTest.java
      */
     private String loadAsString(final String path) {
         try (InputStream inputStream = Thread.currentThread()

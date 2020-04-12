@@ -10,16 +10,18 @@ import java.util.List;
 
 /**
  *
- * @author giancarlo
+ * @author giancarlo, shruti Pareek
  */
 public class AdsTestingBean {
     public int adID;
     public String expectedStatus;
+    public int expectedCount;
     
-    public AdsTestingBean(int adID, String expectedStatus)
+    public AdsTestingBean(int adID, String expectedStatus,int expectedCount)
     {
         this.adID = adID;
         this.expectedStatus = expectedStatus;
+        this.expectedCount = expectedCount;
     }
     
 }

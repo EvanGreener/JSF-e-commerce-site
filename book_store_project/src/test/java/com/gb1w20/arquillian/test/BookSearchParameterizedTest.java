@@ -1,55 +1,59 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package com.gb1w20.arquillian.test;
 
+import com.gb1w20.arquillian.test.beans.AdsTestingBean;
+import com.gb1w20.arquillian.test.beans.BookSearchTestingBean;
 import com.gb1w20.arquillian.test.beans.BookTestingBean;
-import com.gb1w20.arquillian.test.beans.ClientTestingBean;
-import com.gb1w20.book_store_project.backing.BookFormatBackingBean;
 import com.gb1w20.book_store_project.beans.NewsBean;
+import com.gb1w20.book_store_project.entities.Ads;
 import com.gb1w20.book_store_project.entities.Book;
-import com.gb1w20.book_store_project.jpa_controllers.BookFormatJpaController;
-import com.gb1w20.book_store_project.entities.BookFormat;
+import com.gb1w20.book_store_project.jpa_controllers.AdsJpaController;
 import com.gb1w20.book_store_project.jpa_controllers.BookJpaController;
-import com.gb1w20.book_store_project.jpa_controllers.ClientsJpaController;
 import com.gb1w20.book_store_project.jpa_controllers.exceptions.IllegalOrphanException;
 import com.gb1w20.book_store_project.util.MessageLoader;
-
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.Reader;
+import java.io.StringReader;
+import java.sql.Connection;
+import java.sql.SQLException;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Scanner;
+import javax.annotation.Resource;
+import javax.inject.Inject;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+import javax.sql.DataSource;
+import javax.transaction.UserTransaction;
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.junit.Arquillian;
 import org.jboss.shrinkwrap.api.ShrinkWrap;
 import org.jboss.shrinkwrap.api.asset.EmptyAsset;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.jboss.shrinkwrap.resolver.api.maven.Maven;
-import org.junit.Before;
-import org.junit.runner.RunWith;
-
-import javax.annotation.Resource;
-import javax.inject.Inject;
-import javax.sql.DataSource;
-import java.io.*;
-import java.sql.Connection;
-import java.sql.SQLException;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Scanner;
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
-import javax.transaction.UserTransaction;
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
-
+import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
- * Arquillian testing for the book entity
+ * Parameterized testing for the book search methods
  * @author Giancarlo Biasiucci
  * @version April 11, 2020
  */
 @RunWith(Arquillian.class)
-public class BookParameterizedTest {
-
-    private final static Logger LOG = LoggerFactory.getLogger(BookParameterizedTest.class);
+public class BookSearchParameterizedTest {
+    private final static Logger LOG = LoggerFactory.getLogger(BookSearchParameterizedTest.class);
 
     @Deployment
     public static WebArchive deploy() {
@@ -68,14 +72,14 @@ public class BookParameterizedTest {
         final WebArchive webArchive;
         webArchive = ShrinkWrap.create(WebArchive.class, "test.war")
                 .setWebXML(new File("src/main/webapp/WEB-INF/web.xml"))
-                .addPackage(BookFormatJpaController.class.getPackage())
+                
                 .addPackage(IllegalOrphanException.class.getPackage())
-                .addPackage(BookFormat.class.getPackage())
-                .addPackage(BookFormatBackingBean.class.getPackage())
+                .addPackage(BookJpaController.class.getPackage())
                 .addPackage(ParameterRule.class.getPackage())
-                .addPackage(ClientTestingBean.class.getPackage())
                 .addPackage(NewsBean.class.getPackage())
                 .addPackage(MessageLoader.class.getPackage())
+                .addPackage(BookSearchTestingBean.class.getPackage())
+                .addPackage(Book.class.getPackage())
                 .addAsWebInfResource(EmptyAsset.INSTANCE, "beans.xml")
                 .addAsWebInfResource(new File("src/main/webapp/WEB-INF/payara-resources.xml"), "payara-resources.xml")
                 .addAsResource(new File("src/main/resources/META-INF/persistence.xml"), "META-INF/persistence.xml")
@@ -87,20 +91,18 @@ public class BookParameterizedTest {
     }
     @Inject
     private BookJpaController bookControl;
-
+    
     @Rule
-    public ParameterRule Bookrule = new ParameterRule("bookTest",
-            new BookTestingBean(new Book("9780141439471","Frankenstein"),14, "Not Removed"),
-            new BookTestingBean(new Book("9780062024039","Divergent"), 13, "Removed"),
-            new BookTestingBean(new Book("9780060584757","Mystic River"), 8, "Not Removed"),
-            new BookTestingBean(new Book("9780756404734","The Wise Man's Fear"), 8, "Not Removed"),
-            new BookTestingBean(new Book("9780345504968","The Passage"), 14, "Not Removed")
-            
+    public ParameterRule bookRule = new ParameterRule("bookSearchTest",
+            new BookSearchTestingBean("Dennis", "author", 2,2),
+            new BookSearchTestingBean("Suz", "author", 3,3),
+            new BookSearchTestingBean("The", "title", 25,46),
+            new BookSearchTestingBean("Sa", "title", 2,2),
+            new BookSearchTestingBean("97801", "isbn", 5,7)
     );
-
-    private BookTestingBean bookTest;
-
-
+    
+    private BookSearchTestingBean bookSearchTest;
+    
     @Resource(lookup = "java:app/jdbc/bookstore")
     private DataSource ds;
 
@@ -110,50 +112,30 @@ public class BookParameterizedTest {
     @Resource
     private UserTransaction utx;
     
-     /**
-     * Tests if a correct book is returned from an ISBN number
-     * By: Giancarlo Biasiucci
-     */
-    @Test
-    public void testFindSingleBook() {
-        boolean isSuccess = true;
-        Book testBookInfo = bookControl.findAnySingleBook(bookTest.book.getIsbn());
-        LOG.debug(testBookInfo.toString());
-        if (!(testBookInfo.toString().equals(bookTest.book.toString()))) {
-            isSuccess = false;
-        }
-        assertTrue("Book info returned inconsistent results Expected:"+bookTest.book.toString()+" Result:"+testBookInfo.toString(), isSuccess);
-    }
-    
     /**
-     * Tests if the correct number of similar genre books are returned from an isbn
+     * Tests if the gallery page search returns the correct amount of books, given both
+     * the search query and the criteria
      * By: Giancarlo Biasiucci
      */
     @Test
-    public void testFindSimilarGenres() {
-        boolean isSuccess = true;
-        Book testBookInfo = bookControl.findAnySingleBook(bookTest.book.getIsbn());
-        int similarGenreCount = bookControl.getSimilarGenresBookCount(testBookInfo);
-        if (!(similarGenreCount == bookTest.expectedSimilar)) {
-            isSuccess = false;
-        }
-        assertTrue("Similar genres returned inconsistent results Expected:"+bookTest.expectedSimilar+" Result:"+similarGenreCount, isSuccess);
-    }
-    
-    /**
-     * Tests if the correct book status is retrieved (identical process to controller method)
-     * By: Giancarlo Biasiucci
-     */
-    @Test
-    public void testStatusRetrieval()
+    public void testSearch()
     {
-        String removalStatus = "Not Removed";
-        if (bookControl.findAnySingleBook(bookTest.book.getIsbn()).getIsRemoved())
-        {
-            removalStatus = "Removed";
-        }
-        assertEquals("Expected: " + bookTest.expectedStatus + ", actual: " + removalStatus,
-                bookTest.expectedStatus, removalStatus);
+        int results = bookControl.search(bookSearchTest.searchBy, bookSearchTest.query, 0).size();
+        assertEquals("Expected: " + bookSearchTest.expectedResults + ", actual: " + results,
+                bookSearchTest.expectedResults, results);
+    }
+    
+    /**
+     * Tests if manager-side search returns the correct amount of books, given both
+     * the search query and search criteria
+     * By: Giancarlo Biasiucci
+     */
+    @Test
+    public void testSearchAll()
+    {
+        int results = bookControl.searchAllBooks(bookSearchTest.searchBy, bookSearchTest.query, 0).size();
+        assertEquals("Expected: " + bookSearchTest.expectedResultsAll + ", actual: " + results,
+                bookSearchTest.expectedResultsAll, results);
     }
     
     /**

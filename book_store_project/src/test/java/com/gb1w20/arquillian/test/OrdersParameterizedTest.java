@@ -2,15 +2,19 @@ package com.gb1w20.arquillian.test;
 
 import com.gb1w20.arquillian.test.beans.BookTestingBean;
 import com.gb1w20.arquillian.test.beans.ClientTestingBean;
+import com.gb1w20.arquillian.test.beans.OrdersTestingBean;
 import com.gb1w20.book_store_project.backing.BookFormatBackingBean;
 import com.gb1w20.book_store_project.beans.NewsBean;
 import com.gb1w20.book_store_project.entities.Book;
 import com.gb1w20.book_store_project.jpa_controllers.BookFormatJpaController;
 import com.gb1w20.book_store_project.entities.BookFormat;
+import com.gb1w20.book_store_project.entities.CustomerReviews;
+import com.gb1w20.book_store_project.entities.OrderItem;
+import com.gb1w20.book_store_project.entities.Orders;
 import com.gb1w20.book_store_project.jpa_controllers.BookJpaController;
 import com.gb1w20.book_store_project.jpa_controllers.ClientsJpaController;
+import com.gb1w20.book_store_project.jpa_controllers.OrdersJpaController;
 import com.gb1w20.book_store_project.jpa_controllers.exceptions.IllegalOrphanException;
-import com.gb1w20.book_store_project.util.MessageLoader;
 
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.junit.Arquillian;
@@ -33,7 +37,6 @@ import java.util.Scanner;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.transaction.UserTransaction;
-import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 import org.junit.Rule;
@@ -42,18 +45,20 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
- * Arquillian testing for the book entity
- * @author Giancarlo Biasiucci
- * @version April 11, 2020
+ *
+ * @author Shruti Pareek
  */
 @RunWith(Arquillian.class)
-public class BookParameterizedTest {
+public class OrdersParameterizedTest {
 
-    private final static Logger LOG = LoggerFactory.getLogger(BookParameterizedTest.class);
+    private final static Logger LOG = LoggerFactory.getLogger(OrdersParameterizedTest.class);
 
     @Deployment
     public static WebArchive deploy() {
 
+        // Use an alternative to the JUnit assert library called AssertJ
+        // Need to reference MySQL driver as it is not part of either
+        // embedded or remote
         final File[] dependencies = Maven
                 .resolver()
                 .loadPomFromFile("pom.xml")
@@ -68,14 +73,12 @@ public class BookParameterizedTest {
         final WebArchive webArchive;
         webArchive = ShrinkWrap.create(WebArchive.class, "test.war")
                 .setWebXML(new File("src/main/webapp/WEB-INF/web.xml"))
-                .addPackage(BookFormatJpaController.class.getPackage())
+                .addPackage(OrdersJpaController.class.getPackage())
                 .addPackage(IllegalOrphanException.class.getPackage())
-                .addPackage(BookFormat.class.getPackage())
-                .addPackage(BookFormatBackingBean.class.getPackage())
                 .addPackage(ParameterRule.class.getPackage())
-                .addPackage(ClientTestingBean.class.getPackage())
-                .addPackage(NewsBean.class.getPackage())
-                .addPackage(MessageLoader.class.getPackage())
+                .addPackage(Orders.class.getPackage())
+                .addPackage(OrderItem.class.getPackage())
+                .addPackage(OrdersTestingBean.class.getPackage())
                 .addAsWebInfResource(EmptyAsset.INSTANCE, "beans.xml")
                 .addAsWebInfResource(new File("src/main/webapp/WEB-INF/payara-resources.xml"), "payara-resources.xml")
                 .addAsResource(new File("src/main/resources/META-INF/persistence.xml"), "META-INF/persistence.xml")
@@ -86,20 +89,18 @@ public class BookParameterizedTest {
         return webArchive;
     }
     @Inject
-    private BookJpaController bookControl;
+    private OrdersJpaController orderControl;
 
     @Rule
-    public ParameterRule Bookrule = new ParameterRule("bookTest",
-            new BookTestingBean(new Book("9780141439471","Frankenstein"),14, "Not Removed"),
-            new BookTestingBean(new Book("9780062024039","Divergent"), 13, "Removed"),
-            new BookTestingBean(new Book("9780060584757","Mystic River"), 8, "Not Removed"),
-            new BookTestingBean(new Book("9780756404734","The Wise Man's Fear"), 8, "Not Removed"),
-            new BookTestingBean(new Book("9780345504968","The Passage"), 14, "Not Removed")
-            
+    public ParameterRule Bookrule = new ParameterRule("orderTest",
+            new OrdersTestingBean(1, "cst.send@gmail.com", 1, new OrderItem(1), 1, "Removed", "9780142000670", "isbn", new Orders(1)),
+            new OrdersTestingBean(2, "cst.receive@gmail.com", 2, new OrderItem(2), 1, "Removed", "9780439244190", "isbn", new Orders(2)),
+            new OrdersTestingBean(3, "dcastaner0@cbslocal.com", 3, new OrderItem(3), 1, "Not Removed", "dcastaner0@cbslocal.com", "email", new Orders(3)),
+            new OrdersTestingBean(4, "jhutcheon1@last.fm", 5, new OrderItem(4), 1, "Removed", "5", "id", new Orders(5)),
+            new OrdersTestingBean(5, "sdoud2@liveinternet.ru", 6, new OrderItem(5), 1, "Not Removed", "6", "id", new Orders(6))
     );
 
-    private BookTestingBean bookTest;
-
+    private OrdersTestingBean orderTest;
 
     @Resource(lookup = "java:app/jdbc/bookstore")
     private DataSource ds;
@@ -109,58 +110,79 @@ public class BookParameterizedTest {
 
     @Resource
     private UserTransaction utx;
-    
-     /**
-     * Tests if a correct book is returned from an ISBN number
-     * By: Giancarlo Biasiucci
-     */
+
     @Test
-    public void testFindSingleBook() {
+    public void testGetClientEmailById() {
+        LOG.debug("testGetClientEmailById");
         boolean isSuccess = true;
-        Book testBookInfo = bookControl.findAnySingleBook(bookTest.book.getIsbn());
-        LOG.debug(testBookInfo.toString());
-        if (!(testBookInfo.toString().equals(bookTest.book.toString()))) {
+        String resultEmail = orderControl.getClientEmailById(orderTest.testClientId);
+
+        if (!(resultEmail.equals(orderTest.expectedEmail))) {
             isSuccess = false;
         }
-        assertTrue("Book info returned inconsistent results Expected:"+bookTest.book.toString()+" Result:"+testBookInfo.toString(), isSuccess);
+        assertTrue("orderTest returned inconsistent results Expected:" + orderTest.expectedEmail + " Actual:" + resultEmail, isSuccess);
     }
-    
-    /**
-     * Tests if the correct number of similar genre books are returned from an isbn
-     * By: Giancarlo Biasiucci
-     */
+
+    /*
     @Test
-    public void testFindSimilarGenres() {
+    public void testGetOrderItemsByOrderId() {
+        LOG.debug("testGetOrderItemsByOrderId");
         boolean isSuccess = true;
-        Book testBookInfo = bookControl.findAnySingleBook(bookTest.book.getIsbn());
-        int similarGenreCount = bookControl.getSimilarGenresBookCount(testBookInfo);
-        if (!(similarGenreCount == bookTest.expectedSimilar)) {
+        List<OrderItem> resultOrderItem = orderControl.getOrderItemsByOrderId(orderTest.testOrderId);
+
+        if (!(resultOrderItem.get(0).toString().equals(orderTest.expectedOrderItem.toString()))) {
             isSuccess = false;
         }
-        assertTrue("Similar genres returned inconsistent results Expected:"+bookTest.expectedSimilar+" Result:"+similarGenreCount, isSuccess);
+        assertTrue("orderTest returned inconsistent results Expected:" + orderTest.expectedOrderItem.toString() + " Actual:" + resultOrderItem.get(0).toString(), isSuccess);
     }
-    
-    /**
-     * Tests if the correct book status is retrieved (identical process to controller method)
-     * By: Giancarlo Biasiucci
-     */
+    */
+
     @Test
-    public void testStatusRetrieval()
-    {
-        String removalStatus = "Not Removed";
-        if (bookControl.findAnySingleBook(bookTest.book.getIsbn()).getIsRemoved())
+    public void testGetOrderItemsCountByOrderId() {
+        LOG.debug("testGetOrderItemsCountByOrderId");
+        boolean isSuccess = true;
+        int resultOrderItemCount = orderControl.getOrderItemsCountByOrderId(orderTest.testOrderId);
+
+        if (!(resultOrderItemCount == orderTest.expectedOrderItemCount)) {
+
+            isSuccess = false;
+        }
+        assertTrue("orderTest returned inconsistent results Expected:" + orderTest.expectedOrderItemCount + " Actual:" + resultOrderItemCount, isSuccess);
+    }
+
+    @Test
+    public void testGetStatusByOrderId() {
+        LOG.debug("testGetStatusByOrderId");
+        boolean isSuccess = true;
+        String resultStatus = "Not Removed";
+        
+        if (orderControl.findOrders(orderTest.testOrderId).getIsRemoved())
         {
-            removalStatus = "Removed";
+            resultStatus = "Removed";
         }
-        assertEquals("Expected: " + bookTest.expectedStatus + ", actual: " + removalStatus,
-                bookTest.expectedStatus, removalStatus);
+
+        if (!(resultStatus.equals(orderTest.expectedStatus))) {
+            isSuccess = false;
+        }
+        assertTrue("resultStatus returned inconsistent results Expected:" + orderTest.expectedStatus + " Actual:" + resultStatus, isSuccess);
     }
-    
+
+    @Test
+    public void testSearchOrders() {
+        LOG.debug("testSearchOrders");
+        boolean isSuccess = true;
+        List<Orders> resultOrder = orderControl.searchOrders(orderTest.testQuery, orderTest.testSearchBy);
+
+        if (!(resultOrder.get(0).toString().equals(orderTest.expectedOrder.toString()))) {
+            isSuccess = false;
+        }
+        assertTrue("orderTest returned inconsistent results Expected:" + orderTest.expectedOrder.toString() + " Actual:" + resultOrder.get(0).toString(), isSuccess);
+    }
+
     /**
      * Restore the database to a known state before testing. This is important
      * if the test is destructive. This routine is courtesy of Bartosz Majsak
      * who also solved my Arquillian remote server problem
-     * From: KFWebStandardProject - ArquillianUnitTest.java
      */
     @Before
     public void seedDatabase() {
@@ -178,7 +200,6 @@ public class BookParameterizedTest {
 
     /**
      * The following methods support the seedDatabse method
-     * All of the following are from: KFWebStandardProject - ArquillianUnitTest.java
      */
     private String loadAsString(final String path) {
         try (InputStream inputStream = Thread.currentThread()
