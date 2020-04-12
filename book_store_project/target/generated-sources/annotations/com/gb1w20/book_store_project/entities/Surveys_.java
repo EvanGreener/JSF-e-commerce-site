@@ -7,7 +7,7 @@ import javax.persistence.metamodel.ListAttribute;
 import javax.persistence.metamodel.SingularAttribute;
 import javax.persistence.metamodel.StaticMetamodel;
 
-@Generated(value="org.eclipse.persistence.internal.jpa.modelgen.CanonicalModelProcessor", date="2020-04-12T19:07:47", comments="EclipseLink-2.7.6.v20200131-rNA")
+@Generated(value="org.eclipse.persistence.internal.jpa.modelgen.CanonicalModelProcessor", date="2020-04-12T19:18:42", comments="EclipseLink-2.7.6.v20200131-rNA")
 @StaticMetamodel(Surveys.class)
 public class Surveys_ { 
 

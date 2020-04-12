@@ -2,6 +2,7 @@ package com.gb1w20.book_store_project.jpa_controllers;
 
 import com.gb1w20.book_store_project.entities.Authors_;
 import com.gb1w20.book_store_project.entities.Book;
+import com.gb1w20.book_store_project.entities.BookComparator;
 import com.gb1w20.book_store_project.entities.Book_;
 import com.gb1w20.book_store_project.entities.OrderItem_;
 import com.gb1w20.book_store_project.entities.Orders;
@@ -530,23 +531,24 @@ public class BookJpaController implements Serializable {
             return MessageLoader.getString("com.gb1w20.bundles.messages", "removed", null);
         }
     }
-
     /**
-     *
-     * @return
-     */
-    public List<RankedBook> getTopSellingBooks() {
-        TypedQuery<Book> query = em.createQuery("SELECT B FROM Book B, OrderItem OI Where B.isbn = OI.isbn", Book.class);
+ *
+ * @author Cedric Richards
+ */
+    public List<RankedBook> getTopSellingBooks()
+    {
+        TypedQuery<Book> query = em.createQuery("SELECT B FROM Book B", Book.class);
+
         List<Book> orderedBooks = query.getResultList();
-        TypedQuery<String> query2 = em.createQuery("SELECT CAST(COUNT(OI.isbn) AS CHAR(30)) as sales FROM Book B, OrderItem OI Where B.isbn = OI.isbn Order By sales DESC", String.class);
-        List<String> bookSales = query2.getResultList();
         List<RankedBook> results = new ArrayList<RankedBook>();
         int i = 0;
-        for (Book b : orderedBooks) {
-            results.add(new RankedBook(b, "1"));
+        for(Book b : orderedBooks)
+        {
+            
+            results.add(new RankedBook(b,getTotalSalesByIsbn(b.getIsbn())));
             i++;
         }
-
+        results.sort(new BookComparator());
         return results;
     }
 
@@ -567,4 +569,23 @@ public class BookJpaController implements Serializable {
         TypedQuery<Double> query = em.createQuery(cq);
         return query.getSingleResult() == null ? 0 : query.getSingleResult();
     }
+    /**
+ *
+ * @author Cedric Richards
+ */
+    public List<Book> getZeroSellingBooks()
+    {
+        List<RankedBook> allBooks = getTopSellingBooks();
+        List<Book> noSaleBooks = new ArrayList<Book>();
+        for(RankedBook b : allBooks)
+        {
+            if(-0.00001 < b.getSales() && b.getSales() < 0.00001 ){
+                
+            
+                noSaleBooks.add(b.getBook());
+            }
+        }
+        return noSaleBooks;
+    }
+    
 }
