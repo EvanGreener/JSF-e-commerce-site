@@ -6,8 +6,10 @@
 package com.gb1w20.book_store_project.beans;
 
 import com.gb1w20.book_store_project.entities.Book;
+import com.gb1w20.book_store_project.entities.OrderItemTotal;
 import com.gb1w20.book_store_project.entities.RankedBook;
 import com.gb1w20.book_store_project.jpa_controllers.BookJpaController;
+import com.gb1w20.book_store_project.jpa_controllers.OrderItemJpaController;
 import java.io.Serializable;
 import java.util.List;
 import javax.annotation.PostConstruct;
@@ -19,7 +21,7 @@ import org.slf4j.LoggerFactory;
 
 /**
  *
- * @author cawri
+ * @author Cedric Richards
  */
 @Named("reports")
 @ViewScoped
@@ -30,7 +32,16 @@ public class ReportsBean implements Serializable {
     @Inject
     private BookJpaController bookCtrlr;
     
+    @Inject
+    private OrderItemJpaController orderItemCtrlr;
+    
     private List<RankedBook> topSellers;
+    
+    private List<Book> zeroSellers;
+    
+    private List<Book> stockReport;
+    
+    private List<OrderItemTotal> totalSales;
     
     
     @PostConstruct
@@ -40,10 +51,24 @@ public class ReportsBean implements Serializable {
     private void updateReportsBean()
     {
         topSellers = bookCtrlr.getTopSellingBooks();
+        zeroSellers = bookCtrlr.getZeroSellingBooks();
+        stockReport = bookCtrlr.findBookEntities();
+        totalSales = orderItemCtrlr.getTotalSales();
     }
     public List<RankedBook> getTopBooks()
     {
         return topSellers;
     }
-    
+    public List<Book> getZeroSellingBooks()
+    {
+        return zeroSellers;
+    }
+    public List<Book> getStockReport()
+    {
+        return stockReport;
+    }
+    public List<OrderItemTotal> getTotalSales()
+    {
+        return totalSales;
+    }
 }

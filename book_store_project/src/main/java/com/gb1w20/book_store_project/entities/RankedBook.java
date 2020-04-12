@@ -11,8 +11,8 @@ package com.gb1w20.book_store_project.entities;
  */
 public class RankedBook {
     private Book book;
-    private String sales;
-    public RankedBook(Book book, String sales)
+    private double sales;
+    public RankedBook(Book book, double sales)
     {
         this.book = book;
         this.sales = sales;
@@ -21,7 +21,7 @@ public class RankedBook {
     {
         return this.book;
     }
-    public String getSales()
+    public double getSales()
     {
         return this.sales;
     }
