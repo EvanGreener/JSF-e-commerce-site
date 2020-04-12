@@ -17,7 +17,11 @@
         <param-name>smtpPassword</param-name>
         <param-value>BookStore123!</param-value>
     </context-param>
-
+    <error-page>
+    <error-code>404</error-code>
+        <location>/404Page.xhtml</location>
+    </error-page>
+    
     <session-config>
         <session-timeout>
             30

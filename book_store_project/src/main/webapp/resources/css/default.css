@@ -63,9 +63,9 @@ p.small,h3.small {
 
 }
 .navbar-brand{
-padding: 0 !important;
-padding-left: 20px !important;
-padding-bottom: 10px !important;
+    padding: 0 !important;
+    padding-left: 20px !important;
+    padding-bottom: 10px !important;
 }
 .brand-img-style {
     height: 100%;
@@ -197,9 +197,18 @@ padding-bottom: 10px !important;
 .oldPrice{
     text-decoration: line-through;
 }
-.error
-{
+.error{
     color: darkred;
     font-weight: bold;
     font-size: 16px;
+}
+
+.footerHelpLink{
+    text-align: center;
+    font-size:14px;
+    color: white;
+}
+.languageOption{
+    border:0px !important;
+font-weight: bold !important;
 }

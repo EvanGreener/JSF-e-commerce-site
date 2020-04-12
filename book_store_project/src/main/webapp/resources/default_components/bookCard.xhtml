@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <!--
 A Composite component created for book cards to avoid code duplication in all web pages
@@ -25,12 +25,12 @@ A Composite component created for book cards to avoid code duplication in all we
 
                 <!--link to its own book page -->
                 <!--link contains title and author -->
-                <h:link outcome="book" value = "">
+                <h:link class="bookItemLink" outcome="book" value = "">
                     <f:param  name="isbn" value="#{books.isbn}" />
-                    <div class="header textColor">
+                    <div class="header textColor ">
                         #{books.title}</div>
                     <div class="meta">
-                         #{authorsJpaController.findAuthors(bookAuthorsJpaController.findBookAuthorsByIsbn(books.isbn)[0].authorID).name}
+                        #{authorsJpaController.findAuthors(bookAuthorsJpaController.findBookAuthorsByIsbn(books.isbn)[0].authorID).name}
                     </div>
 
                     <!--book info -->
