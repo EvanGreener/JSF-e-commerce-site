@@ -11,6 +11,10 @@ import javax.inject.Named;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+/**
+ * 
+ * @author Evan Greenstein
+ */
 @Named("clientManagement")
 @SessionScoped
 public class ClientManagementBean implements Serializable {
@@ -31,6 +35,9 @@ public class ClientManagementBean implements Serializable {
      private String newCell;
      private String newCompanyName;
 
+     /**
+      * Updates the bean immediately once its firtst used.
+      */
      @PostConstruct
      public void init() {
           LOG.debug("Init called!");
@@ -117,16 +124,18 @@ public class ClientManagementBean implements Serializable {
           this.newCompanyName = newCompanyName;
      }
      
+     /**
+      * Gets called everytime the search is changed
+      */
      public void updateBean() {
           LOG.debug(query);
           results = clientCtrl.searchClients(query, searchBy);
      }
 
-     public void onEdit(int id) {
-          LOG.debug(id + "");
-          currentClient = clientCtrl.findClients(id);
-     }
-
+     /**
+      * When the client clicks the edit button in any given row
+      * @param id the clients id
+      */
      public void onClickEdit(int id) {
           LOG.debug(id + "");
           currentClient = clientCtrl.findClients(id);

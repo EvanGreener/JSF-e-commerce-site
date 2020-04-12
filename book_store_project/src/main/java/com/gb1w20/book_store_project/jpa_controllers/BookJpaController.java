@@ -181,6 +181,13 @@ public class BookJpaController implements Serializable {
         return books.size();
     }
 
+    /**
+     * Evan Greenstein & Giancarlo
+     * @param searchBy What the user is searching by
+     * @param q The string the user types in the seach bar
+     * @param page The page of the results (8 per page)
+     * @return The result set of books
+     */
     public List<Book> search(String searchBy, String q, int page) {
 
         String expression = "%" + q + "%";
@@ -206,6 +213,14 @@ public class BookJpaController implements Serializable {
         return query.getResultList();
     }
     
+    /**
+     * Evan Greenstein
+     * 
+     * @param searchBy what the user is searching by
+     * @param q  the string the user types in the seach bar
+     * @param page the page of the results (8 per page)
+     * @return The result set of books
+     */
     public List<Book> searchAllBooks(String searchBy, String q, int page) {
 
         String expression = "%" + q + "%";

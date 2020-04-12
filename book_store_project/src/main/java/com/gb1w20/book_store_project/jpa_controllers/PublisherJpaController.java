@@ -135,6 +135,7 @@ public class PublisherJpaController implements Serializable {
         return q.getResultList();
     }
     
+    
     public int getPublisherIDByName(String name) {
         CriteriaBuilder cb = em.getCriteriaBuilder();
         CriteriaQuery cq = cb.createQuery();
