@@ -30,9 +30,7 @@ A Composite component created for book cards to avoid code duplication in all we
                     <div class="header textColor">
                         #{books.title}</div>
                     <div class="meta">
-                        <ui:repeat value="#{books.authorsCollection}" var="author">
-                            #{author.name}
-                        </ui:repeat>
+                         #{authorsJpaController.findAuthors(bookAuthorsJpaController.findBookAuthorsByIsbn(books.isbn)[0].authorID).name}
                     </div>
 
                     <!--book info -->
