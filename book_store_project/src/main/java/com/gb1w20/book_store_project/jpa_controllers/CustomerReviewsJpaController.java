@@ -1,6 +1,5 @@
 package com.gb1w20.book_store_project.jpa_controllers;
 
-import com.gb1w20.book_store_project.entities.Book;
 import com.gb1w20.book_store_project.entities.CustomerReviews;
 import com.gb1w20.book_store_project.jpa_controllers.exceptions.NonexistentEntityException;
 import java.io.Serializable;
@@ -33,9 +32,17 @@ public class CustomerReviewsJpaController implements Serializable {
     @PersistenceContext
     private EntityManager em;
 
+    /**
+     *
+     */
     public CustomerReviewsJpaController() {
     }
 
+    /**
+     *
+     * @param customerReviews
+     * @throws Exception
+     */
     public void create(CustomerReviews customerReviews) throws Exception {
         try {
             utx.begin();
@@ -51,6 +58,12 @@ public class CustomerReviewsJpaController implements Serializable {
         }
     }
 
+    /**
+     *
+     * @param customerReviews
+     * @throws NonexistentEntityException
+     * @throws Exception
+     */
     public void edit(CustomerReviews customerReviews) throws NonexistentEntityException, Exception {
         try {
             utx.begin();
@@ -73,6 +86,12 @@ public class CustomerReviewsJpaController implements Serializable {
         }
     }
 
+    /**
+     *
+     * @param id
+     * @throws NonexistentEntityException
+     * @throws Exception
+     */
     public void destroy(Integer id) throws NonexistentEntityException, Exception {
         try {
             utx.begin();
@@ -95,10 +114,20 @@ public class CustomerReviewsJpaController implements Serializable {
         }
     }
 
+    /**
+     *
+     * @return
+     */
     public List<CustomerReviews> findCustomerReviewsEntities() {
         return findCustomerReviewsEntities(true, -1, -1);
     }
 
+    /**
+     *
+     * @param maxResults
+     * @param firstResult
+     * @return
+     */
     public List<CustomerReviews> findCustomerReviewsEntities(int maxResults, int firstResult) {
         return findCustomerReviewsEntities(false, maxResults, firstResult);
     }
@@ -114,6 +143,11 @@ public class CustomerReviewsJpaController implements Serializable {
         return q.getResultList();
     }
 
+    /**
+     *
+     * @param id
+     * @return
+     */
     public CustomerReviews findCustomerReviews(Integer id) {
         return em.find(CustomerReviews.class, id);
     }

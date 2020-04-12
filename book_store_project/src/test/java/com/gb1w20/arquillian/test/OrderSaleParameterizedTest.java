@@ -1,12 +1,15 @@
 /*
- * All arquillain tests belong to this package
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
  */
 package com.gb1w20.arquillian.test;
 
-import com.gb1w20.arquillian.test.beans.AdsTestingBean;
+import com.gb1w20.arquillian.test.beans.BookSearchTestingBean;
+import com.gb1w20.arquillian.test.beans.OrderSaleTestingBean;
 import com.gb1w20.book_store_project.beans.NewsBean;
-import com.gb1w20.book_store_project.entities.Ads;
-import com.gb1w20.book_store_project.jpa_controllers.AdsJpaController;
+import com.gb1w20.book_store_project.entities.Book;
+import com.gb1w20.book_store_project.jpa_controllers.BookJpaController;
 import com.gb1w20.book_store_project.jpa_controllers.exceptions.IllegalOrphanException;
 import com.gb1w20.book_store_project.util.MessageLoader;
 import java.io.BufferedReader;
@@ -32,34 +35,28 @@ import org.jboss.shrinkwrap.api.ShrinkWrap;
 import org.jboss.shrinkwrap.api.asset.EmptyAsset;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.jboss.shrinkwrap.resolver.api.maven.Maven;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
+import static org.junit.Assert.assertEquals;
 import org.junit.runner.RunWith;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
-<<<<<<< HEAD
- * Parameterized testing for the ad class
- * @author Giancarlo Biasiucci,shruti pareek
- * @version April 11, 2020
-=======
- * Tests ads jpa controller methods
- * @author giancarlo,shruti pareek
->>>>>>> 574368e2291f90acd82af0bb499612e9ad6bf485
+ *
+ * @author giancarlo
  */
 @RunWith(Arquillian.class)
-public class AdsParameterizedTest {
-
-    private final static Logger LOG = LoggerFactory.getLogger(AdsParameterizedTest.class);
-
+public class OrderSaleParameterizedTest {
+    private final static Logger LOG = LoggerFactory.getLogger(BookParameterizedTest.class);
 
     @Deployment
     public static WebArchive deploy() {
 
+        // Use an alternative to the JUnit assert library called AssertJ
+        // Need to reference MySQL driver as it is not part of either
+        // embedded or remote
         final File[] dependencies = Maven
                 .resolver()
                 .loadPomFromFile("pom.xml")
@@ -76,12 +73,12 @@ public class AdsParameterizedTest {
                 .setWebXML(new File("src/main/webapp/WEB-INF/web.xml"))
                 
                 .addPackage(IllegalOrphanException.class.getPackage())
-                .addPackage(AdsJpaController.class.getPackage())
+                .addPackage(BookJpaController.class.getPackage())
                 .addPackage(ParameterRule.class.getPackage())
                 .addPackage(NewsBean.class.getPackage())
                 .addPackage(MessageLoader.class.getPackage())
-                .addPackage(AdsTestingBean.class.getPackage())
-                .addPackage(Ads.class.getPackage())
+                .addPackage(OrderSaleTestingBean.class.getPackage())
+                .addPackage(Book.class.getPackage())
                 .addAsWebInfResource(EmptyAsset.INSTANCE, "beans.xml")
                 .addAsWebInfResource(new File("src/main/webapp/WEB-INF/payara-resources.xml"), "payara-resources.xml")
                 .addAsResource(new File("src/main/resources/META-INF/persistence.xml"), "META-INF/persistence.xml")
@@ -91,24 +88,21 @@ public class AdsParameterizedTest {
 
         return webArchive;
     }
-    @Inject
-    private AdsJpaController adsControl;
-
-    /**
-     *
-     */
+    
     @Rule
-    public ParameterRule adsRule = new ParameterRule("adTest",
-            new AdsTestingBean(1, "Not Removed", 2),
-            new AdsTestingBean(2, "Not Removed", 2),
-            new AdsTestingBean(3, "Removed", 2),
-            new AdsTestingBean(4, "Removed", 2),
-            new AdsTestingBean(5, "Removed", 2),
-            new AdsTestingBean(6, "Removed", 2)
+    public ParameterRule saleRule = new ParameterRule("saleTest",
+            new OrderSaleTestingBean("9780142000670", 10.00),
+            new OrderSaleTestingBean("9780439244190", 15.00),
+            new OrderSaleTestingBean("9780061120084", 12.00),
+            new OrderSaleTestingBean("9780684830421", 13.00),
+            new OrderSaleTestingBean("9780316769174", 18.00)
     );
-
-    private AdsTestingBean adTest;
-
+    
+    public OrderSaleTestingBean saleTest;
+    
+    @Inject
+    public BookJpaController bookControl;
+    
     @Resource(lookup = "java:app/jdbc/bookstore")
     private DataSource ds;
 
@@ -117,72 +111,19 @@ public class AdsParameterizedTest {
 
     @Resource
     private UserTransaction utx;
-
-    /**
-     * Tests if a randomly generated advertisement is an actual ad
-     * By: Giancarlo Biasiucci
-     */
-    @Test
-    public void testRandomAdIsAlwaysReal() {
-        Ads ad = adsControl.getRandomAd();
-        List<Ads> allAds = adsControl.findAdsEntities();
-        assertTrue("Expected: included, actual: not", allAds.contains(ad));
-    }
     
-    /**
-     * Replicates the status retrieval method in the controller to test if the expected
-     * removal status of an ad is retrieved
-     * By: Giancarlo Biasiucci
-     */
     @Test
-    public void testExpectedStatus()
+    public void testExpectedSaleTotal()
     {
-        String removalString = "Not Removed";
-        boolean removalStatus = adsControl.findAds(adTest.adID).getIsRemoved();
-        if (removalStatus)
-        {
-            removalString = "Removed";
-        }
-        assertEquals("Expected: " + adTest.expectedStatus + ", actual: " + removalString,
-                adTest.expectedStatus, removalString);
+        double expectedSales = bookControl.getTotalSalesByIsbn(saleTest.isbn);
+        assertEquals("Expected: " + saleTest.expectedTotal + " actual: " + expectedSales, 
+                saleTest.expectedTotal, expectedSales,0.01);
     }
     
-    /**
-     * method for testing the count of advertisements
-     * @author shruti pareek
-     */
-    @Test
-    public void testGetAdsCount() {
-        LOG.debug("testGetAdsCount");
-        boolean isSuccess = true;
-        int resultAdCount = adsControl.getAdsCount();
-        if (!(resultAdCount == adTest.expectedCount)) {
-            isSuccess = false;
-        }
-        assertTrue("adTest returned inconsistent results Expected:" + adTest.expectedCount + " Actual:" + resultAdCount, isSuccess);
-    }
-
-    /**
-     * @author shruti pareek
-     */
-    @Test
-    public void testAllEnabledAds() {
-        LOG.debug("testAllEnabledAds");
-        boolean isSuccess = false;
-        List<Ads> resultEnabledAds = adsControl.getAllEnabledAds();
-        for (Ads testAd : resultEnabledAds) {
-            if (!(testAd.getAdID() == adTest.adID)) {
-                isSuccess = true;
-            }
-        }
-        assertTrue("adTest returned inconsistent results", isSuccess);
-    }
-
     /**
      * Restore the database to a known state before testing. This is important
      * if the test is destructive. This routine is courtesy of Bartosz Majsak
      * who also solved my Arquillian remote server problem
-     * From: KFWebStandardProject - ArquillianUnitTest.java
      */
     @Before
     public void seedDatabase() {
@@ -200,7 +141,6 @@ public class AdsParameterizedTest {
 
     /**
      * The following methods support the seedDatabse method
-     * All of the following are from: KFWebStandardProject - ArquillianUnitTest.java
      */
     private String loadAsString(final String path) {
         try (InputStream inputStream = Thread.currentThread()

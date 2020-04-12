@@ -3,11 +3,11 @@ package com.gb1w20.book_store_project.backing;
 import com.gb1w20.book_store_project.entities.Authors;
 import com.gb1w20.book_store_project.entities.Book;
 import com.gb1w20.book_store_project.entities.BookAuthors;
-import com.gb1w20.book_store_project.entities.Publisher;
 import com.gb1w20.book_store_project.jpa_controllers.AuthorsJpaController;
 import com.gb1w20.book_store_project.jpa_controllers.BookAuthorsJpaController;
 import com.gb1w20.book_store_project.jpa_controllers.BookJpaController;
 import com.gb1w20.book_store_project.jpa_controllers.PublisherJpaController;
+import com.gb1w20.book_store_project.util.MessageLoader;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.ArrayList;
@@ -74,6 +74,12 @@ public class BookBackingBean implements Serializable {
         }
         return book;
     }
+    
+    /**
+     * By: Giancarlo Biasiucci
+     * Returns the names of all publishers every time one is to be selected
+     * @return List of publishers
+     */
 
     public List<String> getPubNames() {
         if (pubNames == null) {
@@ -82,6 +88,11 @@ public class BookBackingBean implements Serializable {
         return pubNames;
     }
 
+    /**
+     * By: Giancarlo Biasiucci
+     * Returns a list of all authors every time one is to be selected
+     * @return List of authors
+     */
     public List<String> getAuthorNames() {
         if (authorNames == null) {
             authorNames = authorsJpaController.getAuthorNames();
@@ -89,7 +100,12 @@ public class BookBackingBean implements Serializable {
         return authorNames;
     }
 
-    //Genres are added manually since referencing the controller at this point would generate a NullPointerException
+    /**
+     * Genres are added manually since referencing the controller at this point 
+     * would generate a NullPointerException
+     * By: Giancarlo Biasiucci
+     * @return List of genres
+     */
     public List<String> getGenres() {
         if (genres == null) {
             genres = new ArrayList<String>();
@@ -179,7 +195,7 @@ public class BookBackingBean implements Serializable {
      * @throws Exception
      */
     public String createBook() throws Exception {
-        List<Authors> authors = new ArrayList<Authors>();
+        List<Authors> authors = new ArrayList<>();
         authors.add(selectedAuthor);
         book.setGenre(selectedGenre);
         book.setListPrice(BigDecimal.valueOf(Double.parseDouble(lPriceStr)));
@@ -191,6 +207,7 @@ public class BookBackingBean implements Serializable {
         book.setDateEntered(new Date());
         book.setLastModified(new Date());
         book.setIsRemoved(false);
+        book.setAuthorsCollection(authors);
         selectedAuthor = authorsJpaController.getAuthorByName(selectedAuthor.getName());
         BookAuthors ba = new BookAuthors();
         ba.setIsbn(book.getIsbn());
@@ -207,7 +224,7 @@ public class BookBackingBean implements Serializable {
 
     /**
      * Marks a book as removed (changes removal status to true)
-     *
+     * By: Giancarlo Biasiucci
      * @param book
      * @return
      * @throws Exception
@@ -225,7 +242,7 @@ public class BookBackingBean implements Serializable {
 
     /**
      * Marks a book as not removed (changes removal status to false)
-     *
+     * By: Giancarlo Biasiucci
      * @param book
      * @return
      * @throws Exception
@@ -246,7 +263,7 @@ public class BookBackingBean implements Serializable {
      * removal status whenever the corresponding link in the managerial ad page
      * is clicked (changed to other state, if true than changed to false and
      * vice versa)
-     *
+     * By: Giancarlo Biasiucci
      * @param book
      * @return
      * @throws Exception
@@ -264,83 +281,108 @@ public class BookBackingBean implements Serializable {
     /**
      * Returns a String indicating what will occur when the corresponding link
      * in the managerial book page is clicked
-     *
+     * By: Giancarlo Biasiucci
      * @param isRemoved
-     * @return
+     * @return String indicating removal status
      * @throws Exception
      */
     public String getRemovalStatus(boolean isRemoved) throws Exception {
-        if (isRemoved) {
-            return "Display Book";
-        } else {
-            return "Remove Book";
+        if (isRemoved)
+        {
+            return MessageLoader.getString("com.gb1w20.bundles.messages", "displayBook", null);
+        }
+        else
+        {
+            return MessageLoader.getString("com.gb1w20.bundles.messages", "removeBook", null);
         }
     }
 
     /**
      * Validation method ensuring that a field in the "Add Book" modal is not
      * left null
-     *
+     * By: Giancarlo Biasiucci
      * @param context
      * @param component
      * @param value
      */
     public void validateNotNull(FacesContext context, UIComponent component, Object value) {
-        String input = (String) value;
-        if (input.isBlank() || input.isEmpty() || input == null) {
-            String message = context.getApplication().evaluateExpressionGet(context, "Value must not be left blank", String.class);
-            FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR, message, message);
+        String input = (String)value;
+        if (input.isBlank() || input.isEmpty() || input == null)
+        {
+            FacesMessage msg = MessageLoader.getMessage("com.gb1w20.bundles.messages", "valueNotNull", null);
+            msg.setSeverity(FacesMessage.SEVERITY_ERROR);
             throw new ValidatorException(msg);
         }
     }
 
     /**
-     * Validation method ensuring that an entered ISBN is entirely numerical and
+     * Validation method ensuring that an entered ISBN is entirely numerical, unique, and
      * of a valid length
-     *
+     * By: Giancarlo Biasiucci
      * @param context
      * @param component
      * @param value
      */
-    public void validateISBN(FacesContext context, UIComponent component, Object value) {
-        String input = (String) value;
-        if (input.isBlank() || input.isEmpty() || input == null) {
-            String message = context.getApplication().evaluateExpressionGet(context, "Value must not be left blank", String.class);
-            FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR, message, message);
+    public void validateISBN(FacesContext context, UIComponent component, Object value)
+    {
+        String input = (String)value;
+        if (input.isBlank() || input.isEmpty() || input == null)
+        {
+            FacesMessage msg = MessageLoader.getMessage("com.gb1w20.bundles.messages", "valueNotNull", null);
+            msg.setSeverity(FacesMessage.SEVERITY_ERROR);
             throw new ValidatorException(msg);
         }
-        if (input.length() > 13) {
-            String message = context.getApplication().evaluateExpressionGet(context, "ISBN must not be more than 13 digits", String.class);
-            FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR, message, message);
+        if (input.length() > 13)
+        {
+            FacesMessage msg = MessageLoader.getMessage("com.gb1w20.bundles.messages", "isbnDigits", null);
+            msg.setSeverity(FacesMessage.SEVERITY_ERROR);
             throw new ValidatorException(msg);
         }
-        if (bookJpaController.getAllISBN().contains(input)) {
-            String message = context.getApplication().evaluateExpressionGet(context, "ISBN already exists", String.class);
-            FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR, message, message);
+        if (bookJpaController.getAllISBN().contains(input))
+        {
+            FacesMessage msg = MessageLoader.getMessage("com.gb1w20.bundles.messages", "isbnExists", null);
+            msg.setSeverity(FacesMessage.SEVERITY_ERROR);
             throw new ValidatorException(msg);
         }
         try {
             for (char c : input.toCharArray()) {
                 Integer.parseInt(Character.toString(c));
             }
-        } catch (NumberFormatException nfe) {
-            String message = context.getApplication().evaluateExpressionGet(context, "Invalid ISBN: contains non-numeric characters", String.class);
-            FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR, message, message);
+        }
+        catch(NumberFormatException nfe)
+        {
+            FacesMessage msg = MessageLoader.getMessage("com.gb1w20.bundles.messages", "badIsbn", null);
+            msg.setSeverity(FacesMessage.SEVERITY_ERROR);
             throw new ValidatorException(msg);
         }
     }
 
+    /**
+     * By: Giancarlo Biasiucci
+     * Sets the genre for the new book every time one is selected
+     * @param newGenre 
+     */
     public void genreChangeMethod(String newGenre) {
         LOG.debug("new genre: " + newGenre);
         selectedGenre = newGenre;
     }
 
+    /**
+     * By: Giancarlo Biasiucci
+     * Sets the author for the new book every time one is selected
+     * @param newAuthName 
+     */
     public void authChangeMethod(String newAuthName) {
         LOG.debug("new auth: " + newAuthName);
         selectedAuthor = authorsJpaController.getAuthorByName(newAuthName);
-        LOG.debug("new auth: " + selectedAuthor.getDateEntered());
+        LOG.debug("new auth: " + selectedAuthor.getAuthorID());
     }
 
+    /**
+     * By: Giancarlo Biasiucci
+     * Sets the publisher for the new book every time one is selected
+     * @param newPubName 
+     */
     public void pubChangeMethod(String newPubName) {
         LOG.debug("new pub: " + newPubName);
         selectedPub = newPubName;
@@ -348,23 +390,26 @@ public class BookBackingBean implements Serializable {
 
     /**
      * Validation method ensuring that the number of pages is entirely numerical
-     *
+     * By: Giancarlo Biasiucci
      * @param context
      * @param component
      * @param value
      */
     public void validatePages(FacesContext context, UIComponent component, Object value) {
         String input = value.toString() + "";
-        if (input.isBlank() || input.isEmpty() || input == null) {
-            String message = context.getApplication().evaluateExpressionGet(context, "Value must not be left blank", String.class);
-            FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR, message, message);
+        if (input.isBlank() || input.isEmpty() || input == null)
+        {
+            FacesMessage msg = MessageLoader.getMessage("com.gb1w20.bundles.messages", "valueNotNull", null);
+            msg.setSeverity(FacesMessage.SEVERITY_ERROR);
             throw new ValidatorException(msg);
         }
         try {
             Integer.parseInt(input);
-        } catch (NumberFormatException nfe) {
-            String message = context.getApplication().evaluateExpressionGet(context, "Invalid number of pages: contains non-numeric characters", String.class);
-            FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR, message, message);
+        }
+        catch(NumberFormatException nfe)
+        {
+            FacesMessage msg = MessageLoader.getMessage("com.gb1w20.bundles.messages", "badPages", null);
+            msg.setSeverity(FacesMessage.SEVERITY_ERROR);
             throw new ValidatorException(msg);
         }
     }
@@ -372,24 +417,26 @@ public class BookBackingBean implements Serializable {
     /**
      * Validation method ensuring that the entered price is a valid double (so
      * that it may be converted to a BigDecimal at creation time)
-     *
+     * By: Giancarlo Biasiucci
      * @param context
      * @param component
      * @param value
      */
     public void validatePrice(FacesContext context, UIComponent component, Object value) {
         String input = value + "";
-        
-        if (input.isBlank() || input.isEmpty() || input == null) {
-            String message = context.getApplication().evaluateExpressionGet(context, "Value must not be left blank", String.class);
-            FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR, message, message);
+        if (input.isBlank() || input.isEmpty() || input == null)
+        {
+            FacesMessage msg = MessageLoader.getMessage("com.gb1w20.bundles.messages", "valueNotNull", null);
+            msg.setSeverity(FacesMessage.SEVERITY_ERROR);
             throw new ValidatorException(msg);
         }
         try {
             Double.parseDouble(input);
-        } catch (NumberFormatException nfe) {
-            String message = context.getApplication().evaluateExpressionGet(context, "Invalid price: contains non-numeric characters", String.class);
-            FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR, message, message);
+        }
+        catch(NumberFormatException nfe)
+        {
+            FacesMessage msg = MessageLoader.getMessage("com.gb1w20.bundles.messages", "badPrice", null);
+            msg.setSeverity(FacesMessage.SEVERITY_ERROR);
             throw new ValidatorException(msg);
         }
     }

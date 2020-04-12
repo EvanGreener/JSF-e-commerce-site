@@ -17,6 +17,7 @@ import com.gb1w20.book_store_project.jpa_controllers.ClientsJpaController;
 import com.gb1w20.book_store_project.jpa_controllers.OrderItemJpaController;
 import com.gb1w20.book_store_project.jpa_controllers.OrdersJpaController;
 import com.gb1w20.book_store_project.jpa_controllers.ClientInventoryJpaController;
+import com.gb1w20.book_store_project.util.MessageLoader;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
@@ -165,6 +166,13 @@ public class CartBackingBean implements Serializable {
         return "cart.xhtml";
     }
 
+    /**
+     * Validates that the expiry year is legitimate and a valid year
+     * By: Giancarlo Biasiucci
+     * @param context
+     * @param component
+     * @param value 
+     */
     public void validateExpiryYear(FacesContext context, UIComponent component, Object value) {
         String year = (String) value;
         try {
@@ -172,18 +180,25 @@ public class CartBackingBean implements Serializable {
                 Integer.parseInt(Character.toString(c));
             }
         } catch (NumberFormatException nfe) {
-            String message = context.getApplication().evaluateExpressionGet(context, "Invalid year: contains non-numeric characters", String.class);
-            FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR, message, message);
+            FacesMessage msg = MessageLoader.getMessage("com.gb1w20.bundles.messages", "invalidYear", null);
+            msg.setSeverity(FacesMessage.SEVERITY_ERROR);
             throw new ValidatorException(msg);
         }
         int yearInt = Integer.parseInt(year);
         if (!(yearInt >= 2020)) {
-            String message = context.getApplication().evaluateExpressionGet(context, "Invalid year: must be either present or future year", String.class);
-            FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR, message, message);
+            FacesMessage msg = MessageLoader.getMessage("com.gb1w20.bundles.messages", "invalidYearNum", null);
+            msg.setSeverity(FacesMessage.SEVERITY_ERROR);
             throw new ValidatorException(msg);
         }
     }
 
+    /**
+     * Validates that the expiry month is legitimate and a valid month
+     * By: Giancarlo Biasiucci
+     * @param context
+     * @param component
+     * @param value 
+     */
     public void validateExpiryMonth(FacesContext context, UIComponent component, Object value) {
         String month = (String) value;
         try {
@@ -191,17 +206,25 @@ public class CartBackingBean implements Serializable {
                 Integer.parseInt(Character.toString(c));
             }
         } catch (NumberFormatException nfe) {
-            String message = context.getApplication().evaluateExpressionGet(context, "Invalid month: contains non-numeric characters", String.class);
-            FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR, message, message);
+            FacesMessage msg = MessageLoader.getMessage("com.gb1w20.bundles.messages", "invalidMonth", null);
+            msg.setSeverity(FacesMessage.SEVERITY_ERROR);
             throw new ValidatorException(msg);
         }
         int monthInt = Integer.parseInt(month);
         if (!(monthInt >= 1 && monthInt <= 12)) {
-            String message = context.getApplication().evaluateExpressionGet(context, "Invalid month: must be between 1 and 12", String.class);
-            FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR, message, message);
+            FacesMessage msg = MessageLoader.getMessage("com.gb1w20.bundles.messages", "invalidMonthNum", null);
+            msg.setSeverity(FacesMessage.SEVERITY_ERROR);
             throw new ValidatorException(msg);
         }
     }
+    
+    /**
+     * Validates that the credit card number is valid
+     * By: Giancarlo Biasiucci
+     * @param context
+     * @param component
+     * @param value 
+     */
 
     public void validateCardNumber(FacesContext context, UIComponent component, Object value) {
         String number = (String) value;
@@ -210,16 +233,23 @@ public class CartBackingBean implements Serializable {
                 Integer.parseInt(Character.toString(c));
             }
         } catch (NumberFormatException nfe) {
-            String message = context.getApplication().evaluateExpressionGet(context, "Invalid card number: contains non-numeric characters", String.class);
-            FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR, message, message);
+            FacesMessage msg = MessageLoader.getMessage("com.gb1w20.bundles.messages", "invalidCardFormat", null);
+            msg.setSeverity(FacesMessage.SEVERITY_ERROR);
             throw new ValidatorException(msg);
         }
         if (!luhnCheck(number)) {
-            String message = context.getApplication().evaluateExpressionGet(context, "Invalid credit card number", String.class);
-            FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR, message, message);
+            FacesMessage msg = MessageLoader.getMessage("com.gb1w20.bundles.messages", "invalidCardChars", null);
+            msg.setSeverity(FacesMessage.SEVERITY_ERROR);
             throw new ValidatorException(msg);
         }
     }
+    
+    /**
+     * Credit card luhn check. FROM: JSFSample20CustomValidator01 : CreditCardValidator
+     * By: Ken Fogel
+     * @param cardNumber
+     * @return 
+     */
 
     private boolean luhnCheck(String cardNumber) {
         int sum = 0;
@@ -243,6 +273,13 @@ public class CartBackingBean implements Serializable {
         return isSignedIn ? "index.xhtml" : "signIn.xhtml";
     }
 
+    /**
+     * Finalizes purchase, clears cart, saves order to database
+     * By: Giancarlo Biasiucci
+     * @param email - Client's email
+     * @return
+     * @throws Exception 
+     */
     public String finalizePurchase(String email) throws Exception {
         Orders newOrder = new Orders();
         Clients client = clientCtrl.findClientByEmail(email);
@@ -355,9 +392,8 @@ public class CartBackingBean implements Serializable {
         boolean validPostalCode = Pattern.matches("[a-zA-Z][0-9][a-zA-Z][0-9][a-zA-Z][0-9]", postalCode);
         if (!validPostalCode)
         {
-            String message = context.getApplication().evaluateExpressionGet(context, "Incorrect postal code format (correct format: A1A1A1)", String.class);
-            FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR, message, message);
-            postalCodeInput.resetValue();
+            FacesMessage msg = MessageLoader.getMessage("com.gb1w20.bundles.messages", "invalidPostalCode", null);
+            msg.setSeverity(FacesMessage.SEVERITY_ERROR);
             throw new ValidatorException(msg);
         }
     }
@@ -373,8 +409,8 @@ public class CartBackingBean implements Serializable {
         String input = (String)value;
         if (input.isBlank() || input.isEmpty() || input == null)
         {
-            String message = context.getApplication().evaluateExpressionGet(context, "Value must not be left blank", String.class);
-            FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR, message, message);
+            FacesMessage msg = MessageLoader.getMessage("com.gb1w20.bundles.messages", "valueNotNull", null);
+            msg.setSeverity(FacesMessage.SEVERITY_ERROR);
             throw new ValidatorException(msg);
         }
     }

@@ -1,6 +1,7 @@
 package com.gb1w20.book_store_project.backing;
 
 import com.gb1w20.book_store_project.entities.Clients;
+import com.gb1w20.book_store_project.util.MessageLoader;
 import com.gb1w20.book_store_project.jpa_controllers.ClientsJpaController;
 import java.io.Serializable;
 import java.nio.charset.StandardCharsets;
@@ -16,7 +17,6 @@ import javax.faces.component.UIInput;
 import javax.faces.context.FacesContext;
 import javax.faces.model.SelectItem;
 import javax.faces.validator.ValidatorException;
-import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 import javax.servlet.http.Cookie;
@@ -178,8 +178,8 @@ public class ClientBackingBean implements Serializable {
         String input = (String)value;
         if (input.isBlank() || input.isEmpty() || input == null)
         {
-            String message = context.getApplication().evaluateExpressionGet(context, "Value must not be left blank", String.class);
-            FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR, message, message);
+            FacesMessage msg = MessageLoader.getMessage("com.gb1w20.bundles.messages", "valueNotNull", null);
+            msg.setSeverity(FacesMessage.SEVERITY_ERROR);
             throw new ValidatorException(msg);
         }
     }
@@ -197,8 +197,8 @@ public class ClientBackingBean implements Serializable {
         UIInput passwordInput = (UIInput)component.findComponent("password");
         String password = (String)passwordInput.getLocalValue();
         if (password == null || confirmPassword == null || !password.equals(confirmPassword)) {
-            String message = context.getApplication().evaluateExpressionGet(context, "Passwords do not match", String.class);
-            FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR, message, message);
+            FacesMessage msg = MessageLoader.getMessage("com.gb1w20.bundles.messages", "passMatchBad", null);
+            msg.setSeverity(FacesMessage.SEVERITY_ERROR);
             throw new ValidatorException(msg);
         }
     }
@@ -214,21 +214,21 @@ public class ClientBackingBean implements Serializable {
     public void validateUniqueAndValidEmail(FacesContext context, UIComponent component, Object value) {
         String email = (String)value;
         UIInput emailInput = (UIInput)component.findComponent("email");
-        if (email == null) {
-            String message = context.getApplication().evaluateExpressionGet(context, "Please enter email", String.class);
-            FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR, message, message);
+        if (email.isBlank() || email.isEmpty() || email == null) {
+            FacesMessage msg = MessageLoader.getMessage("com.gb1w20.bundles.messages", "valueNotNull", null);
+            msg.setSeverity(FacesMessage.SEVERITY_ERROR);
             throw new ValidatorException(msg);
         }
         boolean validEmail = Pattern.matches("([^.@]+)(\\.[^.@]+)*@([^.@]+\\.)+([^.@]+)", email);
         if (!validEmail) {
-            String message = context.getApplication().evaluateExpressionGet(context, "Invalid email format (example of correct format: alberto@gmail.com)", String.class);
-            FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR, message, message);
+            FacesMessage msg = MessageLoader.getMessage("com.gb1w20.bundles.messages", "invalidEmail", null);
+            msg.setSeverity(FacesMessage.SEVERITY_ERROR);
             throw new ValidatorException(msg);
         }
         List<String> emailsByQuery = clientsJpaController.getEmailsByEmail(email);
         if (emailsByQuery.size() >= 1) {
-            String message = context.getApplication().evaluateExpressionGet(context, "Email already exists in database", String.class);
-            FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR, message, message);
+            FacesMessage msg = MessageLoader.getMessage("com.gb1w20.bundles.messages", "emailExists", null);
+            msg.setSeverity(FacesMessage.SEVERITY_ERROR);
             throw new ValidatorException(msg);
         }
     }
@@ -244,22 +244,22 @@ public class ClientBackingBean implements Serializable {
     public void validateCorrectPassword(FacesContext context, UIComponent component, Object value) throws Exception {
         String password = (String)value;
         if (password == null) {
-            String message = context.getApplication().evaluateExpressionGet(context, "Please re-enter password", String.class);
-            FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR, message, message);
+            FacesMessage msg = MessageLoader.getMessage("com.gb1w20.bundles.messages", "rePasswordMsg", null);
+            msg.setSeverity(FacesMessage.SEVERITY_ERROR);
             throw new ValidatorException(msg);
         }
         UIInput emailInput = (UIInput)component.findComponent("email");
         String email = (String)emailInput.getLocalValue();
         if (clientsJpaController.getEmailsByEmail(email).isEmpty())
         {
-            String message = context.getApplication().evaluateExpressionGet(context, "User with this email does not exist", String.class);
-            FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR, message, message);
+            FacesMessage msg = MessageLoader.getMessage("com.gb1w20.bundles.messages", "noUserExists", null);
+            msg.setSeverity(FacesMessage.SEVERITY_ERROR);
             throw new ValidatorException(msg);
         }
         Object[] userInfo = clientsJpaController.getInfoByEmail(email);
         if (loginTest(email, password) == false) {
-            String message = context.getApplication().evaluateExpressionGet(context, "Incorrect password", String.class);
-            FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR, message, message);
+            FacesMessage msg = MessageLoader.getMessage("com.gb1w20.bundles.messages", "badPassword", null);
+            msg.setSeverity(FacesMessage.SEVERITY_ERROR);
             throw new ValidatorException(msg);
         }
     }
@@ -275,14 +275,14 @@ public class ClientBackingBean implements Serializable {
     public void validateEmailExists(FacesContext context, UIComponent component, Object value) throws Exception {
         String email = (String)value;
         if (email == null) {
-            String message = context.getApplication().evaluateExpressionGet(context, "Please enter email", String.class);
-            FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR, message, message);
+            FacesMessage msg = MessageLoader.getMessage("com.gb1w20.bundles.messages", "valueNotNull", null);
+            msg.setSeverity(FacesMessage.SEVERITY_ERROR);
             throw new ValidatorException(msg);
         }
         List<String> emailsByQuery = clientsJpaController.getEmailsByEmail(email);
         if (emailsByQuery.isEmpty()) {
-            String message = context.getApplication().evaluateExpressionGet(context, "User with this email does not exist", String.class);
-            FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR, message, message);
+            FacesMessage msg = MessageLoader.getMessage("com.gb1w20.bundles.messages", "noUserExists", null);
+            msg.setSeverity(FacesMessage.SEVERITY_ERROR);
             throw new ValidatorException(msg);
         }
     }
@@ -390,14 +390,14 @@ public class ClientBackingBean implements Serializable {
         }
         catch(NumberFormatException nfe)
         {
-            String message = context.getApplication().evaluateExpressionGet(context, "Invalid home phone: contains non-numeric characters", String.class);
-            FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR, message, message);
+            FacesMessage msg = MessageLoader.getMessage("com.gb1w20.bundles.messages", "invalidHomePhone", null);
+            msg.setSeverity(FacesMessage.SEVERITY_ERROR);
             throw new ValidatorException(msg);
         }
         if (number.toCharArray().length != 10)
         {
-            String message = context.getApplication().evaluateExpressionGet(context, "Invalid home phone: not 10 digits long", String.class);
-            FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR, message, message);
+            FacesMessage msg = MessageLoader.getMessage("com.gb1w20.bundles.messages", "invalidHomeDigits", null);
+            msg.setSeverity(FacesMessage.SEVERITY_ERROR);
             throw new ValidatorException(msg);
         }
     }
@@ -422,14 +422,14 @@ public class ClientBackingBean implements Serializable {
         }
         catch(NumberFormatException nfe)
         {
-            String message = context.getApplication().evaluateExpressionGet(context, "Invalid cell phone: contains non-numeric characters", String.class);
-            FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR, message, message);
+            FacesMessage msg = MessageLoader.getMessage("com.gb1w20.bundles.messages", "invalidCellPhone", null);
+            msg.setSeverity(FacesMessage.SEVERITY_ERROR);
             throw new ValidatorException(msg);
         }
         if (number.toCharArray().length != 10)
         {
-            String message = context.getApplication().evaluateExpressionGet(context, "Invalid cell phone: not 10 digits long", String.class);
-            FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR, message, message);
+            FacesMessage msg = MessageLoader.getMessage("com.gb1w20.bundles.messages", "invalidCellDigits", null);
+            msg.setSeverity(FacesMessage.SEVERITY_ERROR);
             throw new ValidatorException(msg);
         }
     }
@@ -449,9 +449,8 @@ public class ClientBackingBean implements Serializable {
         boolean validPostalCode = Pattern.matches("[a-zA-Z][0-9][a-zA-Z][0-9][a-zA-Z][0-9]", postalCode);
         if (!validPostalCode)
         {
-            String message = context.getApplication().evaluateExpressionGet(context, "Incorrect postal code format (correct format: A1A1A1)", String.class);
-            FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR, message, message);
-            postalCodeInput.resetValue();
+            FacesMessage msg = MessageLoader.getMessage("com.gb1w20.bundles.messages", "invalidPostalCode", null);
+            msg.setSeverity(FacesMessage.SEVERITY_ERROR);
             throw new ValidatorException(msg);
         }
     }

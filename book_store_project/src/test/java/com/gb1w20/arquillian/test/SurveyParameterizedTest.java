@@ -1,7 +1,5 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * All arquillain tests belong to this package
  */
 package com.gb1w20.arquillian.test;
 
@@ -12,6 +10,7 @@ import com.gb1w20.book_store_project.entities.Surveys;
 import com.gb1w20.book_store_project.jpa_controllers.SurveyDataJpaController;
 import com.gb1w20.book_store_project.jpa_controllers.SurveysJpaController;
 import com.gb1w20.book_store_project.jpa_controllers.exceptions.IllegalOrphanException;
+import com.gb1w20.book_store_project.util.MessageLoader;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;
@@ -53,6 +52,10 @@ public class SurveyParameterizedTest {
 
     private final static Logger LOG = LoggerFactory.getLogger(SurveyParameterizedTest.class);
 
+    /**
+     *
+     * @return
+     */
     @Deployment
     public static WebArchive deploy() {
 
@@ -80,6 +83,7 @@ public class SurveyParameterizedTest {
                 .addPackage(ParameterRule.class.getPackage())
                 .addPackage(SurveyTestingBean.class.getPackage())
                 .addPackage(SurveyBean.class.getPackage())
+                .addPackage(MessageLoader.class.getPackage())
                 .addAsWebInfResource(EmptyAsset.INSTANCE, "beans.xml")
                 .addAsWebInfResource(new File("src/main/webapp/WEB-INF/payara-resources.xml"), "payara-resources.xml")
                 .addAsResource(new File("src/main/resources/META-INF/persistence.xml"), "META-INF/persistence.xml")
@@ -96,14 +100,17 @@ public class SurveyParameterizedTest {
     @Inject
     private SurveyDataJpaController surveyDataControl;
     
+    /**
+     *
+     */
     @Rule
     public ParameterRule surveyRule = new ParameterRule("surveyTest",
-            new SurveyTestingBean(1,5,38),
-            new SurveyTestingBean(2,6,68),
-            new SurveyTestingBean(3,4,37),
-            new SurveyTestingBean(4,4,28),
-            new SurveyTestingBean(5,4,55),
-            new SurveyTestingBean(6,6,43)
+            new SurveyTestingBean(1,5,38, "Active Survey",true),
+            new SurveyTestingBean(2,6,68, "Disabled Survey",false),
+            new SurveyTestingBean(3,4,37, "Disabled Survey",false),
+            new SurveyTestingBean(4,4,28, "Disabled Survey",false),
+            new SurveyTestingBean(5,4,55, "Disabled Survey",false),
+            new SurveyTestingBean(6,6,43, "Disabled Survey",false)
     );
     
     private SurveyTestingBean surveyTest;
@@ -117,6 +124,9 @@ public class SurveyParameterizedTest {
     @Resource
     private UserTransaction utx;
     
+    /**
+     *
+     */
     @Test
     public void testCorrectChoiceAmount()
     {
@@ -126,6 +136,9 @@ public class SurveyParameterizedTest {
                 surveyTest.expectedChoices, choices);
     }
     
+    /**
+     *
+     */
     @Test
     public void testCorrectUserVotes()
     {
@@ -135,12 +148,41 @@ public class SurveyParameterizedTest {
                 surveyTest.expectedVotes, votes);
     }
     
+    /**
+     *
+     */
     @Test
     public void testActiveSurveyIsReal()
     {
         Surveys survey = surveyControl.getActiveSurvey();
         List<Surveys> surveyList = surveyControl.findSurveysEntities();
         assertTrue("Expected: contains, actual: doesn't contain", surveyList.contains(survey));
+    }
+    
+    @Test
+    public void testExpectedStatus()
+    {
+        String removalString = "Active Survey";
+        boolean removalStatus = surveyControl.findSurveys(surveyTest.surveyID).getIsRemoved();
+        if (removalStatus)
+        {
+            removalString = "Disabled Survey";
+        }
+        assertEquals("Expected: " + surveyTest.expectedStatus + ", actual: " + removalString,
+                surveyTest.expectedStatus, removalString);
+    }
+    
+    @Test
+    public void testActiveOrNot()
+    {
+        Surveys active = surveyControl.getActiveSurvey();
+        boolean isActive = false;
+        if (active.getSurveyID() == surveyTest.surveyID)
+        {
+            isActive = true;
+        }
+        assertEquals("Expected: " + surveyTest.isActive + ", actual: " + isActive,
+                surveyTest.isActive, isActive);
     }
     
     /**

@@ -49,8 +49,8 @@ public class NewsBackingBean implements Serializable {
     /**
      * Marks a news feed as removed (changes removal status to true)
      * @param news
-     * @return
      * @throws Exception 
+     * By: Giancarlo Biasiucci
      */
     public void removeNews(News news) throws Exception {
         news.setIsRemoved(true);
@@ -61,8 +61,8 @@ public class NewsBackingBean implements Serializable {
     /**
      * Marks a news feed as not removed (changes removal status to false)
      * @param news
-     * @return
      * @throws Exception 
+     * By: Giancarlo Biasiucci
      */
     public void addNews(News news) throws Exception {
         news.setIsRemoved(false);
@@ -71,11 +71,12 @@ public class NewsBackingBean implements Serializable {
     }
     
     /**
-     * If 2 news feeds are already enabled to display on the front page, all other news feeds will be disabled and be
-     * unable to be displayed. Ensures that at least one news feeds is enabled at all times. In short, this method
-     * guarantees that 1 or 2 news feeds are enabled at all times.
+     * If 1 news feeds is already enabled to display on the front page, all other news feeds will be disabled and be
+     * unable to be displayed. Ensures that one news feed is enabled at all times. In short, this method
+     * guarantees that 1 news feed is enabled at all times.
      * @param news
      * @return 
+     * By: Giancarlo Biasiucci
      */
     public boolean decideDisabled(News news)
     {   
@@ -89,6 +90,7 @@ public class NewsBackingBean implements Serializable {
      * @param news
      * @return
      * @throws Exception 
+     * By: Giancarlo Biasiucci
      */
     public String addOrRemoveNews(News news) throws Exception
     {
@@ -106,6 +108,7 @@ public class NewsBackingBean implements Serializable {
      * @param isRemoved
      * @return
      * @throws Exception 
+     * By: Giancarlo Biasiucci
      */
     public String getRemovalStatus(boolean isRemoved) throws Exception {
         if (isRemoved)

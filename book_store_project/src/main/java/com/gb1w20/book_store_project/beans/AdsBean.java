@@ -34,6 +34,7 @@ public class AdsBean implements Serializable {
     /**
      * method for initializing when bean called
      *
+     * @author Shruti Pareek
      * @return void
      */
     public void init() {
@@ -44,6 +45,7 @@ public class AdsBean implements Serializable {
     /**
      * method for getting random ad
      *
+     * @author Shruti Pareek
      * @return Ads
      */
     public Ads getRandomAd() {
@@ -55,6 +57,7 @@ public class AdsBean implements Serializable {
     /**
      * method setting random ad
      *
+     * @author Shruti Pareek
      * @param ad
      */
     public void setRandomAd(Ads ad) {

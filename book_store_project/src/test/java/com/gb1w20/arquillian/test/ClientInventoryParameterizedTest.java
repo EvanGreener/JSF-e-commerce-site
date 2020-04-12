@@ -1,22 +1,11 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * All arquillain tests belong to this package
  */
 package com.gb1w20.arquillian.test;
 
-import com.gb1w20.arquillian.test.beans.AuthorsTestingBean;
-import com.gb1w20.arquillian.test.beans.BookAuthorsTestingBean;
 import com.gb1w20.arquillian.test.beans.ClientInventoryTestingBean;
-import com.gb1w20.arquillian.test.beans.OrderItemTestingBean;
-import com.gb1w20.book_store_project.entities.Authors;
-import com.gb1w20.book_store_project.entities.BookAuthors;
 import com.gb1w20.book_store_project.entities.ClientInventory;
-import com.gb1w20.book_store_project.entities.OrderItem;
-import com.gb1w20.book_store_project.jpa_controllers.AuthorsJpaController;
-import com.gb1w20.book_store_project.jpa_controllers.BookAuthorsJpaController;
 import com.gb1w20.book_store_project.jpa_controllers.ClientInventoryJpaController;
-import com.gb1w20.book_store_project.jpa_controllers.OrderItemJpaController;
 import com.gb1w20.book_store_project.jpa_controllers.exceptions.IllegalOrphanException;
 import java.io.BufferedReader;
 import java.io.File;
@@ -50,13 +39,14 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
- *
+ * tests the client inventory jpa methods
  * @author shruti pareek
  */
 @RunWith(Arquillian.class)
 public class ClientInventoryParameterizedTest {
 
     private final static Logger LOG = LoggerFactory.getLogger(ClientInventoryParameterizedTest.class);
+
 
     @Deployment
     public static WebArchive deploy() {
@@ -95,6 +85,9 @@ public class ClientInventoryParameterizedTest {
     @Inject
     private ClientInventoryJpaController clientInventoryControl;
 
+    /**
+     * data to test methods
+     */
     @Rule
     public ParameterRule ClientInventoryRule = new ParameterRule("clientInventoryTest",
             new ClientInventoryTestingBean(1, new ClientInventory(1)),
@@ -116,6 +109,7 @@ public class ClientInventoryParameterizedTest {
     private UserTransaction utx;
 
     /**
+     * tests if finds client's inventory through their id
      * @author shruti pareek
      */
     @Test

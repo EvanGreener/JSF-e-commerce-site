@@ -40,6 +40,7 @@ public class SurveyDataBean implements Serializable {
     /**
      * method that initialize when bean first called
      *
+     * @author Shruti Pareek
      * @return
      */
     public void init() {
@@ -50,6 +51,7 @@ public class SurveyDataBean implements Serializable {
     /**
      * SurveyData created if it does not exist.
      *
+     * @author Shruti Pareek
      * @param dataId
      * @return
      */
@@ -65,6 +67,7 @@ public class SurveyDataBean implements Serializable {
     /**
      * Save the current surveyData to the db
      *
+     * @author Shruti Pareek
      * @return
      * @throws Exception
      */
@@ -73,11 +76,10 @@ public class SurveyDataBean implements Serializable {
         return null;
     }
 
-    
-
     /**
      * store user choice for survey in database
      *
+     * @author Shruti Pareek
      * @param surveyId
      */
     public void setSurveyChoices(Integer surveyId) {
@@ -88,6 +90,7 @@ public class SurveyDataBean implements Serializable {
     /**
      * get the all survey options from a survey id
      *
+     * @author Shruti Pareek
      * @param surveyId
      * @return list
      */
@@ -100,6 +103,7 @@ public class SurveyDataBean implements Serializable {
     /**
      * get the survey choice selected
      *
+     * @author Shruti Pareek
      * @return integer
      */
     public Integer getSurveyDataChoice() {
@@ -115,6 +119,7 @@ public class SurveyDataBean implements Serializable {
     /**
      * set the choice selected bu user for survey
      *
+     * @author Shruti Pareek
      * @param dataId
      * @throws java.lang.Exception
      */

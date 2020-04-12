@@ -1,4 +1,11 @@
 <?xml version='1.0' encoding='UTF-8' ?>
+<!--
+    Manager-side order page where a manager can edit or "remove"/"enable" existing orders.
+    Editing an order involves "adding"/"removing" items in that order and editing an item's
+    sale price.
+
+    Manager-side order page done by: Giancarlo Biasiucci, Evan Greenstein
+-->
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://java.sun.com/jsf/html"
@@ -7,7 +14,7 @@
       xmlns:p="http://primefaces.org/ui"
       xmlns:a="http://xmlns.jcp.org/jsf/passthrough">
      <h:head>
-          <title>Manager Orders</title>
+          <title>#{msgs.manOrders}</title>
           <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 
           <link href="https://fonts.googleapis.com/css?family=Montserrat|Roboto&amp;display=swap" rel="stylesheet"/>
@@ -86,96 +93,99 @@
                     <div id="editFormGrowl" class="ui floating positive message" >
                          <!--<i class="close icon"></i>-->
                          <div class="header">
-                              Changes have been saved!
+                              #{msgs.savedChanges}
                          </div>
                     </div>
 
-                    <h1>Order Management</h1>
-
-                    <!--Loading modal-->
-                    <p:ajaxStatus onstart="PF('statusDialog').show()" onsuccess="PF('statusDialog').hide()" />
-                    <p:dialog widgetVar="statusDialog" modal="true" draggable="false" closable="false" resizable="false" showHeader="false">
-                         <p:graphicImage style="display: inline;" class="loading" library="images" name="double-ring.svg" />
-                    </p:dialog>
-
-                    <p>Search by</p>
-                    <h:selectOneRadio layout="pageDirection" value="#{orderSearch.searchBy}" >
-                         <p:ajax update="ordersTable" />
-                         <f:selectItem itemValue = "id" itemLabel = "Order ID"/>
-                         <f:selectItem itemValue = "email" itemLabel = "Email" />
-                         <f:selectItem itemValue = "isbn" itemLabel = "Item ISBN" />
-                    </h:selectOneRadio>
+                    <h1>#{msgs.orderManage}</h1>
+                    
+                    <!--
+                        Search section done by: Giancarlo Biasiucci (inspired by Evan Greenstein's
+                        search section)
+                    -->
+                    <p>#{msgs.searchBy}</p>
+                        <h:selectOneRadio layout="pageDirection" value="#{orderSearch.searchBy}" >
+                            <p:ajax update="ordersTable" />
+                            <f:selectItem itemValue = "id" itemLabel = "#{msgs.orderID}"/>
+                            <f:selectItem itemValue = "email" itemLabel = "#{msgs.email}" />
+                            <f:selectItem itemValue = "isbn" itemLabel = "#{msgs.itemIsbn}" />
+                        </h:selectOneRadio>
 
                     <!--Search bar-->
                     <div style="display: inline;" class="ui search" >
-                         <h:inputText  id="query" value="#{orderSearch.query}"  a:placeholder="Search orders by email..." style="float: right; margin-top: 10px; margin-bottom: 10px; width: 200px; " class="prompt" >
+                        <h:inputText  id="query" value="#{orderSearch.query}"  a:placeholder="#{msgs.searchOrders}" style="float: right; margin-top: 10px; margin-bottom: 10px; width: 200px; " class="prompt" >
                               <f:ajax event="keyup" execute="@all"  listener="#{orderSearch.updateBean}" render="ordersTable" />
                          </h:inputText>
                     </div>
 
 
-
+                    <!--
+                        Order table done by: Giancarlo Biasiucci
+                    -->
                     <h:dataTable  id="ordersTable" var="orders" style="margin-bottom: 20px;"  class="ui celled table" value="#{orderSearch.searchResults}" >
                          <h:column>
-                              <f:facet name="header">Order ID</f:facet>
+                              <f:facet name="header">#{msgs.orderID}</f:facet>
                                    #{orders.orderID}
                          </h:column>
                          <h:column>
-                              <f:facet name="header">Client Email</f:facet>
+                              <f:facet name="header">#{msgs.clientEmail}</f:facet>
                                    #{orders.client.email}
                          </h:column>
                          <h:column>
-                              <f:facet name="header">Number of Items</f:facet>
+                             <f:facet name="header">#{msgs.numItems}</f:facet>
                                    #{orders.orderItems.size()}
                          </h:column>
                          <h:column>
-                              <f:facet name="header">Date Created</f:facet>
+                              <f:facet name="header">#{msgs.dateCreated}</f:facet>
                                    #{orders.dateCreated}
                          </h:column>
                          <h:column>
-                              <f:facet name="header">Last Modified</f:facet>
+                              <f:facet name="header">#{msgs.lastModified}</f:facet>
                                    #{orders.lastUpdated}
                          </h:column>
                          <h:column>
-                              <f:facet name="header">Status</f:facet>
+                              <f:facet name="header">#{msgs.status}</f:facet>
                                    #{ordersJpaController.getStatusByOrderId(orders.orderID)}
+                         </h:column>
+                        <h:column>
+                              <h:commandLink value="#{orderBacking.getRemovalStatus(orders.isRemoved)}" action="#{orderBacking.addOrRemoveOrder(orders)}" />
                          </h:column>
                          <h:column>
                               <h:commandButton type="button" onclick="setTimeout(function () {
                                              $('#editModal').modal('show', hideGrowl())
                                         }, 500)" 
-                                               value="Edit Order" class="big ui primary button edit_btn" disabled="#{orders.isRemoved}">
+                                               value="#{msgs.editOrder}" class="big ui primary button edit_btn" disabled="#{orders.isRemoved}">
                                    <f:ajax event="click"  render="@all" listener="#{orderEdit.onEdit(orders.orderID)}"/>
                               </h:commandButton>
                          </h:column>
-                         <h:column>
-                              <h:commandLink value="#{orderBacking.getRemovalStatus(orders.isRemoved)}" action="#{orderBacking.addOrRemoveOrder(orders)}" />
-                         </h:column>
                     </h:dataTable>
                </div>
-
                <bookstore:footer />
-
+               </h:form>
+                <h:form id="editOrderForm">
                <div id="editModal" class="small ui modal">
                     <div class="header">
-                         <h1>Order ID# #{orderEdit.currentOrder.orderID} </h1>
+                         <h1>#{msgs.orderNum} #{orderEdit.currentOrder.orderID} </h1>
                     </div>
                     <div class="content">
+                        <!--
+                            Order item table done by: Giancarlo Biasiucci
+                        -->
                          <h:dataTable class="ui celled table" value="#{orderEdit.currentOrder.orderItems}" var="items">
                               <h:column>
-                                   <f:facet name="header">ISBN</f:facet>
+                                   <f:facet name="header">#{msgs.isbn}</f:facet>
                                         #{items.isbn}
                               </h:column>
                               <h:column>
-                                   <f:facet name="header">Title</f:facet>
+                                   <f:facet name="header">#{msgs.isbn}</f:facet>
                                         #{items.book.title}
                               </h:column>
                               <h:column>
-                                   <f:facet name="header">Price Sold</f:facet>
+                                   <f:facet name="header">#{msgs.priceSold}</f:facet>
                                         #{items.priceSold}
                               </h:column>
                               <h:column>
-                                   <f:facet name="header">Status</f:facet>
+                                   <f:facet name="header">#{msgs.status}</f:facet>
                                         #{orderItemJpaController.getStatusByItemId(items.itemID)}
                               </h:column>
                               <h:column>
@@ -183,7 +193,7 @@
                               </h:column>
                               <h:column>
                                    <h:commandButton type="button"
-                                                    value="Edit Item" class="big ui primary button edit_btn" disabled="#{items.isRemoved}">
+                                                    value="#{msgs.editItem}" class="big ui primary button edit_btn" disabled="#{items.isRemoved}">
                                         <f:ajax event="click" listener="#{orderEdit.onItemEdit(items.itemID)}"/>
                                    </h:commandButton>
                               </h:column>
@@ -192,30 +202,31 @@
                          <div class="actions">   
                               <div style="font-size: 20px;" type="button" class="ui cancel button" >Cancel</div>
                          </div>
-
                     </div>
                </div>
 
+                    <!--
+                        Edit item modal done by: Giancarlo Biasiucci, Evan Greenstein
+                    -->
                <div id="editItemModal" class="small ui modal">
                     <div class="header">
-                         <h1>Item ID# #{orderEdit.currentItem.itemID} </h1>
+                         <h1>#{msgs.itemNum} #{orderEdit.currentItem.itemID} </h1>
                     </div>
                     <div class="content">
                          <div class="ui form field">
-                              <h:outputLabel for="salePrice" value="New Sale Price" />
+                             <h:outputLabel for="salePrice" value="#{msgs.newSale}" />
                               <h:inputText id="salePrice" value="#{orderEdit.newSalePriceStr}" a:placeholder="#{orderEdit.currentItem.priceSold}" />
                          </div>
                          <div class="actions">
-                              <h:commandButton type="button" action="#{orderEdit.onSubmitEdit()}" style="font-size: 20px;" id="editItem" value="Save Changes" class="huge positive ui button">
+                              <h:commandButton type="button" action="#{orderEdit.onSubmitEdit()}" style="font-size: 20px;" id="editItem" value="#{msgs.editItem}" class="huge positive ui button">
                                    <f:ajax event="click" execute="salePrice" render="ordersTable"/>
                               </h:commandButton>    
-                              <div style="font-size: 20px;" type="button" class="ui cancel button" >Cancel</div>
+                              <div style="font-size: 20px;" type="button" class="ui cancel button">#{msgs.cancel}</div>
                          </div>
                     </div>
                </div>
-
-          </h:form>
-
+            </h:form>
+          
           <script>
 
                $('#editItemModal')
