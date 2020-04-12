@@ -51,11 +51,11 @@ import org.slf4j.LoggerFactory;
 
 /**
  *
- * @author giancarlo
+ * @author giancarlo,shruti pareek
  */
 @RunWith(Arquillian.class)
 public class AdsParameterizedTest {
-    
+
     private final static Logger LOG = LoggerFactory.getLogger(BookParameterizedTest.class);
 
     @Deployment
@@ -78,13 +78,12 @@ public class AdsParameterizedTest {
         final WebArchive webArchive;
         webArchive = ShrinkWrap.create(WebArchive.class, "test.war")
                 .setWebXML(new File("src/main/webapp/WEB-INF/web.xml"))
-                .addPackage(BookFormatJpaController.class.getPackage())
+                
                 .addPackage(IllegalOrphanException.class.getPackage())
-                .addPackage(BookFormat.class.getPackage())
-                .addPackage(BookFormatBackingBean.class.getPackage())
+                .addPackage(AdsJpaController.class.getPackage())
                 .addPackage(ParameterRule.class.getPackage())
-                .addPackage(ClientTestingBean.class.getPackage())
-                .addPackage(NewsBean.class.getPackage())
+                .addPackage(AdsTestingBean.class.getPackage())
+                .addPackage(Ads.class.getPackage())
                 .addAsWebInfResource(EmptyAsset.INSTANCE, "beans.xml")
                 .addAsWebInfResource(new File("src/main/webapp/WEB-INF/payara-resources.xml"), "payara-resources.xml")
                 .addAsResource(new File("src/main/resources/META-INF/persistence.xml"), "META-INF/persistence.xml")
@@ -99,17 +98,15 @@ public class AdsParameterizedTest {
 
     @Rule
     public ParameterRule adsRule = new ParameterRule("adTest",
-            new AdsTestingBean(1,"Not Removed"),
-            new AdsTestingBean(2,"Not Removed"),
-            new AdsTestingBean(3,"Removed"),
-            new AdsTestingBean(4,"Removed"),
-            new AdsTestingBean(5,"Removed"),
-            new AdsTestingBean(6,"Removed")
-            
+            new AdsTestingBean(1, "Not Removed", 2),
+            new AdsTestingBean(2, "Not Removed", 2),
+            new AdsTestingBean(3, "Removed", 2),
+            new AdsTestingBean(4, "Removed", 2),
+            new AdsTestingBean(5, "Removed", 2),
+            new AdsTestingBean(6, "Removed", 2)
     );
 
     private AdsTestingBean adTest;
-
 
     @Resource(lookup = "java:app/jdbc/bookstore")
     private DataSource ds;
@@ -119,23 +116,52 @@ public class AdsParameterizedTest {
 
     @Resource
     private UserTransaction utx;
-    
+
     @Test
-    public void testExpectedStatus()
-    {
+    public void testExpectedStatus() {
         String removalStatus = adsControl.getStatusByAdId(adsControl.findAds(adTest.adID).getAdID());
         assertEquals("Expected: " + adTest.expectedStatus + ", actual: " + removalStatus,
                 adTest.expectedStatus, removalStatus);
     }
-    
+
     @Test
-    public void testRandomAdIsAlwaysReal()
-    {
+    public void testRandomAdIsAlwaysReal() {
         Ads ad = adsControl.getRandomAd();
         List<Ads> allAds = adsControl.findAdsEntities();
         assertTrue("Expected: included, actual: not", allAds.contains(ad));
     }
-    
+
+    /**
+     * @author shruti pareek
+     */
+    @Test
+    public void testGetAdsCount() {
+        LOG.debug("testGetAdsCount");
+        boolean isSuccess = true;
+        int resultAdCount = adsControl.getAdsCount();
+        if (!(resultAdCount == adTest.expectedCount)) {
+            isSuccess = false;
+        }
+        assertTrue("adTest returned inconsistent results Expected:" + adTest.expectedCount + " Actual:" + resultAdCount, isSuccess);
+    }
+
+    /**
+     * @author shruti pareek
+     */
+    @Test
+    public void testAllEnabledAds() {
+        LOG.debug("testAllEnabledAds");
+        boolean isSuccess = false;
+        List<Ads> resultEnabledAds = adsControl.getAllEnabledAds();
+        for (Ads testAd : resultEnabledAds) {
+            if (!(testAd.getAdID() == adTest.adID)) {
+                isSuccess = true;
+            }
+        }
+
+        assertTrue("adTest returned inconsistent results", isSuccess);
+    }
+
     /**
      * Restore the database to a known state before testing. This is important
      * if the test is destructive. This routine is courtesy of Bartosz Majsak
