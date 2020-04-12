@@ -1,13 +1,9 @@
 package com.gb1w20.arquillian.test;
 
 import com.gb1w20.arquillian.test.beans.PublisherTestingBean;
-import com.gb1w20.arquillian.test.beans.SurveyTestingBean;
-import com.gb1w20.book_store_project.backing.SurveyBackingBean;
-import com.gb1w20.book_store_project.beans.SurveyBean;
+import com.gb1w20.book_store_project.backing.PublisherBackingBean;
 import com.gb1w20.book_store_project.entities.Publisher;
-import com.gb1w20.book_store_project.entities.Surveys;
 import com.gb1w20.book_store_project.jpa_controllers.PublisherJpaController;
-import com.gb1w20.book_store_project.jpa_controllers.SurveysJpaController;
 import com.gb1w20.book_store_project.jpa_controllers.exceptions.IllegalOrphanException;
 import java.io.BufferedReader;
 import java.io.File;
@@ -27,6 +23,7 @@ import javax.persistence.PersistenceContext;
 import javax.sql.DataSource;
 import javax.transaction.UserTransaction;
 import org.jboss.arquillian.container.test.api.Deployment;
+import org.jboss.arquillian.junit.Arquillian;
 import org.jboss.shrinkwrap.api.ShrinkWrap;
 import org.jboss.shrinkwrap.api.asset.EmptyAsset;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
@@ -35,13 +32,16 @@ import static org.junit.Assert.assertEquals;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
- *
+ * Tests one PublisherJpaController method.
+ * 
  * @author Evan Greenstein
  */
+@RunWith(Arquillian.class)
 public class PublisherParameterizedTest {
 
      private final static Logger LOG = LoggerFactory.getLogger(PublisherParameterizedTest.class);
@@ -66,13 +66,10 @@ public class PublisherParameterizedTest {
           final WebArchive webArchive;
           webArchive = ShrinkWrap.create(WebArchive.class, "test.war")
                   .setWebXML(new File("src/main/webapp/WEB-INF/web.xml"))
-                  .addPackage(SurveysJpaController.class.getPackage())
-                  .addPackage(IllegalOrphanException.class.getPackage())
-                  .addPackage(Surveys.class.getPackage())
-                  .addPackage(SurveyBackingBean.class.getPackage())
+                  .addPackage(PublisherJpaController.class.getPackage())
+                  .addPackage(Publisher.class.getPackage())
                   .addPackage(ParameterRule.class.getPackage())
-                  .addPackage(SurveyTestingBean.class.getPackage())
-                  .addPackage(SurveyBean.class.getPackage())
+                  .addPackage(PublisherTestingBean.class.getPackage())
                   .addAsWebInfResource(EmptyAsset.INSTANCE, "beans.xml")
                   .addAsWebInfResource(new File("src/main/webapp/WEB-INF/payara-resources.xml"), "payara-resources.xml")
                   .addAsResource(new File("src/main/resources/META-INF/persistence.xml"), "META-INF/persistence.xml")
@@ -86,6 +83,9 @@ public class PublisherParameterizedTest {
      @Inject
      private PublisherJpaController pubCtrl;
 
+     /**
+      * The first param is the input and the second is the expected result
+      */
      @Rule
      public ParameterRule publisherRule = new ParameterRule("publisherTest",
              new PublisherTestingBean("Hauck-Crona", 1),
@@ -104,9 +104,14 @@ public class PublisherParameterizedTest {
     @Resource
     private UserTransaction utx;
     
+    /**
+     * @author Evan Greenstein
+     */
     @Test
-    public void testCorrectIdReturned(){
+    public void testGetByName(){
+         LOG.debug(publisherTest.name);
          Publisher pub = pubCtrl.getPublisherByName(publisherTest.name);
+         LOG.debug("" +pub.getPublisherID() );
          int idReturned = pub.getPublisherID();
          assertEquals(String.format("Expected id: %d. Got '%d' instead", publisherTest.expectedId, idReturned ),
                  publisherTest.expectedId, 
