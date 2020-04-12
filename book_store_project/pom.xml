@@ -1,115 +1,120 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-    <modelVersion>4.0.0</modelVersion>
-    <groupId>com.gB1w20</groupId>
-    <artifactId>book_store_project</artifactId>
-    <version>1.0-SNAPSHOT</version>
-    <packaging>war</packaging>
-    <name>book_store_project</name>
+     <modelVersion>4.0.0</modelVersion>
+     <groupId>com.gB1w20</groupId>
+     <artifactId>book_store_project</artifactId>
+     <version>1.0-SNAPSHOT</version>
+     <packaging>war</packaging>
+     <name>book_store_project</name>
     
     
-    <!-- A description of the program -->
-    <description>Websites allowing users to browse and buy books. Managers can manage books,reviews,orders,surveys,news,ads,and clients. Clients can view information on books,purchase books,write reviews,write surveys,view advertisements,news. </description>
+     <!-- A description of the program -->
+     <description>Websites allowing users to browse and buy books. Managers can manage books,reviews,orders,surveys,news,ads,and clients. Clients can view information on books,purchase books,write reviews,write surveys,view advertisements,news. </description>
 
-    <!-- Identifies the programmer or programmers who worked on the project -->
-    <developers>
-                <developer>
-            <id>1633839</id>
-            <name>Saad Khan</name>
-            <email>saaadkhan23@yahoo.ca</email>
-        </developer>
-        <developer>
-            <id>1735332</id>
-            <name>Shruti Pareek</name>
-            <email>shruti.pareek@dawsoncollege.qc.ca</email>
-        </developer>
-        <developer>
-            <id>1733408</id>
-            <name>Giancarlo Biasiucci</name>
-            <email>g_biasiucci@outlook.com</email>
-        </developer>
-        <developer>
-            <id>1640701</id>
-            <name>Cedric Richards</name>
-            <email>cawrichards@gmail.com</email>
-        </developer>
-    </developers>
+     <!-- Identifies the programmer or programmers who worked on the project -->
+     <developers>
+          <developer>
+               <id>1633839</id>
+               <name>Saad Khan</name>
+               <email>saaadkhan23@yahoo.ca</email>
+          </developer>
+          <developer>
+               <id>1735332</id>
+               <name>Shruti Pareek</name>
+               <email>shruti.pareek@dawsoncollege.qc.ca</email>
+          </developer>
+          <developer>
+               <id>1733408</id>
+               <name>Giancarlo Biasiucci</name>
+               <email>g_biasiucci@outlook.com</email>
+          </developer>
+          <developer>
+               <id>1734025</id>
+               <name>Evan Greenstein</name>
+               <email>evanlg16@gmail.com</email>
+          </developer>          
+          <developer>
+               <id>1640701</id>
+               <name>Cedric Richards</name>
+               <email>cawrichards@gmail.com</email>
+          </developer>
+     </developers>
 
-    <!-- The company or organization that the programmer(s) work for -->
-    <organization>
-        <name>Dawson College</name>
-    </organization>
+     <!-- The company or organization that the programmer(s) work for -->
+     <organization>
+          <name>Dawson College</name>
+     </organization>
     
 
-    <properties>
-        <skipTests>false</skipTests>
-    </properties>
+     <properties>
+          <skipTests>false</skipTests>
+     </properties>
     
-    <dependencies>
-        <dependency>
-            <groupId>mysql</groupId>
-            <artifactId>mysql-connector-java</artifactId>
-            <version>8.0.19</version>
-        </dependency>
-        <dependency>
-            <groupId>net.bootsfaces</groupId>
-            <artifactId>bootsfaces</artifactId>
-            <version>1.4.1</version>
-        </dependency>
+     <dependencies>
+          <dependency>
+               <groupId>mysql</groupId>
+               <artifactId>mysql-connector-java</artifactId>
+               <version>8.0.19</version>
+          </dependency>
+          <dependency>
+               <groupId>net.bootsfaces</groupId>
+               <artifactId>bootsfaces</artifactId>
+               <version>1.4.1</version>
+          </dependency>
         
-        <!-- https://mvnrepository.com/artifact/com.rometools/rome -->
-        <dependency>
-            <groupId>com.rometools</groupId>
-            <artifactId>rome</artifactId>
-            <version>1.12.2</version>
-        </dependency>
+          <!-- https://mvnrepository.com/artifact/com.rometools/rome -->
+          <dependency>
+               <groupId>com.rometools</groupId>
+               <artifactId>rome</artifactId>
+               <version>1.12.2</version>
+          </dependency>
 
-        <dependency>
-            <groupId>net.java.dev.rome</groupId>
-            <artifactId>rome</artifactId>
-            <version>1.0.0</version>
-        </dependency>
-        <!-- https://mvnrepository.com/artifact/org.webjars/Semantic-UI -->
-        <dependency>
-            <groupId>org.webjars</groupId>
-            <artifactId>Semantic-UI</artifactId>
-            <version>2.4.1</version>
-        </dependency>
-        <dependency>
-            <groupId>org.webjars.npm</groupId>
-            <artifactId>swiper</artifactId>
-            <version>4.5.1</version>
-        </dependency>
-        <dependency>
-            <groupId>org.primefaces</groupId>
-            <artifactId>primefaces</artifactId>
-            <version>8.0</version>
-        </dependency>
+          <dependency>
+               <groupId>net.java.dev.rome</groupId>
+               <artifactId>rome</artifactId>
+               <version>1.0.0</version>
+          </dependency>
+          <!-- https://mvnrepository.com/artifact/org.webjars/Semantic-UI -->
+          <dependency>
+               <groupId>org.webjars</groupId>
+               <artifactId>Semantic-UI</artifactId>
+               <version>2.4.1</version>
+          </dependency>
+          <dependency>
+               <groupId>org.webjars.npm</groupId>
+               <artifactId>swiper</artifactId>
+               <version>4.5.1</version>
+          </dependency>
+          <dependency>
+               <groupId>org.primefaces</groupId>
+               <artifactId>primefaces</artifactId>
+               <version>8.0</version>
+          </dependency>
 
-        <dependency>
-            <groupId>org.webjars</groupId>
-            <artifactId>font-awesome</artifactId>
-            <version>4.7.0</version>
-        </dependency>
-        <dependency>
-            <groupId>org.jodd</groupId>
-            <artifactId>jodd-mail</artifactId>
-            <version>5.1.4</version>
-        </dependency>
+          <dependency>
+               <groupId>org.webjars</groupId>
+               <artifactId>font-awesome</artifactId>
+               <version>4.7.0</version>
+          </dependency>
+          <dependency>
+               <groupId>org.jodd</groupId>
+               <artifactId>jodd-mail</artifactId>
+               <version>5.1.4</version>
+          </dependency>
 
-        <dependency>
-            <groupId>org.eclipse.persistence</groupId>
-            <artifactId>javax.persistence</artifactId>
-            <version>2.2.1</version>
-            <type>jar</type>
-        </dependency>
+          <dependency>
+               <groupId>org.eclipse.persistence</groupId>
+               <artifactId>javax.persistence</artifactId>
+               <version>2.2.1</version>
+               <type>jar</type>
+          </dependency>
 
-    </dependencies>
+     </dependencies>
     
-    <parent>
-        <groupId>com.kfwebstandard</groupId>
-        <artifactId>web_project_dependencies</artifactId>
-        <version>1.1</version>
-    </parent>
+     <parent>
+          <groupId>com.kfwebstandard</groupId>
+          <artifactId>web_project_dependencies</artifactId>
+          <version>1.1</version>
+     </parent>
      
 </project>
