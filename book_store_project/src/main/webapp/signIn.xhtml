@@ -1,5 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!--
+    Sign-in page where the user enters their email and password. Upon login, they will be redirected to:
+    -the home page (client (and website) front page), if they are a client
+    -the manager front page, if they are a manager
+    The user also has the option of registering in case they have not made an account yet
 
+    Sign-in page done by: Giancarlo Biasiucci
+-->
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://java.sun.com/jsf/html"
@@ -8,7 +15,7 @@
       xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
       xmlns:bookstore="http://java.sun.com/jsf/composite/default_components">
     <h:head>
-        <title>Login</title>
+        <title>#{msgs.signIn}</title>
         <link href="https://fonts.googleapis.com/css?family=Montserrat|Roboto&amp;display=swap" rel="stylesheet"/>
         <h:outputStylesheet library="webjars" name="Semantic-UI/2.4.1/semantic.min.css" />
         <h:outputStylesheet library="css" name="default.css" />
@@ -22,11 +29,11 @@
             <div class="ui fluid card">
                 <div class="lightGreyDiv">
                     <div class="thingy5">
-                        <h1 class="ui header">Login</h1>
+                        <h1 class="ui header">#{msgs.signIn}</h1>
                         <div class="thingy6">
                             <div class="field">
-                                <h:outputLabel for="email" value="Email"/>
-                                <h:inputText id="email" label="Email" value="#{clientBacking.loginEmail}" required="true" requiredMessage="Please enter email" a:placeholder="Enter email" validator="#{clientBacking.validateEmailExists}">
+                                <h:outputLabel for="email" value="#{msgs.email}"/>
+                                <h:inputText id="email" label="#{msgs.email}" value="#{clientBacking.loginEmail}" required="true" requiredMessage="#{msgs.emailMsg}" a:placeholder="#{msgs.emailMsg}" validator="#{clientBacking.validateEmailExists}">
                                     <f:ajax event="change" render="emailError"/>
                                 </h:inputText>
                                 <br/>
@@ -34,18 +41,18 @@
                             </div>
                             <br/>
                             <div class="field">
-                                <h:outputLabel for="password" value="Password"/>
-                                <h:inputSecret id="password" label="Password" value="#{clientBacking.loginPassword}" required="true" requiredMessage="Please enter password" a:placeholder="Enter password" validator="#{clientBacking.validateCorrectPassword}"/>
+                                <h:outputLabel for="password" value="#{msgs.password}"/>
+                                <h:inputSecret id="password" label="#{msgs.password}" value="#{clientBacking.loginPassword}" required="true" requiredMessage="#{msgs.passwordMsg}" a:placeholder="#{msgs.passwordMsg}" validator="#{clientBacking.validateCorrectPassword}"/>
                                 <br/>
                                 <h:message class="error" for="password"/>
                             </div>
                             <div class="ui checkbox">
                                 <input type="checkbox" name="remember" />
-                                <label>Remember Me</label>
+                                <label>#{msgs.rememberMe}</label>
                             </div>
-                            <h:commandButton class="huge black fluid ui button" id="loginBtn" value="Login" action="#{clientBacking.login()}" />
+                            <h:commandButton class="huge black fluid ui button" id="loginBtn" value="#{msgs.signIn}" action="#{clientBacking.login()}" />
                             <br/>
-                            <a href="signUp.xhtml" class="signUpLink">Register</a>
+                            <a href="signUp.xhtml" class="signUpLink">#{msgs.register}</a>
                         </div>
                     </div>
                 </div>

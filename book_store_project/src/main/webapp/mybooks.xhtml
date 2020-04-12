@@ -13,7 +13,7 @@ compatible with different screen sizes
       xmlns:bookstore="http://java.sun.com/jsf/composite/default_components"
       xmlns:f="http://xmlns.jcp.org/jsf/core">
     <h:head>
-        <title>My Books</title>
+        <title>#{msgs.myBooks}</title>
         <link rel="stylesheet" href="https://unpkg.com/swiper/css/swiper.min.css"/>
 
 
@@ -39,7 +39,7 @@ compatible with different screen sizes
             <div class="ui">
                 <div class="ui fluid">
                     <br/>
-                    <h3 class="small">Download MyBooks</h3>
+                    <h3 class="small">#{msgs.downloadMyBooks}</h3>
                     <br/>
                     <div class="centerItems">
                         <!--lists actual books owned by user from database -->
@@ -61,7 +61,7 @@ compatible with different screen sizes
                                           
                                             <!--Download button that downloads a alice in wonderland pdf -->
                                                 <h:form>
-                                                    <h:commandButton class="ui right floated button" value="Download" action="#{bb.download()}"/>
+                                                    <h:commandButton class="ui right floated button" value="#{msgs.download}" action="#{bb.download()}"/>
                                                 </h:form>
                                           
                                         </div>

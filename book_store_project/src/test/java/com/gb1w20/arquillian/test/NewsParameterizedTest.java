@@ -14,6 +14,7 @@ import com.gb1w20.book_store_project.entities.BookFormat;
 import com.gb1w20.book_store_project.jpa_controllers.NewsJpaController;
 import com.gb1w20.book_store_project.jpa_controllers.BookFormatJpaController;
 import com.gb1w20.book_store_project.jpa_controllers.exceptions.IllegalOrphanException;
+import com.gb1w20.book_store_project.util.MessageLoader;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;
@@ -86,6 +87,7 @@ public class NewsParameterizedTest {
                 .addPackage(ParameterRule.class.getPackage())
                 .addPackage(ClientTestingBean.class.getPackage())
                 .addPackage(NewsBean.class.getPackage())
+                .addPackage(MessageLoader.class.getPackage())
                 .addAsWebInfResource(EmptyAsset.INSTANCE, "beans.xml")
                 .addAsWebInfResource(new File("src/main/webapp/WEB-INF/payara-resources.xml"), "payara-resources.xml")
                 .addAsResource(new File("src/main/resources/META-INF/persistence.xml"), "META-INF/persistence.xml")
@@ -128,17 +130,6 @@ public class NewsParameterizedTest {
      *
      */
     @Test
-    public void testExpectedStatus()
-    {
-        String removalStatus = newsControl.getStatusByNewsId(newsControl.findNews(newsTest.newsID).getNewsID())[1].toString();
-        assertEquals("Expected: " + newsTest.expectedStatus + ", actual: " + removalStatus,
-                newsTest.expectedStatus, removalStatus);
-    }
-    
-    /**
-     *
-     */
-    @Test
     public void testRandomNewsIsAlwaysReal()
     {
         News news = newsControl.getRandomNews();
@@ -155,6 +146,19 @@ public class NewsParameterizedTest {
         News news = newsControl.getEnabledNews();
         List<News> allNews = newsControl.findNewsEntities();
         assertTrue("Expected: included, actual: not", allNews.contains(news));
+    }
+    
+    @Test
+    public void testExpectedStatus()
+    {
+        String removalString = "Not Removed";
+        boolean removalStatus = newsControl.findNews(newsTest.newsID).getIsRemoved();
+        if (removalStatus)
+        {
+            removalString = "Removed";
+        }
+        assertEquals("Expected: " + newsTest.expectedStatus + ", actual: " + removalString,
+                newsTest.expectedStatus, removalString);
     }
     
     /**

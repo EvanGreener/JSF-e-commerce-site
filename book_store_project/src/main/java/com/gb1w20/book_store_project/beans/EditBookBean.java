@@ -47,9 +47,9 @@ public class EditBookBean implements Serializable {
     private final static Logger LOG = LoggerFactory.getLogger(EditBookBean.class);
     private Book currentBook;
     private String newTitle;
-    private Authors newAuthor;
+    private Authors newAuthor = new Authors();
     private String newDescription;
-    private Publisher newPublisher;
+    private Publisher newPublisher = new Publisher();
     private String newGenre;
     private int newPages;
     private BigDecimal newListPrice;
@@ -138,10 +138,10 @@ public class EditBookBean implements Serializable {
     }
 
     /**
-     * Saves the current book information to be displayed in the "Edit Book"
-     * modal when the corresponding button is clicked
-     *
-     * @param isbn
+     * Saves the current book information to be displayed in the "Edit Book" modal
+     * when the corresponding button is clicked
+     * @param isbn 
+     * By: Giancarlo Biasiucci
      */
     public void onEdit(String isbn, Authors author) {
         LOG.debug("onEdit called");
@@ -158,18 +158,33 @@ public class EditBookBean implements Serializable {
         newWholesalePrice = currentBook.getWholesalePrice();
         LOG.debug("Current ISBN: " + currentBook.getIsbn());
     }
-
-    public void genreChangeMethod(String newGenre) {
+    
+    /**
+     * Changes the new genre whenever one is selected
+     * @param newGenre - The new genre
+     * By: Giancarlo Biasiucci
+     */
+    public void genreChangeMethod(String newGenre){
         LOG.debug("new genre: " + newGenre);
         this.newGenre = newGenre;
     }
-
-    public void authChangeMethod(String newAuthName) {
+    
+    /**
+     * Changes the new author whenever one is selected
+     * @param newAuthName - New author name
+     * By: Giancarlo Biasiucci
+     */
+    public void authChangeMethod(String newAuthName){
         LOG.debug("new auth: " + newAuthName);
         newAuthor = authControl.getAuthorByName(newAuthName);
     }
-
-    public void pubChangeMethod(String newPubName) {
+    
+    /**
+     * Changes the new publisher whenever one is selected
+     * @param newPubName - New publisher name
+     * By: Giancarlo Biasiucci
+     */
+    public void pubChangeMethod(String newPubName){
         LOG.debug("new pub: " + newPubName);
         newPublisher = pubControl.getPublisherByName(newPubName);
     }
@@ -179,7 +194,8 @@ public class EditBookBean implements Serializable {
      * the "Edit Book" modal and updates the entry in the database
      *
      * @return
-     * @throws Exception
+     * @throws Exception 
+     * By: Giancarlo Biasiucci
      */
     public String onSubmitEdit() throws Exception {
         LOG.debug("onSubmitEdit called");

@@ -1,12 +1,18 @@
 /*
- * All arquillain tests belong to this package
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
  */
 package com.gb1w20.arquillian.test;
 
 import com.gb1w20.arquillian.test.beans.AdsTestingBean;
+import com.gb1w20.arquillian.test.beans.BookSearchTestingBean;
+import com.gb1w20.arquillian.test.beans.BookTestingBean;
 import com.gb1w20.book_store_project.beans.NewsBean;
 import com.gb1w20.book_store_project.entities.Ads;
+import com.gb1w20.book_store_project.entities.Book;
 import com.gb1w20.book_store_project.jpa_controllers.AdsJpaController;
+import com.gb1w20.book_store_project.jpa_controllers.BookJpaController;
 import com.gb1w20.book_store_project.jpa_controllers.exceptions.IllegalOrphanException;
 import com.gb1w20.book_store_project.util.MessageLoader;
 import java.io.BufferedReader;
@@ -33,7 +39,6 @@ import org.jboss.shrinkwrap.api.asset.EmptyAsset;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.jboss.shrinkwrap.resolver.api.maven.Maven;
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
@@ -42,20 +47,13 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
-<<<<<<< HEAD
- * Parameterized testing for the ad class
- * @author Giancarlo Biasiucci,shruti pareek
+ * Parameterized testing for the book search methods
+ * @author Giancarlo Biasiucci
  * @version April 11, 2020
-=======
- * Tests ads jpa controller methods
- * @author giancarlo,shruti pareek
->>>>>>> 574368e2291f90acd82af0bb499612e9ad6bf485
  */
 @RunWith(Arquillian.class)
-public class AdsParameterizedTest {
-
-    private final static Logger LOG = LoggerFactory.getLogger(AdsParameterizedTest.class);
-
+public class BookSearchParameterizedTest {
+    private final static Logger LOG = LoggerFactory.getLogger(BookSearchParameterizedTest.class);
 
     @Deployment
     public static WebArchive deploy() {
@@ -76,12 +74,12 @@ public class AdsParameterizedTest {
                 .setWebXML(new File("src/main/webapp/WEB-INF/web.xml"))
                 
                 .addPackage(IllegalOrphanException.class.getPackage())
-                .addPackage(AdsJpaController.class.getPackage())
+                .addPackage(BookJpaController.class.getPackage())
                 .addPackage(ParameterRule.class.getPackage())
                 .addPackage(NewsBean.class.getPackage())
                 .addPackage(MessageLoader.class.getPackage())
-                .addPackage(AdsTestingBean.class.getPackage())
-                .addPackage(Ads.class.getPackage())
+                .addPackage(BookSearchTestingBean.class.getPackage())
+                .addPackage(Book.class.getPackage())
                 .addAsWebInfResource(EmptyAsset.INSTANCE, "beans.xml")
                 .addAsWebInfResource(new File("src/main/webapp/WEB-INF/payara-resources.xml"), "payara-resources.xml")
                 .addAsResource(new File("src/main/resources/META-INF/persistence.xml"), "META-INF/persistence.xml")
@@ -92,23 +90,19 @@ public class AdsParameterizedTest {
         return webArchive;
     }
     @Inject
-    private AdsJpaController adsControl;
-
-    /**
-     *
-     */
+    private BookJpaController bookControl;
+    
     @Rule
-    public ParameterRule adsRule = new ParameterRule("adTest",
-            new AdsTestingBean(1, "Not Removed", 2),
-            new AdsTestingBean(2, "Not Removed", 2),
-            new AdsTestingBean(3, "Removed", 2),
-            new AdsTestingBean(4, "Removed", 2),
-            new AdsTestingBean(5, "Removed", 2),
-            new AdsTestingBean(6, "Removed", 2)
+    public ParameterRule bookRule = new ParameterRule("bookSearchTest",
+            new BookSearchTestingBean("Dennis", "author", 2,2),
+            new BookSearchTestingBean("Suz", "author", 3,3),
+            new BookSearchTestingBean("The", "title", 25,46),
+            new BookSearchTestingBean("Sa", "title", 2,2),
+            new BookSearchTestingBean("97801", "isbn", 5,7)
     );
-
-    private AdsTestingBean adTest;
-
+    
+    private BookSearchTestingBean bookSearchTest;
+    
     @Resource(lookup = "java:app/jdbc/bookstore")
     private DataSource ds;
 
@@ -117,67 +111,33 @@ public class AdsParameterizedTest {
 
     @Resource
     private UserTransaction utx;
-
-    /**
-     * Tests if a randomly generated advertisement is an actual ad
-     * By: Giancarlo Biasiucci
-     */
-    @Test
-    public void testRandomAdIsAlwaysReal() {
-        Ads ad = adsControl.getRandomAd();
-        List<Ads> allAds = adsControl.findAdsEntities();
-        assertTrue("Expected: included, actual: not", allAds.contains(ad));
-    }
     
     /**
-     * Replicates the status retrieval method in the controller to test if the expected
-     * removal status of an ad is retrieved
+     * Tests if the gallery page search returns the correct amount of books, given both
+     * the search query and the criteria
      * By: Giancarlo Biasiucci
      */
     @Test
-    public void testExpectedStatus()
+    public void testSearch()
     {
-        String removalString = "Not Removed";
-        boolean removalStatus = adsControl.findAds(adTest.adID).getIsRemoved();
-        if (removalStatus)
-        {
-            removalString = "Removed";
-        }
-        assertEquals("Expected: " + adTest.expectedStatus + ", actual: " + removalString,
-                adTest.expectedStatus, removalString);
+        int results = bookControl.search(bookSearchTest.searchBy, bookSearchTest.query, 0).size();
+        assertEquals("Expected: " + bookSearchTest.expectedResults + ", actual: " + results,
+                bookSearchTest.expectedResults, results);
     }
     
     /**
-     * method for testing the count of advertisements
-     * @author shruti pareek
+     * Tests if manager-side search returns the correct amount of books, given both
+     * the search query and search criteria
+     * By: Giancarlo Biasiucci
      */
     @Test
-    public void testGetAdsCount() {
-        LOG.debug("testGetAdsCount");
-        boolean isSuccess = true;
-        int resultAdCount = adsControl.getAdsCount();
-        if (!(resultAdCount == adTest.expectedCount)) {
-            isSuccess = false;
-        }
-        assertTrue("adTest returned inconsistent results Expected:" + adTest.expectedCount + " Actual:" + resultAdCount, isSuccess);
+    public void testSearchAll()
+    {
+        int results = bookControl.searchAllBooks(bookSearchTest.searchBy, bookSearchTest.query, 0).size();
+        assertEquals("Expected: " + bookSearchTest.expectedResultsAll + ", actual: " + results,
+                bookSearchTest.expectedResultsAll, results);
     }
-
-    /**
-     * @author shruti pareek
-     */
-    @Test
-    public void testAllEnabledAds() {
-        LOG.debug("testAllEnabledAds");
-        boolean isSuccess = false;
-        List<Ads> resultEnabledAds = adsControl.getAllEnabledAds();
-        for (Ads testAd : resultEnabledAds) {
-            if (!(testAd.getAdID() == adTest.adID)) {
-                isSuccess = true;
-            }
-        }
-        assertTrue("adTest returned inconsistent results", isSuccess);
-    }
-
+    
     /**
      * Restore the database to a known state before testing. This is important
      * if the test is destructive. This routine is courtesy of Bartosz Majsak

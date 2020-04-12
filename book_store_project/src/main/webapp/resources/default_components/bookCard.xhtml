@@ -19,7 +19,7 @@ A Composite component created for book cards to avoid code duplication in all we
         <div class="ui fluid card darker homepageCard">
             <div class="homepageImg">
                 <h:graphicImage class="img" height="250" width="200" library="images" name="#{books.isbn}.jpg"/>
-                <div class="cardHoverBtn"> View Cover</div>
+                <div class="cardHoverBtn">#{msgs.viewCover}</div>
             </div>
             <div class="content">
 
@@ -62,7 +62,7 @@ A Composite component created for book cards to avoid code duplication in all we
 
             <!--Button to add to shopping cart-->
             <div class="ui two bottom attached buttons ">
-                <h:commandButton action="#{cbb.addBookToCart(books)}"  value = "+ Add to Cart" class="ui button">
+                <h:commandButton action="#{cbb.addBookToCart(books)}"  value = "#{msgs.addToCart}" class="ui button">
                     <f:ajax event="click" ></f:ajax>
                 </h:commandButton>
             </div>

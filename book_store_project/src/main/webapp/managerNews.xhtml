@@ -1,18 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
-To change this license header, choose License Headers in Project Properties.
-To change this template file, choose Tools | Templates
-and open the template in the editor.
+    News feed management page where a manager can "remove"/"enable" news feeds
+    so that they are displayed/not displayed on the front page.
+
+    News management page done by: Evan Greenstein, Giancarlo Biasiucci
 -->
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:f="http://xmlns.jcp.org/jsf/core"
-      xmlns:b="http://bootsfaces.net/ui"
-      xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
-      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-      xmlns:p="http://primefaces.org/ui"
-      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
       xmlns:bookstore="http://java.sun.com/jsf/composite/default_components">
 
      <h:head>
@@ -68,6 +64,9 @@ and open the template in the editor.
 
                     <h1>News Feed Management</h1>
 
+                    <!--
+                        Table done by: Evan Greenstein
+                    -->
                     <h:dataTable  id="newsTable" var="news"  value="#{newsManagement.results}" class="ui celled table" 
                                   style="margin-bottom: 20px;">
                          <h:column>
@@ -78,6 +77,9 @@ and open the template in the editor.
                               <f:facet name="header">Date created</f:facet>
                                    #{news.dateCreated}
                          </h:column>
+                        <!--
+                            Status and enable/remove links and functionality done by: Giancarlo Biasiucci
+                        -->
                         <h:column>
                             <f:facet name="header">Status</f:facet>
                                 #{newsJpaController.getStatusByNewsId(news.newsID)[1]}
