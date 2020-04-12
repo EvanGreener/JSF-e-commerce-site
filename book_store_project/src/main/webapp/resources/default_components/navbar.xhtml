@@ -31,7 +31,7 @@ A Composite component created for nav bar to avoid code duplication in all web p
                 </b:navbarLinks>
 
                 <!--Adds spacing in nav bar-->
-                <b:navbarLinks pull="right"><b:navLink value="    " href="#"></b:navLink></b:navbarLinks>
+                <b:navbarLinks pull="right"><b:navLink value="          " href="#"></b:navLink></b:navbarLinks>
                 <b:navbarLinks pull="right" styleClass="hidden-xs">
 
                     <b:dropMenu value="Site View" rendered="#{UserLoginBean.getIfManager()}" style="color: white">
@@ -39,19 +39,22 @@ A Composite component created for nav bar to avoid code duplication in all web p
                         <b:navLink id="cli" value="Clinet View" href="index.xhtml"></b:navLink>
                     </b:dropMenu>
 
-                    <b:navLink rendered="#{UserLoginBean.getIfSignedIn()}" style="color: white" class="nav" value="My Books" href="mybooks.xhtml"></b:navLink>
-                    <b:navLink style="color: white" class="nav" value="Cart" href="cart.xhtml"></b:navLink>
+                    <b:navLink rendered="#{UserLoginBean.getIfSignedIn()}" style="color: white" class="nav myBooks" value="My Books" href="mybooks.xhtml"></b:navLink>
+                    <b:navLink style="color: white" class="nav cartBtn" value="Cart" href="cart.xhtml"></b:navLink>
 
                     <b:dropMenu value="#{locale.getLocaleString()}" style="color: white">
-                        <b:navCommandLink id="en" value="English - En" action="#{locale.setLanguage('en','CA')}" />
-                        <b:navCommandLink id="fr" value="Francais - Fr" action="#{locale.setLanguage('fr','CA')}" />
+                        <b:commandButton class="languageOption" id="en" value="English - En" action="#{locale.setLanguage('en','CA')}" />
+                        <b:commandButton class="languageOption" id="fr" value="Francais - Fr" action="#{locale.setLanguage('fr','CA')}" />
                     </b:dropMenu>
 
-                    <b:navLink rendered="#{!UserLoginBean.getIfSignedIn()}" style="color: white;font-weight: bold" value="Log In" href="signIn.xhtml">
+
+                    <b:navLink class="signInBtn" rendered="#{!UserLoginBean.getIfSignedIn()}" style="color: white;font-weight: bold" value="Log In" href="signIn.xhtml">
                     </b:navLink>
 
                     <b:dropMenu rendered="#{UserLoginBean.getIfSignedIn()}" value="Hello #{UserLoginBean.getFirstName()}" style="color: white">
-                        <b:navCommandLink id="signout" value="Signout" href="#" action="#{UserLoginBean.signOut()}"></b:navCommandLink>
+                        <h:form>
+                            <b:navCommandLink class="signOutBtn" id="signout" value="Signout" href="#" action="#{UserLoginBean.signOut()}"></b:navCommandLink>
+                        </h:form>
                     </b:dropMenu>
 
 

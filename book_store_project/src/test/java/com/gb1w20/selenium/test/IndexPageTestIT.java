@@ -131,29 +131,29 @@ public class IndexPageTestIT {
         bookItems.get(0).click();
     }
 
-    @Test
-    public void testSurveyOptionSelect() throws Exception {
-                driver.get("http://localhost:8080/book_store_project/");
-        // Wait for the page to load, timeout after 10 seconds
-        WebDriverWait wait = new WebDriverWait(driver, 10);
-        // Wait for the page to load, timeout after 10 seconds
-        wait.until(ExpectedConditions.titleIs("The BookStore"));
-        List<WebElement> surveyItems = driver.findElements(By.className("surveyItem"));
-        surveyItems.get(0).click();
-    }
-
-    @Test
-    public void testSurveyOptionSelectAndSubmit() throws Exception {
-                        driver.get("http://localhost:8080/book_store_project/");
-        // Wait for the page to load, timeout after 10 seconds
-        WebDriverWait wait = new WebDriverWait(driver, 10);
-        // Wait for the page to load, timeout after 10 seconds
-        wait.until(ExpectedConditions.titleIs("The BookStore"));
-        List<WebElement> surveyItems = driver.findElements(By.className("surveyItem"));
-        surveyItems.get(0).click();
-        WebElement surveySubmit = driver.findElement(By.className("surveySubmitBtn"));
-        surveySubmit.click();
-    }
+//    @Test
+//    public void testSurveyOptionSelect() throws Exception {
+//        driver.get("http://localhost:8080/book_store_project/");
+//        // Wait for the page to load, timeout after 10 seconds
+//        WebDriverWait wait = new WebDriverWait(driver, 10);
+//        // Wait for the page to load, timeout after 10 seconds
+//        wait.until(ExpectedConditions.titleIs("The BookStore"));
+//        List<WebElement> surveyItems = driver.findElements(By.className("surveyItem"));
+//        surveyItems.get(0).click();
+//    }
+//
+//    @Test
+//    public void testSurveyOptionSelectAndSubmit() throws Exception {
+//        driver.get("http://localhost:8080/book_store_project/");
+//        // Wait for the page to load, timeout after 10 seconds
+//        WebDriverWait wait = new WebDriverWait(driver, 10);
+//        // Wait for the page to load, timeout after 10 seconds
+//        wait.until(ExpectedConditions.titleIs("The BookStore"));
+//        List<WebElement> surveyItems = driver.findElements(By.className("surveyItem"));
+//        surveyItems.get(0).click();
+//        WebElement surveySubmit = driver.findElement(By.className("surveySubmitBtn"));
+//        surveySubmit.click();
+//    }
 
     @Test
     public void testPopularGenre() throws Exception {
@@ -177,8 +177,8 @@ public class IndexPageTestIT {
         WebElement ad1 = driver.findElement(By.className("itemAd1"));
         ad1.click();
     }
-    
-   @Test
+
+    @Test
     public void testAd2Click() throws Exception {
         driver.get("http://localhost:8080/book_store_project/");
         // Wait for the page to load, timeout after 10 seconds
@@ -191,13 +191,101 @@ public class IndexPageTestIT {
 
     @Test
     public void testHelpPageClick() throws Exception {
-                driver.get("http://localhost:8080/book_store_project/");
+        driver.get("http://localhost:8080/book_store_project/");
         // Wait for the page to load, timeout after 10 seconds
         WebDriverWait wait = new WebDriverWait(driver, 10);
         // Wait for the page to load, timeout after 10 seconds
         wait.until(ExpectedConditions.titleIs("The BookStore"));
         WebElement footerLink = driver.findElement(By.className("footerHelpLink"));
         footerLink.click();
+        wait.until(ExpectedConditions.titleIs("Help Page"));
+
     }
 
+    @Test
+    public void testLogoClick() throws Exception {
+        driver.get("http://localhost:8080/book_store_project/");
+        // Wait for the page to load, timeout after 10 seconds
+        WebDriverWait wait = new WebDriverWait(driver, 10);
+        // Wait for the page to load, timeout after 10 seconds
+        wait.until(ExpectedConditions.titleIs("The BookStore"));
+        List<WebElement> linkItems = driver.findElements(By.tagName("a"));
+        linkItems.get(0).click();
+        wait.until(ExpectedConditions.titleIs("The BookStore"));
+
+    }
+
+    @Test
+    public void testGalleryButtonClick() throws Exception {
+        driver.get("http://localhost:8080/book_store_project/");
+        // Wait for the page to load, timeout after 10 seconds
+        WebDriverWait wait = new WebDriverWait(driver, 10);
+        // Wait for the page to load, timeout after 10 seconds
+        wait.until(ExpectedConditions.titleIs("The BookStore"));
+        List<WebElement> linkItems = driver.findElements(By.tagName("a"));
+        linkItems.get(1).click();
+        wait.until(ExpectedConditions.titleIs("Gallery Page"));
+    }
+
+    @Test
+    public void testSalesButtonClick() throws Exception {
+        driver.get("http://localhost:8080/book_store_project/");
+        // Wait for the page to load, timeout after 10 seconds
+        WebDriverWait wait = new WebDriverWait(driver, 10);
+        // Wait for the page to load, timeout after 10 seconds
+        wait.until(ExpectedConditions.titleIs("The BookStore"));
+        List<WebElement> linkItems = driver.findElements(By.tagName("a"));
+        linkItems.get(2).click();
+        Assert.assertTrue(driver.getCurrentUrl().contains("#sales"));
+    }
+
+    @Test
+    public void testGenresButtonClick() throws Exception {
+        driver.get("http://localhost:8080/book_store_project/");
+        // Wait for the page to load, timeout after 10 seconds
+        WebDriverWait wait = new WebDriverWait(driver, 10);
+        // Wait for the page to load, timeout after 10 seconds
+        wait.until(ExpectedConditions.titleIs("The BookStore"));
+        List<WebElement> linkItems = driver.findElements(By.tagName("a"));
+        linkItems.get(3).click();
+        Assert.assertTrue(driver.getCurrentUrl().contains("#popularGenres"));
+    }
+
+    @Test
+    public void testCartButtonClick() throws Exception {
+        driver.get("http://localhost:8080/book_store_project/");
+        // Wait for the page to load, timeout after 10 seconds
+        WebDriverWait wait = new WebDriverWait(driver, 10);
+        // Wait for the page to load, timeout after 10 seconds
+        wait.until(ExpectedConditions.titleIs("The BookStore"));
+        WebElement cartBtn = driver.findElement(By.className("cartBtn"));
+        cartBtn.click();
+        wait.until(ExpectedConditions.titleIs("Cart"));
+    }
+
+    @Test
+    public void testLoginButtonClick() throws Exception {
+        driver.get("http://localhost:8080/book_store_project/");
+        // Wait for the page to load, timeout after 10 seconds
+        WebDriverWait wait = new WebDriverWait(driver, 10);
+        // Wait for the page to load, timeout after 10 seconds
+        wait.until(ExpectedConditions.titleIs("The BookStore"));
+        WebElement signIn = driver.findElement(By.className("signInBtn"));
+        signIn.click();
+        wait.until(ExpectedConditions.titleIs("Login"));
+    }
+    
+//        @Test
+//    public void testLanguageChange() throws Exception {
+//        driver.get("http://localhost:8080/book_store_project/");
+//        // Wait for the page to load, timeout after 10 seconds
+//        WebDriverWait wait = new WebDriverWait(driver, 10);
+//        // Wait for the page to load, timeout after 10 seconds
+//        wait.until(ExpectedConditions.titleIs("The BookStore"));
+//        List<WebElement> languageItems = driver.findElements(By.className("languageOption"));
+//        languageItems.get(0).click();
+//        wait.until(ExpectedConditions.titleIs("The BookStore"));
+//        WebElement signIn = driver.findElement(By.className("signInBtn"));
+//        Assert.assertEquals("Log In", signIn.getText());
+//    }
 }

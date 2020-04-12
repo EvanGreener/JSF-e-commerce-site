@@ -208,3 +208,7 @@ p.small,h3.small {
     font-size:14px;
     color: white;
 }
+.languageOption{
+    border:0px !important;
+font-weight: bold !important;
+}
