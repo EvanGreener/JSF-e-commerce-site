@@ -126,6 +126,8 @@ public class AuthorsJpaController implements Serializable {
             return ((Long) q.getSingleResult()).intValue();
     }
     
+    
+    
     public List<String> getAuthorNames()
     {
         CriteriaQuery cq = em.getCriteriaBuilder().createQuery();

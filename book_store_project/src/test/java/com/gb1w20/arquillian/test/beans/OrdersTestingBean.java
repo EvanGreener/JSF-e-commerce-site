@@ -26,18 +26,16 @@ public class OrdersTestingBean {
     public int testClientId;
     public String expectedEmail;
     public int testOrderId;
-    public OrderItem expectedOrderItem;
     public int expectedOrderItemCount;
     public String expectedStatus;
     public String testQuery;
     public String testSearchBy;
     public Orders expectedOrder;
 
-    public OrdersTestingBean(int testClientId, String expectedEmail, int testOrderId, OrderItem expectedOrderItem, int expectedOrderItemCount, String expectedStatus, String testQuery, String testSearchBy, Orders expectedOrder) {
+    public OrdersTestingBean(int testClientId, String expectedEmail, int testOrderId, int expectedOrderItemCount, String expectedStatus, String testQuery, String testSearchBy, Orders expectedOrder) {
         this.testClientId = testClientId;
         this.expectedEmail = expectedEmail;
         this.testOrderId = testOrderId;
-        this.expectedOrderItem = expectedOrderItem;
         this.expectedOrderItemCount = expectedOrderItemCount;
         this.expectedStatus = expectedStatus;
         this.testQuery = testQuery;

@@ -5,17 +5,15 @@
  */
 package com.gb1w20.arquillian.test;
 
-import com.gb1w20.arquillian.test.beans.AdsTestingBean;
-import com.gb1w20.arquillian.test.beans.BookTestingBean;
-import com.gb1w20.arquillian.test.beans.ClientTestingBean;
-import com.gb1w20.book_store_project.backing.BookFormatBackingBean;
-import com.gb1w20.book_store_project.beans.NewsBean;
-import com.gb1w20.book_store_project.entities.Ads;
-import com.gb1w20.book_store_project.entities.Book;
-import com.gb1w20.book_store_project.entities.BookFormat;
-import com.gb1w20.book_store_project.jpa_controllers.AdsJpaController;
-import com.gb1w20.book_store_project.jpa_controllers.BookFormatJpaController;
-import com.gb1w20.book_store_project.jpa_controllers.BookJpaController;
+import com.gb1w20.arquillian.test.beans.AuthorsTestingBean;
+import com.gb1w20.arquillian.test.beans.BookAuthorsTestingBean;
+import com.gb1w20.arquillian.test.beans.OrderItemTestingBean;
+import com.gb1w20.book_store_project.entities.Authors;
+import com.gb1w20.book_store_project.entities.BookAuthors;
+import com.gb1w20.book_store_project.entities.OrderItem;
+import com.gb1w20.book_store_project.jpa_controllers.AuthorsJpaController;
+import com.gb1w20.book_store_project.jpa_controllers.BookAuthorsJpaController;
+import com.gb1w20.book_store_project.jpa_controllers.OrderItemJpaController;
 import com.gb1w20.book_store_project.jpa_controllers.exceptions.IllegalOrphanException;
 import java.io.BufferedReader;
 import java.io.File;
@@ -40,7 +38,6 @@ import org.jboss.shrinkwrap.api.ShrinkWrap;
 import org.jboss.shrinkwrap.api.asset.EmptyAsset;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.jboss.shrinkwrap.resolver.api.maven.Maven;
-import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 import org.junit.Before;
 import org.junit.Rule;
@@ -51,12 +48,12 @@ import org.slf4j.LoggerFactory;
 
 /**
  *
- * @author giancarlo,shruti pareek
+ * @author shruti pareek
  */
 @RunWith(Arquillian.class)
-public class AdsParameterizedTest {
+public class BookAuthorsParameterizedTest {
 
-    private final static Logger LOG = LoggerFactory.getLogger(AdsParameterizedTest.class);
+    private final static Logger LOG = LoggerFactory.getLogger(BookAuthorsParameterizedTest.class);
 
     @Deployment
     public static WebArchive deploy() {
@@ -78,12 +75,11 @@ public class AdsParameterizedTest {
         final WebArchive webArchive;
         webArchive = ShrinkWrap.create(WebArchive.class, "test.war")
                 .setWebXML(new File("src/main/webapp/WEB-INF/web.xml"))
-                
                 .addPackage(IllegalOrphanException.class.getPackage())
-                .addPackage(AdsJpaController.class.getPackage())
+                .addPackage(BookAuthorsJpaController.class.getPackage())
                 .addPackage(ParameterRule.class.getPackage())
-                .addPackage(AdsTestingBean.class.getPackage())
-                .addPackage(Ads.class.getPackage())
+                .addPackage(BookAuthorsTestingBean.class.getPackage())
+                .addPackage(BookAuthors.class.getPackage())
                 .addAsWebInfResource(EmptyAsset.INSTANCE, "beans.xml")
                 .addAsWebInfResource(new File("src/main/webapp/WEB-INF/payara-resources.xml"), "payara-resources.xml")
                 .addAsResource(new File("src/main/resources/META-INF/persistence.xml"), "META-INF/persistence.xml")
@@ -94,19 +90,18 @@ public class AdsParameterizedTest {
         return webArchive;
     }
     @Inject
-    private AdsJpaController adsControl;
+    private BookAuthorsJpaController bookAuthorsControl;
 
     @Rule
-    public ParameterRule adsRule = new ParameterRule("adTest",
-            new AdsTestingBean(1, "Not Removed", 2),
-            new AdsTestingBean(2, "Not Removed", 2),
-            new AdsTestingBean(3, "Removed", 2),
-            new AdsTestingBean(4, "Removed", 2),
-            new AdsTestingBean(5, "Removed", 2),
-            new AdsTestingBean(6, "Removed", 2)
+    public ParameterRule orderItemRule = new ParameterRule("bookAuthorsTest",
+            new BookAuthorsTestingBean("9780060584757", new BookAuthors(47)),
+            new BookAuthorsTestingBean("9780061007224", new BookAuthors(23)),
+            new BookAuthorsTestingBean("9780061120084", new BookAuthors(3)),
+            new BookAuthorsTestingBean("9780061139376", new BookAuthors(33)),
+            new BookAuthorsTestingBean("9780062024039", new BookAuthors(69))
     );
 
-    private AdsTestingBean adTest;
+    private BookAuthorsTestingBean bookAuthorsTest;
 
     @Resource(lookup = "java:app/jdbc/bookstore")
     private DataSource ds;
@@ -117,49 +112,20 @@ public class AdsParameterizedTest {
     @Resource
     private UserTransaction utx;
 
-    @Test
-    public void testExpectedStatus() {
-        String removalStatus = adsControl.getStatusByAdId(adsControl.findAds(adTest.adID).getAdID());
-        assertEquals("Expected: " + adTest.expectedStatus + ", actual: " + removalStatus,
-                adTest.expectedStatus, removalStatus);
-    }
-
-    @Test
-    public void testRandomAdIsAlwaysReal() {
-        Ads ad = adsControl.getRandomAd();
-        List<Ads> allAds = adsControl.findAdsEntities();
-        assertTrue("Expected: included, actual: not", allAds.contains(ad));
-    }
-
     /**
      * @author shruti pareek
      */
     @Test
-    public void testGetAdsCount() {
-        LOG.debug("testGetAdsCount");
+    public void testFindBookAuthorsByIsbn() {
+        LOG.debug("testFindBookAuthorsByIsbn");
         boolean isSuccess = true;
-        int resultAdCount = adsControl.getAdsCount();
-        if (!(resultAdCount == adTest.expectedCount)) {
+        List<BookAuthors> resultBookAuthor = bookAuthorsControl.findBookAuthorsByIsbn(bookAuthorsTest.isbn);
+
+        if (!(resultBookAuthor.get(0).toString().equals(bookAuthorsTest.expectedBookAuthor.toString()))) {
             isSuccess = false;
         }
-        assertTrue("adTest returned inconsistent results Expected:" + adTest.expectedCount + " Actual:" + resultAdCount, isSuccess);
-    }
 
-    /**
-     * @author shruti pareek
-     */
-    @Test
-    public void testAllEnabledAds() {
-        LOG.debug("testAllEnabledAds");
-        boolean isSuccess = false;
-        List<Ads> resultEnabledAds = adsControl.getAllEnabledAds();
-        for (Ads testAd : resultEnabledAds) {
-            if (!(testAd.getAdID() == adTest.adID)) {
-                isSuccess = true;
-            }
-        }
-
-        assertTrue("adTest returned inconsistent results", isSuccess);
+        assertTrue("orderItemTest returned inconsistent results Expected:" + bookAuthorsTest.expectedBookAuthor.toString() + " Actual:" + resultBookAuthor.get(0).toString(), isSuccess);
     }
 
     /**
