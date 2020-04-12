@@ -52,10 +52,7 @@ public class SurveyParameterizedTest {
 
     private final static Logger LOG = LoggerFactory.getLogger(SurveyParameterizedTest.class);
 
-    /**
-     *
-     * @return
-     */
+    
     @Deployment
     public static WebArchive deploy() {
 
