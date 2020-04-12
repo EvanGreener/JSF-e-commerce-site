@@ -35,6 +35,7 @@ public class SurveyBean implements Serializable {
     /**
      * method for initializing when bean called
      *
+     * @author Shruti Pareek
      * @return void
      */
     public void init() {
@@ -47,6 +48,7 @@ public class SurveyBean implements Serializable {
      * Gets the id of the first question in the survey used to set the default
      * choice for radio buttons in index page
      *
+     * @author Shruti Pareek
      * @return Integer
      */
     public Integer getSurveyChoice() {
@@ -63,6 +65,7 @@ public class SurveyBean implements Serializable {
     /**
      * Sets the id of the question that has been selected by user
      *
+     * @author Shruti Pareek
      * @param choice
      */
     public void setSurveyChoice(Integer choice) {
@@ -73,6 +76,7 @@ public class SurveyBean implements Serializable {
     /**
      * Sets the survey to a randomly generated one
      *
+     * @author Shruti Pareek
      */
     public void setSurvey() {
         LOG.debug("setSurvey");
@@ -82,6 +86,7 @@ public class SurveyBean implements Serializable {
     /**
      * Retrieves survey
      *
+     * @author Shruti Pareek
      * @return Surveys
      */
     public Surveys getSurvey() {

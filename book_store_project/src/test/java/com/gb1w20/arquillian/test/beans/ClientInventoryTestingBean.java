@@ -1,37 +1,33 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ *All test beans belong to this package
  */
 package com.gb1w20.arquillian.test.beans;
 
-import com.gb1w20.book_store_project.entities.Ads;
-import com.gb1w20.book_store_project.entities.Authors;
 import com.gb1w20.book_store_project.entities.ClientInventory;
-import java.util.List;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
+ * Bean used only for the purpose of performing arquillian tests on the client
+ * inventory controller class
  *
  * @author shruti Pareek
  */
 public class ClientInventoryTestingBean {
+    
+    private final static Logger LOG = LoggerFactory.getLogger(ClientInventoryTestingBean.class);
 
-    /**
-     *
-     */
     public Integer clientId;
-
-    /**
-     *
-     */
     public ClientInventory expectedClientInventory;
 
     /**
+     * Constructor takes all necessary input needed for testing
      *
      * @param clientId
      * @param expectedClientInventory
      */
     public ClientInventoryTestingBean(Integer clientId, ClientInventory expectedClientInventory) {
+        LOG.debug("ClientInventoryTestingBean");
         this.clientId = clientId;
         this.expectedClientInventory = expectedClientInventory;
     }

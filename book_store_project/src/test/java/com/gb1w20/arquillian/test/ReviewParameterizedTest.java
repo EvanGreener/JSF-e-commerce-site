@@ -1,3 +1,6 @@
+/*
+ * All arquillain tests belong to this package
+ */
 package com.gb1w20.arquillian.test;
 
 import com.gb1w20.arquillian.test.beans.ReviewTestingBean;

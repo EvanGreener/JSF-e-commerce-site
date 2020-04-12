@@ -2,9 +2,6 @@ package com.gb1w20.book_store_project.jpa_controllers;
 
 import com.gb1w20.book_store_project.entities.Ads;
 import com.gb1w20.book_store_project.entities.Ads_;
-import com.gb1w20.book_store_project.entities.Book;
-import com.gb1w20.book_store_project.entities.Orders;
-import com.gb1w20.book_store_project.entities.Orders_;
 import com.gb1w20.book_store_project.jpa_controllers.exceptions.NonexistentEntityException;
 import java.io.Serializable;
 import java.util.List;

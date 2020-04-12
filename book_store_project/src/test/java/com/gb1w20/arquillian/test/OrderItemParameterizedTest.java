@@ -1,15 +1,10 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * All arquillain tests belong to this package
  */
 package com.gb1w20.arquillian.test;
 
-import com.gb1w20.arquillian.test.beans.AuthorsTestingBean;
 import com.gb1w20.arquillian.test.beans.OrderItemTestingBean;
-import com.gb1w20.book_store_project.entities.Authors;
 import com.gb1w20.book_store_project.entities.OrderItem;
-import com.gb1w20.book_store_project.jpa_controllers.AuthorsJpaController;
 import com.gb1w20.book_store_project.jpa_controllers.OrderItemJpaController;
 import com.gb1w20.book_store_project.jpa_controllers.exceptions.IllegalOrphanException;
 import java.io.BufferedReader;
@@ -44,7 +39,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
- *
+ * tests orderItem controller class methods
  * @author shruti pareek
  */
 @RunWith(Arquillian.class)
@@ -52,10 +47,7 @@ public class OrderItemParameterizedTest {
 
     private final static Logger LOG = LoggerFactory.getLogger(OrderItemParameterizedTest.class);
 
-    /**
-     *
-     * @return
-     */
+
     @Deployment
     public static WebArchive deploy() {
 
@@ -94,7 +86,7 @@ public class OrderItemParameterizedTest {
     private OrderItemJpaController orderItemControl;
 
     /**
-     *
+     * data used to test methods
      */
     @Rule
     public ParameterRule orderItemRule = new ParameterRule("orderItemTest",
@@ -117,6 +109,7 @@ public class OrderItemParameterizedTest {
     private UserTransaction utx;
 
     /**
+     * tests if gets correct status for order items based on item id
      * @author shruti pareek
      */
     @Test

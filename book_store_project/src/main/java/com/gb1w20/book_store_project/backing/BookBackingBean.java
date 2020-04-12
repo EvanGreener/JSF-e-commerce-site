@@ -3,7 +3,6 @@ package com.gb1w20.book_store_project.backing;
 import com.gb1w20.book_store_project.entities.Authors;
 import com.gb1w20.book_store_project.entities.Book;
 import com.gb1w20.book_store_project.entities.BookAuthors;
-import com.gb1w20.book_store_project.entities.Publisher;
 import com.gb1w20.book_store_project.jpa_controllers.AuthorsJpaController;
 import com.gb1w20.book_store_project.jpa_controllers.BookAuthorsJpaController;
 import com.gb1w20.book_store_project.jpa_controllers.BookJpaController;
@@ -179,7 +178,7 @@ public class BookBackingBean implements Serializable {
      * @throws Exception
      */
     public String createBook() throws Exception {
-        List<Authors> authors = new ArrayList<Authors>();
+        List<Authors> authors = new ArrayList<>();
         authors.add(selectedAuthor);
         book.setGenre(selectedGenre);
         book.setListPrice(BigDecimal.valueOf(Double.parseDouble(lPriceStr)));

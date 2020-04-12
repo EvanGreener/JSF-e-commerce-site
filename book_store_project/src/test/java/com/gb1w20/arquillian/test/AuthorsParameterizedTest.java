@@ -1,24 +1,11 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * All arquillain tests belong to this package
  */
 package com.gb1w20.arquillian.test;
 
-import com.gb1w20.arquillian.test.beans.AdsTestingBean;
 import com.gb1w20.arquillian.test.beans.AuthorsTestingBean;
-import com.gb1w20.arquillian.test.beans.BookTestingBean;
-import com.gb1w20.arquillian.test.beans.ClientTestingBean;
-import com.gb1w20.book_store_project.backing.BookFormatBackingBean;
-import com.gb1w20.book_store_project.beans.NewsBean;
-import com.gb1w20.book_store_project.entities.Ads;
 import com.gb1w20.book_store_project.entities.Authors;
-import com.gb1w20.book_store_project.entities.Book;
-import com.gb1w20.book_store_project.entities.BookFormat;
-import com.gb1w20.book_store_project.jpa_controllers.AdsJpaController;
 import com.gb1w20.book_store_project.jpa_controllers.AuthorsJpaController;
-import com.gb1w20.book_store_project.jpa_controllers.BookFormatJpaController;
-import com.gb1w20.book_store_project.jpa_controllers.BookJpaController;
 import com.gb1w20.book_store_project.jpa_controllers.exceptions.IllegalOrphanException;
 import java.io.BufferedReader;
 import java.io.File;
@@ -43,7 +30,6 @@ import org.jboss.shrinkwrap.api.ShrinkWrap;
 import org.jboss.shrinkwrap.api.asset.EmptyAsset;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.jboss.shrinkwrap.resolver.api.maven.Maven;
-import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 import org.junit.Before;
 import org.junit.Rule;
@@ -53,13 +39,14 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
- *
+ * tests author jpa controller methods
  * @author shruti pareek
  */
 @RunWith(Arquillian.class)
 public class AuthorsParameterizedTest {
 
     private final static Logger LOG = LoggerFactory.getLogger(AuthorsParameterizedTest.class);
+
 
     @Deployment
     public static WebArchive deploy() {
@@ -98,6 +85,9 @@ public class AuthorsParameterizedTest {
     @Inject
     private AuthorsJpaController authorsControl;
 
+    /**
+     * Data to test methods
+     */
     @Rule
     public ParameterRule authorsRule = new ParameterRule("authorsTest",
             new AuthorsTestingBean(new Authors(1), "John Steinbeck"),
@@ -119,6 +109,7 @@ public class AuthorsParameterizedTest {
     private UserTransaction utx;
 
     /**
+     * tests if gets author names
      * @author shruti pareek
      */
     @Test
@@ -136,6 +127,7 @@ public class AuthorsParameterizedTest {
     }
 
     /**
+     * tests if method get the right author by name
      * @author shruti pareek
      */
     @Test

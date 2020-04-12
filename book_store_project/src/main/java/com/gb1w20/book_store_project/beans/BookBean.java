@@ -11,7 +11,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.Serializable;
-import java.math.BigDecimal;
 import java.net.URL;
 import java.util.Collections;
 import java.util.List;
@@ -51,7 +50,7 @@ public class BookBean implements Serializable {
     @PostConstruct
     /**
      * method for initializing when bean called
-     *
+     * @author Shruti Pareek
      * @return void
      */
     public void init() {

@@ -1,7 +1,6 @@
 package com.gb1w20.book_store_project.jpa_controllers;
 
 import com.gb1w20.book_store_project.entities.SurveyData;
-import com.gb1w20.book_store_project.entities.Surveys;
 import com.gb1w20.book_store_project.jpa_controllers.exceptions.NonexistentEntityException;
 import java.io.Serializable;
 import java.util.List;
@@ -32,9 +31,17 @@ public class SurveyDataJpaController implements Serializable {
     @PersistenceContext
     private EntityManager em;
 
+    /**
+     *
+     */
     public SurveyDataJpaController() {
     }
 
+    /**
+     *
+     * @param surveyData
+     * @throws Exception
+     */
     public void create(SurveyData surveyData) throws Exception {
         try {
             utx.begin();
@@ -50,6 +57,12 @@ public class SurveyDataJpaController implements Serializable {
         }
     }
 
+    /**
+     *
+     * @param surveyData
+     * @throws NonexistentEntityException
+     * @throws Exception
+     */
     public void edit(SurveyData surveyData) throws NonexistentEntityException, Exception {
         try {
             utx.begin();
@@ -72,6 +85,12 @@ public class SurveyDataJpaController implements Serializable {
         }
     }
 
+    /**
+     *
+     * @param id
+     * @throws NonexistentEntityException
+     * @throws Exception
+     */
     public void destroy(Integer id) throws NonexistentEntityException, Exception {
         try {
             utx.begin();
@@ -94,10 +113,20 @@ public class SurveyDataJpaController implements Serializable {
         }
     }
 
+    /**
+     *
+     * @return
+     */
     public List<SurveyData> findSurveyDataEntities() {
         return findSurveyDataEntities(true, -1, -1);
     }
 
+    /**
+     *
+     * @param maxResults
+     * @param firstResult
+     * @return
+     */
     public List<SurveyData> findSurveyDataEntities(int maxResults, int firstResult) {
         return findSurveyDataEntities(false, maxResults, firstResult);
     }
@@ -113,10 +142,19 @@ public class SurveyDataJpaController implements Serializable {
         return q.getResultList();
     }
 
+    /**
+     *
+     * @param id
+     * @return
+     */
     public SurveyData findSurveyData(Integer id) {
         return em.find(SurveyData.class, id);
     }
 
+    /**
+     *
+     * @return
+     */
     public int getSurveyDataCount() {
         CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
         Root<SurveyData> rt = cq.from(SurveyData.class);
