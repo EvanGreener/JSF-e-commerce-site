@@ -1,5 +1,6 @@
 package com.gb1w20.book_store_project.beans;
 
+import com.gb1w20.book_store_project.util.MessageLoader;
 import java.io.IOException;
 import java.io.Serializable;
 import java.util.Locale;
@@ -19,6 +20,7 @@ import org.slf4j.LoggerFactory;
  * redraw the page thus changing the language.
  *
  * @author Ken Fogel, Giancarlo Biasiucci
+ * @version April 12, 2020
  */
 @Named("locale")
 @ViewScoped
@@ -102,19 +104,24 @@ public class LocaleBean implements Serializable {
         locale = lastLocale;
     }
     
+    /**
+     * Returns the localized string corresponding to the current locale
+     * @return The string representing the current locale
+     * By: Giancarlo Biasiucci
+     */
     public String getLocaleString()
     {
         if (locale.equals(new Locale("en", "CA")))
         {
-            return "English";
+            return MessageLoader.getString("com.gb1w20.bundles.messages", "english", null);
         }
         else if (locale.equals(new Locale("fr", "CA")))
         {
-            return "Français";
+            return MessageLoader.getString("com.gb1w20.bundles.messages", "french", null);
         }
         else
         {
-            return "English";
+            return MessageLoader.getString("com.gb1w20.bundles.messages", "english", null);
         }
     }
 

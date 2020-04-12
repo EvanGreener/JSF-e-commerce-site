@@ -1,13 +1,11 @@
 package com.gb1w20.book_store_project.beans;
 
 import com.gb1w20.book_store_project.entities.Clients;
-import com.gb1w20.book_store_project.entities.CustomerReviews;
 import com.gb1w20.book_store_project.jpa_controllers.ClientsJpaController;
 import java.io.IOException;
 import java.io.Serializable;
 import javax.annotation.PostConstruct;
 
-import javax.enterprise.context.SessionScoped;
 import javax.faces.context.FacesContext;
 import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
@@ -72,6 +70,12 @@ public class UserLoginBean implements Serializable {
         }
     }
 
+    /**
+     * Gets a client from cookie based on their email
+     *
+     * @author Shruti Pareek
+     * @return
+     */
     public Clients getClient() {
         LOG.debug("getClient");
         if (getIfSignedIn()) {

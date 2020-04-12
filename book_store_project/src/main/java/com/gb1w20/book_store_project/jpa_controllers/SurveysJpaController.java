@@ -1,8 +1,5 @@
 package com.gb1w20.book_store_project.jpa_controllers;
 
-import com.gb1w20.book_store_project.backing.AdBackingBean;
-import com.gb1w20.book_store_project.entities.Book;
-import com.gb1w20.book_store_project.entities.News;
 import com.gb1w20.book_store_project.entities.SurveyData_;
 import com.gb1w20.book_store_project.entities.Surveys;
 import com.gb1w20.book_store_project.entities.Surveys_;

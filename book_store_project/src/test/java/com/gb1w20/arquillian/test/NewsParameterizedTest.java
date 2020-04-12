@@ -1,22 +1,15 @@
-/*
- * To change this license henewser, choose License Henewsers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.gb1w20.arquillian.test;
 
 import com.gb1w20.arquillian.test.beans.NewsTestingBean;
-import com.gb1w20.arquillian.test.beans.BookTestingBean;
 import com.gb1w20.arquillian.test.beans.ClientTestingBean;
 import com.gb1w20.book_store_project.backing.BookFormatBackingBean;
 import com.gb1w20.book_store_project.beans.NewsBean;
 import com.gb1w20.book_store_project.entities.News;
-import com.gb1w20.book_store_project.entities.Book;
 import com.gb1w20.book_store_project.entities.BookFormat;
 import com.gb1w20.book_store_project.jpa_controllers.NewsJpaController;
 import com.gb1w20.book_store_project.jpa_controllers.BookFormatJpaController;
-import com.gb1w20.book_store_project.jpa_controllers.BookJpaController;
 import com.gb1w20.book_store_project.jpa_controllers.exceptions.IllegalOrphanException;
+import com.gb1w20.book_store_project.util.MessageLoader;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;
@@ -50,8 +43,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
- *
- * @author giancarlo
+ * Parameterized testing for the news JPA controller methods
+ * @author Giancarlo Biasiucci
+ * @version April 10, 2020
  */
 @RunWith(Arquillian.class)
 public class NewsParameterizedTest {
@@ -85,6 +79,7 @@ public class NewsParameterizedTest {
                 .addPackage(ParameterRule.class.getPackage())
                 .addPackage(ClientTestingBean.class.getPackage())
                 .addPackage(NewsBean.class.getPackage())
+                .addPackage(MessageLoader.class.getPackage())
                 .addAsWebInfResource(EmptyAsset.INSTANCE, "beans.xml")
                 .addAsWebInfResource(new File("src/main/webapp/WEB-INF/payara-resources.xml"), "payara-resources.xml")
                 .addAsResource(new File("src/main/resources/META-INF/persistence.xml"), "META-INF/persistence.xml")
@@ -120,14 +115,9 @@ public class NewsParameterizedTest {
     @Resource
     private UserTransaction utx;
     
-    @Test
-    public void testExpectedStatus()
-    {
-        String removalStatus = newsControl.getStatusByNewsId(newsControl.findNews(newsTest.newsID).getNewsID())[1].toString();
-        assertEquals("Expected: " + newsTest.expectedStatus + ", actual: " + removalStatus,
-                newsTest.expectedStatus, removalStatus);
-    }
-    
+    /**
+     * Tests if a randomly selected news feed is in the list of actual news feeds in the database
+     */
     @Test
     public void testRandomNewsIsAlwaysReal()
     {
@@ -136,6 +126,9 @@ public class NewsParameterizedTest {
         assertTrue("Expected: included, actual: not", allNews.contains(news));
     }
     
+    /**
+     * Tests if the enabled news feed is in the list of actual news feeds in the database
+     */
     @Test
     public void testEnabledNewsIsAlwaysReal()
     {
@@ -145,9 +138,27 @@ public class NewsParameterizedTest {
     }
     
     /**
+     * Tests for the expected removal status of a news feed.
+     * Replicates the controller query due to testing problems with i18n
+     */
+    @Test
+    public void testExpectedStatus()
+    {
+        String removalString = "Not Removed";
+        boolean removalStatus = newsControl.findNews(newsTest.newsID).getIsRemoved();
+        if (removalStatus)
+        {
+            removalString = "Removed";
+        }
+        assertEquals("Expected: " + newsTest.expectedStatus + ", actual: " + removalString,
+                newsTest.expectedStatus, removalString);
+    }
+    
+    /**
      * Restore the database to a known state before testing. This is important
      * if the test is destructive. This routine is courtesy of Bartosz Majsak
      * who also solved my Arquillian remote server problem
+     * From: KFWebStandardProject - ArquillianUnitTest.java
      */
     @Before
     public void seedDatabase() {
@@ -165,6 +176,7 @@ public class NewsParameterizedTest {
 
     /**
      * The following methods support the seedDatabse method
+     * All of the following are from: KFWebStandardProject - ArquillianUnitTest.java
      */
     private String loadAsString(final String path) {
         try (InputStream inputStream = Thread.currentThread()

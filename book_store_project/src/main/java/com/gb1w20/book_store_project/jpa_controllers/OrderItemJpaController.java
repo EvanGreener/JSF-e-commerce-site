@@ -5,6 +5,7 @@ import com.gb1w20.book_store_project.entities.OrderItemTotal;
 import com.gb1w20.book_store_project.entities.OrderItem_;
 import com.gb1w20.book_store_project.entities.Orders;
 import com.gb1w20.book_store_project.jpa_controllers.exceptions.NonexistentEntityException;
+import com.gb1w20.book_store_project.util.MessageLoader;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -19,15 +20,17 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
+
 import javax.persistence.criteria.Join;
 import javax.persistence.criteria.JoinType;
+
 import javax.persistence.criteria.Root;
 import javax.transaction.SystemException;
 import javax.transaction.UserTransaction;
 
 /**
  * Queries that facilitate accessing certain orderItems
- * @author Saad
+ * @author Saad,Giancarlo Biasiucci
  */
 @Named
 @RequestScoped
@@ -39,9 +42,17 @@ public class OrderItemJpaController implements Serializable {
     @PersistenceContext
     private EntityManager em;
 
+    /**
+     *
+     */
     public OrderItemJpaController() {
     }
 
+    /**
+     *
+     * @param orderItem
+     * @throws Exception
+     */
     public void create(OrderItem orderItem) throws Exception {
         try {
             utx.begin();
@@ -57,6 +68,12 @@ public class OrderItemJpaController implements Serializable {
         }
     }
 
+    /**
+     *
+     * @param orderItem
+     * @throws NonexistentEntityException
+     * @throws Exception
+     */
     public void edit(OrderItem orderItem) throws NonexistentEntityException, Exception {
         try {
             utx.begin();
@@ -79,6 +96,12 @@ public class OrderItemJpaController implements Serializable {
         }
     }
 
+    /**
+     *
+     * @param id
+     * @throws NonexistentEntityException
+     * @throws Exception
+     */
     public void destroy(Integer id) throws NonexistentEntityException, Exception {
         try {
             utx.begin();
@@ -101,10 +124,20 @@ public class OrderItemJpaController implements Serializable {
         }
     }
 
+    /**
+     *
+     * @return
+     */
     public List<OrderItem> findOrderItemEntities() {
         return findOrderItemEntities(true, -1, -1);
     }
 
+    /**
+     *
+     * @param maxResults
+     * @param firstResult
+     * @return
+     */
     public List<OrderItem> findOrderItemEntities(int maxResults, int firstResult) {
         return findOrderItemEntities(false, maxResults, firstResult);
     }
@@ -120,10 +153,19 @@ public class OrderItemJpaController implements Serializable {
         return q.getResultList();
     }
 
+    /**
+     *
+     * @param id
+     * @return
+     */
     public OrderItem findOrderItem(Integer id) {
         return em.find(OrderItem.class, id);
     }
 
+    /**
+     *
+     * @return
+     */
     public int getOrderItemCount() {
         CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
         Root<OrderItem> rt = cq.from(OrderItem.class);
@@ -133,7 +175,13 @@ public class OrderItemJpaController implements Serializable {
         return ((Long) q.getSingleResult()).intValue();
     }
     
-        public String getStatusByItemId(int itemId)
+    /**
+     * Gets the removal status of the order item
+     * @param itemId - ID of the item
+     * @return String indicating the removal status
+     * @author Giancarlo Biasiucci
+     */
+    public String getStatusByItemId(int itemId)
     {
         CriteriaBuilder cb = em.getCriteriaBuilder();
         CriteriaQuery cq = cb.createQuery();
@@ -144,11 +192,11 @@ public class OrderItemJpaController implements Serializable {
         try
         {
             query.getSingleResult();
-            return "Not Removed";
+            return MessageLoader.getString("com.gb1w20.bundles.messages", "notRemoved", null);
         }
         catch(NoResultException nre)
         {
-            return "Removed";
+            return MessageLoader.getString("com.gb1w20.bundles.messages", "removed", null);
         }
     }
         /**

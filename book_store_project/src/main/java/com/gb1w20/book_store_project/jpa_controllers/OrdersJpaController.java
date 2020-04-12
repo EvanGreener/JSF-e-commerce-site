@@ -1,6 +1,5 @@
 package com.gb1w20.book_store_project.jpa_controllers;
 
-import com.gb1w20.book_store_project.beans.BookBean;
 import com.gb1w20.book_store_project.entities.Clients;
 import com.gb1w20.book_store_project.entities.Clients_;
 import com.gb1w20.book_store_project.entities.OrderItem;
@@ -8,8 +7,8 @@ import com.gb1w20.book_store_project.entities.OrderItem_;
 import com.gb1w20.book_store_project.entities.Orders;
 import com.gb1w20.book_store_project.entities.Orders_;
 import com.gb1w20.book_store_project.jpa_controllers.exceptions.NonexistentEntityException;
+import com.gb1w20.book_store_project.util.MessageLoader;
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.Resource;
 import javax.enterprise.context.RequestScoped;
@@ -47,9 +46,17 @@ public class OrdersJpaController implements Serializable {
 
     private final static Logger LOG = LoggerFactory.getLogger(OrdersJpaController.class);
 
+    /**
+     *
+     */
     public OrdersJpaController() {
     }
 
+    /**
+     *
+     * @param order
+     * @throws Exception
+     */
     public void create(Orders order) throws Exception {
         try {
             utx.begin();
@@ -65,6 +72,12 @@ public class OrdersJpaController implements Serializable {
         }
     }
 
+    /**
+     *
+     * @param order
+     * @throws NonexistentEntityException
+     * @throws Exception
+     */
     public void edit(Orders order) throws NonexistentEntityException, Exception {
         try {
             utx.begin();
@@ -87,6 +100,12 @@ public class OrdersJpaController implements Serializable {
         }
     }
 
+    /**
+     *
+     * @param id
+     * @throws NonexistentEntityException
+     * @throws Exception
+     */
     public void destroy(Integer id) throws NonexistentEntityException, Exception {
         try {
             utx.begin();
@@ -109,10 +128,20 @@ public class OrdersJpaController implements Serializable {
         }
     }
 
+    /**
+     *
+     * @return
+     */
     public List<Orders> findOrdersEntities() {
         return findOrdersEntities(true, -1, -1);
     }
 
+    /**
+     *
+     * @param maxResults
+     * @param firstResult
+     * @return
+     */
     public List<Orders> findOrdersEntities(int maxResults, int firstResult) {
         return findOrdersEntities(false, maxResults, firstResult);
     }
@@ -128,10 +157,19 @@ public class OrdersJpaController implements Serializable {
         return q.getResultList();
     }
 
+    /**
+     *
+     * @param id
+     * @return
+     */
     public Orders findOrders(Integer id) {
         return em.find(Orders.class, id);
     }
 
+    /**
+     *
+     * @return
+     */
     public int getOrdersCount() {
         CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
         Root<Orders> rt = cq.from(Orders.class);
@@ -141,7 +179,12 @@ public class OrdersJpaController implements Serializable {
         return ((Long) q.getSingleResult()).intValue();
     }
 
-    //test 
+    /**
+     * Gets the client email based on their ID
+     * @param clientId - The ID of the client
+     * @return The email of the client
+     * By: Giancarlo Biasiucci
+     */
     public String getClientEmailById(int clientId) {
         CriteriaBuilder cb = em.getCriteriaBuilder();
         CriteriaQuery cq = cb.createQuery();
@@ -152,6 +195,12 @@ public class OrdersJpaController implements Serializable {
         return query.getSingleResult();
     }
 
+    /**
+     * Gets the total amount of order items in a given order (based on order ID)
+     * @param orderId - ID of the order
+     * @return - The number of items in the given order
+     * By: Giancarlo Biasiucci
+     */
     public int getOrderItemsCountByOrderId(int orderId) {
         CriteriaBuilder cb = em.getCriteriaBuilder();
         CriteriaQuery cq = cb.createQuery();
@@ -162,6 +211,12 @@ public class OrdersJpaController implements Serializable {
         return ((Long) query.getSingleResult()).intValue();
     }
 
+    /**
+     * Returns a String indicating the removal status of the order
+     * @param orderId - ID of the order
+     * @return A string indicating the removal status of the order
+     * By: Giancarlo Biasiucci
+     */
     public String getStatusByOrderId(int orderId) {
         CriteriaBuilder cb = em.getCriteriaBuilder();
         CriteriaQuery cq = cb.createQuery();
@@ -171,12 +226,21 @@ public class OrdersJpaController implements Serializable {
         TypedQuery<Boolean> query = em.createQuery(cq);
         try {
             query.getSingleResult();
-            return "Not Removed";
-        } catch (NoResultException nre) {
-            return "Removed";
+            return MessageLoader.getString("com.gb1w20.bundles.messages", "notRemoved", null);
+        }
+        catch(NoResultException nre)
+        {
+            return MessageLoader.getString("com.gb1w20.bundles.messages", "removed", null);
         }
     }
 
+    /**
+     * Searches orders based on one of several criteria
+     * @param query - Search query (keyword)
+     * @param searchBy - Criteria to search by
+     * @return - All orders that match keyword and criteria
+     * @author Giancarlo Biasiucci
+     */
     public List<Orders> searchOrders(String query, String searchBy) {
         String expression = "%" + query + "%";
         if (searchBy.equals("id")) {

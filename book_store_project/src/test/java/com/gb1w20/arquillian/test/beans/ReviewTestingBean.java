@@ -1,24 +1,32 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ *All test beans belong to this package
  */
 package com.gb1w20.arquillian.test.beans;
 
 /**
- *
- * @author giancarlo
+ * Bean used for the review parameterized test
+ * @author Giancarlo Biasiucci
+ * @version April 11, 2020
  */
 public class ReviewTestingBean {
+
     public String isbn;
     public int expectedReviews;
     public double expectedAverage;
     public int clientID;
     public int expectedClientReviews;
-    
+
+    /**
+     * Constructor takes all necessary input needed for testing
+     *
+     * @param isbn
+     * @param expectedReviews
+     * @param expectedAverage
+     * @param clientID
+     * @param expectedClientReviews
+     */
     public ReviewTestingBean(String isbn, int expectedReviews, double expectedAverage, int clientID,
-            int expectedClientReviews)
-    {
+            int expectedClientReviews) {
         this.isbn = isbn;
         this.expectedReviews = expectedReviews;
         this.expectedAverage = expectedAverage;

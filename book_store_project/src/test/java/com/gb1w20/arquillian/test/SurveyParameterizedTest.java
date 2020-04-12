@@ -1,7 +1,5 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * All arquillain tests belong to this package
  */
 package com.gb1w20.arquillian.test;
 
@@ -12,6 +10,7 @@ import com.gb1w20.book_store_project.entities.Surveys;
 import com.gb1w20.book_store_project.jpa_controllers.SurveyDataJpaController;
 import com.gb1w20.book_store_project.jpa_controllers.SurveysJpaController;
 import com.gb1w20.book_store_project.jpa_controllers.exceptions.IllegalOrphanException;
+import com.gb1w20.book_store_project.util.MessageLoader;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;
@@ -45,14 +44,16 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
- *
- * @author giancarlo
+ * Parameterized testing for the survey JPA controller methods
+ * @author Giancarlo Biasiucci
+ * @version April 10, 2020
  */
 @RunWith(Arquillian.class)
 public class SurveyParameterizedTest {
 
     private final static Logger LOG = LoggerFactory.getLogger(SurveyParameterizedTest.class);
 
+    
     @Deployment
     public static WebArchive deploy() {
 
@@ -80,6 +81,7 @@ public class SurveyParameterizedTest {
                 .addPackage(ParameterRule.class.getPackage())
                 .addPackage(SurveyTestingBean.class.getPackage())
                 .addPackage(SurveyBean.class.getPackage())
+                .addPackage(MessageLoader.class.getPackage())
                 .addAsWebInfResource(EmptyAsset.INSTANCE, "beans.xml")
                 .addAsWebInfResource(new File("src/main/webapp/WEB-INF/payara-resources.xml"), "payara-resources.xml")
                 .addAsResource(new File("src/main/resources/META-INF/persistence.xml"), "META-INF/persistence.xml")
@@ -98,12 +100,12 @@ public class SurveyParameterizedTest {
     
     @Rule
     public ParameterRule surveyRule = new ParameterRule("surveyTest",
-            new SurveyTestingBean(1,5,38),
-            new SurveyTestingBean(2,6,68),
-            new SurveyTestingBean(3,4,37),
-            new SurveyTestingBean(4,4,28),
-            new SurveyTestingBean(5,4,55),
-            new SurveyTestingBean(6,6,43)
+            new SurveyTestingBean(1,5,38, "Active Survey",true),
+            new SurveyTestingBean(2,6,68, "Disabled Survey",false),
+            new SurveyTestingBean(3,4,37, "Disabled Survey",false),
+            new SurveyTestingBean(4,4,28, "Disabled Survey",false),
+            new SurveyTestingBean(5,4,55, "Disabled Survey",false),
+            new SurveyTestingBean(6,6,43, "Disabled Survey",false)
     );
     
     private SurveyTestingBean surveyTest;
@@ -117,6 +119,9 @@ public class SurveyParameterizedTest {
     @Resource
     private UserTransaction utx;
     
+    /**
+     * Tests if a survey has the correct amount of choices
+     */
     @Test
     public void testCorrectChoiceAmount()
     {
@@ -126,6 +131,9 @@ public class SurveyParameterizedTest {
                 surveyTest.expectedChoices, choices);
     }
     
+    /**
+     * Tests if a survey has the correct amount of total votes
+     */
     @Test
     public void testCorrectUserVotes()
     {
@@ -135,6 +143,9 @@ public class SurveyParameterizedTest {
                 surveyTest.expectedVotes, votes);
     }
     
+    /**
+     * Tests if the currently active survey is in the list of surveys in the database
+     */
     @Test
     public void testActiveSurveyIsReal()
     {
@@ -144,9 +155,45 @@ public class SurveyParameterizedTest {
     }
     
     /**
+     * Tests if a survey has the correct removal status - replicates controller method due to
+     * testing problems with internationalization
+     */
+    @Test
+    public void testExpectedStatus()
+    {
+        String removalString = "Active Survey";
+        boolean removalStatus = surveyControl.findSurveys(surveyTest.surveyID).getIsRemoved();
+        if (removalStatus)
+        {
+            removalString = "Disabled Survey";
+        }
+        assertEquals("Expected: " + surveyTest.expectedStatus + ", actual: " + removalString,
+                surveyTest.expectedStatus, removalString);
+    }
+    
+    /**
+     * Tests if a survey is active or not, and whether the resulting status is equal
+     * to an expected active status
+     */
+    
+    @Test
+    public void testActiveOrNot()
+    {
+        Surveys active = surveyControl.getActiveSurvey();
+        boolean isActive = false;
+        if (active.getSurveyID() == surveyTest.surveyID)
+        {
+            isActive = true;
+        }
+        assertEquals("Expected: " + surveyTest.isActive + ", actual: " + isActive,
+                surveyTest.isActive, isActive);
+    }
+    
+    /**
      * Restore the database to a known state before testing. This is important
      * if the test is destructive. This routine is courtesy of Bartosz Majsak
      * who also solved my Arquillian remote server problem
+     * From: KFWebStandardProject - ArquillianUnitTest.java
      */
     @Before
     public void seedDatabase() {
@@ -164,6 +211,7 @@ public class SurveyParameterizedTest {
 
     /**
      * The following methods support the seedDatabse method
+     * All of the following are from: KFWebStandardProject - ArquillianUnitTest.java
      */
     private String loadAsString(final String path) {
         try (InputStream inputStream = Thread.currentThread()

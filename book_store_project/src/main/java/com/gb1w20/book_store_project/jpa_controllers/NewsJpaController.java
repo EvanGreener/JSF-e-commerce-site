@@ -1,9 +1,9 @@
 package com.gb1w20.book_store_project.jpa_controllers;
 
-import com.gb1w20.book_store_project.entities.Ads;
 import com.gb1w20.book_store_project.entities.News;
 import com.gb1w20.book_store_project.entities.News_;
 import com.gb1w20.book_store_project.jpa_controllers.exceptions.NonexistentEntityException;
+import com.gb1w20.book_store_project.util.MessageLoader;
 import java.io.Serializable;
 import java.util.List;
 import java.util.Random;
@@ -24,7 +24,7 @@ import javax.transaction.UserTransaction;
 
 /**
  * Queries that facilitate accessing certain news
- * @author Saad,Shruti
+ * @author Saad,Shruti,Giancarlo Biasiucci
  */
 @Named
 @RequestScoped
@@ -36,9 +36,17 @@ public class NewsJpaController implements Serializable {
     @PersistenceContext
     private EntityManager em;
 
+    /**
+     *
+     */
     public NewsJpaController() {
     }
 
+    /**
+     *
+     * @param news
+     * @throws Exception
+     */
     public void create(News news) throws Exception {
         try {
             utx.begin();
@@ -54,6 +62,12 @@ public class NewsJpaController implements Serializable {
         }
     }
 
+    /**
+     *
+     * @param news
+     * @throws NonexistentEntityException
+     * @throws Exception
+     */
     public void edit(News news) throws NonexistentEntityException, Exception {
         try {
             utx.begin();
@@ -76,6 +90,12 @@ public class NewsJpaController implements Serializable {
         }
     }
 
+    /**
+     *
+     * @param id
+     * @throws NonexistentEntityException
+     * @throws Exception
+     */
     public void destroy(Integer id) throws NonexistentEntityException, Exception {
         try {
             utx.begin();
@@ -98,10 +118,20 @@ public class NewsJpaController implements Serializable {
         }
     }
 
+    /**
+     *
+     * @return
+     */
     public List<News> findNewsEntities() {
         return findNewsEntities(true, -1, -1);
     }
 
+    /**
+     *
+     * @param maxResults
+     * @param firstResult
+     * @return
+     */
     public List<News> findNewsEntities(int maxResults, int firstResult) {
         return findNewsEntities(false, maxResults, firstResult);
     }
@@ -117,6 +147,11 @@ public class NewsJpaController implements Serializable {
         return q.getResultList();
     }
 
+    /**
+     *
+     * @param id
+     * @return
+     */
     public News findNews(Integer id) {
         return em.find(News.class, id);
     }
@@ -150,6 +185,12 @@ public class NewsJpaController implements Serializable {
         return n;
     }
 
+    /**
+     * Returns the removal status of a news feed
+     * @author Giancarlo Biasiucci
+     * @param newsID
+     * @return
+     */
     public Object[] getStatusByNewsId(int newsID) {
         CriteriaBuilder cb = em.getCriteriaBuilder();
         CriteriaQuery cq = cb.createQuery();
@@ -159,14 +200,25 @@ public class NewsJpaController implements Serializable {
         TypedQuery<Boolean> query = em.createQuery(cq);
         try {
             query.getSingleResult();
-            Object[] returnArr = {false, "Not Removed", "Enabled"};
+            Object[] returnArr = {false,
+                MessageLoader.getString("com.gb1w20.bundles.messages", "notRemoved", null), 
+                MessageLoader.getString("com.gb1w20.bundles.messages", "enabled", null)};
             return returnArr;
-        } catch (NoResultException nre) {
-            Object[] returnArr = {true, "Removed", "Enable News"};
+        }
+        catch(NoResultException nre)
+        {
+            Object[] returnArr = {true, 
+                MessageLoader.getString("com.gb1w20.bundles.messages", "removed", null),
+                MessageLoader.getString("com.gb1w20.bundles.messages", "enableNews", null)};
             return returnArr;
         }
     }
 
+    /**
+     * Returns the news feed that is enabled (always 1)
+     * @author Giancarlo Biasiucci
+     * @return The news feed that is enabled
+     */
     public News getEnabledNews() {
         CriteriaBuilder cb = em.getCriteriaBuilder();
         CriteriaQuery cq = cb.createQuery();

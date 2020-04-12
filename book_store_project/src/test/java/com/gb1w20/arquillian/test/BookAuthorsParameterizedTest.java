@@ -1,19 +1,11 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * All arquillain tests belong to this package
  */
 package com.gb1w20.arquillian.test;
 
-import com.gb1w20.arquillian.test.beans.AuthorsTestingBean;
 import com.gb1w20.arquillian.test.beans.BookAuthorsTestingBean;
-import com.gb1w20.arquillian.test.beans.OrderItemTestingBean;
-import com.gb1w20.book_store_project.entities.Authors;
 import com.gb1w20.book_store_project.entities.BookAuthors;
-import com.gb1w20.book_store_project.entities.OrderItem;
-import com.gb1w20.book_store_project.jpa_controllers.AuthorsJpaController;
 import com.gb1w20.book_store_project.jpa_controllers.BookAuthorsJpaController;
-import com.gb1w20.book_store_project.jpa_controllers.OrderItemJpaController;
 import com.gb1w20.book_store_project.jpa_controllers.exceptions.IllegalOrphanException;
 import java.io.BufferedReader;
 import java.io.File;
@@ -47,6 +39,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
+ * Tests bookAuthors controller methods
  *
  * @author shruti pareek
  */
@@ -55,6 +48,7 @@ public class BookAuthorsParameterizedTest {
 
     private final static Logger LOG = LoggerFactory.getLogger(BookAuthorsParameterizedTest.class);
 
+  
     @Deployment
     public static WebArchive deploy() {
 
@@ -92,6 +86,9 @@ public class BookAuthorsParameterizedTest {
     @Inject
     private BookAuthorsJpaController bookAuthorsControl;
 
+    /**
+     * data to test methods
+     */
     @Rule
     public ParameterRule orderItemRule = new ParameterRule("bookAuthorsTest",
             new BookAuthorsTestingBean("9780060584757", new BookAuthors(47)),
@@ -113,6 +110,8 @@ public class BookAuthorsParameterizedTest {
     private UserTransaction utx;
 
     /**
+     * tests if booksauthors are found by isbn
+     *
      * @author shruti pareek
      */
     @Test

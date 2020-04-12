@@ -1,3 +1,6 @@
+/*
+ * All arquillain tests belong to this package
+ */
 package com.gb1w20.arquillian.test;
 
 import com.gb1w20.arquillian.test.beans.BookTestingBean;
@@ -8,8 +11,8 @@ import com.gb1w20.book_store_project.entities.Book;
 import com.gb1w20.book_store_project.jpa_controllers.BookFormatJpaController;
 import com.gb1w20.book_store_project.entities.BookFormat;
 import com.gb1w20.book_store_project.jpa_controllers.BookJpaController;
-import com.gb1w20.book_store_project.jpa_controllers.ClientsJpaController;
 import com.gb1w20.book_store_project.jpa_controllers.exceptions.IllegalOrphanException;
+import com.gb1w20.book_store_project.util.MessageLoader;
 
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.junit.Arquillian;
@@ -32,6 +35,7 @@ import java.util.Scanner;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.transaction.UserTransaction;
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 import org.junit.Rule;
@@ -40,24 +44,19 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
- *
- * @author giancarlo
+ * Arquillian testing for the book JPA controller methods
+ * @author Giancarlo Biasiucci, Shruti Pareek
+ * @version April 11, 2020
  */
 @RunWith(Arquillian.class)
 public class BookParameterizedTest {
 
     private final static Logger LOG = LoggerFactory.getLogger(BookParameterizedTest.class);
 
-    /**
-     *
-     * @return
-     */
+
     @Deployment
     public static WebArchive deploy() {
 
-        // Use an alternative to the JUnit assert library called AssertJ
-        // Need to reference MySQL driver as it is not part of either
-        // embedded or remote
         final File[] dependencies = Maven
                 .resolver()
                 .loadPomFromFile("pom.xml")
@@ -79,6 +78,7 @@ public class BookParameterizedTest {
                 .addPackage(ParameterRule.class.getPackage())
                 .addPackage(ClientTestingBean.class.getPackage())
                 .addPackage(NewsBean.class.getPackage())
+                .addPackage(MessageLoader.class.getPackage())
                 .addAsWebInfResource(EmptyAsset.INSTANCE, "beans.xml")
                 .addAsWebInfResource(new File("src/main/webapp/WEB-INF/payara-resources.xml"), "payara-resources.xml")
                 .addAsResource(new File("src/main/resources/META-INF/persistence.xml"), "META-INF/persistence.xml")
@@ -117,7 +117,8 @@ public class BookParameterizedTest {
     private UserTransaction utx;
     
      /**
-     * Tests if a correct book is returned from an isbn
+     * Tests if a correct book is returned from an ISBN number
+     * @author shruti pareek
      */
     @Test
     public void testFindSingleBook() {
@@ -132,6 +133,7 @@ public class BookParameterizedTest {
     
     /**
      * Tests if the correct number of similar genre books are returned from an isbn
+     * By: Giancarlo Biasiucci
      */
     @Test
     public void testFindSimilarGenres() {
@@ -145,24 +147,26 @@ public class BookParameterizedTest {
     }
     
     /**
-     * Tests if the correct status of a book is returned
+     * Tests if the correct book status is retrieved (identical process to controller method)
+     * By: Giancarlo Biasiucci
      */
     @Test
-    public void testStatusRetrieval() {
-        boolean isSuccess = true;
-        Book testBookInfo = bookControl.findAnySingleBook(bookTest.book.getIsbn());
-        String status = bookControl.getStatusByIsbn(bookTest.book.getIsbn());
-        if (!(status.equals(bookTest.expectedStatus))) {
-            isSuccess = false;
+    public void testStatusRetrieval()
+    {
+        String removalStatus = "Not Removed";
+        if (bookControl.findAnySingleBook(bookTest.book.getIsbn()).getIsRemoved())
+        {
+            removalStatus = "Removed";
         }
-        assertTrue("Book status returned inconsistent results Expected:"+bookTest.expectedStatus+" Result:"+status, isSuccess);
+        assertEquals("Expected: " + bookTest.expectedStatus + ", actual: " + removalStatus,
+                bookTest.expectedStatus, removalStatus);
     }
-    
     
     /**
      * Restore the database to a known state before testing. This is important
      * if the test is destructive. This routine is courtesy of Bartosz Majsak
      * who also solved my Arquillian remote server problem
+     * From: KFWebStandardProject - ArquillianUnitTest.java
      */
     @Before
     public void seedDatabase() {
@@ -180,6 +184,7 @@ public class BookParameterizedTest {
 
     /**
      * The following methods support the seedDatabse method
+     * All of the following are from: KFWebStandardProject - ArquillianUnitTest.java
      */
     private String loadAsString(final String path) {
         try (InputStream inputStream = Thread.currentThread()

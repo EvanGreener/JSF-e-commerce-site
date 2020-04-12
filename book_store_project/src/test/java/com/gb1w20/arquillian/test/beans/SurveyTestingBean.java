@@ -1,25 +1,37 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ *All test beans belong to this package
  */
 package com.gb1w20.arquillian.test.beans;
 
-import java.util.List;
-
 /**
- *
- * @author giancarlo
+ * Bean used for the survey parameterized test
+ * @author Giancarlo Biasiucci
+ * @version April 11, 2020
  */
 public class SurveyTestingBean {
+
+
     public int surveyID;
     public int expectedChoices;
     public int expectedVotes;
+    public String expectedStatus;
+    public boolean isActive;
     
-    public SurveyTestingBean(int surveyID, int expectedChoices, int expectedVotes)
+    /**
+     * Constructor takes all necessary input needed for testing
+     * @param surveyID
+     * @param expectedChoices
+     * @param expectedVotes
+     * @param expectedStatus
+     * @param isActive 
+     */
+    public SurveyTestingBean(int surveyID, int expectedChoices, int expectedVotes,String expectedStatus,
+            boolean isActive)
     {
         this.surveyID = surveyID;
         this.expectedChoices = expectedChoices;
         this.expectedVotes = expectedVotes;
+        this.expectedStatus = expectedStatus;
+        this.isActive = isActive;
     }
 }

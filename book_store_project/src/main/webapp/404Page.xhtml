@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:b="http://bootsfaces.net/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
+      xmlns:bookstore="http://java.sun.com/jsf/composite/default_components">
+    <h:head>
+        <title>Login</title>
+        <link href="https://fonts.googleapis.com/css?family=Montserrat|Roboto&amp;display=swap" rel="stylesheet"/>
+        <h:outputStylesheet library="webjars" name="Semantic-UI/2.4.1/semantic.min.css" />
+        <h:outputStylesheet library="css" name="default.css" />
+        <h:outputStylesheet library="signInCss" name="signIn.css" />
+        <h:outputScript library="js" name="homepage.js" />
+    </h:head>
+    <h:body>
+        <!--composite component that comes from the navbar.xhtml file to avoid coding nav bar in all web pages-->
+        <bookstore:navbar/>
+        <h:form class="ui form">
+            <div class="ui fluid">
+                <div class="lightGreyDiv">
+                    <h1>404 Page Not Found</h1>
+                </div>
+            </div>
+        </h:form>
+
+        <!--composite component that comes from the footer.xhtml file to avoid coding the website footer in all web pages-->
+        <bookstore:footer/>
+    </h:body>
+</html>

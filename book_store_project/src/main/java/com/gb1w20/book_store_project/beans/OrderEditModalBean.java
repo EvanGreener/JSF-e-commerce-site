@@ -4,6 +4,7 @@ import com.gb1w20.book_store_project.entities.OrderItem;
 import com.gb1w20.book_store_project.entities.Orders;
 import com.gb1w20.book_store_project.jpa_controllers.OrderItemJpaController;
 import com.gb1w20.book_store_project.jpa_controllers.OrdersJpaController;
+import com.gb1w20.book_store_project.util.MessageLoader;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import javax.annotation.PostConstruct;
@@ -90,7 +91,8 @@ public class OrderEditModalBean implements Serializable {
     /**
      * Saves the current order information to be displayed in the "Edit Order" modal
      * when the corresponding button is clicked
-     * @param id 
+     * @param id - Order ID
+     * By: Giancarlo Biasiucci
      */
     public void onEdit(int id) {
           LOG.debug("Edit called!");
@@ -103,7 +105,8 @@ public class OrderEditModalBean implements Serializable {
     /**
      * Saves the current order item information to be displayed in the "Edit Item" modal
      * when the corresponding button is clicked
-     * @param id 
+     * @param id - Item ID
+     * By: Giancarlo Biasiucci
      */
     public void onItemEdit(int id) {
           LOG.debug("Item edit called!");
@@ -117,8 +120,10 @@ public class OrderEditModalBean implements Serializable {
     /**
      * Edits the existing order item information with what is present in the fields in the "Edit Item" modal
      * and updates the entry in the database
+     * @param price - The new price
      * @return
      * @throws Exception 
+     * By: Giancarlo Biasiucci
      */
     public String onSubmitEdit(String price) throws Exception {
         LOG.debug("onSubmitEdit called");
@@ -135,14 +140,15 @@ public class OrderEditModalBean implements Serializable {
      * @param context
      * @param component
      * @param value 
+     * By: Giancarlo Biasiucci
      */
     public void validateDouble(FacesContext context, UIComponent component, Object value)
     {
         String doubleStr = (String)value;
         if (doubleStr.isBlank() || doubleStr.isEmpty() || doubleStr == null)
         {
-            String message = context.getApplication().evaluateExpressionGet(context, "Value must not be left blank", String.class);
-            FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR, message, message);
+            FacesMessage msg = MessageLoader.getMessage("com.gb1w20.bundles.messages", "valueNotNull", null);
+            msg.setSeverity(FacesMessage.SEVERITY_ERROR);
             throw new ValidatorException(msg);
         }
         try
@@ -151,8 +157,8 @@ public class OrderEditModalBean implements Serializable {
         }
         catch(NumberFormatException nfe)
         {
-            String message = context.getApplication().evaluateExpressionGet(context, "Invalid double", String.class);
-            FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR, message, message);
+            FacesMessage msg = MessageLoader.getMessage("com.gb1w20.bundles.messages", "invalidDouble", null);
+            msg.setSeverity(FacesMessage.SEVERITY_ERROR);
             throw new ValidatorException(msg);
         }
     }

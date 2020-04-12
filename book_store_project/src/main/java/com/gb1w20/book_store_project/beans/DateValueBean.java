@@ -23,6 +23,7 @@ public class DateValueBean implements Serializable {
     
     /**
      * Sets the minimum and maximum dates that can be set
+     * By: Giancarlo Biasiucci
      */
     @PostConstruct
     public void init() {
