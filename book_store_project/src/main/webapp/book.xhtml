@@ -301,9 +301,9 @@ compatible with different screen sizes
             <!--Suggests books by similar authors if any-->
             <h:panelGroup rendered="#{!empty bb.getSimilarAuthorBooks(bb.book.authorsCollection,bb.book.isbn)}">
                 <br/><br/><br/>
-                <ui:repeat value="#{bb.book.authorsCollection}" var="author" >
-                    <p class="small">Books by #{author.name}</p>
-                </ui:repeat>
+               
+                    <p class="small">Books by  #{authorsJpaController.findAuthors(bookAuthorsJpaController.findBookAuthorsByIsbn(bb.book.isbn)[0].authorID).name}</p>
+             
             </h:panelGroup>
 
             <div class="ui four doubling stackable cards">
