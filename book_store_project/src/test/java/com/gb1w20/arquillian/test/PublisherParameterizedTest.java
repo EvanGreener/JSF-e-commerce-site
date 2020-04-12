@@ -5,6 +5,7 @@ import com.gb1w20.book_store_project.backing.PublisherBackingBean;
 import com.gb1w20.book_store_project.entities.Publisher;
 import com.gb1w20.book_store_project.jpa_controllers.PublisherJpaController;
 import com.gb1w20.book_store_project.jpa_controllers.exceptions.IllegalOrphanException;
+import com.gb1w20.book_store_project.jpa_controllers.exceptions.NonexistentEntityException;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;
@@ -68,6 +69,7 @@ public class PublisherParameterizedTest {
                   .setWebXML(new File("src/main/webapp/WEB-INF/web.xml"))
                   .addPackage(PublisherJpaController.class.getPackage())
                   .addPackage(Publisher.class.getPackage())
+                  .addPackage(NonexistentEntityException.class.getPackage())
                   .addPackage(ParameterRule.class.getPackage())
                   .addPackage(PublisherTestingBean.class.getPackage())
                   .addAsWebInfResource(EmptyAsset.INSTANCE, "beans.xml")
@@ -90,7 +92,7 @@ public class PublisherParameterizedTest {
      public ParameterRule publisherRule = new ParameterRule("publisherTest",
              new PublisherTestingBean("Hauck-Crona", 1),
              new PublisherTestingBean("Schimmel-Dooley", 4),
-             new PublisherTestingBean("Haley", 5)             
+             new PublisherTestingBean("Haley, O''Reilly and Hintz", 5)             
      );
 
      private PublisherTestingBean publisherTest;
