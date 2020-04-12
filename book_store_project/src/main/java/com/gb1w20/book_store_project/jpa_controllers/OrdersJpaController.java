@@ -31,37 +31,39 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
+ * Queries that facilitate accessing certain orders
  *
  * @author Saad
  */
 @Named
 @RequestScoped
 public class OrdersJpaController implements Serializable {
-    
+
     @Resource
     private UserTransaction utx;
 
     @PersistenceContext
     private EntityManager em;
-    
+
     private final static Logger LOG = LoggerFactory.getLogger(OrdersJpaController.class);
 
-    public OrdersJpaController() {}
+    public OrdersJpaController() {
+    }
 
     public void create(Orders order) throws Exception {
-    try {
-        utx.begin();
-        em.persist(order);
-        utx.commit();
-    } catch (Exception ex) {
         try {
-            utx.rollback();
-        } catch (Exception re) {
-            throw new Exception("An error occurred attempting to roll back the transaction.", re);
+            utx.begin();
+            em.persist(order);
+            utx.commit();
+        } catch (Exception ex) {
+            try {
+                utx.rollback();
+            } catch (Exception re) {
+                throw new Exception("An error occurred attempting to roll back the transaction.", re);
+            }
+            throw ex;
         }
-        throw ex;
     }
-}
 
     public void edit(Orders order) throws NonexistentEntityException, Exception {
         try {
@@ -127,21 +129,20 @@ public class OrdersJpaController implements Serializable {
     }
 
     public Orders findOrders(Integer id) {
-            return em.find(Orders.class, id);
+        return em.find(Orders.class, id);
     }
 
     public int getOrdersCount() {
-            CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
-            Root<Orders> rt = cq.from(Orders.class);
-            cq.select(em.getCriteriaBuilder().count(rt));
-            Query q = em.createQuery(cq);
-            System.out.println("order count: " + ((Long) q.getSingleResult()).intValue());
-            return ((Long) q.getSingleResult()).intValue();
+        CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
+        Root<Orders> rt = cq.from(Orders.class);
+        cq.select(em.getCriteriaBuilder().count(rt));
+        Query q = em.createQuery(cq);
+        System.out.println("order count: " + ((Long) q.getSingleResult()).intValue());
+        return ((Long) q.getSingleResult()).intValue();
     }
 
     //test 
-    public String getClientEmailById(int clientId)
-    {
+    public String getClientEmailById(int clientId) {
         CriteriaBuilder cb = em.getCriteriaBuilder();
         CriteriaQuery cq = cb.createQuery();
         Root<Clients> client = cq.from(Clients.class);
@@ -150,10 +151,8 @@ public class OrdersJpaController implements Serializable {
         TypedQuery<String> query = em.createQuery(cq);
         return query.getSingleResult();
     }
-    
-    
-    public int getOrderItemsCountByOrderId(int orderId)
-    {
+
+    public int getOrderItemsCountByOrderId(int orderId) {
         CriteriaBuilder cb = em.getCriteriaBuilder();
         CriteriaQuery cq = cb.createQuery();
         Root<OrderItem> orderitems = cq.from(OrderItem.class);
@@ -162,52 +161,47 @@ public class OrdersJpaController implements Serializable {
         Query query = em.createQuery(cq);
         return ((Long) query.getSingleResult()).intValue();
     }
-    
-    public String getStatusByOrderId(int orderId)
-    {
+
+    public String getStatusByOrderId(int orderId) {
         CriteriaBuilder cb = em.getCriteriaBuilder();
         CriteriaQuery cq = cb.createQuery();
         Root<Orders> order = cq.from(Orders.class);
         cq.where(cb.equal(order.get(Orders_.orderID), orderId));
         cq.select(order.get(Orders_.isRemoved));
         TypedQuery<Boolean> query = em.createQuery(cq);
-        try
-        {
+        try {
             query.getSingleResult();
             return "Not Removed";
-        }
-        catch(NoResultException nre)
-        {
+        } catch (NoResultException nre) {
             return "Removed";
         }
     }
-    
-     public List<Orders> searchOrders(String query, String searchBy) {
-         String expression = "%" + query + "%";
-          if (searchBy.equals("id"))
-          {
-              expression = query;
-          }
-          CriteriaBuilder cb = em.getCriteriaBuilder();
-          CriteriaQuery<Orders> cq = cb.createQuery(Orders.class);
-          Root<Orders> order = cq.from(Orders.class);
-          Join orderClients  = order.join("client");
-          Join orderToItems = order.join("orderItemsCollection", JoinType.LEFT);
-          switch (searchBy) {
-              case "id":
-                 cq.where(cb.equal(order.get(Orders_.clientID), expression));
-                 break;
-              case "isbn":
-                  cq.where(cb.like(orderToItems.get(OrderItem_.isbn), expression));
-                  break;
-              default:
-                  cq.where(cb.like(orderClients.get(Clients_.email), expression));
-                  break;
-          }
-          cq.select(order);
-          cq.orderBy(cb.asc(order.get(Orders_.orderID)));
-          TypedQuery<Orders> q = em.createQuery(cq);
-          return q.getResultList();
 
-     }
+    public List<Orders> searchOrders(String query, String searchBy) {
+        String expression = "%" + query + "%";
+        if (searchBy.equals("id")) {
+            expression = query;
+        }
+        CriteriaBuilder cb = em.getCriteriaBuilder();
+        CriteriaQuery<Orders> cq = cb.createQuery(Orders.class);
+        Root<Orders> order = cq.from(Orders.class);
+        Join orderClients = order.join("client");
+        Join orderToItems = order.join("orderItemsCollection", JoinType.LEFT);
+        switch (searchBy) {
+            case "id":
+                cq.where(cb.equal(order.get(Orders_.clientID), expression));
+                break;
+            case "isbn":
+                cq.where(cb.like(orderToItems.get(OrderItem_.isbn), expression));
+                break;
+            default:
+                cq.where(cb.like(orderClients.get(Clients_.email), expression));
+                break;
+        }
+        cq.select(order);
+        cq.orderBy(cb.asc(order.get(Orders_.orderID)));
+        TypedQuery<Orders> q = em.createQuery(cq);
+        return q.getResultList();
+
+    }
 }

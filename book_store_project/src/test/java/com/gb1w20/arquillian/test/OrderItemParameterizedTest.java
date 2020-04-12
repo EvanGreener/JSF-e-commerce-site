@@ -52,6 +52,10 @@ public class OrderItemParameterizedTest {
 
     private final static Logger LOG = LoggerFactory.getLogger(OrderItemParameterizedTest.class);
 
+    /**
+     *
+     * @return
+     */
     @Deployment
     public static WebArchive deploy() {
 
@@ -89,6 +93,9 @@ public class OrderItemParameterizedTest {
     @Inject
     private OrderItemJpaController orderItemControl;
 
+    /**
+     *
+     */
     @Rule
     public ParameterRule orderItemRule = new ParameterRule("orderItemTest",
             new OrderItemTestingBean(1, "Not Removed"),

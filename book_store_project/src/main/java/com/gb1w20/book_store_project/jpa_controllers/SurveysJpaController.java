@@ -29,24 +29,33 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
+ * Queries that facilitate accessing certain surveys
  *
- * @author Saad
+ * @author Saad,shruti
  */
 @Named
 @RequestScoped
 public class SurveysJpaController implements Serializable {
 
     private final static Logger LOG = LoggerFactory.getLogger(SurveysJpaController.class);
-    
+
     @Resource
     private UserTransaction utx;
-    
+
     @PersistenceContext
     private EntityManager em;
 
+    /**
+     *
+     */
     public SurveysJpaController() {
     }
 
+    /**
+     *
+     * @param survey
+     * @throws Exception
+     */
     public void create(Surveys survey) throws Exception {
         try {
             utx.begin();
@@ -62,6 +71,12 @@ public class SurveysJpaController implements Serializable {
         }
     }
 
+    /**
+     *
+     * @param survey
+     * @throws NonexistentEntityException
+     * @throws Exception
+     */
     public void edit(Surveys survey) throws NonexistentEntityException, Exception {
         try {
             utx.begin();
@@ -84,6 +99,12 @@ public class SurveysJpaController implements Serializable {
         }
     }
 
+    /**
+     *
+     * @param id
+     * @throws NonexistentEntityException
+     * @throws Exception
+     */
     public void destroy(Integer id) throws NonexistentEntityException, Exception {
         try {
             utx.begin();
@@ -106,10 +127,20 @@ public class SurveysJpaController implements Serializable {
         }
     }
 
+    /**
+     *
+     * @return
+     */
     public List<Surveys> findSurveysEntities() {
         return findSurveysEntities(true, -1, -1);
     }
 
+    /**
+     *
+     * @param maxResults
+     * @param firstResult
+     * @return
+     */
     public List<Surveys> findSurveysEntities(int maxResults, int firstResult) {
         return findSurveysEntities(false, maxResults, firstResult);
     }
@@ -125,36 +156,35 @@ public class SurveysJpaController implements Serializable {
         return q.getResultList();
     }
 
-    public List<Surveys> getfirstSurvey() {
-        TypedQuery<Surveys> query = em.createQuery("SELECT s FROM Surveys s", Surveys.class);
-        query.setMaxResults(1);
-        List<Surveys> survey = query.getResultList();
-
-        return survey;
-    }
-
-    public List<Integer> getTotalVotes(int id) {
-        TypedQuery<Integer> query = em.createQuery("SELECT sum(sd.votes) FROM Surveys s inner join Survey_Data sd on s.survey_ID=sd.survey_ID", Integer.class);
-        // query.setParameter("id", id);
-        List<Integer> sum = query.getResultList();
-        return sum;
-    }
-    
+    /**
+     *
+     * @param id
+     * @return
+     */
     public int getTotalVotesSingleSurvey(int id) {
         CriteriaBuilder cb = em.getCriteriaBuilder();
         CriteriaQuery cq = cb.createQuery();
         Root<Surveys> surveys = cq.from(Surveys.class);
-        Join surveyData = surveys.join("surveyData",JoinType.INNER);
+        Join surveyData = surveys.join("surveyData", JoinType.INNER);
         cq.where(cb.equal(surveys.get(Surveys_.surveyID), id));
         cq.select(cb.sum(surveyData.get(SurveyData_.votes)));
         TypedQuery<Integer> query = em.createQuery(cq);
         return query.getSingleResult();
     }
 
+    /**
+     *
+     * @param id
+     * @return
+     */
     public Surveys findSurveys(Integer id) {
         return em.find(Surveys.class, id);
     }
 
+    /**
+     *
+     * @return
+     */
     public Surveys getActiveSurvey() {
         TypedQuery<Surveys> query = em.createQuery("SELECT s FROM Surveys s WHERE s.isRemoved = :removed", Surveys.class);
         query.setParameter("removed", false);
@@ -165,6 +195,12 @@ public class SurveysJpaController implements Serializable {
         return s;
     }
 
+    /**
+     * get count of all surveys that have not been removed
+     *
+     * @author shruti pareek
+     * @return count
+     */
     public int getSurveysCount() {
         TypedQuery<Surveys> query = em.createQuery("SELECT s FROM Surveys s WHERE s.isRemoved = :removed", Surveys.class);
         query.setParameter("removed", false);
