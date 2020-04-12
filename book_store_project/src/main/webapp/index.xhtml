@@ -294,9 +294,12 @@ compatible with different screen sizes
                             <h:graphicImage class="itemAd2" height="100%" width="100%" library="images" name="#{ad.imageName}2.png" onclick="viewAd('#{ad.adUrl}')" />
                         </ui:repeat>
                     </div>
-
                 </div>
             </div>
+        </div>
+
+        <div class="recommendCookies" >
+            We recommend that you <strong>enable cookies</strong>. Enable cookies and refresh the page
         </div>
 
         <!--composite component that comes from the footer.xhtml file to avoid coding the website footer in all web pages-->
@@ -304,22 +307,36 @@ compatible with different screen sizes
 
         <!-- Initialize Swiper  for carousel of recently added books-->
         <script>
-                var swiper = new Swiper('.swiper-container', {
+            var swiper = new Swiper('.swiper-container', {
                 loop: true,
                 centeredSlides: true,
                 autoHeight: true, //enable auto height
-                    autoplay: {
+                autoplay: {
                     delay: 5000,
-                disableOnInteraction: false,
+                    disableOnInteraction: false,
                 },
-                    pagination: {
-                el: '.swiper-pagination',
+                pagination: {
+                    el: '.swiper-pagination',
                 },
-                    navigation: {
+                navigation: {
+
                     nextEl: '.swiper-button-next',
-                prevEl: '.swiper-button-prev',
-            },
+                    prevEl: '.swiper-button-prev',
+                },
             });
+
+            /**
+             * Checking if cookies are disabled and does things
+             */
+            if (!navigator.cookieEnabled) {
+                $('div.recommendCookies').show();
+                //Disables all links
+                $("a").attr('href', '#');
+                //Disables all input including buttons
+                $('input').attr('disabled', 'true');
+            } else {
+                $('div.recommendCookies').hide();
+            }
 
         </script>
     </h:body>

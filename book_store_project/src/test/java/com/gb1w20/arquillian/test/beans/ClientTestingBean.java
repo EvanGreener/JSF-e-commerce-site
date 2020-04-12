@@ -12,10 +12,10 @@ import org.slf4j.LoggerFactory;
 
 /**
  *
- * @author giancarlo
+ * @author giancarlo,Shruti pareek
  */
 public class ClientTestingBean {
-    
+
     private final static Logger LOG = LoggerFactory.getLogger(ClientTestingBean.class);
     public String email;
     //getInfoByEmail
@@ -36,26 +36,32 @@ public class ClientTestingBean {
     public String searchCompanyName;
     public String searchCellPhone;
     
+    //testFindClientByEmail
+    public Clients expectedClient;
     
-    public ClientTestingBean(String email, String infoEmail, boolean isManager, String firstName,
-            String provinceAbbr, String clientByEmail_Email, String emailClientFName,
-            String searchEmail, int managerIndicator, String searchFname, String searchLname,String searchAddress1,
-            String searchAddress2, String searchCompanyName, String searchCellPhone)
-    {
+    //testSearchClients
+    public String expectedQuery;
+    public String expectedSearchBy;
+
+    public ClientTestingBean(String email, String infoEmail, boolean isManager, String firstName, String provinceAbbr, String clientByEmail_Email, String clientByEmailFirstName, String searchEmail, int managerIndicator, String searchFname, String searchLname, String searchAddress1, String searchAddress2, String searchCompanyName, String searchCellPhone, Clients expectedClient, String expectedQuery, String expectedSearchBy) {
         this.email = email;
         this.infoEmail = infoEmail;
         this.isManager = isManager;
         this.firstName = firstName;
         this.provinceAbbr = provinceAbbr;
         this.clientByEmail_Email = clientByEmail_Email;
-        this.clientByEmailFirstName = emailClientFName;
-        this.managerIndicator = managerIndicator;
+        this.clientByEmailFirstName = clientByEmailFirstName;
         this.searchEmail = searchEmail;
+        this.managerIndicator = managerIndicator;
         this.searchFname = searchFname;
         this.searchLname = searchLname;
         this.searchAddress1 = searchAddress1;
         this.searchAddress2 = searchAddress2;
         this.searchCompanyName = searchCompanyName;
         this.searchCellPhone = searchCellPhone;
+        this.expectedClient = expectedClient;
+        this.expectedQuery = expectedQuery;
+        this.expectedSearchBy = expectedSearchBy;
     }
+
 }

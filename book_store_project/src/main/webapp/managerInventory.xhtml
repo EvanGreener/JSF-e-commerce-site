@@ -80,9 +80,9 @@
     </h:head>
 
     <h:body>
-         
+
         <bookstore:navbar />
-        
+
         <h:form onsubmit="return false;">
             <div class="middle">
 
@@ -145,6 +145,7 @@
 
 
                 <h:dataTable id="bookTable" var="books" style="margin-bottom: 20px;" class="ui celled table" value="#{managerSearch.results}">
+
                     <h:column>
                         <f:facet name="header">ISBN</f:facet>
                             #{books.isbn}
@@ -175,7 +176,7 @@
                     </h:column>
                     <h:column>
                         <f:facet name="header">Total Sales</f:facet>
-                            $#{bookJpaController.getTotalSalesByIsbn(books.isbn)}
+                        $#{bookJpaController.getTotalSalesByIsbn(books.isbn)}
                     </h:column>
                     <h:column>
                         <f:facet name="header">Status</f:facet>

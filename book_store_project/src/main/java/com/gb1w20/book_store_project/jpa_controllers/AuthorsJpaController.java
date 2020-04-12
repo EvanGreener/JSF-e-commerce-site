@@ -20,7 +20,7 @@ import javax.transaction.SystemException;
 import javax.transaction.UserTransaction;
 
 /**
- *
+ * Queries that facilitate accessing certain authors(s)
  * @author Saad
  */
 @Named
@@ -33,8 +33,16 @@ public class AuthorsJpaController implements Serializable {
     @PersistenceContext
     private EntityManager em;
 
+    /**
+     *
+     */
     public AuthorsJpaController() {}
 
+    /**
+     *
+     * @param authors
+     * @throws Exception
+     */
     public void create(Authors authors) throws Exception {
     try {
         utx.begin();
@@ -50,6 +58,12 @@ public class AuthorsJpaController implements Serializable {
     }
 }
 
+    /**
+     *
+     * @param authors
+     * @throws NonexistentEntityException
+     * @throws Exception
+     */
     public void edit(Authors authors) throws NonexistentEntityException, Exception {
         try {
             utx.begin();
@@ -72,6 +86,12 @@ public class AuthorsJpaController implements Serializable {
         }
     }
 
+    /**
+     *
+     * @param id
+     * @throws NonexistentEntityException
+     * @throws Exception
+     */
     public void destroy(Integer id) throws NonexistentEntityException, Exception {
         try {
             utx.begin();
@@ -94,10 +114,20 @@ public class AuthorsJpaController implements Serializable {
         }
     }
 
+    /**
+     *
+     * @return
+     */
     public List<Authors> findAuthorsEntities() {
         return findAuthorsEntities(true, -1, -1);
     }
 
+    /**
+     *
+     * @param maxResults
+     * @param firstResult
+     * @return
+     */
     public List<Authors> findAuthorsEntities(int maxResults, int firstResult) {
         return findAuthorsEntities(false, maxResults, firstResult);
     }
@@ -113,10 +143,19 @@ public class AuthorsJpaController implements Serializable {
         return q.getResultList();
     }
 
+    /**
+     *
+     * @param id
+     * @return
+     */
     public Authors findAuthors(Integer id) {
             return em.find(Authors.class, id);
     }
 
+    /**
+     *
+     * @return
+     */
     public int getAuthorsCount() {
             CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
             Root<Authors> rt = cq.from(Authors.class);
@@ -126,6 +165,10 @@ public class AuthorsJpaController implements Serializable {
             return ((Long) q.getSingleResult()).intValue();
     }
     
+    /**
+     *
+     * @return
+     */
     public List<String> getAuthorNames()
     {
         CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
@@ -135,6 +178,11 @@ public class AuthorsJpaController implements Serializable {
         return query.getResultList();
     }
     
+    /**
+     *
+     * @param name
+     * @return
+     */
     public Authors getAuthorByName(String name)
     {
         CriteriaBuilder cb = em.getCriteriaBuilder();

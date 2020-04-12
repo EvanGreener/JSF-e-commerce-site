@@ -19,36 +19,51 @@ import javax.transaction.SystemException;
 import javax.transaction.UserTransaction;
 
 /**
- *
- * @author Saad
+ *  Queries that facilitate accessing certain items from inventory
+ * @author Saad,Shruti
  */
 @Named
 @RequestScoped
 public class ClientInventoryJpaController implements Serializable {
-    
+
     @Resource
     private UserTransaction utx;
 
     @PersistenceContext
     private EntityManager em;
 
-    public ClientInventoryJpaController() {}
-
-    public void create(ClientInventory tax) throws Exception {
-    try {
-        utx.begin();
-        em.persist(tax);
-        utx.commit();
-    } catch (Exception ex) {
-        try {
-            utx.rollback();
-        } catch (Exception re) {
-            throw new Exception("An error occurred attempting to roll back the transaction.", re);
-        }
-        throw ex;
+    /**
+     *
+     */
+    public ClientInventoryJpaController() {
     }
-}
 
+    /**
+     *
+     * @param tax
+     * @throws Exception
+     */
+    public void create(ClientInventory tax) throws Exception {
+        try {
+            utx.begin();
+            em.persist(tax);
+            utx.commit();
+        } catch (Exception ex) {
+            try {
+                utx.rollback();
+            } catch (Exception re) {
+                throw new Exception("An error occurred attempting to roll back the transaction.", re);
+            }
+            throw ex;
+        }
+    }
+
+    /**
+     *
+     * @param tax
+     * @throws NonexistentEntityException
+     * @throws Exception
+     */
     public void edit(ClientInventory tax) throws NonexistentEntityException, Exception {
         try {
             utx.begin();
@@ -71,6 +86,12 @@ public class ClientInventoryJpaController implements Serializable {
         }
     }
 
+    /**
+     *
+     * @param id
+     * @throws NonexistentEntityException
+     * @throws Exception
+     */
     public void destroy(Integer id) throws NonexistentEntityException, Exception {
         try {
             utx.begin();
@@ -93,10 +114,20 @@ public class ClientInventoryJpaController implements Serializable {
         }
     }
 
+    /**
+     *
+     * @return
+     */
     public List<ClientInventory> findClientInventoryEntities() {
         return findClientInventoryEntities(true, -1, -1);
     }
 
+    /**
+     *
+     * @param maxResults
+     * @param firstResult
+     * @return
+     */
     public List<ClientInventory> findClientInventoryEntities(int maxResults, int firstResult) {
         return findClientInventoryEntities(false, maxResults, firstResult);
     }
@@ -112,24 +143,39 @@ public class ClientInventoryJpaController implements Serializable {
         return q.getResultList();
     }
 
+    /**
+     *
+     * @param id
+     * @return
+     */
     public ClientInventory findClientInventory(int id) {
-            return em.find(ClientInventory.class, id);
+        return em.find(ClientInventory.class, id);
     }
-    public List<ClientInventory> findClientInventory(Integer clientId){
+
+    /**
+     * Retrieve a client's inventory based on their clientId
+     * @author shruti pareek
+     * @param clientId
+     * @return
+     */
+    public List<ClientInventory> findClientInventory(Integer clientId) {
         TypedQuery<ClientInventory> query = em.createQuery("SELECT c FROM ClientInventory c WHERE c.clientID=:clientId ", ClientInventory.class);
         query.setParameter("clientId", clientId);
         List<ClientInventory> inventory = query.getResultList();
         return inventory;
     }
+
+    /**
+     *
+     * @return
+     */
     public int getClientInventoryCount() {
-            CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
-            Root<ClientInventory> rt = cq.from(ClientInventory.class);
-            cq.select(em.getCriteriaBuilder().count(rt));
-            Query q = em.createQuery(cq);
-            System.out.println("client inventory count: " + ((Long) q.getSingleResult()).intValue());
-            return ((Long) q.getSingleResult()).intValue();
+        CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
+        Root<ClientInventory> rt = cq.from(ClientInventory.class);
+        cq.select(em.getCriteriaBuilder().count(rt));
+        Query q = em.createQuery(cq);
+        System.out.println("client inventory count: " + ((Long) q.getSingleResult()).intValue());
+        return ((Long) q.getSingleResult()).intValue();
     }
-    
-    
-    
+
 }

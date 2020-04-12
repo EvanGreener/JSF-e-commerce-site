@@ -46,6 +46,10 @@ public class ReviewParameterizedTest {
 
     private final static Logger LOG = LoggerFactory.getLogger(BookParameterizedTest.class);
 
+    /**
+     *
+     * @return
+     */
     @Deployment
     public static WebArchive deploy() {
 
@@ -85,6 +89,9 @@ public class ReviewParameterizedTest {
     @Inject
     private CustomerReviewsJpaController reviewControl;
 
+    /**
+     *
+     */
     @Rule
     public ParameterRule reviewRule = new ParameterRule("reviewTest",
             new ReviewTestingBean("9780141439471",5,3.4,4,1),
@@ -105,6 +112,9 @@ public class ReviewParameterizedTest {
     @Resource
     private UserTransaction utx;
     
+    /**
+     *
+     */
     @Test
     public void testExpectedReviewCount()
     {
@@ -113,6 +123,9 @@ public class ReviewParameterizedTest {
                 reviewTest.expectedReviews, totalReviews);
     }
     
+    /**
+     *
+     */
     @Test
     public void testExpectedReviewAverage()
     {
@@ -121,6 +134,9 @@ public class ReviewParameterizedTest {
                 reviewTest.expectedAverage, averageReview,0.1);
     }
     
+    /**
+     *
+     */
     @Test
     public void testExpectedCustomerReviewCount()
     {

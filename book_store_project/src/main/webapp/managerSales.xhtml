@@ -170,7 +170,7 @@
                     </h:column>
                     <h:column>
                         <f:facet name="header">Sale</f:facet>
-                        $#{sales.salePrice}
+                        $#{bookJpaController.findAnySingleBook(sales.isbn).salePrice}
                     </h:column>
                     <h:column>
                         <f:facet name="header">Wholesale</f:facet>
