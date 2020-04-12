@@ -6,9 +6,28 @@
     <version>1.0-SNAPSHOT</version>
     <packaging>war</packaging>
     <name>book_store_project</name>
+    
+    
+    <!-- A description of the program -->
+    <description>Websites allowing users to browse and buy books. Managers can manage books,reviews,orders,surveys,news,ads,and clients. Clients can view information on books,purchase books,write reviews,write surveys,view advertisements,news. </description>
+
+    <!-- Identifies the programmer or programmers who worked on the project -->
+    <developers>
+        <developer>
+            <id>1735332</id>
+            <name>Shruti Pareek</name>
+            <email>shruti.pareek@dawsoncollege.qc.ca</email>
+        </developer>
+    </developers>
+
+    <!-- The company or organization that the programmer(s) work for -->
+    <organization>
+        <name>Dawson College</name>
+    </organization>
+    
 
     <properties>
-        <skipTests>true</skipTests>
+        <skipTests>false</skipTests>
     </properties>
     
     <dependencies>

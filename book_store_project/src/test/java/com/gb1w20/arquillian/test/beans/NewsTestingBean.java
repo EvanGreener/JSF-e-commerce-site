@@ -1,7 +1,5 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ *All test beans belong to this package
  */
 package com.gb1w20.arquillian.test.beans;
 
@@ -10,9 +8,16 @@ package com.gb1w20.arquillian.test.beans;
  * @author giancarlo
  */
 public class NewsTestingBean {
+
+
     public int newsID;
     public String expectedStatus;
     
+    /**
+     *
+     * @param newsID
+     * @param expectedStatus
+     */
     public NewsTestingBean(int newsID, String expectedStatus)
     {
         this.newsID = newsID;

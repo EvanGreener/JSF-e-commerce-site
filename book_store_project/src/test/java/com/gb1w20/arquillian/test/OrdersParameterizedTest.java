@@ -3,56 +3,50 @@
  */
 package com.gb1w20.arquillian.test;
 
-import com.gb1w20.arquillian.test.beans.ReviewTestingBean;
-import com.gb1w20.book_store_project.backing.CustomerReviewBackingBean;
-import com.gb1w20.book_store_project.beans.NewsBean;
-import com.gb1w20.book_store_project.entities.CustomerReviews;
-import com.gb1w20.book_store_project.jpa_controllers.CustomerReviewsJpaController;
+import com.gb1w20.arquillian.test.beans.OrdersTestingBean;
+import com.gb1w20.book_store_project.entities.OrderItem;
+import com.gb1w20.book_store_project.entities.Orders;
+import com.gb1w20.book_store_project.jpa_controllers.OrdersJpaController;
 import com.gb1w20.book_store_project.jpa_controllers.exceptions.IllegalOrphanException;
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.Reader;
-import java.io.StringReader;
-import java.sql.Connection;
-import java.sql.SQLException;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Scanner;
-import javax.annotation.Resource;
-import javax.inject.Inject;
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
-import javax.sql.DataSource;
-import javax.transaction.UserTransaction;
+
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.junit.Arquillian;
 import org.jboss.shrinkwrap.api.ShrinkWrap;
 import org.jboss.shrinkwrap.api.asset.EmptyAsset;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.jboss.shrinkwrap.resolver.api.maven.Maven;
-import static org.junit.Assert.assertEquals;
 import org.junit.Before;
+import org.junit.runner.RunWith;
+
+import javax.annotation.Resource;
+import javax.inject.Inject;
+import javax.sql.DataSource;
+import java.io.*;
+import java.sql.Connection;
+import java.sql.SQLException;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Scanner;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+import javax.transaction.UserTransaction;
+import static org.junit.Assert.assertTrue;
+
 import org.junit.Rule;
 import org.junit.Test;
-import org.junit.runner.RunWith;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
- *
- * @author giancarlo
+ * tests orders jpa controller methods
+ * @author Shruti Pareek
  */
 @RunWith(Arquillian.class)
-public class ReviewParameterizedTest {
+public class OrdersParameterizedTest {
 
-    private final static Logger LOG = LoggerFactory.getLogger(BookParameterizedTest.class);
+    private final static Logger LOG = LoggerFactory.getLogger(OrdersParameterizedTest.class);
 
-    /**
-     *
-     * @return
-     */
+ 
     @Deployment
     public static WebArchive deploy() {
 
@@ -73,13 +67,12 @@ public class ReviewParameterizedTest {
         final WebArchive webArchive;
         webArchive = ShrinkWrap.create(WebArchive.class, "test.war")
                 .setWebXML(new File("src/main/webapp/WEB-INF/web.xml"))
-                .addPackage(CustomerReviewsJpaController.class.getPackage())
+                .addPackage(OrdersJpaController.class.getPackage())
                 .addPackage(IllegalOrphanException.class.getPackage())
-                .addPackage(CustomerReviews.class.getPackage())
-                .addPackage(CustomerReviewBackingBean.class.getPackage())
                 .addPackage(ParameterRule.class.getPackage())
-                .addPackage(ReviewTestingBean.class.getPackage())
-                .addPackage(NewsBean.class.getPackage())
+                .addPackage(Orders.class.getPackage())
+                .addPackage(OrderItem.class.getPackage())
+                .addPackage(OrdersTestingBean.class.getPackage())
                 .addAsWebInfResource(EmptyAsset.INSTANCE, "beans.xml")
                 .addAsWebInfResource(new File("src/main/webapp/WEB-INF/payara-resources.xml"), "payara-resources.xml")
                 .addAsResource(new File("src/main/resources/META-INF/persistence.xml"), "META-INF/persistence.xml")
@@ -90,21 +83,21 @@ public class ReviewParameterizedTest {
         return webArchive;
     }
     @Inject
-    private CustomerReviewsJpaController reviewControl;
+    private OrdersJpaController orderControl;
 
     /**
-     *
+     * data to test methods
      */
     @Rule
-    public ParameterRule reviewRule = new ParameterRule("reviewTest",
-            new ReviewTestingBean("9780141439471",5,3.4,4,1),
-            new ReviewTestingBean("9780743298025",2,3.5,9,1),
-            new ReviewTestingBean("9780142000670",1,2,1,1),
-            new ReviewTestingBean("9780439023481",1,3,7,1),
-            new ReviewTestingBean("9780060584757",1,4,13,1)
+    public ParameterRule Bookrule = new ParameterRule("orderTest",
+            new OrdersTestingBean(1, "cst.send@gmail.com", 1, 1, "Removed", "9780142000670", "isbn", new Orders(1)),
+            new OrdersTestingBean(2, "cst.receive@gmail.com", 2, 1, "Removed", "9780439244190", "isbn", new Orders(2)),
+            new OrdersTestingBean(3, "dcastaner0@cbslocal.com", 3, 1, "Not Removed", "dcastaner0@cbslocal.com", "email", new Orders(3)),
+            new OrdersTestingBean(4, "jhutcheon1@last.fm", 5, 1, "Removed", "5", "id", new Orders(5)),
+            new OrdersTestingBean(5, "sdoud2@liveinternet.ru", 6, 1, "Not Removed", "6", "id", new Orders(6))
     );
 
-    private ReviewTestingBean reviewTest;
+    private OrdersTestingBean orderTest;
 
     @Resource(lookup = "java:app/jdbc/bookstore")
     private DataSource ds;
@@ -114,40 +107,72 @@ public class ReviewParameterizedTest {
 
     @Resource
     private UserTransaction utx;
-    
+
     /**
-     *
+     * tests if gets correct client through their email
+     * @author shruti
      */
     @Test
-    public void testExpectedReviewCount()
-    {
-        int totalReviews = reviewControl.getCustomerReviewsCount(reviewTest.isbn);
-        assertEquals("Expected: " + reviewTest.expectedReviews + ", actual: " + totalReviews, 
-                reviewTest.expectedReviews, totalReviews);
+    public void testGetClientEmailById() {
+        LOG.debug("testGetClientEmailById");
+        boolean isSuccess = true;
+        String resultEmail = orderControl.getClientEmailById(orderTest.testClientId);
+
+        if (!(resultEmail.equals(orderTest.expectedEmail))) {
+            isSuccess = false;
+        }
+        assertTrue("orderTest returned inconsistent results Expected:" + orderTest.expectedEmail + " Actual:" + resultEmail, isSuccess);
     }
-    
+
     /**
-     *
+     * tests if get correct orderitem count
+     * @author shruti
      */
     @Test
-    public void testExpectedReviewAverage()
-    {
-        double averageReview = reviewControl.getAverageRating(reviewTest.isbn);
-        assertEquals("Expected: " + reviewTest.expectedAverage + ", actual: " + averageReview, 
-                reviewTest.expectedAverage, averageReview,0.1);
+    public void testGetOrderItemsCountByOrderId() {
+        LOG.debug("testGetOrderItemsCountByOrderId");
+        boolean isSuccess = true;
+        int resultOrderItemCount = orderControl.getOrderItemsCountByOrderId(orderTest.testOrderId);
+
+        if (!(resultOrderItemCount == orderTest.expectedOrderItemCount)) {
+
+            isSuccess = false;
+        }
+        assertTrue("orderTest returned inconsistent results Expected:" + orderTest.expectedOrderItemCount + " Actual:" + resultOrderItemCount, isSuccess);
     }
-    
+
     /**
-     *
+     * tests if gets correct status
+     * @author shruti
      */
     @Test
-    public void testExpectedCustomerReviewCount()
-    {
-        int expectedReviewCount = reviewControl.findCustomerReviewsByClientId(reviewTest.clientID, reviewTest.isbn).size();
-        assertEquals("Expected: " + reviewTest.expectedClientReviews + ", actual: " + expectedReviewCount, 
-                reviewTest.expectedClientReviews, expectedReviewCount);
+    public void testGetStatusByOrderId() {
+        LOG.debug("testGetStatusByOrderId");
+        boolean isSuccess = true;
+        String resultStatus = orderControl.getStatusByOrderId(orderTest.testOrderId);
+
+        if (!(resultStatus.equals(orderTest.expectedStatus))) {
+            isSuccess = false;
+        }
+        assertTrue("resultStatus returned inconsistent results Expected:" + orderTest.expectedStatus + " Actual:" + resultStatus, isSuccess);
     }
-    
+
+    /**
+     * tests if retrieves correct orders
+     * @author shruti
+     */
+    @Test
+    public void testSearchOrders() {
+        LOG.debug("testSearchOrders");
+        boolean isSuccess = true;
+        List<Orders> resultOrder = orderControl.searchOrders(orderTest.testQuery, orderTest.testSearchBy);
+
+        if (!(resultOrder.get(0).toString().equals(orderTest.expectedOrder.toString()))) {
+            isSuccess = false;
+        }
+        assertTrue("orderTest returned inconsistent results Expected:" + orderTest.expectedOrder.toString() + " Actual:" + resultOrder.get(0).toString(), isSuccess);
+    }
+
     /**
      * Restore the database to a known state before testing. This is important
      * if the test is destructive. This routine is courtesy of Bartosz Majsak

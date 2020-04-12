@@ -1,6 +1,5 @@
 package com.gb1w20.book_store_project.jpa_controllers;
 
-import com.gb1w20.book_store_project.entities.Book;
 import com.gb1w20.book_store_project.entities.CustomerReviews;
 import com.gb1w20.book_store_project.jpa_controllers.exceptions.NonexistentEntityException;
 import java.io.Serializable;
@@ -20,8 +19,8 @@ import javax.transaction.SystemException;
 import javax.transaction.UserTransaction;
 
 /**
- *
- * @author Saad
+ *  Queries that facilitate accessing certain reviews
+ * @author Saad,Shruti
  */
 @Named
 @RequestScoped
@@ -33,9 +32,17 @@ public class CustomerReviewsJpaController implements Serializable {
     @PersistenceContext
     private EntityManager em;
 
+    /**
+     *
+     */
     public CustomerReviewsJpaController() {
     }
 
+    /**
+     *
+     * @param customerReviews
+     * @throws Exception
+     */
     public void create(CustomerReviews customerReviews) throws Exception {
         try {
             utx.begin();
@@ -51,6 +58,12 @@ public class CustomerReviewsJpaController implements Serializable {
         }
     }
 
+    /**
+     *
+     * @param customerReviews
+     * @throws NonexistentEntityException
+     * @throws Exception
+     */
     public void edit(CustomerReviews customerReviews) throws NonexistentEntityException, Exception {
         try {
             utx.begin();
@@ -73,6 +86,12 @@ public class CustomerReviewsJpaController implements Serializable {
         }
     }
 
+    /**
+     *
+     * @param id
+     * @throws NonexistentEntityException
+     * @throws Exception
+     */
     public void destroy(Integer id) throws NonexistentEntityException, Exception {
         try {
             utx.begin();
@@ -95,10 +114,20 @@ public class CustomerReviewsJpaController implements Serializable {
         }
     }
 
+    /**
+     *
+     * @return
+     */
     public List<CustomerReviews> findCustomerReviewsEntities() {
         return findCustomerReviewsEntities(true, -1, -1);
     }
 
+    /**
+     *
+     * @param maxResults
+     * @param firstResult
+     * @return
+     */
     public List<CustomerReviews> findCustomerReviewsEntities(int maxResults, int firstResult) {
         return findCustomerReviewsEntities(false, maxResults, firstResult);
     }
@@ -114,11 +143,24 @@ public class CustomerReviewsJpaController implements Serializable {
         return q.getResultList();
     }
 
+    /**
+     *
+     * @param id
+     * @return
+     */
     public CustomerReviews findCustomerReviews(Integer id) {
         return em.find(CustomerReviews.class, id);
     }
-    
-    public List<CustomerReviews> findCustomerReviewsByClientId(Integer id,String isbn) {
+
+    /**
+     * Finds customer reviews based in isbn and clientId
+     *
+     * @author shruti pareek
+     * @param id
+     * @param isbn
+     * @return
+     */
+    public List<CustomerReviews> findCustomerReviewsByClientId(Integer id, String isbn) {
         TypedQuery<CustomerReviews> query = em.createQuery("SELECT c FROM CustomerReviews c WHERE c.isRemoved = :removed AND c.isbn = :isbn AND c.clientID = :id", CustomerReviews.class);
         query.setParameter("removed", false);
         query.setParameter("isbn", isbn);
@@ -126,26 +168,39 @@ public class CustomerReviewsJpaController implements Serializable {
         List<CustomerReviews> customerReviews = query.getResultList();
         return customerReviews;
     }
+
+    /**
+     * get average rating for a book based on isbn
+     *
+     * @author shruti pareek
+     * @param isbn
+     * @return
+     */
     public double getAverageRating(String isbn) {
         TypedQuery<Object> query = em.createQuery("SELECT AVG(c.rating) FROM CustomerReviews c where c.isRemoved = :removed AND  c.pending = :pending group by c.isbn Having c.isbn = :isbn", Object.class);
         query.setParameter("isbn", isbn);
         query.setParameter("removed", false);
         query.setParameter("pending", false);
         List rating = query.getResultList();
-        if (rating.isEmpty()){
+        if (rating.isEmpty()) {
             return 0.0;
-        }
-        else if (rating.size() == 1) {
-            for(Object r:rating){
+        } else if (rating.size() == 1) {
+            for (Object r : rating) {
                 return (double) r;
             }
         }
         throw new NonUniqueResultException();
-  
-  
+
     }
-    
-    public List<CustomerReviews> getReviews(String isbn){
+
+    /**
+     * Get review that have not been removed based on isbn
+     *
+     * @author shruti pareek
+     * @param isbn
+     * @return
+     */
+    public List<CustomerReviews> getReviews(String isbn) {
         TypedQuery<CustomerReviews> query = em.createQuery("SELECT c FROM CustomerReviews c WHERE c.isRemoved = :removed AND c.isbn = :isbn AND c.pending = :pending", CustomerReviews.class);
         query.setParameter("removed", false);
         query.setParameter("isbn", isbn);
@@ -153,8 +208,15 @@ public class CustomerReviewsJpaController implements Serializable {
         List<CustomerReviews> customerReviews = query.getResultList();
         return customerReviews;
     }
-    
-     public int getCustomerReviewsCount(String isbn){
+
+    /**
+     * Get the count of reviews from a book that have not been removed
+     *
+     * @author shruti pareek
+     * @param isbn
+     * @return count
+     */
+    public int getCustomerReviewsCount(String isbn) {
         TypedQuery<CustomerReviews> query = em.createQuery("SELECT c FROM CustomerReviews c WHERE c.isRemoved = :removed AND c.isbn = :isbn AND c.pending = :pending", CustomerReviews.class);
         query.setParameter("removed", false);
         query.setParameter("isbn", isbn);
@@ -162,7 +224,12 @@ public class CustomerReviewsJpaController implements Serializable {
         List<CustomerReviews> customerReviews = query.getResultList();
         return customerReviews.size();
     }
-   
+
+    /**
+     * Get the count of all reviews from a book
+     *
+     * @return count
+     */
     public int getCustomerReviewsCount() {
         CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
         Root<CustomerReviews> rt = cq.from(CustomerReviews.class);

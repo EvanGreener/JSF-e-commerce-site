@@ -1,3 +1,6 @@
+/*
+ * All arquillain tests belong to this package
+ */
 package com.gb1w20.arquillian.test;
 
 import com.gb1w20.arquillian.test.beans.BookTestingBean;
@@ -8,7 +11,6 @@ import com.gb1w20.book_store_project.entities.Book;
 import com.gb1w20.book_store_project.jpa_controllers.BookFormatJpaController;
 import com.gb1w20.book_store_project.entities.BookFormat;
 import com.gb1w20.book_store_project.jpa_controllers.BookJpaController;
-import com.gb1w20.book_store_project.jpa_controllers.ClientsJpaController;
 import com.gb1w20.book_store_project.jpa_controllers.exceptions.IllegalOrphanException;
 
 import org.jboss.arquillian.container.test.api.Deployment;
@@ -47,6 +49,7 @@ import org.slf4j.LoggerFactory;
 public class BookParameterizedTest {
 
     private final static Logger LOG = LoggerFactory.getLogger(BookParameterizedTest.class);
+
 
     @Deployment
     public static WebArchive deploy() {
@@ -87,6 +90,9 @@ public class BookParameterizedTest {
     @Inject
     private BookJpaController bookControl;
 
+    /**
+     *
+     */
     @Rule
     public ParameterRule Bookrule = new ParameterRule("bookTest",
             new BookTestingBean(new Book("9780141439471","Frankenstein"),14, "Not Removed"),
@@ -111,6 +117,7 @@ public class BookParameterizedTest {
     
      /**
      * Tests if a correct book is returned from an isbn
+     * @author shruti pareek
      */
     @Test
     public void testFindSingleBook() {
@@ -125,6 +132,7 @@ public class BookParameterizedTest {
     
     /**
      * Tests if the correct number of similar genre books are returned from an isbn
+     * @author giancarlo
      */
     @Test
     public void testFindSimilarGenres() {
@@ -139,6 +147,7 @@ public class BookParameterizedTest {
     
     /**
      * Tests if the correct status of a book is returned
+     * @author giancarlo
      */
     @Test
     public void testStatusRetrieval() {

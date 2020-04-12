@@ -1,13 +1,11 @@
+/*
+ * All arquillain tests belong to this package
+ */
 package com.gb1w20.arquillian.test;
 
-import com.gb1w20.arquillian.test.beans.BookTestingBean;
 import com.gb1w20.arquillian.test.beans.ClientTestingBean;
-import com.gb1w20.book_store_project.backing.BookFormatBackingBean;
 import com.gb1w20.book_store_project.beans.NewsBean;
-import com.gb1w20.book_store_project.entities.Book;
-import com.gb1w20.book_store_project.jpa_controllers.BookFormatJpaController;
-import com.gb1w20.book_store_project.entities.BookFormat;
-import com.gb1w20.book_store_project.jpa_controllers.BookJpaController;
+import com.gb1w20.book_store_project.entities.Clients;
 import com.gb1w20.book_store_project.jpa_controllers.ClientsJpaController;
 import com.gb1w20.book_store_project.jpa_controllers.exceptions.IllegalOrphanException;
 
@@ -40,13 +38,14 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
- *
- * @author giancarlo
+ * tests client jpa controller methods
+ * @author giancarlo,Shruti pareek
  */
 @RunWith(Arquillian.class)
 public class ClientParameterizedTest {
 
     private final static Logger LOG = LoggerFactory.getLogger(ClientParameterizedTest.class);
+
 
     @Deployment
     public static WebArchive deploy() {
@@ -68,10 +67,9 @@ public class ClientParameterizedTest {
         final WebArchive webArchive;
         webArchive = ShrinkWrap.create(WebArchive.class, "test.war")
                 .setWebXML(new File("src/main/webapp/WEB-INF/web.xml"))
-                .addPackage(BookFormatJpaController.class.getPackage())
+                .addPackage(ClientsJpaController.class.getPackage())
                 .addPackage(IllegalOrphanException.class.getPackage())
-                .addPackage(BookFormat.class.getPackage())
-                .addPackage(BookFormatBackingBean.class.getPackage())
+                .addPackage(Clients.class.getPackage())
                 .addPackage(ParameterRule.class.getPackage())
                 .addPackage(ClientTestingBean.class.getPackage())
                 .addPackage(NewsBean.class.getPackage())
@@ -88,29 +86,26 @@ public class ClientParameterizedTest {
     @Inject
     private ClientsJpaController clientControl;
 
+    /**
+     * data to test client controller methods
+     */
     @Rule
     public ParameterRule rule = new ParameterRule("dynamic",
             new ClientTestingBean("dcastaner0@cbslocal.com", "dcastaner0@cbslocal.com", false, "Dosi", "1",
-
-            "dcastaner0@cbslocal.com", "Dosi", "dcastaner0@cbslocal.com", 1,
-            "Dosi", "Castaner", "1875 Artisan Lane", "Empty", "Oberbrunner LLC", "Empty"),
-            
+                    "dcastaner0@cbslocal.com", "Dosi", "dcastaner0@cbslocal.com", 1,
+                    "Dosi", "Castaner", "1875 Artisan Lane", "Empty", "Oberbrunner LLC", "Empty", new Clients(3), "dcastaner0@cbslocal.com", "email"),
             new ClientTestingBean("jhutcheon1@last.fm", "jhutcheon1@last.fm", true, "Jane", "2",
-            "jhutcheon1@last.fm", "Jane", "jhutcheon1@last.fm", 0,
-            "Jane", "Hutcheon", "27173 International Junction", "Empty", "Rogahn, Barrows and Wehner", "Empty"),
-            
+                    "jhutcheon1@last.fm", "Jane", "jhutcheon1@last.fm", 0,
+                    "Jane", "Hutcheon", "27173 International Junction", "Empty", "Rogahn, Barrows and Wehner", "Empty", new Clients(4), "jhutcheon1@last.fm", "email"),
             new ClientTestingBean("vgrigoli3@github.com", "vgrigoli3@github.com", false, "Vernice", "4",
-            "vgrigoli3@github.com", "Vernice", "vgrigoli3@github.com", 1,
-            "Vernice", "Grigoli", "1161 Loomis Plaza", "Empty", "Rice, Hegmann and Gorczany", "6445467612"),
-            
+                    "vgrigoli3@github.com", "Vernice", "vgrigoli3@github.com", 1,
+                    "Vernice", "Grigoli", "1161 Loomis Plaza", "Empty", "Rice, Hegmann and Gorczany", "6445467612", new Clients(6), "vgrigoli3@github.com", "email"),
             new ClientTestingBean("deastesg@networksolutions.com", "deastesg@networksolutions.com", false, "Denys", "17",
-            "deastesg@networksolutions.com", "Denys", "deastesg@networksolutions.com", 1,
-            "Denys", "Eastes", "67423 Pine View Lane", "0", "Gleichner Inc", "2138184727"), 
-            
+                    "deastesg@networksolutions.com", "Denys", "deastesg@networksolutions.com", 1,
+                    "Denys", "Eastes", "67423 Pine View Lane", "0", "Gleichner Inc", "2138184727", new Clients(19), "19", "id"),
             new ClientTestingBean("ebeavonl@ycombinator.com", "ebeavonl@ycombinator.com", false, "Elaina", "22",
-            "ebeavonl@ycombinator.com", "Elaina", "ebeavonl@ycombinator.com", 1,
-            "Elaina", "Beavon", "6 Nova Circle", "Empty", "Considine-Mayer", "Empty")
-
+                    "ebeavonl@ycombinator.com", "Elaina", "ebeavonl@ycombinator.com", 1,
+                    "Elaina", "Beavon", "6 Nova Circle", "Empty", "Considine-Mayer", "Empty", new Clients(24), "24", "id")
     );
 
     private ClientTestingBean dynamic;
@@ -124,6 +119,9 @@ public class ClientParameterizedTest {
     @Resource
     private UserTransaction utx;
 
+    /**
+     * @author giancarlo
+     */
     @Test
     public void testEmailInfo() {
         boolean isSuccess = true;
@@ -137,17 +135,17 @@ public class ClientParameterizedTest {
         assertTrue("Email info returned inconsistent results", isSuccess);
     }
 
+    /**
+     * @author giancarlo
+     */
     @Test
     public void testEmailSearch() {
         boolean isSuccess = true;
         List<Object[]> searchResults = clientControl.searchClientsNoSum(dynamic.email);
 
-        if (!searchResults.isEmpty() && dynamic.managerIndicator == 0)
-        {
+        if (!searchResults.isEmpty() && dynamic.managerIndicator == 0) {
             isSuccess = false;
-        }
-        else if (searchResults.size() == 1)
-        {
+        } else if (searchResults.size() == 1) {
             Object[] results = searchResults.get(0);
             for (int i = 0; i < results.length; i++) {
                 if (results[i] == null) {
@@ -164,16 +162,63 @@ public class ClientParameterizedTest {
                 isSuccess = false;
             }
 
-        }
-        else if (searchResults.isEmpty() && dynamic.managerIndicator == 0)
-        {
+        } else if (searchResults.isEmpty() && dynamic.managerIndicator == 0) {
             isSuccess = true;
-        }
-        else
-        {
+        } else {
             isSuccess = false;
         }
         assertTrue("Email search returned inconsistent results", isSuccess);
+    }
+
+    /**
+     * tests if gets correct email
+     * @author Shruti Pareek
+     */
+    @Test
+    public void testGetEmailsByEmail() {
+        LOG.debug("testGetEmailsByEmail");
+        boolean isSuccess = true;
+        List<String> resultEmail = clientControl.getEmailsByEmail(dynamic.email);
+        if (!(resultEmail.get(0).equals(dynamic.email))) {
+            isSuccess = false;
+        }
+        assertTrue("Email info returned inconsistent results Expected:" + dynamic.email + " Actual:" + resultEmail, isSuccess);
+    }
+
+    /**
+     * tests if gets clients by email
+     * @author Shruti Pareek
+     */
+    @Test
+    public void testFindClientByEmail() {
+        LOG.debug("testFindClientByEmail");
+        boolean isSuccess = true;
+        Clients resultClient = clientControl.findClientByEmail(dynamic.email);
+        if (!(resultClient.toString().equals(dynamic.expectedClient.toString()))) {
+            isSuccess = false;
+        }
+        assertTrue("Email info returned inconsistent results Expected:" + dynamic.expectedClient.toString() + " Actual:" + resultClient.toString(), isSuccess);
+    }
+
+    /**
+     * tests if correct client info is returned when searching for clients
+     * @author Shruti Pareek
+     */
+    @Test
+    public void testSearchClients() {
+        LOG.debug("testSearchClients");
+        boolean isSuccess = true;
+        try {
+            List<Object[]> resultClientInfo = clientControl.searchClients(dynamic.expectedQuery, dynamic.expectedSearchBy);
+
+            if (!(resultClientInfo.get(0)[0].toString().equals(dynamic.expectedClient.getClientID().toString()))) {
+                isSuccess = false;
+            }
+
+            assertTrue("Email info returned inconsistent results Expected:" + dynamic.expectedClient.getClientID() + " Actual:" + resultClientInfo.get(0)[0].toString(), isSuccess);
+        } catch (ArrayIndexOutOfBoundsException e) {
+            assertTrue("Email info returned inconsistent results", isSuccess);
+        }
     }
 
     /**

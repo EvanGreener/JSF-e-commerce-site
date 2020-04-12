@@ -3,11 +3,9 @@
  */
 package com.gb1w20.arquillian.test;
 
-import com.gb1w20.arquillian.test.beans.ReviewTestingBean;
-import com.gb1w20.book_store_project.backing.CustomerReviewBackingBean;
-import com.gb1w20.book_store_project.beans.NewsBean;
-import com.gb1w20.book_store_project.entities.CustomerReviews;
-import com.gb1w20.book_store_project.jpa_controllers.CustomerReviewsJpaController;
+import com.gb1w20.arquillian.test.beans.AuthorsTestingBean;
+import com.gb1w20.book_store_project.entities.Authors;
+import com.gb1w20.book_store_project.jpa_controllers.AuthorsJpaController;
 import com.gb1w20.book_store_project.jpa_controllers.exceptions.IllegalOrphanException;
 import java.io.BufferedReader;
 import java.io.File;
@@ -32,7 +30,7 @@ import org.jboss.shrinkwrap.api.ShrinkWrap;
 import org.jboss.shrinkwrap.api.asset.EmptyAsset;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.jboss.shrinkwrap.resolver.api.maven.Maven;
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
@@ -41,18 +39,15 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
- *
- * @author giancarlo
+ * tests author jpa controller methods
+ * @author shruti pareek
  */
 @RunWith(Arquillian.class)
-public class ReviewParameterizedTest {
+public class AuthorsParameterizedTest {
 
-    private final static Logger LOG = LoggerFactory.getLogger(BookParameterizedTest.class);
+    private final static Logger LOG = LoggerFactory.getLogger(AuthorsParameterizedTest.class);
 
-    /**
-     *
-     * @return
-     */
+
     @Deployment
     public static WebArchive deploy() {
 
@@ -73,13 +68,11 @@ public class ReviewParameterizedTest {
         final WebArchive webArchive;
         webArchive = ShrinkWrap.create(WebArchive.class, "test.war")
                 .setWebXML(new File("src/main/webapp/WEB-INF/web.xml"))
-                .addPackage(CustomerReviewsJpaController.class.getPackage())
                 .addPackage(IllegalOrphanException.class.getPackage())
-                .addPackage(CustomerReviews.class.getPackage())
-                .addPackage(CustomerReviewBackingBean.class.getPackage())
+                .addPackage(AuthorsJpaController.class.getPackage())
                 .addPackage(ParameterRule.class.getPackage())
-                .addPackage(ReviewTestingBean.class.getPackage())
-                .addPackage(NewsBean.class.getPackage())
+                .addPackage(AuthorsTestingBean.class.getPackage())
+                .addPackage(Authors.class.getPackage())
                 .addAsWebInfResource(EmptyAsset.INSTANCE, "beans.xml")
                 .addAsWebInfResource(new File("src/main/webapp/WEB-INF/payara-resources.xml"), "payara-resources.xml")
                 .addAsResource(new File("src/main/resources/META-INF/persistence.xml"), "META-INF/persistence.xml")
@@ -90,21 +83,21 @@ public class ReviewParameterizedTest {
         return webArchive;
     }
     @Inject
-    private CustomerReviewsJpaController reviewControl;
+    private AuthorsJpaController authorsControl;
 
     /**
-     *
+     * Data to test methods
      */
     @Rule
-    public ParameterRule reviewRule = new ParameterRule("reviewTest",
-            new ReviewTestingBean("9780141439471",5,3.4,4,1),
-            new ReviewTestingBean("9780743298025",2,3.5,9,1),
-            new ReviewTestingBean("9780142000670",1,2,1,1),
-            new ReviewTestingBean("9780439023481",1,3,7,1),
-            new ReviewTestingBean("9780060584757",1,4,13,1)
+    public ParameterRule authorsRule = new ParameterRule("authorsTest",
+            new AuthorsTestingBean(new Authors(1), "John Steinbeck"),
+            new AuthorsTestingBean(new Authors(2), "Louis Sachar"),
+            new AuthorsTestingBean(new Authors(3), "Harper Lee"),
+            new AuthorsTestingBean(new Authors(4), "F. Scott Fitzgerald"),
+            new AuthorsTestingBean(new Authors(6), "George Orwell, Russell Baker")
     );
 
-    private ReviewTestingBean reviewTest;
+    private AuthorsTestingBean authorsTest;
 
     @Resource(lookup = "java:app/jdbc/bookstore")
     private DataSource ds;
@@ -114,40 +107,43 @@ public class ReviewParameterizedTest {
 
     @Resource
     private UserTransaction utx;
-    
+
     /**
-     *
+     * tests if gets author names
+     * @author shruti pareek
      */
     @Test
-    public void testExpectedReviewCount()
-    {
-        int totalReviews = reviewControl.getCustomerReviewsCount(reviewTest.isbn);
-        assertEquals("Expected: " + reviewTest.expectedReviews + ", actual: " + totalReviews, 
-                reviewTest.expectedReviews, totalReviews);
+    public void testGetAuthorNames() {
+        LOG.debug("testGetAuthorNames");
+        boolean isSuccess = false;
+        List<String> resultAuthor = authorsControl.getAuthorNames();
+        for (String names : resultAuthor) {
+            if (names.equals(authorsTest.authorName)) {
+                isSuccess = true;
+            }
+        }
+
+        assertTrue("authorsTest returned inconsistent results Expected:" + authorsTest.authorName + " Actual:" + resultAuthor.get(0), isSuccess);
     }
-    
+
     /**
-     *
+     * tests if method get the right author by name
+     * @author shruti pareek
      */
     @Test
-    public void testExpectedReviewAverage()
-    {
-        double averageReview = reviewControl.getAverageRating(reviewTest.isbn);
-        assertEquals("Expected: " + reviewTest.expectedAverage + ", actual: " + averageReview, 
-                reviewTest.expectedAverage, averageReview,0.1);
+    public void testGetAuthorByName() {
+        LOG.debug("testGetAuthorByName");
+        boolean isSuccess = true;
+        Authors resultAuthor = authorsControl.getAuthorByName(authorsTest.authorName);
+       
+            if (!(authorsTest.expectedAuthor.toString().equals(resultAuthor.toString()))) {
+                isSuccess = false;
+            }
+        
+
+         assertTrue("authorsTest returned inconsistent results Expected:" + authorsTest.expectedAuthor.toString() + " Actual:" + resultAuthor.toString(), isSuccess);
     }
-    
-    /**
-     *
-     */
-    @Test
-    public void testExpectedCustomerReviewCount()
-    {
-        int expectedReviewCount = reviewControl.findCustomerReviewsByClientId(reviewTest.clientID, reviewTest.isbn).size();
-        assertEquals("Expected: " + reviewTest.expectedClientReviews + ", actual: " + expectedReviewCount, 
-                reviewTest.expectedClientReviews, expectedReviewCount);
-    }
-    
+
     /**
      * Restore the database to a known state before testing. This is important
      * if the test is destructive. This routine is courtesy of Bartosz Majsak

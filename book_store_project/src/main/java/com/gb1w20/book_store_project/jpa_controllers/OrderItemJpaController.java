@@ -1,7 +1,5 @@
 package com.gb1w20.book_store_project.jpa_controllers;
 
-import com.gb1w20.book_store_project.entities.Book;
-import com.gb1w20.book_store_project.entities.Book_;
 import com.gb1w20.book_store_project.entities.OrderItem;
 import com.gb1w20.book_store_project.entities.OrderItem_;
 import com.gb1w20.book_store_project.jpa_controllers.exceptions.NonexistentEntityException;
@@ -18,14 +16,12 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.Join;
-import javax.persistence.criteria.ListJoin;
 import javax.persistence.criteria.Root;
 import javax.transaction.SystemException;
 import javax.transaction.UserTransaction;
 
 /**
- *
+ * Queries that facilitate accessing certain orderItems
  * @author Saad
  */
 @Named
@@ -38,9 +34,17 @@ public class OrderItemJpaController implements Serializable {
     @PersistenceContext
     private EntityManager em;
 
+    /**
+     *
+     */
     public OrderItemJpaController() {
     }
 
+    /**
+     *
+     * @param orderItem
+     * @throws Exception
+     */
     public void create(OrderItem orderItem) throws Exception {
         try {
             utx.begin();
@@ -56,6 +60,12 @@ public class OrderItemJpaController implements Serializable {
         }
     }
 
+    /**
+     *
+     * @param orderItem
+     * @throws NonexistentEntityException
+     * @throws Exception
+     */
     public void edit(OrderItem orderItem) throws NonexistentEntityException, Exception {
         try {
             utx.begin();
@@ -78,6 +88,12 @@ public class OrderItemJpaController implements Serializable {
         }
     }
 
+    /**
+     *
+     * @param id
+     * @throws NonexistentEntityException
+     * @throws Exception
+     */
     public void destroy(Integer id) throws NonexistentEntityException, Exception {
         try {
             utx.begin();
@@ -100,10 +116,20 @@ public class OrderItemJpaController implements Serializable {
         }
     }
 
+    /**
+     *
+     * @return
+     */
     public List<OrderItem> findOrderItemEntities() {
         return findOrderItemEntities(true, -1, -1);
     }
 
+    /**
+     *
+     * @param maxResults
+     * @param firstResult
+     * @return
+     */
     public List<OrderItem> findOrderItemEntities(int maxResults, int firstResult) {
         return findOrderItemEntities(false, maxResults, firstResult);
     }
@@ -119,10 +145,19 @@ public class OrderItemJpaController implements Serializable {
         return q.getResultList();
     }
 
+    /**
+     *
+     * @param id
+     * @return
+     */
     public OrderItem findOrderItem(Integer id) {
         return em.find(OrderItem.class, id);
     }
 
+    /**
+     *
+     * @return
+     */
     public int getOrderItemCount() {
         CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
         Root<OrderItem> rt = cq.from(OrderItem.class);
@@ -132,7 +167,12 @@ public class OrderItemJpaController implements Serializable {
         return ((Long) q.getSingleResult()).intValue();
     }
     
-        public String getStatusByItemId(int itemId)
+    /**
+     *
+     * @param itemId
+     * @return
+     */
+    public String getStatusByItemId(int itemId)
     {
         CriteriaBuilder cb = em.getCriteriaBuilder();
         CriteriaQuery cq = cb.createQuery();

@@ -38,6 +38,7 @@ public class ReviewManagementBean implements Serializable {
     /**
      * Bean initialize method
      *
+     * @author Shruti Pareek
      * @return void
      */
     public void init() {
@@ -45,27 +46,54 @@ public class ReviewManagementBean implements Serializable {
 
     }
 
+    /**
+     * get removal status of a review
+     *
+     * @author Shruti Pareek
+     * @param id
+     * @return
+     */
     public Boolean getIsRemoved(Integer id) {
-         isRemoved=customerReviewCtlr.findCustomerReviews(id).getIsRemoved();
+        isRemoved = customerReviewCtlr.findCustomerReviews(id).getIsRemoved();
         return isRemoved;
     }
 
+    /**
+     * set the removal status of a review
+     *
+     * @author Shruti Pareek
+     * @param isRemoved
+     */
     public void setIsRemoved(Boolean isRemoved) {
         this.isRemoved = isRemoved;
     }
 
+    /**
+     * set pending status of review
+     *
+     * @author Shruti Pareek
+     * @param pending
+     */
     public void setPending(Boolean pending) {
         this.pending = pending;
     }
 
+    /**
+     * get pending status of a review
+     *
+     * @author Shruti Pareek
+     * @param id
+     * @return
+     */
     public Boolean getPending(Integer id) {
-        pending=customerReviewCtlr.findCustomerReviews(id).getPending();
+        pending = customerReviewCtlr.findCustomerReviews(id).getPending();
         return pending;
     }
 
     /**
      * CustomerReviews created if it does not exist.
      *
+     * @author Shruti Pareek
      * @return CustomerReviews
      */
     public CustomerReviews getCustomerReview() {
@@ -79,6 +107,7 @@ public class ReviewManagementBean implements Serializable {
     /**
      * Get opposite of boolean given to it
      *
+     * @author Shruti Pareek
      * @return boolean
      */
     private boolean getOpposite(Boolean isRemoved) {
@@ -90,6 +119,7 @@ public class ReviewManagementBean implements Serializable {
     /**
      * Gets current date and time
      *
+     * @author Shruti Pareek
      * @return Date
      */
     private Date getCurrentDateTime() {
@@ -101,6 +131,7 @@ public class ReviewManagementBean implements Serializable {
     /**
      * Edits a review's fields
      *
+     * @author Shruti Pareek
      * @return void
      */
     private void editReview(boolean isRemoved, Integer reviewId, boolean pending) throws Exception {
@@ -125,7 +156,7 @@ public class ReviewManagementBean implements Serializable {
     /**
      * called when approve or unapprove button is clicked edits review and
      *
-     *
+     * @author Shruti Pareek
      * @param isRemoved
      * @param reviewId
      * @param pending
@@ -144,7 +175,7 @@ public class ReviewManagementBean implements Serializable {
     /**
      * called when approve or unapprove button is clicked edits review and
      *
-     *
+     * @author Shruti Pareek
      * @param isRemoved
      * @param reviewId
      * @param pending
@@ -155,7 +186,7 @@ public class ReviewManagementBean implements Serializable {
         LOG.debug("managePending");
         LOG.debug(reviewId + "");
         //modify a review's values
-         pending = getOpposite(pending);
+        pending = getOpposite(pending);
         editReview(isRemoved, reviewId, pending);
 
     }
@@ -163,6 +194,7 @@ public class ReviewManagementBean implements Serializable {
     /**
      * returns string pending if pending true and reviewed if false
      *
+     * @author Shruti Pareek
      * @param pending
      * @return String
      */
@@ -178,6 +210,7 @@ public class ReviewManagementBean implements Serializable {
     /**
      * returns string approve is isRemoved true and unapprove if false
      *
+     * @author Shruti Pareek
      * @param isRemoved
      * @return String
      */

@@ -38,11 +38,6 @@ import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 /**
  *
  * @author Evan Greenstein
@@ -113,13 +108,13 @@ public class PublisherParameterizedTest {
     public void testCorrectIdReturned(){
          Publisher pub = pubCtrl.getPublisherByName(publisherTest.name);
          int idReturned = pub.getPublisherID();
-         assertEquals("", publisherTest.expectedId, idReturned);
+         assertEquals(String.format("Expected id: %d. Got '%d' instead", publisherTest.expectedId, idReturned ),
+                 publisherTest.expectedId, 
+                 idReturned);
     }
     
     /**
-     * Restore the database to a known state before testing. This is important
-     * if the test is destructive. This routine is courtesy of Bartosz Majsak
-     * who also solved my Arquillian remote server problem
+     * Restore the database to a known state before testing.
      */
     @Before
     public void seedDatabase() {

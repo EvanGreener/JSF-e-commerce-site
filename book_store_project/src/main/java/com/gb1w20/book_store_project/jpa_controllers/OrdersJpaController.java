@@ -1,6 +1,5 @@
 package com.gb1w20.book_store_project.jpa_controllers;
 
-import com.gb1w20.book_store_project.beans.BookBean;
 import com.gb1w20.book_store_project.entities.Clients;
 import com.gb1w20.book_store_project.entities.Clients_;
 import com.gb1w20.book_store_project.entities.OrderItem;
@@ -9,7 +8,6 @@ import com.gb1w20.book_store_project.entities.Orders;
 import com.gb1w20.book_store_project.entities.Orders_;
 import com.gb1w20.book_store_project.jpa_controllers.exceptions.NonexistentEntityException;
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.Resource;
 import javax.enterprise.context.RequestScoped;
@@ -31,38 +29,54 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
+ * Queries that facilitate accessing certain orders
  *
  * @author Saad
  */
 @Named
 @RequestScoped
 public class OrdersJpaController implements Serializable {
-    
+
     @Resource
     private UserTransaction utx;
 
     @PersistenceContext
     private EntityManager em;
-    
+
     private final static Logger LOG = LoggerFactory.getLogger(OrdersJpaController.class);
 
-    public OrdersJpaController() {}
-
-    public void create(Orders order) throws Exception {
-    try {
-        utx.begin();
-        em.persist(order);
-        utx.commit();
-    } catch (Exception ex) {
-        try {
-            utx.rollback();
-        } catch (Exception re) {
-            throw new Exception("An error occurred attempting to roll back the transaction.", re);
-        }
-        throw ex;
+    /**
+     *
+     */
+    public OrdersJpaController() {
     }
-}
 
+    /**
+     *
+     * @param order
+     * @throws Exception
+     */
+    public void create(Orders order) throws Exception {
+        try {
+            utx.begin();
+            em.persist(order);
+            utx.commit();
+        } catch (Exception ex) {
+            try {
+                utx.rollback();
+            } catch (Exception re) {
+                throw new Exception("An error occurred attempting to roll back the transaction.", re);
+            }
+            throw ex;
+        }
+    }
+
+    /**
+     *
+     * @param order
+     * @throws NonexistentEntityException
+     * @throws Exception
+     */
     public void edit(Orders order) throws NonexistentEntityException, Exception {
         try {
             utx.begin();
@@ -85,6 +99,12 @@ public class OrdersJpaController implements Serializable {
         }
     }
 
+    /**
+     *
+     * @param id
+     * @throws NonexistentEntityException
+     * @throws Exception
+     */
     public void destroy(Integer id) throws NonexistentEntityException, Exception {
         try {
             utx.begin();
@@ -107,10 +127,20 @@ public class OrdersJpaController implements Serializable {
         }
     }
 
+    /**
+     *
+     * @return
+     */
     public List<Orders> findOrdersEntities() {
         return findOrdersEntities(true, -1, -1);
     }
 
+    /**
+     *
+     * @param maxResults
+     * @param firstResult
+     * @return
+     */
     public List<Orders> findOrdersEntities(int maxResults, int firstResult) {
         return findOrdersEntities(false, maxResults, firstResult);
     }
@@ -126,21 +156,36 @@ public class OrdersJpaController implements Serializable {
         return q.getResultList();
     }
 
+    /**
+     *
+     * @param id
+     * @return
+     */
     public Orders findOrders(Integer id) {
-            return em.find(Orders.class, id);
+        return em.find(Orders.class, id);
     }
 
+    /**
+     *
+     * @return
+     */
     public int getOrdersCount() {
-            CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
-            Root<Orders> rt = cq.from(Orders.class);
-            cq.select(em.getCriteriaBuilder().count(rt));
-            Query q = em.createQuery(cq);
-            System.out.println("order count: " + ((Long) q.getSingleResult()).intValue());
-            return ((Long) q.getSingleResult()).intValue();
+        CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
+        Root<Orders> rt = cq.from(Orders.class);
+        cq.select(em.getCriteriaBuilder().count(rt));
+        Query q = em.createQuery(cq);
+        System.out.println("order count: " + ((Long) q.getSingleResult()).intValue());
+        return ((Long) q.getSingleResult()).intValue();
     }
 
-    public String getClientEmailById(int clientId)
-    {
+    //test 
+
+    /**
+     *
+     * @param clientId
+     * @return
+     */
+    public String getClientEmailById(int clientId) {
         CriteriaBuilder cb = em.getCriteriaBuilder();
         CriteriaQuery cq = cb.createQuery();
         Root<Clients> client = cq.from(Clients.class);
@@ -149,21 +194,13 @@ public class OrdersJpaController implements Serializable {
         TypedQuery<String> query = em.createQuery(cq);
         return query.getSingleResult();
     }
-    
-    public List<OrderItem> getOrderItemsByOrderId(int orderId)
-    {
-        CriteriaBuilder cb = em.getCriteriaBuilder();
-        CriteriaQuery cq = cb.createQuery();
-        Root<Orders> order = cq.from(Orders.class);
-        Join orderToItems = order.join("orderItemsCollection", JoinType.LEFT);
-        cq.where(cb.equal(order.get(Orders_.orderID), orderId));
-        cq.select(cq.from(OrderItem.class));
-        TypedQuery<OrderItem> query = em.createQuery(cq);
-        return query.getResultList();
-    }
-    
-    public int getOrderItemsCountByOrderId(int orderId)
-    {
+
+    /**
+     *
+     * @param orderId
+     * @return
+     */
+    public int getOrderItemsCountByOrderId(int orderId) {
         CriteriaBuilder cb = em.getCriteriaBuilder();
         CriteriaQuery cq = cb.createQuery();
         Root<OrderItem> orderitems = cq.from(OrderItem.class);
@@ -172,52 +209,58 @@ public class OrdersJpaController implements Serializable {
         Query query = em.createQuery(cq);
         return ((Long) query.getSingleResult()).intValue();
     }
-    
-    public String getStatusByOrderId(int orderId)
-    {
+
+    /**
+     *
+     * @param orderId
+     * @return
+     */
+    public String getStatusByOrderId(int orderId) {
         CriteriaBuilder cb = em.getCriteriaBuilder();
         CriteriaQuery cq = cb.createQuery();
         Root<Orders> order = cq.from(Orders.class);
         cq.where(cb.equal(order.get(Orders_.orderID), orderId));
         cq.select(order.get(Orders_.isRemoved));
         TypedQuery<Boolean> query = em.createQuery(cq);
-        try
-        {
+        try {
             query.getSingleResult();
             return "Not Removed";
-        }
-        catch(NoResultException nre)
-        {
+        } catch (NoResultException nre) {
             return "Removed";
         }
     }
-    
-     public List<Orders> searchOrders(String query, String searchBy) {
-         String expression = "%" + query + "%";
-          if (searchBy.equals("id"))
-          {
-              expression = query;
-          }
-          CriteriaBuilder cb = em.getCriteriaBuilder();
-          CriteriaQuery<Orders> cq = cb.createQuery(Orders.class);
-          Root<Orders> order = cq.from(Orders.class);
-          Join orderClients  = order.join("client");
-          Join orderToItems = order.join("orderItemsCollection", JoinType.LEFT);
-          switch (searchBy) {
-              case "id":
-                 cq.where(cb.equal(order.get(Orders_.clientID), expression));
-                 break;
-              case "isbn":
-                  cq.where(cb.like(orderToItems.get(OrderItem_.isbn), expression));
-                  break;
-              default:
-                  cq.where(cb.like(orderClients.get(Clients_.email), expression));
-                  break;
-          }
-          cq.select(order);
-          cq.orderBy(cb.asc(order.get(Orders_.orderID)));
-          TypedQuery<Orders> q = em.createQuery(cq);
-          return q.getResultList();
 
-     }
+    /**
+     *
+     * @param query
+     * @param searchBy
+     * @return
+     */
+    public List<Orders> searchOrders(String query, String searchBy) {
+        String expression = "%" + query + "%";
+        if (searchBy.equals("id")) {
+            expression = query;
+        }
+        CriteriaBuilder cb = em.getCriteriaBuilder();
+        CriteriaQuery<Orders> cq = cb.createQuery(Orders.class);
+        Root<Orders> order = cq.from(Orders.class);
+        Join orderClients = order.join("client");
+        Join orderToItems = order.join("orderItemsCollection", JoinType.LEFT);
+        switch (searchBy) {
+            case "id":
+                cq.where(cb.equal(order.get(Orders_.clientID), expression));
+                break;
+            case "isbn":
+                cq.where(cb.like(orderToItems.get(OrderItem_.isbn), expression));
+                break;
+            default:
+                cq.where(cb.like(orderClients.get(Clients_.email), expression));
+                break;
+        }
+        cq.select(order);
+        cq.orderBy(cb.asc(order.get(Orders_.orderID)));
+        TypedQuery<Orders> q = em.createQuery(cq);
+        return q.getResultList();
+
+    }
 }
