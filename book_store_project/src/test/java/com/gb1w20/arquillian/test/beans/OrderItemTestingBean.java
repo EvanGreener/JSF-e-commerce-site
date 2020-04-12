@@ -6,22 +6,20 @@
 package com.gb1w20.arquillian.test.beans;
 
 import com.gb1w20.book_store_project.entities.Ads;
+import com.gb1w20.book_store_project.entities.Authors;
 import java.util.List;
 
 /**
  *
- * @author giancarlo, shruti Pareek
+ * @author shruti Pareek
  */
-public class AdsTestingBean {
-    public int adID;
+public class OrderItemTestingBean {
+
+    public int itemId;
     public String expectedStatus;
-    public int expectedCount;
-    
-    public AdsTestingBean(int adID, String expectedStatus,int expectedCount)
-    {
-        this.adID = adID;
+
+    public OrderItemTestingBean(int itemId, String expectedStatus) {
+        this.itemId = itemId;
         this.expectedStatus = expectedStatus;
-        this.expectedCount = expectedCount;
     }
-    
 }

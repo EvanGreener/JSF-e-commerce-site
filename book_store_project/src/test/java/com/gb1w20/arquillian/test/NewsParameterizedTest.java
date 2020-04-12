@@ -56,7 +56,7 @@ import org.slf4j.LoggerFactory;
 @RunWith(Arquillian.class)
 public class NewsParameterizedTest {
     
-    private final static Logger LOG = LoggerFactory.getLogger(BookParameterizedTest.class);
+    private final static Logger LOG = LoggerFactory.getLogger(NewsParameterizedTest.class);
 
     @Deployment
     public static WebArchive deploy() {

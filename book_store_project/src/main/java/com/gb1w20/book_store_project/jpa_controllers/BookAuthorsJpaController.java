@@ -1,7 +1,5 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ *All controller classes belong to this package
  */
 package com.gb1w20.book_store_project.jpa_controllers;
 
@@ -26,7 +24,7 @@ import javax.transaction.SystemException;
 import javax.transaction.UserTransaction;
 
 /**
- *
+ *  Queries that facilitate accessing certain booksAuthors
  * @author Shruti Pareek
  */
 @Named
@@ -39,11 +37,19 @@ public class BookAuthorsJpaController implements Serializable {
     @PersistenceContext
     private EntityManager em;
 
+    /**
+     *
+     */
     public BookAuthorsJpaController() {
     }
 
     private EntityManagerFactory emf = null;
 
+    /**
+     *
+     * @param bookAuthors
+     * @throws Exception
+     */
     public void create(BookAuthors bookAuthors) throws Exception {
 
         try {
@@ -60,6 +66,12 @@ public class BookAuthorsJpaController implements Serializable {
         }
     }
 
+    /**
+     *
+     * @param bookAuthors
+     * @throws NonexistentEntityException
+     * @throws Exception
+     */
     public void edit(BookAuthors bookAuthors) throws NonexistentEntityException, Exception {
         EntityManager em = null;
         try {
@@ -111,10 +123,20 @@ public class BookAuthorsJpaController implements Serializable {
         }
     }
 
+    /**
+     *
+     * @return
+     */
     public List<BookAuthors> findBookAuthorsEntities() {
         return findBookAuthorsEntities(true, -1, -1);
     }
 
+    /**
+     *
+     * @param maxResults
+     * @param firstResult
+     * @return
+     */
     public List<BookAuthors> findBookAuthorsEntities(int maxResults, int firstResult) {
         return findBookAuthorsEntities(false, maxResults, firstResult);
     }
@@ -131,12 +153,24 @@ public class BookAuthorsJpaController implements Serializable {
         return q.getResultList();
     }
 
+    /**
+     *
+     * @param id
+     * @return
+     */
     public BookAuthors findBookAuthors(Integer id) {
 
         return em.find(BookAuthors.class, id);
 
     }
 
+    /**
+     * Get bookauthors based on isbn
+     *
+     * @author shruti pareek
+     * @param isbn
+     * @return bookauthors
+     */
     public List<BookAuthors> findBookAuthorsByIsbn(String isbn) {
         TypedQuery<BookAuthors> query = em.createQuery("SELECT ba FROM BookAuthors ba WHERE ba.isbn = :isbn", BookAuthors.class);
         query.setParameter("isbn", isbn);
@@ -144,6 +178,10 @@ public class BookAuthorsJpaController implements Serializable {
         return bookAuthors;
     }
 
+    /**
+     *
+     * @return
+     */
     public int getBookAuthorsCount() {
 
         CriteriaQuery cq = em.getCriteriaBuilder().createQuery();

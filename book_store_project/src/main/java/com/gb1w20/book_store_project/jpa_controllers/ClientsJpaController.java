@@ -26,7 +26,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
- *
+ *  Queries that facilitate accessing certain clients
  * @author Saad
  */
 @Named
@@ -41,9 +41,17 @@ public class ClientsJpaController implements Serializable {
     @PersistenceContext
     private EntityManager em;
 
+    /**
+     *
+     */
     public ClientsJpaController() {
     }
 
+    /**
+     *
+     * @param clients
+     * @throws Exception
+     */
     public void create(Clients clients) throws Exception {
         try {
             utx.begin();
@@ -59,6 +67,12 @@ public class ClientsJpaController implements Serializable {
         }
     }
 
+    /**
+     *
+     * @param clients
+     * @throws NonexistentEntityException
+     * @throws Exception
+     */
     public void edit(Clients clients) throws NonexistentEntityException, Exception {
         try {
             utx.begin();
@@ -81,6 +95,12 @@ public class ClientsJpaController implements Serializable {
         }
     }
 
+    /**
+     *
+     * @param id
+     * @throws NonexistentEntityException
+     * @throws Exception
+     */
     public void destroy(Integer id) throws NonexistentEntityException, Exception {
         try {
             utx.begin();
@@ -103,10 +123,20 @@ public class ClientsJpaController implements Serializable {
         }
     }
 
+    /**
+     *
+     * @return
+     */
     public List<Clients> findClientsEntities() {
         return findClientsEntities(true, -1, -1);
     }
 
+    /**
+     *
+     * @param maxResults
+     * @param firstResult
+     * @return
+     */
     public List<Clients> findClientsEntities(int maxResults, int firstResult) {
         return findClientsEntities(false, maxResults, firstResult);
     }
@@ -122,10 +152,19 @@ public class ClientsJpaController implements Serializable {
         return q.getResultList();
     }
 
+    /**
+     *
+     * @param id
+     * @return
+     */
     public Clients findClients(Integer id) {
         return em.find(Clients.class, id);
     }
 
+    /**
+     *
+     * @return
+     */
     public int getClientsCount() {
         CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
         Root<Clients> rt = cq.from(Clients.class);
@@ -135,6 +174,12 @@ public class ClientsJpaController implements Serializable {
         return ((Long) q.getSingleResult()).intValue();
     }
 
+    /**
+     *
+     * @param email
+     * @return
+     * @throws NoResultException
+     */
     public Object[] getInfoByEmail(String email) throws NoResultException{
         CriteriaBuilder cb = em.getCriteriaBuilder();
         CriteriaQuery cq = cb.createQuery();
@@ -145,6 +190,11 @@ public class ClientsJpaController implements Serializable {
         return query.getSingleResult();
     }
 
+    /**
+     *
+     * @param email
+     * @return
+     */
     public List<String> getEmailsByEmail(String email) {
         CriteriaBuilder cb = em.getCriteriaBuilder();
         CriteriaQuery cq = cb.createQuery();
@@ -155,6 +205,11 @@ public class ClientsJpaController implements Serializable {
         return query.getResultList();
     }
 
+    /**
+     *
+     * @param email
+     * @return
+     */
     public Clients findClientByEmail(String email) {
         CriteriaBuilder cb = em.getCriteriaBuilder();
         CriteriaQuery cq = cb.createQuery();
@@ -211,6 +266,11 @@ public class ClientsJpaController implements Serializable {
 
     }
 
+    /**
+     *
+     * @param query
+     * @return
+     */
     public List<Object[]> searchClientsNoSum(String query) {
         String expression = "%" + query + "%";
 

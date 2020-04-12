@@ -48,6 +48,10 @@ public class BookParameterizedTest {
 
     private final static Logger LOG = LoggerFactory.getLogger(BookParameterizedTest.class);
 
+    /**
+     *
+     * @return
+     */
     @Deployment
     public static WebArchive deploy() {
 
@@ -87,6 +91,9 @@ public class BookParameterizedTest {
     @Inject
     private BookJpaController bookControl;
 
+    /**
+     *
+     */
     @Rule
     public ParameterRule Bookrule = new ParameterRule("bookTest",
             new BookTestingBean(new Book("9780141439471","Frankenstein"),14, "Not Removed"),
