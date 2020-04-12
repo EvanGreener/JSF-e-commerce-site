@@ -25,36 +25,52 @@ import javax.transaction.SystemException;
 import javax.transaction.UserTransaction;
 
 /**
+ * Queries that facilitate accessing certain advertisements
  *
- * @author Saad
+ * @author Saad,Shruti
  */
 @Named
 @RequestScoped
 public class AdsJpaController implements Serializable {
-    
+
     @Resource
     private UserTransaction utx;
 
     @PersistenceContext
     private EntityManager em;
 
-    public AdsJpaController() {}
-
-    public void create(Ads ads) throws Exception {
-    try {
-        utx.begin();
-        em.persist(ads);
-        utx.commit();
-    } catch (Exception ex) {
-        try {
-            utx.rollback();
-        } catch (Exception re) {
-            throw new Exception("An error occurred attempting to roll back the transaction.", re);
-        }
-        throw ex;
+    /**
+     *
+     */
+    public AdsJpaController() {
     }
-}
 
+    /**
+     *
+     * @param ads
+     * @throws Exception
+     */
+    public void create(Ads ads) throws Exception {
+        try {
+            utx.begin();
+            em.persist(ads);
+            utx.commit();
+        } catch (Exception ex) {
+            try {
+                utx.rollback();
+            } catch (Exception re) {
+                throw new Exception("An error occurred attempting to roll back the transaction.", re);
+            }
+            throw ex;
+        }
+    }
+
+    /**
+     *
+     * @param ads
+     * @throws NonexistentEntityException
+     * @throws Exception
+     */
     public void edit(Ads ads) throws NonexistentEntityException, Exception {
         try {
             utx.begin();
@@ -77,6 +93,12 @@ public class AdsJpaController implements Serializable {
         }
     }
 
+    /**
+     *
+     * @param id
+     * @throws NonexistentEntityException
+     * @throws Exception
+     */
     public void destroy(Integer id) throws NonexistentEntityException, Exception {
         try {
             utx.begin();
@@ -99,10 +121,20 @@ public class AdsJpaController implements Serializable {
         }
     }
 
+    /**
+     *
+     * @return
+     */
     public List<Ads> findAdsEntities() {
         return findAdsEntities(true, -1, -1);
     }
 
+    /**
+     *
+     * @param maxResults
+     * @param firstResult
+     * @return
+     */
     public List<Ads> findAdsEntities(int maxResults, int firstResult) {
         return findAdsEntities(false, maxResults, firstResult);
     }
@@ -118,45 +150,69 @@ public class AdsJpaController implements Serializable {
         return q.getResultList();
     }
 
+    /**
+     *
+     * @param id
+     * @return
+     */
     public Ads findAds(Integer id) {
-            return em.find(Ads.class, id);
+        return em.find(Ads.class, id);
     }
 
+    /**
+     * Gets the count of advertisements that have not been removed
+     *
+     * @author shruti pareek
+     * @return ad count
+     */
     public int getAdsCount() {
-           TypedQuery<Ads> query = em.createQuery("SELECT a FROM Ads a WHERE a.isRemoved = :removed", Ads.class);
-           query.setParameter("removed",false);
+        TypedQuery<Ads> query = em.createQuery("SELECT a FROM Ads a WHERE a.isRemoved = :removed", Ads.class);
+        query.setParameter("removed", false);
         List<Ads> ads = query.getResultList();
         return ads.size();
     }
-    public Ads getRandomAd(){
+
+    /**
+     * Gets a random ad from table
+     *
+     * @author shruti pareek
+     * @return Random ad
+     */
+    public Ads getRandomAd() {
         TypedQuery<Ads> query = em.createQuery("SELECT a FROM Ads a WHERE a.isRemoved = :removed", Ads.class);
-         query.setParameter("removed",false);
-         Random r = new Random();
-         query.setFirstResult((r.nextInt(getAdsCount())));
-         query.setMaxResults(1);
+        query.setParameter("removed", false);
+        Random r = new Random();
+        query.setFirstResult((r.nextInt(getAdsCount())));
+        query.setMaxResults(1);
         Ads a = query.getSingleResult();
         return a;
     }
-    public String getStatusByAdId(int adID)
-    {
+
+    /**
+     *
+     * @param adID
+     * @return
+     */
+    public String getStatusByAdId(int adID) {
         CriteriaBuilder cb = em.getCriteriaBuilder();
         CriteriaQuery cq = cb.createQuery();
         Root<Ads> order = cq.from(Ads.class);
         cq.where(cb.equal(order.get(Ads_.adID), adID));
         cq.select(order.get(Ads_.isRemoved));
         TypedQuery<Boolean> query = em.createQuery(cq);
-        try
-        {
+        try {
             query.getSingleResult();
             return "Not Removed";
-        }
-        catch(NoResultException nre)
-        {
+        } catch (NoResultException nre) {
             return "Removed";
         }
     }
-    
-    public List<Ads> getAllEnabledAds(){
+
+    /**
+     *
+     * @return
+     */
+    public List<Ads> getAllEnabledAds() {
         CriteriaBuilder cb = em.getCriteriaBuilder();
         CriteriaQuery cq = cb.createQuery();
         Root<Ads> ads = cq.from(Ads.class);
@@ -165,5 +221,5 @@ public class AdsJpaController implements Serializable {
         TypedQuery<Ads> query = em.createQuery(cq);
         return query.getResultList();
     }
-    
+
 }

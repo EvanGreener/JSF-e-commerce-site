@@ -23,15 +23,57 @@ public class OrdersTestingBean {
 
     private final static Logger LOG = LoggerFactory.getLogger(OrdersTestingBean.class);
 
+    /**
+     *
+     */
     public int testClientId;
+
+    /**
+     *
+     */
     public String expectedEmail;
+
+    /**
+     *
+     */
     public int testOrderId;
+
+    /**
+     *
+     */
     public int expectedOrderItemCount;
+
+    /**
+     *
+     */
     public String expectedStatus;
+
+    /**
+     *
+     */
     public String testQuery;
+
+    /**
+     *
+     */
     public String testSearchBy;
+
+    /**
+     *
+     */
     public Orders expectedOrder;
 
+    /**
+     *
+     * @param testClientId
+     * @param expectedEmail
+     * @param testOrderId
+     * @param expectedOrderItemCount
+     * @param expectedStatus
+     * @param testQuery
+     * @param testSearchBy
+     * @param expectedOrder
+     */
     public OrdersTestingBean(int testClientId, String expectedEmail, int testOrderId, int expectedOrderItemCount, String expectedStatus, String testQuery, String testSearchBy, Orders expectedOrder) {
         this.testClientId = testClientId;
         this.expectedEmail = expectedEmail;

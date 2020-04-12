@@ -19,8 +19,8 @@ import javax.transaction.SystemException;
 import javax.transaction.UserTransaction;
 
 /**
- *
- * @author Saad
+ * Queries that facilitate accessing certain survey data
+ * @author Saad,shruti
  */
 @Named
 @RequestScoped
@@ -126,6 +126,13 @@ public class SurveyDataJpaController implements Serializable {
         return ((Long) q.getSingleResult()).intValue();
     }
 
+    /**
+     * gets the survey options from a survey id
+     *
+     * @author shruti pareek
+     * @param surveyId
+     * @return
+     */
     public List<SurveyData> getSurveyChoices(Integer surveyId) {
         TypedQuery<SurveyData> query = em.createQuery("SELECT s FROM SurveyData s WHERE s.surveyID = :id AND s.isRemoved = :removed", SurveyData.class);
         query.setParameter("id", surveyId);

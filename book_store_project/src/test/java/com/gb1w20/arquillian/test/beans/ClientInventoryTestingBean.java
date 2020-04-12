@@ -16,9 +16,21 @@ import java.util.List;
  */
 public class ClientInventoryTestingBean {
 
+    /**
+     *
+     */
     public Integer clientId;
+
+    /**
+     *
+     */
     public ClientInventory expectedClientInventory;
 
+    /**
+     *
+     * @param clientId
+     * @param expectedClientInventory
+     */
     public ClientInventoryTestingBean(Integer clientId, ClientInventory expectedClientInventory) {
         this.clientId = clientId;
         this.expectedClientInventory = expectedClientInventory;

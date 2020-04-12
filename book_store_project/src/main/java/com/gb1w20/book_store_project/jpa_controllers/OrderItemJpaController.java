@@ -25,7 +25,7 @@ import javax.transaction.SystemException;
 import javax.transaction.UserTransaction;
 
 /**
- *
+ * Queries that facilitate accessing certain orderItems
  * @author Saad
  */
 @Named

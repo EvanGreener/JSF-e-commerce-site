@@ -48,9 +48,17 @@ public class BookJpaController implements Serializable {
     @PersistenceContext
     private EntityManager em;
 
+    /**
+     *
+     */
     public BookJpaController() {
     }
 
+    /**
+     *
+     * @param books
+     * @throws Exception
+     */
     public void create(Book books) throws Exception {
         try {
             utx.begin();
@@ -66,6 +74,12 @@ public class BookJpaController implements Serializable {
         }
     }
 
+    /**
+     *
+     * @param books
+     * @throws NonexistentEntityException
+     * @throws Exception
+     */
     public void edit(Book books) throws NonexistentEntityException, Exception {
         try {
             utx.begin();
@@ -88,6 +102,12 @@ public class BookJpaController implements Serializable {
         }
     }
 
+    /**
+     *
+     * @param id
+     * @throws NonexistentEntityException
+     * @throws Exception
+     */
     public void destroy(Integer id) throws NonexistentEntityException, Exception {
         try {
             utx.begin();
@@ -110,10 +130,20 @@ public class BookJpaController implements Serializable {
         }
     }
 
+    /**
+     *
+     * @return
+     */
     public List<Book> findBookEntities() {
         return findBookEntities(true, -1, -1);
     }
 
+    /**
+     *
+     * @param maxResults
+     * @param firstResult
+     * @return
+     */
     public List<Book> findBookEntities(int maxResults, int firstResult) {
         return findBookEntities(false, maxResults, firstResult);
     }
@@ -130,6 +160,10 @@ public class BookJpaController implements Serializable {
         return q.getResultList();
     }
 
+    /**
+     *
+     * @return
+     */
     public List<Book> findNonRemovedBooks() {
         CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
         Root<Book> book = cq.from(Book.class);
@@ -139,6 +173,11 @@ public class BookJpaController implements Serializable {
         return query.getResultList();
     }
 
+    /**
+     *
+     * @param id
+     * @return
+     */
     public Book findBook(Integer id) {
         return em.find(Book.class, id);
     }
@@ -146,8 +185,8 @@ public class BookJpaController implements Serializable {
     /**
      * Find a book from isbn that has not been removed
      *
+     * @param id
      * @Shruti Pareek
-     * @param isbn
      * @return Book
      */
     public Book findBook(String id) {
@@ -165,6 +204,11 @@ public class BookJpaController implements Serializable {
         return book;
     }
 
+    /**
+     *
+     * @param id
+     * @return
+     */
     public Book findAnySingleBook(String id) {
         TypedQuery<Book> query = em.createQuery("SELECT b FROM Book b WHERE b.isbn=:isbn", Book.class);
         query.setParameter("isbn", id);
@@ -172,6 +216,11 @@ public class BookJpaController implements Serializable {
         return book;
     }
 
+    /**
+     *
+     * @param id
+     * @return
+     */
     public List<Book> findBookAll(String id) {
         TypedQuery<Book> query = em.createQuery("SELECT b FROM Book b WHERE b.isbn=:isbn", Book.class);
         query.setParameter("isbn", id);
@@ -192,6 +241,13 @@ public class BookJpaController implements Serializable {
         return books.size();
     }
 
+    /**
+     *
+     * @param searchBy
+     * @param q
+     * @param page
+     * @return
+     */
     public List<Book> search(String searchBy, String q, int page) {
 
         String expression = "%" + q + "%";
@@ -217,6 +273,13 @@ public class BookJpaController implements Serializable {
         return query.getResultList();
     }
 
+    /**
+     *
+     * @param searchBy
+     * @param q
+     * @param page
+     * @return
+     */
     public List<Book> searchAllBooks(String searchBy, String q, int page) {
 
         String expression = "%" + q + "%";
@@ -256,6 +319,10 @@ public class BookJpaController implements Serializable {
         return books;
     }
 
+    /**
+     *
+     * @return
+     */
     public List<Book> getAllNonRemovedBooks() {
 
         TypedQuery<Book> query = em.createQuery("SELECT b FROM Book b where b.isRemoved = :removed ", Book.class);
@@ -279,6 +346,10 @@ public class BookJpaController implements Serializable {
         return books;
     }
 
+    /**
+     *
+     * @return
+     */
     public List<Book> getAllSaleBooks() {
 
         TypedQuery<Book> query = em.createQuery("SELECT b FROM Book b where b.listPrice  <> b.salePrice", Book.class);
@@ -286,6 +357,10 @@ public class BookJpaController implements Serializable {
         return books;
     }
 
+    /**
+     *
+     * @return
+     */
     public List<Book> getAllNotOnSaleBooks() {
 
         TypedQuery<Book> query = em.createQuery("SELECT b FROM Book b where b.listPrice = b.salePrice", Book.class);
@@ -315,7 +390,7 @@ public class BookJpaController implements Serializable {
     /**
      * Get the count of books that have same genre as book it is given
      *
-     * @param book
+     * @param b
      * @Shruti Pareek
      * @return int
      */
@@ -347,8 +422,8 @@ public class BookJpaController implements Serializable {
      * Gets books that belong in same genre excluding books written by the
      * author
      *
-     * @param book
-     * @param authorId
+     * @param b
+     * @param a
      * @Shruti Pareek
      * @return books
      */
@@ -368,8 +443,8 @@ public class BookJpaController implements Serializable {
     /**
      * Gets books written by same author excluding book given
      *
-     * @param authorId
-     * @param isbn
+     * @param a
+     * @param b
      * @Shruti Pareek
      * @return books
      */
@@ -397,6 +472,10 @@ public class BookJpaController implements Serializable {
         return books;
     }
 
+    /**
+     *
+     * @return
+     */
     public List<String> getAllISBN() {
         CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
         Root<Book> book = cq.from(Book.class);
@@ -405,11 +484,11 @@ public class BookJpaController implements Serializable {
         return query.getResultList();
     }
 
-    public List<Book> getRecommended() {
-
-        return null;
-    }
-
+    /**
+     *
+     * @param isbn
+     * @return
+     */
     public String getStatusByIsbn(String isbn) {
         CriteriaBuilder cb = em.getCriteriaBuilder();
         CriteriaQuery cq = cb.createQuery();
@@ -425,6 +504,10 @@ public class BookJpaController implements Serializable {
         }
     }
 
+    /**
+     *
+     * @return
+     */
     public List<RankedBook> getTopSellingBooks() {
         TypedQuery<Book> query = em.createQuery("SELECT B FROM Book B, OrderItem OI Where B.isbn = OI.isbn", Book.class);
         List<Book> orderedBooks = query.getResultList();
@@ -440,6 +523,11 @@ public class BookJpaController implements Serializable {
         return results;
     }
 
+    /**
+     *
+     * @param isbn
+     * @return
+     */
     public double getTotalSalesByIsbn(String isbn) {
         CriteriaBuilder cb = em.getCriteriaBuilder();
         CriteriaQuery cq = cb.createQuery();
