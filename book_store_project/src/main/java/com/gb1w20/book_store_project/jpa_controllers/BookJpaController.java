@@ -504,6 +504,10 @@ public class BookJpaController implements Serializable {
             return "Removed";
         }
     }
+    /**
+ *
+ * @author Cedric Richards
+ */
     public List<RankedBook> getTopSellingBooks()
     {
         TypedQuery<Book> query = em.createQuery("SELECT B FROM Book B", Book.class);
@@ -536,6 +540,10 @@ public class BookJpaController implements Serializable {
         TypedQuery<Double> query = em.createQuery(cq);
         return query.getSingleResult() == null ? 0 : query.getSingleResult();
     }
+    /**
+ *
+ * @author Cedric Richards
+ */
     public List<Book> getZeroSellingBooks()
     {
         List<RankedBook> allBooks = getTopSellingBooks();
@@ -550,4 +558,5 @@ public class BookJpaController implements Serializable {
         }
         return noSaleBooks;
     }
+    
 }

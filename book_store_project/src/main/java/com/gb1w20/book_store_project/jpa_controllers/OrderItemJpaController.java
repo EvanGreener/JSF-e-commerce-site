@@ -1,11 +1,12 @@
 package com.gb1w20.book_store_project.jpa_controllers;
 
-import com.gb1w20.book_store_project.entities.Book;
-import com.gb1w20.book_store_project.entities.Book_;
 import com.gb1w20.book_store_project.entities.OrderItem;
+import com.gb1w20.book_store_project.entities.OrderItemTotal;
 import com.gb1w20.book_store_project.entities.OrderItem_;
+import com.gb1w20.book_store_project.entities.Orders;
 import com.gb1w20.book_store_project.jpa_controllers.exceptions.NonexistentEntityException;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.Resource;
 import javax.enterprise.context.RequestScoped;
@@ -19,7 +20,7 @@ import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Join;
-import javax.persistence.criteria.ListJoin;
+import javax.persistence.criteria.JoinType;
 import javax.persistence.criteria.Root;
 import javax.transaction.SystemException;
 import javax.transaction.UserTransaction;
@@ -150,5 +151,28 @@ public class OrderItemJpaController implements Serializable {
             return "Removed";
         }
     }
+        /**
+ *
+ * @author Cedric Richards
+ */
+        public List<OrderItemTotal> getTotalSales()
+        {
+            TypedQuery<OrderItem> query = em.createQuery("SELECT OI FROM OrderItem OI ORDER BY OI.lastUpdated DESC", OrderItem.class);
+            List<OrderItem> allBooksSold = query.getResultList();
+            List<OrderItemTotal> totalledOrders = new ArrayList<OrderItemTotal>();
+            for(OrderItem o : allBooksSold){
+                
+                CriteriaBuilder cb = em.getCriteriaBuilder();
+                CriteriaQuery cq = cb.createQuery();
+                Root<Orders> books = cq.from(Orders.class);
+                Join ordersToItems = books.join("orderItemsCollection", JoinType.LEFT);
+                cq.where(cb.equal(ordersToItems.get(OrderItem_.isbn), o.getIsbn()));
+                cq.select(cb.sumAsDouble(ordersToItems.get(OrderItem_.priceSold)));
+                TypedQuery<Double> query2 = em.createQuery(cq);
+                
+                totalledOrders.add(new OrderItemTotal(o,query2.getSingleResult()));
+            }
+            return totalledOrders;
+        }
 
 }
