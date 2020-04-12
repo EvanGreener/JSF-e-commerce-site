@@ -176,11 +176,9 @@
                                    <h:commandLink value="#{orderItemBacking.getRemovalStatus(items.isRemoved)}" action="#{orderItemBacking.addOrRemoveItem(items)}" />
                               </h:column>
                               <h:column>
-                                   <h:commandButton type="button" onclick="setTimeout(function () {
-                                                  $('#editItemModal').modal('show', hideGrowl())
-                                             }, 500)" 
+                                   <h:commandButton type="button"
                                                     value="#{msgs.editItem}" class="big ui primary button edit_btn" disabled="#{items.isRemoved}">
-                                        <f:ajax event="click" render="@all" listener="#{orderEdit.onItemEdit(items.itemID)}"/>
+                                        <f:ajax event="click" listener="#{orderEdit.onItemEdit(items.itemID)}"/>
                                    </h:commandButton>
                               </h:column>
                          </h:dataTable>
@@ -201,8 +199,8 @@
                               <h:inputText id="salePrice" value="#{orderEdit.newSalePriceStr}" a:placeholder="#{orderEdit.currentItem.priceSold}" />
                          </div>
                          <div class="actions">
-                              <h:commandButton type="button" action="#{orderEdit.onSubmitEdit()}" style="font-size: 20px;" value="#{msgs.editItem}" class="huge black ui button">
-                                   <f:ajax event="click" execute="salePrice" listener="#{orderEdit.onSubmitEdit()}"/>
+                              <h:commandButton type="button" action="#{orderEdit.onSubmitEdit()}" style="font-size: 20px;" id="editItem" value="#{msgs.editItem}" class="huge positive ui button">
+                                   <f:ajax event="click" execute="salePrice" render="ordersTable"/>
                               </h:commandButton>    
                               <div style="font-size: 20px;" type="button" class="ui cancel button">#{msgs.cancel}</div>
                          </div>
@@ -211,6 +209,10 @@
             </h:form>
           
           <script>
+
+               $('#editItemModal')
+                       .modal('attach events', '#editModal .button', 'show');
+               
                function hideGrowl() {
                     $('#editFormGrowl').hide('slow');
                }

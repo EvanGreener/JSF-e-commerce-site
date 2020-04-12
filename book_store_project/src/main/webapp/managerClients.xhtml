@@ -85,6 +85,7 @@
      </h:head>
      <h:body>
           <bookstore:navbar ></bookstore:navbar>
+          
           <h:form id="editForm">
 
 
@@ -163,7 +164,7 @@
                     </h:dataTable>
                </div>
 
-               <bookstore:footer></bookstore:footer>
+               
 
                <div id="editModal" class=" small ui modal">
                     <div class="header">
@@ -173,33 +174,33 @@
 
                          <div class="form-field">
                               <h3>First Name</h3>
-                              <p:inputText placeholder="#{clientManagement.currentClient.firstName}" value="#{clientManagement.newFname} " validator="#{clientBacking.validateNotNull}"/>
-<!--                              <h:outputText value="First name cannot contain only whitespace" />-->
+                              <h:inputText a:placeholder="#{clientManagement.currentClient.firstName}" value="#{clientManagement.newFname} "/>
                          </div>
 
                          <div class="form-field">
                               <h3>Last Name</h3>
-                              <p:inputText placeholder="#{clientManagement.currentClient.lastName}" value="#{clientManagement.newLname}" validator="#{clientBacking.validateNotNull}"/>
+                              <h:inputText a:placeholder="#{clientManagement.currentClient.lastName}" value="#{clientManagement.newLname}" />
                          </div>
 
                          <div class="form-field">
                               <h3>Address 1</h3>
-                              <p:inputText placeholder="#{clientManagement.currentClient.address1}" value="#{clientManagement.newAddress1}" validator="#{clientBacking.validateNotNull}"/>
+                              <h:inputText a:placeholder="#{clientManagement.currentClient.address1}" value="#{clientManagement.newAddress1}"/>
                          </div>
 
                          <div class="form-field">
                               <h3>Address 2</h3>
-                              <p:inputText placeholder="#{clientManagement.currentClient.address2}" value="#{clientManagement.newAddress2}" validator="#{clientBacking.validateNotNull}"/>
+                              <h:inputText id="newAddress2" a:placeholder="#{clientManagement.currentClient.address2}" value="#{clientManagement.newAddress2}">
+                              </h:inputText>
                          </div>
 
                          <div class="form-field">
                               <h3>Company name</h3>
-                              <p:inputText placeholder="#{clientManagement.currentClient.companyName}" value="#{clientManagement.newCompanyName}" validator="#{clientBacking.validateNotNull}"/>
+                              <h:inputText a:placeholder="#{clientManagement.currentClient.companyName}" value="#{clientManagement.newCompanyName}"/>
                          </div>
 
                          <div class="form-field">
                               <h3>Cell #</h3>
-                              <p:inputText placeholder="#{clientManagement.currentClient.cellTelephone}" value="#{clientManagement.newCell}" validator="#{clientBacking.validateCellPhone}"/>
+                              <h:inputText a:placeholder="#{clientManagement.currentClient.cellTelephone}" value="#{clientManagement.newCell}" />
                          </div>
 
                     </div>
@@ -217,6 +218,8 @@
                </div>
 
           </h:form>
+          
+          <bookstore:footer></bookstore:footer>
 
           <script>
                function hideGrowl() {

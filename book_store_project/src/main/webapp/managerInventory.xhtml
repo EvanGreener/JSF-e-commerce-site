@@ -80,7 +80,9 @@
     </h:head>
 
     <h:body>
+         
         <bookstore:navbar />
+        
         <h:form onsubmit="return false;">
             <div class="middle">
                 <h1 class="ui header">#{msgs.invManage}</h1>
@@ -232,14 +234,8 @@
                             <h:selectOneMenu id="author" label="#{msgs.author}" value="#{bookBacking.selectedAuthor.name}" required="true" requiredMessage="#{msgs.authorMsg}" a:placeholder="#{msgs.authorMsg}">
                                 <f:selectItems value="#{bookBacking.authorNames}" />
                                 <f:ajax execute="@this" listener="#{bookBacking.authChangeMethod(bookBacking.selectedAuthor.name)}" />
-                                <f:ajax execute="@all" listener="#{editAuthor.authChangeMethod(bookBacking.selectedAuthor.name)}" />
                             </h:selectOneMenu>
                             <br/>
-                            <h:commandLink value="#{msgs.editAuthor}" onclick="setTimeout(function () {
-                                $('#editAuthorModal').modal('show', hideGrowl())
-                            }, 500)">
-                                <f:ajax event="click" render="editAuthorForm" listener="#{editAuthor.onEdit}"/>
-                            </h:commandLink>
                             <h:message id="authorError" class="error" for="author"/>
                         </div>   
                     </div>
@@ -336,15 +332,9 @@
                             <h:outputLabel for="newAuthor" value="#{msgs.author}"/>
                             <h:selectOneMenu id="newAuthor" label="#{msgs.author}" value="#{editBook.newAuthor.name}" required="true" requiredMessage="#{msgs.authorMsg}" a:placeholder="#{msgs.authorMsg}">
                                 <f:selectItems value="#{bookBacking.authorNames}" />
-                                <f:ajax execute="@this" listener="#{editAuthor.authChangeMethod(editBook.newAuthor.name)}" />
                                 <f:ajax execute="@this" listener="#{editBook.authChangeMethod(editBook.newAuthor.name)}" />
                             </h:selectOneMenu>
                             <br/>
-                            <h:commandLink value="#{msgs.editAuthor}" onclick="setTimeout(function () {
-                                $('#editAuthorModal').modal('show', hideGrowl())
-                            }, 500)">
-                                <f:ajax event="click" render="editAuthorForm" listener="#{editAuthor.onEdit}"/>
-                            </h:commandLink>
                             <h:message id="newAuthorError" class="error" for="newAuthor"/>
                         </div>   
                     </div>
@@ -434,27 +424,6 @@
                         <h:message id="authorNameError" class="error" for="authorName"/>
                     </div>
                     <p:commandButton type="button" class="huge black fluid ui button" id="addAuthor" value="#{msgs.addAuthor}" update="editForm" action="#{authorBacking.createAuthor()}">
-                        <f:ajax execute="authorName" render="bookTable"/>
-                    </p:commandButton>
-                </h:form>
-            </div>
-        </div>
-        
-        <div id="editAuthorModal" class="small ui modal">
-            <div class="header">
-                <h1>#{msgs.editAuthor}</h1>
-            </div>
-            <div class="content">
-                <h:form class="ui form" id="editAuthorForm">
-                    <div class="field">
-                        <h:outputLabel for="newAuthorName" value="#{msgs.authorName}"/>
-                        <h:inputText id="newAuthorName" label="#{msgs.authorName}" value="#{editAuthor.newName}" required="true" requiredMessage="#{msgs.authorNameMsg}" a:placeholder="#{msgs.authorNameMsg}" validator="#{authorBacking.validateUniqueAndValidAuthor}">
-                            <f:ajax event="change" render="newAuthorNameError"/>
-                        </h:inputText>
-                        <br/>
-                        <h:message id="newAuthorNameError" class="error" for="newAuthorName"/>
-                    </div>
-                    <p:commandButton type="button" class="huge black fluid ui button" id="editAuthor" value="#{msgs.editAuthor}" update="editForm" action="#{editAuthor.onSubmitEdit()}">
                         <f:ajax execute="authorName" render="bookTable"/>
                     </p:commandButton>
                 </h:form>
