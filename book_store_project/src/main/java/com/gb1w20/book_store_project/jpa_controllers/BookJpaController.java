@@ -34,8 +34,15 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
+<<<<<<< HEAD
+ * JPA Controller for the book entity, Queries that facilitate accessing certain
+ * books
+ *
+ * @author Giancarlo Biasiucci, Saad, Shruti Pareek
+=======
  * JPA Controller for the book entity, Queries that facilitate accessing certain books
  * @author Giancarlo Biasiucci, Saad, Shruti Pareek, Evan Greenstein
+>>>>>>> 5fb289bdaabb78e0ad0286aded86373c375c7fd6
  * @version April 10, 2020
  */
 @Named
@@ -161,11 +168,12 @@ public class BookJpaController implements Serializable {
         }
         return q.getResultList();
     }
-    
+
     /**
-     * Finds all books in the database that are not "removed" (the user can still browse them)
-     * @return The list of books that are not removed
-     * By: Giancarlo Biasiucci
+     * Finds all books in the database that are not "removed" (the user can
+     * still browse them)
+     *
+     * @return The list of books that are not removed By: Giancarlo Biasiucci
      */
     public List<Book> findNonRemovedBooks() {
         CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
@@ -189,30 +197,29 @@ public class BookJpaController implements Serializable {
      * Find a book from isbn that has not been removed
      *
      * @param id
-     * @Shruti Pareek
+     * @author Shruti Pareek
      * @return Book
      */
     public Book findBook(String id) {
         Book book;
-        try {
+       
 
             TypedQuery<Book> query = em.createQuery("SELECT b FROM Book b WHERE b.isRemoved = :removed AND b.isbn=:isbn", Book.class);
             query.setParameter("removed", false);
             query.setParameter("isbn", id);
 
             book = query.getSingleResult();
-        } catch (NoResultException e) {
-            book = null;
-        }
+     
         return book;
     }
 
     /**
-     * Finds any book in the database given an ISBN, regardless of removal status. Required for
-     * manager-side operations involving inventory management.
+     * Finds any book in the database given an ISBN, regardless of removal
+     * status. Required for manager-side operations involving inventory
+     * management.
+     *
      * @param id - The ISBN of the book
-     * @return The book to be found
-     * By: Giancarlo Biasiucci
+     * @return The book to be found By: Giancarlo Biasiucci
      */
     public Book findAnySingleBook(String id) {
         TypedQuery<Book> query = em.createQuery("SELECT b FROM Book b WHERE b.isbn=:isbn", Book.class);
@@ -236,7 +243,7 @@ public class BookJpaController implements Serializable {
     /**
      * Count Books that have not been removed
      *
-     * @Shruti Pareek
+     * @author Shruti Pareek
      * @return count
      */
     public int getBookCount() {
@@ -277,16 +284,18 @@ public class BookJpaController implements Serializable {
         TypedQuery<Book> query = em.createQuery(cq);
         return query.getResultList();
     }
-    
+
     /**
-     * Direct copy of the search method, aside from being able to search for all books
-     * regardless of removal status, as opposed to just those that are not removed.
-     * Required for manager-side operations involving inventory and sale management.
+     * Direct copy of the search method, aside from being able to search for all
+     * books regardless of removal status, as opposed to just those that are not
+     * removed. Required for manager-side operations involving inventory and
+     * sale management.
+     *
      * @param searchBy - The search criteria (title, author, etc.)
      * @param q - The search query (keyword)
      * @param page - The page number regarding pagination
-     * @return The list of books found by the search
-     * By: Giancarlo Biasiucci (minor modifications to original search method - see above method)
+     * @return The list of books found by the search By: Giancarlo Biasiucci
+     * (minor modifications to original search method - see above method)
      */
     public List<Book> searchAllBooks(String searchBy, String q, int page) {
 
@@ -328,9 +337,10 @@ public class BookJpaController implements Serializable {
     }
 
     /**
-     * Retrieves a list of non-removed books from the database. Used for the gallery page
-     * @return The list of non-removed books
-     * By: Giancarlo Biasiucci
+     * Retrieves a list of non-removed books from the database. Used for the
+     * gallery page
+     *
+     * @return The list of non-removed books By: Giancarlo Biasiucci
      */
     public List<Book> getAllNonRemovedBooks() {
 
@@ -354,12 +364,12 @@ public class BookJpaController implements Serializable {
         List<Book> books = query.getResultList();
         return books;
     }
-    
+
     /**
-     * Retrieves a list of all books from the database that are on sale. Used for manager-side 
-     * search management
-     * @return The list of books on sale
-     * By: Giancarlo Biasiucci
+     * Retrieves a list of all books from the database that are on sale. Used
+     * for manager-side search management
+     *
+     * @return The list of books on sale By: Giancarlo Biasiucci
      */
     public List<Book> getAllSaleBooks() {
 
@@ -367,12 +377,12 @@ public class BookJpaController implements Serializable {
         List<Book> books = query.getResultList();
         return books;
     }
-    
+
     /**
-     * Retrieves a list of all books from the database that are not on sale. Used for manager-side 
-     * search management
-     * @return The list of books that are not on sale
-     * By: Giancarlo Biasiucci
+     * Retrieves a list of all books from the database that are not on sale.
+     * Used for manager-side search management
+     *
+     * @return The list of books that are not on sale By: Giancarlo Biasiucci
      */
     public List<Book> getAllNotOnSaleBooks() {
 
@@ -404,7 +414,7 @@ public class BookJpaController implements Serializable {
      * Get the count of books that have same genre as book it is given
      *
      * @param b
-     * @Shruti Pareek
+     * @author Shruti Pareek
      * @return int
      */
     public int getSimilarGenresBookCount(Book b) {
@@ -419,8 +429,8 @@ public class BookJpaController implements Serializable {
     /**
      * Used for recommending books to user
      *
+     * @author Shruti Pareek
      * @param genre
-     * @Shruti Pareek
      * @return books
      */
     public List<Book> getSimilarGenres(String genre) {
@@ -437,7 +447,7 @@ public class BookJpaController implements Serializable {
      *
      * @param b
      * @param a
-     * @Shruti Pareek
+     * @author Shruti Pareek
      * @return books
      */
     public List<Book> getSimilarGenres(Book b, Integer a) {
@@ -484,11 +494,13 @@ public class BookJpaController implements Serializable {
         List<Book> books = query.getResultList();
         return books;
     }
-    
+
     /**
-     * Retrieves all ISBN numbers from the database. Used for ISBN originality checking
-     * @return The list of all ISBN numbers in the database
-     * By: Giancarlo Biasiucci
+     * Retrieves all ISBN numbers from the database. Used for ISBN originality
+     * checking
+     *
+     * @return The list of all ISBN numbers in the database By: Giancarlo
+     * Biasiucci
      */
     public List<String> getAllISBN() {
         CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
@@ -498,17 +510,12 @@ public class BookJpaController implements Serializable {
         return query.getResultList();
     }
 
-    public List<Book> getRecommended() {
-
-        return null;
-    }
-    
     /**
-     * Returns an internationalized string indicating the book's removal status. Used for manager-side
-     * inventory management
+     * Returns an internationalized string indicating the book's removal status.
+     * Used for manager-side inventory management
+     *
      * @param isbn - The ISBN of the book whose status needs to be retrieved
-     * @return The status of the book
-     * By: Giancarlo Biasiucci
+     * @return The status of the book By: Giancarlo Biasiucci
      */
     public String getStatusByIsbn(String isbn) {
         CriteriaBuilder cb = em.getCriteriaBuilder();
@@ -520,9 +527,7 @@ public class BookJpaController implements Serializable {
         try {
             query.getSingleResult();
             return MessageLoader.getString("com.gb1w20.bundles.messages", "notRemoved", null);
-        }
-        catch(NoResultException nre)
-        {
+        } catch (NoResultException nre) {
             return MessageLoader.getString("com.gb1w20.bundles.messages", "removed", null);
         }
     }
@@ -545,15 +550,16 @@ public class BookJpaController implements Serializable {
         }
         results.sort(new BookComparator());
         return results;
-    }    
+    }
+
     /**
-     * Calculates and returns the total sales of a book found based on its ISBN number
+     * Calculates and returns the total sales of a book found based on its ISBN
+     * number
+     *
      * @param isbn - The ISBN of the book to be found
-     * @return The total sales of the book in question
-     * By: Giancarlo Biasiucci
+     * @return The total sales of the book in question By: Giancarlo Biasiucci
      */
-    public double getTotalSalesByIsbn(String isbn)
-    {
+    public double getTotalSalesByIsbn(String isbn) {
         CriteriaBuilder cb = em.getCriteriaBuilder();
         CriteriaQuery cq = cb.createQuery();
         Root<Orders> books = cq.from(Orders.class);
