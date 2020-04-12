@@ -5,17 +5,12 @@
  */
 package com.gb1w20.arquillian.test;
 
-import com.gb1w20.arquillian.test.beans.AdsTestingBean;
-import com.gb1w20.arquillian.test.beans.BookTestingBean;
-import com.gb1w20.arquillian.test.beans.ClientTestingBean;
-import com.gb1w20.book_store_project.backing.BookFormatBackingBean;
-import com.gb1w20.book_store_project.beans.NewsBean;
-import com.gb1w20.book_store_project.entities.Ads;
-import com.gb1w20.book_store_project.entities.Book;
-import com.gb1w20.book_store_project.entities.BookFormat;
-import com.gb1w20.book_store_project.jpa_controllers.AdsJpaController;
-import com.gb1w20.book_store_project.jpa_controllers.BookFormatJpaController;
-import com.gb1w20.book_store_project.jpa_controllers.BookJpaController;
+import com.gb1w20.arquillian.test.beans.AuthorsTestingBean;
+import com.gb1w20.arquillian.test.beans.OrderItemTestingBean;
+import com.gb1w20.book_store_project.entities.Authors;
+import com.gb1w20.book_store_project.entities.OrderItem;
+import com.gb1w20.book_store_project.jpa_controllers.AuthorsJpaController;
+import com.gb1w20.book_store_project.jpa_controllers.OrderItemJpaController;
 import com.gb1w20.book_store_project.jpa_controllers.exceptions.IllegalOrphanException;
 import java.io.BufferedReader;
 import java.io.File;
@@ -40,7 +35,6 @@ import org.jboss.shrinkwrap.api.ShrinkWrap;
 import org.jboss.shrinkwrap.api.asset.EmptyAsset;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.jboss.shrinkwrap.resolver.api.maven.Maven;
-import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 import org.junit.Before;
 import org.junit.Rule;
@@ -51,12 +45,12 @@ import org.slf4j.LoggerFactory;
 
 /**
  *
- * @author giancarlo,shruti pareek
+ * @author shruti pareek
  */
 @RunWith(Arquillian.class)
-public class AdsParameterizedTest {
+public class OrderItemParameterizedTest {
 
-    private final static Logger LOG = LoggerFactory.getLogger(AdsParameterizedTest.class);
+    private final static Logger LOG = LoggerFactory.getLogger(OrderItemParameterizedTest.class);
 
     @Deployment
     public static WebArchive deploy() {
@@ -78,12 +72,11 @@ public class AdsParameterizedTest {
         final WebArchive webArchive;
         webArchive = ShrinkWrap.create(WebArchive.class, "test.war")
                 .setWebXML(new File("src/main/webapp/WEB-INF/web.xml"))
-                
                 .addPackage(IllegalOrphanException.class.getPackage())
-                .addPackage(AdsJpaController.class.getPackage())
+                .addPackage(OrderItemJpaController.class.getPackage())
                 .addPackage(ParameterRule.class.getPackage())
-                .addPackage(AdsTestingBean.class.getPackage())
-                .addPackage(Ads.class.getPackage())
+                .addPackage(OrderItemTestingBean.class.getPackage())
+                .addPackage(OrderItem.class.getPackage())
                 .addAsWebInfResource(EmptyAsset.INSTANCE, "beans.xml")
                 .addAsWebInfResource(new File("src/main/webapp/WEB-INF/payara-resources.xml"), "payara-resources.xml")
                 .addAsResource(new File("src/main/resources/META-INF/persistence.xml"), "META-INF/persistence.xml")
@@ -94,19 +87,18 @@ public class AdsParameterizedTest {
         return webArchive;
     }
     @Inject
-    private AdsJpaController adsControl;
+    private OrderItemJpaController orderItemControl;
 
     @Rule
-    public ParameterRule adsRule = new ParameterRule("adTest",
-            new AdsTestingBean(1, "Not Removed", 2),
-            new AdsTestingBean(2, "Not Removed", 2),
-            new AdsTestingBean(3, "Removed", 2),
-            new AdsTestingBean(4, "Removed", 2),
-            new AdsTestingBean(5, "Removed", 2),
-            new AdsTestingBean(6, "Removed", 2)
+    public ParameterRule orderItemRule = new ParameterRule("orderItemTest",
+            new OrderItemTestingBean(1, "Not Removed"),
+            new OrderItemTestingBean(2, "Not Removed"),
+            new OrderItemTestingBean(3, "Removed"),
+            new OrderItemTestingBean(4, "Not Removed"),
+            new OrderItemTestingBean(5, "Removed")
     );
 
-    private AdsTestingBean adTest;
+    private OrderItemTestingBean orderItemTest;
 
     @Resource(lookup = "java:app/jdbc/bookstore")
     private DataSource ds;
@@ -117,49 +109,20 @@ public class AdsParameterizedTest {
     @Resource
     private UserTransaction utx;
 
-    @Test
-    public void testExpectedStatus() {
-        String removalStatus = adsControl.getStatusByAdId(adsControl.findAds(adTest.adID).getAdID());
-        assertEquals("Expected: " + adTest.expectedStatus + ", actual: " + removalStatus,
-                adTest.expectedStatus, removalStatus);
-    }
-
-    @Test
-    public void testRandomAdIsAlwaysReal() {
-        Ads ad = adsControl.getRandomAd();
-        List<Ads> allAds = adsControl.findAdsEntities();
-        assertTrue("Expected: included, actual: not", allAds.contains(ad));
-    }
-
     /**
      * @author shruti pareek
      */
     @Test
-    public void testGetAdsCount() {
-        LOG.debug("testGetAdsCount");
+    public void testGetStatusByItemId() {
+        LOG.debug("testGetStatusByItemId");
         boolean isSuccess = true;
-        int resultAdCount = adsControl.getAdsCount();
-        if (!(resultAdCount == adTest.expectedCount)) {
+        String resultStatus = orderItemControl.getStatusByItemId(orderItemTest.itemId);
+
+        if (!(resultStatus.equals(orderItemTest.expectedStatus))) {
             isSuccess = false;
         }
-        assertTrue("adTest returned inconsistent results Expected:" + adTest.expectedCount + " Actual:" + resultAdCount, isSuccess);
-    }
 
-    /**
-     * @author shruti pareek
-     */
-    @Test
-    public void testAllEnabledAds() {
-        LOG.debug("testAllEnabledAds");
-        boolean isSuccess = false;
-        List<Ads> resultEnabledAds = adsControl.getAllEnabledAds();
-        for (Ads testAd : resultEnabledAds) {
-            if (!(testAd.getAdID() == adTest.adID)) {
-                isSuccess = true;
-            }
-        }
-
-        assertTrue("adTest returned inconsistent results", isSuccess);
+        assertTrue("orderItemTest returned inconsistent results Expected:" + orderItemTest.expectedStatus + " Actual:" + resultStatus, isSuccess);
     }
 
     /**

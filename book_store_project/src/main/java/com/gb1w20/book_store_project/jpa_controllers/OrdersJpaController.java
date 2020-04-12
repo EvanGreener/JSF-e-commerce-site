@@ -151,17 +151,6 @@ public class OrdersJpaController implements Serializable {
         return query.getSingleResult();
     }
     
-    public List<OrderItem> getOrderItemsByOrderId(int orderId)
-    {
-        CriteriaBuilder cb = em.getCriteriaBuilder();
-        CriteriaQuery cq = cb.createQuery();
-        Root<Orders> order = cq.from(Orders.class);
-        Join orderToItems = order.join("orderItemsCollection", JoinType.LEFT);
-        cq.where(cb.equal(order.get(Orders_.orderID), orderId));
-        cq.select(cq.from(OrderItem.class));
-        TypedQuery<OrderItem> query = em.createQuery(cq);
-        return query.getResultList();
-    }
     
     public int getOrderItemsCountByOrderId(int orderId)
     {

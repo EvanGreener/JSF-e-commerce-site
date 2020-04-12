@@ -93,11 +93,11 @@ public class OrdersParameterizedTest {
 
     @Rule
     public ParameterRule Bookrule = new ParameterRule("orderTest",
-            new OrdersTestingBean(1, "cst.send@gmail.com", 1, new OrderItem(1), 1, "Removed", "9780142000670", "isbn", new Orders(1)),
-            new OrdersTestingBean(2, "cst.receive@gmail.com", 2, new OrderItem(2), 1, "Removed", "9780439244190", "isbn", new Orders(2)),
-            new OrdersTestingBean(3, "dcastaner0@cbslocal.com", 3, new OrderItem(3), 1, "Not Removed", "dcastaner0@cbslocal.com", "email", new Orders(3)),
-            new OrdersTestingBean(4, "jhutcheon1@last.fm", 5, new OrderItem(4), 1, "Removed", "5", "id", new Orders(5)),
-            new OrdersTestingBean(5, "sdoud2@liveinternet.ru", 6, new OrderItem(5), 1, "Not Removed", "6", "id", new Orders(6))
+            new OrdersTestingBean(1, "cst.send@gmail.com", 1, 1, "Removed", "9780142000670", "isbn", new Orders(1)),
+            new OrdersTestingBean(2, "cst.receive@gmail.com", 2,  1, "Removed", "9780439244190", "isbn", new Orders(2)),
+            new OrdersTestingBean(3, "dcastaner0@cbslocal.com", 3,  1, "Not Removed", "dcastaner0@cbslocal.com", "email", new Orders(3)),
+            new OrdersTestingBean(4, "jhutcheon1@last.fm", 5, 1, "Removed", "5", "id", new Orders(5)),
+            new OrdersTestingBean(5, "sdoud2@liveinternet.ru", 6, 1, "Not Removed", "6", "id", new Orders(6))
     );
 
     private OrdersTestingBean orderTest;
@@ -123,17 +123,7 @@ public class OrdersParameterizedTest {
         assertTrue("orderTest returned inconsistent results Expected:" + orderTest.expectedEmail + " Actual:" + resultEmail, isSuccess);
     }
 
-    @Test
-    public void testGetOrderItemsByOrderId() {
-        LOG.debug("testGetOrderItemsByOrderId");
-        boolean isSuccess = true;
-        List<OrderItem> resultOrderItem = orderControl.getOrderItemsByOrderId(orderTest.testOrderId);
-
-        if (!(resultOrderItem.get(0).toString().equals(orderTest.expectedOrderItem.toString()))) {
-            isSuccess = false;
-        }
-        assertTrue("orderTest returned inconsistent results Expected:" + orderTest.expectedOrderItem.toString() + " Actual:" + resultOrderItem.get(0).toString(), isSuccess);
-    }
+ 
 
     @Test
     public void testGetOrderItemsCountByOrderId() {
