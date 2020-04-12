@@ -1,11 +1,5 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.gb1w20.arquillian.test;
 
-import com.gb1w20.arquillian.test.beans.BookSearchTestingBean;
 import com.gb1w20.arquillian.test.beans.OrderSaleTestingBean;
 import com.gb1w20.book_store_project.beans.NewsBean;
 import com.gb1w20.book_store_project.entities.Book;
@@ -44,8 +38,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
- *
- * @author giancarlo
+ * Parameterized testing for sales
+ * @author Giancarlo Biasiucci
+ * @version April 10, 2020
  */
 @RunWith(Arquillian.class)
 public class OrderSaleParameterizedTest {
@@ -112,6 +107,9 @@ public class OrderSaleParameterizedTest {
     @Resource
     private UserTransaction utx;
     
+    /**
+     * Tests if a book has the expected total sales value
+     */
     @Test
     public void testExpectedSaleTotal()
     {
@@ -124,6 +122,7 @@ public class OrderSaleParameterizedTest {
      * Restore the database to a known state before testing. This is important
      * if the test is destructive. This routine is courtesy of Bartosz Majsak
      * who also solved my Arquillian remote server problem
+     * From: KFWebStandardProject - ArquillianUnitTest.java
      */
     @Before
     public void seedDatabase() {
@@ -141,6 +140,7 @@ public class OrderSaleParameterizedTest {
 
     /**
      * The following methods support the seedDatabse method
+     * All of the following are from: KFWebStandardProject - ArquillianUnitTest.java
      */
     private String loadAsString(final String path) {
         try (InputStream inputStream = Thread.currentThread()

@@ -44,8 +44,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
- *
- * @author giancarlo
+ * Parameterized testing for the survey JPA controller methods
+ * @author Giancarlo Biasiucci
+ * @version April 10, 2020
  */
 @RunWith(Arquillian.class)
 public class SurveyParameterizedTest {
@@ -100,9 +101,6 @@ public class SurveyParameterizedTest {
     @Inject
     private SurveyDataJpaController surveyDataControl;
     
-    /**
-     *
-     */
     @Rule
     public ParameterRule surveyRule = new ParameterRule("surveyTest",
             new SurveyTestingBean(1,5,38, "Active Survey",true),
@@ -125,7 +123,7 @@ public class SurveyParameterizedTest {
     private UserTransaction utx;
     
     /**
-     *
+     * Tests if a survey has the correct amount of choices
      */
     @Test
     public void testCorrectChoiceAmount()
@@ -137,7 +135,7 @@ public class SurveyParameterizedTest {
     }
     
     /**
-     *
+     * Tests if a survey has the correct amount of total votes
      */
     @Test
     public void testCorrectUserVotes()
@@ -149,7 +147,7 @@ public class SurveyParameterizedTest {
     }
     
     /**
-     *
+     * Tests if the currently active survey is in the list of surveys in the database
      */
     @Test
     public void testActiveSurveyIsReal()
@@ -159,6 +157,10 @@ public class SurveyParameterizedTest {
         assertTrue("Expected: contains, actual: doesn't contain", surveyList.contains(survey));
     }
     
+    /**
+     * Tests if a survey has the correct removal status - replicates controller method due to
+     * testing problems with internationalization
+     */
     @Test
     public void testExpectedStatus()
     {
@@ -171,6 +173,11 @@ public class SurveyParameterizedTest {
         assertEquals("Expected: " + surveyTest.expectedStatus + ", actual: " + removalString,
                 surveyTest.expectedStatus, removalString);
     }
+    
+    /**
+     * Tests if a survey is active or not, and whether the resulting status is equal
+     * to an expected active status
+     */
     
     @Test
     public void testActiveOrNot()
@@ -189,6 +196,7 @@ public class SurveyParameterizedTest {
      * Restore the database to a known state before testing. This is important
      * if the test is destructive. This routine is courtesy of Bartosz Majsak
      * who also solved my Arquillian remote server problem
+     * From: KFWebStandardProject - ArquillianUnitTest.java
      */
     @Before
     public void seedDatabase() {
@@ -206,6 +214,7 @@ public class SurveyParameterizedTest {
 
     /**
      * The following methods support the seedDatabse method
+     * All of the following are from: KFWebStandardProject - ArquillianUnitTest.java
      */
     private String loadAsString(final String path) {
         try (InputStream inputStream = Thread.currentThread()

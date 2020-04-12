@@ -42,18 +42,15 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
- *
- * @author giancarlo
+ * Parameterized testing for the review JPA controller methods
+ * @author Giancarlo Biasiucci
+ * @version April 10, 2020
  */
 @RunWith(Arquillian.class)
 public class ReviewParameterizedTest {
 
     private final static Logger LOG = LoggerFactory.getLogger(BookParameterizedTest.class);
 
-    /**
-     *
-     * @return
-     */
     @Deployment
     public static WebArchive deploy() {
 
@@ -94,9 +91,6 @@ public class ReviewParameterizedTest {
     @Inject
     private CustomerReviewsJpaController reviewControl;
 
-    /**
-     *
-     */
     @Rule
     public ParameterRule reviewRule = new ParameterRule("reviewTest",
             new ReviewTestingBean("9780141439471",5,3.4,4,1),
@@ -118,7 +112,7 @@ public class ReviewParameterizedTest {
     private UserTransaction utx;
     
     /**
-     *
+     * Tests if a book has the correct amount of reviews
      */
     @Test
     public void testExpectedReviewCount()
@@ -129,7 +123,7 @@ public class ReviewParameterizedTest {
     }
     
     /**
-     *
+     * Tests if a book has the correct average rating
      */
     @Test
     public void testExpectedReviewAverage()
@@ -140,7 +134,7 @@ public class ReviewParameterizedTest {
     }
     
     /**
-     *
+     * Tests if a customer has the correct number of reviews on a book
      */
     @Test
     public void testExpectedCustomerReviewCount()
@@ -154,6 +148,7 @@ public class ReviewParameterizedTest {
      * Restore the database to a known state before testing. This is important
      * if the test is destructive. This routine is courtesy of Bartosz Majsak
      * who also solved my Arquillian remote server problem
+     * From: KFWebStandardProject - ArquillianUnitTest.java
      */
     @Before
     public void seedDatabase() {
@@ -171,6 +166,7 @@ public class ReviewParameterizedTest {
 
     /**
      * The following methods support the seedDatabse method
+     * All of the following are from: KFWebStandardProject - ArquillianUnitTest.java
      */
     private String loadAsString(final String path) {
         try (InputStream inputStream = Thread.currentThread()

@@ -1,8 +1,3 @@
-/*
- * To change this license henewser, choose License Henewsers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.gb1w20.arquillian.test;
 
 import com.gb1w20.arquillian.test.beans.NewsTestingBean;
@@ -48,18 +43,15 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
- *
- * @author giancarlo
+ * Parameterized testing for the news JPA controller methods
+ * @author Giancarlo Biasiucci
+ * @version April 10, 2020
  */
 @RunWith(Arquillian.class)
 public class NewsParameterizedTest {
     
     private final static Logger LOG = LoggerFactory.getLogger(NewsParameterizedTest.class);
 
-    /**
-     *
-     * @return
-     */
     @Deployment
     public static WebArchive deploy() {
 
@@ -100,9 +92,6 @@ public class NewsParameterizedTest {
     @Inject
     private NewsJpaController newsControl;
 
-    /**
-     *
-     */
     @Rule
     public ParameterRule newsRule = new ParameterRule("newsTest",
             new NewsTestingBean(1,"Removed"),
@@ -127,7 +116,7 @@ public class NewsParameterizedTest {
     private UserTransaction utx;
     
     /**
-     *
+     * Tests if a randomly selected news feed is in the list of actual news feeds in the database
      */
     @Test
     public void testRandomNewsIsAlwaysReal()
@@ -138,7 +127,7 @@ public class NewsParameterizedTest {
     }
     
     /**
-     *
+     * Tests if the enabled news feed is in the list of actual news feeds in the database
      */
     @Test
     public void testEnabledNewsIsAlwaysReal()
@@ -148,6 +137,10 @@ public class NewsParameterizedTest {
         assertTrue("Expected: included, actual: not", allNews.contains(news));
     }
     
+    /**
+     * Tests for the expected removal status of a news feed.
+     * Replicates the controller query due to testing problems with i18n
+     */
     @Test
     public void testExpectedStatus()
     {
@@ -165,6 +158,7 @@ public class NewsParameterizedTest {
      * Restore the database to a known state before testing. This is important
      * if the test is destructive. This routine is courtesy of Bartosz Majsak
      * who also solved my Arquillian remote server problem
+     * From: KFWebStandardProject - ArquillianUnitTest.java
      */
     @Before
     public void seedDatabase() {
@@ -182,6 +176,7 @@ public class NewsParameterizedTest {
 
     /**
      * The following methods support the seedDatabse method
+     * All of the following are from: KFWebStandardProject - ArquillianUnitTest.java
      */
     private String loadAsString(final String path) {
         try (InputStream inputStream = Thread.currentThread()
