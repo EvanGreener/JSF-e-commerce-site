@@ -1,12 +1,18 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE html>
+<!--
+    Manager-side ad management page, where a manager can add, edit, or "remove" ads such that
+    they don't display on the front page (or enable them so that they do display)
+
+    Manager-side ad page done by: Giancarlo Biasiucci
+-->
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:f="http://xmlns.jcp.org/jsf/core"
       xmlns:bookstore="http://java.sun.com/jsf/composite/default_components"
       xmlns:a="http://xmlns.jcp.org/jsf/passthrough">
     <h:head>
-        <title>Manager Ads</title>
+        <title>#{msgs.managerAds}</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 
         <link href="https://fonts.googleapis.com/css?family=Montserrat|Roboto&amp;display=swap" rel="stylesheet"/>
@@ -77,23 +83,22 @@
     </h:head>
 
     <h:body>
-
-        <h:form id="editForm">
-            <bookstore:navbar />
+        <bookstore:navbar />
+        <h:form id="editForm">  
 
             <div class="middle">
 
                 <div id="editFormGrowl" class="ui floating positive message" >
                     <!--<i class="close icon"></i>-->
                     <div class="header">
-                        Changes have been saved!
+                        #{msgs.savedChanges}
                     </div>
                 </div>
 
-                <h1 class="ui header">Ad Management</h1>
+                <h1 class="ui header">#{msgs.adManage}</h1>
 
 
-                <h:commandButton value="Add Ad" class="big pink ui button" onclick="setTimeout(function () {
+                <h:commandButton value="#{msgs.createAd}" class="big pink ui button" onclick="setTimeout(function () {
                             $('#addModal').modal('show', hideGrowl())
                         }, 500)">
                     <f:ajax event="click" render="editForm" listener="#{adBacking.onCreate()}"/>
@@ -102,27 +107,27 @@
 
                 <h:dataTable id="adsTable" var="ads" style="margin-bottom: 20px;" class="ui celled table" value="#{adsJpaController.findAdsEntities()}">
                     <h:column>
-                        <f:facet name="header">Ad #</f:facet>
+                        <f:facet name="header">#{msgs.adID}</f:facet>
                             #{ads.adID}
                     </h:column>
                     <h:column>
-                        <f:facet name="header">Ad URL</f:facet>
+                        <f:facet name="header">#{msgs.adURL}</f:facet>
                             #{ads.adUrl}
                     </h:column>
                     <h:column>
-                        <f:facet name="header">Ad Image</f:facet>
+                        <f:facet name="header">#{msgs.adImg}</f:facet>
                             #{ads.imageName}
                     </h:column>
                     <h:column>
-                        <f:facet name="header">Date Created</f:facet>
+                        <f:facet name="header">#{msgs.dateCreated}</f:facet>
                             #{ads.dateCreated}
                     </h:column>
                     <h:column>
-                        <f:facet name="header">Last Modified</f:facet>
+                        <f:facet name="header">#{msgs.lastModified}</f:facet>
                             #{ads.lastModified}
                     </h:column>
                     <h:column>
-                        <f:facet name="header">Status</f:facet>
+                        <f:facet name="header">#{msgs.status}</f:facet>
                             #{adsJpaController.getStatusByAdId(ads.adID)}
                     </h:column>
                     <h:column>
@@ -131,7 +136,7 @@
                         </h:commandLink>
                     </h:column>
                     <h:column>
-                        <h:commandButton type="button" value="Edit Ad" disabled="#{ads.isRemoved}" onclick="setTimeout(function () {
+                        <h:commandButton type="button" value="#{msgs.editAd}" disabled="#{ads.isRemoved}" onclick="setTimeout(function () {
                             $('#editModal').modal('show', hideGrowl())}, 500)" class="big ui primary button edit_btn" >
                              <f:ajax event="click" render="@all" listener="#{editAd.onEdit(ads.adID)}" />
                         </h:commandButton>
@@ -143,13 +148,13 @@
         </h:form>
         <div id="addModal" class="small ui modal">
             <div class="header">
-                <h1>Add Ad</h1>
+                <h1>#{msgs.createAd}</h1>
             </div>
             <div class="content">
                 <h:form id="addForm">
                     <div class="ui form field">
-                        <h:outputLabel for="adUrl" value="Ad URL"/>
-                        <h:inputText id="adUrl" label="Ad URL" value="#{adBacking.ad.adUrl}" required="true" requiredMessage="Please enter ad URL" a:placeholder="Enter ad URL" validator="#{adBacking.validateNotNull}">
+                        <h:outputLabel for="adUrl" value="#{msgs.adURL}"/>
+                        <h:inputText id="adUrl" label="#{msgs.adURL}" value="#{adBacking.ad.adUrl}" required="true" requiredMessage="#{msgs.enterURL}" a:placeholder="#{msgs.enterURL}" validator="#{adBacking.validateNotNull}">
                             <f:ajax event="change" render="adUrlError"/>
                         </h:inputText>
                         <br/>
@@ -157,15 +162,15 @@
                     </div>
                     <br/>
                     <div class="ui form field">
-                        <h:outputLabel for="imageName" value="Image Name"/>
-                        <h:inputText id="imageName" label="Image Name" value="#{adBacking.ad.imageName}" required="true" requiredMessage="Please enter image name" a:placeholder="Enter image name" validator="#{adBacking.validateNotNull}">
+                        <h:outputLabel for="imageName" value="#{msgs.adImg}"/>
+                        <h:inputText id="imageName" label="#{msgs.adImg}" value="#{adBacking.ad.imageName}" required="true" requiredMessage="#{msgs.enterImg}" a:placeholder="#{msgs.enterImg}" validator="#{adBacking.validateNotNull}">
                             <f:ajax event="change" render="imageNameError"/>
                         </h:inputText>
                         <br/>
                         <h:message id="imageNameError" class="error" for="imageName"/>
                     </div>
                     <br/>
-                    <h:commandButton type="button" class="huge black fluid ui button" id="createAd" value="Create Ad" action="#{adBacking.createAd()}">
+                    <h:commandButton type="button" class="huge black fluid ui button" id="createAd" value="#{msgs.createAd}" action="#{adBacking.createAd()}">
                         <f:ajax event="click" execute="adUrl imageName" render="editForm"/>
                     </h:commandButton>
                 </h:form>
@@ -174,13 +179,13 @@
 
         <div id="editModal" class="small ui modal">
             <div class="header">
-                <h1>Edit Ad</h1>
+                <h1>#{msgs.editAd}</h1>
             </div>
             <div class="content">
                 <h:form id="editAdForm">
                     <div class="ui form field">
-                        <h:outputLabel for="newAdUrl" value="Ad URL"/>
-                        <h:inputText id="newAdUrl" label="Ad URL" value="#{editAd.newUrl}" required="true" requiredMessage="Please enter ad URL" a:placeholder="Enter ad URL" validator="#{adBacking.validateNotNull}">
+                        <h:outputLabel for="newAdUrl" value="#{msgs.adURL}"/>
+                        <h:inputText id="newAdUrl" label="#{msgs.adURL}" value="#{editAd.newUrl}" required="true" requiredMessage="#{msgs.enterURL}" a:placeholder="#{msgs.enterURL}" validator="#{adBacking.validateNotNull}">
                             <f:ajax event="change" render="newAdUrlError"/>
                         </h:inputText>
                         <br/>
@@ -188,15 +193,15 @@
                     </div>
                     <br/>
                     <div class="ui form field">
-                        <h:outputLabel for="newAdImageName" value="Image Name"/>
-                        <h:inputText id="newAdImageName" label="Image Name" value="#{editAd.newImage}" required="true" requiredMessage="Please enter image name" a:placeholder="Enter image name" validator="#{adBacking.validateNotNull}">
+                        <h:outputLabel for="newAdImageName" value="#{msgs.adImg}"/>
+                        <h:inputText id="newAdImageName" label="#{msgs.adImg}" value="#{editAd.newImage}" required="true" requiredMessage="#{msgs.enterImg}" a:placeholder="#{msgs.enterImg}" validator="#{adBacking.validateNotNull}">
                             <f:ajax event="change" render="newAdImageNameError"/>
                         </h:inputText>
                         <br/>
                         <h:message id="newAdImageNameError" class="error" for="newAdImageName"/>
                     </div>
                     <br/>
-                    <h:commandButton type="button" class="huge black fluid ui button" id="editAd" value="Edit Ad" action="#{editAd.onSubmitEdit()}">
+                    <h:commandButton type="button" class="huge black fluid ui button" id="editAd" value="#{msgs.editAd}" action="#{editAd.onSubmitEdit()}">
                         <f:ajax event="click" execute="adUrl imageName" render="editForm"/>
                     </h:commandButton>
                 </h:form>

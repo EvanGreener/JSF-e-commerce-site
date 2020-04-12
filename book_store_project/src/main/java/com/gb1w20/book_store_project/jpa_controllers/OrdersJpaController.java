@@ -7,6 +7,7 @@ import com.gb1w20.book_store_project.entities.OrderItem_;
 import com.gb1w20.book_store_project.entities.Orders;
 import com.gb1w20.book_store_project.entities.Orders_;
 import com.gb1w20.book_store_project.jpa_controllers.exceptions.NonexistentEntityException;
+import com.gb1w20.book_store_project.util.MessageLoader;
 import java.io.Serializable;
 import java.util.List;
 import javax.annotation.Resource;
@@ -178,12 +179,11 @@ public class OrdersJpaController implements Serializable {
         return ((Long) q.getSingleResult()).intValue();
     }
 
-    //test 
-
     /**
-     *
-     * @param clientId
-     * @return
+     * Gets the client email based on their ID
+     * @param clientId - The ID of the client
+     * @return The email of the client
+     * By: Giancarlo Biasiucci
      */
     public String getClientEmailById(int clientId) {
         CriteriaBuilder cb = em.getCriteriaBuilder();
@@ -196,9 +196,10 @@ public class OrdersJpaController implements Serializable {
     }
 
     /**
-     *
-     * @param orderId
-     * @return
+     * Gets the total amount of order items in a given order (based on order ID)
+     * @param orderId - ID of the order
+     * @return - The number of items in the given order
+     * By: Giancarlo Biasiucci
      */
     public int getOrderItemsCountByOrderId(int orderId) {
         CriteriaBuilder cb = em.getCriteriaBuilder();
@@ -211,9 +212,10 @@ public class OrdersJpaController implements Serializable {
     }
 
     /**
-     *
-     * @param orderId
-     * @return
+     * Returns a String indicating the removal status of the order
+     * @param orderId - ID of the order
+     * @return A string indicating the removal status of the order
+     * By: Giancarlo Biasiucci
      */
     public String getStatusByOrderId(int orderId) {
         CriteriaBuilder cb = em.getCriteriaBuilder();
@@ -224,17 +226,20 @@ public class OrdersJpaController implements Serializable {
         TypedQuery<Boolean> query = em.createQuery(cq);
         try {
             query.getSingleResult();
-            return "Not Removed";
-        } catch (NoResultException nre) {
-            return "Removed";
+            return MessageLoader.getString("com.gb1w20.bundles.messages", "notRemoved", null);
+        }
+        catch(NoResultException nre)
+        {
+            return MessageLoader.getString("com.gb1w20.bundles.messages", "removed", null);
         }
     }
 
     /**
-     *
-     * @param query
-     * @param searchBy
-     * @return
+     * Searches orders based on one of several criteria
+     * @param query - Search query (keyword)
+     * @param searchBy - Criteria to search by
+     * @return - All orders that match keyword and criteria
+     * @author Giancarlo Biasiucci
      */
     public List<Orders> searchOrders(String query, String searchBy) {
         String expression = "%" + query + "%";

@@ -166,8 +166,9 @@ public class PublisherJpaController implements Serializable {
     }
     
     /**
-     *
-     * @return
+     * Gets the names of all the publishers
+     * @return The names of all the publishers
+     * @author Giancarlo Biasiucci
      */
     public List<String> getPublisherNames() {
         CriteriaBuilder cb = em.getCriteriaBuilder();
@@ -179,9 +180,10 @@ public class PublisherJpaController implements Serializable {
     }
     
     /**
-     *
-     * @param name
-     * @return
+     * Gets a publisher ID based on their name
+     * @param name - The name of the publisher
+     * @return The publisher ID
+     * @author Giancarlo Biasiucci
      */
     public int getPublisherIDByName(String name) {
         CriteriaBuilder cb = em.getCriteriaBuilder();
@@ -194,9 +196,10 @@ public class PublisherJpaController implements Serializable {
     }
     
     /**
-     *
-     * @param name
-     * @return
+     * Gets the publisher object based on their name
+     * @param name - The name of the publisher
+     * @return The publisher object
+     * @author Giancarlo Biasiucci
      */
     public Publisher getPublisherByName(String name) {
         CriteriaBuilder cb = em.getCriteriaBuilder();

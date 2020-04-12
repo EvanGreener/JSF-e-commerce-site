@@ -149,7 +149,12 @@ public class OrdersParameterizedTest {
     public void testGetStatusByOrderId() {
         LOG.debug("testGetStatusByOrderId");
         boolean isSuccess = true;
-        String resultStatus = orderControl.getStatusByOrderId(orderTest.testOrderId);
+        String resultStatus = "Not Removed";
+        
+        if (orderControl.findOrders(orderTest.testOrderId).getIsRemoved())
+        {
+            resultStatus = "Removed";
+        }
 
         if (!(resultStatus.equals(orderTest.expectedStatus))) {
             isSuccess = false;

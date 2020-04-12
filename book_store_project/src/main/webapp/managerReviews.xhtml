@@ -23,7 +23,7 @@ Reviews that have not be seen by the manager yet will have a status of pending a
         <h:outputStylesheet library="css" name="default.css" />
         <h:outputStylesheet library="temp" name="homepage.css" />
 
-        <title>Manage Reviews</title>
+        <title>#{msgs.manageReviews}</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     </h:head>
     <h:body>
@@ -31,49 +31,45 @@ Reviews that have not be seen by the manager yet will have a status of pending a
         <!--Table of customer reviews-->
         <h:form id="reviewTable">
             <div class="middle">
-                <h1 class="ui header">Review Management</h1>
+                <h1 class="ui header">#{msgs.reviewManage}</h1>
 
                 <h:dataTable  var="reviews" style="margin-bottom: 20px;"  class="ui celled table" value="#{customerReviewsJpaController.findCustomerReviewsEntities()}" >
                     <h:column>
-                        <f:facet name="header">Review ID</f:facet>
+                        <f:facet name="header">#{msgs.reviewID}</f:facet>
                             #{reviews.reviewID}
                     </h:column>
                     <h:column>
-                        <f:facet name="header">Client Email</f:facet>
+                        <f:facet name="header">#{msgs.clientEmail}</f:facet>
                             #{clientsJpaController.findClients(reviews.clientID).email}
                     </h:column>
                     <h:column>
-                        <f:facet name="header">Book</f:facet>
+                        <f:facet name="header">#{msgs.book}</f:facet>
                         <ui:repeat var="book" value="#{bookJpaController.findBookAll(reviews.isbn)}">
                             #{book.title}
                         </ui:repeat>
                     </h:column>
                     <h:column>
-                        <f:facet name="header">Rating</f:facet>
+                        <f:facet name="header">#{msgs.rating}</f:facet>
                         #{reviews.rating}/5
                     </h:column>
                     <h:column>
-                        <f:facet name="header">Review Title</f:facet>
+                        <f:facet name="header">#{msgs.reviewTitle}</f:facet>
                             #{reviews.reviewTitle}
                     </h:column>
                     <h:column>
-                        <f:facet name="header">Review Body</f:facet>
+                        <f:facet name="header">#{msgs.reviewBody}</f:facet>
                             #{reviews.reviewBody}
                     </h:column>
                     <h:column>
-                        <f:facet name="header">Last Modified</f:facet>
+                        <f:facet name="header">#{msgs.lastModified}</f:facet>
                             #{reviews.lastModified}
                     </h:column>
                     <h:column>
-                        <f:facet name="header">Date Created</f:facet>
+                        <f:facet name="header">#{msgs.dateCreated}</f:facet>
                             #{reviews.dateEntered}
                     </h:column>
                     <h:column>
-                        <f:facet name="header">Date Removed</f:facet>
-                            #{reviews.dateRemoved}
-                    </h:column>
-                    <h:column>
-                        <f:facet name="header">Status</f:facet>
+                        <f:facet name="header">#{msgs.status}</f:facet>
                         <h:commandButton type="button" action="#{reviewManagmentBean.managePending(reviewManagmentBean.getIsRemoved(reviews.reviewID), reviews.reviewID , reviewManagmentBean.getPending(reviews.reviewID))}" value="#{reviewManagmentBean.getPendingStatus(reviewManagmentBean.getPending(reviews.reviewID))}" class="big ui primary button edit_btn">
                             <f:ajax execute="@form" render="reviewTable" />
                         </h:commandButton>

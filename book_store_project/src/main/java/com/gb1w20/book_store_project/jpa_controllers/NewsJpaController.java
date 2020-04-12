@@ -3,6 +3,7 @@ package com.gb1w20.book_store_project.jpa_controllers;
 import com.gb1w20.book_store_project.entities.News;
 import com.gb1w20.book_store_project.entities.News_;
 import com.gb1w20.book_store_project.jpa_controllers.exceptions.NonexistentEntityException;
+import com.gb1w20.book_store_project.util.MessageLoader;
 import java.io.Serializable;
 import java.util.List;
 import java.util.Random;
@@ -23,7 +24,7 @@ import javax.transaction.UserTransaction;
 
 /**
  * Queries that facilitate accessing certain news
- * @author Saad,Shruti
+ * @author Saad,Shruti,Giancarlo Biasiucci
  */
 @Named
 @RequestScoped
@@ -185,7 +186,8 @@ public class NewsJpaController implements Serializable {
     }
 
     /**
-     *
+     * Returns the removal status of a news feed
+     * @author Giancarlo Biasiucci
      * @param newsID
      * @return
      */
@@ -198,17 +200,24 @@ public class NewsJpaController implements Serializable {
         TypedQuery<Boolean> query = em.createQuery(cq);
         try {
             query.getSingleResult();
-            Object[] returnArr = {false, "Not Removed", "Enabled"};
+            Object[] returnArr = {false,
+                MessageLoader.getString("com.gb1w20.bundles.messages", "notRemoved", null), 
+                MessageLoader.getString("com.gb1w20.bundles.messages", "enabled", null)};
             return returnArr;
-        } catch (NoResultException nre) {
-            Object[] returnArr = {true, "Removed", "Enable News"};
+        }
+        catch(NoResultException nre)
+        {
+            Object[] returnArr = {true, 
+                MessageLoader.getString("com.gb1w20.bundles.messages", "removed", null),
+                MessageLoader.getString("com.gb1w20.bundles.messages", "enableNews", null)};
             return returnArr;
         }
     }
 
     /**
-     *
-     * @return
+     * Returns the news feed that is enabled (always 1)
+     * @author Giancarlo Biasiucci
+     * @return The news feed that is enabled
      */
     public News getEnabledNews() {
         CriteriaBuilder cb = em.getCriteriaBuilder();

@@ -4,6 +4,7 @@ import com.gb1w20.book_store_project.entities.SurveyData;
 import com.gb1w20.book_store_project.entities.Surveys;
 import com.gb1w20.book_store_project.jpa_controllers.SurveyDataJpaController;
 import com.gb1w20.book_store_project.jpa_controllers.SurveysJpaController;
+import com.gb1w20.book_store_project.util.MessageLoader;
 import java.io.Serializable;
 import java.util.Arrays;
 import java.util.Date;
@@ -175,9 +176,9 @@ public class SurveyBackingBean implements Serializable {
 
     public String getRemovalStatus(boolean isRemoved) throws Exception {
         if (isRemoved) {
-            return "Disabled Survey";
+            return MessageLoader.getString("com.gb1w20.bundles.messages", "disabled", null);
         } else {
-            return "Active Survey";
+            return MessageLoader.getString("com.gb1w20.bundles.messages", "active", null);
         }
     }
     

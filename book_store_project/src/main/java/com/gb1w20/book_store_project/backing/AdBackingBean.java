@@ -2,6 +2,7 @@ package com.gb1w20.book_store_project.backing;
 
 import com.gb1w20.book_store_project.entities.Ads;
 import com.gb1w20.book_store_project.jpa_controllers.AdsJpaController;
+import com.gb1w20.book_store_project.util.MessageLoader;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
@@ -33,7 +34,7 @@ public class AdBackingBean implements Serializable {
 
     /**
      * If the ad managed by the bean is null, it will be created from scratch to avoid a NullPointerException.
-     *
+     * 
      * @return
      */
     public Ads getAd() {
@@ -45,7 +46,7 @@ public class AdBackingBean implements Serializable {
 
     /**
      * Creates the ad based on the data entered in the corresponding modal and saves it to the database.
-     *
+     * 
      * @return
      * @throws Exception
      */
@@ -64,9 +65,10 @@ public class AdBackingBean implements Serializable {
     
     /**
      * Marks an ad as removed (changes removal status to true)
-     * @param order
+     * @param ad
      * @return
      * @throws Exception 
+     * By: Giancarlo Biasiucci
      */
     public String removeAd(Ads ad) throws Exception {
         LOG.debug("Reached the remove method");
@@ -80,10 +82,11 @@ public class AdBackingBean implements Serializable {
     }
     
     /**
-     * Marks an order as not removed (changes removal status to false)
-     * @param order
+     * Marks an ad as not removed (changes removal status to false)
+     * @param ad
      * @return
      * @throws Exception 
+     * By: Giancarlo Biasiucci
      */
     public String addAd(Ads ad) throws Exception {
         LOG.debug("Reached the add method");
@@ -102,6 +105,7 @@ public class AdBackingBean implements Serializable {
      * guarantees that 1 or 2 ads are enabled at all times.
      * @param ad
      * @return 
+     * By: Giancarlo Biasiucci
      */
     public boolean decideDisabled(Ads ad)
     {   
@@ -132,6 +136,7 @@ public class AdBackingBean implements Serializable {
      * @param ad
      * @return
      * @throws Exception 
+     * By: Giancarlo Biasiucci
      */
     public String addOrRemoveAd(Ads ad) throws Exception
     {
@@ -153,15 +158,16 @@ public class AdBackingBean implements Serializable {
      * @param isRemoved
      * @return
      * @throws Exception 
+     * By: Giancarlo Biasiucci
      */
     public String getRemovalStatus(boolean isRemoved) throws Exception {
         if (isRemoved)
         {
-            return "Display Ad";
+            return MessageLoader.getString("com.gb1w20.bundles.messages", "displayAd", null);
         }
         else
         {
-            return "Remove Ad";
+            return MessageLoader.getString("com.gb1w20.bundles.messages", "removeAd", null);
         }
     }
     
@@ -175,8 +181,8 @@ public class AdBackingBean implements Serializable {
         String input = (String)value;
         if (input.isBlank() || input.isEmpty() || input == null)
         {
-            String message = context.getApplication().evaluateExpressionGet(context, "Value must not be left blank", String.class);
-            FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR, message, message);
+            FacesMessage msg = MessageLoader.getMessage("com.gb1w20.bundles.messages", "valueNotNull", null);
+            msg.setSeverity(FacesMessage.SEVERITY_ERROR);
             throw new ValidatorException(msg);
         }
     }

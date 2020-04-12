@@ -1,12 +1,8 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.gb1w20.book_store_project.beans;
 
 import com.gb1w20.book_store_project.entities.Book;
 import com.gb1w20.book_store_project.jpa_controllers.BookJpaController;
+import com.gb1w20.book_store_project.util.MessageLoader;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
@@ -21,8 +17,9 @@ import javax.inject.Inject;
 import javax.inject.Named;
 
 /**
- *
- * @author giancarlo
+ * Bean for managing book sales
+ * @author Giancarlo Biasiucci
+ * @version April 10, 2020
  */
 @Named("salesBean")
 @SessionScoped
@@ -54,6 +51,13 @@ public class SaleManagementBean implements Serializable {
         return booksDisplayed;
     }
     
+    /**
+     * As the list changes, the page is refreshed to reflect any changes that may have been made
+     * @param newList - new list of books
+     * @return
+     * @throws Exception 
+     * By: Giancarlo Biasiucci
+     */
     public String setBooksDisplayed(List<Book> newList) throws Exception
     {
         booksDisplayed = newList;
@@ -71,12 +75,23 @@ public class SaleManagementBean implements Serializable {
         newSalePrice = newPrice;
     }
     
+    /**
+     * Changes the current book whose sale price is to be edited as it is selected
+     * @param isbn - isbn of newly current book
+     * By: Giancarlo Biasiucci
+     */
     public void onEdit(String isbn)
     {
         currentBook = bookControl.findAnySingleBook(isbn);
         newSalePrice = currentBook.getSalePrice();
     }
     
+    /**
+     * Edits the sale price of the current book with what has been entered
+     * @return
+     * @throws Exception 
+     * By: Giancarlo Biasiucci
+     */
     public String onSubmitEdit() throws Exception
     {
         currentBook.setSalePrice(newSalePrice);
@@ -92,14 +107,15 @@ public class SaleManagementBean implements Serializable {
      * @param context
      * @param component
      * @param value 
+     * By: Giancarlo Biasiucci
      */
     public void validatePrice(FacesContext context, UIComponent component, Object value)
     {
         String input = value + "";
         if (input.isBlank() || input.isEmpty() || input == null)
         {
-            String message = context.getApplication().evaluateExpressionGet(context, "Value must not be left blank", String.class);
-            FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR, message, message);
+            FacesMessage msg = MessageLoader.getMessage("com.gb1w20.bundles.messages", "valueNotNull", null);
+            msg.setSeverity(FacesMessage.SEVERITY_ERROR);
             throw new ValidatorException(msg);
         }
         try
@@ -108,14 +124,20 @@ public class SaleManagementBean implements Serializable {
         }
         catch(NumberFormatException nfe)
         {
-            String message = context.getApplication().evaluateExpressionGet(context, "Invalid price: contains non-numeric characters", String.class);
-            FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR, message, message);
+            FacesMessage msg = MessageLoader.getMessage("com.gb1w20.bundles.messages", "badPrice", null);
+            msg.setSeverity(FacesMessage.SEVERITY_ERROR);
             throw new ValidatorException(msg);
         }
     }
     
+    /**
+     * Returns a String indicating whether or not the book is on sale
+     * @param book - The book whose sale status is to be determined
+     * @return - the String indicating the sale status
+     * By: Giancarlo Biasiucci
+     */
     public String determineOnSale(Book book)
     {
-        return book.getSalePrice().doubleValue() < book.getListPrice().doubleValue() ? "On Sale" : "Not on Sale";
+        return book.getSalePrice().doubleValue() < book.getListPrice().doubleValue() ? MessageLoader.getString("com.gb1w20.bundles.messages", "onSale", null) : MessageLoader.getString("com.gb1w20.bundles.messages", "noSale", null);
     }
 }

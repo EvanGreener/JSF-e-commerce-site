@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
-     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <!--
 A Composite component created for book cards to avoid code duplication in all web pages
 
@@ -14,26 +14,24 @@ A Composite component created for book cards to avoid code duplication in all we
 
      <composite:interface></composite:interface>
 
-     <composite:implementation>
-          <!--book cover -->
-          <div class="ui fluid card darker homepageCard">
-               <div class="homepageImg">
-                    <h:graphicImage class="img" height="250" width="200" library="images" name="#{books.isbn}.jpg"/>
-                    <div class="cardHoverBtn"> #{msgs.viewCover}</div>
-               </div>
-               <div class="content">
+    <composite:implementation>
+        <!--book cover -->
+        <div class="ui fluid card darker homepageCard">
+            <div class="homepageImg">
+                <h:graphicImage class="img" height="250" width="200" library="images" name="#{books.isbn}.jpg"/>
+                <div class="cardHoverBtn">#{msgs.viewCover}</div>
+            </div>
+            <div class="content">
 
-                    <!--link to its own book page -->
-                    <!--link contains title and author -->
-                    <h:link outcome="book" value = "">
-                         <f:param  name="isbn" value="#{books.isbn}" />
-                         <div class="header textColor">
-                              #{books.title}</div>
-                         <div class="meta">
-                              <ui:repeat value="#{books.authorsCollection}" var="author">
-                                   #{author.name}
-                              </ui:repeat>
-                         </div>
+                <!--link to its own book page -->
+                <!--link contains title and author -->
+                <h:link class="bookItemLink" outcome="book" value = "">
+                    <f:param  name="isbn" value="#{books.isbn}" />
+                    <div class="header textColor ">
+                        #{books.title}</div>
+                    <div class="meta">
+                        #{authorsJpaController.findAuthors(bookAuthorsJpaController.findBookAuthorsByIsbn(books.isbn)[0].authorID).name}
+                    </div>
 
                          <!--book info -->
                          <div class="description">
@@ -62,12 +60,12 @@ A Composite component created for book cards to avoid code duplication in all we
                     </h:link>
                </div>
 
-               <!--Button to add to shopping cart-->
-               <div class="ui two bottom attached buttons ">
-                    <h:commandButton action="#{cbb.addBookToCart(books)}"  value = "+ #{msgs.addToCart}" class="ui button">
-                         <f:ajax event="click" ></f:ajax>
-                    </h:commandButton>
-               </div>
+            <!--Button to add to shopping cart-->
+            <div class="ui two bottom attached buttons ">
+                <h:commandButton action="#{cbb.addBookToCart(books)}"  value = "#{msgs.addToCart}" class="ui button">
+                    <f:ajax event="click" ></f:ajax>
+                </h:commandButton>
+            </div>
 
           </div>
      </composite:implementation>

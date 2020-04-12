@@ -116,13 +116,18 @@ public class OrderItemParameterizedTest {
     public void testGetStatusByItemId() {
         LOG.debug("testGetStatusByItemId");
         boolean isSuccess = true;
-        String resultStatus = orderItemControl.getStatusByItemId(orderItemTest.itemId);
+        String removalString = "Not Removed";
+        boolean removalStatus = orderItemControl.findOrderItem(orderItemTest.itemId).getIsRemoved();
+        if (removalStatus)
+        {
+            removalString = "Removed";
+        }
 
-        if (!(resultStatus.equals(orderItemTest.expectedStatus))) {
+        if (!(removalString.equals(orderItemTest.expectedStatus))) {
             isSuccess = false;
         }
 
-        assertTrue("orderItemTest returned inconsistent results Expected:" + orderItemTest.expectedStatus + " Actual:" + resultStatus, isSuccess);
+        assertTrue("orderItemTest returned inconsistent results Expected:" + orderItemTest.expectedStatus + " Actual:" + removalString, isSuccess);
     }
 
     /**

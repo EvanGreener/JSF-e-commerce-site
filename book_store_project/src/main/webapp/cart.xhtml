@@ -1,8 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
-To change this license header, choose License Headers in Project Properties.
-To change this template file, choose Tools | Templates
-and open the template in the editor.
+    Cart page containing all the books the user has opted to purchase (or none if 
+    none were selected). If the user is not logged in when attempting to finalize,
+    they will be prompted with login before finalizing for real. When it comes time to
+    finalize, the user must enter several details including a credit card number,
+    expiry month and year, and a cardholder name. Once the purchase is finalized,
+    the user will be redirected to another page where they can view and print a
+    receipt. The user can also download the books they just purchased on the "My Books"
+    page.
+    
+    By: Saad Khan, Giancarlo Biasiucci
 -->
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
@@ -12,7 +19,7 @@ and open the template in the editor.
       xmlns:bookstore="http://java.sun.com/jsf/composite/default_components"
       xmlns:a="http://xmlns.jcp.org/jsf/passthrough">
     <h:head>
-        <title>Cart</title>
+        <title>#{msgs.cartNav}</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 
         <link href="https://fonts.googleapis.com/css?family=Montserrat|Roboto&amp;display=swap" rel="stylesheet"/>
@@ -40,11 +47,11 @@ and open the template in the editor.
                     <div class="four wide column">
                         <div class="ui card" style="margin-top: 30%">
                             <div class="content">
-                                <div class="header">Order Summary</div>
+                                <div class="header">#{msgs.orderSummary}</div>
                             </div>
 
                             <div class="content">
-                                <h4 class="ui sub header">Items</h4>
+                                <h4 class="ui sub header">#{msgs.items}</h4>
                                 <div class="aligned divided list">
                                     <div style="height:270px; overflow-y: auto;">
                                         <ui:repeat value="#{cbb.getCartItems()}" var="book">
@@ -61,23 +68,23 @@ and open the template in the editor.
                                     <hr/>
                                     <ui:fragment rendered="#{UserLoginBean.getIfSignedIn()}">
                                         <div>
-                                            <strong>Sub-Total</strong>
+                                            <strong>#{msgs.subTotal}</strong>
                                             <div class="right floated content">
                                                 <strong>$ #{cbb.getCartTotal()}</strong>
                                             </div>
                                             <div style="display:block ruby;">
-                                                <div style="float:left">GST (#{taxBacking.getTaxByProvince().getGst()})</div>
+                                                <div style="float:left">#{msgs.GST} (#{taxBacking.getTaxByProvince().getGst()})</div>
                                                 <div style="float:right">$ #{taxBacking.getTotalwithGST(cbb.getCartTotal())}</div>
                                             </div>
                                             <div style="display:block ruby;">
-                                                <div style="float:left">PST (#{taxBacking.getTaxByProvince().getPst()})</div>
+                                                <div style="float:left">#{msgs.PST} (#{taxBacking.getTaxByProvince().getPst()})</div>
                                                 <div style="float:right">$ #{taxBacking.getTotalwithPST(cbb.getCartTotal())}</div>
                                             </div>
                                             <div style="display:block ruby;">
-                                                <div style="float:left">HST (#{taxBacking.getTaxByProvince().getHst()})</div>
+                                                <div style="float:left">#{msgs.HST} (#{taxBacking.getTaxByProvince().getHst()})</div>
                                                 <div style="float:right">$ #{taxBacking.getTotalwithHST(cbb.getCartTotal())}</div>
                                             </div>
-                                            <strong>Total</strong>
+                                            <strong>#{msgs.total}</strong>
                                             <div class="right floated content">
                                                 <strong>$ #{taxBacking.getTotalWithTaxByProvince(cbb.getCartTotal())}</strong>
                                             </div>
@@ -85,7 +92,7 @@ and open the template in the editor.
                                     </ui:fragment>
 
                                     <ui:fragment rendered="#{!UserLoginBean.getIfSignedIn()}">
-                                        <strong>Sub-Total</strong>
+                                        <strong>#{msgs.subTotal}</strong>
                                         <div class="right floated content">
                                             <strong>$ #{cbb.getCartTotal()}</strong>
                                         </div>
@@ -93,7 +100,7 @@ and open the template in the editor.
                                 </div>
                             </div>
                             <div class="extra content">
-                                <h:commandButton disabled="#{cbb.isCartEmpty()}" value="Finalize" class="ui button" onclick="showCorrectModal(#{UserLoginBean.getIfSignedIn()})">
+                                <h:commandButton disabled="#{cbb.isCartEmpty()}" value="#{msgs.finalize}" class="ui button" onclick="showCorrectModal(#{UserLoginBean.getIfSignedIn()})">
                                     <f:ajax event="click" render="editForm" listener="#{cbb.checkSignedIn(UserLoginBean.getIfSignedIn())}"/>
                                 </h:commandButton>
                             </div>
@@ -104,15 +111,18 @@ and open the template in the editor.
             <!--composite component that comes from the footer.xhtml file to avoid coding the website footer in all web pages-->
             <bookstore:footer/>
         </h:form>
+        <!--
+            Login modal done by: Giancarlo Biasiucci
+        -->
         <div id="loginModal" class="small ui modal">
             <div class="header">
-                <h1>Login</h1>
+                <h1>#{msgs.signIn}</h1>
             </div>
             <div class="content">
                 <h:form id="addForm" class="ui form">
                     <div class="field">
-                        <h:outputLabel for="email" value="Email"/>
-                        <h:inputText id="email" label="Email" value="#{clientBacking.loginEmail}" required="true" requiredMessage="Please enter email" a:placeholder="Enter email" validator="#{clientBacking.validateEmailExists}">
+                        <h:outputLabel for="email" value="#{msgs.email}"/>
+                        <h:inputText id="email" label="#{msgs.email}" value="#{clientBacking.loginEmail}" required="true" requiredMessage="#{msgs.emailMsg}" a:placeholder="#{msgs.emailMsg}" validator="#{clientBacking.validateEmailExists}">
                             <f:ajax event="change" render="emailError"/>
                         </h:inputText>
                         <br/>
@@ -120,41 +130,48 @@ and open the template in the editor.
                     </div>
                     <br/>
                     <div class="field">
-                        <h:outputLabel for="password" value="Password"/>
-                        <h:inputSecret id="password" label="Password" value="#{clientBacking.loginPassword}" required="true" requiredMessage="Please enter password" a:placeholder="Enter password" validator="#{clientBacking.validateCorrectPassword}"/>
+                        <h:outputLabel for="password" value="#{msgs.password}"/>
+                        <h:inputSecret id="password" label="#{msgs.password}" value="#{clientBacking.loginPassword}" required="true" requiredMessage="#{msgs.passwordMsg}" a:placeholder="#{msgs.passwordMsg}" validator="#{clientBacking.validateCorrectPassword}"/>
                         <br/>
                         <h:message class="error" for="password"/>
                     </div>
                     <div class="ui checkbox">
                         <input type="checkbox" name="remember" />
-                        <label>Remember Me</label>
+                        <label>#{msgs.rememberMe}</label>
                     </div>
-                    <h:commandButton class="huge black fluid ui button" id="loginBtn" value="Login" action="#{clientBacking.loginForCart()}" />
+                    <h:commandButton class="huge black fluid ui button" id="loginBtn" value="#{msgs.signIn}" action="#{clientBacking.loginForCart()}" />
                     <br/>
-                    <a href="signUp.xhtml" class="signUpLink">Register</a>
+                    <a href="signUp.xhtml" class="signUpLink">#{msgs.register}</a>
                 </h:form>
             </div>
         </div>
 
+        <!--
+            Finalization modal done by: Saad Khan, Giancarlo Biasiucci.
+        
+            Giancarlo Biasiucci: Card details
+        
+            Saad Khan: Address information
+        -->
         <div id="finalize" class="small ui modal">
             <div class="header">
-                <h1>Finalize Purchase</h1>
+                <h1>#{msgs.finalizePurchase}</h1>
                 <br/>
-                <p style="text-align: center;">Total order cost: $ #{taxBacking.getTotalWithTaxByProvince(cbb.getCartTotal())}</p>
+                <p style="text-align: center;">#{msgs.totalOrderPrice}: $ #{taxBacking.getTotalWithTaxByProvince(cbb.getCartTotal())}</p>
             </div>
             <div class="long-content">
                 <h:form id="finalizeForm" class="ui form">
                     <div class="field">
-                        <h:outputLabel for="cardType" value="Card Type"/>
-                        <h:selectOneMenu id="cardType" label="Card Type" required="true" requiredMessage="Please enter card type" a:placeholder="Enter card type">
-                            <f:selectItem itemValue="MasterCard" itemLabel="MasterCard" />
-                            <f:selectItem itemValue="Visa" itemLabel="Visa" />
+                        <h:outputLabel for="cardType" value="#{msgs.cardType}"/>
+                        <h:selectOneMenu id="cardType" label="#{msgs.cardType}" required="true" requiredMessage="#{msgs.cardTypeMsg}" a:placeholder="#{msgs.cardTypeMsg}">
+                            <f:selectItem itemValue="MasterCard" itemLabel="#{msgs.mastercard}" />
+                            <f:selectItem itemValue="Visa" itemLabel="#{msgs.visa}" />
                         </h:selectOneMenu>
                         <h:message id="cardTypeError" class="error" for="cardType"/>
                     </div>
                     <div class="field">
-                        <h:outputLabel for="cardNumber" value="Card Number"/>
-                        <h:inputText id="cardNumber" label="Card Number" required="true" requiredMessage="Please enter card number" a:placeholder="Enter card number" validator="#{cbb.validateCardNumber}">
+                        <h:outputLabel for="cardNumber" value="#{msgs.cardNumber}"/>
+                        <h:inputText id="cardNumber" label="#{msgs.cardNumber}" required="true" requiredMessage="#{msgs.cardNumberMsg}" a:placeholder="#{msgs.cardNumberMsg}" validator="#{cbb.validateCardNumber}">
                             <f:ajax event="change" render="cardNumberError"/>
                         </h:inputText>
                         <br/>
@@ -162,8 +179,8 @@ and open the template in the editor.
                     </div>
                     <div class="two fields">
                         <div class="field">
-                            <h:outputLabel for="expiryMonth" value="Expiry Month"/>
-                            <h:inputText id="expiryMonth" label="Expiry Month" required="true" requiredMessage="Please enter expiry month" a:placeholder="Enter expiry month" validator="#{cbb.validateExpiryMonth}">
+                            <h:outputLabel for="expiryMonth" value="#{msgs.expiryMonth}"/>
+                            <h:inputText id="expiryMonth" label="#{msgs.expiryMonth}" required="true" requiredMessage="#{msgs.expiryMonthMsg}" a:placeholder="#{msgs.expiryMonthMsg}" validator="#{cbb.validateExpiryMonth}">
                                 <f:ajax event="change" render="expiryMonthError"/>
                             </h:inputText>
                             <br/>
@@ -171,8 +188,8 @@ and open the template in the editor.
                         </div>
                         <br/>
                         <div class="field">
-                            <h:outputLabel for="expiryYear" value="Expiry Year"/>
-                            <h:inputText id="expiryYear" label="Expiry Year" required="true" requiredMessage="Please enter expiry year" a:placeholder="Enter expiry year" validator="#{cbb.validateExpiryYear}">
+                            <h:outputLabel for="expiryYear" value="#{msgs.expiryYear}"/>
+                            <h:inputText id="expiryYear" label="#{msgs.expiryYear}" required="true" requiredMessage="#{msgs.expiryYearMsg}" a:placeholder="#{msgs.expiryYearMsg}" validator="#{cbb.validateExpiryYear}">
                                 <f:ajax event="change" render="expiryYearError"/>
                             </h:inputText>
                             <br/>
@@ -180,28 +197,28 @@ and open the template in the editor.
                         </div>
                     </div>
                     <div class="field">
-                        <h:outputLabel for="cardholder" value="Cardholder Name"/>
-                        <h:inputText id="cardholder" label="Cardholder Name" required="true" requiredMessage="Please enter cardholder name" a:placeholder="Enter cardholder name" validator="#{cbb.validateNotNull}">
+                        <h:outputLabel for="cardholder" value="#{msgs.holderName}"/>
+                        <h:inputText id="cardholder" label="#{msgs.holderName}" required="true" requiredMessage="#{msgs.holderNameMsg}" a:placeholder="#{msgs.holderNameMsg}" validator="#{cbb.validateNotNull}">
                             <f:ajax event="change" render="cardholderError"/>
                         </h:inputText>
                         <br/>
                         <h:message id="cardholderError" class="error" for="cardholder"/>
                     </div>
                     <br/>
-                    <strong>Shipping Address</strong>
-                    <p>Your Billing Address must be the same as your shipping address</p>
+                    <strong>#{msgs.shipAddress}</strong>
+                    <p>#{msgs.shipInfo}</p>
                     <hl/>
                     <div class="field">
-                        <h:outputLabel for="address1" value="Address 1"/>
-                        <h:inputText id="address1" label="Address 1" value="#{clientBacking.client.address1}" required="true" requiredMessage="Please enter address 1" a:placeholder="Enter address 1" validator="#{cbb.validateNotNull}">
+                        <h:outputLabel for="address1" value="#{msgs.address1}"/>
+                        <h:inputText id="address1" label="#{msgs.address1}" value="#{clientBacking.client.address1}" required="true" requiredMessage="#{msgs.address1Msg}" a:placeholder="#{msgs.address1Msg}" validator="#{cbb.validateNotNull}">
                             <f:ajax event="change" render="address1Error"/>
                         </h:inputText>
                         <br/>
                         <h:message id="address1Error" class="error" for="address1"/>
                     </div>
                     <div class="field">
-                        <h:outputLabel for="address2" value="Address 2"/>
-                        <h:inputText id="address2" label="Address 2" value="#{clientBacking.client.address2}" required="true" requiredMessage="Please enter address 2" a:placeholder="Enter address 2" validator="#{cbb.validateNotNull}">
+                        <h:outputLabel for="address2" value="#{msgs.address2}"/>
+                        <h:inputText id="address2" label="#{msgs.address2}" value="#{clientBacking.client.address2}" required="true" requiredMessage="#{msgs.address2Msg}" a:placeholder="#{msgs.address2Msg}" validator="#{cbb.validateNotNull}">
                             <f:ajax event="change" render="address2Error"/>
                         </h:inputText>
                         <br/>
@@ -209,15 +226,15 @@ and open the template in the editor.
                     </div>
                     <div class="fields">
                         <div class="twelve wide field">
-                            <h:outputLabel for="country" value="Country"/>
-                            <h:selectOneMenu id="country" label="Country" required="true" value="#{clientBacking.client.country}" requiredMessage="Please enter country" a:placeholder="Enter country">
+                            <h:outputLabel for="country" value="#{msgs.country}"/>
+                            <h:selectOneMenu id="country" label="#{msgs.country}" required="true" value="#{clientBacking.client.country}" requiredMessage="#{msgs.countryMsg}" a:placeholder="#{msgs.countryMsg}">
                                 <f:selectItem itemValue="Canada" itemLabel="Canada" />
                             </h:selectOneMenu>
                             <h:message id="countryError" class="error" for="country"/>
                         </div>
                         <div class="four wide field">
-                            <h:outputLabel for="provOrState" value="Province/State"/>
-                            <h:selectOneMenu id="provOrState" label="Province/State" value="#{clientBacking.client.provinceAbbreviation}" required="true" requiredMessage="Please enter province or state" a:placeholder="Enter province or state">
+                            <h:outputLabel for="provOrState" value="#{msgs.province}"/>
+                            <h:selectOneMenu id="provOrState" label="#{msgs.province}" value="#{clientBacking.client.provinceAbbreviation}" required="true" requiredMessage="#{msgs.provinceMsg}" a:placeholder="#{msgs.provinceMsg}">
                                 <f:selectItems value="#{clientBacking.provinces}" />
                             </h:selectOneMenu>
                             <br/>
@@ -226,27 +243,30 @@ and open the template in the editor.
                     </div>
                     <div class="fields">
                         <div class="twelve wide field">
-                            <h:outputLabel for="city" value="City"/>
-                            <h:inputText id="city" label="City" value="#{clientBacking.client.city}" required="true" requiredMessage="Please enter city" a:placeholder="Enter city" validator="#{cbb.validateNotNull}">
+                            <h:outputLabel for="city" value="#{msgs.city}"/>
+                            <h:inputText id="city" label="#{msgs.city}" value="#{clientBacking.client.city}" required="true" requiredMessage="#{msgs.cityMsg}" a:placeholder="#{msgs.cityMsg}" validator="#{cbb.validateNotNull}">
                                 <f:ajax event="change" render="cityError"/>
                             </h:inputText>
                             <br/>
                             <h:message id="cityError" class="error" for="city"/>
                         </div>
                         <div class="four wide field">
-                            <h:outputLabel for="postalCode" value="Postal Code"/>
-                            <h:inputText id="postalCode" label="Postal Code" value="#{clientBacking.client.postalCode}" required="true" requiredMessage="Please enter postal code" a:placeholder="Enter postal code" validator="#{cbb.validatePostalCode}">
+                            <h:outputLabel for="postalCode" value="#{msgs.postalCode}"/>
+                            <h:inputText id="postalCode" label="#{msgs.postalCode}" value="#{clientBacking.client.postalCode}" required="true" requiredMessage="#{msgs.postalCodeMsg}" a:placeholder="#{msgs.postalCodeMsg}" validator="#{cbb.validatePostalCode}">
                                 <f:ajax event="change" render="postalCodeError"/>
                             </h:inputText>
                             <br/>
                             <h:message id="postalCodeError" class="error" for="postalCode"/>
                         </div>
                     </div>
-                    <h:commandButton class="huge black fluid ui button" id="finalizeBtn" value="Finalize Purchase" action="#{cbb.finalizePurchase(UserLoginBean.email)}" />
+                    <h:commandButton class="huge black fluid ui button" id="finalizeBtn" value="#{msgs.finalizePurchase}" action="#{cbb.finalizePurchase(UserLoginBean.email)}" />
                     <br/>
                 </h:form>
             </div>
         </div>
+            <!--
+                Show correct modal function done by: Giancarlo Biasiucci
+            -->
         <script>
             function showCorrectModal(isSignedIn)
             {
