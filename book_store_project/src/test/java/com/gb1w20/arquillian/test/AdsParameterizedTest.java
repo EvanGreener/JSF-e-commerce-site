@@ -1,21 +1,11 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * All arquillain tests belong to this package
  */
 package com.gb1w20.arquillian.test;
 
 import com.gb1w20.arquillian.test.beans.AdsTestingBean;
-import com.gb1w20.arquillian.test.beans.BookTestingBean;
-import com.gb1w20.arquillian.test.beans.ClientTestingBean;
-import com.gb1w20.book_store_project.backing.BookFormatBackingBean;
-import com.gb1w20.book_store_project.beans.NewsBean;
 import com.gb1w20.book_store_project.entities.Ads;
-import com.gb1w20.book_store_project.entities.Book;
-import com.gb1w20.book_store_project.entities.BookFormat;
 import com.gb1w20.book_store_project.jpa_controllers.AdsJpaController;
-import com.gb1w20.book_store_project.jpa_controllers.BookFormatJpaController;
-import com.gb1w20.book_store_project.jpa_controllers.BookJpaController;
 import com.gb1w20.book_store_project.jpa_controllers.exceptions.IllegalOrphanException;
 import java.io.BufferedReader;
 import java.io.File;
@@ -50,13 +40,14 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
- *
+ * Tests ads jpa controller methods
  * @author giancarlo,shruti pareek
  */
 @RunWith(Arquillian.class)
 public class AdsParameterizedTest {
 
     private final static Logger LOG = LoggerFactory.getLogger(AdsParameterizedTest.class);
+
 
     @Deployment
     public static WebArchive deploy() {
@@ -96,6 +87,9 @@ public class AdsParameterizedTest {
     @Inject
     private AdsJpaController adsControl;
 
+    /**
+     *
+     */
     @Rule
     public ParameterRule adsRule = new ParameterRule("adTest",
             new AdsTestingBean(1, "Not Removed", 2),
@@ -117,6 +111,9 @@ public class AdsParameterizedTest {
     @Resource
     private UserTransaction utx;
 
+    /**
+     *@author giancarlo
+     */
     @Test
     public void testExpectedStatus() {
         String removalStatus = adsControl.getStatusByAdId(adsControl.findAds(adTest.adID).getAdID());
@@ -124,6 +121,9 @@ public class AdsParameterizedTest {
                 adTest.expectedStatus, removalStatus);
     }
 
+    /**
+     *@author giancarlo
+     */
     @Test
     public void testRandomAdIsAlwaysReal() {
         Ads ad = adsControl.getRandomAd();
@@ -132,6 +132,7 @@ public class AdsParameterizedTest {
     }
 
     /**
+     * method for testing the count of advertisements
      * @author shruti pareek
      */
     @Test

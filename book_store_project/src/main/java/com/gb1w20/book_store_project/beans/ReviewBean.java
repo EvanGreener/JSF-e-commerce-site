@@ -47,6 +47,7 @@ public class ReviewBean implements Serializable {
     /**
      * method for initializing when bean called
      *
+     * @author Shruti Pareek
      * @return void
      */
     public void init() {
@@ -71,6 +72,7 @@ public class ReviewBean implements Serializable {
      * Get the number of reviews that a client has written on a book Used to
      * validate that customer has written only one review for a book
      *
+     * @author Shruti Pareek
      * @param clientId
      * @param isbn
      * @return int
@@ -86,6 +88,7 @@ public class ReviewBean implements Serializable {
      * Validate that the review body text is less than 750 characters and not
      * empty or null
      *
+     * @author Shruti Pareek
      * @param context
      * @param component
      * @param value
@@ -110,6 +113,7 @@ public class ReviewBean implements Serializable {
      * Validate that the review title text is less than 150 characters and not
      * empty or null
      *
+     * @author Shruti Pareek
      * @param context
      * @param component
      * @param value
@@ -133,6 +137,7 @@ public class ReviewBean implements Serializable {
     /**
      * Save the current customerReview to the db
      *
+     * @author Shruti Pareek
      * @return String
      * @throws Exception
      */
@@ -145,6 +150,7 @@ public class ReviewBean implements Serializable {
     /**
      * Gets the rating for review default is 0
      *
+     * @author Shruti Pareek
      * @return Integer
      */
     public Integer getRatingChoice() {
@@ -155,6 +161,7 @@ public class ReviewBean implements Serializable {
     /**
      * set the rating for review
      *
+     * @author Shruti Pareek
      * @param choice
      */
     public void setRatingChoice(Integer choice) {
@@ -165,6 +172,7 @@ public class ReviewBean implements Serializable {
     /**
      * Gets current date and time
      *
+     * @author Shruti Pareek
      * @return Date
      */
     private Date getCurrentDateTime() {
@@ -175,6 +183,7 @@ public class ReviewBean implements Serializable {
     /**
      * Creates a customer's review on submission
      *
+     * @author Shruti Pareek
      * @param isbn
      * @param clientId
      * @throws java.lang.Exception
@@ -199,6 +208,7 @@ public class ReviewBean implements Serializable {
     /**
      * set the review content
      *
+     * @author Shruti Pareek
      * @param review
      */
     public void setReviewBody(String review) {
@@ -209,6 +219,7 @@ public class ReviewBean implements Serializable {
     /**
      * get the review content
      *
+     * @author Shruti Pareek
      * @return String
      */
     public String getReviewBody() {
@@ -219,6 +230,7 @@ public class ReviewBean implements Serializable {
     /**
      * set the title for review
      *
+     * @author Shruti Pareek
      * @param title
      */
     public void setTitle(String title) {
@@ -229,6 +241,7 @@ public class ReviewBean implements Serializable {
     /**
      * get the review title
      *
+     * @author Shruti Pareek
      * @return String
      */
     public String getTitle() {
@@ -239,6 +252,7 @@ public class ReviewBean implements Serializable {
     /**
      * get the rating user had selected from select menu
      *
+     * @author Shruti Pareek
      * @return rating
      */
     public List<SelectItem> getRatings() {
@@ -254,6 +268,7 @@ public class ReviewBean implements Serializable {
     /**
      * set the default rating in select menu to 0
      *
+     * @author Shruti Pareek
      * @param ratings
      */
     public void setRatings(List<SelectItem> ratings) {
@@ -264,6 +279,7 @@ public class ReviewBean implements Serializable {
     /**
      * Get all reviews for a book
      *
+     * @author Shruti Pareek
      * @param isbn
      * @return
      */
@@ -276,6 +292,7 @@ public class ReviewBean implements Serializable {
     /**
      * Creates an array the same size as rating
      *
+     * @author Shruti Pareek
      * @param size
      * @return array
      */
@@ -287,6 +304,7 @@ public class ReviewBean implements Serializable {
     /**
      * Get the average rating for a book
      *
+     * @author Shruti Pareek
      * @param isbn
      * @return int
      */
@@ -299,6 +317,7 @@ public class ReviewBean implements Serializable {
     /**
      * Get the amount of reviews for a book
      *
+     * @author Shruti Pareek
      * @param isbn
      * @return int
      */

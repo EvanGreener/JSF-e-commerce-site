@@ -1,6 +1,5 @@
 package com.gb1w20.book_store_project.jpa_controllers;
 
-import com.gb1w20.book_store_project.beans.BookBean;
 import com.gb1w20.book_store_project.entities.Clients;
 import com.gb1w20.book_store_project.entities.Clients_;
 import com.gb1w20.book_store_project.entities.OrderItem;
@@ -9,7 +8,6 @@ import com.gb1w20.book_store_project.entities.Orders;
 import com.gb1w20.book_store_project.entities.Orders_;
 import com.gb1w20.book_store_project.jpa_controllers.exceptions.NonexistentEntityException;
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.Resource;
 import javax.enterprise.context.RequestScoped;
@@ -47,9 +45,17 @@ public class OrdersJpaController implements Serializable {
 
     private final static Logger LOG = LoggerFactory.getLogger(OrdersJpaController.class);
 
+    /**
+     *
+     */
     public OrdersJpaController() {
     }
 
+    /**
+     *
+     * @param order
+     * @throws Exception
+     */
     public void create(Orders order) throws Exception {
         try {
             utx.begin();
@@ -65,6 +71,12 @@ public class OrdersJpaController implements Serializable {
         }
     }
 
+    /**
+     *
+     * @param order
+     * @throws NonexistentEntityException
+     * @throws Exception
+     */
     public void edit(Orders order) throws NonexistentEntityException, Exception {
         try {
             utx.begin();
@@ -87,6 +99,12 @@ public class OrdersJpaController implements Serializable {
         }
     }
 
+    /**
+     *
+     * @param id
+     * @throws NonexistentEntityException
+     * @throws Exception
+     */
     public void destroy(Integer id) throws NonexistentEntityException, Exception {
         try {
             utx.begin();
@@ -109,10 +127,20 @@ public class OrdersJpaController implements Serializable {
         }
     }
 
+    /**
+     *
+     * @return
+     */
     public List<Orders> findOrdersEntities() {
         return findOrdersEntities(true, -1, -1);
     }
 
+    /**
+     *
+     * @param maxResults
+     * @param firstResult
+     * @return
+     */
     public List<Orders> findOrdersEntities(int maxResults, int firstResult) {
         return findOrdersEntities(false, maxResults, firstResult);
     }
@@ -128,10 +156,19 @@ public class OrdersJpaController implements Serializable {
         return q.getResultList();
     }
 
+    /**
+     *
+     * @param id
+     * @return
+     */
     public Orders findOrders(Integer id) {
         return em.find(Orders.class, id);
     }
 
+    /**
+     *
+     * @return
+     */
     public int getOrdersCount() {
         CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
         Root<Orders> rt = cq.from(Orders.class);
@@ -142,6 +179,12 @@ public class OrdersJpaController implements Serializable {
     }
 
     //test 
+
+    /**
+     *
+     * @param clientId
+     * @return
+     */
     public String getClientEmailById(int clientId) {
         CriteriaBuilder cb = em.getCriteriaBuilder();
         CriteriaQuery cq = cb.createQuery();
@@ -152,6 +195,11 @@ public class OrdersJpaController implements Serializable {
         return query.getSingleResult();
     }
 
+    /**
+     *
+     * @param orderId
+     * @return
+     */
     public int getOrderItemsCountByOrderId(int orderId) {
         CriteriaBuilder cb = em.getCriteriaBuilder();
         CriteriaQuery cq = cb.createQuery();
@@ -162,6 +210,11 @@ public class OrdersJpaController implements Serializable {
         return ((Long) query.getSingleResult()).intValue();
     }
 
+    /**
+     *
+     * @param orderId
+     * @return
+     */
     public String getStatusByOrderId(int orderId) {
         CriteriaBuilder cb = em.getCriteriaBuilder();
         CriteriaQuery cq = cb.createQuery();
@@ -177,6 +230,12 @@ public class OrdersJpaController implements Serializable {
         }
     }
 
+    /**
+     *
+     * @param query
+     * @param searchBy
+     * @return
+     */
     public List<Orders> searchOrders(String query, String searchBy) {
         String expression = "%" + query + "%";
         if (searchBy.equals("id")) {

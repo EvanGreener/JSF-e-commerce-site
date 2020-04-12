@@ -1,6 +1,5 @@
 package com.gb1w20.book_store_project.jpa_controllers;
 
-import com.gb1w20.book_store_project.entities.Ads;
 import com.gb1w20.book_store_project.entities.News;
 import com.gb1w20.book_store_project.entities.News_;
 import com.gb1w20.book_store_project.jpa_controllers.exceptions.NonexistentEntityException;
@@ -36,9 +35,17 @@ public class NewsJpaController implements Serializable {
     @PersistenceContext
     private EntityManager em;
 
+    /**
+     *
+     */
     public NewsJpaController() {
     }
 
+    /**
+     *
+     * @param news
+     * @throws Exception
+     */
     public void create(News news) throws Exception {
         try {
             utx.begin();
@@ -54,6 +61,12 @@ public class NewsJpaController implements Serializable {
         }
     }
 
+    /**
+     *
+     * @param news
+     * @throws NonexistentEntityException
+     * @throws Exception
+     */
     public void edit(News news) throws NonexistentEntityException, Exception {
         try {
             utx.begin();
@@ -76,6 +89,12 @@ public class NewsJpaController implements Serializable {
         }
     }
 
+    /**
+     *
+     * @param id
+     * @throws NonexistentEntityException
+     * @throws Exception
+     */
     public void destroy(Integer id) throws NonexistentEntityException, Exception {
         try {
             utx.begin();
@@ -98,10 +117,20 @@ public class NewsJpaController implements Serializable {
         }
     }
 
+    /**
+     *
+     * @return
+     */
     public List<News> findNewsEntities() {
         return findNewsEntities(true, -1, -1);
     }
 
+    /**
+     *
+     * @param maxResults
+     * @param firstResult
+     * @return
+     */
     public List<News> findNewsEntities(int maxResults, int firstResult) {
         return findNewsEntities(false, maxResults, firstResult);
     }
@@ -117,6 +146,11 @@ public class NewsJpaController implements Serializable {
         return q.getResultList();
     }
 
+    /**
+     *
+     * @param id
+     * @return
+     */
     public News findNews(Integer id) {
         return em.find(News.class, id);
     }
@@ -150,6 +184,11 @@ public class NewsJpaController implements Serializable {
         return n;
     }
 
+    /**
+     *
+     * @param newsID
+     * @return
+     */
     public Object[] getStatusByNewsId(int newsID) {
         CriteriaBuilder cb = em.getCriteriaBuilder();
         CriteriaQuery cq = cb.createQuery();
@@ -167,6 +206,10 @@ public class NewsJpaController implements Serializable {
         }
     }
 
+    /**
+     *
+     * @return
+     */
     public News getEnabledNews() {
         CriteriaBuilder cb = em.getCriteriaBuilder();
         CriteriaQuery cq = cb.createQuery();

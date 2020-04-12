@@ -6,16 +6,13 @@
 package com.gb1w20.arquillian.test;
 
 import com.gb1w20.arquillian.test.beans.NewsTestingBean;
-import com.gb1w20.arquillian.test.beans.BookTestingBean;
 import com.gb1w20.arquillian.test.beans.ClientTestingBean;
 import com.gb1w20.book_store_project.backing.BookFormatBackingBean;
 import com.gb1w20.book_store_project.beans.NewsBean;
 import com.gb1w20.book_store_project.entities.News;
-import com.gb1w20.book_store_project.entities.Book;
 import com.gb1w20.book_store_project.entities.BookFormat;
 import com.gb1w20.book_store_project.jpa_controllers.NewsJpaController;
 import com.gb1w20.book_store_project.jpa_controllers.BookFormatJpaController;
-import com.gb1w20.book_store_project.jpa_controllers.BookJpaController;
 import com.gb1w20.book_store_project.jpa_controllers.exceptions.IllegalOrphanException;
 import java.io.BufferedReader;
 import java.io.File;
@@ -58,6 +55,10 @@ public class NewsParameterizedTest {
     
     private final static Logger LOG = LoggerFactory.getLogger(NewsParameterizedTest.class);
 
+    /**
+     *
+     * @return
+     */
     @Deployment
     public static WebArchive deploy() {
 
@@ -97,6 +98,9 @@ public class NewsParameterizedTest {
     @Inject
     private NewsJpaController newsControl;
 
+    /**
+     *
+     */
     @Rule
     public ParameterRule newsRule = new ParameterRule("newsTest",
             new NewsTestingBean(1,"Removed"),
@@ -120,6 +124,9 @@ public class NewsParameterizedTest {
     @Resource
     private UserTransaction utx;
     
+    /**
+     *
+     */
     @Test
     public void testExpectedStatus()
     {
@@ -128,6 +135,9 @@ public class NewsParameterizedTest {
                 newsTest.expectedStatus, removalStatus);
     }
     
+    /**
+     *
+     */
     @Test
     public void testRandomNewsIsAlwaysReal()
     {
@@ -136,6 +146,9 @@ public class NewsParameterizedTest {
         assertTrue("Expected: included, actual: not", allNews.contains(news));
     }
     
+    /**
+     *
+     */
     @Test
     public void testEnabledNewsIsAlwaysReal()
     {

@@ -33,8 +33,16 @@ public class TaxJpaController implements Serializable {
     @PersistenceContext
     private EntityManager em;
 
+    /**
+     *
+     */
     public TaxJpaController() {}
 
+    /**
+     *
+     * @param tax
+     * @throws Exception
+     */
     public void create(Tax tax) throws Exception {
     try {
         utx.begin();
@@ -50,6 +58,12 @@ public class TaxJpaController implements Serializable {
     }
 }
 
+    /**
+     *
+     * @param tax
+     * @throws NonexistentEntityException
+     * @throws Exception
+     */
     public void edit(Tax tax) throws NonexistentEntityException, Exception {
         try {
             utx.begin();
@@ -72,6 +86,12 @@ public class TaxJpaController implements Serializable {
         }
     }
 
+    /**
+     *
+     * @param id
+     * @throws NonexistentEntityException
+     * @throws Exception
+     */
     public void destroy(Integer id) throws NonexistentEntityException, Exception {
         try {
             utx.begin();
@@ -94,10 +114,20 @@ public class TaxJpaController implements Serializable {
         }
     }
 
+    /**
+     *
+     * @return
+     */
     public List<Tax> findTaxEntities() {
         return findTaxEntities(true, -1, -1);
     }
 
+    /**
+     *
+     * @param maxResults
+     * @param firstResult
+     * @return
+     */
     public List<Tax> findTaxEntities(int maxResults, int firstResult) {
         return findTaxEntities(false, maxResults, firstResult);
     }
@@ -113,11 +143,20 @@ public class TaxJpaController implements Serializable {
         return q.getResultList();
     }
 
+    /**
+     *
+     * @param id
+     * @return
+     */
     public Tax findTax(String id) {
             return em.find(Tax.class, id);
     }
   
-    
+    /**
+     *
+     * @param province
+     * @return
+     */
     public Tax getTaxByProvince(String province){
         CriteriaBuilder cb = em.getCriteriaBuilder();
         CriteriaQuery cq = cb.createQuery();
@@ -127,6 +166,10 @@ public class TaxJpaController implements Serializable {
         return query.getSingleResult();
     }
 
+    /**
+     *
+     * @return
+     */
     public int getTaxCount() {
             CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
             Root<Tax> rt = cq.from(Tax.class);
