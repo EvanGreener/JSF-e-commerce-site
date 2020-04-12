@@ -13,6 +13,11 @@
 
     <!-- Identifies the programmer or programmers who worked on the project -->
     <developers>
+                <developer>
+            <id>1633839</id>
+            <name>Saad Khan</name>
+            <email>saaadkhan23@yahoo.ca</email>
+        </developer>
         <developer>
             <id>1735332</id>
             <name>Shruti Pareek</name>
