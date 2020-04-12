@@ -101,12 +101,12 @@ public class AdsParameterizedTest {
 
     @Rule
     public ParameterRule adsRule = new ParameterRule("adTest",
-            new AdsTestingBean(1,"Not Removed"),
-            new AdsTestingBean(2,"Not Removed"),
-            new AdsTestingBean(3,"Removed"),
-            new AdsTestingBean(4,"Removed"),
-            new AdsTestingBean(5,"Removed"),
-            new AdsTestingBean(6,"Removed")
+            new AdsTestingBean(1, "Not Removed"),
+            new AdsTestingBean(2, "Not Removed"),
+            new AdsTestingBean(3, "Removed"),
+            new AdsTestingBean(4, "Removed"),
+            new AdsTestingBean(5, "Removed"),
+            new AdsTestingBean(6, "Removed")
             
     );
 
@@ -128,6 +128,19 @@ public class AdsParameterizedTest {
         Ads ad = adsControl.getRandomAd();
         List<Ads> allAds = adsControl.findAdsEntities();
         assertTrue("Expected: included, actual: not", allAds.contains(ad));
+    }
+    
+    @Test
+    public void testExpectedStatus()
+    {
+        String removalString = "Not Removed";
+        boolean removalStatus = adsControl.findAds(adTest.adID).getIsRemoved();
+        if (removalStatus)
+        {
+            removalString = "Removed";
+        }
+        assertEquals("Expected: " + adTest.expectedStatus + ", actual: " + removalString,
+                adTest.expectedStatus, removalString);
     }
     
     /**

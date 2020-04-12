@@ -139,6 +139,19 @@ public class NewsParameterizedTest {
         assertTrue("Expected: included, actual: not", allNews.contains(news));
     }
     
+    @Test
+    public void testExpectedStatus()
+    {
+        String removalString = "Not Removed";
+        boolean removalStatus = newsControl.findNews(newsTest.newsID).getIsRemoved();
+        if (removalStatus)
+        {
+            removalString = "Removed";
+        }
+        assertEquals("Expected: " + newsTest.expectedStatus + ", actual: " + removalString,
+                newsTest.expectedStatus, removalString);
+    }
+    
     /**
      * Restore the database to a known state before testing. This is important
      * if the test is destructive. This routine is courtesy of Bartosz Majsak

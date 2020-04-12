@@ -51,7 +51,7 @@ public class BookBackingBean implements Serializable {
     private String selectedPub;
     private List<String> pubNames;
     private List<String> authorNames;
-    private Authors selectedAuthor = new Authors();
+    private Authors selectedAuthor;
     private String selectedGenre;
     private String pageNum;
     private String lPriceStr;
@@ -164,6 +164,10 @@ public class BookBackingBean implements Serializable {
     }
 
     public Authors getSelectedAuthor() {
+        if (selectedAuthor == null)
+        {
+            selectedAuthor = authorsJpaController.getAuthorByName("John Steinbeck");
+        }
         return selectedAuthor;
     }
 
@@ -192,6 +196,7 @@ public class BookBackingBean implements Serializable {
         book.setDateEntered(new Date());
         book.setLastModified(new Date());
         book.setIsRemoved(false);
+        book.setAuthorsCollection(authors);
         selectedAuthor = authorsJpaController.getAuthorByName(selectedAuthor.getName());
         BookAuthors ba = new BookAuthors();
         ba.setIsbn(book.getIsbn());
