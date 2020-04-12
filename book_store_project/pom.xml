@@ -28,6 +28,11 @@
             <name>Giancarlo Biasiucci</name>
             <email>g_biasiucci@outlook.com</email>
         </developer>
+        <developer>
+             <id>1734025</id>
+             <name>Evan Greenstein</name>
+             <email>evanlg16@gmail.com</email>          
+        </developer>
     </developers>
 
     <!-- The company or organization that the programmer(s) work for -->
