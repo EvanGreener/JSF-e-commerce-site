@@ -50,6 +50,7 @@ public class BookBean implements Serializable {
     @PostConstruct
     /**
      * method for initializing when bean called
+     *
      * @author Shruti Pareek
      * @return void
      */
@@ -230,8 +231,7 @@ public class BookBean implements Serializable {
     /**
      * Downloads an alice in wonderland pdf
      *
-     * @author Shruti Pareek 
-     * Sources used
+     * @author Shruti Pareek Sources used
      * https://stackoverflow.com/questions/9391838/how-to-provide-a-file-download-from-a-jsf-backing-bean
      * https://itqna.net/questions/15083/how-download-pdf-file-jsf
      * http://www.iana.org/assignments/media-types
@@ -283,10 +283,9 @@ public class BookBean implements Serializable {
         try {
             this.book = this.bookCtrlr.findBook(isbn);
         } catch (NoResultException e) {
-            /*
-        TODO: redirect to error page because this book does not exist or is removed once error page is created
-             */
-            FacesContext.getCurrentInstance().getExternalContext().redirect("index.xhtml");
+
+            //redirects to error page because this book does not exist or is removed 
+            FacesContext.getCurrentInstance().getExternalContext().redirect("404Page.xhtml");
         }
 
     }
@@ -307,6 +306,10 @@ public class BookBean implements Serializable {
         if (isbn != null) {
             LOG.debug("getBook" + isbn);
             findBook(isbn);
+        } 
+        //no isbn given in url parameters meaning no book
+        else {
+            FacesContext.getCurrentInstance().getExternalContext().redirect("404Page.xhtml");
         }
 
         return this.book;
