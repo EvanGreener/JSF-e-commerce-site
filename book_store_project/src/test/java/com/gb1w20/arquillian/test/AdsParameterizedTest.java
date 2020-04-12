@@ -42,14 +42,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
-<<<<<<< HEAD
- * Parameterized testing for the ad class
+ * Parameterized testing for the ad JPA controller methods
  * @author Giancarlo Biasiucci,shruti pareek
  * @version April 11, 2020
-=======
- * Tests ads jpa controller methods
- * @author giancarlo,shruti pareek
->>>>>>> 574368e2291f90acd82af0bb499612e9ad6bf485
  */
 @RunWith(Arquillian.class)
 public class AdsParameterizedTest {
