@@ -139,6 +139,7 @@ public class OrdersJpaController implements Serializable {
             return ((Long) q.getSingleResult()).intValue();
     }
 
+    //test 
     public String getClientEmailById(int clientId)
     {
         CriteriaBuilder cb = em.getCriteriaBuilder();
