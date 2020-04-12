@@ -122,7 +122,8 @@ public class ClientParameterizedTest {
     private UserTransaction utx;
 
     /**
-     * @author giancarlo
+     * Tests if they expected client information is returned based on their email
+     * @author Giancarlo Biasiucci
      */
     @Test
     public void testEmailInfo() {
@@ -138,7 +139,8 @@ public class ClientParameterizedTest {
     }
 
     /**
-     * @author giancarlo
+     * Tests if the email search returns the correct client, and the correct client information
+     * @author Giancarlo Biasiucci
      */
     @Test
     public void testEmailSearch() {
@@ -227,6 +229,7 @@ public class ClientParameterizedTest {
      * Restore the database to a known state before testing. This is important
      * if the test is destructive. This routine is courtesy of Bartosz Majsak
      * who also solved my Arquillian remote server problem
+     * From: KFWebStandardProject - ArquillianUnitTest.java
      */
     @Before
     public void seedDatabase() {
@@ -244,6 +247,7 @@ public class ClientParameterizedTest {
 
     /**
      * The following methods support the seedDatabse method
+     * All of the following are from: KFWebStandardProject - ArquillianUnitTest.java
      */
     private String loadAsString(final String path) {
         try (InputStream inputStream = Thread.currentThread()

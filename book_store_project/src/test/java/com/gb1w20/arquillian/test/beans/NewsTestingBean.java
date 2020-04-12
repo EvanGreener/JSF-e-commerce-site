@@ -4,8 +4,9 @@
 package com.gb1w20.arquillian.test.beans;
 
 /**
- *
- * @author giancarlo
+ * Bean used for the news parameterized test
+ * @author Giancarlo Biasiucci
+ * @version April 11, 2020
  */
 public class NewsTestingBean {
 
@@ -14,7 +15,7 @@ public class NewsTestingBean {
     public String expectedStatus;
     
     /**
-     *
+     * All necessary values to be incorporated and tested for are inserted
      * @param newsID
      * @param expectedStatus
      */

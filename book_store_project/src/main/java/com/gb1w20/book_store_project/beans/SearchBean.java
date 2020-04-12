@@ -12,13 +12,16 @@ import java.util.stream.Collectors;
 import javax.annotation.PostConstruct;
 
 import javax.inject.Named;
-import javax.enterprise.context.SessionScoped;
 import javax.faces.context.FacesContext;
 import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+ /**
+  * A bean created specifically for the gallery page
+  * @author Evan Greenstein
+  */
 @Named("search")
 @ViewScoped
 public class SearchBean implements Serializable {
@@ -37,6 +40,9 @@ public class SearchBean implements Serializable {
     private String surveyChoice;
     private String isbn;
 
+    /**
+     * Updates the bean immediately once its firtst used.
+     */
     @PostConstruct
     public void init() {
         LOG.debug("Init called!");
@@ -121,6 +127,10 @@ public class SearchBean implements Serializable {
         return results;
     }
 
+    /**
+     * Evan Greenstein
+     * @throws IOException 
+     */
     private void updateSearchBean() throws IOException {
 
         List<Book> res = searchBy != null && !query.isBlank() ? bookCtrlr.search(searchBy, query, page) : bookCtrlr.findNonRemovedBooks();

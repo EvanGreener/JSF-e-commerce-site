@@ -33,10 +33,15 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
+<<<<<<< HEAD
  * JPA Controller for the book entity, Queries that facilitate accessing certain
  * books
  *
  * @author Giancarlo Biasiucci, Saad, Shruti Pareek
+=======
+ * JPA Controller for the book entity, Queries that facilitate accessing certain books
+ * @author Giancarlo Biasiucci, Saad, Shruti Pareek, Evan Greenstein
+>>>>>>> 5fb289bdaabb78e0ad0286aded86373c375c7fd6
  * @version April 10, 2020
  */
 @Named
@@ -248,11 +253,11 @@ public class BookJpaController implements Serializable {
     }
 
     /**
-     *
-     * @param searchBy
-     * @param q
-     * @param page
-     * @return
+     * Evan Greenstein & Giancarlo
+     * @param searchBy What the user is searching by
+     * @param q The string the user types in the seach bar
+     * @param page The page of the results (8 per page)
+     * @return The result set of books
      */
     public List<Book> search(String searchBy, String q, int page) {
 

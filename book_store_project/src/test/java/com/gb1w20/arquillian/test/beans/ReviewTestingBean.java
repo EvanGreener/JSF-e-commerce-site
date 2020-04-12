@@ -4,8 +4,9 @@
 package com.gb1w20.arquillian.test.beans;
 
 /**
- *
- * @author giancarlo
+ * Bean used for the review parameterized test
+ * @author Giancarlo Biasiucci
+ * @version April 11, 2020
  */
 public class ReviewTestingBean {
 

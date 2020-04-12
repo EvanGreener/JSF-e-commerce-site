@@ -221,6 +221,8 @@ public class ClientsJpaController implements Serializable {
     }
 
     /**
+     * Evan Greenstein.
+     * 
      * SELECT c.email, c.fname, c.lname, SUM(price_sold) FROM clients c LEFT
      * JOIN orders o ON c.client_id = o.client_id LEFT JOIN orderItems oi oN
      * o.order_id = oi.order_id WHERE c.email LIKE :query AND c.is_manager =

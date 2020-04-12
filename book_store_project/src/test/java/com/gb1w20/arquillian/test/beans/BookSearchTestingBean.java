@@ -1,13 +1,9 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.gb1w20.arquillian.test.beans;
 
 /**
- *
- * @author giancarlo
+ * Bean used for the book search parameterized test
+ * @author Giancarlo Biasiucci
+ * @version April 11, 2020
  */
 public class BookSearchTestingBean {
     
@@ -16,6 +12,13 @@ public class BookSearchTestingBean {
     public int expectedResults;
     public int expectedResultsAll;
     
+    /**
+     * All necessary values to be incorporated and tested for are inserted
+     * @param query
+     * @param searchBy
+     * @param expectedResults
+     * @param expectedResultsAll 
+     */
     public BookSearchTestingBean(String query, String searchBy, int expectedResults,
             int expectedResultsAll)
     {

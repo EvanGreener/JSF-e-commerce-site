@@ -1,17 +1,8 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.gb1w20.arquillian.test;
 
-import com.gb1w20.arquillian.test.beans.AdsTestingBean;
 import com.gb1w20.arquillian.test.beans.BookSearchTestingBean;
-import com.gb1w20.arquillian.test.beans.BookTestingBean;
 import com.gb1w20.book_store_project.beans.NewsBean;
-import com.gb1w20.book_store_project.entities.Ads;
 import com.gb1w20.book_store_project.entities.Book;
-import com.gb1w20.book_store_project.jpa_controllers.AdsJpaController;
 import com.gb1w20.book_store_project.jpa_controllers.BookJpaController;
 import com.gb1w20.book_store_project.jpa_controllers.exceptions.IllegalOrphanException;
 import com.gb1w20.book_store_project.util.MessageLoader;
@@ -47,7 +38,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
- * Parameterized testing for the book search methods
+ * Parameterized testing for the book search JPA controller methods
  * @author Giancarlo Biasiucci
  * @version April 11, 2020
  */

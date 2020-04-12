@@ -44,8 +44,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
- * Arquillian testing for the book entity
- * @author Giancarlo Biasiucci
+ * Arquillian testing for the book JPA controller methods
+ * @author Giancarlo Biasiucci, Shruti Pareek
  * @version April 11, 2020
  */
 @RunWith(Arquillian.class)
@@ -117,13 +117,8 @@ public class BookParameterizedTest {
     private UserTransaction utx;
     
      /**
-<<<<<<< HEAD
      * Tests if a correct book is returned from an ISBN number
-     * By: Giancarlo Biasiucci
-=======
-     * Tests if a correct book is returned from an isbn
      * @author shruti pareek
->>>>>>> 574368e2291f90acd82af0bb499612e9ad6bf485
      */
     @Test
     public void testFindSingleBook() {
@@ -138,11 +133,7 @@ public class BookParameterizedTest {
     
     /**
      * Tests if the correct number of similar genre books are returned from an isbn
-<<<<<<< HEAD
      * By: Giancarlo Biasiucci
-=======
-     * @author giancarlo
->>>>>>> 574368e2291f90acd82af0bb499612e9ad6bf485
      */
     @Test
     public void testFindSimilarGenres() {
@@ -156,13 +147,8 @@ public class BookParameterizedTest {
     }
     
     /**
-<<<<<<< HEAD
      * Tests if the correct book status is retrieved (identical process to controller method)
      * By: Giancarlo Biasiucci
-=======
-     * Tests if the correct status of a book is returned
-     * @author giancarlo
->>>>>>> 574368e2291f90acd82af0bb499612e9ad6bf485
      */
     @Test
     public void testStatusRetrieval()
