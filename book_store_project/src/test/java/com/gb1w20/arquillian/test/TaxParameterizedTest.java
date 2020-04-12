@@ -73,6 +73,7 @@ public class TaxParameterizedTest {
                   .addPackage(Tax.class.getPackage())
                   .addPackage(ParameterRule.class.getPackage())
                   .addPackage(TaxTestingBean.class.getPackage())
+                  .addPackage(IllegalOrphanException.class.getPackage())
                   .addAsWebInfResource(EmptyAsset.INSTANCE, "beans.xml")
                   .addAsWebInfResource(new File("src/main/webapp/WEB-INF/payara-resources.xml"), "payara-resources.xml")
                   .addAsResource(new File("src/main/resources/META-INF/persistence.xml"), "META-INF/persistence.xml")

@@ -14,6 +14,7 @@ import com.gb1w20.book_store_project.jpa_controllers.PublisherJpaController;
 import com.gb1w20.book_store_project.jpa_controllers.SurveyDataJpaController;
 import com.gb1w20.book_store_project.jpa_controllers.TaxJpaController;
 import com.gb1w20.book_store_project.jpa_controllers.exceptions.IllegalOrphanException;
+import com.gb1w20.book_store_project.jpa_controllers.exceptions.NonexistentEntityException;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;
@@ -76,11 +77,12 @@ public class SurveryDataParameterizedTest {
                   .addPackage(SurveyData.class.getPackage())
                   .addPackage(ParameterRule.class.getPackage())
                   .addPackage(SurveyDataTestingBean.class.getPackage())
+                  .addPackage(NonexistentEntityException.class.getPackage())
                   .addAsWebInfResource(EmptyAsset.INSTANCE, "beans.xml")
                   .addAsWebInfResource(new File("src/main/webapp/WEB-INF/payara-resources.xml"), "payara-resources.xml")
                   .addAsResource(new File("src/main/resources/META-INF/persistence.xml"), "META-INF/persistence.xml")
                   .addAsResource(new File("src/main/resources/log4j2.xml"), "log4j2.xml")
-                  .addAsResource("createFishTable.sql")
+                  .addAsResource("Book_Store_DML.sql")
                   .addAsLibraries(dependencies);
 
           return webArchive;
