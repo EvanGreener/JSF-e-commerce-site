@@ -166,6 +166,13 @@ public class CartBackingBean implements Serializable {
         return "cart.xhtml";
     }
 
+    /**
+     * Validates that the expiry year is legitimate and a valid year
+     * By: Giancarlo Biasiucci
+     * @param context
+     * @param component
+     * @param value 
+     */
     public void validateExpiryYear(FacesContext context, UIComponent component, Object value) {
         String year = (String) value;
         try {
@@ -185,6 +192,13 @@ public class CartBackingBean implements Serializable {
         }
     }
 
+    /**
+     * Validates that the expiry month is legitimate and a valid month
+     * By: Giancarlo Biasiucci
+     * @param context
+     * @param component
+     * @param value 
+     */
     public void validateExpiryMonth(FacesContext context, UIComponent component, Object value) {
         String month = (String) value;
         try {
@@ -203,6 +217,14 @@ public class CartBackingBean implements Serializable {
             throw new ValidatorException(msg);
         }
     }
+    
+    /**
+     * Validates that the credit card number is valid
+     * By: Giancarlo Biasiucci
+     * @param context
+     * @param component
+     * @param value 
+     */
 
     public void validateCardNumber(FacesContext context, UIComponent component, Object value) {
         String number = (String) value;
@@ -221,6 +243,13 @@ public class CartBackingBean implements Serializable {
             throw new ValidatorException(msg);
         }
     }
+    
+    /**
+     * Credit card luhn check. FROM: JSFSample20CustomValidator01 : CreditCardValidator
+     * By: Ken Fogel
+     * @param cardNumber
+     * @return 
+     */
 
     private boolean luhnCheck(String cardNumber) {
         int sum = 0;
@@ -244,6 +273,13 @@ public class CartBackingBean implements Serializable {
         return isSignedIn ? "index.xhtml" : "signIn.xhtml";
     }
 
+    /**
+     * Finalizes purchase, clears cart, saves order to database
+     * By: Giancarlo Biasiucci
+     * @param email - Client's email
+     * @return
+     * @throws Exception 
+     */
     public String finalizePurchase(String email) throws Exception {
         Orders newOrder = new Orders();
         Clients client = clientCtrl.findClientByEmail(email);

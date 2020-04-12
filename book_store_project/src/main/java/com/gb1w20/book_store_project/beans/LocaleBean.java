@@ -20,6 +20,7 @@ import org.slf4j.LoggerFactory;
  * redraw the page thus changing the language.
  *
  * @author Ken Fogel, Giancarlo Biasiucci
+ * @version April 12, 2020
  */
 @Named("locale")
 @ViewScoped
@@ -103,6 +104,11 @@ public class LocaleBean implements Serializable {
         locale = lastLocale;
     }
     
+    /**
+     * Returns the localized string corresponding to the current locale
+     * @return The string representing the current locale
+     * By: Giancarlo Biasiucci
+     */
     public String getLocaleString()
     {
         if (locale.equals(new Locale("en", "CA")))

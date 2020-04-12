@@ -1,3 +1,6 @@
+/*
+ * All arquillain tests belong to this package
+ */
 package com.gb1w20.arquillian.test;
 
 import com.gb1w20.arquillian.test.beans.BookTestingBean;
@@ -8,7 +11,6 @@ import com.gb1w20.book_store_project.entities.Book;
 import com.gb1w20.book_store_project.jpa_controllers.BookFormatJpaController;
 import com.gb1w20.book_store_project.entities.BookFormat;
 import com.gb1w20.book_store_project.jpa_controllers.BookJpaController;
-import com.gb1w20.book_store_project.jpa_controllers.ClientsJpaController;
 import com.gb1w20.book_store_project.jpa_controllers.exceptions.IllegalOrphanException;
 import com.gb1w20.book_store_project.util.MessageLoader;
 
@@ -51,6 +53,7 @@ public class BookParameterizedTest {
 
     private final static Logger LOG = LoggerFactory.getLogger(BookParameterizedTest.class);
 
+
     @Deployment
     public static WebArchive deploy() {
 
@@ -88,6 +91,9 @@ public class BookParameterizedTest {
     @Inject
     private BookJpaController bookControl;
 
+    /**
+     *
+     */
     @Rule
     public ParameterRule Bookrule = new ParameterRule("bookTest",
             new BookTestingBean(new Book("9780141439471","Frankenstein"),14, "Not Removed"),
@@ -111,8 +117,13 @@ public class BookParameterizedTest {
     private UserTransaction utx;
     
      /**
+<<<<<<< HEAD
      * Tests if a correct book is returned from an ISBN number
      * By: Giancarlo Biasiucci
+=======
+     * Tests if a correct book is returned from an isbn
+     * @author shruti pareek
+>>>>>>> 574368e2291f90acd82af0bb499612e9ad6bf485
      */
     @Test
     public void testFindSingleBook() {
@@ -127,7 +138,11 @@ public class BookParameterizedTest {
     
     /**
      * Tests if the correct number of similar genre books are returned from an isbn
+<<<<<<< HEAD
      * By: Giancarlo Biasiucci
+=======
+     * @author giancarlo
+>>>>>>> 574368e2291f90acd82af0bb499612e9ad6bf485
      */
     @Test
     public void testFindSimilarGenres() {
@@ -141,8 +156,13 @@ public class BookParameterizedTest {
     }
     
     /**
+<<<<<<< HEAD
      * Tests if the correct book status is retrieved (identical process to controller method)
      * By: Giancarlo Biasiucci
+=======
+     * Tests if the correct status of a book is returned
+     * @author giancarlo
+>>>>>>> 574368e2291f90acd82af0bb499612e9ad6bf485
      */
     @Test
     public void testStatusRetrieval()

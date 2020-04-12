@@ -1,7 +1,5 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * All arquillain tests belong to this package
  */
 package com.gb1w20.arquillian.test;
 
@@ -54,6 +52,10 @@ public class SurveyParameterizedTest {
 
     private final static Logger LOG = LoggerFactory.getLogger(SurveyParameterizedTest.class);
 
+    /**
+     *
+     * @return
+     */
     @Deployment
     public static WebArchive deploy() {
 
@@ -98,6 +100,9 @@ public class SurveyParameterizedTest {
     @Inject
     private SurveyDataJpaController surveyDataControl;
     
+    /**
+     *
+     */
     @Rule
     public ParameterRule surveyRule = new ParameterRule("surveyTest",
             new SurveyTestingBean(1,5,38, "Active Survey",true),
@@ -119,6 +124,9 @@ public class SurveyParameterizedTest {
     @Resource
     private UserTransaction utx;
     
+    /**
+     *
+     */
     @Test
     public void testCorrectChoiceAmount()
     {
@@ -128,6 +136,9 @@ public class SurveyParameterizedTest {
                 surveyTest.expectedChoices, choices);
     }
     
+    /**
+     *
+     */
     @Test
     public void testCorrectUserVotes()
     {
@@ -137,6 +148,9 @@ public class SurveyParameterizedTest {
                 surveyTest.expectedVotes, votes);
     }
     
+    /**
+     *
+     */
     @Test
     public void testActiveSurveyIsReal()
     {

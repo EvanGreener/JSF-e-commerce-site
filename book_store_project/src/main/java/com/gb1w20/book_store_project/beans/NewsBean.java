@@ -31,6 +31,7 @@ public class NewsBean implements Serializable {
     /**
      * method that get random news
      *
+     * @author Shruti Pareek
      * @return News
      */
     public News getRandomNews() {
@@ -42,6 +43,7 @@ public class NewsBean implements Serializable {
     /**
      * method that set the news
      *
+     * @author Shruti Pareek
      * @param news
      */
     public void setRandomNews(News news) {

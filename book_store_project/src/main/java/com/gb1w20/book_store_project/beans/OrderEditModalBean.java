@@ -91,7 +91,8 @@ public class OrderEditModalBean implements Serializable {
     /**
      * Saves the current order information to be displayed in the "Edit Order" modal
      * when the corresponding button is clicked
-     * @param id 
+     * @param id - Order ID
+     * By: Giancarlo Biasiucci
      */
     public void onEdit(int id) {
           LOG.debug("Edit called!");
@@ -104,7 +105,8 @@ public class OrderEditModalBean implements Serializable {
     /**
      * Saves the current order item information to be displayed in the "Edit Item" modal
      * when the corresponding button is clicked
-     * @param id 
+     * @param id - Item ID
+     * By: Giancarlo Biasiucci
      */
     public void onItemEdit(int id) {
           LOG.debug("Item edit called!");
@@ -118,8 +120,10 @@ public class OrderEditModalBean implements Serializable {
     /**
      * Edits the existing order item information with what is present in the fields in the "Edit Item" modal
      * and updates the entry in the database
+     * @param price - The new price
      * @return
      * @throws Exception 
+     * By: Giancarlo Biasiucci
      */
     public String onSubmitEdit(String price) throws Exception {
         LOG.debug("onSubmitEdit called");
@@ -136,6 +140,7 @@ public class OrderEditModalBean implements Serializable {
      * @param context
      * @param component
      * @param value 
+     * By: Giancarlo Biasiucci
      */
     public void validateDouble(FacesContext context, UIComponent component, Object value)
     {

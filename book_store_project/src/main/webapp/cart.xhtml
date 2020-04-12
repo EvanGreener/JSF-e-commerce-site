@@ -1,8 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
-To change this license header, choose License Headers in Project Properties.
-To change this template file, choose Tools | Templates
-and open the template in the editor.
+    Cart page containing all the books the user has opted to purchase (or none if 
+    none were selected). If the user is not logged in when attempting to finalize,
+    they will be prompted with login before finalizing for real. When it comes time to
+    finalize, the user must enter several details including a credit card number,
+    expiry month and year, and a cardholder name. Once the purchase is finalized,
+    the user will be redirected to another page where they can view and print a
+    receipt. The user can also download the books they just purchased on the "My Books"
+    page.
+    
+    By: Saad Khan, Giancarlo Biasiucci
 -->
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
@@ -12,7 +19,7 @@ and open the template in the editor.
       xmlns:bookstore="http://java.sun.com/jsf/composite/default_components"
       xmlns:a="http://xmlns.jcp.org/jsf/passthrough">
     <h:head>
-        <title>#{msgs.cart}</title>
+        <title>#{msgs.cartNav}</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 
         <link href="https://fonts.googleapis.com/css?family=Montserrat|Roboto&amp;display=swap" rel="stylesheet"/>
@@ -104,6 +111,9 @@ and open the template in the editor.
             <!--composite component that comes from the footer.xhtml file to avoid coding the website footer in all web pages-->
             <bookstore:footer/>
         </h:form>
+        <!--
+            Login modal done by: Giancarlo Biasiucci
+        -->
         <div id="loginModal" class="small ui modal">
             <div class="header">
                 <h1>#{msgs.signIn}</h1>
@@ -136,6 +146,13 @@ and open the template in the editor.
             </div>
         </div>
 
+        <!--
+            Finalization modal done by: Saad Khan, Giancarlo Biasiucci.
+        
+            Giancarlo Biasiucci: Card details
+        
+            Saad Khan: Address information
+        -->
         <div id="finalize" class="small ui modal">
             <div class="header">
                 <h1>#{msgs.finalizePurchase}</h1>
@@ -247,6 +264,9 @@ and open the template in the editor.
                 </h:form>
             </div>
         </div>
+            <!--
+                Show correct modal function done by: Giancarlo Biasiucci
+            -->
         <script>
             function showCorrectModal(isSignedIn)
             {

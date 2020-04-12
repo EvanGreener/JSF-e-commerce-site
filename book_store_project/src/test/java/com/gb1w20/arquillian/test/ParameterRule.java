@@ -37,6 +37,11 @@ public class ParameterRule implements MethodRule {
     private final Object[] params;
     private final String fieldName;
 
+    /**
+     *
+     * @param fieldName
+     * @param params
+     */
     public ParameterRule(String fieldName, Object[]... params) {
         if (fieldName == null) {
             throw new IllegalArgumentException("fieldName must be specified");
@@ -48,6 +53,11 @@ public class ParameterRule implements MethodRule {
         this.params = params;
     }
 
+    /**
+     *
+     * @param fieldName
+     * @param params
+     */
     public ParameterRule(String fieldName, Object... params) {
         if (fieldName == null) {
             throw new IllegalArgumentException("fieldName must be specified");
@@ -59,6 +69,13 @@ public class ParameterRule implements MethodRule {
         this.params = params;
     }
 
+    /**
+     *
+     * @param base
+     * @param method
+     * @param target
+     * @return
+     */
     @Override
     public Statement apply(final Statement base, final FrameworkMethod method, final Object target) {
         return new Statement() {

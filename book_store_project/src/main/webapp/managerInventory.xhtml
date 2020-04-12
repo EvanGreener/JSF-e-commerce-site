@@ -1,5 +1,12 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE html>
+<!--
+    Manager-side inventory page where a manager can add, edit, or "remove" books from inventory
+    such that they don't display on any client-side page (or "enable" them so that they do.
+    You can also add authors simply by entering a unique name.
+
+    Manager-side inventory page by: Giancarlo Biasiucci, Shruti Pareek, Evan Greenstein
+-->
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:f="http://xmlns.jcp.org/jsf/core"
@@ -83,6 +90,11 @@
 
         <bookstore:navbar />
 
+        <!--
+            Search section functionality and input layout done by: Evan Greenstein
+        
+            Transition to green on hover done by: Giancarlo Biasiucci
+        -->
         <h:form onsubmit="return false;">
             <div class="middle">
                 <h1 class="ui header">#{msgs.invManage}</h1>
@@ -139,6 +151,9 @@
             <div class="middle">
 
 
+                <!--
+                    Add and edit buttons and functionality done by: Giancarlo Biasiucci, Shruti Pareek
+                -->
                 <h:commandButton value="#{msgs.createBook}" class="big pink ui button" onclick="setTimeout(function () {
                             $('#addModal').modal('show', hideGrowl())
                         }, 500)">
@@ -152,6 +167,9 @@
                 </h:commandButton>
 
 
+                <!--
+                    Table done by: Giancarlo Biasiucci
+                -->
                 <h:dataTable id="bookTable" var="books" style="margin-bottom: 20px;" class="ui celled table" value="#{managerSearch.results}">
 
                     <h:column>
@@ -162,6 +180,9 @@
                         <f:facet name="header">#{msgs.title}</f:facet>
                             #{books.title}
                     </h:column>
+                    <!--
+                        Author retrieval done by: Shruti Pareek
+                    -->
                     <h:column>
                         <f:facet name="header">#{msgs.author}</f:facet>
                             #{authorsJpaController.findAuthors(bookAuthorsJpaController.findBookAuthorsByIsbn(books.isbn)[0].authorID).name}
@@ -207,6 +228,9 @@
             </div>
             <bookstore:footer />
         </h:form>
+        <!--
+            Add book, add author, and edit book modals done by: Giancarlo Biasiucci
+        -->
         <div id="addModal" class="small ui modal">
             <div class="header">
                 <h1>#{msgs.createBook}</h1>
@@ -310,6 +334,9 @@
             </div>
         </div>
 
+        <!--
+            Add book, add author, and edit book modals done by: Giancarlo Biasiucci
+        -->
         <div id="editModal" class="small ui modal">
             <div class="header">
                 <h1>#{msgs.editBook}</h1>
@@ -410,6 +437,9 @@
             </div>
         </div>
         
+        <!--
+            Add book, add author, and edit book modals done by: Giancarlo Biasiucci
+        -->
         <div id="addAuthorModal" class="small ui modal">
             <div class="header">
                 <h1>#{msgs.addAuthor}</h1>

@@ -30,8 +30,16 @@ public class BookFormatJpaController implements Serializable {
     @PersistenceContext
     private EntityManager em;
 
+    /**
+     *
+     */
     public BookFormatJpaController() {}
 
+    /**
+     *
+     * @param bookFormat
+     * @throws Exception
+     */
     public void create(BookFormat bookFormat) throws Exception {
     try {
         utx.begin();
@@ -47,6 +55,12 @@ public class BookFormatJpaController implements Serializable {
     }
 }
 
+    /**
+     *
+     * @param bookFormat
+     * @throws NonexistentEntityException
+     * @throws Exception
+     */
     public void edit(BookFormat bookFormat) throws NonexistentEntityException, Exception {
         try {
             utx.begin();
@@ -69,6 +83,12 @@ public class BookFormatJpaController implements Serializable {
         }
     }
 
+    /**
+     *
+     * @param id
+     * @throws NonexistentEntityException
+     * @throws Exception
+     */
     public void destroy(Integer id) throws NonexistentEntityException, Exception {
         try {
             utx.begin();
@@ -91,10 +111,20 @@ public class BookFormatJpaController implements Serializable {
         }
     }
 
+    /**
+     *
+     * @return
+     */
     public List<BookFormat> findBookFormatEntities() {
         return findBookFormatEntities(true, -1, -1);
     }
 
+    /**
+     *
+     * @param maxResults
+     * @param firstResult
+     * @return
+     */
     public List<BookFormat> findBookFormatEntities(int maxResults, int firstResult) {
         return findBookFormatEntities(false, maxResults, firstResult);
     }
@@ -110,10 +140,19 @@ public class BookFormatJpaController implements Serializable {
         return q.getResultList();
     }
 
+    /**
+     *
+     * @param id
+     * @return
+     */
     public BookFormat findBookFormat(Integer id) {
             return em.find(BookFormat.class, id);
     }
 
+    /**
+     *
+     * @return
+     */
     public int getBookFormatCount() {
             CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
             Root<BookFormat> rt = cq.from(BookFormat.class);

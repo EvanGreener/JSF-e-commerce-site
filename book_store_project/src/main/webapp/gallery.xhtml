@@ -39,7 +39,7 @@
                               <p>#{msgs.filterByGenre}</p>
                               <h:selectManyCheckbox layout="pageDirection" value="#{search.genreFilters}">
                                    <p:ajax update="gallery pagination resLabel" listener="#{search.onChecked}" />
-                                   <f:selectItem itemValue = "Science Fiction" itemLabel = "#{msgs.sciFi}"/>
+                                   <f:selectItem itemValue = "Science Fiction" itemLabel = "#{msgs.scifi}"/>
                                    <f:selectItem itemValue = "Mystery" itemLabel = "#{msgs.mystery}" />
                                    <f:selectItem itemValue = "Fantasy" itemLabel = "#{msgs.fantasy}" />
                                    <f:selectItem itemValue = "Horror" itemLabel = "#{msgs.horror}" />
@@ -150,7 +150,7 @@
 
                </div>
                <div class="recommendations">
-                    <h3 style="text-align: center;">You may also like</h3>
+                    <h3 style="text-align: center;">#{msgs.alsoLike}</h3>
                     <div class="swiper-container">
                          <div class="swiper-wrapper">
                               <ui:param name="limit" value="6"/>

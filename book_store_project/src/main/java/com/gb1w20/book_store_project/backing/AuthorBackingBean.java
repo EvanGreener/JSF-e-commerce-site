@@ -51,7 +51,7 @@ public class AuthorBackingBean implements Serializable {
 
     /**
      * Save the current author to the db
-     *
+     * 
      * @return
      * @throws Exception
      */
@@ -65,12 +65,13 @@ public class AuthorBackingBean implements Serializable {
     }
     
     /**
-     * Validation method ensuring that a field in the "Add Book" modal is not
-     * left null
+     * Validation method ensuring that the field in the "Add Author" modal is not
+     * left null, nor that it contains the name of an existing author
      *
      * @param context
      * @param component
      * @param value
+     * By: Giancarlo Biasiucci
      */
     public void validateUniqueAndValidAuthor(FacesContext context, UIComponent component, Object value) {
         String input = (String)value;

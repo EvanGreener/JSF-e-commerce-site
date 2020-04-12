@@ -3,12 +3,10 @@
  */
 package com.gb1w20.arquillian.test;
 
-import com.gb1w20.arquillian.test.beans.AdsTestingBean;
-import com.gb1w20.book_store_project.beans.NewsBean;
-import com.gb1w20.book_store_project.entities.Ads;
-import com.gb1w20.book_store_project.jpa_controllers.AdsJpaController;
+import com.gb1w20.arquillian.test.beans.ClientInventoryTestingBean;
+import com.gb1w20.book_store_project.entities.ClientInventory;
+import com.gb1w20.book_store_project.jpa_controllers.ClientInventoryJpaController;
 import com.gb1w20.book_store_project.jpa_controllers.exceptions.IllegalOrphanException;
-import com.gb1w20.book_store_project.util.MessageLoader;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;
@@ -32,7 +30,6 @@ import org.jboss.shrinkwrap.api.ShrinkWrap;
 import org.jboss.shrinkwrap.api.asset.EmptyAsset;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.jboss.shrinkwrap.resolver.api.maven.Maven;
-import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 import org.junit.Before;
 import org.junit.Rule;
@@ -42,24 +39,21 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
-<<<<<<< HEAD
- * Parameterized testing for the ad class
- * @author Giancarlo Biasiucci,shruti pareek
- * @version April 11, 2020
-=======
- * Tests ads jpa controller methods
- * @author giancarlo,shruti pareek
->>>>>>> 574368e2291f90acd82af0bb499612e9ad6bf485
+ * tests the client inventory jpa methods
+ * @author shruti pareek
  */
 @RunWith(Arquillian.class)
-public class AdsParameterizedTest {
+public class ClientInventoryParameterizedTest {
 
-    private final static Logger LOG = LoggerFactory.getLogger(AdsParameterizedTest.class);
+    private final static Logger LOG = LoggerFactory.getLogger(ClientInventoryParameterizedTest.class);
 
 
     @Deployment
     public static WebArchive deploy() {
 
+        // Use an alternative to the JUnit assert library called AssertJ
+        // Need to reference MySQL driver as it is not part of either
+        // embedded or remote
         final File[] dependencies = Maven
                 .resolver()
                 .loadPomFromFile("pom.xml")
@@ -74,14 +68,11 @@ public class AdsParameterizedTest {
         final WebArchive webArchive;
         webArchive = ShrinkWrap.create(WebArchive.class, "test.war")
                 .setWebXML(new File("src/main/webapp/WEB-INF/web.xml"))
-                
                 .addPackage(IllegalOrphanException.class.getPackage())
-                .addPackage(AdsJpaController.class.getPackage())
+                .addPackage(ClientInventoryJpaController.class.getPackage())
                 .addPackage(ParameterRule.class.getPackage())
-                .addPackage(NewsBean.class.getPackage())
-                .addPackage(MessageLoader.class.getPackage())
-                .addPackage(AdsTestingBean.class.getPackage())
-                .addPackage(Ads.class.getPackage())
+                .addPackage(ClientInventoryTestingBean.class.getPackage())
+                .addPackage(ClientInventory.class.getPackage())
                 .addAsWebInfResource(EmptyAsset.INSTANCE, "beans.xml")
                 .addAsWebInfResource(new File("src/main/webapp/WEB-INF/payara-resources.xml"), "payara-resources.xml")
                 .addAsResource(new File("src/main/resources/META-INF/persistence.xml"), "META-INF/persistence.xml")
@@ -92,22 +83,21 @@ public class AdsParameterizedTest {
         return webArchive;
     }
     @Inject
-    private AdsJpaController adsControl;
+    private ClientInventoryJpaController clientInventoryControl;
 
     /**
-     *
+     * data to test methods
      */
     @Rule
-    public ParameterRule adsRule = new ParameterRule("adTest",
-            new AdsTestingBean(1, "Not Removed", 2),
-            new AdsTestingBean(2, "Not Removed", 2),
-            new AdsTestingBean(3, "Removed", 2),
-            new AdsTestingBean(4, "Removed", 2),
-            new AdsTestingBean(5, "Removed", 2),
-            new AdsTestingBean(6, "Removed", 2)
+    public ParameterRule ClientInventoryRule = new ParameterRule("clientInventoryTest",
+            new ClientInventoryTestingBean(1, new ClientInventory(1)),
+            new ClientInventoryTestingBean(2, new ClientInventory(2)),
+            new ClientInventoryTestingBean(3, new ClientInventory(3)),
+            new ClientInventoryTestingBean(5, new ClientInventory(4)),
+            new ClientInventoryTestingBean(6, new ClientInventory(5))
     );
 
-    private AdsTestingBean adTest;
+    private ClientInventoryTestingBean clientInventoryTest;
 
     @Resource(lookup = "java:app/jdbc/bookstore")
     private DataSource ds;
@@ -119,70 +109,27 @@ public class AdsParameterizedTest {
     private UserTransaction utx;
 
     /**
-     * Tests if a randomly generated advertisement is an actual ad
-     * By: Giancarlo Biasiucci
-     */
-    @Test
-    public void testRandomAdIsAlwaysReal() {
-        Ads ad = adsControl.getRandomAd();
-        List<Ads> allAds = adsControl.findAdsEntities();
-        assertTrue("Expected: included, actual: not", allAds.contains(ad));
-    }
-    
-    /**
-     * Replicates the status retrieval method in the controller to test if the expected
-     * removal status of an ad is retrieved
-     * By: Giancarlo Biasiucci
-     */
-    @Test
-    public void testExpectedStatus()
-    {
-        String removalString = "Not Removed";
-        boolean removalStatus = adsControl.findAds(adTest.adID).getIsRemoved();
-        if (removalStatus)
-        {
-            removalString = "Removed";
-        }
-        assertEquals("Expected: " + adTest.expectedStatus + ", actual: " + removalString,
-                adTest.expectedStatus, removalString);
-    }
-    
-    /**
-     * method for testing the count of advertisements
+     * tests if finds client's inventory through their id
      * @author shruti pareek
      */
     @Test
-    public void testGetAdsCount() {
-        LOG.debug("testGetAdsCount");
-        boolean isSuccess = true;
-        int resultAdCount = adsControl.getAdsCount();
-        if (!(resultAdCount == adTest.expectedCount)) {
-            isSuccess = false;
-        }
-        assertTrue("adTest returned inconsistent results Expected:" + adTest.expectedCount + " Actual:" + resultAdCount, isSuccess);
-    }
-
-    /**
-     * @author shruti pareek
-     */
-    @Test
-    public void testAllEnabledAds() {
-        LOG.debug("testAllEnabledAds");
+    public void testFindClientInventory() {
+        LOG.debug("testFindClientInventory");
         boolean isSuccess = false;
-        List<Ads> resultEnabledAds = adsControl.getAllEnabledAds();
-        for (Ads testAd : resultEnabledAds) {
-            if (!(testAd.getAdID() == adTest.adID)) {
+        List<ClientInventory> resultClientInventory = clientInventoryControl.findClientInventory(clientInventoryTest.clientId);
+        for (ClientInventory c : resultClientInventory) {
+            if (c.toString().equals(clientInventoryTest.expectedClientInventory.toString())) {
                 isSuccess = true;
             }
         }
-        assertTrue("adTest returned inconsistent results", isSuccess);
+
+        assertTrue("clientInventoryTest returned inconsistent results ", isSuccess);
     }
 
     /**
      * Restore the database to a known state before testing. This is important
      * if the test is destructive. This routine is courtesy of Bartosz Majsak
      * who also solved my Arquillian remote server problem
-     * From: KFWebStandardProject - ArquillianUnitTest.java
      */
     @Before
     public void seedDatabase() {
@@ -200,7 +147,6 @@ public class AdsParameterizedTest {
 
     /**
      * The following methods support the seedDatabse method
-     * All of the following are from: KFWebStandardProject - ArquillianUnitTest.java
      */
     private String loadAsString(final String path) {
         try (InputStream inputStream = Thread.currentThread()

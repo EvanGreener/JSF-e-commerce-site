@@ -56,6 +56,7 @@ public class OrderBackingBean implements Serializable {
      * @param order
      * @return
      * @throws Exception 
+     * By: Giancarlo Biasiucci
      */
     public String removeOrder(Orders order) throws Exception {
         order.setIsRemoved(true);
@@ -69,6 +70,7 @@ public class OrderBackingBean implements Serializable {
      * @param order
      * @return
      * @throws Exception 
+     * By: Giancarlo Biasiucci
      */
     public String addOrder(Orders order) throws Exception {
         order.setIsRemoved(false);
@@ -84,6 +86,7 @@ public class OrderBackingBean implements Serializable {
      * @param order
      * @return
      * @throws Exception 
+     * By: Giancarlo Biasiucci
      */
     public String addOrRemoveOrder(Orders order) throws Exception
     {
@@ -105,6 +108,7 @@ public class OrderBackingBean implements Serializable {
      * @param isRemoved
      * @return
      * @throws Exception 
+     * By: Giancarlo Biasiucci
      */
     public String getRemovalStatus(boolean isRemoved) throws Exception {
         if (isRemoved)

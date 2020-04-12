@@ -34,7 +34,7 @@ public class AdBackingBean implements Serializable {
 
     /**
      * If the ad managed by the bean is null, it will be created from scratch to avoid a NullPointerException.
-     *
+     * 
      * @return
      */
     public Ads getAd() {
@@ -46,7 +46,7 @@ public class AdBackingBean implements Serializable {
 
     /**
      * Creates the ad based on the data entered in the corresponding modal and saves it to the database.
-     *
+     * 
      * @return
      * @throws Exception
      */
@@ -65,9 +65,10 @@ public class AdBackingBean implements Serializable {
     
     /**
      * Marks an ad as removed (changes removal status to true)
-     * @param order
+     * @param ad
      * @return
      * @throws Exception 
+     * By: Giancarlo Biasiucci
      */
     public String removeAd(Ads ad) throws Exception {
         LOG.debug("Reached the remove method");
@@ -81,10 +82,11 @@ public class AdBackingBean implements Serializable {
     }
     
     /**
-     * Marks an order as not removed (changes removal status to false)
-     * @param order
+     * Marks an ad as not removed (changes removal status to false)
+     * @param ad
      * @return
      * @throws Exception 
+     * By: Giancarlo Biasiucci
      */
     public String addAd(Ads ad) throws Exception {
         LOG.debug("Reached the add method");
@@ -103,6 +105,7 @@ public class AdBackingBean implements Serializable {
      * guarantees that 1 or 2 ads are enabled at all times.
      * @param ad
      * @return 
+     * By: Giancarlo Biasiucci
      */
     public boolean decideDisabled(Ads ad)
     {   
@@ -133,6 +136,7 @@ public class AdBackingBean implements Serializable {
      * @param ad
      * @return
      * @throws Exception 
+     * By: Giancarlo Biasiucci
      */
     public String addOrRemoveAd(Ads ad) throws Exception
     {
@@ -154,6 +158,7 @@ public class AdBackingBean implements Serializable {
      * @param isRemoved
      * @return
      * @throws Exception 
+     * By: Giancarlo Biasiucci
      */
     public String getRemovalStatus(boolean isRemoved) throws Exception {
         if (isRemoved)

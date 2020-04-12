@@ -155,6 +155,7 @@ public class EditBookBean implements Serializable {
      * Saves the current book information to be displayed in the "Edit Book" modal
      * when the corresponding button is clicked
      * @param isbn 
+     * By: Giancarlo Biasiucci
      */
     public void onEdit(String isbn,Authors author)
     {
@@ -173,16 +174,31 @@ public class EditBookBean implements Serializable {
         LOG.debug("Current ISBN: " + currentBook.getIsbn());
     }
     
+    /**
+     * Changes the new genre whenever one is selected
+     * @param newGenre - The new genre
+     * By: Giancarlo Biasiucci
+     */
     public void genreChangeMethod(String newGenre){
         LOG.debug("new genre: " + newGenre);
         this.newGenre = newGenre;
     }
     
+    /**
+     * Changes the new author whenever one is selected
+     * @param newAuthName - New author name
+     * By: Giancarlo Biasiucci
+     */
     public void authChangeMethod(String newAuthName){
         LOG.debug("new auth: " + newAuthName);
         newAuthor = authControl.getAuthorByName(newAuthName);
     }
     
+    /**
+     * Changes the new publisher whenever one is selected
+     * @param newPubName - New publisher name
+     * By: Giancarlo Biasiucci
+     */
     public void pubChangeMethod(String newPubName){
         LOG.debug("new pub: " + newPubName);
         newPublisher = pubControl.getPublisherByName(newPubName);
@@ -193,6 +209,7 @@ public class EditBookBean implements Serializable {
      * and updates the entry in the database
      * @return
      * @throws Exception 
+     * By: Giancarlo Biasiucci
      */
     public String onSubmitEdit() throws Exception
     {

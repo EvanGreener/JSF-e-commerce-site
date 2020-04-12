@@ -20,7 +20,7 @@ import javax.transaction.SystemException;
 import javax.transaction.UserTransaction;
 
 /**
- *
+ * Queries that facilitate accessing certain publishers
  * @author Saad
  */
 @Named
@@ -33,8 +33,16 @@ public class PublisherJpaController implements Serializable {
     @PersistenceContext
     private EntityManager em;
 
+    /**
+     *
+     */
     public PublisherJpaController() {}
 
+    /**
+     *
+     * @param publisher
+     * @throws Exception
+     */
     public void create(Publisher publisher) throws Exception {
     try {
         utx.begin();
@@ -50,6 +58,12 @@ public class PublisherJpaController implements Serializable {
     }
 }
 
+    /**
+     *
+     * @param publisher
+     * @throws NonexistentEntityException
+     * @throws Exception
+     */
     public void edit(Publisher publisher) throws NonexistentEntityException, Exception {
         try {
             utx.begin();
@@ -72,6 +86,12 @@ public class PublisherJpaController implements Serializable {
         }
     }
 
+    /**
+     *
+     * @param id
+     * @throws NonexistentEntityException
+     * @throws Exception
+     */
     public void destroy(Integer id) throws NonexistentEntityException, Exception {
         try {
             utx.begin();
@@ -94,10 +114,20 @@ public class PublisherJpaController implements Serializable {
         }
     }
 
+    /**
+     *
+     * @return
+     */
     public List<Publisher> findPublisherEntities() {
         return findPublisherEntities(true, -1, -1);
     }
 
+    /**
+     *
+     * @param maxResults
+     * @param firstResult
+     * @return
+     */
     public List<Publisher> findPublisherEntities(int maxResults, int firstResult) {
         return findPublisherEntities(false, maxResults, firstResult);
     }
@@ -113,10 +143,19 @@ public class PublisherJpaController implements Serializable {
         return q.getResultList();
     }
 
+    /**
+     *
+     * @param id
+     * @return
+     */
     public Publisher findPublisher(Integer id) {
             return em.find(Publisher.class, id);
     }
 
+    /**
+     *
+     * @return
+     */
     public int getPublisherCount() {
             CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
             Root<Publisher> rt = cq.from(Publisher.class);
@@ -126,6 +165,11 @@ public class PublisherJpaController implements Serializable {
             return ((Long) q.getSingleResult()).intValue();
     }
     
+    /**
+     * Gets the names of all the publishers
+     * @return The names of all the publishers
+     * @author Giancarlo Biasiucci
+     */
     public List<String> getPublisherNames() {
         CriteriaBuilder cb = em.getCriteriaBuilder();
         CriteriaQuery cq = cb.createQuery();
@@ -135,6 +179,12 @@ public class PublisherJpaController implements Serializable {
         return q.getResultList();
     }
     
+    /**
+     * Gets a publisher ID based on their name
+     * @param name - The name of the publisher
+     * @return The publisher ID
+     * @author Giancarlo Biasiucci
+     */
     public int getPublisherIDByName(String name) {
         CriteriaBuilder cb = em.getCriteriaBuilder();
         CriteriaQuery cq = cb.createQuery();
@@ -145,6 +195,12 @@ public class PublisherJpaController implements Serializable {
         return q.getSingleResult();
     }
     
+    /**
+     * Gets the publisher object based on their name
+     * @param name - The name of the publisher
+     * @return The publisher object
+     * @author Giancarlo Biasiucci
+     */
     public Publisher getPublisherByName(String name) {
         CriteriaBuilder cb = em.getCriteriaBuilder();
         CriteriaQuery cq = cb.createQuery();

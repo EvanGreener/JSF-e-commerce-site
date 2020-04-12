@@ -1,4 +1,11 @@
 <?xml version='1.0' encoding='UTF-8' ?>
+<!--
+    Manager-side sales page where a manager can update books' sale prices, and essentially
+    add or remove sales. They can filter by books that are not on sale, books that are
+    on sale, and all books in inventory.
+
+    Manager-side sales page done by: Giancarlo Biasiucci, Shruti Pareek
+-->
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://java.sun.com/jsf/html"
@@ -89,6 +96,10 @@
 
                 <br/>
 
+                <!--
+                        Search section done by: Giancarlo Biasiucci (inspired by Evan Greenstein's
+                        search section)
+                -->
                 <div class="ui form">
                     <div class="three fields searchCriteria">
                         <div class="field">
@@ -136,7 +147,7 @@
 
             <div class="middle">
 
-                
+                <!-- Command buttons added by: Giancarlo Biasiucci -->
                 <h:commandButton value="#{msgs.onSale}">
                     <f:ajax event="click" listener="#{salesBean.setBooksDisplayed(bookJpaController.getAllSaleBooks())}" />
                 </h:commandButton>
@@ -147,6 +158,7 @@
                     <f:ajax event="click" listener="#{salesBean.setBooksDisplayed(bookJpaController.findBookEntities())}" />
                 </h:commandButton>
                 #{managerSearch.onKeyUp(salesBean.booksDisplayed)}
+                <!-- Sales table by: Giancarlo Biasiucci -->
                 <h:dataTable id="saleTable" var="sales" style="margin-bottom: 20px;" class="ui celled table" value="#{managerSearch.results}">
                     <h:column>
                         <f:facet name="header">#{msgs.isbn}</f:facet>
@@ -156,6 +168,7 @@
                         <f:facet name="header">#{msgs.title}</f:facet>
                             #{sales.title}
                     </h:column>
+                    <!-- Authors column functionality designed by: Shruti Pareek -->
                     <h:column>
                         <f:facet name="header">#{msgs.author}</f:facet>
                             #{authorsJpaController.findAuthors(bookAuthorsJpaController.findBookAuthorsByIsbn(sales.isbn)[0].authorID).name}
@@ -164,6 +177,7 @@
                         <f:facet name="header">#{msgs.listPrice}</f:facet>
                             $#{sales.listPrice}
                     </h:column>
+                    <!-- Sale price column functionality designed by: Shruti Pareek -->
                     <h:column>
                         <f:facet name="header">#{msgs.salePrice}</f:facet>
                             $#{bookJpaController.findAnySingleBook(sales.isbn).salePrice}
@@ -192,6 +206,7 @@
             <bookstore:footer />
         </h:form>
 
+        <!-- Edit sale modal done by: Giancarlo Biasiucci -->
         <div id="editModal" class="small ui modal">
             <div class="header">
                 <h1>#{msgs.editSale}</h1>

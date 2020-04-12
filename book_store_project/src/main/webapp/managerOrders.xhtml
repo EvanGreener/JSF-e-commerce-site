@@ -1,4 +1,11 @@
 <?xml version='1.0' encoding='UTF-8' ?>
+<!--
+    Manager-side order page where a manager can edit or "remove"/"enable" existing orders.
+    Editing an order involves "adding"/"removing" items in that order and editing an item's
+    sale price.
+
+    Manager-side order page done by: Giancarlo Biasiucci, Evan Greenstein
+-->
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://java.sun.com/jsf/html"
@@ -92,6 +99,10 @@
 
                     <h1>#{msgs.orderManage}</h1>
                     
+                    <!--
+                        Search section done by: Giancarlo Biasiucci (inspired by Evan Greenstein's
+                        search section)
+                    -->
                     <p>#{msgs.searchBy}</p>
                         <h:selectOneRadio layout="pageDirection" value="#{orderSearch.searchBy}" >
                             <p:ajax update="ordersTable" />
@@ -108,7 +119,9 @@
                     </div>
 
 
-
+                    <!--
+                        Order table done by: Giancarlo Biasiucci
+                    -->
                     <h:dataTable  id="ordersTable" var="orders" style="margin-bottom: 20px;"  class="ui celled table" value="#{orderSearch.searchResults}" >
                          <h:column>
                               <f:facet name="header">#{msgs.orderID}</f:facet>
@@ -155,6 +168,9 @@
                          <h1>#{msgs.orderNum} #{orderEdit.currentOrder.orderID} </h1>
                     </div>
                     <div class="content">
+                        <!--
+                            Order item table done by: Giancarlo Biasiucci
+                        -->
                          <h:dataTable class="ui celled table" value="#{orderEdit.currentOrder.orderItems}" var="items">
                               <h:column>
                                    <f:facet name="header">#{msgs.isbn}</f:facet>
@@ -189,6 +205,9 @@
                     </div>
                </div>
 
+                    <!--
+                        Edit item modal done by: Giancarlo Biasiucci, Evan Greenstein
+                    -->
                <div id="editItemModal" class="small ui modal">
                     <div class="header">
                          <h1>#{msgs.itemNum} #{orderEdit.currentItem.itemID} </h1>

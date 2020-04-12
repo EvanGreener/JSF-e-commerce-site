@@ -1,14 +1,11 @@
+/*
+ * All arquillain tests belong to this package
+ */
 package com.gb1w20.arquillian.test;
 
-import com.gb1w20.arquillian.test.beans.BookTestingBean;
 import com.gb1w20.arquillian.test.beans.ClientTestingBean;
-import com.gb1w20.book_store_project.backing.BookFormatBackingBean;
 import com.gb1w20.book_store_project.beans.NewsBean;
-import com.gb1w20.book_store_project.entities.Book;
-import com.gb1w20.book_store_project.jpa_controllers.BookFormatJpaController;
-import com.gb1w20.book_store_project.entities.BookFormat;
 import com.gb1w20.book_store_project.entities.Clients;
-import com.gb1w20.book_store_project.jpa_controllers.BookJpaController;
 import com.gb1w20.book_store_project.jpa_controllers.ClientsJpaController;
 import com.gb1w20.book_store_project.jpa_controllers.exceptions.IllegalOrphanException;
 import com.gb1w20.book_store_project.util.MessageLoader;
@@ -42,13 +39,14 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
- *
+ * tests client jpa controller methods
  * @author giancarlo,Shruti pareek
  */
 @RunWith(Arquillian.class)
 public class ClientParameterizedTest {
 
     private final static Logger LOG = LoggerFactory.getLogger(ClientParameterizedTest.class);
+
 
     @Deployment
     public static WebArchive deploy() {
@@ -90,6 +88,9 @@ public class ClientParameterizedTest {
     @Inject
     private ClientsJpaController clientControl;
 
+    /**
+     * data to test client controller methods
+     */
     @Rule
     public ParameterRule rule = new ParameterRule("dynamic",
             new ClientTestingBean("dcastaner0@cbslocal.com", "dcastaner0@cbslocal.com", false, "Dosi", "1",
@@ -120,6 +121,9 @@ public class ClientParameterizedTest {
     @Resource
     private UserTransaction utx;
 
+    /**
+     * @author giancarlo
+     */
     @Test
     public void testEmailInfo() {
         boolean isSuccess = true;
@@ -133,6 +137,9 @@ public class ClientParameterizedTest {
         assertTrue("Email info returned inconsistent results", isSuccess);
     }
 
+    /**
+     * @author giancarlo
+     */
     @Test
     public void testEmailSearch() {
         boolean isSuccess = true;
@@ -166,6 +173,7 @@ public class ClientParameterizedTest {
     }
 
     /**
+     * tests if gets correct email
      * @author Shruti Pareek
      */
     @Test
@@ -180,6 +188,7 @@ public class ClientParameterizedTest {
     }
 
     /**
+     * tests if gets clients by email
      * @author Shruti Pareek
      */
     @Test
@@ -194,23 +203,23 @@ public class ClientParameterizedTest {
     }
 
     /**
+     * tests if correct client info is returned when searching for clients
      * @author Shruti Pareek
      */
     @Test
     public void testSearchClients() {
         LOG.debug("testSearchClients");
         boolean isSuccess = true;
-        try{
-        List<Object[]> resultClientInfo = clientControl.searchClients(dynamic.expectedQuery, dynamic.expectedSearchBy);
-       
+        try {
+            List<Object[]> resultClientInfo = clientControl.searchClients(dynamic.expectedQuery, dynamic.expectedSearchBy);
+
             if (!(resultClientInfo.get(0)[0].toString().equals(dynamic.expectedClient.getClientID().toString()))) {
                 isSuccess = false;
             }
-        
-        assertTrue("Email info returned inconsistent results Expected:" + dynamic.expectedClient.getClientID() + " Actual:" + resultClientInfo.get(0)[0].toString(), isSuccess);
-        }
-        catch(ArrayIndexOutOfBoundsException e){
-             assertTrue("Email info returned inconsistent results", isSuccess);
+
+            assertTrue("Email info returned inconsistent results Expected:" + dynamic.expectedClient.getClientID() + " Actual:" + resultClientInfo.get(0)[0].toString(), isSuccess);
+        } catch (ArrayIndexOutOfBoundsException e) {
+            assertTrue("Email info returned inconsistent results", isSuccess);
         }
     }
 

@@ -66,6 +66,7 @@ public class OrderSearchBean implements Serializable {
     
     /**
      * Updates the bean with the new search query, and performs the search with the new query
+     * By: Giancarlo Biasiucci
      */
     public void updateBean() {
           LOG.debug("Update called");
@@ -73,6 +74,11 @@ public class OrderSearchBean implements Serializable {
           searchResults = orderCtrl.searchOrders(this.query, this.searchBy);
      }
     
+    /**
+     * Sets the current order every time it is to be edited
+     * @param id - order ID
+     * By: Giancarlo Biasiucci
+     */
      public void onEdit(int id) {
           LOG.debug(id + "");
           currentOrder = orderCtrl.findOrders(id);

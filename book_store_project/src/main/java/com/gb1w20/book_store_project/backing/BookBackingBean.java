@@ -3,7 +3,6 @@ package com.gb1w20.book_store_project.backing;
 import com.gb1w20.book_store_project.entities.Authors;
 import com.gb1w20.book_store_project.entities.Book;
 import com.gb1w20.book_store_project.entities.BookAuthors;
-import com.gb1w20.book_store_project.entities.Publisher;
 import com.gb1w20.book_store_project.jpa_controllers.AuthorsJpaController;
 import com.gb1w20.book_store_project.jpa_controllers.BookAuthorsJpaController;
 import com.gb1w20.book_store_project.jpa_controllers.BookJpaController;
@@ -51,7 +50,7 @@ public class BookBackingBean implements Serializable {
     private String selectedPub;
     private List<String> pubNames;
     private List<String> authorNames;
-    private Authors selectedAuthor;
+    private Authors selectedAuthor = new Authors();
     private String selectedGenre;
     private String pageNum;
     private String lPriceStr;
@@ -75,6 +74,12 @@ public class BookBackingBean implements Serializable {
         }
         return book;
     }
+    
+    /**
+     * By: Giancarlo Biasiucci
+     * Returns the names of all publishers every time one is to be selected
+     * @return List of publishers
+     */
 
     public List<String> getPubNames() {
         if (pubNames == null) {
@@ -83,6 +88,11 @@ public class BookBackingBean implements Serializable {
         return pubNames;
     }
 
+    /**
+     * By: Giancarlo Biasiucci
+     * Returns a list of all authors every time one is to be selected
+     * @return List of authors
+     */
     public List<String> getAuthorNames() {
         if (authorNames == null) {
             authorNames = authorsJpaController.getAuthorNames();
@@ -90,7 +100,12 @@ public class BookBackingBean implements Serializable {
         return authorNames;
     }
 
-    //Genres are added manually since referencing the controller at this point would generate a NullPointerException
+    /**
+     * Genres are added manually since referencing the controller at this point 
+     * would generate a NullPointerException
+     * By: Giancarlo Biasiucci
+     * @return List of genres
+     */
     public List<String> getGenres() {
         if (genres == null) {
             genres = new ArrayList<String>();
@@ -164,10 +179,6 @@ public class BookBackingBean implements Serializable {
     }
 
     public Authors getSelectedAuthor() {
-        if (selectedAuthor == null)
-        {
-            selectedAuthor = authorsJpaController.getAuthorByName("John Steinbeck");
-        }
         return selectedAuthor;
     }
 
@@ -184,7 +195,7 @@ public class BookBackingBean implements Serializable {
      * @throws Exception
      */
     public String createBook() throws Exception {
-        List<Authors> authors = new ArrayList<Authors>();
+        List<Authors> authors = new ArrayList<>();
         authors.add(selectedAuthor);
         book.setGenre(selectedGenre);
         book.setListPrice(BigDecimal.valueOf(Double.parseDouble(lPriceStr)));
@@ -213,7 +224,7 @@ public class BookBackingBean implements Serializable {
 
     /**
      * Marks a book as removed (changes removal status to true)
-     *
+     * By: Giancarlo Biasiucci
      * @param book
      * @return
      * @throws Exception
@@ -231,7 +242,7 @@ public class BookBackingBean implements Serializable {
 
     /**
      * Marks a book as not removed (changes removal status to false)
-     *
+     * By: Giancarlo Biasiucci
      * @param book
      * @return
      * @throws Exception
@@ -252,7 +263,7 @@ public class BookBackingBean implements Serializable {
      * removal status whenever the corresponding link in the managerial ad page
      * is clicked (changed to other state, if true than changed to false and
      * vice versa)
-     *
+     * By: Giancarlo Biasiucci
      * @param book
      * @return
      * @throws Exception
@@ -270,9 +281,9 @@ public class BookBackingBean implements Serializable {
     /**
      * Returns a String indicating what will occur when the corresponding link
      * in the managerial book page is clicked
-     *
+     * By: Giancarlo Biasiucci
      * @param isRemoved
-     * @return
+     * @return String indicating removal status
      * @throws Exception
      */
     public String getRemovalStatus(boolean isRemoved) throws Exception {
@@ -289,7 +300,7 @@ public class BookBackingBean implements Serializable {
     /**
      * Validation method ensuring that a field in the "Add Book" modal is not
      * left null
-     *
+     * By: Giancarlo Biasiucci
      * @param context
      * @param component
      * @param value
@@ -305,9 +316,9 @@ public class BookBackingBean implements Serializable {
     }
 
     /**
-     * Validation method ensuring that an entered ISBN is entirely numerical and
+     * Validation method ensuring that an entered ISBN is entirely numerical, unique, and
      * of a valid length
-     *
+     * By: Giancarlo Biasiucci
      * @param context
      * @param component
      * @param value
@@ -346,17 +357,32 @@ public class BookBackingBean implements Serializable {
         }
     }
 
+    /**
+     * By: Giancarlo Biasiucci
+     * Sets the genre for the new book every time one is selected
+     * @param newGenre 
+     */
     public void genreChangeMethod(String newGenre) {
         LOG.debug("new genre: " + newGenre);
         selectedGenre = newGenre;
     }
 
+    /**
+     * By: Giancarlo Biasiucci
+     * Sets the author for the new book every time one is selected
+     * @param newAuthName 
+     */
     public void authChangeMethod(String newAuthName) {
         LOG.debug("new auth: " + newAuthName);
         selectedAuthor = authorsJpaController.getAuthorByName(newAuthName);
         LOG.debug("new auth: " + selectedAuthor.getAuthorID());
     }
 
+    /**
+     * By: Giancarlo Biasiucci
+     * Sets the publisher for the new book every time one is selected
+     * @param newPubName 
+     */
     public void pubChangeMethod(String newPubName) {
         LOG.debug("new pub: " + newPubName);
         selectedPub = newPubName;
@@ -364,7 +390,7 @@ public class BookBackingBean implements Serializable {
 
     /**
      * Validation method ensuring that the number of pages is entirely numerical
-     *
+     * By: Giancarlo Biasiucci
      * @param context
      * @param component
      * @param value
@@ -391,7 +417,7 @@ public class BookBackingBean implements Serializable {
     /**
      * Validation method ensuring that the entered price is a valid double (so
      * that it may be converted to a BigDecimal at creation time)
-     *
+     * By: Giancarlo Biasiucci
      * @param context
      * @param component
      * @param value

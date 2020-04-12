@@ -49,6 +49,13 @@ public class OrderItemBackingBean implements Serializable {
         return null;
     }
 
+    /**
+     * Gets the removal status of the current order item
+     * @param isRemoved
+     * @return
+     * @throws Exception 
+     * By: Giancarlo Biasiucci
+     */
     public String getRemovalStatus(boolean isRemoved) throws Exception {
         if (isRemoved) {
             return MessageLoader.getString("com.gb1w20.bundles.messages", "addItem", null);
@@ -57,6 +64,13 @@ public class OrderItemBackingBean implements Serializable {
         }
     }
 
+    /**
+     * Removes an order item - changes removal status to true
+     * @param item
+     * @return
+     * @throws Exception 
+     * By: Giancarlo Biasiucci
+     */
     public String removeItem(OrderItem item) throws Exception {
         item.setIsRemoved(true);
         item.setLastUpdated(new Date());
@@ -64,13 +78,27 @@ public class OrderItemBackingBean implements Serializable {
         return null;
     }
 
+    /**
+     * Adds an order item - changes its removal status to false
+     * @param item
+     * @return
+     * @throws Exception 
+     */
     public String addItem(OrderItem item) throws Exception {
         item.setIsRemoved(false);
         item.setLastUpdated(new Date());
         orderItemJpaController.edit(item);
         return null;
     }
-
+    
+    /**
+     * Determines whether an order item should be "added" or "removed" depending on its
+     * current status when the corresponding link is clicked
+     * @param item
+     * @return
+     * @throws Exception 
+     * By: Giancarlo Biasiucci
+     */
     public String addOrRemoveItem(OrderItem item) throws Exception {
         if (item.getIsRemoved()) {
             addItem(item);
