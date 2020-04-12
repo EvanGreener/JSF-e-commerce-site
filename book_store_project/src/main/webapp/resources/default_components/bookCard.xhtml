@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <!--
 A Composite component created for book cards to avoid code duplication in all web pages
@@ -12,7 +12,7 @@ A Composite component created for book cards to avoid code duplication in all we
       xmlns:f="http://xmlns.jcp.org/jsf/core"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
 
-    <composite:interface></composite:interface>
+     <composite:interface></composite:interface>
 
     <composite:implementation>
         <!--book cover -->
@@ -25,40 +25,40 @@ A Composite component created for book cards to avoid code duplication in all we
 
                 <!--link to its own book page -->
                 <!--link contains title and author -->
-                <h:link outcome="book" value = "">
+                <h:link class="bookItemLink" outcome="book" value = "">
                     <f:param  name="isbn" value="#{books.isbn}" />
-                    <div class="header textColor">
+                    <div class="header textColor ">
                         #{books.title}</div>
                     <div class="meta">
-                         #{authorsJpaController.findAuthors(bookAuthorsJpaController.findBookAuthorsByIsbn(books.isbn)[0].authorID).name}
+                        #{authorsJpaController.findAuthors(bookAuthorsJpaController.findBookAuthorsByIsbn(books.isbn)[0].authorID).name}
                     </div>
 
-                    <!--book info -->
-                    <div class="description">
+                         <!--book info -->
+                         <div class="description">
 
-                        <!--book pricing -->
-                        <div class="ui tag labels">
+                              <!--book pricing -->
+                              <div class="ui tag labels">
 
-                            <!--list price displayed if sale price equal list price-->
-                            <h:panelGroup rendered="#{books.listPrice.compareTo(books.salePrice)== 0}">
-                                <a class="ui label">
-                                    $#{books.listPrice}
-                                </a>
-                            </h:panelGroup>
-                            <!--sale price displayed if sale price  not equal list price-->
-                            <h:panelGroup rendered="#{books.listPrice.compareTo(books.salePrice)!= 0}">
-                                <a class="ui label oldPrice">
-                                    $#{books.listPrice}
-                                </a>
-                                <a class="ui label salePrice">
-                                    $#{books.salePrice}
-                                </a>
-                            </h:panelGroup>
+                                   <!--list price displayed if sale price equal list price-->
+                                   <h:panelGroup rendered="#{books.listPrice.compareTo(books.salePrice)== 0}">
+                                        <a class="ui label">
+                                             $#{books.listPrice}
+                                        </a>
+                                   </h:panelGroup>
+                                   <!--sale price displayed if sale price  not equal list price-->
+                                   <h:panelGroup rendered="#{books.listPrice.compareTo(books.salePrice)!= 0}">
+                                        <a class="ui label oldPrice">
+                                             $#{books.listPrice}
+                                        </a>
+                                        <a class="ui label salePrice">
+                                             $#{books.salePrice}
+                                        </a>
+                                   </h:panelGroup>
 
-                        </div>
-                    </div>
-                </h:link>
-            </div>
+                              </div>
+                         </div>
+                    </h:link>
+               </div>
 
             <!--Button to add to shopping cart-->
             <div class="ui two bottom attached buttons ">
@@ -67,6 +67,6 @@ A Composite component created for book cards to avoid code duplication in all we
                 </h:commandButton>
             </div>
 
-        </div>
-    </composite:implementation>
+          </div>
+     </composite:implementation>
 </html>
