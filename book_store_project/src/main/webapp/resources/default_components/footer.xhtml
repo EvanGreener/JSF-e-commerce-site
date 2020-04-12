@@ -1,15 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <!--
 A Composite component created for the website footer to avoid code duplication in all web pages
 
-@author Shruti Pareek
+@author Shruti Pareek, Saad Khan, Giancarlo
 -->
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:composite="http://java.sun.com/jsf/composite">
-
+    <h:head>
+        <h:outputStylesheet library="css" name="default.css" />
+    </h:head>
     <composite:interface></composite:interface>
 
     <composite:implementation>
@@ -18,11 +20,7 @@ A Composite component created for the website footer to avoid code duplication i
             <h:graphicImage height="2%" width="15%" library="images" name="logo.png"  />
             <br />
             <br />
-            <a href="help.xhtml" style="
-                text-align: center;
-                font-size:14px;
-                color: white;
-            ">Help Page</a>
+            <a href="help.xhtml" class="footerHelpLink">Help Page</a>
         </div>
     </composite:implementation>
 

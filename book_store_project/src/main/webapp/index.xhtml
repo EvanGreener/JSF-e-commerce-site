@@ -237,10 +237,10 @@ compatible with different screen sizes
                                 <div id="survey">
                                     <p style="font-size:20px;padding:2%">#{s.surveyDescription}</p>
                                     <p:selectOneRadio style="font-size:20px" required="true" layout="pageDirection" value="#{surveyDataBean.surveyDataChoice}" >
-                                        <f:selectItems value="#{s.surveyData}" var="sd" itemValue="#{sd.dataID}" itemLabel = " #{sd.choice}" />
+                                        <f:selectItems class="surveyItem" value="#{s.surveyData}" var="sd" itemValue="#{sd.dataID}" itemLabel = " #{sd.choice}" />
                                     </p:selectOneRadio>
                                     <br/>
-                                    <p:commandButton  update="surveyResults" class="bookFormatBtn"  value="Submit" oncomplete="showResults(#{s.surveyID})"/>
+                                    <p:commandButton id="surveySubmitBtn" update="surveyResults" class="bookFormatBtn"  value="Submit" oncomplete="showResults(#{s.surveyID})"/>
                                 </div>
                             </ui:repeat>
                         </h:form>
@@ -254,7 +254,7 @@ compatible with different screen sizes
                     <!-- First Ad location -->
                     <div class="image homepageCard">
                         <ui:repeat value="#{adsBean.randomAd}" var="ad">
-                            <h:graphicImage height="100%" width="100%" library="images" name="#{ad.imageName}1.png"  onclick="viewAd('#{ad.adUrl}')"/>
+                            <h:graphicImage class="itemAd1" height="100%" width="100%" library="images" name="#{ad.imageName}1.png"  onclick="viewAd('#{ad.adUrl}')"/>
                         </ui:repeat>
                     </div>
                 </div>
@@ -269,7 +269,7 @@ compatible with different screen sizes
                     <div class="ui four doubling stackable cards">
                         <ui:repeat value="#{bb.popularGenres}" var="genres">
 
-                            <div class="ui fluid card darker">
+                            <div class="ui fluid card darker genreItem">
                                 <h:link outcome="gallery" value="">
                                     <f:param  name="genre" value="#{genres}" />
                                     <div class="homepageImg">
@@ -291,7 +291,7 @@ compatible with different screen sizes
                 <div class="ui card" style="width:40%">
                     <div class="image">
                         <ui:repeat value="#{adsBean.randomAd}" var="ad">
-                            <h:graphicImage height="100%" width="100%" library="images" name="#{ad.imageName}2.png" onclick="viewAd('#{ad.adUrl}')" />
+                            <h:graphicImage class="itemAd2" height="100%" width="100%" library="images" name="#{ad.imageName}2.png" onclick="viewAd('#{ad.adUrl}')" />
                         </ui:repeat>
                     </div>
 
