@@ -19,7 +19,7 @@ import org.slf4j.LoggerFactory;
 
 /**
  * Bean for editing an existing ad's information
- * @author Giancarlo Biasiucci
+ * @author Giancarlo Biasiucci & Saad Khan
  * @version April 4, 2020
  */
 
@@ -70,7 +70,7 @@ public class EditAdBean implements Serializable {
      * Saves the current ad information to be displayed in the "Edit Ad" modal
      * when the corresponding button is clicked
      * @param id 
-     * By: Giancarlo Biasiucci
+     * By: Giancarlo Biasiucci & Saad Khan
      */
     public void onEdit(int id)
     {
@@ -91,7 +91,7 @@ public class EditAdBean implements Serializable {
      * and updates the entry in the database
      * @return
      * @throws Exception 
-     * By: Giancarlo Biasiucci
+     * By: Giancarlo Biasiucci & Saad Khan
      */
     public String onSubmitEdit() throws Exception
     {

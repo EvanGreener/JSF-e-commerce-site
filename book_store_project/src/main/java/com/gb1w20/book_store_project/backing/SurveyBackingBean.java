@@ -20,6 +20,10 @@ import javax.inject.Named;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+/**
+ * Backing bean for the surveys entity
+ * @author Saad Khan
+ */
 @Named("surveyBacking")
 @SessionScoped
 public class SurveyBackingBean implements Serializable {
@@ -131,6 +135,11 @@ public class SurveyBackingBean implements Serializable {
         return "managerSurveys.xhtml";
     }
 
+    /**
+     * Deactivates the current survey in the database
+     * @param survey
+     * @throws Exception 
+     */
     public void deactivateSurvey(Surveys survey) throws Exception {
         LOG.debug("Reached the remove method");
         survey.setIsRemoved(true);

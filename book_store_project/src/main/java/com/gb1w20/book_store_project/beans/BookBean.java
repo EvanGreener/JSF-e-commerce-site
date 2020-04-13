@@ -307,10 +307,6 @@ public class BookBean implements Serializable {
             LOG.debug("getBook" + isbn);
             findBook(isbn);
         } 
-        //no isbn given in url parameters meaning no book
-        else {
-            FacesContext.getCurrentInstance().getExternalContext().redirect("404Page.xhtml");
-        }
 
         return this.book;
     }

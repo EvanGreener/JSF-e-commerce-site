@@ -38,7 +38,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
- *
+ * Cart Backing Bean to keep track of all items and totals
+ * 
  * @author Saad
  */
 @Named("cbb")
@@ -112,11 +113,20 @@ public class CartBackingBean implements Serializable {
         expiryMonth = newValue;
     }
 
+    /**
+     * check if the cart is indeed empty
+          * @author Saad Khan
+     */
     public Boolean isCartEmpty() {
         List<Book> cartList = this.getCartItems();
         return cartList.size() < 1;
     }
 
+    /**
+     * get Total amount before taxes from cart
+     * @return total amount due
+          * @author Saad Khan
+     */
     public double getCartTotal() {
         List<Book> cartList = this.getCartItems();
         double cartTotal = 0.00;
@@ -128,6 +138,11 @@ public class CartBackingBean implements Serializable {
         return cartTotal;
     }
 
+    /**
+     * get Total amount after taxes from cart
+     * @return total amount due
+          * @author Saad Khan
+     */
     public double getCartTotalAfterTax() {
         double total = 0;
         for (int i = 0; i < this.getCartItems().size(); i++) {
@@ -136,10 +151,20 @@ public class CartBackingBean implements Serializable {
         return total;
     }
 
+    /**
+     * calculate books price with tax
+     * @return total amount
+     * @author Saad Khan
+     */
     public double calculateItemTaxPrice(Book book) {
         return taxbb.getTotalWithTaxByProvince(book.getSalePrice().doubleValue());
     }
 
+    /**
+     * add book item to cart
+     * @param addingBook 
+     * @author Saad Khan
+     */
     public void addBookToCart(Book addingBook) {
         LOG.info("adding");
         List<Book> cartList = this.getCartItems();
@@ -155,6 +180,11 @@ public class CartBackingBean implements Serializable {
         LOG.debug(signedIn ? "Signed in" : "not signed in");
     }
 
+     /**
+     * remove book item to cart
+     * @param removingBook 
+     * @author Saad Khan
+     */
     public String removeBookFromCart(Book removingBook) throws Exception {
         List<Book> cartList = this.getCartItems();
         if (cartList.contains(removingBook)) {
@@ -220,12 +250,11 @@ public class CartBackingBean implements Serializable {
     
     /**
      * Validates that the credit card number is valid
-     * By: Giancarlo Biasiucci
+     * By: Giancarlo Biasiucci & Saad Khan
      * @param context
      * @param component
      * @param value 
      */
-
     public void validateCardNumber(FacesContext context, UIComponent component, Object value) {
         String number = (String) value;
         try {
@@ -268,6 +297,13 @@ public class CartBackingBean implements Serializable {
         return sum % 10 == 0;
     }
 
+        /**
+     * Redirects user to proper page
+     * By: Giancarlo Biasiucci & Saad Khan
+     * @param context
+     * @param component
+     * @param value 
+     */
     public String redirectToFinalizePage(Boolean isSignedIn) {
         LOG.info("user is " + isSignedIn);
         return isSignedIn ? "index.xhtml" : "signIn.xhtml";
@@ -310,7 +346,12 @@ public class CartBackingBean implements Serializable {
         return "myOrder.xhtml";
     }
     
-    
+    /**
+     * Add Book Item to Clients Inventory
+     * @param clientID
+     * @param isbn
+     * @throws Exception 
+     */
     private void addToClientInventory(Integer clientID, String isbn) throws Exception {
         ClientInventory item = new ClientInventory();
         item.setClientID(clientID);
@@ -321,6 +362,13 @@ public class CartBackingBean implements Serializable {
         clientInventoryCtrl.create(item);
     }
 
+    /**
+     * sends email to clients email address
+     * 
+     * @author Saad Khan
+     * @param receiver
+     * @param orderID 
+     */
     private void sendEmail(String receiver, Integer orderID) {
         MailSender sender = new MailSender();
         mailBean.setSendTo(receiver);
@@ -330,6 +378,11 @@ public class CartBackingBean implements Serializable {
         sender.sendOrderConfirmationEmail(mailBean);
     }
 
+    /**
+     * save last genre added to the cart as a cookie
+     * @author Saad Khan
+     * @param addingBook 
+     */
     public void saveLastGenre(Book addingBook) {
         FacesContext facesContext = FacesContext.getCurrentInstance();
         HttpServletRequest request = (HttpServletRequest) facesContext.getExternalContext().getRequest();
@@ -358,6 +411,12 @@ public class CartBackingBean implements Serializable {
         response.addCookie(cookie);        
     }
     
+    /**
+     * get the last genre added to the cart
+     * 
+     * @author Saad Khan
+     * @return lastGenre
+     */
     public String getLastGenre(){
         FacesContext facesContext = FacesContext.getCurrentInstance();
         HttpServletRequest request = (HttpServletRequest) facesContext.getExternalContext().getRequest();

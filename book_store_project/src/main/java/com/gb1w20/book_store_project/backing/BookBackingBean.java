@@ -26,7 +26,7 @@ import org.slf4j.LoggerFactory;
 /**
  * Backing bean for the book entity
  *
- * @author Giancarlo Biasiucci
+ * @author Giancarlo Biasiucci & Saad Khan
  * @version April 4, 2020
  */
 @Named("bookBacking")

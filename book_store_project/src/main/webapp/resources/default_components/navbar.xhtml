@@ -52,9 +52,7 @@ A Composite component created for nav bar to avoid code duplication in all web p
                     </b:navLink>
 
                     <b:dropMenu rendered="#{UserLoginBean.getIfSignedIn()}" value="#{msgs.hello} #{UserLoginBean.getFirstName()}" style="color: white">
-                        <h:form>
-                            <b:navCommandLink id="signout" class="signOutBtn" value="#{msgs.signout}" href="#" action="#{UserLoginBean.signOut()}"></b:navCommandLink>
-                        </h:form>
+                        <b:navCommandLink id="signout" class="signOutBtn" value="#{msgs.signout}" href="#" action="#{UserLoginBean.signOut()}"></b:navCommandLink>
                     </b:dropMenu>
 
 

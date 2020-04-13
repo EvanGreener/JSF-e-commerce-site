@@ -9,6 +9,12 @@ import javax.inject.Named;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+/**
+ * Backing bean for the book entity
+ *
+ * @author Giancarlo Biasiucci & Saad Khan
+ * @version April 4, 2020
+ */
 @Named("bookFormatBacking")
 @RequestScoped
 public class BookFormatBackingBean implements Serializable {

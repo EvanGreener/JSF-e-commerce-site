@@ -1,8 +1,8 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE html>
 <!--
-Book page that displays information for a single book, 
-allows logged in user to create reviews if they have not already, 
+Book page that displays information for a single book,
+allows logged in user to create reviews if they have not already,
 allows all users to view reviews that have been approved by manager,
 suggests books with similar authors and/or genre,
 saves the genre in a cookie for suggestions in homepage
@@ -41,14 +41,9 @@ compatible with different screen sizes
 
     </h:head>
     <h:body>
-        <c:choose>
-            <c:when test="${bb.book == null}">
-                                      <f:event type="preRenderView" listener="404Page.xhtml" />
-                                        </c:when>
-        </c:choose>
         <!--composite component that comes from the navbar.xhtml file to avoid coding nav bar in all web pages-->
         <bookstore:navbar/>
-        
+
         <!-- The Modal for view book cover -->
         <!-- source https://semantic-ui.com/modules/modal.html-->
         <div class="ui modals transition visible" id="myModal" style="display: none !important;z-index:3;" >
@@ -96,7 +91,7 @@ compatible with different screen sizes
                                 </ui:repeat>
 
                                 <!--Review count info-->
-                                <p> #{reviewBean.getReviewCount(book.isbn)} 
+                                <p> #{reviewBean.getReviewCount(book.isbn)}
                                     <!--Choose plural or singular form depending on how many reviews there are-->
                                     <c:choose>
                                         <c:when test="${reviewBean.getReviewCount(book.isbn)eq 1}">
@@ -164,7 +159,7 @@ compatible with different screen sizes
                     <td  style="vertical-align: middle; text-align: center">
                         <p style="font-size: 1.7em">#{msgs.reviewsBtn}</p>
                     </td>
-                    <td  colspan="5" class="right aligned single line">  
+                    <td  colspan="5" class="right aligned single line">
                         <h:panelGroup id="reviewSection">
 
                             <!-- Only show the add review button if user is logged in and they have not written a review for the current book they are viewing-->
@@ -220,7 +215,7 @@ compatible with different screen sizes
                         </tr>
                     </tbody>
                     <tfoot>
-                        <tr>  
+                        <tr>
                         </tr>
                     </tfoot>
                 </h:form>
@@ -288,8 +283,36 @@ compatible with different screen sizes
             </div>
         </div>
 
+        <!--Suggestions section-->
+        <div class="lightOrangeDiv">
 
-        
+            <!--Suggests books by similar genres if any-->
+            <h:panelGroup rendered="#{!empty bb.getSimilarGenreBooks(bb.book,bb.book.authorsCollection)}">
+                <p class="small">Similar Genre</p>
+            </h:panelGroup>
+            <div class="ui four doubling stackable cards">
+                <ui:repeat value="#{bb.getSimilarGenreBooks(bb.book,bb.book.authorsCollection)}" var="books">
+                    <!--Used composition to display all book cards-->
+                    <bookstore:bookCard/>
+                </ui:repeat>
+            </div>
+
+            <!--Suggests books by similar authors if any-->
+            <h:panelGroup rendered="#{!empty bb.getSimilarAuthorBooks(bb.book.authorsCollection,bb.book.isbn)}">
+                <br/><br/><br/>
+                <ui:repeat value="#{bb.book.authorsCollection}" var="author" >
+                    <p class="small">Books by #{author.name}</p>
+                </ui:repeat>
+            </h:panelGroup>
+
+            <div class="ui four doubling stackable cards">
+                <ui:repeat value="#{bb.getSimilarAuthorBooks(bb.book.authorsCollection,bb.book.isbn)}" var="books">
+                    <!--Used composition to display all book cards-->
+                    <bookstore:bookCard/>
+                </ui:repeat>
+            </div>
+        </div>
+
         <!--composite component that comes from the footer.xhtml file to avoid coding the website footer in all web pages-->
         <bookstore:footer/>
 

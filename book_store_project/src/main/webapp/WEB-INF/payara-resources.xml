@@ -22,7 +22,7 @@
                               max-connection-usage-count="0" 
                               max-pool-size="15" 
                               max-wait-time-in-millis="60000" 
-                              name="connectionPool" 
+                              name="bookstorePool" 
                               non-transactional-connections="false" 
                               pool-resize-quantity="2" 
                               res-type="javax.sql.ConnectionPoolDataSource" 
@@ -35,4 +35,3 @@
             <property name="Password" value="bench3chips"/>
     </jdbc-connection-pool>
 </resources>
-
