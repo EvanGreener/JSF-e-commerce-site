@@ -48,6 +48,10 @@ public class MailBean {
         return plainTextMsg;
     }
 
+    /**
+     * set the plain text in the email
+     * @author Saad Khan
+     */
     public void setPlainOrderTextMsg() {
         List<Book> CartItems = cartbb.getCartItems();
         String plainTextMsg = "<h1>TheBookStore"
