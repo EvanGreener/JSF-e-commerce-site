@@ -21,12 +21,13 @@ import javax.transaction.UserTransaction;
 
 /**
  * Queries that facilitate accessing certain authors(s)
+ *
  * @author Saad
  */
 @Named
 @RequestScoped
 public class AuthorsJpaController implements Serializable {
-    
+
     @Resource
     private UserTransaction utx;
 
@@ -36,7 +37,8 @@ public class AuthorsJpaController implements Serializable {
     /**
      *
      */
-    public AuthorsJpaController() {}
+    public AuthorsJpaController() {
+    }
 
     /**
      *
@@ -44,19 +46,19 @@ public class AuthorsJpaController implements Serializable {
      * @throws Exception
      */
     public void create(Authors authors) throws Exception {
-    try {
-        utx.begin();
-        em.persist(authors);
-        utx.commit();
-    } catch (Exception ex) {
         try {
-            utx.rollback();
-        } catch (Exception re) {
-            throw new Exception("An error occurred attempting to roll back the transaction.", re);
+            utx.begin();
+            em.persist(authors);
+            utx.commit();
+        } catch (Exception ex) {
+            try {
+                utx.rollback();
+            } catch (Exception re) {
+                throw new Exception("An error occurred attempting to roll back the transaction.", re);
+            }
+            throw ex;
         }
-        throw ex;
     }
-}
 
     /**
      *
@@ -149,7 +151,7 @@ public class AuthorsJpaController implements Serializable {
      * @return
      */
     public Authors findAuthors(Integer id) {
-            return em.find(Authors.class, id);
+        return em.find(Authors.class, id);
     }
 
     /**
@@ -157,34 +159,32 @@ public class AuthorsJpaController implements Serializable {
      * @return
      */
     public int getAuthorsCount() {
-            CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
-            Root<Authors> rt = cq.from(Authors.class);
-            cq.select(em.getCriteriaBuilder().count(rt));
-            Query q = em.createQuery(cq);
-            System.out.println("author count: " + ((Long) q.getSingleResult()).intValue());
-            return ((Long) q.getSingleResult()).intValue();
+        CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
+        Root<Authors> rt = cq.from(Authors.class);
+        cq.select(em.getCriteriaBuilder().count(rt));
+        Query q = em.createQuery(cq);
+        System.out.println("author count: " + ((Long) q.getSingleResult()).intValue());
+        return ((Long) q.getSingleResult()).intValue();
     }
-    
+
     /**
      *
      * @return
      */
-    public List<String> getAuthorNames()
-    {
+    public List<String> getAuthorNames() {
         CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
         Root<Authors> author = cq.from(Authors.class);
         cq.select(author.get(Authors_.name));
         TypedQuery<String> query = em.createQuery(cq);
         return query.getResultList();
     }
-    
+
     /**
      *
      * @param name
      * @return
      */
-    public Authors getAuthorByName(String name)
-    {
+    public Authors getAuthorByName(String name) {
         CriteriaBuilder cb = em.getCriteriaBuilder();
         CriteriaQuery cq = cb.createQuery();
         Root<Authors> author = cq.from(Authors.class);
@@ -193,5 +193,5 @@ public class AuthorsJpaController implements Serializable {
         TypedQuery<Authors> query = em.createQuery(cq);
         return query.getSingleResult();
     }
-    
+
 }

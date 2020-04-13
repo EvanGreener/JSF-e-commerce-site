@@ -19,6 +19,7 @@ import javax.transaction.UserTransaction;
 
 /**
  * Queries that facilitate accessing certain survey data
+ *
  * @author Saad
  */
 @Named

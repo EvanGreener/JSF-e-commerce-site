@@ -25,37 +25,37 @@ import org.slf4j.LoggerFactory;
 @SessionScoped
 public class NewsManagementBean implements Serializable {
 
-     private final static Logger LOG = LoggerFactory.getLogger(ClientManagementBean.class);
+    private final static Logger LOG = LoggerFactory.getLogger(ClientManagementBean.class);
 
-     @Inject
-     private NewsJpaController newsCtrlr;
-     private List<News> results;
+    @Inject
+    private NewsJpaController newsCtrlr;
+    private List<News> results;
 
-     @PostConstruct
-     public void init() {
-          updateBean();
-     }
+    @PostConstruct
+    public void init() {
+        updateBean();
+    }
 
-     private void updateBean() {
-          results = newsCtrlr.findNewsEntities();
-     }
+    private void updateBean() {
+        results = newsCtrlr.findNewsEntities();
+    }
 
-     public List<News> getResults() {
-          return results;
-     }
+    public List<News> getResults() {
+        return results;
+    }
 
-     public void onChangedRemoved(int id, boolean isRemoved) throws NonexistentEntityException, Exception {
-          LOG.debug("onChangedRemoved called");
-          LOG.debug("wasRemoved:   " + !isRemoved);
-          News news = newsCtrlr.findNews(id);
-          if (isRemoved) {
-               news.setIsRemoved(Boolean.TRUE);
+    public void onChangedRemoved(int id, boolean isRemoved) throws NonexistentEntityException, Exception {
+        LOG.debug("onChangedRemoved called");
+        LOG.debug("wasRemoved:   " + !isRemoved);
+        News news = newsCtrlr.findNews(id);
+        if (isRemoved) {
+            news.setIsRemoved(Boolean.TRUE);
 
-          } else {
-               news.setIsRemoved(Boolean.FALSE);
-          }
+        } else {
+            news.setIsRemoved(Boolean.FALSE);
+        }
 
-          newsCtrlr.edit(news);
-     }
+        newsCtrlr.edit(news);
+    }
 
 }

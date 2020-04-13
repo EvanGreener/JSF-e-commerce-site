@@ -26,7 +26,7 @@ import org.slf4j.LoggerFactory;
  * bean used in the book page that gets all the information necessary for a
  * client review allows creating a new review
  *
- * @author Shruti Pareek
+ * @author Shruti Pareek Saad Khan
  */
 @Named("reviewBean")
 @ViewScoped
@@ -73,7 +73,7 @@ public class ReviewBean implements Serializable {
      * Get the number of reviews that a client has written on a book Used to
      * validate that customer has written only one review for a book
      *
-     * @author Shruti Pareek
+     * @author Shruti Pareek Saad Khan
      * @param clientId
      * @param isbn
      * @return int
@@ -89,7 +89,7 @@ public class ReviewBean implements Serializable {
      * Validate that the review body text is less than 750 characters and not
      * empty or null
      *
-     * @author Shruti Pareek
+     * @author Shruti Pareek Saad Khan
      * @param context
      * @param component
      * @param value
@@ -106,7 +106,7 @@ public class ReviewBean implements Serializable {
             FacesMessage msg = MessageLoader.getMessage("com.gb1w20.bundles.messages", "reviewCharLimit", null);
             msg.setSeverity(FacesMessage.SEVERITY_ERROR);
             throw new ValidatorException(msg);
-            
+
         }
 
     }

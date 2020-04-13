@@ -63,22 +63,21 @@ public class SurveyData implements Serializable {
     private Date lastModified;
     @Column(name = "Is_Removed")
     private Boolean isRemoved;
-    
-     @JoinColumn(name = "Survey_ID", referencedColumnName = "Survey_ID", insertable = false, updatable = false)
+
+    @JoinColumn(name = "Survey_ID", referencedColumnName = "Survey_ID", insertable = false, updatable = false)
     @ManyToOne(optional = false)
     private Surveys survey;
-     
-     
-         private final static Logger LOG = LoggerFactory.getLogger(SurveyData.class);
 
-     public Surveys getSurvey(){
-         return survey;
-     }
-     
+    private final static Logger LOG = LoggerFactory.getLogger(SurveyData.class);
+
+    public Surveys getSurvey() {
+        return survey;
+    }
+
     public SurveyData() {
     }
 
-    public SurveyData(Integer dataID,Integer surveyID) {
+    public SurveyData(Integer dataID, Integer surveyID) {
         this.dataID = dataID;
     }
 
@@ -163,5 +162,5 @@ public class SurveyData implements Serializable {
     public String toString() {
         return "com.gb1w20.book_store_project.entities.SurveyData[ dataID=" + dataID + " ]";
     }
-    
+
 }

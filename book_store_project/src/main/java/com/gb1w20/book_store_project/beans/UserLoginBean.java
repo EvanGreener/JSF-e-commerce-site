@@ -44,6 +44,8 @@ public class UserLoginBean implements Serializable {
 
     /**
      * check status of sign in status of user
+     *
+     * @author Saad Khan
      */
     public void getSignInStatus() {
         FacesContext facesContext = FacesContext.getCurrentInstance();
@@ -98,9 +100,10 @@ public class UserLoginBean implements Serializable {
 
     /**
      * sign out user by deleting cookie
+     *
      * @Saad Khan
      * @return page to send user
-     * @throws IOException 
+     * @throws IOException
      */
     public String signOut() throws IOException {
 

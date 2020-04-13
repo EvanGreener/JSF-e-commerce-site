@@ -154,7 +154,6 @@ public class IndexPageTestIT {
 //        WebElement surveySubmit = driver.findElement(By.className("surveySubmitBtn"));
 //        surveySubmit.click();
 //    }
-
     @Test
     public void testPopularGenre() throws Exception {
         driver.get("http://localhost:8080/book_store_project/");
@@ -274,7 +273,7 @@ public class IndexPageTestIT {
         signIn.click();
         wait.until(ExpectedConditions.titleIs("Login"));
     }
-    
+
 //        @Test
 //    public void testLanguageChange() throws Exception {
 //        driver.get("http://localhost:8080/book_store_project/");

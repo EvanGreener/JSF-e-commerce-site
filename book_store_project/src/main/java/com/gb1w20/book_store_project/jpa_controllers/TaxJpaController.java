@@ -26,7 +26,7 @@ import javax.transaction.UserTransaction;
 @Named
 @RequestScoped
 public class TaxJpaController implements Serializable {
-    
+
     @Resource
     private UserTransaction utx;
 
@@ -36,7 +36,8 @@ public class TaxJpaController implements Serializable {
     /**
      *
      */
-    public TaxJpaController() {}
+    public TaxJpaController() {
+    }
 
     /**
      *
@@ -44,19 +45,19 @@ public class TaxJpaController implements Serializable {
      * @throws Exception
      */
     public void create(Tax tax) throws Exception {
-    try {
-        utx.begin();
-        em.persist(tax);
-        utx.commit();
-    } catch (Exception ex) {
         try {
-            utx.rollback();
-        } catch (Exception re) {
-            throw new Exception("An error occurred attempting to roll back the transaction.", re);
+            utx.begin();
+            em.persist(tax);
+            utx.commit();
+        } catch (Exception ex) {
+            try {
+                utx.rollback();
+            } catch (Exception re) {
+                throw new Exception("An error occurred attempting to roll back the transaction.", re);
+            }
+            throw ex;
         }
-        throw ex;
     }
-}
 
     /**
      *
@@ -149,15 +150,15 @@ public class TaxJpaController implements Serializable {
      * @return
      */
     public Tax findTax(String id) {
-            return em.find(Tax.class, id);
+        return em.find(Tax.class, id);
     }
-  
+
     /**
      *
      * @param province
      * @return
      */
-    public Tax getTaxByProvince(String province){
+    public Tax getTaxByProvince(String province) {
         CriteriaBuilder cb = em.getCriteriaBuilder();
         CriteriaQuery cq = cb.createQuery();
         Root<Tax> tax = cq.from(Tax.class);
@@ -171,12 +172,12 @@ public class TaxJpaController implements Serializable {
      * @return
      */
     public int getTaxCount() {
-            CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
-            Root<Tax> rt = cq.from(Tax.class);
-            cq.select(em.getCriteriaBuilder().count(rt));
-            Query q = em.createQuery(cq);
-            System.out.println("tax count: " + ((Long) q.getSingleResult()).intValue());
-            return ((Long) q.getSingleResult()).intValue();
+        CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
+        Root<Tax> rt = cq.from(Tax.class);
+        cq.select(em.getCriteriaBuilder().count(rt));
+        Query q = em.createQuery(cq);
+        System.out.println("tax count: " + ((Long) q.getSingleResult()).intValue());
+        return ((Long) q.getSingleResult()).intValue();
     }
-    
+
 }
