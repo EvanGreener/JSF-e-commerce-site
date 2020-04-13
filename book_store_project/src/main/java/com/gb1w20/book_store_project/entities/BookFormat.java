@@ -29,7 +29,7 @@ import javax.validation.constraints.Size;
  * @author 1733408
  */
 @Entity
-@Table(name = "book_format", catalog = "", schema = "")
+@Table(name = "book_format", catalog = "gb1w20", schema = "")
 @NamedQueries({
     @NamedQuery(name = "BookFormat.findAll", query = "SELECT b FROM BookFormat b"),
     @NamedQuery(name = "BookFormat.findByFormatID", query = "SELECT b FROM BookFormat b WHERE b.formatID = :formatID"),

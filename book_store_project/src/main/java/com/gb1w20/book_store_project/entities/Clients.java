@@ -35,7 +35,7 @@ import org.slf4j.LoggerFactory;
  * @author 1733408
  */
 @Entity
-@Table(name = "clients", catalog = "bookstore", schema = "")
+@Table(name = "clients", catalog = "gb1w20", schema = "")
 @NamedQueries({
     @NamedQuery(name = "Clients.findAll", query = "SELECT c FROM Clients c"),
     @NamedQuery(name = "Clients.findByClientID", query = "SELECT c FROM Clients c WHERE c.clientID = :clientID"),

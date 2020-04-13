@@ -38,7 +38,7 @@ import org.slf4j.LoggerFactory;
  * @author 1733408
  */
 @Entity
-@Table(name = "book", catalog = "bookstore", schema = "")
+@Table(name = "book", catalog = "gb1w20", schema = "")
 @NamedQueries({
     @NamedQuery(name = "Book.findAll", query = "SELECT b FROM Book b"),
     @NamedQuery(name = "Book.findByIsbn", query = "SELECT b FROM Book b WHERE b.isbn = :isbn"),

@@ -7,7 +7,7 @@ package com.gb1w20.book_store_project.entities;
 
 /**
  *
- * @author cawri
+ * @author Cedric Richards
  */
 public class RankedBook {
     private Book book;

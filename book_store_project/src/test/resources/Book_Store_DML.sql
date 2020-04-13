@@ -1,4 +1,4 @@
-USE bookstore;
+USE gb1w20;
 
 DROP TABLE IF EXISTS `Tax`;
 DROP TABLE IF EXISTS `Clients`;

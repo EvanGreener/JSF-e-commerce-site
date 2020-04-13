@@ -30,7 +30,7 @@ import org.slf4j.LoggerFactory;
  * @author 1733408
  */
 @Entity
-@Table(name = "survey_data", catalog = "bookstore", schema = "")
+@Table(name = "survey_data", catalog = "gb1w20", schema = "")
 @NamedQueries({
     @NamedQuery(name = "SurveyData.findAll", query = "SELECT s FROM SurveyData s"),
     @NamedQuery(name = "SurveyData.findByDataID", query = "SELECT s FROM SurveyData s WHERE s.dataID = :dataID"),

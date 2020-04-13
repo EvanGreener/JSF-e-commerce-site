@@ -1,8 +1,10 @@
-DROP DATABASE IF EXISTS bookstore;
-CREATE DATABASE bookstore;
-USE bookstore;
+create database gb1w20;
+use gb1w20;
 
-DROP USER IF EXISTS gb1w20@localhost;
-CREATE USER gb1w20@'localhost' IDENTIFIED WITH mysql_native_password BY 'password123' REQUIRE NONE;
-GRANT ALL ON bookstore.* TO gb1w20@'localhost';
-FLUSH PRIVILEGES;
+create user gb1w20@'localhost' identified with mysql_native_password by 'bench3chips' require none;
+create user gb1w20@'%' identified with mysql_native_password by 'bench3chips' require none;
+
+grant all on gb1w20.* to gb1w20@'localhost';
+grant all on gb1w20.* to gb1w20@'%';
+
+flush privileges;
