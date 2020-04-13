@@ -19,7 +19,7 @@ import org.slf4j.LoggerFactory;
 
 /**
  *
- * @author
+ * @author Saad Khan
  */
 @Named("UserLoginBean")
 @ViewScoped
@@ -42,6 +42,9 @@ public class UserLoginBean implements Serializable {
         getSignInStatus();
     }
 
+    /**
+     * check status of sign in status of user
+     */
     public void getSignInStatus() {
         FacesContext facesContext = FacesContext.getCurrentInstance();
         HttpServletRequest request = (HttpServletRequest) facesContext.getExternalContext().getRequest();
@@ -93,8 +96,13 @@ public class UserLoginBean implements Serializable {
 
     }
 
+    /**
+     * sign out user by deleting cookie
+     * @Saad Khan
+     * @return page to send user
+     * @throws IOException 
+     */
     public String signOut() throws IOException {
-        LOG.debug("redirecting to index i think _____________________________________________________ ");
 
         FacesContext facesContext = FacesContext.getCurrentInstance();
         HttpServletRequest request = (HttpServletRequest) facesContext.getExternalContext().getRequest();

@@ -17,7 +17,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 /**
  * Selenium test class for the client front page
  *
- * @author Giancarlo Biasiucci, Saad Khan
+ * @author Saad Khan
  * @version April 6, 2020
  */
 public class IndexPageTestIT {

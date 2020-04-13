@@ -23,7 +23,7 @@ import org.slf4j.LoggerFactory;
 /**
  * bean used to get survey results
  *
- * @author Shruti Pareek
+ * @author Saad Khan
  */
 public class SurveyDataBean implements Serializable {
 
@@ -40,7 +40,7 @@ public class SurveyDataBean implements Serializable {
     /**
      * method that initialize when bean first called
      *
-     * @author Shruti Pareek
+     * @author  Saad Khan
      * @return
      */
     public void init() {
@@ -51,7 +51,7 @@ public class SurveyDataBean implements Serializable {
     /**
      * SurveyData created if it does not exist.
      *
-     * @author Shruti Pareek
+     * @author  Saad Khan
      * @param dataId
      * @return
      */
@@ -67,7 +67,7 @@ public class SurveyDataBean implements Serializable {
     /**
      * Save the current surveyData to the db
      *
-     * @author Shruti Pareek
+     * @author  Saad Khan
      * @return
      * @throws Exception
      */
@@ -79,7 +79,7 @@ public class SurveyDataBean implements Serializable {
     /**
      * store user choice for survey in database
      *
-     * @author Shruti Pareek
+     * @author  Saad Khan
      * @param surveyId
      */
     public void setSurveyChoices(Integer surveyId) {
@@ -90,7 +90,7 @@ public class SurveyDataBean implements Serializable {
     /**
      * get the all survey options from a survey id
      *
-     * @author Shruti Pareek
+     * @author  Saad Khan
      * @param surveyId
      * @return list
      */
@@ -103,7 +103,7 @@ public class SurveyDataBean implements Serializable {
     /**
      * get the survey choice selected
      *
-     * @author Shruti Pareek
+     * @author  Saad Khan
      * @return integer
      */
     public Integer getSurveyDataChoice() {
@@ -119,7 +119,7 @@ public class SurveyDataBean implements Serializable {
     /**
      * set the choice selected bu user for survey
      *
-     * @author Shruti Pareek
+     * @author  Saad Khan
      * @param dataId
      * @throws java.lang.Exception
      */

@@ -179,7 +179,9 @@ public class SurveysJpaController implements Serializable {
     }
 
     /**
-     *
+     * Get the active survey
+          * @author Saad Khan
+
      * @return
      */
     public Surveys getActiveSurvey() {

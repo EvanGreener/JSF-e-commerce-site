@@ -19,7 +19,7 @@ import javax.transaction.UserTransaction;
 
 /**
  * Queries that facilitate accessing certain survey data
- * @author Saad,shruti
+ * @author Saad
  */
 @Named
 @RequestScoped
@@ -143,7 +143,7 @@ public class SurveyDataJpaController implements Serializable {
     }
 
     /**
-     *
+     * @author Saad Khan
      * @param id
      * @return
      */
@@ -152,7 +152,7 @@ public class SurveyDataJpaController implements Serializable {
     }
 
     /**
-     *
+     * @author Saad Khan
      * @return
      */
     public int getSurveyDataCount() {
@@ -167,7 +167,7 @@ public class SurveyDataJpaController implements Serializable {
     /**
      * gets the survey options from a survey id
      *
-     * @author shruti pareek
+     * @author Saad Khan
      * @param surveyId
      * @return
      */

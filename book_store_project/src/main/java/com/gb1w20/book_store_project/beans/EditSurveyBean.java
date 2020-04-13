@@ -24,7 +24,7 @@ import org.slf4j.LoggerFactory;
 
 /**
  *
- * @author giancarlo
+ * @author Saad khan & Giancarlo
  */
 @Named("editSurvey")
 @SessionScoped
@@ -127,6 +127,11 @@ public class EditSurveyBean implements Serializable {
         this.currentSurveyItems = currentSurveyItems;
     }
 
+    /**
+     * edit survey
+     * @param id 
+     * @author Saad Khan @ Giancarlo
+     */
     public void onEdit(int id) {
         LOG.debug("onEdit called");
         LOG.debug("ID we are looking for: " + id);

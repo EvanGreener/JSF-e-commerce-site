@@ -19,7 +19,7 @@ import org.slf4j.LoggerFactory;
 
 /**
  *
- * @author evangreenstein
+ * @author evan greenstein
  */
 @Named("newsManagement")
 @SessionScoped
