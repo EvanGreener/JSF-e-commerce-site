@@ -1,2 +1,4 @@
-# gB1w20
+# TheBooksStore
+
+An ecommerce website for selling books made with JSF.
 
